@@ -14,9 +14,9 @@ namespace Fanex.SMAReport.Business.Constants
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class EmailTemplateConstants
+    public static class EmailTemplateConstants
     {
-        public const string ResetWinningTemplate = @"/Templates/EmailTemplate.cshtml";
-        public const string ResetWinningNotificationTemplate = @"/Templates/NotificationEmailTemplate.cshtml";
+        public const string SMAReportEmailTemplate = @"/Templates/EmailTemplate.cshtml";
+        public const string SMAReportEmailNotificationTemplate = @"/Templates/NotificationEmailTemplate.cshtml";
     }
 }

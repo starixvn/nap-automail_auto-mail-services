@@ -1,20 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.ServiceProcess;
-using System.Text;
-using System.Timers;
-using Fanex.SMAReport.Business;
-using Fanex.SMAReport.Business.Service;
-using System.IO;
-using Fanex.Data.Configuration;
-using Fanex.SMAReport.Business.Common;
+﻿// -----------------------------------------------------------------------
+// <copyright file="AutoMailService.cs" company="Microsoft">
+// TODO: Update copyright text.
+// </copyright>
+// -----------------------------------------------------------------------
 
-namespace Fanex.SMAReport.Service 
+namespace Fanex.SMAReport.Service
 {
+    using System;
+    using System.IO;
+    using System.ServiceProcess;
+    using System.Timers;
+    using Fanex.Data.Configuration;
+    using Fanex.Service.Core.Extensions;
+    using Fanex.SMAReport.Business;
+    using Fanex.SMAReport.Business.Enums;
+    using Fanex.SMAReport.Business.Model;
+    using Fanex.SMAReport.Business.Service;
+
+    /// <summary>
+    /// Auto mail service.
+    /// </summary>
     public partial class AutoMailService : ServiceBase
     {
         /// <summary>
@@ -29,6 +34,10 @@ namespace Fanex.SMAReport.Service
             InitializeComponent(AppSettings.ServiceName);
         }
 
+        /// <summary>
+        /// Execute when service start.
+        /// </summary>
+        /// <param name="args">Data passed by the start command.</param>
         protected override void OnStart(string[] args)
         {
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
@@ -41,6 +50,7 @@ namespace Fanex.SMAReport.Service
             timer.Enabled = true;
 
             AppSettings.OnProcessing = false;
+            AppSettings.ForceRunningOnProcessing = false;
 
             service = new SMAReportService();
         }
@@ -65,17 +75,40 @@ namespace Fanex.SMAReport.Service
         {
             try
             {
-                if (!AppSettings.OnProcessing)
+                SMAReportModel taskModel = new SMAReportModel();
+                bool isRunningDay = DateTime.Now.Day == AppSettings.RunAtDay;
+
+                SMAReportModel model = service.GetTaskReadyToRun();
+                DateTime taskRunningDay = Convert.ToDateTime(model.CreatedDate);
+                bool hasAlreadyRun = DateTime.Now.Month == taskRunningDay.Month;
+
+                if (isRunningDay && !AppSettings.OnProcessing && !hasAlreadyRun)
                 {
-                    AppSettings.OnProcessing = true;                        
-                    service.ProcessResetWinning();
-                    AppSettings.OnProcessing = false;
+                    TimeSpan executeTime = new TimeSpan(AppSettings.RunAtHours, AppSettings.RunAtMinutes, 0);
+                    var currentTime = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, 0);
+                    int compareResult = TimeSpan.Compare(currentTime, executeTime);
+
+                    if (compareResult >= 0)
+                    {
+                        taskModel.TaskType = (int)TaskType.Monthly;
+                        service.InsertTask(taskModel);
+                        service.ProcessSMAReport();
+                    }
+                }
+
+                if (AppSettings.ForceRunning && !AppSettings.ForceRunningOnProcessing)
+                {
+                    AppSettings.ForceRunningOnProcessing = true;
+                    taskModel.TaskType = (int)TaskType.Urgently;
+                    service.InsertTask(taskModel);
+                    service.ProcessSMAReport();
                 }
             }
             catch (Exception ex)
             {
                 LogExtensions.ExceptionHandler(ex);
                 AppSettings.OnProcessing = false;
+                throw;
             }
         }
     }

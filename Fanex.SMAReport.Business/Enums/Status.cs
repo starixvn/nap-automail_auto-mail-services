@@ -22,20 +22,18 @@ namespace Fanex.SMAReport.Business.Enums
         Running,
 
         /// <summary>
-        /// Task is processing.
+        /// The process is failed.
         /// </summary>
-        Processing,
+        Failed,
 
         /// <summary>
-        /// The process reset winning is failed.
+        /// The process successful.
         /// </summary>
-        ResetFailed,
+        Successful,
 
         /// <summary>
-        /// The process reset winning successful.
+        /// The can not found.
         /// </summary>
-        ResetSuccessful,
-
         CannotFound
     }
 }

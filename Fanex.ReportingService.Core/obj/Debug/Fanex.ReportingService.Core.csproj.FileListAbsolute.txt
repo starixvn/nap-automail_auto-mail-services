@@ -1,0 +1,16 @@
+D:\Project\auto-mail-services\Fanex.ReportingService.Core\bin\Debug\Fanex.ReportingService.Core.dll
+D:\Project\auto-mail-services\Fanex.ReportingService.Core\bin\Debug\Fanex.ReportingService.Core.pdb
+D:\Project\auto-mail-services\Fanex.ReportingService.Core\bin\Debug\Fanex.Common.dll
+D:\Project\auto-mail-services\Fanex.ReportingService.Core\bin\Debug\Fanex.Data.dll
+D:\Project\auto-mail-services\Fanex.ReportingService.Core\bin\Debug\Fanex.Logging.dll
+D:\Project\auto-mail-services\Fanex.ReportingService.Core\bin\Debug\Fanex.NAP.Framework.dll
+D:\Project\auto-mail-services\Fanex.ReportingService.Core\bin\Debug\NPOI.dll
+D:\Project\auto-mail-services\Fanex.ReportingService.Core\bin\Debug\RemotingRef.dll
+D:\Project\auto-mail-services\Fanex.ReportingService.Core\bin\Debug\SPSRemoting.dll
+D:\Project\auto-mail-services\Fanex.ReportingService.Core\bin\Debug\IBCFile.dll
+D:\Project\auto-mail-services\Fanex.ReportingService.Core\obj\Debug\Fanex.ReportingService.Core.Resources.Labels.resources
+D:\Project\auto-mail-services\Fanex.ReportingService.Core\obj\Debug\Fanex.ReportingService.Core.csproj.GenerateResource.Cache
+D:\Project\auto-mail-services\Fanex.ReportingService.Core\obj\Debug\Fanex.ReportingService.Core.dll
+D:\Project\auto-mail-services\Fanex.ReportingService.Core\obj\Debug\Fanex.ReportingService.Core.pdb
+D:\Project\auto-mail-services\Fanex.ReportingService.Core\bin\Debug\ICSharpCode.SharpZipLib.dll
+D:\Project\auto-mail-services\Fanex.ReportingService.Core\obj\Debug\Fanex.ReportingService.Core.csprojResolveAssemblyReference.cache

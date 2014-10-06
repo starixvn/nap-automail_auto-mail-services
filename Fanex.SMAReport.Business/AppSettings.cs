@@ -7,9 +7,6 @@
 namespace Fanex.SMAReport.Business
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Configuration;
 
     /// <summary>
@@ -79,6 +76,21 @@ namespace Fanex.SMAReport.Business
             {
                 var val = ConfigurationManager.AppSettings["WinlostDateForceRunning"];
                 return val == null ? DateTime.Today : Convert.ToDateTime(ConfigurationManager.AppSettings["WinlostDateForceRunning"]);
+            }
+        }
+
+        /// <summary>
+        /// Gets run at day.
+        /// </summary>
+        /// <value>
+        /// The day running task.
+        /// </value>
+        public static int RunAtDay
+        {
+            get
+            {
+                var val = ConfigurationManager.AppSettings["RunAtDay"];
+                return val == null ? 6 : Convert.ToInt32(ConfigurationManager.AppSettings["RunAtDay"]);
             }
         }
 

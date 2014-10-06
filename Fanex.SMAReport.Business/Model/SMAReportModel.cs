@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ResetWinningModel.cs" company="Microsoft">
+// <copyright file="SMAReportModel.cs" company="Microsoft">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -25,10 +25,6 @@ namespace Fanex.SMAReport.Business.Model
 
         public string UpdatedDate { get; set; }
 
-        public int UserId { get; set; }
-
-        public string UserName { get; set; }
-
-        public string ResetOnDate { get; set; }
+        public int TaskType { get; set; }
     }
 }
