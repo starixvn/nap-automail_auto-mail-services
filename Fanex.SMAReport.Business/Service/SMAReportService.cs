@@ -27,7 +27,7 @@ namespace Fanex.SMAReport.Business.Service
     public class SMAReportService : ISMAReportService
     {
         private readonly ISMAReportRepository _repository = null;
-        private readonly DateTime _lastMonth = DateTime.Now.AddMonths(-1);
+        private DateTime _lastMonth = DateTime.Now.AddMonths(-1);
         private XSSFWorkbook _workbook;
         private BorderInfo _borderInfo;
         private BorderInfo _leftRightBorderInfo;
@@ -70,17 +70,6 @@ namespace Fanex.SMAReport.Business.Service
         public SMAReportService()
         {
             _repository = new SMAReportRepository();
-            _reportDirectory = new List<string>();
-
-            this.InitColor();
-            this.InitAlignmentInfo();
-            this.InitBorderStyleInfo();
-            this.InitFontInfo();
-            this.InitBackgroundColorInfo();
-
-            DateTime firstMonth = new DateTime(_lastMonth.Year, 1, 1);
-            _reportFrom = firstMonth.ToString("MMM yyyy");
-            _reportTo = _lastMonth.ToString("MMM yyyy");
         }
 
         /// <summary>
@@ -95,6 +84,16 @@ namespace Fanex.SMAReport.Business.Service
 
                 try
                 {
+                    this.InitColor();
+                    this.InitAlignmentInfo();
+                    this.InitBorderStyleInfo();
+                    this.InitFontInfo();
+                    this.InitBackgroundColorInfo();
+                    _lastMonth = DateTime.Now.AddMonths(-1);
+                    DateTime firstMonth = new DateTime(_lastMonth.Year, 1, 1);
+                    _reportFrom = firstMonth.ToString("MMM yyyy");
+                    _reportTo = _lastMonth.ToString("MMM yyyy");
+
                     SMAReport report = _repository.GetSMAReport();
 
                     this.ExportReportData(report);
@@ -141,6 +140,7 @@ namespace Fanex.SMAReport.Business.Service
         /// <param name="report">The report.</param>
         private void ExportReportData(SMAReport report)
         {
+            _reportDirectory = new List<string>();
             FileStream fileStream = null;
             bool isSuperReport = false;
             DateTime firstMonth = new DateTime(_lastMonth.Year, 1, 1);
@@ -403,7 +403,7 @@ namespace Fanex.SMAReport.Business.Service
                 _totalRowBackgroundInfo,
                 _rightAlignmentInfo,
                 _font);
-            _numberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NumberFormat);
+            totalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NumberFormat);
 
             XSSFCellStyle totalPositiveNumberStyle = NPOIHighVersion.CreateCellStyle(
                 workbook,
@@ -411,7 +411,7 @@ namespace Fanex.SMAReport.Business.Service
                 _totalRowBackgroundInfo,
                 _rightAlignmentInfo,
                 _font);
-            _positiveNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.PositiveNumberFormat);
+            totalPositiveNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.PositiveNumberFormat);
 
             NPOIUtility.ResetColumnIndex(ref _cellInfo);
             XSSFRow row = worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;

@@ -97,6 +97,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Fanex.Service.Core\Fanex.Service.Core.csproj">
+      <Project>{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}</Project>
+      <Name>Fanex.Service.Core %28Fanex.Service.Core\Fanex.Service.Core%29</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fanex.SMAReport.Business\Fanex.SMAReport.Business.csproj">
       <Project>{56CC0914-78E8-4BF8-8664-5DB8807C1488}</Project>
       <Name>Fanex.SMAReport.Business</Name>

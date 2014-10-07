@@ -77,10 +77,14 @@ namespace Fanex.SMAReport.Service
             {
                 SMAReportModel taskModel = new SMAReportModel();
                 bool isRunningDay = DateTime.Now.Day == AppSettings.RunAtDay;
+                bool hasAlreadyRun = false;
 
                 SMAReportModel model = service.GetTaskReadyToRun();
-                DateTime taskRunningDay = Convert.ToDateTime(model.CreatedDate);
-                bool hasAlreadyRun = DateTime.Now.Month == taskRunningDay.Month;
+                if (model != null)
+                {
+                    DateTime taskRunningDay = Convert.ToDateTime(model.CreatedDate);
+                    hasAlreadyRun = DateTime.Now.Month == taskRunningDay.Month;
+                }
 
                 if (isRunningDay && !AppSettings.OnProcessing && !hasAlreadyRun)
                 {
