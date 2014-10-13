@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<Functions>
-  <Function Name="Exchange rate">
-    <Setting Key="Acc_ExchangeDailyIns" SpName="Acc_ExchangeDailyIns" DbName="DBTXN.CustDB.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Acc_ExchangeDaily_ActualRateUpd" SpName="Acc_ExchangeDaily_ActualRateUpd" DbName="DBTXN.CustDB.bodbAdminNet" TimeOut="0" />
-  </Function>
-</Functions>

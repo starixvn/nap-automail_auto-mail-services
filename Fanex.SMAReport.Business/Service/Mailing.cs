@@ -41,6 +41,8 @@ namespace Fanex.SMAReport.Business.Service
                 var mailItem = new Fanex.MailDeliver.Model.MailRecord
                 {
                     MailTo = emailTo,
+                    MailCc = AppSettings.MailCcTo,
+                    MailBcc = AppSettings.MailBCcTo,
                     Subject = emailSubject,
                     Title = emailTitle,
                     Body = emailContent
@@ -59,6 +61,7 @@ namespace Fanex.SMAReport.Business.Service
                 {
                     using (var client = new Fanex.MailDeliver.MailClient.API.MailDeliver())
                     {
+                        System.Threading.Thread.Sleep(300000);
                         client.SendMail(mailItem);
                     }
                 }
