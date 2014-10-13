@@ -92,8 +92,6 @@
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
     <Compile Include="Constants\EmailTemplateConstants.cs" />
-    <Compile Include="Enums\Status.cs" />
-    <Compile Include="Enums\TaskType.cs" />
     <Compile Include="Model\SMAReport.cs" />
     <Compile Include="Model\SMAReportDetail.cs" />
     <Compile Include="Model\SMAReportModel.cs" />
@@ -111,7 +109,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Criteria\" />
-    <Folder Include="Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Service.Core\Fanex.Service.Core.csproj">

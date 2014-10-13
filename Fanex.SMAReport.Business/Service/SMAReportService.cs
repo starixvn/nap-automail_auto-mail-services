@@ -13,8 +13,8 @@ namespace Fanex.SMAReport.Business.Service
     using System.IO;
     using Fanex.Service.Core.Common;
     using Fanex.Service.Core.Constants;
+    using Fanex.Service.Core.Enums;
     using Fanex.Service.Core.Extensions;
-    using Fanex.SMAReport.Business.Enums;
     using Fanex.SMAReport.Business.Model;
     using Fanex.SMAReport.Business.Repositories;
     using NPOI.SS.UserModel;
@@ -349,7 +349,7 @@ namespace Fanex.SMAReport.Business.Service
                 NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _normalRowTextStyle);
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-                _cellInfo.CellValue = "Margin";
+                _cellInfo.CellValue = "Margin %";
                 NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _normalRowTextStyle);
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
                 NPOIUtility.IncreaseRowIndex(ref _cellInfo);
@@ -360,18 +360,42 @@ namespace Fanex.SMAReport.Business.Service
                     _cellInfo.EndRow = _cellInfo.EndRow - 3;
                     var currentMonthData = currentUser.ReportByMonths[j];
 
-                    _cellInfo.CellValue = currentMonthData.TurnOver;
-                    NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _numberStyle);
-                    NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+                    if (currentMonthData.TurnOver != 0)
+                    {
+                        _cellInfo.CellValue = currentMonthData.TurnOver;
+                        NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _numberStyle);
+                    }
+                    else
+                    {
+                        _cellInfo.CellValue = string.Empty;
+                        NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _specialRowTextStyle);
+                    }
 
-                    _cellInfo.CellValue = currentMonthData.WinLoss;
-                    NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _positiveNumberStyle);
                     NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+                    if (currentMonthData.WinLoss != 0)
+                    {
+                        _cellInfo.CellValue = currentMonthData.WinLoss;
+                        NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _positiveNumberStyle);
+                    }
+                    else
+                    {
+                        _cellInfo.CellValue = string.Empty;
+                        NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _specialRowTextStyle);
+                    }
 
-                    _cellInfo.CellValue = currentMonthData.Margin;
-                    NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _positivePercentStyle);
                     NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+                    if (currentMonthData.WinLoss == 0 && currentMonthData.TurnOver == 0)
+                    {
+                        _cellInfo.CellValue = string.Empty;
+                        NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _normalRowTextStyle);
+                    }
+                    else
+                    {
+                        _cellInfo.CellValue = currentMonthData.Margin;
+                        NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _positivePercentStyle);
+                    }
 
+                    NPOIUtility.IncreaseRowIndex(ref _cellInfo);
                     NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
                 }
             }
@@ -439,7 +463,7 @@ namespace Fanex.SMAReport.Business.Service
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _normalRowTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-            _cellInfo.CellValue = "Margin";
+            _cellInfo.CellValue = "Margin %";
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _normalRowTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
             NPOIUtility.IncreaseRowIndex(ref _cellInfo);
@@ -450,18 +474,43 @@ namespace Fanex.SMAReport.Business.Service
                 _cellInfo.EndRow = _cellInfo.EndRow - 3;
                 var currentMonthData = totalInfo.ReportByMonths[i];
 
-                _cellInfo.CellValue = currentMonthData.TurnOver;
-                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, totalNumberStyle);
+                if (currentMonthData.TurnOver != 0)
+                {
+                    _cellInfo.CellValue = currentMonthData.TurnOver;
+                    NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, totalNumberStyle);
+                }
+                else
+                {
+                    _cellInfo.CellValue = string.Empty;
+                    NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, totalRowTextStyle);
+                }
+
+                NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+                if (currentMonthData.WinLoss != 0)
+                {
+                    _cellInfo.CellValue = currentMonthData.WinLoss;
+                    NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, totalPositiveNumberStyle);
+                }
+                else
+                {
+                    _cellInfo.CellValue = string.Empty;
+                    NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, totalRowTextStyle);
+                }
+
                 NPOIUtility.IncreaseRowIndex(ref _cellInfo);
 
-                _cellInfo.CellValue = currentMonthData.WinLoss;
-                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, totalPositiveNumberStyle);
-                NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+                if (currentMonthData.TurnOver == 0 && currentMonthData.WinLoss == 0)
+                {
+                    _cellInfo.CellValue = string.Empty;
+                    NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _normalRowTextStyle);
+                }
+                else
+                {
+                    _cellInfo.CellValue = currentMonthData.Margin;
+                    NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _positivePercentStyle);
+                }
 
-                _cellInfo.CellValue = currentMonthData.Margin;
-                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _positivePercentStyle);
                 NPOIUtility.IncreaseRowIndex(ref _cellInfo);
-
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
             }
         }

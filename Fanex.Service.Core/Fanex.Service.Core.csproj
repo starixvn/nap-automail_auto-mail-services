@@ -64,11 +64,14 @@
     <Compile Include="Common\NPOIUtility.cs" />
     <Compile Include="Constants\DateTimeFormatConstants.cs" />
     <Compile Include="Constants\NPOIConstants.cs" />
+    <Compile Include="Enums\Status.cs" />
+    <Compile Include="Enums\TaskType.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\DirectoryExtensions.cs" />
     <Compile Include="Extensions\LogExtensions.cs" />
     <Compile Include="Extensions\NPOIExtension.cs" />
     <Compile Include="Extensions\NPOIHighVersion.cs" />
+    <Compile Include="Extensions\NumberExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

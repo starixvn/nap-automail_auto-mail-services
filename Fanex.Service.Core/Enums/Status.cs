@@ -4,13 +4,8 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.SMAReport.Business.Enums
+namespace Fanex.Service.Core.Enums
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -20,6 +15,11 @@ namespace Fanex.SMAReport.Business.Enums
         /// Task is running.
         /// </summary>
         Running,
+
+        /// <summary>
+        /// Task is processing.
+        /// </summary>
+        Processing,
 
         /// <summary>
         /// The process is failed.

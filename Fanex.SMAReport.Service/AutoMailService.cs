@@ -11,9 +11,9 @@ namespace Fanex.SMAReport.Service
     using System.ServiceProcess;
     using System.Timers;
     using Fanex.Data.Configuration;
+    using Fanex.Service.Core.Enums;
     using Fanex.Service.Core.Extensions;
     using Fanex.SMAReport.Business;
-    using Fanex.SMAReport.Business.Enums;
     using Fanex.SMAReport.Business.Model;
     using Fanex.SMAReport.Business.Service;
 

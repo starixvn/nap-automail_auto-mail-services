@@ -12,10 +12,10 @@ namespace Fanex.ReportingService.Core.Repository.Impl
     using System;
     using System.Collections.Generic;
     using System.Data;
-    using Fanex.ReportingService.Core.Models;
-    using Fanex.ReportingService.Core.Repository.Interface;
     using Fanex.Common.Extensions;
     using Fanex.NAP.Framework.Data;
+    using Fanex.ReportingService.Core.Models;
+    using Fanex.ReportingService.Core.Repository.Interface;
 
     /// <summary>
     /// TODO: Update summary.

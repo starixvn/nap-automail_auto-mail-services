@@ -10,7 +10,7 @@ namespace Fanex.SMAReport.Business.Model
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Fanex.SMAReport.Business.Enums;
+    using Fanex.Service.Core.Enums;
 
     /// <summary>
     /// TODO: Update summary.

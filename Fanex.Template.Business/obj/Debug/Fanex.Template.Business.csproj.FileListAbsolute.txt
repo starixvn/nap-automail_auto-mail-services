@@ -17,4 +17,3 @@ D:\Project\auto-mail-services\Fanex.Template.Business\bin\Debug\WebGrease.dll
 D:\Project\auto-mail-services\Fanex.Template.Business\bin\Debug\Antlr3.Runtime.dll
 D:\Project\auto-mail-services\Fanex.Template.Business\obj\Debug\Fanex.Template.Business.dll
 D:\Project\auto-mail-services\Fanex.Template.Business\obj\Debug\Fanex.Template.Business.pdb
-D:\Project\auto-mail-services\Fanex.Template.Business\obj\Debug\Fanex.Template.Business.csprojResolveAssemblyReference.cache

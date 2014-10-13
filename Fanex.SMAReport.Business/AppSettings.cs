@@ -25,7 +25,7 @@ namespace Fanex.SMAReport.Business
             get
             {
                 var val = ConfigurationManager.AppSettings["ServiceName"];
-                return val == null ? "_Fanex.AccountingReports.ResetWinning.Service" : val;
+                return val == null ? "_Fanex.SMAReport.Service" : val;
             }
         }
 

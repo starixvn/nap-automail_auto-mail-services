@@ -1,0 +1,110 @@
+﻿// -----------------------------------------------------------------------
+// <copyright file="NumberExtensions.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace Fanex.Service.Core.Extensions
+{
+    using System;
+
+    /// <summary>
+    /// Number extension.
+    /// </summary>
+    public static class NumberExtensions
+    {
+        public static string CurrencyFormat(this decimal value)
+        {
+            return @String.Format("{0:0,0.00}", value);
+        }
+
+        /// <summary>
+        /// Formats the specified value.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>The value after format.</returns>
+        public static string Format(this int value)
+        {
+            return DoFormat(value, 0);
+        }
+
+        /// <summary>
+        /// Format Object.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>The value after format.</returns>
+        public static string Format(this object value)
+        {
+            return DoFormat(value, 0);
+        }
+
+        /// <summary>
+        /// Format Decimal Value.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="decDigits">The digit.</param>
+        /// <returns>The value after format.</returns>
+        public static string Format(this decimal value, byte decDigits)
+        {
+            return DoFormat(value, decDigits);
+        }
+
+        /// <summary>
+        /// Format Object value.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="decDigits">The digit.</param>
+        /// <returns>The value after format.</returns>
+        public static string Format(this object value, byte decDigits)
+        {
+            return DoFormat(value, decDigits);
+        }
+
+        /// <summary>
+        /// Format Double Value.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="decDigits">The digit.</param>
+        /// <returns>The value after format.</returns>
+        public static string Format(this double value, byte decDigits)
+        {
+            return DoFormat(value, decDigits);
+        }
+
+        /// <summary>
+        /// Format Float Value.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="decDigits">The digit.</param>
+        /// <returns>The value after format.</returns>
+        public static string Format(this float value, byte decDigits)
+        {
+            return DoFormat(value, decDigits);
+        }
+
+        /// <summary>
+        /// Format specified number value.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="decDigits">The digit.</param>
+        /// <returns>Value after rounding and formatting.</returns>
+        private static string DoFormat(object value, byte decDigits)
+        {
+            if (value != null)
+            {
+                string formatString = "{0:n" + decDigits.ToString() + "}";
+                string result = null;
+                if (value != null)
+                {
+                    result = string.Format(formatString, value);
+                }
+
+                return result;
+            }
+            else
+            {
+                throw new NullReferenceException();
+            }
+        }
+    }
+}

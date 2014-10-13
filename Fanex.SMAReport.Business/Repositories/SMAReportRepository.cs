@@ -13,8 +13,8 @@ namespace Fanex.SMAReport.Business.Repositories
     using Fanex.AccountingReports.SqLiteDatabase;
     using Fanex.Common;
     using Fanex.Data;
+    using Fanex.Service.Core.Enums;
     using Fanex.Service.Core.Extensions;
-    using Fanex.SMAReport.Business.Enums;
     using Fanex.SMAReport.Business.Model;
 
     /// <summary>
@@ -254,9 +254,9 @@ namespace Fanex.SMAReport.Business.Repositories
         private List<SMAReportDetail> InitMonthlySMADataByUser()
         {
             List<SMAReportDetail> monthlySMADataReport = new List<SMAReportDetail>();
-            int currentMonth = DateTime.Now.Month;
+            int numberMonth = DateTime.Now.AddMonths(-1).Month + 1;
 
-            for (int i = 0; i < currentMonth; i++)
+            for (int i = 0; i < numberMonth; i++)
             {
                 monthlySMADataReport.Add(new SMAReportDetail
                 {
@@ -269,6 +269,11 @@ namespace Fanex.SMAReport.Business.Repositories
             return monthlySMADataReport;
         }
 
+        /// <summary>
+        /// Maps the task data.
+        /// </summary>
+        /// <param name="row">The data row.</param>
+        /// <returns>The task information.</returns>
         private SMAReportModel MapTaskData(DataRow row)
         {
             SMAReportModel model = new SMAReportModel()

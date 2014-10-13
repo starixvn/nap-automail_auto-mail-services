@@ -27,7 +27,7 @@ namespace Fanex.SMAReport.Business.Model
             get
             {
                 decimal margin = this.TurnOver == 0 ? 0 :
-                                (this.WinLoss / this.TurnOver) * 100;
+                                this.WinLoss / this.TurnOver;
 
                 return margin;
             }
