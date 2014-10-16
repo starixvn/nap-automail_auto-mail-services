@@ -164,6 +164,7 @@ namespace Fanex.SMAReport.Business.Service
                 NPOIUtility.IncreaseRowIndex(ref _cellInfo);
                 NPOIUtility.ResetColumnIndex(ref _cellInfo);
                 this.ExportReportContent(worksheet, report.Report[i]);
+                worksheet.CreateFreezePane(0, 3, 0, 3);
 
                 var reportDirectory = this.CreateSMAReportDataDirectory();
                 string reportName = string.Format(
