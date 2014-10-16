@@ -222,5 +222,14 @@ namespace Fanex.SMAReport.Business
             get;
             set;
         }
+
+        public static string DownloadUrl
+        {
+            get
+            {
+                var val = ConfigurationManager.AppSettings["DownloadUrl"];
+                return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["DownloadUrl"]);
+            }
+        }
     }
 }

@@ -171,6 +171,7 @@ namespace Fanex.SMAReport.Business.Service
                     Resources.SMA_Master_Report_Name,
                     _reportFrom.Replace(' ', '_'),
                     _reportTo.Replace(' ', '_'));
+                
                 var reportPath = Path.Combine(reportDirectory, reportName);
                 var fullReportPath = string.Format("{0}.{1}", reportPath, "xlsx");
 
@@ -179,10 +180,10 @@ namespace Fanex.SMAReport.Business.Service
                         FileMode.Create,
                         FileAccess.Write);
                 _workbook.Write(fileStream);
+                _reportDirectory.Add(reportName);
+                
                 fileStream.Close();
-                fileStream.Dispose();
-
-                _reportDirectory.Add(fullReportPath);
+                GC.Collect();
             }
         }
 

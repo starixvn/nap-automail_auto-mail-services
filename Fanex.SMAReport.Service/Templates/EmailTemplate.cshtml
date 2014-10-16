@@ -1,10 +1,29 @@
-﻿<div>
+﻿@using System.Collections.Generic;
+@using Fanex.SMAReport.Business;
+@using fanexCommon = Fanex.Common;
+<div>
     <div>
-        Dear All,<br /><br />
+        Dear All,<br />
+        <br />
     </div>
-    <div>Please get the attachment files for the report.</div><br /><br />
     <div>
-        Thanks & Regards,<br /><br />
+        Please get the attachment files for the report.</div>
+    <br />
+    @foreach (string fileName in @Model)
+    {
+        DateTime currentTime = DateTime.Now;
+        string timeToEncrypt =  currentTime.ToString();
+        var encryptText = fanexCommon.Cryptography.CfsEnCrypt(timeToEncrypt);
+        string reportPath = AppSettings.DownloadUrl;
+        string reportContainerFolder = currentTime.AddMonths(-1).Year.ToString();
+        string fileNameWithExtension = string.Format("{0}.{1}", fileName, "xlsx");
+        string fullReportUrl = string.Join("/", new string[] { reportPath, reportContainerFolder, fileNameWithExtension });
+        string fullReportUrlWithEncrypt = string.Format("{0}?time={1}", fullReportUrl, encryptText);
+        <a href="@fullReportUrlWithEncrypt">@fileName</a><br /><br />
+    }
+    <div>
+        Thanks & Regards,<br />
+        <br />
         Starix IT.
     </div>
 </div>
