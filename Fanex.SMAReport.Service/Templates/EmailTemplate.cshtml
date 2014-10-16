@@ -1,6 +1,8 @@
 ﻿@using System.Collections.Generic;
 @using Fanex.SMAReport.Business;
+@using Fanex.Service.Core.Extensions;
 @using fanexCommon = Fanex.Common;
+
 <div>
     <div>
         Dear All,<br />
@@ -9,18 +11,21 @@
     <div>
         Please get the attachment files for the report.</div>
     <br />
-    @foreach (string fileName in @Model)
-    {
+    @{
         DateTime currentTime = DateTime.Now;
-        string timeToEncrypt =  currentTime.ToString();
-        var encryptText = fanexCommon.Cryptography.CfsEnCrypt(timeToEncrypt);
+        string timeToEncrypt = currentTime.ToString();
+        string encryptText = fanexCommon.Cryptography.CfsEnCrypt(timeToEncrypt);
         string reportPath = AppSettings.DownloadUrl;
         string reportContainerFolder = currentTime.AddMonths(-1).Year.ToString();
+    }
+    @foreach (string fileName in @Model)
+    {
         string fileNameWithExtension = string.Format("{0}.{1}", fileName, "xlsx");
         string fullReportUrl = string.Join("/", new string[] { reportPath, reportContainerFolder, fileNameWithExtension });
         string fullReportUrlWithEncrypt = string.Format("{0}?time={1}", fullReportUrl, encryptText);
         <a href="@fullReportUrlWithEncrypt">@fileName</a><br /><br />
     }
+    <div>Note: <span style="font-style: italic;">It'll specify that ""The links will be expired on @currentTime.AddMonths(1).ToShortFormatedDate(). Please contact StarisIT if you can not download them!"</span></div><br /><br />
     <div>
         Thanks & Regards,<br />
         <br />
