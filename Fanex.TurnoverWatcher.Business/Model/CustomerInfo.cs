@@ -38,7 +38,8 @@ namespace Fanex.TurnoverWatcher.Business.Model
                 }
 
                 var percentage = (CompanyTurnover / MaxTurnover) * 100;
-                return Convert.ToInt32(percentage);
+
+                return (int)Math.Round(percentage, 0 , MidpointRounding.AwayFromZero);
             }
         }
     }
