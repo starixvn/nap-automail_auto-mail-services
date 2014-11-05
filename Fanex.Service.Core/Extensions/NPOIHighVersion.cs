@@ -117,7 +117,15 @@ namespace Fanex.Service.Core.Extensions
                     }
                 }
             }
+        }
 
+        public static void RenderMergeCell(
+          ref XSSFSheet worksheet,
+          ref XSSFRow row,
+          ref CellInfo cellInfo,
+          XSSFCellStyle cellStyle)
+        {
+            RenderCell(ref worksheet, ref row, ref cellInfo, cellStyle);
             worksheet.AddMergedRegion(new CellRangeAddress(cellInfo.CurrentRow, cellInfo.EndRow, cellInfo.CurrentColumn, cellInfo.EndColumn));
         }
     }
