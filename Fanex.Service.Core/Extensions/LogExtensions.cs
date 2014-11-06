@@ -1,15 +1,12 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="LogExtensions.cs" company="Microsoft">
+// <copyright file="LogExtensions.cs" company="Nexcel Solutions Vietnam.">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.SMAReport.Business.Common
+namespace Fanex.Service.Core.Extensions
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Fanex.Logging;
 
     /// <summary>
@@ -20,9 +17,10 @@ namespace Fanex.SMAReport.Business.Common
         public static void ExceptionHandler(Exception ex)
         {
             string message = ex.Message +
-                              "<br>\r\nSOURCE: " + ex.Source +
-                              "<br>\r\nTARGETSITE: " + ex.TargetSite +
-                              "<br>\r\nSTACKTRACE: " + ex.StackTrace;
+                                "<br>\r\nINNEREXCEPTION: " + ex.InnerException +
+                                "<br>\r\nSOURCE: " + ex.Source +
+                                "<br>\r\nTARGETSITE: " + ex.TargetSite +
+                                "<br>\r\nSTACKTRACE: " + ex.StackTrace;
             Logger.Log.Error(message);
         }
     }

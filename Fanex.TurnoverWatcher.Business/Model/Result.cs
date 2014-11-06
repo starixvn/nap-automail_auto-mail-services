@@ -1,10 +1,10 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="Result.cs" company="Microsoft">
-// TODO: Update copyright text.
+// <copyright file="Result.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.SMAReport.Business.Model
+namespace Fanex.TurnoverWatcher.Business.Model
 {
     using System;
     using System.Collections.Generic;
@@ -16,13 +16,8 @@ namespace Fanex.SMAReport.Business.Model
     /// </summary>
     public class Result
     {
-        public Result()
-        {
-            ErrMsg = string.Empty;
-        }
+        public int ErrorCode { get; set; }
 
-        public int ErrCode { get; set; }
-
-        public string ErrMsg { get; set; }
+        public string ErrorMessage { get; set; }
     }
 }

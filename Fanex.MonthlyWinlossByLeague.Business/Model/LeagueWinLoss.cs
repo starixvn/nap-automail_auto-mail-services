@@ -1,0 +1,25 @@
+﻿// -----------------------------------------------------------------------
+// <copyright file="LeagueWinLoss.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace Fanex.MonthlyWinlossByLeague.Business.Model
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    /// <summary>
+    /// TODO: Update summary.
+    /// </summary>
+    public class LeagueWinLoss
+    {
+        public string LeagueName { get; set; }
+
+        public int MatchCount { get; set; }
+
+        public List<BettypeWinLoss> BettypeWinLoss { get; set; }
+    }
+}

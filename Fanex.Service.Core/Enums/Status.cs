@@ -4,13 +4,8 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.SMAReport.Business.Enums
+namespace Fanex.Service.Core.Enums
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -27,15 +22,18 @@ namespace Fanex.SMAReport.Business.Enums
         Processing,
 
         /// <summary>
-        /// The process reset winning is failed.
+        /// The process is failed.
         /// </summary>
-        ResetFailed,
+        Failed,
 
         /// <summary>
-        /// The process reset winning successful.
+        /// The process successful.
         /// </summary>
-        ResetSuccessful,
+        Successful,
 
+        /// <summary>
+        /// The can not found.
+        /// </summary>
         CannotFound
     }
 }

@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ResetWinningRepository.cs" company="Microsoft">
+// <copyright file="SMAReportRepository.cs" company="Microsoft">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -8,15 +8,14 @@ namespace Fanex.SMAReport.Business.Repositories
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.AccountingReports.SqLiteDatabase;
-    using Fanex.SMAReport.Business.Model;
-    using Fanex.SMAReport.Business.Enums;
     using System.Data;
+    using System.Linq;
+    using Fanex.AccountingReports.SqLiteDatabase;
     using Fanex.Common;
-    using System.Collections;
     using Fanex.Data;
+    using Fanex.Service.Core.Enums;
+    using Fanex.Service.Core.Extensions;
+    using Fanex.SMAReport.Business.Model;
 
     /// <summary>
     /// TODO: Update summary.
@@ -30,217 +29,263 @@ namespace Fanex.SMAReport.Business.Repositories
             _db = new SqLite(AppSettings.ConnectionString);
         }
 
+        /// <summary>
+        /// Updates the task status.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="status">The status.</param>
+        public void UpdateTaskStatus(int id, Status status)
+        {
+            try
+            {
+                Dictionary<string, string> data = new Dictionary<string, string>();
+                data.Add("Status", ((int)status).ToString());
+                data.Add("UpdatedDate", DateTime.Now.ToString());
+
+                string where = " Id = " + id;
+                _db.Update("Log", data, where);
+            }
+            catch (Exception ex)
+            {
+                LogExtensions.ExceptionHandler(ex);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Gets the current task.
+        /// </summary>
+        /// <returns>SMA report task.</returns>
         public SMAReportModel GetCurrentTask()
         {
             SMAReportModel model = null;
             try
             {
-                string sql = "select * from log where Status = "+ (int)Status.Running +" LIMIT 1";
-                DataTable dataTable = _db.GetDataTable(sql);
-                
-                if (dataTable.Rows.Count == 0)
-                    return model;               
-
-                DataRow row = dataTable.Rows[0];
-                model = new SMAReportModel() 
-                {
-                    Id = Converter.ToInt(row["Id"]),
-                    TaskStatus = (Status)Converter.ToInt(row["Status"]),
-                    CreatedDate = Converter.ToString2(row["CreatedDate"]),
-                    UpdatedDate = Converter.ToString2(row["UpdatedDate"]),
-                    UserId = Converter.ToInt(row["UserId"]),
-                    UserName = Converter.ToString2(row["UserName"]),
-                    ResetOnDate = Converter.ToString2(row["ResetOnDate"])
-                };
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-            return model;
-        }
-
-        public void UpdateTaskStatus(int Id, Status status)
-        {
-            try
-            {
-                Dictionary<string, string> data = new Dictionary<string, string>();
-                data.Add("Status", ((int)status).ToString()); 
-                data.Add("UpdatedDate", DateTime.Now.ToString());
-
-                string where = " Id = " + Id;
-                _db.Update("Log", data, where);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-
-        public void MoveTaskToArchive(int Id)
-        {
-            try
-            {
-                SMAReportModel model = GetTaskById(Id);
-                if (model == null)
-                    return;
-
-                Dictionary<string, string> data = new Dictionary<string, string>();
-                data.Add("Id", model.Id.ToString());
-                data.Add("Status", Converter.ToInt(model.TaskStatus).ToString());
-                data.Add("CreatedDate", model.CreatedDate);
-                data.Add("UpdatedDate", model.UpdatedDate);
-                data.Add("UserId", model.UserId.ToString());
-                data.Add("UserName", model.UserName);
-                data.Add("ResetOnDate", model.ResetOnDate);
-
-                _db.Insert("Log_Archive", data);
-
-                string where = " Id = " + Id;
-                _db.Delete("Log", where);
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-
-        public SMAReportModel GetTaskById(int Id)
-        {
-            SMAReportModel model = null;
-            try
-            {
-                string sql = "select * from log where Id = " + Id;
+                string sql = "select * from log where Status = " + (int)Status.Running + " LIMIT 1";
                 DataTable dataTable = _db.GetDataTable(sql);
 
                 if (dataTable.Rows.Count == 0)
                 {
                     return model;
                 }
-                    
+
                 DataRow row = dataTable.Rows[0];
-                model = new SMAReportModel()
-                {
-                    Id = Converter.ToInt(row["Id"]),
-                    TaskStatus = (Status)Converter.ToInt(row["Status"]),
-                    CreatedDate = Converter.ToString2(row["CreatedDate"]),
-                    UpdatedDate = Converter.ToString2(row["UpdatedDate"]),
-                    UserId = Converter.ToInt(row["UserId"]),
-                    UserName = Converter.ToString2(row["UserName"]),
-                    ResetOnDate = Converter.ToString2(row["ResetOnDate"])
-                };
+                model = this.MapTaskData(row);
             }
             catch (Exception ex)
             {
-                throw ex;
+                LogExtensions.ExceptionHandler(ex);
+                throw;
             }
 
             return model;
         }
 
-
-        public Result ResetWinning(int Id)
+        /// <summary>
+        /// Gets the task ready run.
+        /// </summary>
+        /// <returns>SMA report task.</returns>
+        public SMAReportModel GetTaskReadyRun()
         {
-            Result result = new Result();
+            SMAReportModel model = null;
             try
             {
-                SMAReportModel model = GetTaskById(Id);
+                string sql = "select * from log order by Id desc LIMIT 1";
+                DataTable dataTable = _db.GetDataTable(sql);
 
-                if (model == null)
+                if (dataTable.Rows.Count == 0)
                 {
-                    result.ErrCode = 100;
-                    result.ErrMsg = "There is no data to reset";
-
-                    return result;
+                    return model;
                 }
 
-                Hashtable parameters = new Hashtable();
-                parameters.Add("fromdate", model.ResetOnDate);
-                parameters.Add("todate", model.ResetOnDate);
-                parameters.Add("mode", 1);//Reset
-                parameters.Add("errcode", 0);
-                parameters.Add("errmsg", string.Empty);
-
-                using (ObjectDb db = new ObjectDb("Task_ResetWinning_Non3rdParty"))
-                {
-                    db.AssignParamValues(parameters);
-                    db.ExecuteNonQuery();
-
-                    Hashtable output = db.GetOuputParams();
-                    result.ErrCode = Converter.ToInt(output["errcode"]);
-                    result.ErrMsg = Converter.ToString2(output["errmsg"]);
-                }
-
+                DataRow row = dataTable.Rows[0];
+                model = this.MapTaskData(row);
             }
             catch (Exception ex)
             {
-                throw ex;
+                LogExtensions.ExceptionHandler(ex);
+                throw;
             }
 
-            return result;
+            return model;
         }
 
+        /// <summary>
+        /// Gets the task by identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>SMA report task.</returns>
+        public SMAReportModel GetTaskById(int id)
+        {
+            SMAReportModel model = null;
+            try
+            {
+                string sql = "select * from log where Id = " + id;
+                DataTable dataTable = _db.GetDataTable(sql);
 
+                if (dataTable.Rows.Count == 0)
+                {
+                    return model;
+                }
+
+                DataRow row = dataTable.Rows[0];
+                model = this.MapTaskData(row);
+            }
+            catch (Exception ex)
+            {
+                LogExtensions.ExceptionHandler(ex);
+                throw;
+            }
+
+            return model;
+        }
+
+        /// <summary>
+        /// Inserts the task.
+        /// </summary>
+        /// <param name="task">The SMA task.</param>
+        /// <returns>Identifier of the task.</returns>
         public int InsertTask(SMAReportModel task)
         {
-            int Id = 0;
+            int id = 0;
             try
             {
                 Dictionary<string, string> data = new Dictionary<string, string>();
                 data.Add("Status", ((int)Status.Running).ToString());
                 data.Add("CreatedDate", DateTime.Now.ToString());
-                data.Add("UserId", task.UserId.ToString());
-                data.Add("UserName", task.UserName);
-                data.Add("ResetOnDate", task.ResetOnDate);
+                data.Add("Type", task.TaskType.ToString());
 
-                Id = Converter.ToInt(_db.Insert("Log", data));
+                id = Converter.ToInt(_db.Insert("Log", data));
             }
             catch (Exception ex)
             {
-                throw ex;
+                LogExtensions.ExceptionHandler(ex);
+                throw;
             }
 
-            return Id;
+            return id;
         }
 
-
-        public Status GetSatatusByTaskId(int Id)
+        /// <summary>
+        /// Gets the SMA report.
+        /// </summary>
+        /// <returns>SMA report.</returns>
+        public SMAReport GetSMAReport()
         {
-            Status status = Status.Running;
-            try
+            var report = new SMAReport();
+
+            using (var objectDb = new ObjectDb("SMA_Report_GetData"))
             {
-                SMAReportModel model = GetTaskById(Id);
-                if (model == null)
+                IDataReader reader = objectDb.ExecuteReader();
+                var superReportData = this.MapReportData(reader);
+                report.Report.Add(superReportData);
+
+                if (reader.NextResult())
                 {
-                    string sql = "select * from log_archive where Id = " + Id;
-                    DataTable dataTable = _db.GetDataTable(sql);
-
-                    if (dataTable.Rows.Count == 0)
-                    {
-                        status = Status.CannotFound;
-                        return status;
-                    }
-
-                    DataRow row = dataTable.Rows[0];
-                    model = new SMAReportModel()
-                    {
-                        Id = Converter.ToInt(row["Id"]),
-                        TaskStatus = (Status)Converter.ToInt(row["Status"])                        
-                    };
+                    var masterReportData = this.MapReportData(reader);
+                    report.Report.Add(masterReportData);
                 }
-
-                status = model.TaskStatus;
             }
-            catch (Exception ex)
+
+            return report;
+        }
+
+        /// <summary>
+        /// Maps the report data.
+        /// </summary>
+        /// <param name="reader">The reader.</param>
+        /// <returns>SMA report data.</returns>
+        private SMAReport MapReportData(IDataReader reader)
+        {
+            Dictionary<int, string> userInfo = new Dictionary<int, string>();
+            SMAReport result = new SMAReport();
+            SMAReport total = new SMAReport();
+            total.ReportByMonths = this.InitMonthlySMADataByUser();
+            int numberMonth = 0;
+            int userIndex = 0;
+
+            while (reader.Read())
             {
-                throw ex;
+                string userName = Converter.ToString2(reader["Username"]);
+                int month = Converter.ToInt(reader["rptMonth"]);
+                SMAReportDetail smaReportDetail = new SMAReportDetail
+                    {
+                        Month = month,
+                        TurnOver = Converter.ToDecimal(reader["TurnOver"]),
+                        WinLoss = Converter.ToDecimal(reader["Winloss"])
+                    };
+                total.ReportByMonths[month - 1].CalculateTotal(smaReportDetail);
+                total.ReportByMonths[total.ReportByMonths.Count - 1].CalculateTotal(smaReportDetail);
+                var userIsExist = userInfo.ContainsValue(userName);
+
+                if (userIsExist)
+                {
+                    int currentUserIndex = userInfo.FirstOrDefault(x => x.Value == userName).Key;
+                    numberMonth = result.Report[currentUserIndex].ReportByMonths.Count;
+                    result.Report[currentUserIndex].ReportByMonths[month - 1] = smaReportDetail;
+                    result.Report[currentUserIndex].ReportByMonths[numberMonth - 1].CalculateTotal(smaReportDetail);
+                }
+                else
+                {
+                    userInfo.Add(userIndex, userName);
+                    userIndex++;
+                    var monthlySMADataReport = this.InitMonthlySMADataByUser();
+                    numberMonth = monthlySMADataReport.Count;
+                    monthlySMADataReport[month - 1] = smaReportDetail;
+                    monthlySMADataReport[numberMonth - 1].CalculateTotal(smaReportDetail);
+                    result.Report.Add(new SMAReport
+                    {
+                        UserName = userName,
+                        VirtualRate = Converter.ToDecimal(reader["VirtualRate"]) / 100,
+                        Currency = Converter.ToString2(reader["Currency"]),
+                        ReportByMonths = monthlySMADataReport
+                    });
+                }
             }
 
-            return status;            
+            result.Report.Add(total);
+            return result;
+        }
+
+        /// <summary>
+        /// Initializes the monthly SMA data by user.
+        /// </summary>
+        /// <returns>Initializes monthly data.</returns>
+        private List<SMAReportDetail> InitMonthlySMADataByUser()
+        {
+            List<SMAReportDetail> monthlySMADataReport = new List<SMAReportDetail>();
+            int numberMonth = DateTime.Now.AddMonths(-1).Month + 1;
+
+            for (int i = 0; i < numberMonth; i++)
+            {
+                monthlySMADataReport.Add(new SMAReportDetail
+                {
+                    Month = i + 1,
+                    TurnOver = 0,
+                    WinLoss = 0
+                });
+            }
+
+            return monthlySMADataReport;
+        }
+
+        /// <summary>
+        /// Maps the task data.
+        /// </summary>
+        /// <param name="row">The data row.</param>
+        /// <returns>The task information.</returns>
+        private SMAReportModel MapTaskData(DataRow row)
+        {
+            SMAReportModel model = new SMAReportModel()
+            {
+                Id = Converter.ToInt(row["Id"]),
+                TaskStatus = (Status)Converter.ToInt(row["Status"]),
+                CreatedDate = Converter.ToString2(row["CreatedDate"]),
+                TaskType = Converter.ToInt(row["Type"]),
+                UpdatedDate = Converter.ToString2(row["UpdatedDate"])
+            };
+
+            return model;
         }
     }
 }

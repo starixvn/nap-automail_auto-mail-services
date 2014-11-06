@@ -113,7 +113,7 @@ namespace Fanex.ReportingService.Business.Service.Implement.DailyTurnOver
             finally
             {
                 fileStream.Close();
-                fileStream.Dispose();
+                GC.Collect();
             }
         }
 

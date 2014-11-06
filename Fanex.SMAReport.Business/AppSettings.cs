@@ -7,9 +7,6 @@
 namespace Fanex.SMAReport.Business
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Configuration;
 
     /// <summary>
@@ -28,7 +25,7 @@ namespace Fanex.SMAReport.Business
             get
             {
                 var val = ConfigurationManager.AppSettings["ServiceName"];
-                return val == null ? "_Fanex.AccountingReports.ResetWinning.Service" : val;
+                return val == null ? "_Fanex.SMAReport.Service" : val;
             }
         }
 
@@ -79,6 +76,21 @@ namespace Fanex.SMAReport.Business
             {
                 var val = ConfigurationManager.AppSettings["WinlostDateForceRunning"];
                 return val == null ? DateTime.Today : Convert.ToDateTime(ConfigurationManager.AppSettings["WinlostDateForceRunning"]);
+            }
+        }
+
+        /// <summary>
+        /// Gets run at day.
+        /// </summary>
+        /// <value>
+        /// The day running task.
+        /// </value>
+        public static int RunAtDay
+        {
+            get
+            {
+                var val = ConfigurationManager.AppSettings["RunAtDay"];
+                return val == null ? 6 : Convert.ToInt32(ConfigurationManager.AppSettings["RunAtDay"]);
             }
         }
 
@@ -209,6 +221,15 @@ namespace Fanex.SMAReport.Business
         {
             get;
             set;
+        }
+
+        public static string DownloadUrl
+        {
+            get
+            {
+                var val = ConfigurationManager.AppSettings["DownloadUrl"];
+                return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["DownloadUrl"]);
+            }
         }
     }
 }

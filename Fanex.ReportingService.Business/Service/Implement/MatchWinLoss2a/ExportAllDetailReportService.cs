@@ -124,7 +124,7 @@ namespace Fanex.ReportingService.Business.Service.Implement.MatchWinLoss2a
             finally
             {
                 fileStream.Close();
-                fileStream.Dispose();
+                GC.Collect();
             }
         }
 

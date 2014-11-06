@@ -1,6 +1,15 @@
-﻿namespace Fanex.SMAReport.Service
+﻿// -----------------------------------------------------------------------
+// <copyright file="AutoMailService.Designer.cs" company="Nexcel Solutions Vietnam.">
+// TODO: Update copyright text.
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace Fanex.SMAReport.Service
 {
-    partial class AutoMailService
+    /// <summary>
+    /// Auto mail service.
+    /// </summary>
+    public partial class AutoMailService
     {
         /// <summary> 
         /// Required designer variable.

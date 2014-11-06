@@ -125,7 +125,7 @@ namespace Fanex.ReportingService.Business.Service.Implement.CompanyStatement
             finally
             {
                 fileStream.Close();
-                fileStream.Dispose();
+                GC.Collect();
             }
         }
 

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Functions>
+  <Function Name="Monthly Win Loss By League">
+    <Setting Key="Monthly_WinLoss_ByLeague_GetReport" SpName="Report_WinlostByPeriod_tmp" DbName="DBRPT.bodb_Report.bodbAdminNet" />
+  </Function>
+</Functions>

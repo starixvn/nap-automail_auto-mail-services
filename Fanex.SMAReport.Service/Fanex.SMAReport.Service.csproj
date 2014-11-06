@@ -47,6 +47,9 @@
     <Reference Include="Fanex.NAP.Framework">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="Fanex.Service.Core">
+      <HintPath>..\Fanex.Service.Core\bin\Debug\Fanex.Service.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Caching">
       <HintPath>..\_Dependencies\Entlib\Microsoft.Practices.EnterpriseLibrary.Caching.dll</HintPath>
     </Reference>
@@ -64,6 +67,9 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.66.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <HintPath>..\_Dependencies\SQLite\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -94,15 +100,20 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Fanex.Service.Core\Fanex.Service.Core.csproj">
+      <Project>{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}</Project>
+      <Name>Fanex.Service.Core %28Fanex.Service.Core\Fanex.Service.Core%29</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fanex.SMAReport.Business\Fanex.SMAReport.Business.csproj">
       <Project>{56CC0914-78E8-4BF8-8664-5DB8807C1488}</Project>
       <Name>Fanex.SMAReport.Business</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\DBACC.bodb02.bodbAdminNet.xml">
+    <Content Include="App_Data\DBDWH.bodb_dwrs.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="CodeAnalysis\CodeAnalysisConfiguration.xml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

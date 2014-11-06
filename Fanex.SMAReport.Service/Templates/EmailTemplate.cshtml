@@ -1,70 +1,32 @@
-﻿@model WinLossByProducts.Model.WinLossByProductsInfo
-@using WinLossByProducts.Extensions
+﻿@using System.Collections.Generic;
+@using Fanex.SMAReport.Business;
+@using Fanex.Service.Core.Extensions;
+@using fanexCommon = Fanex.Common;
+
 <div>
     <div>
-        Dear All,<br /><br />
-        This is to provide the Daily Win Loss report of all products on @Model.Date
+        Dear All,<br />
+        <br />
     </div>
-    <br/>
-   <table cellspacing="0" rules="all" border="1" id="display" style="border-color:#c5c5c5; border-style:Solid;border-collapse:collapse;font-size:10pt; font-family:Tahoma, Arial, Verdana, Sans-Serif;">
-        <thead>
-            <tr style="height: 25px;background-color:#3C5EA5; color: #FFFFFF; font-weight: bold;">
-                <th style="width:150px;">Product</th>
-                <th style="width:120px;">Win/Loss</th>
-                <th style="width:180px;">Month to Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Sportbook)
-            {
-                <tr style="height: 25px;">
-                    <td style="text-align:left;">@item.ProductName</td>
-                    <td style="text-align:right;">@NumberFormatExtension.DecimalNumberFormat(@item.WinLoss)</td>
-                    <td style="text-align:right;">@NumberFormatExtension.DecimalNumberFormat(@item.MonthToDateWinLoss)</td>
-                </tr>
-            }
-            @if (Model.SportbookTotal != null)
-            {
-                <tr style="height: 25px; background-color:#D8E4BC; text-align:right; font-weight:bold;">
-                    <td>@Model.SportbookTotal.ProductName</td>
-                    <td>@NumberFormatExtension.DecimalNumberFormat(@Model.SportbookTotal.WinLoss)</td>
-                    <td>@NumberFormatExtension.DecimalNumberFormat(@Model.SportbookTotal.MonthToDateWinLoss)</td>
-                </tr>
-            }
-            @foreach (var item in Model.ThirdPartySport)
-            {
-                if (@item.GroupName.ToLower() == "partners")
-                {
-                    <tr style="height: 25px;font-style:italic;color:#C0C0C0;">
-                        <td style="text-align:left;">@item.ProductName</td>
-                        <td style="text-align:right;">@NumberFormatExtension.DecimalNumberFormat(@item.WinLoss)</td>
-                        <td style="text-align:right;">@NumberFormatExtension.DecimalNumberFormat(@item.MonthToDateWinLoss)</td>
-                    </tr>
-                }
-                else
-                {
-                    <tr style="height: 25px;">
-                        <td style="text-align:left; ">@item.ProductName</td>
-                        <td style="text-align:right; ">@NumberFormatExtension.DecimalNumberFormat(@item.WinLoss)</td>
-                        <td style="text-align:right; ">@NumberFormatExtension.DecimalNumberFormat(@item.MonthToDateWinLoss)</td>
-                    </tr>
-                }
-            }
-            @if (Model.Total != null)
-            {
-                <tr style="height: 25px;background-color:#C3D79B; text-align:right; font-weight:bold;">
-                    <td>@Model.Total.ProductName</td>
-                    <td>@NumberFormatExtension.DecimalNumberFormat(@Model.Total.WinLoss)</td>
-                    <td>@NumberFormatExtension.DecimalNumberFormat(@Model.Total.MonthToDateWinLoss)</td>
-                </tr>
-            }
-        </tbody>
-   </table>
-   <br />
     <div>
-        <div style="font-style:italic">Note: The amount due to 3rd parties for Virtual Sports and Keno products will be manually settled by Oneworks which are not shown here.</div><br />
-        This is an auto-generated email, please do not reply.<br /><br />
-        Thanks & Regards,<br /><br />
-        Automail System.
+        Please get the attachment files for the report.</div>
+    <br />
+    @{
+        DateTime currentTime = DateTime.Now;
+        string timeToEncrypt = currentTime.ToString();
+        string encryptText = fanexCommon.Cryptography.CfsEnCrypt(timeToEncrypt);
+        string reportPath = AppSettings.DownloadUrl;
+    }
+    @foreach (string fileName in @Model)
+    {
+        string encryptReportName = fanexCommon.Cryptography.CfsEnCrypt(fileName);
+        string reportDownloadUrl = string.Format("{0}?time={1}&reportName={2}", reportPath, encryptText, encryptReportName);
+        <a href="@reportDownloadUrl">@fileName</a><br /><br />
+    }
+    <div>Note: <span style="font-style: italic;">The links will be expired on @currentTime.AddMonths(1).ToShortFormatedDate(). Please contact Starix IT if you can not download them!</span></div><br /><br />
+    <div>
+        Thanks & Regards,<br />
+        <br />
+        Starix IT.
     </div>
 </div>

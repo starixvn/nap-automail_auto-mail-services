@@ -160,7 +160,7 @@ namespace Fanex.Template.Business.Repositories
                 Hashtable parameters = new Hashtable();
                 parameters.Add("fromdate", model.ResetOnDate);
                 parameters.Add("todate", model.ResetOnDate);
-                parameters.Add("mode", 1);//Reset
+                parameters.Add("mode", 1);////Reset
                 parameters.Add("errcode", 0);
                 parameters.Add("errmsg", string.Empty);
 

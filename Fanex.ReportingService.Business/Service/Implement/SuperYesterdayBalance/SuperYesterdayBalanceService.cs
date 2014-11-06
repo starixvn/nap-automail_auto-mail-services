@@ -178,7 +178,7 @@ namespace Fanex.ReportingService.Business.Service.Implement.SuperYesterdayBalanc
             finally
             {
                 fileStream.Close();
-                fileStream.Dispose();
+                GC.Collect();
             }
         }
 

@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="Mailing.cs" company="Microsoft">
+// <copyright file="Mailing.cs" company="Nexcel Solutions Vietnam.">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -8,12 +8,9 @@ namespace Fanex.SMAReport.Business.Service
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.SMAReport.Business.Model;
-    using Fanex.SMAReport.Business.Constants;
     using System.IO;
-    using Fanex.SMAReport.Business.Common;
+    using Fanex.Service.Core.Extensions;
+    using Fanex.SMAReport.Business.Constants;
     using RazorEngine;
 
     /// <summary>
@@ -22,26 +19,30 @@ namespace Fanex.SMAReport.Business.Service
     public static class Mailing
     {
         /// <summary>
-        /// Wins the loss by product email notification.
+        /// Sends the SMA report email.
         /// </summary>
-        /// <param name="criteria">The win loss by products criteria.</param>
+        /// <param name="fileNames">The file name.</param>
+        /// <param name="reportFrom">The report from.</param>
+        /// <param name="reportTo">The report to.</param>
         /// <returns>Email will be send success or not.</returns>
-        public static bool ResetWinningEmailNotification(SMAReportModel model, Result result)
+        public static bool SendSMAReportEmail(List<string> fileNames, string reportFrom, string reportTo)
         {
             bool isSuccess = true;
             try
             {
                 var root = AppDomain.CurrentDomain.BaseDirectory;
-                string filePath = root + EmailTemplateConstants.ResetWinningNotificationTemplate;
+                string filePath = root + EmailTemplateConstants.SMAReportEmailTemplate;
                 string template = File.ReadAllText(filePath);
-                var emailContent = Razor.Parse(template, result); 
-                string emailTo = AppSettings.AdminEmail;
-                string emailSubject = string.Format(AppSettings.MailSubject, model.ResetOnDate);
+                var emailContent = Razor.Parse(template, fileNames);
+                string emailTo = AppSettings.MailTo;
+                string emailSubject = string.Format(AppSettings.MailSubject, reportFrom, reportTo);
                 string emailTitle = AppSettings.MailTitle;
 
                 var mailItem = new Fanex.MailDeliver.Model.MailRecord
                 {
                     MailTo = emailTo,
+                    MailCc = AppSettings.MailCcTo,
+                    MailBcc = AppSettings.MailBCcTo,
                     Subject = emailSubject,
                     Title = emailTitle,
                     Body = emailContent
@@ -59,22 +60,27 @@ namespace Fanex.SMAReport.Business.Service
             {
                 LogExtensions.ExceptionHandler(ex);
                 isSuccess = false;
+                throw;
             }
 
             return isSuccess;
         }
 
-        public static bool ResetWinningSuccess(SMAReportModel model)
+        /// <summary>
+        /// Errors the email notification.
+        /// </summary>
+        /// <param name="reportFrom">The report from.</param>
+        /// <param name="reportTo">The report to.</param>
+        public static void ErrorEmailNotification(string reportFrom, string reportTo)
         {
-            bool isSuccess = true;
             try
             {
                 var root = AppDomain.CurrentDomain.BaseDirectory;
-                string filePath = root + EmailTemplateConstants.ResetWinningTemplate;
+                string filePath = root + EmailTemplateConstants.SMAReportEmailNotificationTemplate;
                 string template = File.ReadAllText(filePath);
-                var emailContent = Razor.Parse(template, model);
+                var emailContent = Razor.Parse(template);
                 string emailTo = AppSettings.AdminEmail;
-                string emailSubject = string.Format(AppSettings.MailSubject, model.ResetOnDate);
+                string emailSubject = string.Format(AppSettings.MailSubject, reportFrom, reportTo);
                 string emailTitle = AppSettings.MailTitle;
 
                 var mailItem = new Fanex.MailDeliver.Model.MailRecord
@@ -96,10 +102,8 @@ namespace Fanex.SMAReport.Business.Service
             catch (Exception ex)
             {
                 LogExtensions.ExceptionHandler(ex);
-                isSuccess = false;
+                throw;
             }
-
-            return isSuccess;
         }
     }
 }
