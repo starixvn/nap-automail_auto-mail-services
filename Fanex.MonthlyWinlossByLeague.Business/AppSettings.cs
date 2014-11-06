@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="AppSettings.cs" company="">
-// TODO: Update copyright text.
+// <copyright file="AppSettings.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -223,12 +223,12 @@ namespace Fanex.MonthlyWinlossByLeague.Business
             set;
         }
 
-        public static string DownloadUrl
+        public static string ExcelPassword
         {
             get
             {
-                var val = ConfigurationManager.AppSettings["DownloadUrl"];
-                return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["DownloadUrl"]);
+                var val = ConfigurationManager.AppSettings["ExcelPassword"];
+                return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["ExcelPassword"]);
             }
         }
     }

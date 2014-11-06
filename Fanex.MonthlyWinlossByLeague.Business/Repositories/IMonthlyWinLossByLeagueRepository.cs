@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="IMonthlyWinLossByLeagueRepository.cs" company="">
-// TODO: Update copyright text.
+// <copyright file="IMonthlyWinLossByLeagueRepository.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -15,6 +15,8 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Repositories
     /// </summary>
     public interface IMonthlyWinLossByLeagueRepository
     {
+        List<string> Bettypes { get; }
+
         void UpdateTaskStatus(int id, Status status);
 
         Task GetCurrentTask();
@@ -24,8 +26,6 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Repositories
         int InsertTask(Task task);
 
         Task GetTaskReadyRun();
-
-        List<string> Bettypes { get; }
 
         List<MonthlyWinLossByLeague> GetMonthlyWinLossByLeague();
     }

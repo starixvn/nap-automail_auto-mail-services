@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="MonthlyWinLossByLeague.cs" company="">
-// TODO: Update copyright text.
+// <copyright file="MonthlyWinLossByLeague.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 

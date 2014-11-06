@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="BettypeWinLossInfo.cs" company="">
-// TODO: Update copyright text.
+// <copyright file="BettypeWinLoss.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Model
         {
             get
             {
-                return this.Turnover == 0 ? 0 : this.WinLoss / this.Turnover;
+                return this.Turnover == 0 ? 0 : (this.WinLoss / this.Turnover * 100);
             }
         }
 

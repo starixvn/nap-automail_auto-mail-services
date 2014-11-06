@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="MonthlyWinLossByLeagueService.cs" company="">
-// TODO: Update copyright text.
+// <copyright file="MonthlyWinLossByLeagueService.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -8,22 +8,29 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
     using System.IO;
     using System.Linq;
     using Fanex.MonthlyWinlossByLeague.Business.Model;
     using Fanex.MonthlyWinlossByLeague.Business.Repositories;
+    using Fanex.MonthlyWinlossByLeague.Business.Resources;
     using Fanex.Service.Core.Common;
+    using Fanex.Service.Core.Constants;
     using Fanex.Service.Core.Extensions;
     using NPOI.SS.UserModel;
     using NPOI.XSSF.UserModel;
-    using Fanex.Service.Core.Constants;
+    using OfficeOpenXmlCrypto;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class MonthlyWinLossByLeagueService : IMonthlyWinLossByLeagueService
     {
+        private const int _NormalRow = 0;
+        private const int _SubTotalRow = 1;
+        private const int _TotalRow = 2;
+
         private IMonthlyWinLossByLeagueRepository _repository;
         private Dictionary<int, string> _bettypes;
         private DateTime _lastMonth = DateTime.Now.AddMonths(-1);
@@ -41,6 +48,8 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
 
         private XSSFCellStyle _decimalNumberStyle;
         private XSSFCellStyle _leftTextStyle;
+        private XSSFCellStyle _leftTotalByGroupTextStyle;
+        private XSSFCellStyle _leftTotalTextStyle;
         private XSSFCellStyle _intNumberStyle;
         private XSSFCellStyle _decimalTotalNumberStyle;
         private XSSFCellStyle _intTotalNumberStyle;
@@ -70,6 +79,21 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
             _repository = repository ?? new MonthlyWinLossByLeagueRepository();
         }
 
+        public Dictionary<int, string> Bettypes
+        {
+            get
+            {
+                return _bettypes;
+            }
+        }
+
+        /// <summary>
+        /// Gets the report.
+        /// </summary>
+        /// <returns>Monthly win loss by league.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        "SP2101:MethodMustNotContainMoreLinesThan",
+        Justification = "Reviewed. Suppression is OK here.")]
         public List<MonthlyWinLoss> GetReport()
         {
             List<MonthlyWinLoss> report = new List<MonthlyWinLoss>();
@@ -118,7 +142,7 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
                             };
 
                             leagueWinLoss.BettypeWinLoss[bettypeIndex] = bettypeInfo;
-                            leagueWinLoss.MatchCount += item.BetTypeWinLoss.MatchCount;
+                            leagueWinLoss.MatchCount = item.BetTypeWinLoss.MatchCount;
                             groupLeague.Total[bettypeIndex].CalculateTotal(bettypeInfo);
                             periodAndStatusGroup.Total[bettypeIndex].CalculateTotal(bettypeInfo);
                         }
@@ -135,14 +159,6 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
             return report;
         }
 
-        public Dictionary<int, string> Bettypes
-        {
-            get
-            {
-                return _bettypes;
-            }
-        }
-
         public int InsertTask(Task task)
         {
             int id = _repository.InsertTask(task);
@@ -156,6 +172,9 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
             return task;
         }
 
+        /// <summary>
+        /// Processes the monthly win loss by league report.
+        /// </summary>
         public void ProcessMonthlyWinLossByLeagueReport()
         {
             _lastMonth = DateTime.Now.AddMonths(-1);
@@ -167,16 +186,19 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
             }
         }
 
+        /// <summary>
+        /// Initializes the bet types.
+        /// </summary>
         private void InitBettypes()
         {
             int index = 0;
             var bettypeList = _repository.Bettypes;
 
             _bettypes = new Dictionary<int, string>();
-            _bettypes.Add(index++, "Handicap");
-            _bettypes.Add(index++, "1H Handicap");
-            _bettypes.Add(index++, "1H Over/Under");
-            _bettypes.Add(index++, "Over/Under");
+            _bettypes.Add(index++, Labels.Handicap);
+            _bettypes.Add(index++, Labels._1stHandicap);
+            _bettypes.Add(index++, Labels._1stOverUnder);
+            _bettypes.Add(index++, Labels.OverUnder);
 
             foreach (string bettype in bettypeList)
             {
@@ -187,6 +209,10 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
             }
         }
 
+        /// <summary>
+        /// Initializes the list bet types win loss.
+        /// </summary>
+        /// <returns>List bet types.</returns>
         private List<BettypeWinLoss> InitListBettypesWinLoss()
         {
             List<BettypeWinLoss> bettypeWinLossList = new List<BettypeWinLoss>();
@@ -209,6 +235,10 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
             return _bettypes.FirstOrDefault(x => x.Value == bettypeName).Key;
         }
 
+        /// <summary>
+        /// Creates the monthly win loss by league report data directory.
+        /// </summary>
+        /// <returns>Report data directory.</returns>
         private string CreateMonthlyWinLossByLeagueReportDataDirectory()
         {
             string reportDataDirectory = AppSettings.ExportDataDirectory;
@@ -219,6 +249,10 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
             return directoryReportPath;
         }
 
+        /// <summary>
+        /// Exports the report.
+        /// </summary>
+        /// <param name="report">The report.</param>
         private void ExportReport(List<MonthlyWinLoss> report)
         {
             FileStream fileStream = null;
@@ -242,10 +276,13 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
                 NPOIUtility.IncreaseRowIndex(ref _cellInfo);
                 NPOIUtility.ResetColumnIndex(ref _cellInfo);
                 this.ExportReportContent(worksheet, reportByPeriodTimeAndStatus);
+                NPOIUtility.ResetColumnIndex(ref _cellInfo);
+                this.ExportTotal(reportByPeriodTimeAndStatus.Total, worksheet, _TotalRow, string.Empty);
+                worksheet.CreateFreezePane(0, 1, 0, 1);
             }
 
             var reportDirectory = this.CreateMonthlyWinLossByLeagueReportDataDirectory();
-            string reportName = "Monthly_Winloss_Report_by_League";
+            string reportName = Resources.MonthlyWinlossByLeague_ReportName;
 
             var reportPath = Path.Combine(reportDirectory, reportName);
             var fullReportPath = string.Format("{0}.{1}", reportPath, "xlsx");
@@ -256,10 +293,19 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
                     FileAccess.Write);
             _workbook.Write(fileStream);
 
+            OfficeCryptoStream stream = OfficeCryptoStream.Open(fullReportPath);
+            stream.Password = AppSettings.ExcelPassword;
+            stream.SaveAs(fullReportPath);
+            stream.Close();
+
             fileStream.Close();
             GC.Collect();
         }
 
+        /// <summary>
+        /// Initializes the width of the column.
+        /// </summary>
+        /// <param name="worksheet">The worksheet.</param>
         private void InitColumnWidth(XSSFSheet worksheet)
         {
             int numberColumn = this.Bettypes.Count + 4;
@@ -273,22 +319,26 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
             worksheet.SetColumnWidth(3, 220 * NPOIConstants.FontWidth);
         }
 
+        /// <summary>
+        /// Exports the report header.
+        /// </summary>
+        /// <param name="worksheet">The worksheet.</param>
         private void ExportReportHeader(XSSFSheet worksheet)
         {
             XSSFRow row = worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
-            _cellInfo.CellValue = "Group";
+            _cellInfo.CellValue = Labels.Group;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-            _cellInfo.CellValue = "League";
+            _cellInfo.CellValue = Labels.League;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-            _cellInfo.CellValue = "No of Match";
+            _cellInfo.CellValue = Labels.NoMatch;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-            _cellInfo.CellValue = "Data";
+            _cellInfo.CellValue = Labels.Data;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
@@ -302,6 +352,14 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
             NPOIUtility.ResetColumnIndex(ref _cellInfo);
         }
 
+        /// <summary>
+        /// Exports the content of the report.
+        /// </summary>
+        /// <param name="worksheet">The worksheet.</param>
+        /// <param name="report">The report.</param>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        "SP2101:MethodMustNotContainMoreLinesThan",
+        Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReportContent(XSSFSheet worksheet, MonthlyWinLoss report)
         {
             XSSFRow row = null;
@@ -311,13 +369,13 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
                 row = worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
                 int groupLength = groupLeagueWinLoss.LeagueWinLoss.Count;
                 _cellInfo.CellValue = groupLeagueWinLoss.GroupName;
-                _cellInfo.EndRow = _cellInfo.CurrentRow + groupLength * 4 - 1;
+                _cellInfo.EndRow = _cellInfo.CurrentRow + (groupLength * 4) - 1;
                 NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _leftTextStyle);
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
                 foreach (var leagueWinLoss in groupLeagueWinLoss.LeagueWinLoss)
                 {
-                    _cellInfo.EndRow = groupIndex == 0 ? (_cellInfo.EndRow - groupLength * 4 - 1) : _cellInfo.EndRow;
+                    _cellInfo.EndRow = groupIndex == 0 ? _cellInfo.EndRow - (groupLength * 4) - 1 : _cellInfo.EndRow;
                     groupIndex++;
                     _cellInfo.EndRow = _cellInfo.CurrentRow + 3;
                     _cellInfo.CellValue = leagueWinLoss.LeagueName;
@@ -327,56 +385,165 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
                     _cellInfo.CellValue = leagueWinLoss.MatchCount;
                     NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _intNumberStyle);
                     NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
-                    
+
                     _cellInfo.EndRow = _cellInfo.EndRow - 3;
-                    _cellInfo.CellValue = "Turnover Sunbet";
+                    _cellInfo.CellValue = Labels.TurnoverSunbet;
                     NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _leftTextStyle);
                     NPOIUtility.IncreaseRowIndex(ref _cellInfo);
 
-                    _cellInfo.CellValue = "Winloss Sunbet";
+                    _cellInfo.CellValue = Labels.WinlossSunbet;
                     NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _leftTextStyle);
                     NPOIUtility.IncreaseRowIndex(ref _cellInfo);
 
-                    _cellInfo.CellValue = "Margin %";
+                    _cellInfo.CellValue = Labels.MarginPercent;
                     NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _leftTextStyle);
                     NPOIUtility.IncreaseRowIndex(ref _cellInfo);
 
-                    _cellInfo.CellValue = "BetCount";
+                    _cellInfo.CellValue = Labels.BetCount;
                     NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _leftTextStyle);
                     NPOIUtility.IncreaseRowIndex(ref _cellInfo);
                     NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-                    foreach (var bettype in leagueWinLoss.BettypeWinLoss)
-                    {
-                        _cellInfo.CurrentRow = _cellInfo.CurrentRow - 4;
-                        _cellInfo.EndRow = _cellInfo.EndRow - 4;
-                        _cellInfo.CellValue = bettype.Turnover;
-                        NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _decimalNumberStyle);
-                        NPOIUtility.IncreaseRowIndex(ref _cellInfo);
-
-                        _cellInfo.CellValue = bettype.WinLoss;
-                        NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _decimalNumberStyle);
-                        NPOIUtility.IncreaseRowIndex(ref _cellInfo);
-
-                        _cellInfo.CellValue = bettype.Margin;
-                        NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _decimalNumberStyle);
-                        NPOIUtility.IncreaseRowIndex(ref _cellInfo);
-
-                        _cellInfo.CellValue = bettype.BetCount;
-                        NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _intNumberStyle);
-                        NPOIUtility.IncreaseRowIndex(ref _cellInfo);
-                        NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
-                    }
+                    ExportBettypeInfo(leagueWinLoss.BettypeWinLoss, worksheet, _NormalRow);
 
                     _cellInfo.CurrentColumn = 1;
                     _cellInfo.EndColumn = 1;
                 }
 
-                _cellInfo.CurrentColumn = 0;
-                _cellInfo.EndColumn = 0;
+                NPOIUtility.ResetColumnIndex(ref _cellInfo);
+                ExportTotal(groupLeagueWinLoss.Total, worksheet, _SubTotalRow, groupLeagueWinLoss.GroupName);
             }
         }
 
+        /// <summary>
+        /// Exports the bet type information.
+        /// </summary>
+        /// <param name="bettypeWinLoss">The bet type win loss.</param>
+        /// <param name="worksheet">The worksheet.</param>
+        /// <param name="rowType">Type of the row.</param>
+        private void ExportBettypeInfo(List<BettypeWinLoss> bettypeWinLoss, XSSFSheet worksheet, int rowType)
+        {
+            XSSFRow row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
+            XSSFCellStyle decimalNumberStyle = GetDecimalNumberStyleByRowType(rowType);
+            XSSFCellStyle intNumberStyle = GetIntNumberStyleByRowType(rowType);
+            foreach (var bettype in bettypeWinLoss)
+            {
+                _cellInfo.CurrentRow = _cellInfo.CurrentRow - 4;
+                _cellInfo.EndRow = _cellInfo.EndRow - 4;
+                _cellInfo.CellValue = bettype.Turnover;
+                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
+                NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+
+                _cellInfo.CellValue = bettype.WinLoss;
+                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
+                NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+
+                _cellInfo.CellValue = bettype.Margin;
+                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
+                NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+
+                _cellInfo.CellValue = bettype.BetCount;
+                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, intNumberStyle);
+                NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+                NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            }
+        }
+
+        /// <summary>
+        /// Exports the total.
+        /// </summary>
+        /// <param name="total">The total.</param>
+        /// <param name="worksheet">The worksheet.</param>
+        /// <param name="rowType">Type of the row.</param>
+        /// <param name="groupName">Name of the group.</param>
+        private void ExportTotal(List<BettypeWinLoss> total, XSSFSheet worksheet, int rowType, string groupName)
+        {
+            XSSFRow row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
+            XSSFCellStyle textStyle = rowType == _SubTotalRow ? _leftTotalByGroupTextStyle : _leftTotalTextStyle;
+            _cellInfo.EndColumn = _cellInfo.CurrentColumn + 3;
+            _cellInfo.CellValue = string.Format("{0} {1}", rowType == _SubTotalRow ? groupName : Labels.Total, Labels.Turnover);
+            NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, textStyle);
+            NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+
+            _cellInfo.CellValue = string.Format("{0} {1}", rowType == _SubTotalRow ? groupName : Labels.Total, Labels.Winloss);
+            NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, textStyle);
+            NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+
+            _cellInfo.CellValue = string.Format("{0} {1}", rowType == _SubTotalRow ? groupName : Labels.Total, Labels.MarginPercent);
+            NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, textStyle);
+            NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+
+            _cellInfo.CellValue = string.Format("{0} {1}", rowType == _SubTotalRow ? groupName : Labels.Total, Labels.BetCount);
+            NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, textStyle);
+            NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+
+            _cellInfo.CurrentColumn = 4;
+            _cellInfo.EndColumn = 4;
+            ExportBettypeInfo(total, worksheet, rowType);
+            NPOIUtility.ResetColumnIndex(ref _cellInfo);
+        }
+
+        /// <summary>
+        /// Gets the type of the decimal number style by row.
+        /// </summary>
+        /// <param name="rowType">Type of the row.</param>
+        /// <returns>Decimal number style.</returns>
+        private XSSFCellStyle GetDecimalNumberStyleByRowType(int rowType)
+        {
+            XSSFCellStyle cellStyle = null;
+            switch (rowType)
+            {
+                case _NormalRow:
+                    cellStyle = _decimalNumberStyle;
+                    break;
+
+                case _SubTotalRow:
+                    cellStyle = _decimalTotalByGroupNumberStyle;
+                    break;
+
+                case _TotalRow:
+                    cellStyle = _decimalTotalNumberStyle;
+                    break;
+
+                default:
+                    break;
+            }
+
+            return cellStyle;
+        }
+
+        /// <summary>
+        /// Gets the type of the integer number style by row.
+        /// </summary>
+        /// <param name="rowType">Type of the row.</param>
+        /// <returns>The number style.</returns>
+        private XSSFCellStyle GetIntNumberStyleByRowType(int rowType)
+        {
+            XSSFCellStyle cellStyle = null;
+            switch (rowType)
+            {
+                case _NormalRow:
+                    cellStyle = _intNumberStyle;
+                    break;
+
+                case _SubTotalRow:
+                    cellStyle = _intTotalByGroupNumberStyle;
+                    break;
+
+                case _TotalRow:
+                    cellStyle = _intTotalNumberStyle;
+                    break;
+
+                default:
+                    break;
+            }
+
+            return cellStyle;
+        }
+
+        /// <summary>
+        /// Initializes the border information.
+        /// </summary>
         private void InitBorderInfo()
         {
             _borderInfo = new BorderInfo(
@@ -390,6 +557,9 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
                 Color.Gray);
         }
 
+        /// <summary>
+        /// Initializes the color.
+        /// </summary>
         private void InitColor()
         {
             _headerColor = Color.FromArgb(189, 215, 238);
@@ -397,6 +567,9 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
             _totalRowBackgroundColor = Color.FromArgb(146, 209, 79);
         }
 
+        /// <summary>
+        /// Initializes the font information.
+        /// </summary>
         private void InitFontInfo()
         {
             _fontInfo = new FontAndColorInfo(
@@ -405,6 +578,9 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
                     Color.Black);
         }
 
+        /// <summary>
+        /// Initializes the alignment information.
+        /// </summary>
         private void InitAlignmentInfo()
         {
             _leftAlignmentInfo = new AlignmentInfo(
@@ -418,6 +594,9 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
                 (int)VerticalAlignment.Center);
         }
 
+        /// <summary>
+        /// Initializes the background color information.
+        /// </summary>
         private void InitBackgroundColorInfo()
         {
             _normalRowBackgroundInfo = new BackgroundStyleInfo(
@@ -440,6 +619,9 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
         /// <summary>
         /// Initializes the cell style information.
         /// </summary>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        "SP2101:MethodMustNotContainMoreLinesThan",
+        Justification = "Reviewed. Suppression is OK here.")]
         private void InitCellStyleInfo()
         {
             _leftTextStyle = NPOIHighVersion.CreateCellStyle(
@@ -448,6 +630,20 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
                 _normalRowBackgroundInfo,
                 _leftAlignmentInfo,
                 _font);
+
+            _leftTotalByGroupTextStyle = NPOIHighVersion.CreateCellStyle(
+               _workbook,
+               _borderInfo,
+               _totalRowByGroupBackgroundInfo,
+               _leftAlignmentInfo,
+               _boldFont);
+
+            _leftTotalTextStyle = NPOIHighVersion.CreateCellStyle(
+               _workbook,
+               _borderInfo,
+               _totalRowBackgroundInfo,
+               _leftAlignmentInfo,
+               _boldFont);
 
             _intNumberStyle = NPOIHighVersion.CreateCellStyle(
                 _workbook,
@@ -505,6 +701,9 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
                 _boldFont);
         }
 
+        /// <summary>
+        /// Initializes the font.
+        /// </summary>
         private void InitFont()
         {
             _font = NPOIHighVersion.CreateFont(_workbook, _fontInfo, false);

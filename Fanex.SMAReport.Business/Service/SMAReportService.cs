@@ -309,19 +309,19 @@ namespace Fanex.SMAReport.Business.Service
                 var currentUser = report.Report[i];
 
                 _cellInfo.CellValue = i + 1;
-                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _specialRowTextStyle);
+                NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _specialRowTextStyle);
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
                 _cellInfo.CellValue = currentUser.UserName;
-                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _specialRowTextStyle);
+                NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _specialRowTextStyle);
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
                 _cellInfo.CellValue = currentUser.VirtualRate;
-                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _rightTextStyle);
+                NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _rightTextStyle);
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
                 _cellInfo.CellValue = currentUser.Currency;
-                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _specialRowTextStyle);
+                NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _specialRowTextStyle);
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
                 _cellInfo.EndRow = _cellInfo.EndRow - 1;

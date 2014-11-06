@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="MonthlyWinLossByLeagueRepository.cs" company="">
-// TODO: Update copyright text.
+// <copyright file="MonthlyWinLossByLeagueRepository.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -9,6 +9,7 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Repositories
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Text.RegularExpressions;
     using Fanex.AccountingReports.SqLiteDatabase;
     using Fanex.Common;
     using Fanex.Data;
@@ -28,6 +29,14 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Repositories
         {
             _db = new SqLite(AppSettings.ConnectionString);
             _bettypes = new List<string>();
+        }
+
+        public List<string> Bettypes
+        {
+            get
+            {
+                return _bettypes;
+            }
         }
 
         /// <summary>
@@ -167,14 +176,10 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Repositories
             return id;
         }
 
-        public List<string> Bettypes
-        {
-            get
-            {
-                return _bettypes;
-            }
-        }
-
+        /// <summary>
+        /// Gets the monthly win loss by league.
+        /// </summary>
+        /// <returns>Monthly win loss by league.</returns>
         public List<MonthlyWinLossByLeague> GetMonthlyWinLossByLeague()
         {
             List<MonthlyWinLossByLeague> monthlyWinLossByLeague = new List<MonthlyWinLossByLeague>();
@@ -183,7 +188,7 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Repositories
                 IDataReader reader = objectDb.ExecuteReader();
                 while (reader.Read())
                 {
-                    string bettype = Converter.ToString2(reader["Bet type"]);
+                    string bettype = Regex.Replace(Converter.ToString2(reader["Bet type"]), @"\r\n|\r|\n", string.Empty);
                     monthlyWinLossByLeague.Add(new MonthlyWinLossByLeague
                     {
                         Period = Converter.ToInt(reader["period"]),

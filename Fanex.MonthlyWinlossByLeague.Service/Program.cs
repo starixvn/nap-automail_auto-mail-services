@@ -1,7 +1,16 @@
-﻿namespace Fanex.MonthlyWinlossByLeague.Service
+﻿// -----------------------------------------------------------------------
+// <copyright file="Program.cs" company="Microsoft">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace Fanex.MonthlyWinlossByLeague.Service
 {
     using System.ServiceProcess;
 
+    /// <summary>
+    /// Main program.
+    /// </summary>
     public static class Program
     {
         /// <summary>

@@ -1,4 +1,10 @@
-﻿namespace Fanex.MonthlyWinlossByLeague.Service
+﻿// -----------------------------------------------------------------------
+// <copyright file="AutomailService.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace Fanex.MonthlyWinlossByLeague.Service
 {
     using System;
     using System.IO;
@@ -8,9 +14,10 @@
     using Fanex.MonthlyWinlossByLeague.Business;
     using Fanex.MonthlyWinlossByLeague.Business.Service;
     using Fanex.Service.Core.Extensions;
-    using Fanex.MonthlyWinlossByLeague.Business.Model;
-    using Fanex.Service.Core.Enums;
 
+    /// <summary>
+    /// Auto mail service.
+    /// </summary>
     public partial class AutomailService : ServiceBase
     {
         /// <summary>
@@ -25,6 +32,10 @@
             InitializeComponent(AppSettings.ServiceName);
         }
 
+        /// <summary>
+        /// Implement when service start.
+        /// </summary>
+        /// <param name="args">Data passed by the start command.</param>
         protected override void OnStart(string[] args)
         {
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
@@ -67,38 +78,38 @@
                     AppSettings.OnProcessing = true;
                     service.ProcessMonthlyWinLossByLeagueReport();
                 }
-                //Task taskModel = new Task();
-                //bool isRunningDay = DateTime.Now.Day == AppSettings.RunAtDay;
-                //bool hasAlreadyRun = false;
+                ////Task taskModel = new Task();
+                ////bool isRunningDay = DateTime.Now.Day == AppSettings.RunAtDay;
+                ////bool hasAlreadyRun = false;
 
-                //Task model = service.GetTaskReadyToRun();
-                //if (model != null)
-                //{
-                //    DateTime taskRunningDay = Convert.ToDateTime(model.CreatedDate);
-                //    hasAlreadyRun = DateTime.Now.Month == taskRunningDay.Month;
-                //}
+                ////Task model = service.GetTaskReadyToRun();
+                ////if (model != null)
+                ////{
+                ////    DateTime taskRunningDay = Convert.ToDateTime(model.CreatedDate);
+                ////    hasAlreadyRun = DateTime.Now.Month == taskRunningDay.Month;
+                ////}
 
-                //if (isRunningDay && !AppSettings.OnProcessing && !hasAlreadyRun)
-                //{
-                //    TimeSpan executeTime = new TimeSpan(AppSettings.RunAtHours, AppSettings.RunAtMinutes, 0);
-                //    var currentTime = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, 0);
-                //    int compareResult = TimeSpan.Compare(currentTime, executeTime);
+                ////if (isRunningDay && !AppSettings.OnProcessing && !hasAlreadyRun)
+                ////{
+                ////    TimeSpan executeTime = new TimeSpan(AppSettings.RunAtHours, AppSettings.RunAtMinutes, 0);
+                ////    var currentTime = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, 0);
+                ////    int compareResult = TimeSpan.Compare(currentTime, executeTime);
 
-                //    if (compareResult >= 0)
-                //    {
-                //        taskModel.TaskType = (int)TaskType.Monthly;
-                //        service.InsertTask(taskModel);
-                //        service.ProcessMonthlyWinLossByLeagueReport();
-                //    }
-                //}
+                ////    if (compareResult >= 0)
+                ////    {
+                ////        taskModel.TaskType = (int)TaskType.Monthly;
+                ////        service.InsertTask(taskModel);
+                ////        service.ProcessMonthlyWinLossByLeagueReport();
+                ////    }
+                ////}
 
-                //if (AppSettings.ForceRunning && !AppSettings.ForceRunningOnProcessing)
-                //{
-                //    AppSettings.ForceRunningOnProcessing = true;
-                //    taskModel.TaskType = (int)TaskType.Urgently;
-                //    service.InsertTask(taskModel);
-                //    service.ProcessMonthlyWinLossByLeagueReport();
-                //}
+                ////if (AppSettings.ForceRunning && !AppSettings.ForceRunningOnProcessing)
+                ////{
+                ////    AppSettings.ForceRunningOnProcessing = true;
+                ////    taskModel.TaskType = (int)TaskType.Urgently;
+                ////    service.InsertTask(taskModel);
+                ////    service.ProcessMonthlyWinLossByLeagueReport();
+                ////}
             }
             catch (Exception ex)
             {
