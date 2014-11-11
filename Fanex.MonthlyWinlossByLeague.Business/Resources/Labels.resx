@@ -123,6 +123,9 @@
   <data name="Data" xml:space="preserve">
     <value>Data</value>
   </data>
+  <data name="GrandTotal" xml:space="preserve">
+    <value>Grand Total</value>
+  </data>
   <data name="Group" xml:space="preserve">
     <value>Group</value>
   </data>

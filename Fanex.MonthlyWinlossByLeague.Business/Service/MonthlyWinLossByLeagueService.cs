@@ -133,6 +133,7 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
                         {
                             string bettypeName = item.BetTypeWinLoss.Bettype;
                             int bettypeIndex = GetBettypeIndex(bettypeName);
+                            int grandTotalIndex = GetBettypeIndex(Labels.GrandTotal);
                             var bettypeInfo = new BettypeWinLoss
                             {
                                 Bettype = bettypeName,
@@ -142,9 +143,12 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
                             };
 
                             leagueWinLoss.BettypeWinLoss[bettypeIndex] = bettypeInfo;
+                            leagueWinLoss.BettypeWinLoss[grandTotalIndex].CalculateTotal(bettypeInfo);
                             leagueWinLoss.MatchCount = item.BetTypeWinLoss.MatchCount;
                             groupLeague.Total[bettypeIndex].CalculateTotal(bettypeInfo);
+                            groupLeague.Total[grandTotalIndex].CalculateTotal(bettypeInfo);
                             periodAndStatusGroup.Total[bettypeIndex].CalculateTotal(bettypeInfo);
+                            periodAndStatusGroup.Total[grandTotalIndex].CalculateTotal(bettypeInfo);
                         }
 
                         groupLeague.LeagueWinLoss.Add(leagueWinLoss);
@@ -207,6 +211,8 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
                     _bettypes.Add(index++, bettype);
                 }
             }
+
+            _bettypes.Add(index++, Labels.GrandTotal);
         }
 
         /// <summary>
@@ -387,11 +393,11 @@ namespace Fanex.MonthlyWinlossByLeague.Business.Service
                     NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
                     _cellInfo.EndRow = _cellInfo.EndRow - 3;
-                    _cellInfo.CellValue = Labels.TurnoverSunbet;
+                    _cellInfo.CellValue = Labels.Turnover;
                     NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _leftTextStyle);
                     NPOIUtility.IncreaseRowIndex(ref _cellInfo);
 
-                    _cellInfo.CellValue = Labels.WinlossSunbet;
+                    _cellInfo.CellValue = Labels.Winloss;
                     NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _leftTextStyle);
                     NPOIUtility.IncreaseRowIndex(ref _cellInfo);
 

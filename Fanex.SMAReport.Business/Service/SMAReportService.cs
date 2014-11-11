@@ -312,18 +312,26 @@ namespace Fanex.SMAReport.Business.Service
                 NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _specialRowTextStyle);
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
+                _cellInfo.EndRow = _cellInfo.EndRow - 1;
                 _cellInfo.CellValue = currentUser.UserName;
-                NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _specialRowTextStyle);
+                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _specialRowTextStyle);
+                NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _specialRowTextStyle);
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
+                _cellInfo.CurrentRow = _cellInfo.CurrentRow - 1;
                 _cellInfo.CellValue = currentUser.VirtualRate;
                 NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _rightTextStyle);
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
+                _cellInfo.EndRow = _cellInfo.EndRow - 1;
                 _cellInfo.CellValue = currentUser.Currency;
-                NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _specialRowTextStyle);
+                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _specialRowTextStyle);
+                NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _specialRowTextStyle);
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
+                _cellInfo.CurrentRow = _cellInfo.CurrentRow - 1;
                 _cellInfo.EndRow = _cellInfo.EndRow - 1;
                 _cellInfo.CellValue = "Turnover";
                 NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _specialRowTextStyle);
@@ -339,7 +347,7 @@ namespace Fanex.SMAReport.Business.Service
                 NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _normalRowTextStyle);
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-                _cellInfo.CellValue = string.Empty;
+                _cellInfo.CellValue = currentUser.UserName;
                 NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _normalRowTextStyle);
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
@@ -347,7 +355,7 @@ namespace Fanex.SMAReport.Business.Service
                 NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _normalRowTextStyle);
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-                _cellInfo.CellValue = string.Empty;
+                _cellInfo.CellValue = currentUser.Currency;
                 NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _normalRowTextStyle);
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
@@ -445,7 +453,7 @@ namespace Fanex.SMAReport.Business.Service
             _cellInfo.EndRow = _cellInfo.CurrentRow + 1;
             _cellInfo.EndColumn = _cellInfo.CurrentColumn + 3;
             _cellInfo.CellValue = "Total";
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, totalRowTextStyle);
+            NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, totalRowTextStyle);
 
             _cellInfo.EndRow = _cellInfo.CurrentRow;
             _cellInfo.CurrentColumn = _cellInfo.CurrentColumn + 3;
@@ -462,7 +470,7 @@ namespace Fanex.SMAReport.Business.Service
             NPOIUtility.ResetColumnIndex(ref _cellInfo);
             _cellInfo.EndColumn = _cellInfo.CurrentColumn + 3;
             _cellInfo.CellValue = string.Empty;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _normalRowTextStyle);
+            NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _normalRowTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = "Margin %";
