@@ -12,6 +12,8 @@ namespace Fanex.HorseRacingReport.Business.Service
     using System.IO;
     using RazorEngine;
     using Fanex.Service.Core.Extensions;
+    using Fanex.MailDeliver.Model;
+    using System.Collections.Generic;
 
     /// <summary>
     /// TODO: Update summary.
@@ -50,6 +52,10 @@ namespace Fanex.HorseRacingReport.Business.Service
                     Title = emailTitle,
                     Body = emailContent
                 };
+
+                mailItem.Attachments = new List<MailAttachment>();
+                var attachmentItem = new Fanex.MailDeliver.Model.MailAttachment(reportUrl, Fanex.MailDeliver.Model.FileExtentions.TEXT);
+                mailItem.Attachments.Add(attachmentItem);
 
                 if (!string.IsNullOrEmpty(mailItem.MailTo.Trim()))
                 {

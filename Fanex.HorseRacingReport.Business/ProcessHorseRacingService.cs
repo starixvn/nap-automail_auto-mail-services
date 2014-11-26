@@ -48,6 +48,8 @@ namespace Fanex.HorseRacingReport.Business
                     _horseRacingReportService.ExportDetailReport(detailReport, detailRacingReportCriteria.PartnerId, detailRacingReportCriteria.WinLostDate, criteria);
                 }
 
+                string reportZipFolderName = CreateZipReportFolder(criteria);
+                string reportZipFolderPath = Path.Combine(AppSettings.ExportDataDirectory, reportZipFolderName);
                 string[] listFiles = GetFileToCompressed(_horseRacingReportService.GetReportDirectory);
                 using (ZipFile zip = new ZipFile())
                 {
@@ -56,18 +58,18 @@ namespace Fanex.HorseRacingReport.Business
                         zip.AddFile(file, string.Empty);
                     }
 
-                    zip.Save(AppSettings.ExportDataDirectory + "\\MyZipFile.zip");
+                    zip.Save(reportZipFolderPath);
                 }
 
-                //bool sendMailSuccess = Mailing.SendRacingReportEmail("aaa", criteria);
-                //if (sendMailSuccess)
-                //{
-                //    _taskRepository.UpdateTaskStatus(model.Id, Status.Successful);
-                //}
-                //else
-                //{
-                //    _taskRepository.UpdateTaskStatus(model.Id, Status.Failed);
-                //}
+                bool sendMailSuccess = Mailing.SendRacingReportEmail(reportZipFolderPath, criteria);
+                if (sendMailSuccess)
+                {
+                    _taskRepository.UpdateTaskStatus(model.Id, Status.Successful);
+                }
+                else
+                {
+                    _taskRepository.UpdateTaskStatus(model.Id, Status.Failed);
+                }
             }
             catch (Exception ex)
             {
@@ -185,6 +187,13 @@ namespace Fanex.HorseRacingReport.Business
             }
 
             return fileNames.ToArray();
+        }
+
+        private string CreateZipReportFolder(TimeRangeCriteria criteria)
+        {
+            string reportFrom = criteria.FromDate.ToShortFormatedDateWithSlash().Replace("/", "-");
+            string reportTo = criteria.ToDate.ToShortFormatedDateWithSlash().Replace("/", "-");
+            return string.Format("RacingReport_{0}_{1}.zip", reportFrom, reportTo);
         }
     }
 }

@@ -1,14 +1,18 @@
 ﻿@using System.Collections.Generic;
 @using Fanex.Service.Core.Extensions;
-@model Fanex.HorseRacingReport.Business.Criteria;
+@using Fanex.HorseRacingReport.Business.Criteria;
+@{
+    string reportFrom = Model.FromDate.ToShortFormatedDateWithSlash();
+    string reportTo = Model.ToDate.ToShortFormatedDateWithSlash();
+}
 <div>
     <div>
         Dear All,<br />
         <br />
     </div>
     <div>
-        Please find enclosed the data extraction of daily racing report from @Model.FromDate.ToShortFormatedDateWithSlash() to 
-        @Model.ToDate.ToShortFormatedDateWithSlash() </div>
+        Please find enclosed the data extraction of daily racing report from @reportFrom to 
+        @reportFrom </div>
     <br />
 
     <div>

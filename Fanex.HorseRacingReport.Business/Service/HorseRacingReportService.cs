@@ -6,23 +6,23 @@
 
 namespace Fanex.HorseRacingReport.Business.Service
 {
+    using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
+    using System.IO;
     using Fanex.Common;
     using Fanex.Data;
     using Fanex.HorseRacingReport.Business.Criteria;
-    using Fanex.HorseRacingReport.Business.Model;
     using Fanex.Service.Core.Common;
     using Fanex.Service.Core.Constants;
     using Fanex.Service.Core.Extensions;
     using Fanex.Service.Core.Service;
     using NPOI.SS.UserModel;
     using NPOI.XSSF.UserModel;
+    using Fanex.HorseRacingReport.Business.Model;
     using Fanex.HorseRacingReport.Business.Enums;
-    using System.IO;
-    using System;
     using Fanex.HorseRacingReport.Business.Resources;
 
     /// <summary>
@@ -429,7 +429,7 @@ namespace Fanex.HorseRacingReport.Business.Service
         private void ExportReportHeader(XSSFSheet worksheet, string firstColumnName, string secondColumnName)
         {
             XSSFRow row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
-            
+
             _cellInfo.CellValue = firstColumnName;
             _cellInfo.EndRow = _cellInfo.CurrentRow + 1;
             NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
@@ -701,7 +701,7 @@ namespace Fanex.HorseRacingReport.Business.Service
             int grandTotalLength = grandTotal.ReportRows.Count;
             for (int i = 0; i < grandTotalLength - 1; i++)
             {
-                row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow; 
+                row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
                 grandTotalInfo = grandTotal.ReportRows[i];
                 _cellInfo.CellValue = grandTotalInfo.PartnerName;
                 NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _subTotalByPoolCurrencyCenterTextStyle);
@@ -727,7 +727,6 @@ namespace Fanex.HorseRacingReport.Business.Service
 
             foreach (var grandTotalByCurrency in grandTotalInfo.ReportRows)
             {
-
                 row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
                 _cellInfo.CellValue = grandTotalByCurrency.CurrencyName;
                 NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _grandTotalCenterTextStyle);
@@ -815,7 +814,7 @@ namespace Fanex.HorseRacingReport.Business.Service
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
             //// Partner group data.
-                _cellInfo.CellValue = rowData.WinTOPartner;
+            _cellInfo.CellValue = rowData.WinTOPartner;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
@@ -1135,18 +1134,23 @@ namespace Fanex.HorseRacingReport.Business.Service
                 case RowType.NormalRow:
                     cellStyle = _decimalNumberStyle;
                     break;
+
                 case RowType.SubTotal:
                     cellStyle = _subTotalDecimalNumberStyle;
                     break;
+
                 case RowType.SubTotalByCurrency:
                     cellStyle = _subTotalByCurrencyDecimalNumberStyle;
                     break;
+
                 case RowType.SubTotalByPoolCurrency:
                     cellStyle = _subTotalByPoolCurrencyDecimalNumberStyle;
                     break;
+
                 case RowType.GrandTotal:
                     cellStyle = _grandTotalDecimalNumberStyle;
                     break;
+
                 default:
                     cellStyle = _decimalNumberStyle;
                     break;
@@ -1163,18 +1167,23 @@ namespace Fanex.HorseRacingReport.Business.Service
                 case RowType.NormalRow:
                     cellStyle = _centerTextStyle;
                     break;
+
                 case RowType.SubTotal:
                     cellStyle = _subTotalCenterTextStyle;
                     break;
+
                 case RowType.SubTotalByCurrency:
                     cellStyle = _subTotalByCurrencyCenterTextStyle;
                     break;
+
                 case RowType.SubTotalByPoolCurrency:
                     cellStyle = _subTotalByPoolCurrencyCenterTextStyle;
                     break;
+
                 case RowType.GrandTotal:
                     cellStyle = _grandTotalCenterTextStyle;
                     break;
+
                 default:
                     cellStyle = _centerTextStyle;
                     break;
@@ -1187,7 +1196,7 @@ namespace Fanex.HorseRacingReport.Business.Service
         {
             string reportFrom = criteria.FromDate.ToShortFormatedDateWithSlash().Replace("/", "-");
             string reportTo = criteria.ToDate.ToShortFormatedDateWithSlash().Replace("/", "-");
-            string reportByPeriodTime = string.Format("{0}-{1}", reportFrom, reportTo);
+            string reportByPeriodTime = string.Format("RacingReport_{0}_{1}", reportFrom, reportTo);
             string reportDataDirectory = AppSettings.ExportDataDirectory;
             DirectoryExtensions.CheckAndCreateDirectory(reportDataDirectory);
             string directoryReportPath = Path.Combine(reportDataDirectory, reportByPeriodTime);
@@ -1208,17 +1217,19 @@ namespace Fanex.HorseRacingReport.Business.Service
                 case 1:
                     reportName = string.Format(
                         RacingResource.Horse_Racing_UK_Tote_ReportName,
-                        winlostDate.ToShortFormatedDateWithSlash().Replace("/","_"));
+                        winlostDate.ToShortFormatedDateWithSlash().Replace("/", "_"));
                     sheetName = RacingResource.Horse_Racing_UK_Tote_SheetName;
                     reportTitle = string.Format(RacingResource.Horse_Racing_UK_Tote_ReportTitle, winlostDate.ToShortFormatedDate());
                     break;
+
                 case 6:
-                     reportName = string.Format(
-                        RacingResource.Horse_Racing_SA_Tote_ReportName,
-                        winlostDate.ToShortFormatedDateWithSlash().Replace("/","_"));
-                     sheetName = RacingResource.Horse_Racing_SA_Tote_SheetName;
-                     reportTitle = string.Format(RacingResource.Horse_Racing_SA_Tote_ReportTitle, winlostDate.ToShortFormatedDate());
+                    reportName = string.Format(
+                       RacingResource.Horse_Racing_SA_Tote_ReportName,
+                       winlostDate.ToShortFormatedDateWithSlash().Replace("/", "_"));
+                    sheetName = RacingResource.Horse_Racing_SA_Tote_SheetName;
+                    reportTitle = string.Format(RacingResource.Horse_Racing_SA_Tote_ReportTitle, winlostDate.ToShortFormatedDate());
                     break;
+
                 default:
                     reportName = string.Empty;
                     sheetName = string.Empty;
@@ -1247,6 +1258,7 @@ namespace Fanex.HorseRacingReport.Business.Service
                         "TABCORP",
                         winlostDate.ToShortFormatedDate());
                     break;
+
                 case 6:
                     reportName = string.Format(
                         RacingResource.HorseRacingForAustTote_ReportName,
@@ -1258,6 +1270,7 @@ namespace Fanex.HorseRacingReport.Business.Service
                         "TABCORPNSW",
                         winlostDate.ToShortFormatedDate());
                     break;
+
                 case 103:
                     reportName = string.Format(
                         RacingResource.GreyhoundForAustTote_ReportName,
@@ -1269,6 +1282,7 @@ namespace Fanex.HorseRacingReport.Business.Service
                        "TABCORP",
                        winlostDate.ToShortFormatedDate());
                     break;
+
                 case 104:
                     reportName = string.Format(
                        RacingResource.GreyhoundForAustTote_ReportName,
@@ -1280,6 +1294,7 @@ namespace Fanex.HorseRacingReport.Business.Service
                       "TABCORPNSW",
                       winlostDate.ToShortFormatedDate());
                     break;
+
                 case 201:
                     reportName = string.Format(
                         RacingResource.HarnessForAustTote_ReportName,
@@ -1291,6 +1306,7 @@ namespace Fanex.HorseRacingReport.Business.Service
                       "TABCORP",
                       winlostDate.ToShortFormatedDate());
                     break;
+
                 case 202:
                     reportName = string.Format(
                        RacingResource.HarnessForAustTote_ReportName,
@@ -1302,6 +1318,7 @@ namespace Fanex.HorseRacingReport.Business.Service
                       "TABCORPNSW",
                       winlostDate.ToShortFormatedDate());
                     break;
+
                 default:
                     reportName = string.Empty;
                     sheetName = string.Empty;
