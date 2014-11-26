@@ -15,6 +15,8 @@ namespace Fanex.HorseRacingReport.Business.Service
     /// </summary>
     public interface IHorseRacingReportService
     {
+        string GetReportDirectory { get; }
+
         RacingWinLoss GetMainReport(GetMainRacingReportCriteria criteria);
 
         RacingWinLoss GetDetailReport(GetDetailRacingReportCriteria criteria);

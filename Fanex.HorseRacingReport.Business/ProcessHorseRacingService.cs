@@ -14,6 +14,8 @@ namespace Fanex.HorseRacingReport.Business
     using Fanex.HorseRacingReport.Business.Model;
     using Fanex.Service.Core.Extensions;
     using Fanex.Service.Core.Enums;
+    using System.IO;
+    using Ionic.Zip;
 
     /// <summary>
     /// TODO: Update summary.
@@ -25,7 +27,7 @@ namespace Fanex.HorseRacingReport.Business
 
         public void ProcessHorseRacingReportService(TimeRangeCriteria criteria)
         {
-            _horseRacingReportService = new HorseRacingReportService();
+            _horseRacingReportService = new HorseRacingReportService(criteria);
             _taskRepository = new TaskRepository();
             TaskModel model = _taskRepository.GetCurrentTask();
 
@@ -46,16 +48,26 @@ namespace Fanex.HorseRacingReport.Business
                     _horseRacingReportService.ExportDetailReport(detailReport, detailRacingReportCriteria.PartnerId, detailRacingReportCriteria.WinLostDate, criteria);
                 }
 
-                bool sendMailSuccess = Mailing.SendRacingReportEmail("aaa", criteria);
-                if (sendMailSuccess)
+                string[] listFiles = GetFileToCompressed(_horseRacingReportService.GetReportDirectory);
+                using (ZipFile zip = new ZipFile())
                 {
-                    _taskRepository.UpdateTaskStatus(model.Id, Status.Successful);
-                }
-                else
-                {
-                    _taskRepository.UpdateTaskStatus(model.Id, Status.Failed);
+                    foreach (string file in listFiles)
+                    {
+                        zip.AddFile(file, string.Empty);
+                    }
+
+                    zip.Save(AppSettings.ExportDataDirectory + "\\MyZipFile.zip");
                 }
 
+                //bool sendMailSuccess = Mailing.SendRacingReportEmail("aaa", criteria);
+                //if (sendMailSuccess)
+                //{
+                //    _taskRepository.UpdateTaskStatus(model.Id, Status.Successful);
+                //}
+                //else
+                //{
+                //    _taskRepository.UpdateTaskStatus(model.Id, Status.Failed);
+                //}
             }
             catch (Exception ex)
             {
@@ -162,6 +174,17 @@ namespace Fanex.HorseRacingReport.Business
             }
 
             return detailReportCriteria;
+        }
+
+        private string[] GetFileToCompressed(string directoryPath)
+        {
+            List<string> fileNames = new List<string>();
+            foreach (var path in Directory.GetFiles(directoryPath))
+            {
+                fileNames.Add(path);
+            }
+
+            return fileNames.ToArray();
         }
     }
 }

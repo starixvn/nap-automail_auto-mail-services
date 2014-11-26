@@ -30,7 +30,6 @@ namespace Fanex.HorseRacingReport.Service
         protected override void OnStart(string[] args)
         {
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
-
             DbSettingProviderManager.Current.Start();
             timer = new Timer();
             timer.Interval = AppSettings.Interval;

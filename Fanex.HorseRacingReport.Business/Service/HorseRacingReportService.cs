@@ -83,7 +83,14 @@ namespace Fanex.HorseRacingReport.Business.Service
         private AlignmentInfo _centerAlignmentInfo;
         private AlignmentInfo _rightAlignmentInfo;
 
+        private string _reportDataDirectory;
+
         public HorseRacingReportService()
+            : this(null)
+        {
+        }
+
+        public HorseRacingReportService(TimeRangeCriteria criteria)
         {
             _currencies = BaseService.ExchangeCurrencies;
             this.InitColor();
@@ -91,6 +98,15 @@ namespace Fanex.HorseRacingReport.Business.Service
             this.InitBorderInfo();
             this.InitFontInfo();
             this.InitBackgroundColorInfo();
+            _reportDataDirectory = this.CreateHorseRacingReportDataDirectory(criteria);
+        }
+
+        public string GetReportDirectory
+        {
+            get
+            {
+                return _reportDataDirectory;
+            }
         }
 
         public RacingWinLoss GetMainReport(GetMainRacingReportCriteria criteria)
@@ -327,8 +343,7 @@ namespace Fanex.HorseRacingReport.Business.Service
                 this.ExportNoDataReport(worksheet);
             }
 
-            var reportDirectory = this.CreateHorseRacingReportDataDirectory(criteria);
-            var reportPath = Path.Combine(reportDirectory, reportName);
+            var reportPath = Path.Combine(_reportDataDirectory, reportName);
             var fullReportPath = string.Format("{0}.{1}", reportPath, "xlsx");
 
             fileStream = new FileStream(
@@ -368,8 +383,7 @@ namespace Fanex.HorseRacingReport.Business.Service
                 this.ExportNoDataReport(worksheet);
             }
 
-            var reportDirectory = this.CreateHorseRacingReportDataDirectory(criteria);
-            var reportPath = Path.Combine(reportDirectory, reportName);
+            var reportPath = Path.Combine(_reportDataDirectory, reportName);
             var fullReportPath = string.Format("{0}.{1}", reportPath, "xlsx");
 
             fileStream = new FileStream(
