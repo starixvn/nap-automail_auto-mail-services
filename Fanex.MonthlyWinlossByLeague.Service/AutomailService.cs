@@ -58,9 +58,7 @@ namespace Fanex.MonthlyWinlossByLeague.Service
             timer.Stop();
             timer = null;
             service = null;
-
             AppSettings.OnProcessing = false;
-
             GC.Collect();
         }
 

@@ -43,6 +43,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.MonthlyWinlossByLeagu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.MonthlyWinlossByLeague.Service", "Fanex.MonthlyWinlossByLeague.Service\Fanex.MonthlyWinlossByLeague.Service.csproj", "{EAFD6A4F-86D0-4A3B-B192-8341F84798B6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fanex.HorseRacingReport", "Fanex.HorseRacingReport", "{84385BB5-6DA3-4429-B535-7ECB1089FCC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.HorseRacingReport.Business", "Fanex.HorseRacingReport.Business\Fanex.HorseRacingReport.Business.csproj", "{AFE10301-BCFD-4D11-885C-A43A46B5B2BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.HorseRacingReport.Service", "Fanex.HorseRacingReport.Service\Fanex.HorseRacingReport.Service.csproj", "{A26D737A-8655-40AD-AA5D-13DC22FCFF7C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -193,6 +199,26 @@ Global
 		{EAFD6A4F-86D0-4A3B-B192-8341F84798B6}.Release|Mixed Platforms.Build.0 = Release|x86
 		{EAFD6A4F-86D0-4A3B-B192-8341F84798B6}.Release|x86.ActiveCfg = Release|x86
 		{EAFD6A4F-86D0-4A3B-B192-8341F84798B6}.Release|x86.Build.0 = Release|x86
+		{AFE10301-BCFD-4D11-885C-A43A46B5B2BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFE10301-BCFD-4D11-885C-A43A46B5B2BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFE10301-BCFD-4D11-885C-A43A46B5B2BF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{AFE10301-BCFD-4D11-885C-A43A46B5B2BF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{AFE10301-BCFD-4D11-885C-A43A46B5B2BF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AFE10301-BCFD-4D11-885C-A43A46B5B2BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFE10301-BCFD-4D11-885C-A43A46B5B2BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFE10301-BCFD-4D11-885C-A43A46B5B2BF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{AFE10301-BCFD-4D11-885C-A43A46B5B2BF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{AFE10301-BCFD-4D11-885C-A43A46B5B2BF}.Release|x86.ActiveCfg = Release|Any CPU
+		{A26D737A-8655-40AD-AA5D-13DC22FCFF7C}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{A26D737A-8655-40AD-AA5D-13DC22FCFF7C}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{A26D737A-8655-40AD-AA5D-13DC22FCFF7C}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{A26D737A-8655-40AD-AA5D-13DC22FCFF7C}.Debug|x86.ActiveCfg = Debug|x86
+		{A26D737A-8655-40AD-AA5D-13DC22FCFF7C}.Debug|x86.Build.0 = Debug|x86
+		{A26D737A-8655-40AD-AA5D-13DC22FCFF7C}.Release|Any CPU.ActiveCfg = Release|x86
+		{A26D737A-8655-40AD-AA5D-13DC22FCFF7C}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{A26D737A-8655-40AD-AA5D-13DC22FCFF7C}.Release|Mixed Platforms.Build.0 = Release|x86
+		{A26D737A-8655-40AD-AA5D-13DC22FCFF7C}.Release|x86.ActiveCfg = Release|x86
+		{A26D737A-8655-40AD-AA5D-13DC22FCFF7C}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -212,5 +238,7 @@ Global
 		{FD60ADBE-F7DC-4EDC-9869-E38B860CB61D} = {2AB8C033-12E7-4AD6-9FE3-B0BD2A027C34}
 		{B9C0CA6B-C407-4E48-B672-4CA10B8BA6FE} = {8EEEC498-DD27-4366-836F-3F9252C43EF8}
 		{EAFD6A4F-86D0-4A3B-B192-8341F84798B6} = {8EEEC498-DD27-4366-836F-3F9252C43EF8}
+		{AFE10301-BCFD-4D11-885C-A43A46B5B2BF} = {84385BB5-6DA3-4429-B535-7ECB1089FCC0}
+		{A26D737A-8655-40AD-AA5D-13DC22FCFF7C} = {84385BB5-6DA3-4429-B535-7ECB1089FCC0}
 	EndGlobalSection
 EndGlobal
