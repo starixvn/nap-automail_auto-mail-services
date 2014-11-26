@@ -1196,7 +1196,7 @@ namespace Fanex.HorseRacingReport.Business.Service
         {
             string reportFrom = criteria.FromDate.ToShortFormatedDateWithSlash().Replace("/", "-");
             string reportTo = criteria.ToDate.ToShortFormatedDateWithSlash().Replace("/", "-");
-            string reportByPeriodTime = string.Format("RacingReport_{0}_{1}", reportFrom, reportTo);
+            string reportByPeriodTime = string.Format("RacingReport_from_{0}_to_{1}", reportFrom, reportTo);
             string reportDataDirectory = AppSettings.ExportDataDirectory;
             DirectoryExtensions.CheckAndCreateDirectory(reportDataDirectory);
             string directoryReportPath = Path.Combine(reportDataDirectory, reportByPeriodTime);

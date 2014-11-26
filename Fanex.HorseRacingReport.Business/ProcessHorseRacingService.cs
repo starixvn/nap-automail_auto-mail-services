@@ -193,7 +193,7 @@ namespace Fanex.HorseRacingReport.Business
         {
             string reportFrom = criteria.FromDate.ToShortFormatedDateWithSlash().Replace("/", "-");
             string reportTo = criteria.ToDate.ToShortFormatedDateWithSlash().Replace("/", "-");
-            return string.Format("RacingReport_{0}_{1}.zip", reportFrom, reportTo);
+            return string.Format("RacingReport_from_{0}_to_{1}.zip", reportFrom, reportTo);
         }
     }
 }
