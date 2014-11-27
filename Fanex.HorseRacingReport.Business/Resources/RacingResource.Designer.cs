@@ -194,5 +194,23 @@ namespace Fanex.HorseRacingReport.Business.Resources {
                 return ResourceManager.GetString("HorseRacingForAustTote_SheetName", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RacingReport_from_{0}_to_{1}.zip.
+        /// </summary>
+        public static string Racing_Report_Directory {
+            get {
+                return ResourceManager.GetString("Racing_Report_Directory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RacingReport_from_{0}_to_{1}.
+        /// </summary>
+        public static string Racing_Report_Export_Directory {
+            get {
+                return ResourceManager.GetString("Racing_Report_Export_Directory", resourceCulture);
+            }
+        }
     }
 }

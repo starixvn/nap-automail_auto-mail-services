@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="CombinationTypeConstants.cs" company="">
+// <copyright file="CombinationTypeConstants.cs" company="Nexcel Solutions Vietnam.">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------

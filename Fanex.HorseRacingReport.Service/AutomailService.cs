@@ -1,16 +1,26 @@
-﻿using System;
-using System.IO;
-using System.ServiceProcess;
-using System.Timers;
-using Fanex.Data.Configuration;
-using Fanex.HorseRacingReport.Business;
-using Fanex.HorseRacingReport.Business.Criteria;
-using Fanex.HorseRacingReport.Business.Model;
-using Fanex.HorseRacingReport.Business.Repositories;
-using Fanex.Service.Core.Extensions;
+﻿// -----------------------------------------------------------------------
+// <copyright file="AutomailService.cs" company="Nexcel Solutions Vietnam.">
+// TODO: Update copyright text.
+// </copyright>
+// -----------------------------------------------------------------------
 
 namespace Fanex.HorseRacingReport.Service
 {
+    using System;
+    using System.Diagnostics.CodeAnalysis;
+    using System.IO;
+    using System.ServiceProcess;
+    using System.Timers;
+    using Fanex.Data.Configuration;
+    using Fanex.HorseRacingReport.Business;
+    using Fanex.HorseRacingReport.Business.Criteria;
+    using Fanex.HorseRacingReport.Business.Model;
+    using Fanex.HorseRacingReport.Business.Repositories;
+    using Fanex.Service.Core.Extensions;
+
+    /// <summary>
+    /// Auto mail service.
+    /// </summary>
     public partial class AutomailService : ServiceBase
     {
         /// <summary>
@@ -27,6 +37,10 @@ namespace Fanex.HorseRacingReport.Service
             InitializeComponent(AppSettings.ServiceName);
         }
 
+        /// <summary>
+        /// Handle event when service start.
+        /// </summary>
+        /// <param name="args">Data passed by the start command.</param>
         protected override void OnStart(string[] args)
         {
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
@@ -56,6 +70,9 @@ namespace Fanex.HorseRacingReport.Service
         /// </summary>
         /// <param name="source">The source.</param>
         /// <param name="e">The <see cref="ElapsedEventArgs"/> instance containing the event data.</param>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        "SP2101:MethodMustNotContainMoreLinesThan",
+        Justification = "Reviewed. Suppression is OK here.")]
         private static void OnInterval(object source, ElapsedEventArgs e)
         {
             try

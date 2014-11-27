@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="TimeRangeCriteria.cs" company="">
+// <copyright file="TimeRangeCriteria.cs" company="Nexcel Solutions Vietnam.">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------

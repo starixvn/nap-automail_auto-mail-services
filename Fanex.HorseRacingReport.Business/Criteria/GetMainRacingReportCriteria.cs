@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="GetMainRacingReportCriteria.cs" company="">
+// <copyright file="GetMainRacingReportCriteria.cs" company="Nexcel Solutions Vietnam.">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------

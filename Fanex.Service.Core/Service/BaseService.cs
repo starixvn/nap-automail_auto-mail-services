@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="BaseService.cs" company="">
+// <copyright file="BaseService.cs" company="Nexcel Solutions Vietnam.">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -8,15 +8,13 @@ namespace Fanex.Service.Core.Service
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.Service.Core.Criteria;
-    using Fanex.Data;
     using System.Data;
-    using Fanex.Service.Core.Extensions;
     using Fanex.Common;
-    using Fanex.Service.Core.Model;
+    using Fanex.Data;
     using Fanex.NAP.Framework.Data;
+    using Fanex.Service.Core.Criteria;
+    using Fanex.Service.Core.Extensions;
+    using Fanex.Service.Core.Model;
 
     /// <summary>
     /// TODO: Update summary.

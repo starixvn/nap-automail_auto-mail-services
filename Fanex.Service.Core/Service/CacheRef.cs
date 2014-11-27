@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="CacheRef.cs" company="">
+// <copyright file="CacheRef.cs" company="Nexcel Solutions Vietnam.">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -8,11 +8,9 @@ namespace Fanex.Service.Core.Service
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using RemotingRef;
     using Fanex.Common;
     using Fanex.Service.Core.Constants;
+    using RemotingRef;
 
     /// <summary>
     /// TODO: Update summary.
@@ -104,18 +102,23 @@ namespace Fanex.Service.Core.Service
                 case CombinationTypeConstants.Trixie:
                     name = Labels.Trixie;
                     break;
+
                 case CombinationTypeConstants.Yankee:
                     name = Labels.Yankee;
                     break;
+
                 case CombinationTypeConstants.Canadian:
                     name = Labels.Canadian;
                     break;
+
                 case CombinationTypeConstants.Heinz:
                     name = Labels.Heinz;
                     break;
+
                 case CombinationTypeConstants.SuperHeinz:
                     name = Labels.Super_Heinz;
                     break;
+
                 case CombinationTypeConstants.Goliath:
                     name = Labels.Goliath;
                     break;

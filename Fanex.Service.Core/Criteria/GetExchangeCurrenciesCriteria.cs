@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="GetExchangeCurrenciesCriteria.cs" company="">
+// <copyright file="GetExchangeCurrenciesCriteria.cs" company="Nexcel Solutions Vietnam.">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------

@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ProcessHorseRacingService.cs" company="">
+// <copyright file="ProcessHorseRacingService.cs" company="Nexcel Solutions Vietnam.">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -8,13 +8,15 @@ namespace Fanex.HorseRacingReport.Business
 {
     using System;
     using System.Collections.Generic;
-    using Fanex.HorseRacingReport.Business.Criteria;
-    using Fanex.HorseRacingReport.Business.Service;
-    using Fanex.HorseRacingReport.Business.Repositories;
-    using Fanex.HorseRacingReport.Business.Model;
-    using Fanex.Service.Core.Extensions;
-    using Fanex.Service.Core.Enums;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
+    using Fanex.HorseRacingReport.Business.Criteria;
+    using Fanex.HorseRacingReport.Business.Model;
+    using Fanex.HorseRacingReport.Business.Repositories;
+    using Fanex.HorseRacingReport.Business.Resources;
+    using Fanex.HorseRacingReport.Business.Service;
+    using Fanex.Service.Core.Enums;
+    using Fanex.Service.Core.Extensions;
     using Ionic.Zip;
 
     /// <summary>
@@ -25,6 +27,13 @@ namespace Fanex.HorseRacingReport.Business
         private IHorseRacingReportService _horseRacingReportService;
         private ITaskRepository _taskRepository;
 
+        /// <summary>
+        /// Processes the horse racing report service.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        "SP2101:MethodMustNotContainMoreLinesThan",
+        Justification = "Reviewed. Suppression is OK here.")]
         public void ProcessHorseRacingReportService(TimeRangeCriteria criteria)
         {
             _horseRacingReportService = new HorseRacingReportService(criteria);
@@ -80,6 +89,11 @@ namespace Fanex.HorseRacingReport.Business
             }
         }
 
+        /// <summary>
+        /// Gets the time range criteria.
+        /// </summary>
+        /// <param name="currentTime">The current time.</param>
+        /// <returns>Time range of report.</returns>
         public TimeRangeCriteria GetTimeRangeCriteria(DateTime currentTime)
         {
             TimeRangeCriteria criteria = new TimeRangeCriteria();
@@ -98,6 +112,11 @@ namespace Fanex.HorseRacingReport.Business
             return criteria;
         }
 
+        /// <summary>
+        /// Gets the list main report criteria.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>List main report criteria.</returns>
         private List<GetMainRacingReportCriteria> GetListMainReportCriteria(TimeRangeCriteria criteria)
         {
             List<GetMainRacingReportCriteria> mainReportCriteria = new List<GetMainRacingReportCriteria>();
@@ -124,6 +143,14 @@ namespace Fanex.HorseRacingReport.Business
             return mainReportCriteria;
         }
 
+        /// <summary>
+        /// Gets the list detail report criteria.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>List detail report criteria.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        "SP2101:MethodMustNotContainMoreLinesThan",
+        Justification = "Reviewed. Suppression is OK here.")]
         private List<GetDetailRacingReportCriteria> GetListDetailReportCriteria(TimeRangeCriteria criteria)
         {
             List<GetDetailRacingReportCriteria> detailReportCriteria = new List<GetDetailRacingReportCriteria>();
@@ -193,7 +220,7 @@ namespace Fanex.HorseRacingReport.Business
         {
             string reportFrom = criteria.FromDate.ToShortFormatedDateWithSlash().Replace("/", "-");
             string reportTo = criteria.ToDate.ToShortFormatedDateWithSlash().Replace("/", "-");
-            return string.Format("RacingReport_from_{0}_to_{1}.zip", reportFrom, reportTo);
+            return string.Format(RacingResource.Racing_Report_Directory, reportFrom, reportTo);
         }
     }
 }

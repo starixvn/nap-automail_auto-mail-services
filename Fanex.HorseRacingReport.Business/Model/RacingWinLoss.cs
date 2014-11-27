@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="RacingWinLoss.cs" company="">
+// <copyright file="RacingWinLoss.cs" company="Nexcel Solutions Vietnam.">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -83,6 +83,10 @@ namespace Fanex.HorseRacingReport.Business.Model
 
         public RacingWinLoss Total { get; set; }
 
+        /// <summary>
+        /// Calculates the total.
+        /// </summary>
+        /// <param name="racingWinLoss">The racing win loss.</param>
         public void CalculateTotal(RacingWinLoss racingWinLoss)
         {
             Race += racingWinLoss.Race;

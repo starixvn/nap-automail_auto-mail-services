@@ -1,22 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceProcess;
-using System.Text;
+﻿// -----------------------------------------------------------------------
+// <copyright file="Program.cs" company="Nexcel Solutions Vietnam.">
+// TODO: Update copyright text.
+// </copyright>
+// -----------------------------------------------------------------------
 
 namespace Fanex.HorseRacingReport.Service
 {
-    static class Program
+    using System.ServiceProcess;
+
+    /// <summary>
+    /// Main program.
+    /// </summary>
+    public static class Program
     {
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        static void Main()
+        private static void Main()
         {
             ServiceBase[] servicesToRun;
-            servicesToRun = new ServiceBase[] 
-            { 
-                new AutomailService() 
+            servicesToRun = new ServiceBase[]
+            {
+                new AutomailService()
             };
             ServiceBase.Run(servicesToRun);
         }

@@ -1,25 +1,39 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="RowType.cs" company="">
+// <copyright file="RowType.cs" company="Nexcel Solutions Vietnam.">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
 
 namespace Fanex.HorseRacingReport.Business.Enums
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public enum RowType
     {
+        /// <summary>
+        /// The normal row.
+        /// </summary>
         NormalRow,
+
+        /// <summary>
+        /// The sub total row.
+        /// </summary>
         SubTotal,
+
+        /// <summary>
+        /// The sub total row by currency.
+        /// </summary>
         SubTotalByCurrency,
+
+        /// <summary>
+        /// The sub total row by pool currency.
+        /// </summary>
         SubTotalByPoolCurrency,
+
+        /// <summary>
+        /// The grand total row.
+        /// </summary>
         GrandTotal
     }
 }

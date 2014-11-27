@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="HorseRacingReportService.cs" company="">
+// <copyright file="HorseRacingReportService.cs" company="Nexcel Solutions Vietnam.">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -15,15 +15,15 @@ namespace Fanex.HorseRacingReport.Business.Service
     using Fanex.Common;
     using Fanex.Data;
     using Fanex.HorseRacingReport.Business.Criteria;
+    using Fanex.HorseRacingReport.Business.Enums;
+    using Fanex.HorseRacingReport.Business.Model;
+    using Fanex.HorseRacingReport.Business.Resources;
     using Fanex.Service.Core.Common;
     using Fanex.Service.Core.Constants;
     using Fanex.Service.Core.Extensions;
     using Fanex.Service.Core.Service;
     using NPOI.SS.UserModel;
     using NPOI.XSSF.UserModel;
-    using Fanex.HorseRacingReport.Business.Model;
-    using Fanex.HorseRacingReport.Business.Enums;
-    using Fanex.HorseRacingReport.Business.Resources;
 
     /// <summary>
     /// TODO: Update summary.
@@ -109,15 +109,23 @@ namespace Fanex.HorseRacingReport.Business.Service
             }
         }
 
+        /// <summary>
+        /// Gets the main report.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>The main racing report data.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        "SP2101:MethodMustNotContainMoreLinesThan",
+        Justification = "Reviewed. Suppression is OK here.")]
         public RacingWinLoss GetMainReport(GetMainRacingReportCriteria criteria)
         {
             Dictionary<int, int> grandTotalByCurrency = new Dictionary<int, int>();
             string previousPartner = string.Empty;
             RacingWinLoss report = new RacingWinLoss
             {
-                Total = CreateRacingWinLossWithPartnerName("Grand Total")
+                Total = CreateRacingWinLossWithPartnerName(Labels.Grand_Total)
             };
-            RacingWinLoss racingWinLossTotalBase = CreateRacingWinLossWithCurrencyName("BaseRM");
+            RacingWinLoss racingWinLossTotalBase = CreateRacingWinLossWithCurrencyName(Labels.BaseRM);
 
             using (ObjectDb objectDb = new ObjectDb(criteria.GetSettingKey()))
             {
@@ -148,7 +156,7 @@ namespace Fanex.HorseRacingReport.Business.Service
                         {
                             CurrencyName = _currencies[poolCurrency]
                         };
-                        winLossTotalBaseByPartner = CreateRacingWinLossWithCurrencyName("BaseRM");
+                        winLossTotalBaseByPartner = CreateRacingWinLossWithCurrencyName(Labels.BaseRM);
                         previousPartner = GetPartnerAndPoolCurrencyGroupName(reader);
                     }
 
@@ -189,6 +197,14 @@ namespace Fanex.HorseRacingReport.Business.Service
             return report;
         }
 
+        /// <summary>
+        /// Gets the detail report.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>The detail racing report data.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        "SP2101:MethodMustNotContainMoreLinesThan",
+        Justification = "Reviewed. Suppression is OK here.")]
         public RacingWinLoss GetDetailReport(GetDetailRacingReportCriteria criteria)
         {
             Dictionary<int, int> totalDictionary = new Dictionary<int, int>();
@@ -198,9 +214,9 @@ namespace Fanex.HorseRacingReport.Business.Service
             string currencyNamebyPool = _currencies[criteria.PoolCurrency];
             RacingWinLoss report = new RacingWinLoss
             {
-                Total = CreateRacingWinLossWithPartnerName("Grand Total")
+                Total = CreateRacingWinLossWithPartnerName(Labels.Grand_Total)
             };
-            RacingWinLoss grandTotal = CreateRacingWinLossWithPartnerName("Grand Total");
+            RacingWinLoss grandTotal = CreateRacingWinLossWithPartnerName(Labels.Grand_Total);
 
             using (ObjectDb objectDb = new ObjectDb(criteria.GetSettingKey()))
             {
@@ -210,7 +226,7 @@ namespace Fanex.HorseRacingReport.Business.Service
                 };
                 RacingWinLoss grandTotalBaseCurrency = new RacingWinLoss
                 {
-                    CurrencyName = "Base RM"
+                    CurrencyName = Labels.BaseRM
                 };
                 RacingWinLoss racingWinLossByCurrencyGroup = null;
                 RacingWinLoss racingWinLossByMeetingGroup = null;
@@ -246,7 +262,7 @@ namespace Fanex.HorseRacingReport.Business.Service
                             PartnerName = leagueName,
                             Total = CreateRacingWinLossWithPartnerName(string.Format("{0} - {1} Total", leagueName, currencyName))
                         };
-                        racingWinLossBaseCurrencyTotal = CreateRacingWinLossWithCurrencyName("Base (RM)");
+                        racingWinLossBaseCurrencyTotal = CreateRacingWinLossWithCurrencyName(Labels.Base_RM);
                         racingWinLossByCurrencyTotal = CreateRacingWinLossWithCurrencyName(currencyName);
                         previousCurrency = GetCurrencyGroupName(reader);
                     }
@@ -316,6 +332,13 @@ namespace Fanex.HorseRacingReport.Business.Service
             return report;
         }
 
+        /// <summary>
+        /// Exports the main report.
+        /// </summary>
+        /// <param name="report">The report.</param>
+        /// <param name="reportType">Type of the report.</param>
+        /// <param name="winlostDate">The win lost date.</param>
+        /// <param name="criteria">The criteria.</param>
         public void ExportMainReport(RacingWinLoss report, int reportType, DateTime winlostDate, TimeRangeCriteria criteria)
         {
             string reportName = string.Empty;
@@ -331,7 +354,7 @@ namespace Fanex.HorseRacingReport.Business.Service
             this.InitCellStyleInfo();
             _cellInfo = new CellInfo(0, 0, 0, 0, string.Empty);
             this.ExportReportTitle(worksheet, reportTitle);
-            this.ExportReportHeader(worksheet, "Pool - Currency", "Currency");
+            this.ExportReportHeader(worksheet, Labels.Pool_Currency, Labels.Currency);
             NPOIUtility.IncreaseRowIndex(ref _cellInfo);
             if (report.ReportRows.Count > 0)
             {
@@ -356,6 +379,13 @@ namespace Fanex.HorseRacingReport.Business.Service
             GC.Collect();
         }
 
+        /// <summary>
+        /// Exports the detail report.
+        /// </summary>
+        /// <param name="report">The report.</param>
+        /// <param name="partnerId">The partner identifier.</param>
+        /// <param name="winlostDate">The win lost date.</param>
+        /// <param name="criteria">The criteria.</param>
         public void ExportDetailReport(RacingWinLoss report, int partnerId, DateTime winlostDate, TimeRangeCriteria criteria)
         {
             FileStream fileStream = null;
@@ -371,7 +401,7 @@ namespace Fanex.HorseRacingReport.Business.Service
             this.InitCellStyleInfo();
             _cellInfo = new CellInfo(0, 0, 0, 0, string.Empty);
             this.ExportReportTitle(worksheet, reportTitle);
-            this.ExportReportHeader(worksheet, "Meeting - Currency", "Race");
+            this.ExportReportHeader(worksheet, Labels.Meeting_Currency, Labels.Race);
             NPOIUtility.IncreaseRowIndex(ref _cellInfo);
             if (report.ReportRows.Count > 0)
             {
@@ -426,6 +456,15 @@ namespace Fanex.HorseRacingReport.Business.Service
             NPOIUtility.ResetColumnIndex(ref _cellInfo);
         }
 
+        /// <summary>
+        /// Exports the report header.
+        /// </summary>
+        /// <param name="worksheet">The worksheet.</param>
+        /// <param name="firstColumnName">First name of the column.</param>
+        /// <param name="secondColumnName">Name of the second column.</param>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        "SP2101:MethodMustNotContainMoreLinesThan",
+        Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReportHeader(XSSFSheet worksheet, string firstColumnName, string secondColumnName)
         {
             XSSFRow row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
@@ -441,17 +480,17 @@ namespace Fanex.HorseRacingReport.Business.Service
 
             _cellInfo.EndRow = _cellInfo.CurrentRow;
             _cellInfo.EndColumn = _cellInfo.CurrentColumn + 5;
-            _cellInfo.CellValue = "Agency";
+            _cellInfo.CellValue = Labels.Agency;
             NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
 
             _cellInfo.CurrentColumn = _cellInfo.EndColumn + 1;
             _cellInfo.EndColumn = _cellInfo.CurrentColumn + 8;
-            _cellInfo.CellValue = "IBC";
+            _cellInfo.CellValue = Labels.IBC;
             NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
 
             _cellInfo.CurrentColumn = _cellInfo.EndColumn + 1;
             _cellInfo.EndColumn = _cellInfo.CurrentColumn + 7;
-            _cellInfo.CellValue = "Partner";
+            _cellInfo.CellValue = Labels.Partner;
             NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.ResetColumnIndex(ref _cellInfo);
             NPOIUtility.IncreaseRowIndex(ref _cellInfo);
@@ -460,101 +499,106 @@ namespace Fanex.HorseRacingReport.Business.Service
             _cellInfo.EndColumn = 2;
 
             //// Agency header group
-            _cellInfo.CellValue = "Win TO";
+            _cellInfo.CellValue = Labels.Win_TO;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-            _cellInfo.CellValue = "Place TO";
+            _cellInfo.CellValue = Labels.Place_TO;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-            _cellInfo.CellValue = "W/P TO";
+            _cellInfo.CellValue = Labels.Win_Place_TO;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-            _cellInfo.CellValue = "Total TO";
+            _cellInfo.CellValue = Labels.Total_TO;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-            _cellInfo.CellValue = "Comm Income";
+            _cellInfo.CellValue = Labels.Comm_Income;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-            _cellInfo.CellValue = "PT Win/Loss";
+            _cellInfo.CellValue = Labels.PT_Win_Loss;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
             //// IBC header group
-            _cellInfo.CellValue = "Win TO";
+            _cellInfo.CellValue = Labels.Win_TO;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-            _cellInfo.CellValue = "Place TO";
+            _cellInfo.CellValue = Labels.Place_TO;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-            _cellInfo.CellValue = "W/P TO";
+            _cellInfo.CellValue = Labels.Win_Place_TO;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-            _cellInfo.CellValue = "Total TO";
+            _cellInfo.CellValue = Labels.Total_TO;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-            _cellInfo.CellValue = "Comm Income";
+            _cellInfo.CellValue = Labels.Comm_Income;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-            _cellInfo.CellValue = "Tote Fee";
+            _cellInfo.CellValue = Labels.Tote_Fee;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-            _cellInfo.CellValue = "Comm Expense";
+            _cellInfo.CellValue = Labels.Comm_Expense;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-            _cellInfo.CellValue = "PT Win/Loss";
+            _cellInfo.CellValue = Labels.PT_Win_Loss;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-            _cellInfo.CellValue = "Net Income";
+            _cellInfo.CellValue = Labels.Net_Income;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
             //// Partner header group.
-            _cellInfo.CellValue = "Win TO";
+            _cellInfo.CellValue = Labels.Win_TO;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-            _cellInfo.CellValue = "Place TO";
+            _cellInfo.CellValue = Labels.Place_TO;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-            _cellInfo.CellValue = "W/P TO";
+            _cellInfo.CellValue = Labels.Win_Place_TO;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-            _cellInfo.CellValue = "Total TO";
+            _cellInfo.CellValue = Labels.Total_TO;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-            _cellInfo.CellValue = "Dividend Won";
+            _cellInfo.CellValue = Labels.Dividend_Won;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-            _cellInfo.CellValue = "Comm Expense";
+            _cellInfo.CellValue = Labels.Comm_Expense;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-            _cellInfo.CellValue = "Tote Fee";
+            _cellInfo.CellValue = Labels.Tote_Fee;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-            _cellInfo.CellValue = "Amount Due";
+            _cellInfo.CellValue = Labels.Amount_Due;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
             NPOIUtility.ResetColumnIndex(ref _cellInfo);
         }
 
+        /// <summary>
+        /// Exports the content of the main report.
+        /// </summary>
+        /// <param name="worksheet">The worksheet.</param>
+        /// <param name="report">The report.</param>
         private void ExportMainReportContent(XSSFSheet worksheet, RacingWinLoss report)
         {
             XSSFRow row = null;
@@ -606,6 +650,14 @@ namespace Fanex.HorseRacingReport.Business.Service
             }
         }
 
+        /// <summary>
+        /// Exports the main report grand total.
+        /// </summary>
+        /// <param name="worksheet">The worksheet.</param>
+        /// <param name="grandTotal">The grand total.</param>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        "SP2101:MethodMustNotContainMoreLinesThan",
+        Justification = "Reviewed. Suppression is OK here.")]
         private void ExportMainReportGrandTotal(XSSFSheet worksheet, RacingWinLoss grandTotal)
         {
             int groupLength = 0;
@@ -630,6 +682,14 @@ namespace Fanex.HorseRacingReport.Business.Service
             }
         }
 
+        /// <summary>
+        /// Exports the content of the detail report.
+        /// </summary>
+        /// <param name="worksheet">The worksheet.</param>
+        /// <param name="report">The report.</param>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        "SP2101:MethodMustNotContainMoreLinesThan",
+        Justification = "Reviewed. Suppression is OK here.")]
         private void ExportDetailReportContent(XSSFSheet worksheet, RacingWinLoss report)
         {
             int groupLength = 0;
@@ -693,6 +753,11 @@ namespace Fanex.HorseRacingReport.Business.Service
             }
         }
 
+        /// <summary>
+        /// Exports the detail report grand total.
+        /// </summary>
+        /// <param name="worksheet">The worksheet.</param>
+        /// <param name="grandTotal">The grand total.</param>
         private void ExportDetailReportGrandTotal(XSSFSheet worksheet, RacingWinLoss grandTotal)
         {
             XSSFRow row = null;
@@ -741,6 +806,16 @@ namespace Fanex.HorseRacingReport.Business.Service
             NPOIUtility.IncreaseRowIndex(ref _cellInfo);
         }
 
+        /// <summary>
+        /// Exports the racing win loss report row.
+        /// </summary>
+        /// <param name="rowData">The row data.</param>
+        /// <param name="worksheet">The worksheet.</param>
+        /// <param name="row">The row of sheet.</param>
+        /// <param name="rowType">Type of the row.</param>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        "SP2101:MethodMustNotContainMoreLinesThan",
+        Justification = "Reviewed. Suppression is OK here.")]
         private void ExportRacingWinLossReportRow(
             RacingWinLoss rowData,
             XSSFSheet worksheet,
@@ -847,6 +922,12 @@ namespace Fanex.HorseRacingReport.Business.Service
             NPOIUtility.ResetColumnIndex(ref _cellInfo);
         }
 
+        /// <summary>
+        /// Mappings the data by currency.
+        /// </summary>
+        /// <param name="reader">The reader.</param>
+        /// <param name="suffix">The suffix.</param>
+        /// <returns>Racing win loss data.</returns>
         private RacingWinLoss MappingDataByCurrency(IDataReader reader, string suffix)
         {
             return new RacingWinLoss
@@ -1126,9 +1207,14 @@ namespace Fanex.HorseRacingReport.Business.Service
             _headerFont = NPOIHighVersion.CreateFont(_workbook, _headerFontInfo, true);
         }
 
+        /// <summary>
+        /// Gets the type of the decimal cell style by row.
+        /// </summary>
+        /// <param name="rowType">Type of the row.</param>
+        /// <returns>Decimal number style.</returns>
         private XSSFCellStyle GetDecimalCellStyleByRowType(RowType rowType)
         {
-            XSSFCellStyle cellStyle = null; ;
+            XSSFCellStyle cellStyle = null;
             switch (rowType)
             {
                 case RowType.NormalRow:
@@ -1159,44 +1245,16 @@ namespace Fanex.HorseRacingReport.Business.Service
             return cellStyle;
         }
 
-        private XSSFCellStyle GetTextCellStyleByRowType(RowType rowType)
-        {
-            XSSFCellStyle cellStyle = null; ;
-            switch (rowType)
-            {
-                case RowType.NormalRow:
-                    cellStyle = _centerTextStyle;
-                    break;
-
-                case RowType.SubTotal:
-                    cellStyle = _subTotalCenterTextStyle;
-                    break;
-
-                case RowType.SubTotalByCurrency:
-                    cellStyle = _subTotalByCurrencyCenterTextStyle;
-                    break;
-
-                case RowType.SubTotalByPoolCurrency:
-                    cellStyle = _subTotalByPoolCurrencyCenterTextStyle;
-                    break;
-
-                case RowType.GrandTotal:
-                    cellStyle = _grandTotalCenterTextStyle;
-                    break;
-
-                default:
-                    cellStyle = _centerTextStyle;
-                    break;
-            }
-
-            return cellStyle;
-        }
-
+        /// <summary>
+        /// Creates the horse racing report data directory.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Report data directory.</returns>
         private string CreateHorseRacingReportDataDirectory(TimeRangeCriteria criteria)
         {
             string reportFrom = criteria.FromDate.ToShortFormatedDateWithSlash().Replace("/", "-");
             string reportTo = criteria.ToDate.ToShortFormatedDateWithSlash().Replace("/", "-");
-            string reportByPeriodTime = string.Format("RacingReport_from_{0}_to_{1}", reportFrom, reportTo);
+            string reportByPeriodTime = string.Format(RacingResource.Racing_Report_Export_Directory, reportFrom, reportTo);
             string reportDataDirectory = AppSettings.ExportDataDirectory;
             DirectoryExtensions.CheckAndCreateDirectory(reportDataDirectory);
             string directoryReportPath = Path.Combine(reportDataDirectory, reportByPeriodTime);
@@ -1205,6 +1263,17 @@ namespace Fanex.HorseRacingReport.Business.Service
             return directoryReportPath;
         }
 
+        /// <summary>
+        /// Gets the export main report information.
+        /// </summary>
+        /// <param name="reportType">Type of the report.</param>
+        /// <param name="winlostDate">The win lost date.</param>
+        /// <param name="reportName">Name of the report.</param>
+        /// <param name="sheetName">Name of the sheet.</param>
+        /// <param name="reportTitle">The report title.</param>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        "SP2101:MethodMustNotContainMoreLinesThan",
+        Justification = "Reviewed. Suppression is OK here.")]
         private void GetExportMainReportInfo(
             int reportType,
             DateTime winlostDate,
@@ -1238,6 +1307,17 @@ namespace Fanex.HorseRacingReport.Business.Service
             }
         }
 
+        /// <summary>
+        /// Gets the export detail report information.
+        /// </summary>
+        /// <param name="partnerId">The partner identifier.</param>
+        /// <param name="winlostDate">The win lost date.</param>
+        /// <param name="reportName">Name of the report.</param>
+        /// <param name="sheetName">Name of the sheet.</param>
+        /// <param name="reportTitle">The report title.</param>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        "SP2101:MethodMustNotContainMoreLinesThan",
+        Justification = "Reviewed. Suppression is OK here.")]
         private void GetExportDetailReportInfo(
             int partnerId,
             DateTime winlostDate,

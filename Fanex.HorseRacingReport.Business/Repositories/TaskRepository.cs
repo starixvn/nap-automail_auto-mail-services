@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="TaskRepository.cs" company="">
+// <copyright file="TaskRepository.cs" company="Nexcel Solutions Vietnam.">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -27,6 +27,11 @@ namespace Fanex.HorseRacingReport.Business.Repositories
             _db = new SqLite(AppSettings.ConnectionString);
         }
 
+        /// <summary>
+        /// Updates the task status.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="status">The status.</param>
         public void UpdateTaskStatus(int id, Status status)
         {
             try
@@ -45,6 +50,10 @@ namespace Fanex.HorseRacingReport.Business.Repositories
             }
         }
 
+        /// <summary>
+        /// Gets the current task.
+        /// </summary>
+        /// <returns>The current task.</returns>
         public TaskModel GetCurrentTask()
         {
             TaskModel model = null;
@@ -70,6 +79,10 @@ namespace Fanex.HorseRacingReport.Business.Repositories
             return model;
         }
 
+        /// <summary>
+        /// Gets the task ready run.
+        /// </summary>
+        /// <returns>The task ready to run.</returns>
         public TaskModel GetTaskReadyRun()
         {
             TaskModel model = null;
@@ -95,6 +108,11 @@ namespace Fanex.HorseRacingReport.Business.Repositories
             return model;
         }
 
+        /// <summary>
+        /// Gets the task by identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>The task by identifier.</returns>
         public TaskModel GetTaskById(int id)
         {
             TaskModel model = null;
@@ -120,6 +138,11 @@ namespace Fanex.HorseRacingReport.Business.Repositories
             return model;
         }
 
+        /// <summary>
+        /// Inserts the task.
+        /// </summary>
+        /// <param name="task">The task model.</param>
+        /// <returns>The identifier of task.</returns>
         public int InsertTask(TaskModel task)
         {
             int id = 0;

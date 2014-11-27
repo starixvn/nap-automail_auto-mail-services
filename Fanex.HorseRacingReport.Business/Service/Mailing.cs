@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="Mailing.cs" company="">
+// <copyright file="Mailing.cs" company="Nexcel Solutions Vietnam.">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -7,13 +7,13 @@
 namespace Fanex.HorseRacingReport.Business.Service
 {
     using System;
-    using Fanex.HorseRacingReport.Business.Criteria;
-    using Fanex.HorseRacingReport.Business.Constants;
-    using System.IO;
-    using RazorEngine;
-    using Fanex.Service.Core.Extensions;
-    using Fanex.MailDeliver.Model;
     using System.Collections.Generic;
+    using System.IO;
+    using Fanex.HorseRacingReport.Business.Constants;
+    using Fanex.HorseRacingReport.Business.Criteria;
+    using Fanex.MailDeliver.Model;
+    using Fanex.Service.Core.Extensions;
+    using RazorEngine;
 
     /// <summary>
     /// TODO: Update summary.
@@ -21,12 +21,11 @@ namespace Fanex.HorseRacingReport.Business.Service
     public static class Mailing
     {
         /// <summary>
-        /// Sends the SMA report email.
+        /// Sends the racing report email.
         /// </summary>
-        /// <param name="fileNames">The file name.</param>
-        /// <param name="reportFrom">The report from.</param>
-        /// <param name="reportTo">The report to.</param>
-        /// <returns>Email will be send success or not.</returns>
+        /// <param name="reportUrl">The report URL.</param>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Email sent success or fail.</returns>
         public static bool SendRacingReportEmail(string reportUrl, TimeRangeCriteria criteria)
         {
             bool isSuccess = true;
@@ -78,8 +77,7 @@ namespace Fanex.HorseRacingReport.Business.Service
         /// <summary>
         /// Errors the email notification.
         /// </summary>
-        /// <param name="reportFrom">The report from.</param>
-        /// <param name="reportTo">The report to.</param>
+        /// <param name="criteria">The criteria.</param>
         public static void ErrorEmailNotification(TimeRangeCriteria criteria)
         {
             try
