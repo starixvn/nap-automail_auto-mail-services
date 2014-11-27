@@ -124,7 +124,6 @@ namespace Fanex.HorseRacingReport.Service
             catch (Exception ex)
             {
                 LogExtensions.ExceptionHandler(ex);
-                AppSettings.OnProcessing = false;
                 throw;
             }
         }

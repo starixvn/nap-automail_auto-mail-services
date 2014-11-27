@@ -366,6 +366,8 @@ namespace Fanex.HorseRacingReport.Business.Service
                 this.ExportNoDataReport(worksheet);
             }
 
+            worksheet.CreateFreezePane(2, 4, 2, 4);
+
             var reportPath = Path.Combine(_reportDataDirectory, reportName);
             var fullReportPath = string.Format("{0}.{1}", reportPath, "xlsx");
 
@@ -413,6 +415,7 @@ namespace Fanex.HorseRacingReport.Business.Service
                 this.ExportNoDataReport(worksheet);
             }
 
+            worksheet.CreateFreezePane(2, 4, 2, 4);
             var reportPath = Path.Combine(_reportDataDirectory, reportName);
             var fullReportPath = string.Format("{0}.{1}", reportPath, "xlsx");
 
