@@ -10,8 +10,8 @@
 namespace Fanex.ReportingService.Business.Criteria.MatchWinLoss2a
 {
     using System;
-    using Fanex.ReportingService.Core.Services.Impl;
     using Fanex.NAP.Framework.Data;
+    using Fanex.ReportingService.Core.Services.Impl;
 
     /// <summary>
     /// TODO: Update summary.

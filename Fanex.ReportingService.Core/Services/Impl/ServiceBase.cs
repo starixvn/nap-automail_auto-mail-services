@@ -12,9 +12,9 @@ namespace Fanex.ReportingService.Core.Services.Impl
 {
     using System;
     using System.Collections.Generic;
-    using Fanex.ReportingService.Core.Services.Interface;
     using Fanex.Common.Helper;
     using Fanex.NAP.Framework.Data;
+    using Fanex.ReportingService.Core.Services.Interface;
 
     /// <summary>
     /// TODO: Update summary.

@@ -13,13 +13,13 @@ namespace Fanex.ReportingService.Business.Repositories.Implement.MatchWinLoss2a
     using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
-    using Fanex.ReportingService.Core.Services.Impl;
-    using Fanex.ReportingService.Business.Criteria.MatchWinLoss2a;
-    using Fanex.ReportingService.Business.Model.MatchWinLoss2a;
-    using Fanex.ReportingService.Business.Repositories.Interface;
     using Fanex.Common;
     using Fanex.Data;
     using Fanex.NAP.Framework.Data;
+    using Fanex.ReportingService.Business.Criteria.MatchWinLoss2a;
+    using Fanex.ReportingService.Business.Model.MatchWinLoss2a;
+    using Fanex.ReportingService.Business.Repositories.Interface;
+    using Fanex.ReportingService.Core.Services.Impl;
 
     /// <summary>
     /// TODO: Update summary.

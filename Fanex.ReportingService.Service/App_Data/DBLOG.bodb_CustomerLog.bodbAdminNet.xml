@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Functions>
+  <Function Name="Balance - Company Balance Difference">
+    <Setting Key="Balance_CompanyBalance_Difference" SpName="Acc_Rpt_Balance_Company_History_xtest" DbName="DBLOG.bodb_CustomerLog.bodbAdminNet"></Setting>
+  </Function>
+</Functions>

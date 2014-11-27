@@ -76,9 +76,9 @@
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
     <Compile Include="Common\LogExtensions.cs" />
+    <Compile Include="Criteria\CompanyBalance\GetCompanyBalanceCriteria.cs" />
     <Compile Include="Criteria\CompanyStatement\GetCompanyStatementCriteria.cs" />
     <Compile Include="Criteria\DailyTurnOver\GetDailyTurnoverCriteria.cs" />
-    <Compile Include="Criteria\GetMatchWinLoss2aCriteria.cs" />
     <Compile Include="Criteria\MatchWinLoss2a\GetAllDetailReportBySportsCriteria.cs" />
     <Compile Include="Criteria\MatchWinLoss2a\GetDetailReportByBetTypeCriteria.cs">
       <SubType>Code</SubType>
@@ -118,6 +118,7 @@
     </Compile>
     <Compile Include="Service\BaseService.cs" />
     <Compile Include="Common\DirectoryExtensions.cs" />
+    <Compile Include="Service\Implement\CompanyBalance\CompanyBalanceService.cs" />
     <Compile Include="Service\Implement\CompanyStatement\CompanyStatementService.cs" />
     <Compile Include="Service\Implement\DailyTurnOver\DailyTurnoverService.cs" />
     <Compile Include="Service\Implement\MatchWinLoss2a\ExportAllDetailReportBySportService.cs" />
@@ -126,16 +127,14 @@
     <Compile Include="Service\Implement\MatchWinLoss2a\MatchWinLoss2aService.cs" />
     <Compile Include="Service\Implement\MatchWinLoss2a\RowType.cs" />
     <Compile Include="Service\Implement\SuperYesterdayBalance\SuperYesterdayBalanceService.cs" />
+    <Compile Include="Service\Interface\ICompanyBalanceService.cs" />
     <Compile Include="Service\Interface\ICompanyStatementService.cs" />
     <Compile Include="Service\Interface\IDailyTurnoverService.cs" />
     <Compile Include="Service\Interface\IMatchWinLoss2aService.cs" />
     <Compile Include="Service\Interface\ISuperYesterdayBalanceService.cs" />
     <Compile Include="Service\ReportingServiceQueue.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repositories\Implement\CompanyStatement\" />
-    <Folder Include="Repositories\Implement\DailyTurnOver\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Resources\Labels.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -9,8 +9,8 @@
 
 namespace Fanex.ReportingService.Business.Criteria.SuperYesterdayBalance
 {
-    using Fanex.ReportingService.Business.Enums;
     using Fanex.NAP.Framework.Data;
+    using Fanex.ReportingService.Business.Enums;
 
     /// <summary>
     /// Get super yesterday balance criteria.

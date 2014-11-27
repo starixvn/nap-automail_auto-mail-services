@@ -7,9 +7,9 @@
 namespace Fanex.ReportingService.Business.Service
 {
     using System;
+    using Fanex.NAP.Framework.Data;
     using Fanex.ReportingService.Business.Enums;
     using Fanex.ReportingService.Business.Model;
-    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.

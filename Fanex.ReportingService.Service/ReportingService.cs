@@ -12,10 +12,10 @@ namespace Fanex.ReportingService.Business
     using System.IO;
     using System.ServiceProcess;
     using System.Timers;
+    using Fanex.Data.Configuration;
     using Fanex.ReportingService.Business.Common;
     using Fanex.ReportingService.Business.Enums;
     using Fanex.ReportingService.Business.Service;
-    using Fanex.Data.Configuration;
     using Timer = System.Timers.Timer;
 
     /// <summary>

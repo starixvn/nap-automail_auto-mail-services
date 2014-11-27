@@ -9,7 +9,9 @@ namespace Fanex.ReportingService.Business.Service
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using Fanex.Common;
     using Fanex.ReportingService.Business.Common;
+    using Fanex.ReportingService.Business.Criteria.CompanyBalance;
     using Fanex.ReportingService.Business.Criteria.CompanyStatement;
     using Fanex.ReportingService.Business.Criteria.DailyTurnOver;
     using Fanex.ReportingService.Business.Criteria.MatchWinLoss2a;
@@ -18,12 +20,12 @@ namespace Fanex.ReportingService.Business.Service
     using Fanex.ReportingService.Business.Model;
     using Fanex.ReportingService.Business.Repositories.Implement;
     using Fanex.ReportingService.Business.Repositories.Interface;
+    using Fanex.ReportingService.Business.Service.Implement.CompanyBalance;
     using Fanex.ReportingService.Business.Service.Implement.CompanyStatement;
     using Fanex.ReportingService.Business.Service.Implement.DailyTurnOver;
     using Fanex.ReportingService.Business.Service.Implement.MatchWinLoss2a;
     using Fanex.ReportingService.Business.Service.Implement.SuperYesterdayBalance;
     using Fanex.ReportingService.Business.Service.Interface;
-    using Fanex.Common;
     using WebConfiguration = System.Web.Configuration;
 
     /// <summary>
@@ -35,11 +37,13 @@ namespace Fanex.ReportingService.Business.Service
         private const string DailyTurnOverTaskName = "dailyturnover";
         private const string SuperYesterdayBalanceTaskName = "superyesterdaybalance";
         private const string CompanyStatementTaskName = "companystatement";
+        private const string CompanyBalanceTaskName = "companybalance";
         private IReportingServiceRepository _repository = null;
         private IMatchWinLoss2aService _matchWinLoss2aService = null;
         private IDailyTurnoverService _dailyTurnOverService = null;
         private ISuperYesterdayBalanceService _superYesterdayBalanceService = null;
         private ICompanyStatementService _companyStatementService = null;
+        private ICompanyBalanceService _companyBalanceService = null;
 
         public ReportingServiceQueue()
         {
@@ -127,7 +131,7 @@ namespace Fanex.ReportingService.Business.Service
             list.Add(GetTaskDailyTurnOver(id));
             list.Add(GetTaskSuperYesterdayBalance(id));
             list.Add(GetTaskCompanyStatement(id));
-
+            list.Add(GetTaskCompanyBalance(id));
             return list;
         }
 
@@ -202,6 +206,20 @@ namespace Fanex.ReportingService.Business.Service
         }
 
         /// <summary>
+        /// Gets the task daily turn over.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Daily turn over task information.</returns>
+        private TaskQueueDetail GetTaskCompanyBalance(int id)
+        {
+            GetCompanyBalanceCriteria criteria = new GetCompanyBalanceCriteria();
+            criteria.ReportDate = DateTime.Today;
+            string taskName = CompanyBalanceTaskName;
+            TaskQueueDetail queue = GetQueueModel(criteria, id, taskName);
+            return queue;
+        }
+
+        /// <summary>
         /// Exports the match win loss 2A report.
         /// </summary>
         /// <param name="task">The task information.</param>
@@ -250,6 +268,18 @@ namespace Fanex.ReportingService.Business.Service
         }
 
         /// <summary>
+        /// Exports the company balance report.
+        /// </summary>
+        /// <param name="task">The task detail.</param>
+        private void ExportCompanyBalanceReport(TaskQueueDetail task)
+        {
+            var getCompanyBalanceCriteria = new GetCompanyBalanceCriteria();
+            getCompanyBalanceCriteria.ReportDate = DateTime.Today;
+            _companyBalanceService = new CompanyBalanceService();
+            _companyBalanceService.ExportCompanyBalanceReport(getCompanyBalanceCriteria);
+        }
+
+        /// <summary>
         /// Exports the report.
         /// </summary>
         /// <param name="task">The task information.</param>
@@ -271,6 +301,10 @@ namespace Fanex.ReportingService.Business.Service
 
                 case CompanyStatementTaskName:
                     this.ExportCompanyStatementReport(task);
+                    break;
+
+                case CompanyBalanceTaskName:
+                    this.ExportCompanyBalanceReport(task);
                     break;
 
                 default:
