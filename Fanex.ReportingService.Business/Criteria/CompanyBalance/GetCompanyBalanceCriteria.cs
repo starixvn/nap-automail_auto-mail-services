@@ -1,27 +1,24 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="GetMatchWinLoss2aCriteria.cs" company="Microsoft">
-// TODO: Update copyright text.
+// <copyright file="GetCompanyBalanceCriteria.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
-
-namespace Fanex.ReportingService.Business.Criteria
+namespace Fanex.ReportingService.Business.Criteria.CompanyBalance
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class GetMatchWinLoss2aCriteria : CriteriaBase
+    public class GetCompanyBalanceCriteria : CriteriaBase
     {
-        public DateTime WinlostDate { get; set; }
+        [SpParam(Ignored = true)]
+        public DateTime ReportDate { get; set; }
 
         public override string GetSettingKey()
         {
-            return "Acc_Rpt_MatchWinLoss2_New";
+            return "Balance_CompanyBalance_GetReport";
         }
 
         public override bool IsValid()

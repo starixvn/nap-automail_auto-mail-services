@@ -10,10 +10,10 @@ namespace Fanex.ReportingService.Business.Repositories.Implement
     using System.Collections;
     using System.Collections.Generic;
     using System.Data;
+    using Fanex.AccountingReports.SqLiteDatabase;
     using Fanex.ReportingService.Business.Enums;
     using Fanex.ReportingService.Business.Model;
     using Fanex.ReportingService.Business.Repositories.Interface;
-    using Fanex.AccountingReports.SqLiteDatabase;
     using Newtonsoft.Json;
 
     /// <summary>
@@ -59,7 +59,7 @@ namespace Fanex.ReportingService.Business.Repositories.Implement
             var dataTable = _db.GetDataTable(sql);
             if (dataTable.Rows.Count > 0)
             {
-                isRunning = dataTable.Rows[0]["Status"] == DBNull.Value ? 
+                isRunning = dataTable.Rows[0]["Status"] == DBNull.Value ?
                     false :
                     (Convert.ToInt32(dataTable.Rows[0]["Status"]) == Convert.ToInt32(Status.Running));
             }
@@ -161,14 +161,14 @@ namespace Fanex.ReportingService.Business.Repositories.Implement
         {
             bool already = false;
 
-            var sql = "select * from TaskQueue where ID in( select max(ID) from TaskQueue) and Type = " + 
-                ((int)TaskType.Daily).ToString() + " and Status= " + 
+            var sql = "select * from TaskQueue where ID in( select max(ID) from TaskQueue) and Type = " +
+                ((int)TaskType.Daily).ToString() + " and Status= " +
                 ((int)Status.Completed).ToString();
             var dataTable = _db.GetDataTable(sql);
             if (dataTable.Rows.Count > 0)
             {
-                already = dataTable.Rows[0]["CreatedDate"] == DBNull.Value ? 
-                    false : 
+                already = dataTable.Rows[0]["CreatedDate"] == DBNull.Value ?
+                    false :
                     (Convert.ToDateTime(dataTable.Rows[0]["CreatedDate"]).ToShortDateString() == DateTime.Today.ToShortDateString());
             }
 

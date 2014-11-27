@@ -61,6 +61,33 @@ namespace Fanex.ReportingService.Business.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Company_Balance_Date_{0}.
+        /// </summary>
+        internal static string CompanyBalance_ReportName {
+            get {
+                return ResourceManager.GetString("CompanyBalance_ReportName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company Balance Date: {0}.
+        /// </summary>
+        internal static string CompanyBalance_ReportTitle {
+            get {
+                return ResourceManager.GetString("CompanyBalance_ReportTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company Balance.
+        /// </summary>
+        internal static string CompanyBalance_SheetName {
+            get {
+                return ResourceManager.GetString("CompanyBalance_SheetName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Company_Statement_Date_{0}.
         /// </summary>
         internal static string CompanyStatement_ReportName {

@@ -10,9 +10,9 @@
 namespace Fanex.ReportingService.Business.Service.Implement.MatchWinLoss2a
 {
     using System.Diagnostics.CodeAnalysis;
-    using Fanex.ReportingService.Core.Extensions;
     using Fanex.ReportingService.Business.Model.MatchWinLoss2a;
     using Fanex.ReportingService.Business.Resources;
+    using Fanex.ReportingService.Core.Extensions;
     using NPOI.HSSF.UserModel;
     using NPOI.HSSF.Util;
     using NPOI.SS.UserModel;

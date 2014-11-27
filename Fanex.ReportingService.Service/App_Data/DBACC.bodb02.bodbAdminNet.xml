@@ -12,9 +12,12 @@
     <Setting Key="Special_DailyTurnover_GetReport" SpName="Acc_Rpt_DailyTurnover" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Balance - Supper Balance">
-    <Setting Key="Balance_SuperBalance_SuperYesterday" SpName="Acc_Rpt_Balance_Super_Yesterday" DbName="DBACC.bodb02.bodbAdminNet"></Setting>
+    <Setting Key="Balance_SuperBalance_SuperYesterday" SpName="Acc_Rpt_Balance_Super_Yesterday" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
   <Function Name="Statement - Company Statement">
-    <Setting Key="Statement_Get_Company_Statement" SpName="Acc_AllStatementCompany" DbName="DBACC.bodb02.bodbAdminNet"></Setting>
+    <Setting Key="Statement_Get_Company_Statement" SpName="Acc_AllStatementCompany" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
+  </Function>
+  <Function Name="Balance - Company Balance">
+    <Setting Key="Balance_CompanyBalance_GetReport" SpName="Acc_Rpt_Balance_Company_xtest" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
 </Functions>

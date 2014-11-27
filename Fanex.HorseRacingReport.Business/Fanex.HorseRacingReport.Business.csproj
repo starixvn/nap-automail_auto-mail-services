@@ -126,6 +126,7 @@
     <EmbeddedResource Include="Resources\RacingResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RacingResource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

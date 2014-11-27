@@ -163,9 +163,9 @@
     <value>HorseRacingUKTote</value>
   </data>
   <data name="Racing_Report_Directory" xml:space="preserve">
-    <value>RacingReport_from_{0}_to_{1}.zip</value>
+    <value>Daily Racing Report {0} - {1}.zip</value>
   </data>
   <data name="Racing_Report_Export_Directory" xml:space="preserve">
-    <value>RacingReport_from_{0}_to_{1}</value>
+    <value>Daily Racing Report {0} - {1}</value>
   </data>
 </root>

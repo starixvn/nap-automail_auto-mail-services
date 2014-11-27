@@ -12,11 +12,11 @@ namespace Fanex.ReportingService.Business.Repositories.Implement.SuperYesterdayB
     using System.Collections;
     using System.Collections.Generic;
     using System.Data;
-    using Fanex.ReportingService.Core.Services.Impl;
-    using Fanex.ReportingService.Business.Criteria.SuperYesterdayBalance;
-    using Fanex.ReportingService.Business.Repositories.Interface;
     using Fanex.Common;
     using Fanex.Data;
+    using Fanex.ReportingService.Business.Criteria.SuperYesterdayBalance;
+    using Fanex.ReportingService.Business.Repositories.Interface;
+    using Fanex.ReportingService.Core.Services.Impl;
 
     /// <summary>
     /// Super yesterday balance repository.

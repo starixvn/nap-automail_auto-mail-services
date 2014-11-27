@@ -11,8 +11,8 @@ namespace Fanex.ReportingService.Core.Services.Impl
 {
     using System;
     using System.Collections.Generic;
-    using Fanex.ReportingService.Core.Constants;
     using Fanex.Common;
+    using Fanex.ReportingService.Core.Constants;
     using RemotingRef;
 
     /// <summary>

@@ -82,7 +82,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="App_Data\NAP-Report.s3db" />
     <None Include="Configuration\RMSection.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -107,6 +106,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Data\DBDWH.bodb_dwrs.bodbAdminNet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\DBLOG.bodb_CustomerLog.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

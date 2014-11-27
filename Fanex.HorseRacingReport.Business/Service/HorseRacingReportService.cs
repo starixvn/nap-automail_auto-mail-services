@@ -30,6 +30,7 @@ namespace Fanex.HorseRacingReport.Business.Service
     /// </summary>
     public class HorseRacingReportService : IHorseRacingReportService
     {
+        private const string RMCurrency = "RM2";
         private Dictionary<int, string> _currencies;
 
         private XSSFWorkbook _workbook;
@@ -125,7 +126,7 @@ namespace Fanex.HorseRacingReport.Business.Service
             {
                 Total = CreateRacingWinLossWithPartnerName(Labels.Grand_Total)
             };
-            RacingWinLoss racingWinLossTotalBase = CreateRacingWinLossWithCurrencyName(Labels.BaseRM);
+            RacingWinLoss racingWinLossTotalBase = CreateRacingWinLossWithCurrencyName(Labels.Base_RM);
 
             using (ObjectDb objectDb = new ObjectDb(criteria.GetSettingKey()))
             {
@@ -156,7 +157,7 @@ namespace Fanex.HorseRacingReport.Business.Service
                         {
                             CurrencyName = _currencies[poolCurrency]
                         };
-                        winLossTotalBaseByPartner = CreateRacingWinLossWithCurrencyName(Labels.BaseRM);
+                        winLossTotalBaseByPartner = CreateRacingWinLossWithCurrencyName(Labels.Base_RM);
                         previousPartner = GetPartnerAndPoolCurrencyGroupName(reader);
                     }
 
@@ -226,7 +227,7 @@ namespace Fanex.HorseRacingReport.Business.Service
                 };
                 RacingWinLoss grandTotalBaseCurrency = new RacingWinLoss
                 {
-                    CurrencyName = Labels.BaseRM
+                    CurrencyName = Labels.Base_RM
                 };
                 RacingWinLoss racingWinLossByCurrencyGroup = null;
                 RacingWinLoss racingWinLossByMeetingGroup = null;
@@ -243,7 +244,7 @@ namespace Fanex.HorseRacingReport.Business.Service
                     {
                         if (racingWinLossByCurrencyGroup != null)
                         {
-                            if (currencyId != 2)
+                            if (previousCurrency != RMCurrency)
                             {
                                 racingWinLossByCurrencyGroup.Total.ReportRows.Add(racingWinLossByCurrencyTotal);
                             }
@@ -783,7 +784,6 @@ namespace Fanex.HorseRacingReport.Business.Service
                 NPOIUtility.IncreaseRowIndex(ref _cellInfo);
             }
 
-            NPOIUtility.IncreaseRowIndex(ref _cellInfo);
             grandTotalInfo = grandTotal.ReportRows[grandTotalLength - 1];
             groupLength = grandTotalInfo.ReportRows.Count;
             _cellInfo.EndRow = _cellInfo.CurrentRow + groupLength - 1;

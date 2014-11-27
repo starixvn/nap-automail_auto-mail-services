@@ -11,9 +11,9 @@ namespace Fanex.ReportingService.Core.Repository.Impl
 {
     using System.Collections.Generic;
     using System.Data;
+    using Fanex.Data;
     using Fanex.ReportingService.Core.Criteria;
     using Fanex.ReportingService.Core.Repository.Interface;
-    using Fanex.Data;
 
     /// <summary>
     /// TODO: Update summary.

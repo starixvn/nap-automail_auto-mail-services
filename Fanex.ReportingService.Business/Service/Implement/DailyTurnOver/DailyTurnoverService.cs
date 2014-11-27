@@ -13,14 +13,14 @@ namespace Fanex.ReportingService.Business.Service.Implement.DailyTurnOver
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
+    using Fanex.Common;
     using Fanex.ReportingService.Business.Common;
-    using Fanex.ReportingService.Core.Extensions;
-    using Fanex.ReportingService.Core.Services.Impl;
     using Fanex.ReportingService.Business.Criteria.DailyTurnOver;
     using Fanex.ReportingService.Business.Model.DailyTurnOver;
     using Fanex.ReportingService.Business.Resources;
     using Fanex.ReportingService.Business.Service.Interface;
-    using Fanex.Common;
+    using Fanex.ReportingService.Core.Extensions;
+    using Fanex.ReportingService.Core.Services.Impl;
     using NPOI.HSSF.UserModel;
     using NPOI.HSSF.Util;
     using NPOI.SS.UserModel;

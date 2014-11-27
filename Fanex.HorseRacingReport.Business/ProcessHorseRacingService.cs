@@ -216,8 +216,8 @@ namespace Fanex.HorseRacingReport.Business
 
         private string CreateZipReportFolder(TimeRangeCriteria criteria)
         {
-            string reportFrom = criteria.FromDate.ToShortFormatedDateWithSlash().Replace("/", "-");
-            string reportTo = criteria.ToDate.ToShortFormatedDateWithSlash().Replace("/", "-");
+            string reportFrom = criteria.FromDate.ToString("d MMM");
+            string reportTo = criteria.ToDate.ToString("d MMM");
             return string.Format(RacingResource.Racing_Report_Directory, reportFrom, reportTo);
         }
     }

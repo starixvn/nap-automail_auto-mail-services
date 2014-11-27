@@ -196,7 +196,7 @@ namespace Fanex.HorseRacingReport.Business.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RacingReport_from_{0}_to_{1}.zip.
+        ///   Looks up a localized string similar to Daily Racing Report {0} - {1}.zip.
         /// </summary>
         public static string Racing_Report_Directory {
             get {
@@ -205,7 +205,7 @@ namespace Fanex.HorseRacingReport.Business.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RacingReport_from_{0}_to_{1}.
+        ///   Looks up a localized string similar to Daily Racing Report {0} - {1}.
         /// </summary>
         public static string Racing_Report_Export_Directory {
             get {

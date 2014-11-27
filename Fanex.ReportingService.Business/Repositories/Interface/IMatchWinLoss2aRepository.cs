@@ -11,9 +11,9 @@ namespace Fanex.ReportingService.Business.Repositories.Interface
 {
     using System.Collections;
     using System.Collections.Generic;
+    using Fanex.NAP.Framework.Data;
     using Fanex.ReportingService.Business.Criteria.MatchWinLoss2a;
     using Fanex.ReportingService.Business.Model.MatchWinLoss2a;
-    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.

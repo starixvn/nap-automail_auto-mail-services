@@ -11,14 +11,14 @@ namespace Fanex.ReportingService.Core.Services.Impl
 {
     using System;
     using System.Collections.Generic;
+    using Fanex.Common;
+    using Fanex.NAP.Framework.Data;
     using Fanex.ReportingService.Core.Constants;
     using Fanex.ReportingService.Core.Criteria;
     using Fanex.ReportingService.Core.Models;
     using Fanex.ReportingService.Core.Repository.Impl;
     using Fanex.ReportingService.Core.Repository.Interface;
     using Fanex.ReportingService.Core.Resources;
-    using Fanex.Common;
-    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.
