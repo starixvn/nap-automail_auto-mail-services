@@ -231,5 +231,14 @@ namespace Fanex.SMAReport.Business
                 return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["DownloadUrl"]);
             }
         }
+
+        public static string ExcelPassword
+        {
+            get
+            {
+                var val = ConfigurationManager.AppSettings["ExcelPassword"];
+                return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["ExcelPassword"]);
+            }
+        }
     }
 }

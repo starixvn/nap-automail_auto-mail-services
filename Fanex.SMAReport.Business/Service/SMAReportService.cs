@@ -20,6 +20,7 @@ namespace Fanex.SMAReport.Business.Service
     using NPOI.SS.UserModel;
     using NPOI.XSSF.UserModel;
     using Resources = Fanex.SMAReport.Business.Resources.Resources;
+    using OfficeOpenXmlCrypto;
 
     /// <summary>
     /// TODO: Update summary.
@@ -182,6 +183,12 @@ namespace Fanex.SMAReport.Business.Service
                         FileMode.Create,
                         FileAccess.Write);
                 _workbook.Write(fileStream);
+
+                OfficeCryptoStream stream = OfficeCryptoStream.Open(fullReportPath);
+                stream.Password = AppSettings.ExcelPassword;
+                stream.SaveAs(fullReportPath);
+                stream.Close();
+
                 _reportDirectory.Add(reportName);
                 
                 fileStream.Close();
