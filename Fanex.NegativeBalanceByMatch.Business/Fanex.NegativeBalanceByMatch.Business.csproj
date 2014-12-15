@@ -38,39 +38,32 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DNAide">
-      <HintPath>..\_Dependencies\DNAide.dll</HintPath>
-    </Reference>
-    <Reference Include="Fanex.Caching">
-      <HintPath>..\_Dependencies\Fanex.Caching.dll</HintPath>
-    </Reference>
     <Reference Include="Fanex.Common">
-      <HintPath>..\_Dependencies\Fanex.Common.dll</HintPath>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.Data, Version=0.5.404.59, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\_Dependencies\Fanex.Data.dll</HintPath>
+    <Reference Include="Fanex.Data">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Data.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Logging">
-      <HintPath>..\_Dependencies\Fanex.Logging.dll</HintPath>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.MailDeliver.MailClient">
-      <HintPath>..\_Dependencies\Fanex.MailDeliver.MailClient.dll</HintPath>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.MailDeliver.MailClient.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.NAP.Framework">
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework.dll</HintPath>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Framework.dll</HintPath>
     </Reference>
     <Reference Include="IBCFile">
-      <HintPath>..\_Dependencies\IBCFile.dll</HintPath>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\IBCFile.dll</HintPath>
     </Reference>
     <Reference Include="RazorEngine">
-      <HintPath>..\packages\RazorEngine.3.2.0\lib\net40\RazorEngine.dll</HintPath>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\RazorEngine.dll</HintPath>
     </Reference>
     <Reference Include="RemotingRef">
-      <HintPath>..\_Dependencies\RemotingRef.dll</HintPath>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\RemotingRef.dll</HintPath>
     </Reference>
-    <Reference Include="SPSRemoting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\SPSRemoting.dll</HintPath>
+    <Reference Include="SPSRemoting">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\SPSRemoting.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
