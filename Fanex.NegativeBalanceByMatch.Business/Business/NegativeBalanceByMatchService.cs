@@ -131,6 +131,8 @@ namespace Fanex.NegativeBalanceByMatch.Business.Business
         private List<Match> GetMatchList(Sel_BySiteCriteria criteria)
         {
             List<Match> matchList = new List<Match>();
+            LogIDUpdate = string.Empty;
+
             try
             {
                 using (var dbUserInfor = new ObjectDb(criteria.GetSettingKey()))
@@ -270,7 +272,7 @@ namespace Fanex.NegativeBalanceByMatch.Business.Business
                 {
                     var subject = licenseeName.ToUpper() + " - " +
                     string.Format(AppSettings.MailSubject, DateTime.Now, timezone > 0 ? ("+" + timezone) : timezone.ToString());
-                    ProcessNegativeBalanceByMatch(licenseeName, subject, "IT Team", "", mailing.To, mailing.Cc, mailing.Bcc);
+                    ProcessNegativeBalanceByMatch(licenseeName, subject, AppSettings.MailTitle, "", mailing.To, mailing.Cc, mailing.Bcc);
                 }
             }
         }
