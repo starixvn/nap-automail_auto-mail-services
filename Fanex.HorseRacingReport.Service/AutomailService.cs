@@ -107,9 +107,10 @@ namespace Fanex.HorseRacingReport.Service
                     {
                         taskRepository.InsertTask(taskModel);
                         timeRangeCriteria = service.GetTimeRangeCriteria(currentTime);
-                        service.ProcessHorseRacingReportService(timeRangeCriteria);
-                        AppSettings.OnProcessing = false;
+                        service.ProcessHorseRacingReportService(timeRangeCriteria);                        
                     }
+
+                    AppSettings.OnProcessing = false;
                 }
 
                 if (AppSettings.ForceRunning && !AppSettings.ForceRunningOnProcessing)

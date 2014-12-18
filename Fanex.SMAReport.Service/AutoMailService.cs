@@ -111,7 +111,7 @@ namespace Fanex.SMAReport.Service
             catch (Exception ex)
             {
                 LogExtensions.ExceptionHandler(ex);
-                AppSettings.OnProcessing = false;
+               // AppSettings.OnProcessing = false;
                 throw;
             }
         }

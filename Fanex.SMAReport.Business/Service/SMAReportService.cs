@@ -20,6 +20,7 @@ namespace Fanex.SMAReport.Business.Service
     using NPOI.SS.UserModel;
     using NPOI.XSSF.UserModel;
     using Resources = Fanex.SMAReport.Business.Resources.Resources;
+    using OfficeOpenXmlCrypto;
 
     /// <summary>
     /// TODO: Update summary.
@@ -57,6 +58,7 @@ namespace Fanex.SMAReport.Business.Service
         private XSSFCellStyle _numberStyle;
         private XSSFCellStyle _positiveNumberStyle;
         private XSSFCellStyle _positivePercentStyle;
+        private XSSFCellStyle _normalRowRightTextStyle;
 
         private Color _specialBackgroundColor;
         private Color _totalRowBackgroundColor;
@@ -181,6 +183,12 @@ namespace Fanex.SMAReport.Business.Service
                         FileMode.Create,
                         FileAccess.Write);
                 _workbook.Write(fileStream);
+
+                OfficeCryptoStream stream = OfficeCryptoStream.Open(fullReportPath);
+                stream.Password = AppSettings.ExcelPassword;
+                stream.SaveAs(fullReportPath);
+                stream.Close();
+
                 _reportDirectory.Add(reportName);
                 
                 fileStream.Close();
@@ -320,10 +328,14 @@ namespace Fanex.SMAReport.Business.Service
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
                 _cellInfo.CurrentRow = _cellInfo.CurrentRow - 1;
+                _cellInfo.EndRow = _cellInfo.EndRow - 1;
                 _cellInfo.CellValue = currentUser.VirtualRate;
-                NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _rightTextStyle);
+                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _rightTextStyle);
+                NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _rightTextStyle);
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
+                _cellInfo.CurrentRow = _cellInfo.CurrentRow - 1;
                 _cellInfo.EndRow = _cellInfo.EndRow - 1;
                 _cellInfo.CellValue = currentUser.Currency;
                 NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _specialRowTextStyle);
@@ -351,8 +363,8 @@ namespace Fanex.SMAReport.Business.Service
                 NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _normalRowTextStyle);
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-                _cellInfo.CellValue = string.Empty;
-                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _normalRowTextStyle);
+                _cellInfo.CellValue = currentUser.VirtualRate;
+                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _normalRowRightTextStyle);
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
                 _cellInfo.CellValue = currentUser.Currency;
@@ -610,6 +622,14 @@ namespace Fanex.SMAReport.Business.Service
                 _rightAlignmentInfo,
                 _redFont);
             _rightTextStyle.DataFormat = _dataFormat.GetFormat("0%");
+
+            _normalRowRightTextStyle = NPOIHighVersion.CreateCellStyle(
+                _workbook,
+                _noneTopBorderInfo,
+                _normalRowBackgroundInfo,
+                _rightAlignmentInfo,
+                _redFont);
+            _normalRowRightTextStyle.DataFormat = _dataFormat.GetFormat("0%");
         }
 
         /// <summary>

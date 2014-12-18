@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Functions>
+  <Function Name="Live Casino - GET PT Setting">
+    <Setting Key="Acc_MailingListSel" SpName="Acc_MailingListSel" DbName="DBACC.bodb_ACC.bodbAdminNet" />    
+    <Setting Key="Acc_BalanceNegativeUpd_StatusID" SpName="Acc_BalanceNegativeUpd_StatusID" DbName="DBTXN.bodb02.bodbAdminNet" />
+    <Setting Key="Acc_BalanceNegativeSel_BySite" SpName="Acc_BalanceNegativeSel_BySite" DbName="DBTXN.bodb02.bodbAdminNet" />
+    <Setting Key="Acc_BalanceNegativeSel_MatchLog" SpName="Acc_BalanceNegativeSel_MatchLog" DbName="DBLOG.bodb_CustomerLog.bodbAdminNet" />
+  </Function>
+</Functions>
