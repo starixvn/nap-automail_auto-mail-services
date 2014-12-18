@@ -73,6 +73,21 @@ namespace Fanex.NegativeBalanceByMatch.Business
         /// </value>
         public static bool ForceRunningOnProcessing { get; set; }
 
+        /// <summary>
+        /// Gets the connection string.
+        /// </summary>
+        /// <value>
+        /// The connection string.
+        /// </value>
+        public static string ConnectionString
+        {
+            get
+            {
+                var val = ConfigurationManager.AppSettings["SQLiteDBPath"];
+                return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["SQLiteDBPath"]);
+            }
+        }
+
         public static string MailTo
         {
             get

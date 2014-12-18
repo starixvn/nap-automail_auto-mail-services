@@ -38,7 +38,7 @@ namespace Fanex.NegativeBalanceByMatch.Service
             timer.Enabled = true;
 
             AppSettings.OnProcessing = false;
-            AppSettings.ForceRunningOnProcessing = false;            
+            AppSettings.ForceRunningOnProcessing = false;
         }
 
         protected override void OnStop()

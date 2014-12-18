@@ -38,6 +38,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Fanex.AccountingReports.SqLiteDatabase">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.AccountingReports.SqLiteDatabase.dll</HintPath>
+    </Reference>
     <Reference Include="Fanex.Common">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Common.dll</HintPath>
     </Reference>
@@ -68,6 +71,9 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\_Dependencies\SQLite\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
@@ -86,6 +92,7 @@
     <Compile Include="Criteria\Upd_StatusIDCriteria.cs" />
     <Compile Include="Entities\Mailing.cs" />
     <Compile Include="Entities\Match.cs" />
+    <Compile Include="Entities\NegativeBalanceTaskInfo.cs" />
     <Compile Include="Helper\Implement\FileExtension.cs" />
     <Compile Include="Helper\Implement\LogginHandler.cs" />
     <Compile Include="Helper\Implement\NumberExtension.cs" />
@@ -94,6 +101,8 @@
     <Compile Include="Helper\Implement\ServiceBase.cs" />
     <Compile Include="Helper\Interface\IServiceBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\INegativeBalanceByMatchRepository.cs" />
+    <Compile Include="Repositories\NegativeBalanceByMatchRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

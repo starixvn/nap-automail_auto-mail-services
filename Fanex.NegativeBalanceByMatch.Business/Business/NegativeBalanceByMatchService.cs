@@ -1,39 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.IO;
-using System.Linq;
-using Fanex.Common;
-using Fanex.Data;
-using Fanex.NegativeBalanceByMatch.Business.Criteria;
-using Fanex.NegativeBalanceByMatch.Business.Entities;
-using Fanex.NegativeBalanceByMatch.Business.Helper.Implement;
-using Fanex.Service.Core.Extensions;
-using RazorEngine;
-using RemotingRef;
-
-namespace Fanex.NegativeBalanceByMatch.Business.Business
+﻿namespace Fanex.NegativeBalanceByMatch.Business.Business
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.IO;
+    using System.Linq;
+    using Fanex.Common;
+    using Fanex.Data;
+    using Fanex.NegativeBalanceByMatch.Business.Criteria;
+    using Fanex.NegativeBalanceByMatch.Business.Entities;
+    using Fanex.NegativeBalanceByMatch.Business.Helper.Implement;
+    using Fanex.NegativeBalanceByMatch.Business.Repositories;
+    using Fanex.Service.Core.Extensions;
+    using RazorEngine;
+    using RemotingRef;
+    using Fanex.Service.Core.Enums;
+
     public class NegativeBalanceByMatchService : ServiceBase
     {
+        private INegativeBalanceByMatchRepository _repository;
         private string LogIDUpdate = string.Empty;
+
+        public NegativeBalanceByMatchService()
+        {
+            _repository = new NegativeBalanceByMatchRepository();
+        }
 
         private bool ProcessNegativeBalanceByMatch(string licensee, string subject, string title, string filePathAttach, string tomail, string ccMail, string bccMail)
         {
             var result = false;
             var resultUpdate = new Result();
+            int taskId = 0;
             try
             {
                 Sel_BySiteCriteria balanceNegativeSel_BySiteCriteria = new Sel_BySiteCriteria
                     {
                         Site = licensee,
-                        
                     };
 
                 var matchList = GetMatchList(balanceNegativeSel_BySiteCriteria);
                 if (matchList != null && matchList.Count > 0)
                 {
+                    NegativeBalanceTaskInfo taskInfo = new NegativeBalanceTaskInfo
+                    {
+                        TaskStatus = Status.Running
+                    };
+                    taskId = _repository.InsertTask(taskInfo);
                     string appLocation = AppDomain.CurrentDomain.BaseDirectory;
                     var template = File.ReadAllText(appLocation + @"/Templates/EmailTemplate.cshtml");
                     var content = Razor.Parse(template, matchList);
@@ -61,10 +73,10 @@ namespace Fanex.NegativeBalanceByMatch.Business.Business
                     }
                     catch (Exception ex)
                     {
+                        _repository.UpdateTaskStatus(taskId, Status.Failed);
                         result = false;
                         LogExtensions.ExceptionHandler(ex);
                     }
-
 
                     if (result)
                     {
@@ -80,11 +92,14 @@ namespace Fanex.NegativeBalanceByMatch.Business.Business
                             resultUpdate.ErrorCode = Converter.To<int>(hashResult["ErrCode"]);
                             resultUpdate.ErrorMessage = Converter.ToString2(hashResult["ErrMsg"]);
                         }
+
+                        _repository.UpdateTaskStatus(taskId, Status.Successful);
                     }
                 }
             }
             catch (Exception ex)
             {
+                _repository.UpdateTaskStatus(taskId, Status.Failed);
                 LogExtensions.ExceptionHandler(ex);
                 resultUpdate.ErrorCode = 100;
                 resultUpdate.ErrorMessage = ex.Message;
@@ -172,7 +187,7 @@ namespace Fanex.NegativeBalanceByMatch.Business.Business
                         foreach (Match match in matchList)
                         {
                             var groupIDList = match.CustomerInfoList.Select(x => x.GroupID).Distinct().ToList();
-                            
+
                             foreach (int groupID in groupIDList)
                             {
                                 Sel_MatchLogCriteria matchLogCriteria = new Sel_MatchLogCriteria
@@ -199,7 +214,6 @@ namespace Fanex.NegativeBalanceByMatch.Business.Business
                                             match.MatchInfo.HomeName = RefData.GetTeamName(row["HomeID"].ToString(), "en");
                                             match.MatchInfo.AwayName = RefData.GetTeamName(row["AwayID"].ToString(), "en");
                                             match.MatchInfo.GroupId = groupID;
-
                                         }
 
                                         DataTable matchSettleTable = dataSetMatch.Tables[1];
@@ -213,7 +227,7 @@ namespace Fanex.NegativeBalanceByMatch.Business.Business
                                                         LogID = Converter.To<int>(row["logid"]),
                                                         SettlementTime = Converter.To<DateTime>(row["logdate"]),
                                                         Action = Converter.ToString2(row["ActionNameEN"]),
-                                                        Result = Converter.ToString2(row["Result"]), 
+                                                        Result = Converter.ToString2(row["Result"]),
                                                         Remark = Converter.ToString2(row["Remark"])
                                                     });
                                             }
@@ -276,6 +290,5 @@ namespace Fanex.NegativeBalanceByMatch.Business.Business
                 }
             }
         }
-
     }
 }
