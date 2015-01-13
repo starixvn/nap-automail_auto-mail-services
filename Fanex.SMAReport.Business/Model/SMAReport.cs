@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="SMAReport.cs" company="Microsoft">
+// <copyright file="SMAReport.cs" company="Nexcel Solutions Vietnam.">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -18,18 +18,15 @@ namespace Fanex.SMAReport.Business.Model
     {
         public SMAReport()
         {
-            ReportByMonths = new List<SMAReportDetail>();
-            Report = new List<SMAReport>();
+            ReportRows = new List<SMAReport>();
         }
 
-        public string UserName { get; set; }
+        public int NumberUserEnabledVirtualRate { get; set; }
 
-        public decimal VirtualRate { get; set; }
+        public SMAWinLoss SMAWinLoss { get; set; }
 
-        public string Currency { get; set; }
+        public SMAVirtualRate SMAVirtualRate { get; set; }
 
-        public List<SMAReportDetail> ReportByMonths { get; set; }
-
-        public List<SMAReport> Report { get; set; }
+        public List<SMAReport> ReportRows { get; set; }
     }
 }

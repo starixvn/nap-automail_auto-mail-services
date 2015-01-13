@@ -96,9 +96,14 @@
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
     <Compile Include="Constants\EmailTemplateConstants.cs" />
+    <Compile Include="Constants\ExcelConstants.cs" />
+    <Compile Include="Enums\RowType.cs" />
     <Compile Include="Model\SMAReport.cs" />
-    <Compile Include="Model\SMAReportDetail.cs" />
+    <Compile Include="Model\SMAWinLoss.cs" />
+    <Compile Include="Model\SMAWinLossDetail.cs" />
     <Compile Include="Model\SMAReportModel.cs" />
+    <Compile Include="Model\SMAVirtualRate.cs" />
+    <Compile Include="Model\VirtualRateByBettype.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ISMAReportRepository.cs" />
     <Compile Include="Repositories\SMAReportRepository.cs" />

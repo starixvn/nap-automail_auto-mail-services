@@ -11,16 +11,20 @@ namespace Fanex.SMAReport.Business.Service
     using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
     using System.IO;
+    using System.Linq;
+    using Fanex.Common;
     using Fanex.Service.Core.Common;
     using Fanex.Service.Core.Constants;
     using Fanex.Service.Core.Enums;
     using Fanex.Service.Core.Extensions;
+    using Fanex.SMAReport.Business.Constants;
+    using Fanex.SMAReport.Business.Enums;
     using Fanex.SMAReport.Business.Model;
     using Fanex.SMAReport.Business.Repositories;
     using NPOI.SS.UserModel;
     using NPOI.XSSF.UserModel;
-    using Resources = Fanex.SMAReport.Business.Resources.Resources;
     using OfficeOpenXmlCrypto;
+    using Resources = Fanex.SMAReport.Business.Resources.Resources;
 
     /// <summary>
     /// TODO: Update summary.
@@ -50,15 +54,27 @@ namespace Fanex.SMAReport.Business.Service
         private BackgroundStyleInfo _normalRowBackgroundInfo;
         private BackgroundStyleInfo _specialRowBackgroundInfo;
         private BackgroundStyleInfo _totalRowBackgroundInfo;
+        private BackgroundStyleInfo _headerBackgroundInfo;
 
         private XSSFCellStyle _specialRowTextStyle;
         private XSSFCellStyle _rightTextStyle;
         private XSSFCellStyle _normalRowTextStyle;
+        private XSSFCellStyle _normalRowRightTextStyle;
+        private XSSFCellStyle _specialRowRedTextStyle;
         private XSSFCellStyle _titleTextStyle;
         private XSSFCellStyle _numberStyle;
         private XSSFCellStyle _positiveNumberStyle;
         private XSSFCellStyle _positivePercentStyle;
-        private XSSFCellStyle _normalRowRightTextStyle;
+        private XSSFCellStyle _totalRowTextStyle;
+        private XSSFCellStyle _totalNumberStyle;
+        private XSSFCellStyle _totalPositiveNumberStyle;
+        private XSSFCellStyle _headerStyle;
+        private XSSFCellStyle _evenRowNumberStyle;
+        private XSSFCellStyle _oddRowNumberStyle;
+        private XSSFCellStyle _evenRowTextStyle;
+        private XSSFCellStyle _oddRowTextStyle;
+        private XSSFCellStyle _evenRowPercentStyle;
+        private XSSFCellStyle _oddRowPercentStyle;
 
         private Color _specialBackgroundColor;
         private Color _totalRowBackgroundColor;
@@ -66,6 +82,7 @@ namespace Fanex.SMAReport.Business.Service
 
         private AlignmentInfo _centerAlignmentInfo;
         private AlignmentInfo _rightAlignmentInfo;
+        private AlignmentInfo _titleAlignmentInfo;
 
         private List<string> _reportDirectory;
 
@@ -98,7 +115,7 @@ namespace Fanex.SMAReport.Business.Service
 
                     SMAReport report = _repository.GetSMAReport();
 
-                    this.ExportReportData(report);
+                    this.ExportReport(report);
 
                     bool isSuccess = Mailing.SendSMAReportEmail(_reportDirectory, _reportFrom, _reportTo);
 
@@ -140,13 +157,13 @@ namespace Fanex.SMAReport.Business.Service
         /// Exports the report data.
         /// </summary>
         /// <param name="report">The report.</param>
-        private void ExportReportData(SMAReport report)
+        private void ExportReport(SMAReport report)
         {
             _reportDirectory = new List<string>();
             FileStream fileStream = null;
             bool isSuperReport = false;
             DateTime firstMonth = new DateTime(_lastMonth.Year, 1, 1);
-            for (int i = 0; i < report.Report.Count; i++)
+            for (int i = 0; i < report.ReportRows.Count; i++)
             {
                 _cellInfo = new CellInfo(0, 0, 0, 0, string.Empty);
                 isSuperReport = i == 0 ? true : false;
@@ -157,16 +174,7 @@ namespace Fanex.SMAReport.Business.Service
                 _titleFont = NPOIHighVersion.CreateFont(_workbook, _titleFontInfo, true);
 
                 this.InitCellStyleInfo();
-
-                string sheetName = Resources.SMA_Report_SheetName;
-                XSSFSheet worksheet = _workbook.GetSheet(sheetName) as XSSFSheet ?? _workbook.CreateSheet(sheetName) as XSSFSheet;
-
-                this.InitColumnWidth(worksheet, isSuperReport);
-                this.ExportReportHeader(worksheet, isSuperReport);
-                NPOIUtility.IncreaseRowIndex(ref _cellInfo);
-                NPOIUtility.ResetColumnIndex(ref _cellInfo);
-                this.ExportReportContent(worksheet, report.Report[i]);
-                worksheet.CreateFreezePane(0, 3, 0, 3);
+                this.ExportReportByLevel(report.ReportRows[i], isSuperReport);
 
                 var reportDirectory = this.CreateSMAReportDataDirectory();
                 string reportName = string.Format(
@@ -174,7 +182,7 @@ namespace Fanex.SMAReport.Business.Service
                     Resources.SMA_Master_Report_Name,
                     _reportFrom.Replace(' ', '_'),
                     _reportTo.Replace(' ', '_'));
-                
+
                 var reportPath = Path.Combine(reportDirectory, reportName);
                 var fullReportPath = string.Format("{0}.{1}", reportPath, "xlsx");
 
@@ -190,9 +198,62 @@ namespace Fanex.SMAReport.Business.Service
                 stream.Close();
 
                 _reportDirectory.Add(reportName);
-                
+
                 fileStream.Close();
                 GC.Collect();
+            }
+        }
+
+        private void ExportReportByLevel(SMAReport report, bool isSuperReport)
+        {
+            this.ExportWinLossReport(report, isSuperReport);
+            this.ExportVirtualRateReport(report, isSuperReport);
+        }
+
+        /// <summary>
+        /// Exports the win loss report.
+        /// </summary>
+        /// <param name="report">The report.</param>
+        /// <param name="isSuperReport">If set to <c>true</c> [is super report].</param>
+        private void ExportWinLossReport(SMAReport report, bool isSuperReport)
+        {
+            _cellInfo = new CellInfo(0, 0, 0, 0, string.Empty);
+            string sheetName = Resources.SMA_Report_SheetName;
+            XSSFSheet worksheet = _workbook.GetSheet(sheetName) as XSSFSheet ?? _workbook.CreateSheet(sheetName) as XSSFSheet;
+            this.InitWinLossReportColumnWidthAndTitle(worksheet, isSuperReport);
+            this.ExportWinLossReportHeader(worksheet, isSuperReport);
+            NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+            NPOIUtility.ResetColumnIndex(ref _cellInfo);
+            this.ExportWinLossReportContent(worksheet, report.SMAWinLoss);
+            worksheet.CreateFreezePane(0, 3, 0, 3);
+            NPOIUtility.ResetColumnIndex(ref _cellInfo);
+        }
+
+        /// <summary>
+        /// Exports the virtual rate report.
+        /// </summary>
+        /// <param name="report">The report.</param>
+        /// <param name="isSuperReport">If set to <c>true</c> [is super report].</param>
+        private void ExportVirtualRateReport(SMAReport report, bool isSuperReport)
+        {
+            int maxUserPerSheet = ExcelConstants.MaxUserPerSheet;
+            int redundancyUsers = report.NumberUserEnabledVirtualRate % maxUserPerSheet;
+            int numberSheetBeforeRounding = Converter.ToInt(report.NumberUserEnabledVirtualRate / maxUserPerSheet);
+            int numberSheet = redundancyUsers == 0 ? numberSheetBeforeRounding : numberSheetBeforeRounding + 1;
+
+            for (int sheetIndex = 0; sheetIndex < numberSheet; sheetIndex++)
+            {
+                var virtualRateByUserInSheet = report.SMAVirtualRate.ReportRows.Skip(sheetIndex * maxUserPerSheet).Take(maxUserPerSheet).ToList();
+                _cellInfo = new CellInfo(0, 0, 0, 0, string.Empty);
+                string sheetName = string.Format("{0}{1}", Resources.VirtualRate, sheetIndex + 1);
+                XSSFSheet worksheet = _workbook.GetSheet(sheetName) as XSSFSheet ?? _workbook.CreateSheet(sheetName) as XSSFSheet;
+                this.InitVirtualRateReportColumnWidthAndTitle(worksheet, isSuperReport);
+                this.ExportVirtualRateReportHeader(worksheet, isSuperReport);
+                for (int userIndex = 0; userIndex < virtualRateByUserInSheet.Count; userIndex++)
+                {
+                    var virtualRateByUser = virtualRateByUserInSheet[userIndex];
+                    this.ExportVirtualRateByUser(worksheet, userIndex, virtualRateByUser);
+                }
             }
         }
 
@@ -201,13 +262,8 @@ namespace Fanex.SMAReport.Business.Service
         /// </summary>
         /// <param name="worksheet">The worksheet.</param>
         /// <param name="isSuperReport">If set to <c>true</c> [is super report].</param>
-        private void InitColumnWidth(XSSFSheet worksheet, bool isSuperReport)
+        private void InitWinLossReportColumnWidthAndTitle(XSSFSheet worksheet, bool isSuperReport)
         {
-            AlignmentInfo titleAlignmentInfo = new AlignmentInfo(
-                (int)HorizontalAlignment.Left,
-                (int)VerticalAlignment.Center);
-            _titleTextStyle = NPOIHighVersion.CreateCellStyle(_workbook, _borderInfo, _normalRowBackgroundInfo, titleAlignmentInfo, _titleFont);
-
             int numberColumn = _lastMonth.Month + 6;
             for (int i = 0; i < numberColumn; i++)
             {
@@ -215,17 +271,38 @@ namespace Fanex.SMAReport.Business.Service
             }
 
             worksheet.SetColumnWidth(0, 60 * NPOIConstants.FontWidth);
-            worksheet.SetColumnWidth(1, 100 * NPOIConstants.FontWidth);
+            worksheet.SetColumnWidth(1, 200 * NPOIConstants.FontWidth);
             worksheet.SetColumnWidth(3, 80 * NPOIConstants.FontWidth);
             worksheet.SetColumnWidth(4, 110 * NPOIConstants.FontWidth);
 
-            XSSFRow row = worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
-            _cellInfo.CellValue = string.Format(
-                isSuperReport ? Resources.SMA_Super_Report_Title :
-                                Resources.SMA_Master_Report_Title,
-                                _reportFrom,
-                                _reportTo);
+            XSSFRow row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
+            _cellInfo.CellValue = this.GetReportTitle(isSuperReport);
             _cellInfo.EndColumn = _cellInfo.CurrentColumn + numberColumn - 1;
+            _cellInfo.EndRow = _cellInfo.CurrentRow + 1;
+            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _titleTextStyle);
+            NPOIUtility.ResetColumnIndex(ref _cellInfo);
+            NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+        }
+
+        /// <summary>
+        /// Initializes the virtual rate report column width and title.
+        /// </summary>
+        /// <param name="worksheet">The worksheet.</param>
+        /// <param name="isSuperReport">If set to <c>true</c> [is super report].</param>
+        private void InitVirtualRateReportColumnWidthAndTitle(XSSFSheet worksheet, bool isSuperReport)
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                worksheet.SetColumnWidth(i, 100 * NPOIConstants.FontWidth);
+            }
+
+            worksheet.SetColumnWidth(0, 60 * NPOIConstants.FontWidth);
+            worksheet.SetColumnWidth(1, 200 * NPOIConstants.FontWidth);
+            worksheet.SetColumnWidth(2, 180 * NPOIConstants.FontWidth);
+
+            XSSFRow row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
+            _cellInfo.CellValue = this.GetReportTitle(isSuperReport);
+            _cellInfo.EndColumn = _cellInfo.CurrentColumn + 8;
             _cellInfo.EndRow = _cellInfo.CurrentRow + 1;
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _titleTextStyle);
             NPOIUtility.ResetColumnIndex(ref _cellInfo);
@@ -240,46 +317,30 @@ namespace Fanex.SMAReport.Business.Service
         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
-        private void ExportReportHeader(
+        private void ExportWinLossReportHeader(
             XSSFSheet worksheet,
             bool isSuperReport)
         {
             int currentYearOfLastMonth = _lastMonth.Year;
-
-            BackgroundStyleInfo headerBackgroundInfo = new BackgroundStyleInfo(
-                _headerBackgroundColor,
-                (int)FillPattern.SolidForeground);
-
-            AlignmentInfo headerAlignmentInfo = new AlignmentInfo(
-                (int)HorizontalAlignment.Center,
-                (int)VerticalAlignment.Center);
-
-            XSSFCellStyle headerStyle = NPOIHighVersion.CreateCellStyle(
-                _workbook,
-                _borderInfo,
-                headerBackgroundInfo,
-                headerAlignmentInfo,
-                _font);
-
             _cellInfo.CellValue = "NO";
-            XSSFRow row = worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, headerStyle);
+            XSSFRow row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
+            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = isSuperReport ? "Super" : "Master";
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, headerStyle);
+            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = "Virtual Rate %";
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, headerStyle);
+            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = "Currency";
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, headerStyle);
+            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = "Data";
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, headerStyle);
+            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
             for (int i = 0; i < _lastMonth.Month; i++)
@@ -287,12 +348,63 @@ namespace Fanex.SMAReport.Business.Service
                 DateTime tempDateTime = new DateTime(currentYearOfLastMonth, i + 1, 1);
                 var tempDateFormat = tempDateTime.ToString("MMM yy");
                 _cellInfo.CellValue = tempDateFormat;
-                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, headerStyle);
+                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
             }
 
             _cellInfo.CellValue = "Total";
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, headerStyle);
+            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
+        }
+
+        /// <summary>
+        /// Exports the virtual rate report header.
+        /// </summary>
+        /// <param name="worksheet">The worksheet.</param>
+        /// <param name="isSuperReport">If set to <c>true</c> [is super report].</param>
+        private void ExportVirtualRateReportHeader(
+            XSSFSheet worksheet,
+            bool isSuperReport)
+        {
+            _cellInfo.CellValue = "NO";
+            _cellInfo.EndRow = _cellInfo.CurrentRow + 1;
+            XSSFRow row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
+            NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
+            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+
+            _cellInfo.CellValue = isSuperReport ? "Super" : "Master";
+            NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
+            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            _cellInfo.EndRow = _cellInfo.EndRow - 1;
+
+            _cellInfo.CellValue = "Virtual Rate";
+            _cellInfo.EndColumn = _cellInfo.CurrentColumn + 6;
+            NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
+            NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+            _cellInfo.CurrentColumn = 2;
+            _cellInfo.EndColumn = 2;
+
+            _cellInfo.CellValue = "Sport";
+            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
+            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            _cellInfo.CellValue = "HDP";
+            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
+            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            _cellInfo.CellValue = "OU";
+            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
+            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            _cellInfo.CellValue = "OE";
+            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
+            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            _cellInfo.CellValue = "1st HDP";
+            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
+            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            _cellInfo.CellValue = "1st OU";
+            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
+            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            _cellInfo.CellValue = "1st OE";
+            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
+            NPOIUtility.ResetColumnIndex(ref _cellInfo);
+            NPOIUtility.IncreaseRowIndex(ref _cellInfo);
         }
 
         /// <summary>
@@ -303,18 +415,18 @@ namespace Fanex.SMAReport.Business.Service
         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
-        private void ExportReportContent(
+        private void ExportWinLossReportContent(
             XSSFSheet worksheet,
-            SMAReport report)
+            SMAWinLoss report)
         {
             XSSFRow row = null;
-            int reportLength = report.Report.Count;
+            int reportLength = report.ReportRows.Count;
             for (int i = 0; i < reportLength - 1; i++)
             {
                 NPOIUtility.ResetColumnIndex(ref _cellInfo);
                 _cellInfo.EndRow = _cellInfo.CurrentRow + 1;
-                row = worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
-                var currentUser = report.Report[i];
+                row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
+                var currentUser = report.ReportRows[i];
 
                 _cellInfo.CellValue = i + 1;
                 NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _specialRowTextStyle);
@@ -327,15 +439,13 @@ namespace Fanex.SMAReport.Business.Service
                 NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _specialRowTextStyle);
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
+                bool isDisableVirtualRate = string.Equals(currentUser.VirtualRate, "Disabled");
                 _cellInfo.CurrentRow = _cellInfo.CurrentRow - 1;
-                _cellInfo.EndRow = _cellInfo.EndRow - 1;
+                _cellInfo.EndRow = _cellInfo.CurrentRow + 1;
                 _cellInfo.CellValue = currentUser.VirtualRate;
-                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _rightTextStyle);
-                NPOIUtility.IncreaseRowIndex(ref _cellInfo);
-                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _rightTextStyle);
+                NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, isDisableVirtualRate ? _specialRowRedTextStyle : _rightTextStyle);
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-                _cellInfo.CurrentRow = _cellInfo.CurrentRow - 1;
                 _cellInfo.EndRow = _cellInfo.EndRow - 1;
                 _cellInfo.CellValue = currentUser.Currency;
                 NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _specialRowTextStyle);
@@ -363,7 +473,7 @@ namespace Fanex.SMAReport.Business.Service
                 NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _normalRowTextStyle);
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-                _cellInfo.CellValue = currentUser.VirtualRate;
+                _cellInfo.CellValue = string.Empty;
                 NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _normalRowRightTextStyle);
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
@@ -376,107 +486,81 @@ namespace Fanex.SMAReport.Business.Service
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
                 NPOIUtility.IncreaseRowIndex(ref _cellInfo);
 
-                for (int j = 0; j < currentUser.ReportByMonths.Count; j++)
-                {
-                    _cellInfo.CurrentRow = _cellInfo.CurrentRow - 3;
-                    _cellInfo.EndRow = _cellInfo.EndRow - 3;
-                    var currentMonthData = currentUser.ReportByMonths[j];
-
-                    if (currentMonthData.TurnOver != 0)
-                    {
-                        _cellInfo.CellValue = currentMonthData.TurnOver;
-                        NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _numberStyle);
-                    }
-                    else
-                    {
-                        _cellInfo.CellValue = string.Empty;
-                        NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _specialRowTextStyle);
-                    }
-
-                    NPOIUtility.IncreaseRowIndex(ref _cellInfo);
-                    if (currentMonthData.WinLoss != 0)
-                    {
-                        _cellInfo.CellValue = currentMonthData.WinLoss;
-                        NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _positiveNumberStyle);
-                    }
-                    else
-                    {
-                        _cellInfo.CellValue = string.Empty;
-                        NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _specialRowTextStyle);
-                    }
-
-                    NPOIUtility.IncreaseRowIndex(ref _cellInfo);
-                    if (currentMonthData.WinLoss == 0 && currentMonthData.TurnOver == 0)
-                    {
-                        _cellInfo.CellValue = string.Empty;
-                        NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _normalRowTextStyle);
-                    }
-                    else
-                    {
-                        _cellInfo.CellValue = currentMonthData.Margin;
-                        NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _positivePercentStyle);
-                    }
-
-                    NPOIUtility.IncreaseRowIndex(ref _cellInfo);
-                    NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
-                }
+                ExportWinLossInfoByMonth(worksheet, currentUser, RowType.Normal);
             }
 
-            this.ExportTotalSMAReport(_workbook, worksheet, report.Report[reportLength - 1]);
+            this.ExportWinLossTotalReport(worksheet, report.ReportRows[reportLength - 1]);
         }
 
         /// <summary>
-        /// Exports the total SMA report.
+        /// Exports the virtual rate by user.
         /// </summary>
-        /// <param name="workbook">The workbook.</param>
+        /// <param name="worksheet">The worksheet.</param>
+        /// <param name="userIndex">Index of the user.</param>
+        /// <param name="virtualRateByUser">The virtual rate by user.</param>
+        private void ExportVirtualRateByUser(XSSFSheet worksheet, int userIndex, SMAVirtualRate virtualRateByUser)
+        {
+            int numberMergeRow = virtualRateByUser.ReportRows.Count;
+            bool evenRow = userIndex % 2 == 0;
+            XSSFRow row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
+            _cellInfo.CellValue = userIndex + 1;
+            _cellInfo.EndRow = _cellInfo.CurrentRow + numberMergeRow - 1;
+            NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, evenRow ? _oddRowNumberStyle : _evenRowNumberStyle);
+            _cellInfo.EndRow = _cellInfo.EndRow - numberMergeRow + 1;
+
+            foreach (var virtualRateBySportAndLiveStatus in virtualRateByUser.ReportRows)
+            {
+                _cellInfo.CurrentColumn = 1;
+                _cellInfo.EndColumn = 1;
+
+                _cellInfo.CellValue = virtualRateByUser.UserName;
+                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, evenRow ? _oddRowTextStyle : _evenRowTextStyle);
+                NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+
+                _cellInfo.CellValue = virtualRateBySportAndLiveStatus.Sport;
+                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, evenRow ? _oddRowTextStyle : _evenRowTextStyle);
+                NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+                foreach (var virtualRateByBettype in virtualRateBySportAndLiveStatus.VirtualRateByBettype)
+                {
+                    _cellInfo.CellValue = virtualRateByBettype.VirtualRate / 100;
+                    NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, evenRow ? _oddRowPercentStyle : _evenRowPercentStyle);
+                    NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+                }
+
+                NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+            }
+
+            NPOIUtility.ResetColumnIndex(ref _cellInfo);
+        }
+
+        /// <summary>
+        /// Exports the win loss total report.
+        /// </summary>
         /// <param name="worksheet">The worksheet.</param>
         /// <param name="totalInfo">The total information.</param>
         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
-        private void ExportTotalSMAReport(XSSFWorkbook workbook, XSSFSheet worksheet, SMAReport totalInfo)
+        private void ExportWinLossTotalReport(XSSFSheet worksheet, SMAWinLoss totalInfo)
         {
-            XSSFCellStyle totalRowTextStyle = NPOIHighVersion.CreateCellStyle(
-                workbook,
-                _leftRightBorderInfo,
-                _totalRowBackgroundInfo,
-                _centerAlignmentInfo,
-                _font);
-
-            XSSFCellStyle totalNumberStyle = NPOIHighVersion.CreateCellStyle(
-                workbook,
-                _leftRightBorderInfo,
-                _totalRowBackgroundInfo,
-                _rightAlignmentInfo,
-                _font);
-            totalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NumberFormat);
-
-            XSSFCellStyle totalPositiveNumberStyle = NPOIHighVersion.CreateCellStyle(
-                workbook,
-                _leftRightBorderInfo,
-                _totalRowBackgroundInfo,
-                _rightAlignmentInfo,
-                _font);
-            totalPositiveNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.PositiveNumberFormat);
-
             NPOIUtility.ResetColumnIndex(ref _cellInfo);
-            XSSFRow row = worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
+            XSSFRow row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
 
             _cellInfo.EndRow = _cellInfo.CurrentRow + 1;
             _cellInfo.EndColumn = _cellInfo.CurrentColumn + 3;
             _cellInfo.CellValue = "Total";
-            NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, totalRowTextStyle);
+            NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _totalRowTextStyle);
 
             _cellInfo.EndRow = _cellInfo.CurrentRow;
             _cellInfo.CurrentColumn = _cellInfo.CurrentColumn + 3;
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = "Turnover";
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, totalRowTextStyle);
+            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _totalRowTextStyle);
             NPOIUtility.IncreaseRowIndex(ref _cellInfo);
 
             _cellInfo.CellValue = "Winloss";
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, totalRowTextStyle);
+            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _totalRowTextStyle);
             NPOIUtility.IncreaseRowIndex(ref _cellInfo);
 
             NPOIUtility.ResetColumnIndex(ref _cellInfo);
@@ -490,33 +574,45 @@ namespace Fanex.SMAReport.Business.Service
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
             NPOIUtility.IncreaseRowIndex(ref _cellInfo);
 
-            for (int i = 0; i < totalInfo.ReportByMonths.Count; i++)
+            this.ExportWinLossInfoByMonth(worksheet, totalInfo, RowType.Total);
+        }
+
+        /// <summary>
+        /// Exports the win loss information by month.
+        /// </summary>
+        /// <param name="worksheet">The worksheet.</param>
+        /// <param name="winLossInfo">The win loss information.</param>
+        /// <param name="rowType">Type of the row.</param>
+        private void ExportWinLossInfoByMonth(XSSFSheet worksheet, SMAWinLoss winLossInfo, RowType rowType)
+        {
+            for (int i = 0; i < winLossInfo.ReportByMonths.Count; i++)
             {
                 _cellInfo.CurrentRow = _cellInfo.CurrentRow - 3;
                 _cellInfo.EndRow = _cellInfo.EndRow - 3;
-                var currentMonthData = totalInfo.ReportByMonths[i];
+                XSSFRow row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
+                var currentMonthData = winLossInfo.ReportByMonths[i];
 
                 if (currentMonthData.TurnOver != 0)
                 {
                     _cellInfo.CellValue = currentMonthData.TurnOver;
-                    NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, totalNumberStyle);
+                    NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, rowType == RowType.Total ? _totalNumberStyle : _numberStyle);
                 }
                 else
                 {
                     _cellInfo.CellValue = string.Empty;
-                    NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, totalRowTextStyle);
+                    NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, rowType == RowType.Total ? _totalRowTextStyle : _specialRowTextStyle);
                 }
 
                 NPOIUtility.IncreaseRowIndex(ref _cellInfo);
                 if (currentMonthData.WinLoss != 0)
                 {
                     _cellInfo.CellValue = currentMonthData.WinLoss;
-                    NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, totalPositiveNumberStyle);
+                    NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, rowType == RowType.Total ? _totalPositiveNumberStyle : _positiveNumberStyle);
                 }
                 else
                 {
                     _cellInfo.CellValue = string.Empty;
-                    NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, totalRowTextStyle);
+                    NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, rowType == RowType.Total ? _totalRowTextStyle : _specialRowTextStyle);
                 }
 
                 NPOIUtility.IncreaseRowIndex(ref _cellInfo);
@@ -570,11 +666,18 @@ namespace Fanex.SMAReport.Business.Service
             _totalRowBackgroundInfo = new BackgroundStyleInfo(
                 _totalRowBackgroundColor,
                 (int)FillPattern.SolidForeground);
+
+            _headerBackgroundInfo = new BackgroundStyleInfo(
+                _headerBackgroundColor,
+                (int)FillPattern.SolidForeground);
         }
 
         /// <summary>
         /// Initializes the cell style information.
         /// </summary>
+         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private void InitCellStyleInfo()
         {
             _specialRowTextStyle = NPOIHighVersion.CreateCellStyle(
@@ -620,16 +723,104 @@ namespace Fanex.SMAReport.Business.Service
                 _leftRightBorderInfo,
                 _specialRowBackgroundInfo,
                 _rightAlignmentInfo,
+                _font);
+
+            _specialRowRedTextStyle = NPOIHighVersion.CreateCellStyle(
+                _workbook,
+                _leftRightBorderInfo,
+                _specialRowBackgroundInfo,
+                _rightAlignmentInfo,
                 _redFont);
-            _rightTextStyle.DataFormat = _dataFormat.GetFormat("0%");
 
             _normalRowRightTextStyle = NPOIHighVersion.CreateCellStyle(
                 _workbook,
                 _noneTopBorderInfo,
                 _normalRowBackgroundInfo,
                 _rightAlignmentInfo,
-                _redFont);
-            _normalRowRightTextStyle.DataFormat = _dataFormat.GetFormat("0%");
+                _font);
+
+            _totalRowTextStyle = NPOIHighVersion.CreateCellStyle(
+                _workbook,
+                _leftRightBorderInfo,
+                _totalRowBackgroundInfo,
+                _centerAlignmentInfo,
+                _font);
+
+            _totalNumberStyle = NPOIHighVersion.CreateCellStyle(
+                _workbook,
+                _leftRightBorderInfo,
+                _totalRowBackgroundInfo,
+                _rightAlignmentInfo,
+                _font);
+            _totalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NumberFormat);
+
+            _totalPositiveNumberStyle = NPOIHighVersion.CreateCellStyle(
+                _workbook,
+                _leftRightBorderInfo,
+                _totalRowBackgroundInfo,
+                _rightAlignmentInfo,
+                _font);
+            _totalPositiveNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.PositiveNumberFormat);
+
+            _titleTextStyle = NPOIHighVersion.CreateCellStyle(
+                _workbook,
+                _borderInfo,
+                _normalRowBackgroundInfo,
+                _titleAlignmentInfo,
+                _titleFont);
+
+            _headerStyle = NPOIHighVersion.CreateCellStyle(
+               _workbook,
+               _borderInfo,
+               _headerBackgroundInfo,
+               _centerAlignmentInfo,
+               _font);
+
+            _evenRowNumberStyle = NPOIHighVersion.CreateCellStyle(
+                _workbook,
+                _borderInfo,
+                _specialRowBackgroundInfo,
+                _centerAlignmentInfo,
+                _font);
+            _evenRowNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NumberFormat);
+
+            _oddRowNumberStyle = NPOIHighVersion.CreateCellStyle(
+               _workbook,
+               _borderInfo,
+               _normalRowBackgroundInfo,
+               _centerAlignmentInfo,
+               _font);
+            _oddRowNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NumberFormat);
+
+            _evenRowTextStyle = NPOIHighVersion.CreateCellStyle(
+                    _workbook,
+                    _borderInfo,
+                    _specialRowBackgroundInfo,
+                    _centerAlignmentInfo,
+                    _font);
+
+            _oddRowTextStyle = NPOIHighVersion.CreateCellStyle(
+                    _workbook,
+                    _borderInfo,
+                    _normalRowBackgroundInfo,
+                    _centerAlignmentInfo,
+                    _font);
+
+            _evenRowPercentStyle = NPOIHighVersion.CreateCellStyle(
+                       _workbook,
+                       _borderInfo,
+                       _specialRowBackgroundInfo,
+                       _centerAlignmentInfo,
+                       _font);
+            _evenRowPercentStyle.DataFormat = _dataFormat.GetFormat("0%");
+
+            _oddRowPercentStyle = NPOIHighVersion.CreateCellStyle(
+                       _workbook,
+                       _borderInfo,
+                       _normalRowBackgroundInfo,
+                       _centerAlignmentInfo,
+                       _font);
+            _oddRowPercentStyle.DataFormat = _dataFormat.GetFormat("0%");
         }
 
         /// <summary>
@@ -689,6 +880,9 @@ namespace Fanex.SMAReport.Business.Service
                 Color.Black);
         }
 
+        /// <summary>
+        /// Initializes the alignment information.
+        /// </summary>
         private void InitAlignmentInfo()
         {
             _centerAlignmentInfo = new AlignmentInfo(
@@ -697,6 +891,17 @@ namespace Fanex.SMAReport.Business.Service
             _rightAlignmentInfo = new AlignmentInfo(
                 (int)HorizontalAlignment.Right,
                 (int)VerticalAlignment.Center);
+            _titleAlignmentInfo = new AlignmentInfo(
+                (int)HorizontalAlignment.Left,
+                (int)VerticalAlignment.Center);
+        }
+
+        private string GetReportTitle(bool isSuperReport)
+        {
+            return string.Format(
+                isSuperReport ? Resources.SMA_Super_Report_Title : Resources.SMA_Master_Report_Title,
+                _reportFrom,
+                _reportTo);
         }
     }
 }
