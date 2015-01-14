@@ -28,6 +28,7 @@ namespace Fanex.SMAReport.Business.Repositories
     {
         private SqLite _db = null;
         private Dictionary<int, int> _bettype = new Dictionary<int, int>();
+        private Dictionary<string, int> _enabledVirtualRateUser;
 
         public SMAReportRepository()
         {
@@ -208,6 +209,7 @@ namespace Fanex.SMAReport.Business.Repositories
                 report.ReportRows.Add(new SMAReport
                 {
                     NumberUserEnabledVirtualRate = numberSuperEnableVirtualRate,
+                    EnabledVirtualRateUser = _enabledVirtualRateUser,
                     SMAWinLoss = winLossInfo ?? new SMAWinLoss(),
                     SMAVirtualRate = virtualRateInfo ?? new SMAVirtualRate()
                 });
@@ -225,6 +227,7 @@ namespace Fanex.SMAReport.Business.Repositories
                 report.ReportRows.Add(new SMAReport
                 {
                     NumberUserEnabledVirtualRate = numberMasterEnableVirtualRate,
+                    EnabledVirtualRateUser = _enabledVirtualRateUser,
                     SMAWinLoss = winLossInfo ?? new SMAWinLoss(),
                     SMAVirtualRate = virtualRateInfo ?? new SMAVirtualRate()
                 });
@@ -245,7 +248,6 @@ namespace Fanex.SMAReport.Business.Repositories
             Justification = "Reviewed. Suppression is OK here.")]
         private SMAWinLoss MapWinLossReportData(IDataReader reader)
         {
-            int enableVirtualRateIndex = -1;
             Dictionary<int, string> userInfo = new Dictionary<int, string>();
             SMAWinLoss result = new SMAWinLoss();
             SMAWinLoss total = new SMAWinLoss();
@@ -278,8 +280,6 @@ namespace Fanex.SMAReport.Business.Repositories
                 }
                 else
                 {
-                    enableVirtualRateIndex = virtualRate == 1 ? (enableVirtualRateIndex + 1) : enableVirtualRateIndex;
-                    int sheetIndex = Converter.ToInt(enableVirtualRateIndex / ExcelConstants.MaxUserPerSheet);
                     userInfo.Add(userIndex, userName);
                     userIndex++;
                     var monthlySMADataReport = this.InitMonthlySMAWinLossDataByUser();
@@ -289,7 +289,7 @@ namespace Fanex.SMAReport.Business.Repositories
                     result.ReportRows.Add(new SMAWinLoss
                     {
                         UserName = userName,
-                        VirtualRate = virtualRate != 1 ? "Disabled" : string.Format("{0}{1}", "VirtualRate", sheetIndex + 1),
+                        VirtualRate = virtualRate,
                         Currency = Converter.ToString2(reader["Currency"]),
                         ReportByMonths = monthlySMADataReport
                     });
@@ -297,8 +297,21 @@ namespace Fanex.SMAReport.Business.Repositories
             }
 
             result.ReportRows.Add(total);
+            List<SMAWinLoss> enabledVirtualRateUser = result.ReportRows.Where(x => x.VirtualRate == 1).OrderBy(x => x.UserName).ToList();
+            MapEnabledVirtualRateUserData(enabledVirtualRateUser);
             return result;
         }
+
+         private void MapEnabledVirtualRateUserData(List<SMAWinLoss> enabledVirtualRateUser)
+         {
+             int index = 0;
+             _enabledVirtualRateUser = new Dictionary<string, int>();
+             foreach (var user in enabledVirtualRateUser)
+             {
+                 _enabledVirtualRateUser.Add(user.UserName, index);
+                 index++;
+             }
+         }
 
         /// <summary>
         /// Initializes the monthly SMA data by user.

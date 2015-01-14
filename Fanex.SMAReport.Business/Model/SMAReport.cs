@@ -23,6 +23,8 @@ namespace Fanex.SMAReport.Business.Model
 
         public int NumberUserEnabledVirtualRate { get; set; }
 
+        public Dictionary<string, int> EnabledVirtualRateUser { get; set; }
+
         public SMAWinLoss SMAWinLoss { get; set; }
 
         public SMAVirtualRate SMAVirtualRate { get; set; }

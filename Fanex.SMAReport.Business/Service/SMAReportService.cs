@@ -224,7 +224,7 @@ namespace Fanex.SMAReport.Business.Service
             this.ExportWinLossReportHeader(worksheet, isSuperReport);
             NPOIUtility.IncreaseRowIndex(ref _cellInfo);
             NPOIUtility.ResetColumnIndex(ref _cellInfo);
-            this.ExportWinLossReportContent(worksheet, report.SMAWinLoss);
+            this.ExportWinLossReportContent(worksheet, report);
             worksheet.CreateFreezePane(0, 3, 0, 3);
             NPOIUtility.ResetColumnIndex(ref _cellInfo);
         }
@@ -417,16 +417,16 @@ namespace Fanex.SMAReport.Business.Service
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportWinLossReportContent(
             XSSFSheet worksheet,
-            SMAWinLoss report)
+            SMAReport report)
         {
             XSSFRow row = null;
-            int reportLength = report.ReportRows.Count;
+            int reportLength = report.SMAWinLoss.ReportRows.Count;
             for (int i = 0; i < reportLength - 1; i++)
             {
                 NPOIUtility.ResetColumnIndex(ref _cellInfo);
                 _cellInfo.EndRow = _cellInfo.CurrentRow + 1;
                 row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
-                var currentUser = report.ReportRows[i];
+                var currentUser = report.SMAWinLoss.ReportRows[i];
 
                 _cellInfo.CellValue = i + 1;
                 NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _specialRowTextStyle);
@@ -439,11 +439,13 @@ namespace Fanex.SMAReport.Business.Service
                 NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _specialRowTextStyle);
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-                bool isDisableVirtualRate = string.Equals(currentUser.VirtualRate, "Disabled");
+                bool isEnabledVirtualRate = report.EnabledVirtualRateUser.ContainsKey(currentUser.UserName);
                 _cellInfo.CurrentRow = _cellInfo.CurrentRow - 1;
                 _cellInfo.EndRow = _cellInfo.CurrentRow + 1;
-                _cellInfo.CellValue = currentUser.VirtualRate;
-                NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, isDisableVirtualRate ? _specialRowRedTextStyle : _rightTextStyle);
+                _cellInfo.CellValue = currentUser.VirtualRate == 1 ? 
+                    GetVirtualRateColumnValue(report.EnabledVirtualRateUser[currentUser.UserName]) :
+                    "Disabled";
+                NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, isEnabledVirtualRate ? _rightTextStyle : _specialRowRedTextStyle);
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
                 _cellInfo.EndRow = _cellInfo.EndRow - 1;
@@ -489,7 +491,7 @@ namespace Fanex.SMAReport.Business.Service
                 ExportWinLossInfoByMonth(worksheet, currentUser, RowType.Normal);
             }
 
-            this.ExportWinLossTotalReport(worksheet, report.ReportRows[reportLength - 1]);
+            this.ExportWinLossTotalReport(worksheet, report.SMAWinLoss.ReportRows[reportLength - 1]);
         }
 
         /// <summary>
@@ -902,6 +904,15 @@ namespace Fanex.SMAReport.Business.Service
                 isSuperReport ? Resources.SMA_Super_Report_Title : Resources.SMA_Master_Report_Title,
                 _reportFrom,
                 _reportTo);
+        }
+
+        private string GetVirtualRateColumnValue(int userIndex)
+        {
+            int sheetIndexBeforRounding = Converter.ToInt((userIndex + 1) / ExcelConstants.MaxUserPerSheet);
+            int sheetIndex = (userIndex + 1) % ExcelConstants.MaxUserPerSheet == 0 ?
+                sheetIndexBeforRounding :
+                sheetIndexBeforRounding + 1;
+            return string.Format("VirtualRate{0}", sheetIndex);
         }
     }
 }

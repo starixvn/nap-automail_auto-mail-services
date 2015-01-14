@@ -24,7 +24,7 @@ namespace Fanex.SMAReport.Business.Model
 
         public string UserName { get; set; }
 
-        public string VirtualRate { get; set; }
+        public decimal VirtualRate { get; set; }
 
         public string Currency { get; set; }
 
