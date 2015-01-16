@@ -17,5 +17,7 @@ namespace Fanex.NegativeBalanceByMatch.Business.Repositories
         int InsertTask(NegativeBalanceTaskInfo task);
 
         void UpdateTaskStatus(int id, Status status);
+
+        void UpdateTaskStatus(int id, Status status, string logData);
     }
 }
