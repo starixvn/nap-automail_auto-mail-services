@@ -454,7 +454,7 @@ namespace Fanex.SMAReport.Business.Repositories
             {
                 var virtualRateByBettypeItem = new VirtualRateByBettype
                 {
-                    Bettype = CacheRef.GetBettype(_bettype[i]),
+                    Bettype = CacheRef.GetBettype(_bettype[i])
                 };
 
                 virtualRateByBettype.Add(virtualRateByBettypeItem);
