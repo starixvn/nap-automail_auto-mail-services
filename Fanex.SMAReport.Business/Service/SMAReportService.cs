@@ -225,7 +225,7 @@ namespace Fanex.SMAReport.Business.Service
             NPOIUtility.IncreaseRowIndex(ref _cellInfo);
             NPOIUtility.ResetColumnIndex(ref _cellInfo);
             this.ExportWinLossReportContent(worksheet, report);
-            worksheet.CreateFreezePane(0, 3, 0, 3);
+            worksheet.CreateFreezePane(5, 3, 5, 3);
             NPOIUtility.ResetColumnIndex(ref _cellInfo);
         }
 
@@ -245,7 +245,7 @@ namespace Fanex.SMAReport.Business.Service
             {
                 var virtualRateByUserInSheet = report.SMAVirtualRate.ReportRows.Skip(sheetIndex * maxUserPerSheet).Take(maxUserPerSheet).ToList();
                 _cellInfo = new CellInfo(0, 0, 0, 0, string.Empty);
-                string sheetName = string.Format("{0}{1}", Resources.VirtualRate, sheetIndex + 1);
+                string sheetName = string.Format("{0} {1}", Resources.VirtualRate, sheetIndex + 1);
                 XSSFSheet worksheet = _workbook.GetSheet(sheetName) as XSSFSheet ?? _workbook.CreateSheet(sheetName) as XSSFSheet;
                 this.InitVirtualRateReportColumnWidthAndTitle(worksheet, isSuperReport);
                 this.ExportVirtualRateReportHeader(worksheet, isSuperReport);
@@ -254,6 +254,8 @@ namespace Fanex.SMAReport.Business.Service
                     var virtualRateByUser = virtualRateByUserInSheet[userIndex];
                     this.ExportVirtualRateByUser(worksheet, userIndex, virtualRateByUser);
                 }
+
+                worksheet.CreateFreezePane(3, 4, 3, 4);
             }
         }
 
@@ -336,7 +338,7 @@ namespace Fanex.SMAReport.Business.Service
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
-            _cellInfo.CellValue = "Virtual Rate %";
+            _cellInfo.CellValue = "Virtual Rate";
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
@@ -958,7 +960,7 @@ namespace Fanex.SMAReport.Business.Service
             int sheetIndex = (userIndex + 1) % ExcelConstants.MaxUserPerSheet == 0 ?
                 sheetIndexBeforRounding :
                 sheetIndexBeforRounding + 1;
-            return string.Format("VirtualRate{0}", sheetIndex);
+            return string.Format("VirtualRate {0}", sheetIndex);
         }
 
         /// <summary>
