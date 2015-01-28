@@ -18,6 +18,6 @@ namespace Fanex.SMAReport.Business.Model
     {
         public string Bettype { get; set; }
 
-        public decimal VirtualRate { get; set; }
+        public decimal? VirtualRate { get; set; }
     }
 }

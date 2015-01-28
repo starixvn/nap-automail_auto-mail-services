@@ -354,6 +354,9 @@ namespace Fanex.SMAReport.Business.Repositories
             return model;
         }
 
+        /// <summary>
+        /// Initializes the bet type.
+        /// </summary>
         private void InitBettype()
         {
             this._bettype.Add(0, BetTypeConstants.Handicap);
@@ -362,6 +365,12 @@ namespace Fanex.SMAReport.Business.Repositories
             this._bettype.Add(3, BetTypeConstants._1stHandicap);
             this._bettype.Add(4, BetTypeConstants._1stOverUnder);
             this._bettype.Add(5, BetTypeConstants._1stOddEvenBetType);
+            this._bettype.Add(6, BetTypeConstants.MoneyLineBettype);
+            this._bettype.Add(7, BetTypeConstants._1stMoneyLineBettype);
+            this._bettype.Add(8, BetTypeConstants.SetXWinnerBettype);
+            this._bettype.Add(9, BetTypeConstants.MatchWinnerBettype);
+            this._bettype.Add(10, BetTypeConstants.SetXWinner3Rd);
+            this._bettype.Add(11, BetTypeConstants.SetXGameYWinner);
         }
 
         /// <summary>
@@ -446,7 +455,6 @@ namespace Fanex.SMAReport.Business.Repositories
                 var virtualRateByBettypeItem = new VirtualRateByBettype
                 {
                     Bettype = CacheRef.GetBettype(_bettype[i]),
-                    VirtualRate = 0
                 };
 
                 virtualRateByBettype.Add(virtualRateByBettypeItem);

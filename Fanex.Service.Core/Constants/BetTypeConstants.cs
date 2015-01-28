@@ -99,5 +99,12 @@ namespace Fanex.Service.Core.Constants
         public const int _1stOddEvenBetType = 12;
 
         public const int _1stTotalGoal = 126;
+
+        public const int MoneyLineBettype = 20;
+        public const int _1stMoneyLineBettype = 21;
+        public const int SetXWinnerBettype = 154;
+        public const int MatchWinnerBettype = 1301;
+        public const int SetXWinner3Rd = 1311;
+        public const int SetXGameYWinner = 1324;
     }
 }

@@ -291,7 +291,7 @@ namespace Fanex.SMAReport.Business.Service
         /// <param name="isSuperReport">If set to <c>true</c> [is super report].</param>
         private void InitVirtualRateReportColumnWidthAndTitle(XSSFSheet worksheet, bool isSuperReport)
         {
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i < 13; i++)
             {
                 worksheet.SetColumnWidth(i, 100 * NPOIConstants.FontWidth);
             }
@@ -299,6 +299,11 @@ namespace Fanex.SMAReport.Business.Service
             worksheet.SetColumnWidth(0, 60 * NPOIConstants.FontWidth);
             worksheet.SetColumnWidth(1, 200 * NPOIConstants.FontWidth);
             worksheet.SetColumnWidth(2, 180 * NPOIConstants.FontWidth);
+
+            worksheet.SetColumnWidth(9, 180 * NPOIConstants.FontWidth);
+            worksheet.SetColumnWidth(10, 180 * NPOIConstants.FontWidth);
+            worksheet.SetColumnWidth(11, 180 * NPOIConstants.FontWidth);
+            worksheet.SetColumnWidth(12, 180 * NPOIConstants.FontWidth);
 
             XSSFRow row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
             _cellInfo.CellValue = this.GetReportTitle(isSuperReport);
@@ -361,6 +366,9 @@ namespace Fanex.SMAReport.Business.Service
         /// </summary>
         /// <param name="worksheet">The worksheet.</param>
         /// <param name="isSuperReport">If set to <c>true</c> [is super report].</param>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportVirtualRateReportHeader(
             XSSFSheet worksheet,
             bool isSuperReport)
@@ -377,7 +385,7 @@ namespace Fanex.SMAReport.Business.Service
             _cellInfo.EndRow = _cellInfo.EndRow - 1;
 
             _cellInfo.CellValue = "Virtual Rate";
-            _cellInfo.EndColumn = _cellInfo.CurrentColumn + 6;
+            _cellInfo.EndColumn = _cellInfo.CurrentColumn + 10;
             NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
             NPOIUtility.IncreaseRowIndex(ref _cellInfo);
             _cellInfo.CurrentColumn = 2;
@@ -402,6 +410,18 @@ namespace Fanex.SMAReport.Business.Service
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
             _cellInfo.CellValue = "1st OE";
+            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
+            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            _cellInfo.CellValue = "Moneyline / \n Match Winner";
+            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
+            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            _cellInfo.CellValue = "1st Moneyline";
+            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
+            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            _cellInfo.CellValue = "Set x Winner / \n Set x Winner(3rd)";
+            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
+            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            _cellInfo.CellValue = "Set x Game y Winner";
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
             NPOIUtility.ResetColumnIndex(ref _cellInfo);
             NPOIUtility.IncreaseRowIndex(ref _cellInfo);
@@ -500,6 +520,9 @@ namespace Fanex.SMAReport.Business.Service
         /// <param name="worksheet">The worksheet.</param>
         /// <param name="userIndex">Index of the user.</param>
         /// <param name="virtualRateByUser">The virtual rate by user.</param>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportVirtualRateByUser(XSSFSheet worksheet, int userIndex, SMAVirtualRate virtualRateByUser)
         {
             int numberMergeRow = virtualRateByUser.ReportRows.Count;
@@ -522,12 +545,35 @@ namespace Fanex.SMAReport.Business.Service
                 _cellInfo.CellValue = virtualRateBySportAndLiveStatus.Sport;
                 NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, evenRow ? _oddRowTextStyle : _evenRowTextStyle);
                 NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
-                foreach (var virtualRateByBettype in virtualRateBySportAndLiveStatus.VirtualRateByBettype)
+
+                VirtualRateByBettype virtualRateByBettype = null;
+                for (int i = 0; i < 6; i++)
                 {
-                    _cellInfo.CellValue = virtualRateByBettype.VirtualRate / 100;
+                    virtualRateByBettype = virtualRateBySportAndLiveStatus.VirtualRateByBettype[i];
+                    SetCellValue(virtualRateByBettype.VirtualRate, ref _cellInfo);
                     NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, evenRow ? _oddRowPercentStyle : _evenRowPercentStyle);
                     NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
                 }
+
+                virtualRateByBettype = virtualRateBySportAndLiveStatus.VirtualRateByBettype[6];
+                SetCellValue(virtualRateByBettype.VirtualRate, ref _cellInfo);
+                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, evenRow ? _oddRowPercentStyle : _evenRowPercentStyle);
+                NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+
+                virtualRateByBettype = virtualRateBySportAndLiveStatus.VirtualRateByBettype[7];
+                SetCellValue(virtualRateByBettype.VirtualRate, ref _cellInfo);
+                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, evenRow ? _oddRowPercentStyle : _evenRowPercentStyle);
+                NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+
+                virtualRateByBettype = virtualRateBySportAndLiveStatus.VirtualRateByBettype[8];
+                SetCellValue(virtualRateByBettype.VirtualRate, ref _cellInfo);
+                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, evenRow ? _oddRowPercentStyle : _evenRowPercentStyle);
+                NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+
+                virtualRateByBettype = virtualRateBySportAndLiveStatus.VirtualRateByBettype[11];
+                SetCellValue(virtualRateByBettype.VirtualRate, ref _cellInfo);
+                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, evenRow ? _oddRowPercentStyle : _evenRowPercentStyle);
+                NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
 
                 NPOIUtility.IncreaseRowIndex(ref _cellInfo);
             }
@@ -913,6 +959,25 @@ namespace Fanex.SMAReport.Business.Service
                 sheetIndexBeforRounding :
                 sheetIndexBeforRounding + 1;
             return string.Format("VirtualRate{0}", sheetIndex);
+        }
+
+        /// <summary>
+        /// Sets the cell value.
+        /// </summary>
+        /// <param name="virtualRate">The virtual rate.</param>
+        /// <param name="cellInfo">The cell information.</param>
+        private void SetCellValue(decimal? virtualRate, ref CellInfo cellInfo)
+        {
+            decimal? virtualRateValue = virtualRate / 100;
+            
+            if (virtualRateValue == null)
+            {
+                cellInfo.CellValue = string.Empty;
+            }
+            else
+            {
+                cellInfo.CellValue = virtualRateValue;
+            }
         }
     }
 }
