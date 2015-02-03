@@ -245,7 +245,7 @@ namespace Fanex.SMAReport.Business.Service
             {
                 var virtualRateByUserInSheet = report.SMAVirtualRate.ReportRows.Skip(sheetIndex * maxUserPerSheet).Take(maxUserPerSheet).ToList();
                 _cellInfo = new CellInfo(0, 0, 0, 0, string.Empty);
-                string sheetName = string.Format("{0} {1}", Resources.VirtualRate, sheetIndex + 1);
+                string sheetName = string.Format("{0} {1}", Resources.Virtual_Rate, sheetIndex + 1);
                 XSSFSheet worksheet = _workbook.GetSheet(sheetName) as XSSFSheet ?? _workbook.CreateSheet(sheetName) as XSSFSheet;
                 this.InitVirtualRateReportColumnWidthAndTitle(worksheet, isSuperReport);
                 this.ExportVirtualRateReportHeader(worksheet, isSuperReport);
@@ -384,18 +384,19 @@ namespace Fanex.SMAReport.Business.Service
             _cellInfo.CellValue = isSuperReport ? "Super" : "Master";
             NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
-            _cellInfo.EndRow = _cellInfo.EndRow - 1;
-
-            _cellInfo.CellValue = "Virtual Rate";
-            _cellInfo.EndColumn = _cellInfo.CurrentColumn + 10;
-            NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
-            NPOIUtility.IncreaseRowIndex(ref _cellInfo);
-            _cellInfo.CurrentColumn = 2;
-            _cellInfo.EndColumn = 2;
 
             _cellInfo.CellValue = "Sport";
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
+            NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            _cellInfo.EndRow = _cellInfo.EndRow - 1;
+
+            _cellInfo.CellValue = "Virtual Rate %";
+            _cellInfo.EndColumn = _cellInfo.CurrentColumn + 9;
+            NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
+            NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+            _cellInfo.CurrentColumn = 3;
+            _cellInfo.EndColumn = 3;
+
             _cellInfo.CellValue = "HDP";
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
             NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
@@ -960,7 +961,7 @@ namespace Fanex.SMAReport.Business.Service
             int sheetIndex = (userIndex + 1) % ExcelConstants.MaxUserPerSheet == 0 ?
                 sheetIndexBeforRounding :
                 sheetIndexBeforRounding + 1;
-            return string.Format("VirtualRate {0}", sheetIndex);
+            return string.Format("Virtual Rate {0}", sheetIndex);
         }
 
         /// <summary>

@@ -27,7 +27,7 @@ namespace Fanex.NegativeBalanceByMatch.Business.Criteria
         [SpParam(Ignored = true)]
         public string SpName
         {
-            get { return "Acc_BalanceNegativeUpd_StatusID"; }
+            get { return GetSettingKey(); }
         }
 
         [SpParam(Ignored = true)]
@@ -35,6 +35,11 @@ namespace Fanex.NegativeBalanceByMatch.Business.Criteria
         {
             get;
             set;
+        }
+
+        public override string GetSettingKey()
+        {
+            return "Acc_BalanceNegativeUpd_StatusID";
         }
     }
 }

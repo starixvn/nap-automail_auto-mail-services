@@ -24,7 +24,7 @@ namespace Fanex.NegativeBalanceByMatch.Business.Criteria
         [SpParam(Ignored = true)]
         public string SpName
         {
-            get { return "Acc_BalanceNegativeSel_BySite"; }
+            get { return GetSettingKey(); }
         }
 
         [SpParam(Ignored = true)]
@@ -37,6 +37,11 @@ namespace Fanex.NegativeBalanceByMatch.Business.Criteria
         public override bool IsValid()
         {
             return true;
-        }        
+        }
+
+        public override string GetSettingKey()
+        {
+            return "Acc_BalanceNegativeSel_BySite";
+        }
     }
 }
