@@ -299,6 +299,7 @@ namespace Fanex.SMAReport.Business.Repositories
             result.ReportRows.Add(total);
             List<SMAWinLoss> enabledVirtualRateUser = result.ReportRows.Where(x => x.VirtualRate == 1).OrderBy(x => x.UserName).ToList();
             MapEnabledVirtualRateUserData(enabledVirtualRateUser);
+            result.ReportRows.OrderBy(x => x.UserName).ToList();
             return result;
         }
 

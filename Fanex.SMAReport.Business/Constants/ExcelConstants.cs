@@ -16,6 +16,6 @@ namespace Fanex.SMAReport.Business.Constants
     /// </summary>
     public static class ExcelConstants
     {
-        public const int MaxUserPerSheet = 100; ////200000;
+        public const int MaxUserPerSheet = 200000; ////200000;
     }
 }
