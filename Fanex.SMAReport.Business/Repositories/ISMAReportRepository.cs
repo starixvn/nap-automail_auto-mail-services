@@ -1,11 +1,12 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ISMAReportRepository.cs" company="Microsoft">
+// <copyright file="ISMAReportRepository.cs" company="Nexcel Solutions Vietnam.">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
 
 namespace Fanex.SMAReport.Business.Repositories
 {
+    using System.Collections.Generic;
     using Fanex.Service.Core.Enums;
     using Fanex.SMAReport.Business.Model;
 

@@ -104,5 +104,14 @@ namespace Fanex.SMAReport.Business.Resources {
                 return ResourceManager.GetString("SMA_Super_Report_Title", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Virtual Rate.
+        /// </summary>
+        internal static string Virtual_Rate {
+            get {
+                return ResourceManager.GetString("Virtual_Rate", resourceCulture);
+            }
+        }
     }
 }

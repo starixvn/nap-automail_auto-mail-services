@@ -59,6 +59,9 @@
     <Reference Include="IBCFile">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\IBCFile.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="RazorEngine">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\RazorEngine.dll</HintPath>
     </Reference>

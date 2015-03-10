@@ -26,6 +26,19 @@ namespace Fanex.NegativeBalanceByMatch.Business.Criteria
             return true;
         }
 
+        [SpParam(Ignored = true)]
+        public string SpName
+        {
+            get { return GetSettingKey(); }
+        }
+
+        [SpParam(Ignored = true)]
+        public object Result
+        {
+            get;
+            set;
+        }
+
         public override string GetSettingKey()
         {
             return "Acc_BalanceNegativeSel_MatchLog";

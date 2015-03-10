@@ -68,5 +68,25 @@ namespace Fanex.NegativeBalanceByMatch.Business.Repositories
                 throw;
             }
         }
+
+
+        public void UpdateTaskStatus(int id, Status status, string logData)
+        {
+            try
+            {
+                Dictionary<string, string> data = new Dictionary<string, string>();
+                data.Add("Status", ((int)status).ToString());
+                data.Add("UpdatedDate", DateTime.Now.ToString());
+                data.Add("LogData", logData);
+
+                string where = " Id = " + id;
+                _db.Update("Log", data, where);
+            }
+            catch (Exception ex)
+            {
+                LogExtensions.ExceptionHandler(ex);
+                throw;
+            }
+        }
     }
 }

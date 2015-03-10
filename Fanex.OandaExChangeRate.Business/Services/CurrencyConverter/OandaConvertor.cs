@@ -7,6 +7,7 @@ namespace Fanex.OandaExChangeRate.Business.Services.CurrencyConverter
 {
     using System.IO;
     using System.Net;
+    using System.Xml;
 
     using Fanex.OandaExChangeRate.Business.Infrastructure.Configurations;
 
@@ -30,6 +31,57 @@ namespace Fanex.OandaExChangeRate.Business.Services.CurrencyConverter
     {
         public override double GetExchageRate(string fromCurrency, string toCurrency, string rateDate)
         {
+            double ask = 0.0, bid = 0.0;
+            string date = Convert.ToDateTime(rateDate).ToString("yyyy-MM-dd");
+            try
+            {
+                if (fromCurrency.Equals(toCurrency))
+                {
+                    return 1.00;
+                }
+                if (fromCurrency.ToLower() == "c" || toCurrency.ToLower() == "c"
+                    || fromCurrency.ToLower() == "h" || toCurrency.ToLower() == "h"
+                    || fromCurrency.ToLower() == "uus" || toCurrency.ToLower() == "uus")
+                {
+                    return ask;
+                }
+
+                var url = AppSettings.OandaUrl;
+                url = string.Format(url, fromCurrency.Trim(), toCurrency.Trim(), date);
+                var request = WebRequest.Create(url);
+                var response = request.GetResponse();
+
+
+                XmlDocument xml = new XmlDocument();
+                xml.Load(response.GetResponseStream());
+                XmlNodeList xnList = xml.SelectNodes("response/quotes/quote");
+
+                foreach (XmlNode node in xnList)
+                {
+                    var askTag = node.SelectNodes("ask");
+                    if (askTag.Count > 0)
+                    {
+                        ask = Convert.ToDouble(askTag[0].InnerText);
+                    }
+
+                    var bidTag = node.SelectNodes("bid");
+                    if (bidTag.Count > 0)
+                    {
+                        bid = Convert.ToDouble(bidTag[0].InnerText);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                string msg = "fromCurrency: " + fromCurrency + ", toCurrency: " + toCurrency + ", date: " + date + ", Exception: " + ex.Message;
+                throw new Exception(msg);
+            }
+
+            return ask;
+        }
+
+        public double GetExchageRate_Old(string fromCurrency, string toCurrency, string rateDate)
+        {
             if (fromCurrency.Equals(toCurrency))
             {
                 return 1.00;
@@ -37,7 +89,7 @@ namespace Fanex.OandaExChangeRate.Business.Services.CurrencyConverter
 
 
             var url = AppSettings.OandaUrl;
-            url = string.Format(url, fromCurrency.Trim(), toCurrency.Trim(), rateDate);
+            url = string.Format(url, fromCurrency.Trim(), toCurrency.Trim(), Convert.ToDateTime(rateDate).ToString("yyyy-MM-dd"));
             var request = WebRequest.Create(url);
             var response = request.GetResponse();
             //Response data:            

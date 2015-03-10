@@ -20,6 +20,19 @@ namespace Fanex.NegativeBalanceByMatch.Business.Criteria
         public string Site { get; set; }
 
         public bool IsTest { get { return AppSettings.IsTesting; } }
+
+        [SpParam(Ignored = true)]
+        public string SpName
+        {
+            get { return GetSettingKey(); }
+        }
+
+        [SpParam(Ignored = true)]
+        public object Result
+        {
+            get;
+            set;
+        }
         
         public override bool IsValid()
         {

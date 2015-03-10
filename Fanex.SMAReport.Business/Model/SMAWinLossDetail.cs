@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="SMAReportDetail.cs" company="Nexcel Solutions Vietnam.">
+// <copyright file="SMAWinLossDetail.cs" company="Nexcel Solutions Vietnam.">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -14,7 +14,7 @@ namespace Fanex.SMAReport.Business.Model
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class SMAReportDetail
+    public class SMAWinLossDetail
     {
         public int Month { get; set; }
 
@@ -33,7 +33,7 @@ namespace Fanex.SMAReport.Business.Model
             }
         }
 
-        public void CalculateTotal(SMAReportDetail smaReportDetail)
+        public void CalculateTotal(SMAWinLossDetail smaReportDetail)
         {
             this.TurnOver += smaReportDetail.TurnOver;
             this.WinLoss += smaReportDetail.WinLoss;
