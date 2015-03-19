@@ -22,11 +22,13 @@ namespace Fanex.NegativeBalanceByMatch.Business.Entities
 
         public List<CustomerBalanceInfo> CustomerInfoList { get; set; }
 
+        public string LicenseeName { get; set; }
+
         public Match()
         {
             this.MatchSettleLogList = new List<MatchSettleLog>();
             this.CustomerInfoList = new List<CustomerBalanceInfo>();
-            this.MatchInfo = new MatchInfo();
+            this.MatchInfo = new MatchInfo();            
         }
     }
 

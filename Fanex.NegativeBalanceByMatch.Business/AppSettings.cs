@@ -133,6 +133,9 @@ namespace Fanex.NegativeBalanceByMatch.Business
             }
         }
 
+        /// <summary>
+        /// true: get real currency and email from db, false: get uus currency and get email config file.
+        /// </summary>
         public static bool IsTesting
         {
             get
@@ -150,6 +153,14 @@ namespace Fanex.NegativeBalanceByMatch.Business
                 return val == null ? "HAIFA" : Convert.ToString(ConfigurationManager.AppSettings["licensee"]);
             }
         }
-        
+
+        public static bool IsSendEmailFromConfigFileWithRealCurrency
+        {
+            get
+            {
+                var val = ConfigurationManager.AppSettings["IsSendEmailFromConfigFileWithRealCurrency"];
+                return val == null ? false : (Convert.ToString(ConfigurationManager.AppSettings["IsSendEmailFromConfigFileWithRealCurrency"]) == "1");
+            }
+        }
     }
 }

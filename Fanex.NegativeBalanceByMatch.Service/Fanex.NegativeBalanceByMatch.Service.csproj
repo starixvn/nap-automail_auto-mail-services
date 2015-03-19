@@ -111,9 +111,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="SQLiteDatabase\AutoMail-NegativeBalanceByMatch.s3db" />
-    <None Include="Templates\EmailTemplate.cshtml">
+    <Content Include="Templates\EmailTemplateSingleLanguage.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
+    <Content Include="Templates\EmailTemplateDualLanguage.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logs\Error\TextFile1.txt">
