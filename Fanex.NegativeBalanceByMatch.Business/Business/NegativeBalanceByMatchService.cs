@@ -49,7 +49,15 @@
                     };
                     taskId = _repository.InsertTask(taskInfo);
                     string appLocation = AppDomain.CurrentDomain.BaseDirectory;
-                    var template = File.ReadAllText(appLocation + @"/Templates/EmailTemplate.cshtml");
+                    var template = string.Empty;
+                    if (licensee.ToLower().Equals("haifa"))
+                    {
+                        template = File.ReadAllText(appLocation + @"/Templates/EmailTemplateDualLanguage.cshtml");
+                    }
+                    else
+                    {
+                        template = File.ReadAllText(appLocation + @"/Templates/EmailTemplateSingleLanguage.cshtml");
+                    }
 
                     Dictionary<object, object> dataSendEmail = new Dictionary<object,object>();
                     dataSendEmail.Add("DataSendEmail", matchList);
@@ -204,6 +212,7 @@
 
                         foreach (Match match in matchList)
                         {
+                            match.LicenseeName = criteria.Site;    
                             var groupIDList = match.CustomerInfoList.Select(x => x.GroupID).Distinct().ToList();
 
                             foreach (int groupID in groupIDList)
@@ -366,7 +375,7 @@
                 var mailing = new Mailing();
 
                 bool isTesting = AppSettings.IsTesting;
-                if (isTesting)
+                if (isTesting || AppSettings.IsSendEmailFromConfigFileWithRealCurrency)
                 {
                     mailing.To = AppSettings.MailTo;
                     mailing.Cc = AppSettings.MailCC;
@@ -375,6 +384,17 @@
                 else
                 {
                     mailing = SelMailAddress(licenseeName);
+                    if (!string.IsNullOrWhiteSpace(AppSettings.MailBCC))
+                    {
+                        if (string.IsNullOrWhiteSpace(mailing.Bcc))
+                        {
+                            mailing.Bcc = AppSettings.MailBCC;
+                        }
+                        else
+                        {
+                            mailing.Bcc += ";" + AppSettings.MailBCC;
+                        }
+                    }
                 }
 
                 if (mailing.IsValid)
