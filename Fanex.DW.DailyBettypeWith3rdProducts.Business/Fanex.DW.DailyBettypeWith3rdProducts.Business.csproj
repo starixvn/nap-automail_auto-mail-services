@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BA901E4A-BFE7-49DB-83DC-54DC467A44B8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fanex.DW.DailyBettypeWith3rdProducts.Business</RootNamespace>
+    <AssemblyName>Fanex.DW.DailyBettypeWith3rdProducts.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EasyNetQ">
+      <HintPath>..\_Dependencies\MailStation\EasyNetQ.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.AccountingReports.SqLiteDatabase">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.AccountingReports.SqLiteDatabase.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Common">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Data">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Databank.Core">
+      <HintPath>..\_Dependencies\DW\Fanex.Databank.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Logging">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.MailDelivery.Client">
+      <HintPath>..\_Dependencies\MailStation\Fanex.MailDelivery.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.NAP.Core">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.NAP.Framework">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zlib">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Ionic.Zlib.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="OfficeOpenXmlCrypto">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\OfficeOpenXmlCrypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Quartz">
+      <HintPath>..\_Dependencies\MailStation\Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.66.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <HintPath>..\_Dependencies\SQLite\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppSettings.cs" />
+    <Compile Include="Criteria\DailyBettypeWith3rdProductsCriteria.cs" />
+    <Compile Include="Criteria\GetAllSportType.cs" />
+    <Compile Include="Model\Sporttype.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource\Label.Designer.cs" />
+    <Compile Include="Service\AutoMailBaseService.cs" />
+    <Compile Include="Service\DailyBettypeWith3rdProductsService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\Dev\DBDWH.bodb_dwrs.dwrs.xml" />
+    <Content Include="App_Data\Dev\DBDWHFN.FN.fin.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\Label.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fanex.Service.Core\Fanex.Service.Core.csproj">
+      <Project>{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}</Project>
+      <Name>Fanex.Service.Core %28Fanex.Service.Core\Fanex.Service.Core%29</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
