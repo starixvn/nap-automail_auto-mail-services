@@ -32,7 +32,7 @@
         {
             var result = false;
             var resultUpdate = new Result();
-            int taskId = 0;
+            int taskId = 0;            
             try
             {
                 Sel_BySiteCriteria balanceNegativeSel_BySiteCriteria = new Sel_BySiteCriteria
@@ -105,7 +105,7 @@
 
             var log = JsonConvert.SerializeObject(_logData);
 
-            _repository.UpdateTaskStatus(taskId, Status.Successful, log);
+            _repository.UpdateTaskStatus(taskId, Status.Successful, log);            
         }
 
         private bool SendEmail(string subject, string title, string tomail, string ccMail, string bccMail, bool result, int taskId, string content)
@@ -231,8 +231,10 @@
                                     {
                                         DataTable matchInfoTable = dataSetMatch.Tables[0];
                                         AssignMatchInfo(match, groupID, matchInfoTable);
+
                                         DataTable matchSettleTable = dataSetMatch.Tables[1];
                                         AssignMatchSettleLogInfo(match, groupID, matchSettleTable);
+
                                         var matchesLog = DistinctMatchLog(match);
                                         match.MatchSettleLogList = matchesLog;
                                     }
@@ -373,6 +375,7 @@
             foreach (string licenseeName in licenseeNameList)
             {
                 var mailing = new Mailing();
+                _logData = new List<object>();
 
                 bool isTesting = AppSettings.IsTesting;
                 if (isTesting || AppSettings.IsSendEmailFromConfigFileWithRealCurrency)

@@ -58,10 +58,14 @@
     <Reference Include="NPOI.OpenXmlFormats">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
+    <Reference Include="OfficeOpenXmlCrypto">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\OfficeOpenXmlCrypto.dll</HintPath>
+    </Reference>
     <Reference Include="RemotingRef">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\RemotingRef.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
@@ -104,6 +108,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\BaseService.cs" />
     <Compile Include="Service\CacheRef.cs" />
+    <Compile Include="Utilities\AppSettingBase.cs" />
+    <Compile Include="Utilities\Impersonate.cs" />
+    <Compile Include="Utilities\NetworkConnection.cs" />
+    <Compile Include="Utilities\SaveFile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="CodeAnalysis\CodeAnalysisConfiguration.xml" />
