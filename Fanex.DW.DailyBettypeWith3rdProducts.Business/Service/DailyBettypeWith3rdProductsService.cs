@@ -83,14 +83,10 @@
                 this.GenerateSporttypeSection(sporttype);
             }
 
-            if (AppSettings.IsAuthenticate)
-            {
-                this.GetFileName = SaveFile.SaveFileWithAuthenticate(this._exportDataDirectoryKey, this.FileName, this.Workbook);
-            }
-            else
-            {
-                this.GetFileName = SaveFile.SaveFileWithNoneAuthenticate(this._exportDataDirectoryKey, this.FileName, this.Workbook);
-            }
+            string exportDataDirectory = AppSettings.ExportDataDirectory;
+            this.GetFileName = exportDataDirectory + @"\" + this.FileName;
+            SaveFile.SaveExcelFile(exportDataDirectory, this.FileName, this.Workbook);            
+            
         }
 
         private void Init()
@@ -126,7 +122,7 @@
                     {
                         SportId = Converter.ToInt(reader[0]),
                         SportName = Converter.ToString2(reader[1])
-                    });                    
+                    });
                 }
             }
         }
