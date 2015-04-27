@@ -73,6 +73,10 @@
       <Project>{41B6421F-B8A6-48AA-A9FF-FB3040E5C43F}</Project>
       <Name>Fanex.OandaExChangeRate.Business</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Fanex.Service.Core\Fanex.Service.Core.csproj">
+      <Project>{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}</Project>
+      <Name>Fanex.Service.Core %28Fanex.Service.Core\Fanex.Service.Core%29</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\DBEXT.bodb02.bodbAdminNet.xml">

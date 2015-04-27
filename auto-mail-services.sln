@@ -63,13 +63,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.DW.AutoMailReport.Ser
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.HorseRacingReport.Business", "Fanex.NAPReport.HorseRacingReport.Business\Fanex.NAPReport.HorseRacingReport.Business.csproj", "{AFE10301-BCFD-4D11-885C-A43A46B5B2BF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.OandaExChangeRate.Testing", "Fanex.OandaExChangeRate.Testing\Fanex.OandaExChangeRate.Testing.csproj", "{079BD04E-333E-452B-B022-2BCE8743286F}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.AutoMailReport.Service", "Fanex.NAPReport.AutoMailReport.Service\Fanex.NAPReport.AutoMailReport.Service.csproj", "{A26D737A-8655-40AD-AA5D-13DC22FCFF7C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.HorseRacingReport.Testing", "Fanex.NAPReport.HorseRacingReport.Testing\Fanex.NAPReport.HorseRacingReport.Testing.csproj", "{9CE3B48A-A440-439C-9BA8-0BBA81A4D4A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.SMALoss.Business", "Fanex.NAPReport.SMALoss.Business\Fanex.NAPReport.SMALoss.Business.csproj", "{DA6DE65A-5D27-4B28-A928-422B664502C2}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.SMALoss.Testing", "Fanex.NAPReport.SMALoss.Testing\Fanex.SMALoss.Testing.csproj", "{01502577-50B0-4B8C-B622-7725FEB12F76}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{3CD44427-FA84-4AD6-A78B-92CDC8E4AAC2}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -281,6 +286,16 @@ Global
 		{AFE10301-BCFD-4D11-885C-A43A46B5B2BF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{AFE10301-BCFD-4D11-885C-A43A46B5B2BF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{AFE10301-BCFD-4D11-885C-A43A46B5B2BF}.Release|x86.ActiveCfg = Release|Any CPU
+		{079BD04E-333E-452B-B022-2BCE8743286F}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{079BD04E-333E-452B-B022-2BCE8743286F}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{079BD04E-333E-452B-B022-2BCE8743286F}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{079BD04E-333E-452B-B022-2BCE8743286F}.Debug|x86.ActiveCfg = Debug|x86
+		{079BD04E-333E-452B-B022-2BCE8743286F}.Debug|x86.Build.0 = Debug|x86
+		{079BD04E-333E-452B-B022-2BCE8743286F}.Release|Any CPU.ActiveCfg = Release|x86
+		{079BD04E-333E-452B-B022-2BCE8743286F}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{079BD04E-333E-452B-B022-2BCE8743286F}.Release|Mixed Platforms.Build.0 = Release|x86
+		{079BD04E-333E-452B-B022-2BCE8743286F}.Release|x86.ActiveCfg = Release|x86
+		{079BD04E-333E-452B-B022-2BCE8743286F}.Release|x86.Build.0 = Release|x86
 		{A26D737A-8655-40AD-AA5D-13DC22FCFF7C}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{A26D737A-8655-40AD-AA5D-13DC22FCFF7C}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{A26D737A-8655-40AD-AA5D-13DC22FCFF7C}.Debug|Mixed Platforms.Build.0 = Debug|x86
@@ -335,6 +350,7 @@ Global
 		{15D49C5B-AC05-4596-8984-888A3CFC5340} = {6B2F9D4A-0234-4FBB-8FB0-74CD693B0AC4}
 		{41B6421F-B8A6-48AA-A9FF-FB3040E5C43F} = {D4441DEE-0E2A-4730-832C-15D8F973BEB2}
 		{6E55A258-F182-43B0-A392-AD2637EA001D} = {D4441DEE-0E2A-4730-832C-15D8F973BEB2}
+		{079BD04E-333E-452B-B022-2BCE8743286F} = {D4441DEE-0E2A-4730-832C-15D8F973BEB2}
 		{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B} = {4913BD11-42BB-4F4E-97C4-24475392CC54}
 		{EEEE6EC6-55BC-4C6E-AC8B-2D5B8C8B7179} = {2AB8C033-12E7-4AD6-9FE3-B0BD2A027C34}
 		{FD60ADBE-F7DC-4EDC-9869-E38B860CB61D} = {2AB8C033-12E7-4AD6-9FE3-B0BD2A027C34}

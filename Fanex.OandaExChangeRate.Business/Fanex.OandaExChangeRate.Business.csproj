@@ -115,31 +115,32 @@
     <Compile Include="DataAccess\SQLiteDataAccess.cs" />
     <Compile Include="Enums\Status.cs" />
     <Compile Include="Enums\TaskType.cs" />
-    <Compile Include="Infrastructure\Configurations\ApplicationSettings.cs" />
     <Compile Include="Infrastructure\Configurations\BootStrappers\BootStrapperElement.cs" />
     <Compile Include="Infrastructure\Configurations\BootStrappers\BootStrapperMappingConstants.cs" />
     <Compile Include="Infrastructure\Configurations\BootStrappers\BootStrapperSettings.cs" />
-    <Compile Include="Infrastructure\Configurations\CurrencyAdjustmentSettings.cs" />
-    <Compile Include="Infrastructure\Configurations\MailSettings.cs" />
-    <Compile Include="Infrastructure\Constants\Currency.cs" />
     <Compile Include="Infrastructure\Helper\Mail.cs" />
     <Compile Include="Infrastructure\IoC\BootStrapperFactory.cs" />
     <Compile Include="Infrastructure\IoC\BootStrapperManager.cs" />
-    <Compile Include="Infrastructure\IoC\CommonBootStrapper.cs" />
+    <Compile Include="Infrastructure\IoC\CommonBootStrapper.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Infrastructure\ServiceLocatorAdapter\StructureMapServiceLocator.cs" />
     <Compile Include="Infrastructure\ServiceLocatorAdapter\UnityServiceLocator.cs" />
-    <Compile Include="Model\GoogleCurrency.cs" />
     <Compile Include="Model\Result.cs" />
     <Compile Include="ProcessExChangeRate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BootStrappers\StructureMapBootStrapper.cs" />
     <Compile Include="Services\BootStrappers\UnityBootStrapper.cs" />
     <Compile Include="Services\CurrencyConverter\BaseCurrencyConvertor.cs" />
-    <Compile Include="Services\CurrencyConverter\GoogleCurrencyConvertor.cs" />
     <Compile Include="Services\CurrencyConverter\OandaConvertor.cs" />
-    <Compile Include="Services\CurrencyConverter\WebServiceX\CurrencyConvertor.cs" />
-    <Compile Include="Services\CurrencyConverter\WebServiceX\WebServicesApiConvertor.cs" />
     <Compile Include="Services\ExRateService.cs" />
+    <Compile Include="Utility\SignificantNumber.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fanex.Service.Core\Fanex.Service.Core.csproj">
+      <Project>{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}</Project>
+      <Name>Fanex.Service.Core %28Fanex.Service.Core\Fanex.Service.Core%29</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

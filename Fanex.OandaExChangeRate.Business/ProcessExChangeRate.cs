@@ -18,22 +18,21 @@ namespace Fanex.OandaExChangeRate.Business
     /// </summary>
     public class ProcessExChangeRate
     {
-        SQLiteDataAccess _log;
+        private SQLiteDataAccess _log;
+
         public ProcessExChangeRate()
         {
             _log = new SQLiteDataAccess();
         }
 
-        void UpdateExchangeRate()
+        private void UpdateExchangeRate()
         {
             var rateDate = new DateTime();
             try
             {
-
                 BootStrapperManager.Initialize(BootStrapperFactory.CreateInstance());
                 var exchageRateService = new ExRateService();
                 var baseCurrencies = AppSettings.BaseCurrencies;
-
 
                 if (AppSettings.IsTest)
                 {
@@ -41,7 +40,6 @@ namespace Fanex.OandaExChangeRate.Business
                 }
                 else if (AppSettings.IsInsertHistoryRate)
                 {
-
                     rateDate = AppSettings.ToHistoryDate;
                     var fromDate = AppSettings.FromHistoryDate;
 
@@ -56,10 +54,7 @@ namespace Fanex.OandaExChangeRate.Business
                 {
                     exchageRateService.UpdateRate(baseCurrencies);
                     exchageRateService.UpdateIbcRate();
-
                 }
-
-
             }
             catch (Exception ex)
             {
@@ -69,7 +64,6 @@ namespace Fanex.OandaExChangeRate.Business
 
         public void OnRunningDaily()
         {
-            
             AppSettings.Id = _log.GetTodayLogId();
             int countRunner = 0;
 

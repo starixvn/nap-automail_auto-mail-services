@@ -6,10 +6,13 @@
     public class BaseDataAccess
     {
         private Database _db;
+
         protected enum DatabaseName
         {
-            Archive =0, Main = 1
+            Archive = 0, 
+            Main = 1
         }
+
         protected Database Database
         {
             get

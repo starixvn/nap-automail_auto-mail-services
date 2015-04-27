@@ -18,8 +18,10 @@
                 return currencyConvertorClient;
             }
         }
-        public abstract double GetExchageRate(string fromCurrency, string toCurrency, string rateDate);
-   
-   
+        public abstract string GetExchageRate(string fromCurrency, string toCurrency, string rateDate);
+
+        public abstract double GetExchageRate_Old(string fromCurrency, string toCurrency, string rateDate);
+
+        public abstract double GetExchageRate_Simulate(string fromCurrency, string toCurrency, string rateDate);
     }
 }

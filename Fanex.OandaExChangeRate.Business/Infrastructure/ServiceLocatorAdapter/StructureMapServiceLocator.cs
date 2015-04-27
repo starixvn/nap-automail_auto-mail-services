@@ -5,7 +5,6 @@
     using Microsoft.Practices.ServiceLocation;
     using StructureMap;
 
-
     public class StructureMapServiceLocator : ServiceLocatorImplBase
     {
         private IContainer container;
@@ -24,8 +23,8 @@
         }
 
         /// <summary>
-        ///             When implemented by inheriting classes, this method will do the actual work of resolving
-        ///             the requested service instance.
+        /// When implemented by inheriting classes, this method will do the actual work of resolving
+        /// the requested service instance.
         /// </summary>
         /// <param name="serviceType">Type of instance requested.</param>
         /// <param name="key">Name of registered service you want. May be null.</param>

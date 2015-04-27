@@ -9,9 +9,9 @@ namespace Fanex.OandaExChangeRate.Business.DataAccess
     using System;
     using System.Collections.Generic;
     using System.Data;
-    using Fanex.OandaExChangeRate.Business.Enums;
     using Fanex.AccountingReports.SqLiteDatabase;
     using Fanex.Common;
+    using Fanex.OandaExChangeRate.Business.Enums;
 
     /// <summary>
     /// TODO: Update summary.
@@ -39,7 +39,7 @@ namespace Fanex.OandaExChangeRate.Business.DataAccess
                 data.Add("Status", ((int)Status.Running).ToString());
                 data.Add("CreatedDate", DateTime.Now.ToString());
                 data.Add("Type", ((int)type).ToString());
-                data.Add("CountRunner", (0).ToString());
+                data.Add("CountRunner", "0");
 
                 id = Convert.ToInt32(_db.Insert("Log", data));
             }
@@ -96,7 +96,7 @@ namespace Fanex.OandaExChangeRate.Business.DataAccess
 
         public int GetTodayLogId()
         {
-            int Id = -1;
+            int id = -1;
             try
             {
                 var sql = "select * from Log where ID in (select max(ID) from Log)";
@@ -107,7 +107,7 @@ namespace Fanex.OandaExChangeRate.Business.DataAccess
                     if (Convert.ToDateTime(row["CreatedDate"]).ToShortDateString() == DateTime.Today.ToShortDateString()
                         || Convert.ToInt32(row["CountRunner"]) < AppSettings.CountRunner)
                     {
-                        Id = Converter.ToInt(row["Id"]);
+                        id = Converter.ToInt(row["Id"]);
                     }                    
                 }
             }
@@ -116,7 +116,7 @@ namespace Fanex.OandaExChangeRate.Business.DataAccess
                 throw ex;
             }
 
-            return Id;
+            return id;
         }
 
         public int GetCurrentCountRunner(int id)

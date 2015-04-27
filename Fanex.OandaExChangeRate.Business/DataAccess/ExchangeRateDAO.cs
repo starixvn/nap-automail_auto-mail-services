@@ -7,7 +7,7 @@
     using Fanex.Data;
     using Fanex.OandaExChangeRate.Business.Model;
 
-    public class ExchangeRateDAO: BaseDataAccess, IExchangeRateDAO
+    public class ExchangeRateDAO : BaseDataAccess, IExchangeRateDAO
     {
         public List<string> GetCurrencyCodeList()
         {
@@ -24,7 +24,6 @@
                                        : string.Empty;
                         currencyCodeList.Add(code.Trim());
                     }
-
                 }
             }
 

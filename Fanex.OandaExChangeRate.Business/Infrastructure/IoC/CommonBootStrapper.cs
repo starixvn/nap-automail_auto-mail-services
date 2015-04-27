@@ -8,9 +8,7 @@
 
         protected CommonBootStrapper()
         {
-// ReSharper disable DoNotCallOverridableMethodsInConstructor
             Locator = CreateServiceLocator();
-// ReSharper restore DoNotCallOverridableMethodsInConstructor
         }
 
         protected abstract IServiceLocator CreateServiceLocator();

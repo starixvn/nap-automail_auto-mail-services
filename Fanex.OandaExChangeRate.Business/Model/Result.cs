@@ -3,7 +3,10 @@
     public class Result
     {
         public int ErrorCode
-        { get; set; }
+        { 
+            get; set; 
+        }
+
         public string ErrorMsg
         {
             get;

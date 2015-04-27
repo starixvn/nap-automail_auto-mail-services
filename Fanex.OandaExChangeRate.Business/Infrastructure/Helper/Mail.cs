@@ -1,17 +1,10 @@
 ﻿namespace Fanex.OandaExChangeRate.Business.Infrastructure.Helper
 {
-    using System.Net.Mail;
-    using System.Net;
-
-    using Fanex.OandaExChangeRate.Business.Infrastructure.Configurations;
     using System;
     using Fanex.OandaExChangeRate.Business.Common;
-    using System.Collections.Generic;
 
     public class Mail
     {
-        
-
         public static bool SendMail(string emailContent)
         {
             bool isSuccess = true;

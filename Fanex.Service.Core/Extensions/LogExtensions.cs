@@ -33,9 +33,8 @@ namespace Fanex.Service.Core.Extensions
                     Logger.Log.Error(message);
                 }
             }
-            catch (Exception xxx)
+            catch
             {
-                //
             }
         }
     }

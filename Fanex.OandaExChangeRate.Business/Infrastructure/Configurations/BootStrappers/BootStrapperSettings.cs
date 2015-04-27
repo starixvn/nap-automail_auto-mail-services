@@ -1,5 +1,4 @@
-﻿
-namespace Fanex.OandaExChangeRate.Business.Infrastructure.Configurations.BootStrappers
+﻿namespace Fanex.OandaExChangeRate.Business.Infrastructure.Configurations.BootStrappers
 {
     using System.Configuration;
 
@@ -10,13 +9,11 @@ namespace Fanex.OandaExChangeRate.Business.Infrastructure.Configurations.BootStr
         {
             get
             {
-                if (this.Properties.Contains
-                    (BootStrapperMappingConstants.DefaulFullTypeNameAttributeName))
+                if (this.Properties.Contains(BootStrapperMappingConstants.DefaulFullTypeNameAttributeName))
                 {
                     return base[BootStrapperMappingConstants.DefaulFullTypeNameAttributeName].ToString();
                 }
 
-                //return Sunplus.Accounting.CRM.Infrastructure.BootStrappers.UnityBootStrapper
                 return BootStrapperMappingConstants.DefaultBootStrapperFullTypeName;
             }
         }

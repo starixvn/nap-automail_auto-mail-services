@@ -3,35 +3,17 @@
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
-
 namespace Fanex.OandaExChangeRate.Business
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Configuration;
+    using Fanex.Service.Core.Utilities;
 
     /// <summary>
     /// Application setting.
     /// </summary>
-    public static class AppSettings
+    public class AppSettings : AppSettingBase
     {
-        /// <summary>
-        /// Gets the name of the service.
-        /// </summary>
-        /// <value>
-        /// The name of the service.
-        /// </value>
-        public static string ServiceName
-        {
-            get
-            {
-                var val = ConfigurationManager.AppSettings["ServiceName"];
-                return val == null ? "_Fanex.ExchangeRateOanda.Service" : val;
-            }
-        }
-
         /// <summary>
         /// Gets the interval in second.
         /// </summary>
@@ -142,7 +124,7 @@ namespace Fanex.OandaExChangeRate.Business
             }
         }
 
-        public static string ExportDataDirectory
+        public static new string ExportDataDirectory
         {
             get
             {
@@ -222,40 +204,42 @@ namespace Fanex.OandaExChangeRate.Business
 
         public static int NumberOfRecordsPerPage
         {
-            get { return int.Parse(ConfigurationManager.AppSettings["NumberOfRecordsPerPage"]); }
+            get 
+            { 
+                return int.Parse(ConfigurationManager.AppSettings["NumberOfRecordsPerPage"]); 
+            }
         }
 
         public static string[] BaseCurrencies
         {
             get
             {
-                var strCurrencies = ConfigurationManager.AppSettings["BaseCurrencies"].ToString();
+                var strCurrencies = ConfigurationManager.AppSettings["OandaExchangeRate.BaseCurrencies"].ToString();
                 var arrCurrencies = strCurrencies.Split(',');
                 return arrCurrencies;
             }
         }
 
-        public static bool IsTest { get { return ConfigurationManager.AppSettings["istest"].Equals("1"); } }
-
-        public static string FromCurrency { get { return ConfigurationManager.AppSettings["fromcurrency"].ToString(); } }
-
-        public static DateTime TestDate
-        {
-            get
-            {
-
-                return Convert.ToDateTime(ConfigurationManager.AppSettings["testdate"]);
+        public static string FromCurrency 
+        { 
+            get 
+            { 
+                return ConfigurationManager.AppSettings["fromcurrency"].ToString(); 
             }
         }
 
-        public static bool IsInsertHistoryRate { get { return ConfigurationManager.AppSettings["IsInsertHistoryRate"].Equals("1"); } }
-
+        public static bool IsInsertHistoryRate 
+        { 
+            get 
+            { 
+                return ConfigurationManager.AppSettings["IsInsertHistoryRate"].Equals("1"); 
+            } 
+        }
 
         public static DateTime FromHistoryDate
         {
             get
             {
-
                 return Convert.ToDateTime(ConfigurationManager.AppSettings["FromHistoryDate"]);
             }
         }
@@ -264,7 +248,6 @@ namespace Fanex.OandaExChangeRate.Business
         {
             get
             {
-
                 return Convert.ToDateTime(ConfigurationManager.AppSettings["ToHistoryDate"]);
             }
         }
@@ -277,6 +260,21 @@ namespace Fanex.OandaExChangeRate.Business
         public static string OandaUrl
         {
             get { return ConfigurationManager.AppSettings["OandaUrl"].ToString(); }
+        }
+
+        public static bool IsSimulateRate
+        {
+            get { return GetSettingValueByKey("OandaExchangeRate.IsSimulateRate") == "1"; }
+        }
+
+        public static bool IsTest
+        {
+            get { return GetSettingValueByKey("OandaExchangeRate.IsTest") == "1"; }
+        }
+
+        public static DateTime TestDate
+        {
+            get { return Convert.ToDateTime(GetSettingValueByKey("OandaExchangeRate.TestDate")); }
         }
     }
 }

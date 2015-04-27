@@ -20,7 +20,7 @@ namespace Fanex.OandaExChangeRate.Service
 
         public AutoMailService()
         {            
-            InitializeComponent(AppSettings.ServiceName);
+            InitializeComponent("");
         }
 
         /// <summary>
