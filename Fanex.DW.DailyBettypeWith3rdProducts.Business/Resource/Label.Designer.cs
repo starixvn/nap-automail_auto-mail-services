@@ -63,9 +63,17 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Resource {
         /// <summary>
         ///   Looks up a localized string similar to This is the Bettype with 3rd products Daily update. Please see attached files for details..
         /// </summary>
-        public static string DailyBettype3rdProductMailBody {
+        public static string DailyBettype3rdProductMailBody_Weekly {
             get {
-                return ResourceManager.GetString("DailyBettype3rdProductMailBody", resourceCulture);
+                return ResourceManager.GetString("DailyBettype3rdProductMailBody_Weekly", resourceCulture);
+            }
+        }
+
+        public static string DailyBettype3rdProductMailBody_Daily
+        {
+            get
+            {
+                return ResourceManager.GetString("DailyBettype3rdProductMailBody_Daiy", resourceCulture);
             }
         }
         

@@ -52,8 +52,6 @@
 
         private bool _isVirtual;
 
-        private string _exportDataDirectoryKey = "Fanex.DW.DailyBettypeWith3rdProducts.ExportDataDirectory";
-
         public DailyBettypeWith3rdProductsService()
         {
             this._criteria = new DailyBettypeWith3rdProductsCriteria();
@@ -66,7 +64,7 @@
         /// Generates the report.
         /// </summary>
         /// <param name="isVirtual">If set to <c>true</c> [is virtual].</param>
-        public void GenerateReport(bool isVirtual)
+        public void GenerateReport(bool isVirtual, string exportDataDirectory)
         {
             this.Init();
             this._isVirtual = isVirtual;
@@ -83,10 +81,8 @@
                 this.GenerateSporttypeSection(sporttype);
             }
 
-            string exportDataDirectory = AppSettings.ExportDataDirectory;
             this.GetFileName = exportDataDirectory + @"\" + this.FileName;
-            SaveFile.SaveExcelFile(exportDataDirectory, this.FileName, this.Workbook);            
-            
+            SaveFile.SaveExcelFile(exportDataDirectory, this.FileName, this.Workbook);         
         }
 
         private void Init()
@@ -123,6 +119,11 @@
                         SportId = Converter.ToInt(reader[0]),
                         SportName = Converter.ToString2(reader[1])
                     });
+
+                    if (AppSettings.IsSingleSport)
+                    {
+                        break;
+                    }
                 }
             }
         }
@@ -239,7 +240,7 @@
             for (int col = 0; col < this._columnCount; col++)
             {
                 var colName = this._reader.GetName(col);
-                bool isTotalColumn = colName.Contains("Total") || colName.Contains("total");
+                bool isTotalColumn = colName.Contains("Total WL") || colName.Contains("total wl");
                 var cell = headerRow.CreateCell(this._startCol + col);
                 cell.CellStyle = this.GetHeaderCellStyle(this._cellStyle.HeaderStyles, col, this._columnCount, isTotalColumn);
                 cell.SetCellValue(this._reader.GetName(col));
@@ -259,7 +260,7 @@
                 {
                     var cell = row.CreateCell(this._startCol + col);
                     var colName = this._reader.GetName(col);
-                    bool isTotalColumn = colName.Contains("Total") || colName.Contains("total");
+                    bool isTotalColumn = colName.Contains("Total WL") || colName.Contains("total wl");
                     var colType = this._reader.GetFieldType(col);
                     if (colType == typeof(DateTime))
                     {
@@ -291,7 +292,7 @@
             for (int col = 0; col < this._columnCount; col++)
             {
                 var colName = this._reader.GetName(col);
-                bool isTotalColumn = colName.Contains("Total") || colName.Contains("total");
+                bool isTotalColumn = colName.Contains("Total WL") || colName.Contains("total wl");
                 var footerCell = footerRow.CreateCell(this._startCol + col);
                 if (col == 0)
                 {

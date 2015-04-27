@@ -5,6 +5,8 @@ using Fanex.DW.DailyBettypeWith3rdProducts.Business.Service;
 using Fanex.DW.DailyBettypeWith3rdProducts.Business.Resource;
 using Fanex.MailDelivery.Client.Models;
 using System.Collections.Generic;
+using Fanex.DW.DailyBettypeWith3rdProducts.Business.Jobs;
+using Fanex.DW.DailyBettypeWith3rdProducts.Business.Model;
 
 namespace Fanex.DW.DailyBettypeWith3rdProducts.Testing
 {
@@ -17,20 +19,8 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Testing
 
             Console.WriteLine("Running DailyBettypeWith3rdProductsService");
 
-            DailyBettypeWith3rdProductsService service = new DailyBettypeWith3rdProductsService();
-            service.GenerateReport(false);
-            Mail mail = new Mail()
-            {
-                Subject = string.Format(Label.DailyBettype3rdProductMailSubject, DateTime.Now.ToString("yyyy-MM-dd")),
-                Title = string.Format(Label.DailyBettype3rdProductMailSubject, DateTime.Now.ToString("yyyy-MM-dd")),
-                Body = Label.DailyBettype3rdProductMailBody
-            };
-
-            mail.Attachments = new List<MailAttachment>();
-            mail.Attachments.Add(new MailAttachment(@service.GetFileName, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
-            service.GenerateReport(true);
-            mail.Attachments.Add(new MailAttachment(@service.GetFileName, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
-
+            IDailyBettypeWith3rdProductJob job = new DailyBettypeWith3rdProductJob();
+            job.ProcessExportDailyBettypeWith3rdProducts(false);
 
             Console.WriteLine("Done at " + DateTime.Now.ToString());
             Console.ReadLine();
