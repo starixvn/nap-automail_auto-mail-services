@@ -15,6 +15,12 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business
     /// </summary>
     public class AppSettings : AppSettingBase
     {
-        
+        public static string ExportDataDirectory
+        {
+            get
+            {
+                return ExportDataDirectory("Fanex.DW.DailyBettypeWith3rdProducts.ExportDataDirectory");
+            }
+        }
     }
 }

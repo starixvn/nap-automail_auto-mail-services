@@ -62,7 +62,7 @@ namespace Fanex.Service.Core.Utilities
             }
         }
 
-        public static string GetSettingValueByKey(string key)
+        protected static string GetSettingValueByKey(string key)
         {
             var val = ConfigurationManager.AppSettings[key];
             return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings[key]);
@@ -73,6 +73,26 @@ namespace Fanex.Service.Core.Utilities
             get 
             {
                 return GetSettingValueByKey("ExcelPassword");
+            }
+        }
+
+        protected static string ExportDataDirectory(string key)
+        {
+            string path = AppSettingBase.GetSettingValueByKey(key); 
+            string month = DateTime.Today.Month < 10
+                ? "0" + DateTime.Today.Month
+                : DateTime.Today.Month + string.Empty;
+
+            path += @"\" + DateTime.Today.Year + @"\" + month;
+
+            return path;
+        }
+
+        public static string ServiceName
+        {
+            get 
+            {
+                return GetSettingValueByKey("ServiceName");
             }
         }
     }

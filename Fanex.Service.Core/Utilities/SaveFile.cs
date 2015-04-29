@@ -6,45 +6,50 @@
 
 namespace Fanex.Service.Core.Utilities
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.IO;
-using NPOI.SS.UserModel;
-    using OfficeOpenXmlCrypto;
-    using Fanex.Common;
     using System.Net;
+    using Fanex.Common;
+    using NPOI.SS.UserModel;
+    using OfficeOpenXmlCrypto;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class SaveFile
     {
-        public static string SaveFileWithNoneAuthenticate(string exportDataDirectoryKey, string fileName, IWorkbook workbook)
+        public static void SaveExcelFile(string exportDataDirectory, string fileName, IWorkbook workbook)
         {
-            string getFileName = ExportDataDirectory(exportDataDirectoryKey);
-            if (!Directory.Exists(getFileName))
+            if (AppSettingBase.IsAuthenticate)
             {
-                Directory.CreateDirectory(getFileName);
+                SaveFileWithAuthenticate(exportDataDirectory, fileName, workbook);
             }
-
-            getFileName += @"\" + fileName;
-
-            FileInfo file = new FileInfo(getFileName);
-            file.Delete();
-
-            workbook.Write(new FileStream(getFileName, FileMode.Create));
-
-            OfficeCryptoStream stream1 = OfficeCryptoStream.Open(getFileName);
-            stream1.Password = AppSettingBase.ExcelPassword;
-            stream1.SaveAs(getFileName);
-            stream1.Close();
-
-            return getFileName;
+            else
+            {
+                SaveFileWithNoneAuthenticate(exportDataDirectory, fileName, workbook);
+            }
         }
 
-        public static string SaveFileWithAuthenticate(string exportDataDirectoryKey, string fileName, IWorkbook workbook)
+        private static void SaveFileWithNoneAuthenticate(string exportDataDirectory, string fileName, IWorkbook workbook)
+        {
+            if (!Directory.Exists(exportDataDirectory))
+            {
+                Directory.CreateDirectory(exportDataDirectory);
+            }
+
+            exportDataDirectory += @"\" + fileName;
+
+            FileInfo file = new FileInfo(exportDataDirectory);
+            file.Delete();
+
+            workbook.Write(new FileStream(exportDataDirectory, FileMode.Create)); 
+
+            OfficeCryptoStream stream1 = OfficeCryptoStream.Open(exportDataDirectory); 
+            stream1.Password = AppSettingBase.ExcelPassword;
+            stream1.SaveAs(exportDataDirectory);
+            stream1.Close();
+        }
+
+        private static void SaveFileWithAuthenticate(string exportDataDirectory, string fileName, IWorkbook workbook)
         {
             string ip = AppSettingBase.IP;
             string password = AppSettingBase.Password;
@@ -59,38 +64,23 @@ using NPOI.SS.UserModel;
 
             using (new NetworkConnection(@"\\" + ip, networkCredential))
             {
-                string getFileName = ExportDataDirectory(exportDataDirectoryKey);
-                if (!Directory.Exists(getFileName))
+                if (!Directory.Exists(exportDataDirectory))
                 {
-                    Directory.CreateDirectory(getFileName);
+                    Directory.CreateDirectory(exportDataDirectory);
                 }
 
-                getFileName += @"\" + fileName;
+                exportDataDirectory += @"\" + fileName;
 
-                FileInfo file = new FileInfo(getFileName);
+                FileInfo file = new FileInfo(exportDataDirectory); 
                 file.Delete();
 
-                workbook.Write(new FileStream(getFileName, FileMode.Create));
+                workbook.Write(new FileStream(exportDataDirectory, FileMode.Create)); 
 
-                OfficeCryptoStream stream1 = OfficeCryptoStream.Open(getFileName);
+                OfficeCryptoStream stream1 = OfficeCryptoStream.Open(exportDataDirectory);
                 stream1.Password = AppSettingBase.ExcelPassword;
-                stream1.SaveAs(getFileName);
+                stream1.SaveAs(exportDataDirectory);
                 stream1.Close();
-
-                return getFileName;
             }
-        }
-
-        private static string ExportDataDirectory(string exportDataDirectoryKey)
-        {
-            string path = AppSettingBase.GetSettingValueByKey(exportDataDirectoryKey);
-            string month = DateTime.Today.Month < 10
-                ? "0" + DateTime.Today.Month
-                : DateTime.Today.Month + string.Empty;
-
-            path += @"\" + DateTime.Today.Year + @"\" + month;
-
-            return path;
         }
     }
 }

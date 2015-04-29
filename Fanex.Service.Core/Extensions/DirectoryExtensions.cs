@@ -7,6 +7,9 @@
 namespace Fanex.Service.Core.Extensions
 {
     using System.IO;
+    using Fanex.Service.Core.Utilities;
+    using Fanex.Common;
+    using System.Net;
 
     /// <summary>
     /// TODO: Update summary.
@@ -17,9 +20,43 @@ namespace Fanex.Service.Core.Extensions
 
         public static void CheckAndCreateDirectory(string path)
         {
+            if (AppSettingBase.IsAuthenticate)
+            {
+                CheckAndCreateDirectoryWithAuthenticate(path);
+            }
+            else
+            {
+                CheckAndCreateDirectoryWithNoneAuthenticate(path);
+            }
+        }
+
+        private static void CheckAndCreateDirectoryWithNoneAuthenticate(string path)
+        {
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
+            }
+        }
+
+        private static void CheckAndCreateDirectoryWithAuthenticate(string path)
+        {
+            string ip = AppSettingBase.IP;
+            string password = AppSettingBase.Password;
+            string username = AppSettingBase.UserName;
+
+            if (AppSettingBase.IsEncryptPassword)
+            {
+                password = Cryptography.CfsDeCrypt(password);
+            }
+
+            NetworkCredential networkCredential = new NetworkCredential(username, password);
+
+            using (new NetworkConnection(@"\\" + ip, networkCredential))
+            {
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
             }
         }
 
@@ -28,6 +65,18 @@ namespace Fanex.Service.Core.Extensions
         /// </summary>
         /// <param name="path">The path of directory.</param>
         public static void DeleteDirectory(string path)
+        {
+            if (AppSettingBase.IsAuthenticate)
+            {
+                DeleteDirectoryWithAuthenticate(path);
+            }
+            else
+            {
+                DeleteDirectoryWithNoneAuthenticate(path);
+            }
+        }
+
+        private static void DeleteDirectoryWithNoneAuthenticate(string path)
         {
             var directories = Directory.GetDirectories(path);
             var directoryLength = directories.Length;
@@ -38,6 +87,35 @@ namespace Fanex.Service.Core.Extensions
                 {
                     var directory = directories[i];
                     Directory.Delete(directory, true);
+                }
+            }
+        }
+
+        private static void DeleteDirectoryWithAuthenticate(string path)
+        {
+            string ip = AppSettingBase.IP;
+            string password = AppSettingBase.Password;
+            string username = AppSettingBase.UserName;
+
+            if (AppSettingBase.IsEncryptPassword)
+            {
+                password = Cryptography.CfsDeCrypt(password);
+            }
+
+            NetworkCredential networkCredential = new NetworkCredential(username, password);
+
+            using (new NetworkConnection(@"\\" + ip, networkCredential))
+            {
+                var directories = Directory.GetDirectories(path);
+                var directoryLength = directories.Length;
+                if (directoryLength > _MaxNumberOfDirectories)
+                {
+                    //// Delete old data. Remain 3 lasted month data.
+                    for (int i = 0; i < directoryLength - _MaxNumberOfDirectories; i++)
+                    {
+                        var directory = directories[i];
+                        Directory.Delete(directory, true);
+                    }
                 }
             }
         }
