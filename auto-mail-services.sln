@@ -67,6 +67,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.AutoMailRep
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.HorseRacingReport.Testing", "Fanex.NAPReport.HorseRacingReport.Testing\Fanex.NAPReport.HorseRacingReport.Testing.csproj", "{9CE3B48A-A440-439C-9BA8-0BBA81A4D4A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NapReport.Forms.Testing", "Fanex.NapReport.Forms.Testing\Fanex.NapReport.Forms.Testing.csproj", "{C61EA993-A413-4F47-A5EC-5E3CBF148592}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -297,6 +299,16 @@ Global
 		{9CE3B48A-A440-439C-9BA8-0BBA81A4D4A4}.Release|Mixed Platforms.Build.0 = Release|x86
 		{9CE3B48A-A440-439C-9BA8-0BBA81A4D4A4}.Release|x86.ActiveCfg = Release|x86
 		{9CE3B48A-A440-439C-9BA8-0BBA81A4D4A4}.Release|x86.Build.0 = Release|x86
+		{C61EA993-A413-4F47-A5EC-5E3CBF148592}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{C61EA993-A413-4F47-A5EC-5E3CBF148592}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{C61EA993-A413-4F47-A5EC-5E3CBF148592}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{C61EA993-A413-4F47-A5EC-5E3CBF148592}.Debug|x86.ActiveCfg = Debug|x86
+		{C61EA993-A413-4F47-A5EC-5E3CBF148592}.Debug|x86.Build.0 = Debug|x86
+		{C61EA993-A413-4F47-A5EC-5E3CBF148592}.Release|Any CPU.ActiveCfg = Release|x86
+		{C61EA993-A413-4F47-A5EC-5E3CBF148592}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{C61EA993-A413-4F47-A5EC-5E3CBF148592}.Release|Mixed Platforms.Build.0 = Release|x86
+		{C61EA993-A413-4F47-A5EC-5E3CBF148592}.Release|x86.ActiveCfg = Release|x86
+		{C61EA993-A413-4F47-A5EC-5E3CBF148592}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -324,5 +336,6 @@ Global
 		{E1A6904E-FD26-47CE-A1EB-4A6E8F3126E6} = {ADC782A9-F916-4F43-9E28-B8C6D7579D55}
 		{FBA40037-31BF-4EC0-98F5-09CF8067457E} = {DD647794-42ED-4DBB-82FF-75040CE2D8D0}
 		{9CE3B48A-A440-439C-9BA8-0BBA81A4D4A4} = {DD647794-42ED-4DBB-82FF-75040CE2D8D0}
+		{C61EA993-A413-4F47-A5EC-5E3CBF148592} = {DD647794-42ED-4DBB-82FF-75040CE2D8D0}
 	EndGlobalSection
 EndGlobal
