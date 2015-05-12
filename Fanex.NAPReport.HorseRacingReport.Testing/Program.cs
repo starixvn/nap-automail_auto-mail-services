@@ -28,7 +28,7 @@ namespace Fanex.NAPReport.HorseRacingReport.Testing
             var root = AppDomain.CurrentDomain.BaseDirectory;
             string filePath = root + EmailTemplateConstants.RacingReportEmailTemplate;
             string template = File.ReadAllText(filePath);
-            var emailContent = Razor.Parse(template, timeRangeCriteria);            
+            var emailContent = Razor.Parse(template, timeRangeCriteria);
             string emailSubject = string.Format(
                 AppSettings.Subject,
                 timeRangeCriteria.FromDate.ToShortFormatedDateWithSlash(),

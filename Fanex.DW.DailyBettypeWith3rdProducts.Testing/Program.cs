@@ -1,16 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Fanex.Data.Configuration;
-using Fanex.DW.DailyBettypeWith3rdProducts.Business.Service;
 using Fanex.DW.DailyBettypeWith3rdProducts.Business.Resource;
+using Fanex.DW.DailyBettypeWith3rdProducts.Business.Service;
 using Fanex.MailDelivery.Client.Models;
-using System.Collections.Generic;
 
 namespace Fanex.DW.DailyBettypeWith3rdProducts.Testing
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
             DbSettingProviderManager.Current.Start();
@@ -30,7 +30,6 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Testing
             mail.Attachments.Add(new MailAttachment(@service.GetFileName, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
             service.GenerateReport(true);
             mail.Attachments.Add(new MailAttachment(@service.GetFileName, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
-
 
             Console.WriteLine("Done at " + DateTime.Now.ToString());
             Console.ReadLine();

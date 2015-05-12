@@ -7,9 +7,9 @@
 namespace Fanex.Service.Core.Extensions
 {
     using System.IO;
-    using Fanex.Service.Core.Utilities;
-    using Fanex.Common;
     using System.Net;
+    using Fanex.Common;
+    using Fanex.Service.Core.Utilities;
 
     /// <summary>
     /// TODO: Update summary.

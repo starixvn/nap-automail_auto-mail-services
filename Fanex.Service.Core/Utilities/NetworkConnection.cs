@@ -7,12 +7,9 @@
 namespace Fanex.Service.Core.Utilities
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Runtime.InteropServices;
-    using System.Net;
     using System.ComponentModel;
+    using System.Net;
+    using System.Runtime.InteropServices;
 
     /// <summary>
     /// TODO: Update summary.
@@ -141,42 +138,42 @@ namespace Fanex.Service.Core.Utilities
         /// <summary>
         /// Resource scope.
         /// </summary>
-        public ResourceScope Scope;
+        public ResourceScope Scope { get; set; }
 
         /// <summary>
         /// Resource type.
         /// </summary>
-        public ResourceType ResourceType;
+        public ResourceType ResourceType { get; set; }
 
         /// <summary>
         /// Display type.
         /// </summary>
-        public ResourceDisplaytype DisplayType;
+        public ResourceDisplaytype DisplayType { get; set; }
 
         /// <summary>
         /// The usage.
         /// </summary>
-        public int Usage;
+        public int Usage { get; set; }
 
         /// <summary>
         /// The local name.
         /// </summary>
-        public string LocalName;
+        public string LocalName { get; set; }
 
         /// <summary>
         /// The remote name.
         /// </summary>
-        public string RemoteName;
+        public string RemoteName { get; set; }
 
         /// <summary>
         /// The comment.
         /// </summary>
-        public string Comment;
+        public string Comment { get; set; }
 
         /// <summary>
         /// The provider.
         /// </summary>
-        public string Provider;
+        public string Provider { get; set; }
     }
 
     /// <summary>
@@ -185,7 +182,8 @@ namespace Fanex.Service.Core.Utilities
     [System.CodeDom.Compiler.GeneratedCodeAttribute("T4", "1.0.0.0")]
     public class NetworkConnection : IDisposable
     {
-        string _networkName;
+        private string _networkName;
+
         public NetworkConnection(string networkName, NetworkCredential credentials)
         {
             _networkName = networkName;

@@ -8,8 +8,8 @@ namespace Fanex.Service.Core.Extensions
 {
     using System;
     using Fanex.Logging;
-    using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Service.Impl;
+    using Fanex.NAP.Core.Service.Interface;
 
     /// <summary>
     /// TODO: Update summary.
@@ -33,8 +33,9 @@ namespace Fanex.Service.Core.Extensions
                     Logger.Log.Error(message);
                 }
             }
-            catch
+            catch (Exception exception)
             {
+                Logger.Log.Error(exception.ToString());
             }
         }
     }

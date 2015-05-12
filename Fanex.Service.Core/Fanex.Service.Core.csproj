@@ -98,6 +98,8 @@
     <Compile Include="Extensions\LogExtensions.cs" />
     <Compile Include="Extensions\NPOIExtension.cs" />
     <Compile Include="Extensions\NPOIHighVersion.cs" />
+    <Compile Include="Extensions\NpoiNewFormatExcelExtension.cs" />
+    <Compile Include="Extensions\NpoiOldFormatExcelExtension.cs" />
     <Compile Include="Extensions\NumberExtensions.cs" />
     <Compile Include="Labels.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -105,9 +107,65 @@
       <DependentUpon>Labels.resx</DependentUpon>
     </Compile>
     <Compile Include="Model\BalanceUp.cs" />
+    <Compile Include="Model\Cell.cs" />
+    <Compile Include="Model\NpoiBase\BackgroundInformationBase.cs" />
+    <Compile Include="Model\NpoiBase\BorderInformationBase.cs" />
+    <Compile Include="Model\NpoiBase\FontInformationBase.cs" />
+    <Compile Include="Model\NpoiNewFormat\AlignmentInformation.cs" />
+    <Compile Include="Model\NpoiNewFormat\BackgroundInformation.cs" />
+    <Compile Include="Model\NpoiNewFormat\BorderInformation.cs" />
+    <Compile Include="Model\NpoiNewFormat\FontInformation.cs" />
+    <Compile Include="Model\NpoiOldFormat\AlignmentInformation.cs" />
+    <Compile Include="Model\NpoiOldFormat\BackgroundInformation.cs" />
+    <Compile Include="Model\NpoiOldFormat\BorderInformation.cs" />
+    <Compile Include="Model\NpoiOldFormat\FontInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Implement\NewFormat\BodyCellStyle\CellDecimalNumberStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Implement\NewFormat\BodyCellStyle\CellNumberStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Implement\NewFormat\BodyCellStyle\CellTextStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Implement\NewFormat\BodyCellStyle\CelPercentageStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Implement\NewFormat\CustomCellStyle\CellDecimalNumberStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Implement\NewFormat\CustomCellStyle\CellNumberStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Implement\NewFormat\CustomCellStyle\CellTextStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Implement\NewFormat\CustomCellStyle\CelPercentageStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Implement\OldFormat\BodyCellStyle\CellDecimalNumberStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Implement\OldFormat\BodyCellStyle\CellNumberStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Implement\OldFormat\BodyCellStyle\CellTextStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Implement\OldFormat\BodyCellStyle\CelPercentageStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Implement\OldFormat\CustomCellStyle\CellDecimalNumberStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Implement\OldFormat\CustomCellStyle\CellNumberStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Implement\OldFormat\CustomCellStyle\CellTextStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Implement\OldFormat\CustomCellStyle\CelPercentageStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Interface\NewFormat\BodyCellStyle\ICellDecimalNumberStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Interface\NewFormat\BodyCellStyle\ICellNumberStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Interface\NewFormat\BodyCellStyle\ICellTextStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Interface\NewFormat\BodyCellStyle\ICelPercentageStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Interface\NewFormat\CustomCellStyle\ICellDecimalNumberStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Interface\NewFormat\CustomCellStyle\ICellNumberStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Interface\NewFormat\CustomCellStyle\ICellTextStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Interface\NewFormat\CustomCellStyle\ICelPercentageStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Interface\OldFormat\BodyCellStyle\ICellDecimalNumberStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Interface\OldFormat\BodyCellStyle\ICellNumberStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Interface\OldFormat\BodyCellStyle\ICellTextStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Interface\OldFormat\BodyCellStyle\ICelPercentageStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Interface\OldFormat\CustomCellStyle\ICellDecimalNumberStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Interface\OldFormat\CustomCellStyle\ICellNumberStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Interface\OldFormat\CustomCellStyle\ICellTextStyle.cs" />
+    <Compile Include="Repositories\Npoi\CellStyle\Interface\OldFormat\CustomCellStyle\ICelPercentageStyle.cs" />
     <Compile Include="Service\BaseService.cs" />
     <Compile Include="Service\CacheRef.cs" />
+    <Compile Include="Service\Implement\Npoi\NpoiNewFormatBodyCellStyleService.cs" />
+    <Compile Include="Service\Implement\Npoi\NpoiNewFormatCustomCellStyleService.cs" />
+    <Compile Include="Service\Implement\Npoi\NpoiNewFormatFontService.cs" />
+    <Compile Include="Service\Implement\Npoi\NpoiOldFormatBodyCellStyleService.cs" />
+    <Compile Include="Service\Implement\Npoi\NpoiOldFormatCustomCellStyleService.cs" />
+    <Compile Include="Service\Implement\Npoi\NpoiOldFormatFontService.cs" />
+    <Compile Include="Service\Interface\Npoi\INpoiNewFormatCustomCellStyleService.cs" />
+    <Compile Include="Service\Interface\Npoi\INpoiNewFormatFontService.cs" />
+    <Compile Include="Service\Interface\Npoi\INpoiNewFormatBodyCellStyleService.cs" />
+    <Compile Include="Service\Interface\Npoi\INpoiOldFormatCustomCellStyleService.cs" />
+    <Compile Include="Service\Interface\Npoi\INpoiOldFormatFontService.cs" />
+    <Compile Include="Service\Interface\Npoi\INpoiOldFormatBodyCellStyleService.cs" />
     <Compile Include="Utilities\AppSettingBase.cs" />
     <Compile Include="Utilities\Impersonate.cs" />
     <Compile Include="Utilities\NetworkConnection.cs" />
@@ -122,6 +180,7 @@
       <LastGenOutput>Labels.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

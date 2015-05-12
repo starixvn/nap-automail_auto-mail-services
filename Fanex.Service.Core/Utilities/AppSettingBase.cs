@@ -7,9 +7,6 @@
 namespace Fanex.Service.Core.Utilities
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Configuration;
 
     /// <summary>
@@ -62,23 +59,25 @@ namespace Fanex.Service.Core.Utilities
             }
         }
 
-        protected static string GetSettingValueByKey(string key)
-        {
-            var val = ConfigurationManager.AppSettings[key];
-            return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings[key]);
-        }
-
         public static string ExcelPassword
         {
-            get 
+            get
             {
                 return GetSettingValueByKey("ExcelPassword");
             }
         }
 
+        public static string ServiceName
+        {
+            get
+            {
+                return GetSettingValueByKey("ServiceName");
+            }
+        }
+
         protected static string ExportDataDirectory(string key)
         {
-            string path = AppSettingBase.GetSettingValueByKey(key); 
+            string path = AppSettingBase.GetSettingValueByKey(key);
             string month = DateTime.Today.Month < 10
                 ? "0" + DateTime.Today.Month
                 : DateTime.Today.Month + string.Empty;
@@ -88,12 +87,10 @@ namespace Fanex.Service.Core.Utilities
             return path;
         }
 
-        public static string ServiceName
+        protected static string GetSettingValueByKey(string key)
         {
-            get 
-            {
-                return GetSettingValueByKey("ServiceName");
-            }
+            var val = ConfigurationManager.AppSettings[key];
+            return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings[key]);
         }
     }
 }

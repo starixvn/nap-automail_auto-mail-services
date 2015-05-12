@@ -7,11 +7,8 @@
 namespace Fanex.Service.Core.Utilities
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Security.Principal;
     using System.Runtime.InteropServices;
+    using System.Security.Principal;
     using Fanex.Logging;
 
     /// <summary>
@@ -20,25 +17,28 @@ namespace Fanex.Service.Core.Utilities
     [System.CodeDom.Compiler.GeneratedCodeAttribute("T4", "1.0.0.0")]
     public class Impersonate
     {
-
         #region "Class Members"
+
         public const int LOGON32_LOGON_INTERACTIVE = 2;
         public const int LOGON32_PROVIDER_DEFAULT = 0;
-        WindowsImpersonationContext _impersonationContext;
-        #endregion
+        private WindowsImpersonationContext _impersonationContext;
+
+        #endregion "Class Members"
 
         #region "Class Properties"
+
         public string domainName { get; set; }
+
         public string userName { get; set; }
+
         public string userPassword { get; set; }
-        #endregion
+
+        #endregion "Class Properties"
 
         public Impersonate()
         {
-            //
-            // TODO: Add constructor logic here
-            //
         }
+
         public Impersonate(string domainName, string userName, string userPassword)
         {
             this.domainName = domainName;
@@ -47,8 +47,10 @@ namespace Fanex.Service.Core.Utilities
         }
 
         #region "Impersonation Code"
+
         [DllImport("advapi32.dll")]
-        public static extern int LogonUserA(String lpszUserName,
+        public static extern int LogonUserA(
+            String lpszUserName,
             String lpszDomain,
             String lpszPassword,
             int dwLogonType,
@@ -56,7 +58,8 @@ namespace Fanex.Service.Core.Utilities
             ref IntPtr phToken);
 
         [DllImport("advapi32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern int DuplicateToken(IntPtr hToken,
+        public static extern int DuplicateToken(
+            IntPtr hToken,
             int impersonationLevel,
             ref IntPtr hNewToken);
 
@@ -78,8 +81,13 @@ namespace Fanex.Service.Core.Utilities
 
             if (RevertToSelf())
             {
-                if (LogonUserA(this.userName, this.domainName, this.userPassword, LOGON32_LOGON_INTERACTIVE,
-                    LOGON32_PROVIDER_DEFAULT, ref token) != 0)
+                if (LogonUserA(
+                    this.userName, 
+                    this.domainName, 
+                    this.userPassword,
+                    LOGON32_LOGON_INTERACTIVE,
+                    LOGON32_PROVIDER_DEFAULT,
+                    ref token) != 0)
                 {
                     if (DuplicateToken(token, 2, ref tokenDuplicate) != 0)
                     {
@@ -95,10 +103,17 @@ namespace Fanex.Service.Core.Utilities
                     }
                 }
             }
+
             if (token != IntPtr.Zero)
+            {
                 CloseHandle(token);
+            }
+
             if (tokenDuplicate != IntPtr.Zero)
+            {
                 CloseHandle(tokenDuplicate);
+            }
+
             LogService.Debug("Impersonate unsuccessful with user \"" + this.userName + "\"");
             return false;
         }
@@ -107,8 +122,8 @@ namespace Fanex.Service.Core.Utilities
         {
             _impersonationContext.Undo();
         }
-        #endregion
 
+        #endregion "Impersonation Code"
 
         public bool TestConnection(string domainName, string userName, string userPassword)
         {
