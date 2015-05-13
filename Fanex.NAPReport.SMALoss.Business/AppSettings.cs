@@ -44,7 +44,7 @@
             {
                 if (title == null)
                 {
-                    title = GetValue("Title");
+                    title = GetValue("HorseRacingReport.Subject");
                 }
 
                 return title;
@@ -55,12 +55,7 @@
         {
             get
             {
-                if (subject == null)
-                {
-                    subject = GetValue("Subject");
-                }
-
-                return subject;
+                return GetSettingValueByKey("HorseRacingReport.Subject");
             }
         }
 

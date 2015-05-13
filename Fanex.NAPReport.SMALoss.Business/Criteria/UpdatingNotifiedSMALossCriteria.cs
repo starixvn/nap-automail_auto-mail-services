@@ -1,14 +1,13 @@
-﻿namespace Fanex.NAPReport.SMALoss.Business.Entities
+﻿namespace Fanex.NAPReport.SMALoss.Business.Criteria
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Fanex.NAP.Framework.Data;
+    using Fanex.NAPReport.SMALoss.Business.Entities;
 
-    /// <summary>
-    /// Entity contains data that are needed for updating notification status.
-    /// </summary>
-    public class UpdatingNotifiedSMALoss
+    public class UpdatingNotifiedSMALossCriteria : CriteriaBase
     {
-        public UpdatingNotifiedSMALoss(IEnumerable<SMALoss> turnovers)
+        public UpdatingNotifiedSMALossCriteria(IEnumerable<SMALoss> turnovers)
         {
             this.SMAIDs = string.Empty;
 
@@ -29,11 +28,7 @@
 
         public string ErrMsg { get; set; }
 
-        /// <summary>
-        /// Determines whether this instance is valid.
-        /// </summary>
-        /// <returns>Boolean value.</returns>
-        public bool IsValid()
+        public override bool IsValid()
         {
             return !string.IsNullOrEmpty(this.SMAIDs);
         }

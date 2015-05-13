@@ -8,7 +8,7 @@
     using Fanex.NAPReport.SMALoss.Business.Entities;
     using Fanex.Service.Core.Service;
 
-    public class SMALossService : ISMALossService
+    public class SMALossService : ServiceBase, ISMALossService
     {
         /// <summary>
         /// Gets the receivers.
@@ -23,63 +23,21 @@
         /// <summary>
         /// Gets the SMA list that reached the max loss limit.
         /// </summary>
+        /// <param name="criteria">Criteria value.</param>
         /// <returns>List of SMALoss objects.</returns>
-        public IEnumerable<SMALoss> GetNotifiedSMALoss()
+        public IEnumerable<SMALoss> GetNotifiedSMALoss(MonitorListCriteria criteria)
         {
-            IEnumerable<SMALoss> result = null;
-
-            using (var objDB = new ObjectDb("NAP_LimitLoss_MonitorList"))
-            {
-                result = objDB.Query<SMALoss>();
-            }
-
-            return result;
+            return GetEntites<SMALoss>(criteria);
         }
 
         /// <summary>
         /// Gets the list of set loss levels.
         /// </summary>
+        /// <param name="criteria">Criteria value.</param>
         /// <returns>List of SMALossLevel objects.</returns>
-        public IEnumerable<SMALossLevel> GetSMALossLevels()
+        public IEnumerable<SMALossLevel> GetSMALossLevels(LimitLossActionConfigCriteria criteria)
         {
-            IEnumerable<SMALossLevel> result = null;
-
-            using (var objDB = new ObjectDb("NAP_LimitLoss_ActionConfigSel"))
-            {
-                result = objDB.Query<SMALossLevel>();
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Updates the notified status.
-        /// </summary>
-        /// <param name="updatingData">The updating data object contains up-to-date data.</param>
-        public void UpdateNotifiedStatus(UpdatingNotifiedSMALoss updatingData)
-        {
-            Hashtable output = null;
-
-            using (var objDB = new ObjectDb("NAP_LimitLoss_IsNotifiedUpd"))
-            {
-                objDB.AddInParameter("SMAIDs", DbType.String, updatingData.SMAIDs);
-                objDB.AddOutParameter("ErrCode", DbType.Int32, 4);
-                objDB.AddOutParameter("ErrMsg", DbType.String, 400);
-
-                objDB.ExecuteNonQuery();
-
-                output = objDB.GetOuputParams();
-
-                if (output.ContainsKey("errcode"))
-                {
-                    updatingData.ErrCode = Converter.ToInt(output["errorcode"]);
-                }
-
-                if (output.ContainsKey("errmsg"))
-                {
-                    updatingData.ErrMsg = Converter.ToString2(output["errmsg"]);
-                }
-            }
+            return GetEntites<SMALossLevel>(criteria);
         }
     }
 }

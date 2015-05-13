@@ -1,4 +1,4 @@
-﻿namespace Fanex.NapReport.Forms.Testing
+﻿namespace Fanex.Forms.Testing
 {
     partial class Main
     {

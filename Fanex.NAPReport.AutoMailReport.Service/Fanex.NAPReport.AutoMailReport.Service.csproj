@@ -115,6 +115,7 @@
       <DependentUpon>AutomailService.cs</DependentUpon>
     </Compile>
     <Compile Include="Jobs\NAPReport\HorseRacingReport.cs" />
+    <Compile Include="Jobs\NAPReport\SMALoss.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -154,11 +155,18 @@
     <Content Include="Templates\NotificationEmailTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Templates\SMALossTemplate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.NAPReport.HorseRacingReport.Business\Fanex.NAPReport.HorseRacingReport.Business.csproj">
       <Project>{AFE10301-BCFD-4D11-885C-A43A46B5B2BF}</Project>
       <Name>Fanex.NAPReport.HorseRacingReport.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.NAPReport.SMALoss.Business\Fanex.NAPReport.SMALoss.Business.csproj">
+      <Project>{DA6DE65A-5D27-4B28-A928-422B664502C2}</Project>
+      <Name>Fanex.NAPReport.SMALoss.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.Service.Core\Fanex.Service.Core.csproj">
       <Project>{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}</Project>

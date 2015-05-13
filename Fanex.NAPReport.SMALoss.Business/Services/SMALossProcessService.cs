@@ -2,9 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
-    using System.Text;
+    using Fanex.MailDelivery.Client.Models;
+    using Fanex.NAPReport.SMALoss.Business.Criteria;
     using Fanex.NAPReport.SMALoss.Business.Entities;
+    using RazorEngine;
 
     public class SMALossProcessService
     {
@@ -12,6 +15,22 @@
         private const string DownwardArrowUrl = @"/Templates/Images/DownardArrow.png";
         private const string HorizontalLineUrl = @"/Templates/Images/HorizontalLine.png";
         private string _template = null;
+        private readonly ISMALossService _lossService = null;
+
+        public SMALossProcessService()
+            : this(null)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SportsbookController" /> class.
+        /// </summary>
+        /// <param name="lossService">SMA loss service.</param>
+        private SMALossProcessService(
+            ISMALossService lossService)
+        {
+            _lossService = lossService ?? new SMALossService();
+        }
 
         /// <summary>
         /// Notifies the email.
@@ -25,7 +44,7 @@
             var timezoneInd = DateTime.Now.IsDaylightSavingTime() ? offset - 1 : offset;
             var subject = string.Format(AppSettings.Subject, DateTime.Now, string.Format("{0}{1}", timezoneInd > 0 ? "+" : string.Empty, timezoneInd));
             var recipients = GetRecipients();
-            IEnumerable<FormattedSMALossGroup> lossItems = GetReachedSMALoss();
+            var lossItems = GetReachedSMALoss();
 
             if (recipients != null && !string.IsNullOrEmpty(recipients.ToList) && lossItems != null && lossItems.Any())
             {
@@ -67,7 +86,7 @@
         /// <returns>Recipients object.</returns>
         private Recipients GetRecipients()
         {
-            var recipients = this._repository.GetReceivers(AppSettings.FunctionID);
+            var recipients = _lossService.GetReceivers(new MailingListSelCriteria { FuncId = AppSettings.FunctionID });
 
             recipients = recipients.IsAvailabe != 0 ? recipients : null;
 
@@ -80,7 +99,7 @@
         /// <returns>List of FormattedSMALossGroup objects.</returns>
         private IEnumerable<FormattedSMALossGroup> GetReachedSMALoss()
         {
-            IEnumerable<SMALoss> rawData = this._repository.GetNotifiedSMALoss();
+            IEnumerable<SMALoss> rawData = _lossService.GetNotifiedSMALoss(new MonitorListCriteria());
             List<FormattedSMALossLevelItem> levels = this.GetSMALossLevels();
             List<FormattedSMALossGroup> result = null;
 
@@ -114,61 +133,70 @@
             return result;
         }
 
-        ///// <summary>
-        ///// Gets the SMA loss levels.
-        ///// </summary>
-        ///// <returns>List of SMALossLevelItem objects.</returns>
-        //private List<FormattedSMALossLevelItem> GetSMALossLevels()
-        //{
-        //    IEnumerable<SMALossLevel> rawData = this._repository.GetSMALossLevels();
-        //    List<FormattedSMALossLevelItem> result = null;
+        /// <summary>
+        /// Gets the SMA loss levels.
+        /// </summary>
+        /// <returns>List of SMALossLevelItem objects.</returns>
+        private List<FormattedSMALossLevelItem> GetSMALossLevels()
+        {
+            IEnumerable<SMALossLevel> rawData = this._lossService.GetSMALossLevels(new LimitLossActionConfigCriteria());
+            List<FormattedSMALossLevelItem> result = null;
 
-        //    if (rawData.Any())
-        //    {
-        //        SMALossLevel higherLevel = null;
+            if (rawData.Any())
+            {
+                SMALossLevel higherLevel = null;
 
-        //        rawData = rawData.OrderByDescending(obj => obj.LevelID);
-        //        result = new List<FormattedSMALossLevelItem>();
+                rawData = rawData.OrderByDescending(obj => obj.LevelID);
+                result = new List<FormattedSMALossLevelItem>();
 
-        //        foreach (SMALossLevel level in rawData)
-        //        {
-        //            result.Add(new FormattedSMALossLevelItem(level, higherLevel));
-        //            higherLevel = level;
-        //        }
-        //    }
+                foreach (SMALossLevel level in rawData)
+                {
+                    result.Add(new FormattedSMALossLevelItem(level, higherLevel));
+                    higherLevel = level;
+                }
+            }
 
-        //    return result;
-        //}
+            return result;
+        }
 
-        ///// <summary>
-        ///// Sends the mail.
-        ///// </summary>
-        ///// <param name="content">The content.</param>
-        //private void SendMail(EmailContent content)
-        //{
-        //    using (var client = new MailDeliver())
-        //    {
-        //        var mailItem = new MailRecord
-        //        {
-        //            MailTo = content.Recievers.ToList,
-        //            MailCc = content.Recievers.CcList,
-        //            MailBcc = content.Recievers.BccList,
-        //            Title = content.Title,
-        //            Subject = content.Subject,
-        //            Body = content.Body
-        //        };
-        //        string appLocation = AppDomain.CurrentDomain.BaseDirectory;
-        //        var upwardArrow = new MailLinkedResource(appLocation + UpwardArrowUrl, FileExtentions.IMG_PNG, "lruworradrawpu");
-        //        var downwardArrow = new MailLinkedResource(appLocation + DownwardArrowUrl, FileExtentions.IMG_PNG, "lruworradrawnwod");
-        //        var horizontalLineArrow = new MailLinkedResource(appLocation + HorizontalLineUrl, FileExtentions.IMG_PNG, "lruworradrawenillatnoziroh");
+        /// <summary>
+        /// Sends the mail.
+        /// </summary>
+        /// <param name="content">The content.</param>
+        private void SendMail(EmailContent content)
+        {
+            var mail = new Mail()
+            {
+                Subject = content.Subject,
+                Title = content.Title,
+                Body = content.Body
+            };
 
-        //        mailItem.AlternateView = new List<MailLinkedResource>();
-        //        mailItem.AlternateView.Add(upwardArrow);
-        //        mailItem.AlternateView.Add(downwardArrow);
-        //        mailItem.AlternateView.Add(horizontalLineArrow);
+            //mail.Attachments = new List<MailAttachment>();
+            //mail.Attachments.Add(new MailAttachment(@service.ReportZipFolderPath, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
+            //using (var client = new Mail())
+            //{
+            //    var mailItem = new MailRecord
+            //    {
+            //        MailTo = content.Recievers.ToList,
+            //        MailCc = content.Recievers.CcList,
+            //        MailBcc = content.Recievers.BccList,
+            //        Title = content.Title,
+            //        Subject = content.Subject,
+            //        Body = content.Body
+            //    };
+            //    string appLocation = AppDomain.CurrentDomain.BaseDirectory;
+            //    var upwardArrow = new MailLinkedResource(appLocation + UpwardArrowUrl, FileExtentions.IMG_PNG, "lruworradrawpu");
+            //    var downwardArrow = new MailLinkedResource(appLocation + DownwardArrowUrl, FileExtentions.IMG_PNG, "lruworradrawnwod");
+            //    var horizontalLineArrow = new MailLinkedResource(appLocation + HorizontalLineUrl, FileExtentions.IMG_PNG, "lruworradrawenillatnoziroh");
 
-        //        client.SendMail(mailItem);
-        //    }
-        //}
+            //    mailItem.AlternateView = new List<MailLinkedResource>();
+            //    mailItem.AlternateView.Add(upwardArrow);
+            //    mailItem.AlternateView.Add(downwardArrow);
+            //    mailItem.AlternateView.Add(horizontalLineArrow);
+
+            //    client.SendMail(mailItem);
+            //}
+        }
     }
 }

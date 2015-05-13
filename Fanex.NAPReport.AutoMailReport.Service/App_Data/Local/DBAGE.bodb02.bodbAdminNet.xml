@@ -5,4 +5,10 @@
     <Setting Key="NAP_ExchangeCurrencySel" SpName="NAP_ExchangeCurrencySel" DbName="DBAGE.bodb02.bodbAdminNet">
     </Setting>
   </Function>
+
+  <Function Name="SMA Loss Automail">
+    <Setting Key="NAP_LimitLoss_MonitorList" SpName="NAP_LimitLoss_MonitorList" DbName="DBAGE.bodb02.bodbAdminNet" />
+    <Setting Key="NAP_LimitLoss_ActionConfigSel" SpName="NAP_LimitLoss_ActionConfigSel" DbName="DBAGE.bodb02.bodbAdminNet"></Setting>
+    <Setting Key="Acc_MailingListSel" SpName="Acc_MailingListSel" DbName="DBACC.bodb_ACC.bodbAdminNet" />
+  </Function>
 </Functions>
