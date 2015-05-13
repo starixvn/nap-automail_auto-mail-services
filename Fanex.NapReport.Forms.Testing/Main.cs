@@ -18,7 +18,6 @@ namespace Fanex.NapReport.Forms.Testing
 
         private void bntStart_Click(object sender, EventArgs e)
         {
-
         }
     }
 }
