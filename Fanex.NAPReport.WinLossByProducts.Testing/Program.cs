@@ -1,12 +1,12 @@
-﻿using System;
-using System.IO;
-using Fanex.Data.Configuration;
-using Fanex.WinLossByProducts.Business.Criteria;
-using Fanex.WinLossByProducts.Business.Services.Implement;
-using Fanex.WinLossByProducts.Business.Services.Interface;
-
-namespace Fanex.NAPReport.WinLossByProducts.Testing
+﻿namespace Fanex.NAPReport.WinLossByProducts.Testing
 {
+    using System;
+    using System.IO;
+    using Fanex.Data.Configuration;
+    using Fanex.WinLossByProducts.Business.Criteria;
+    using Fanex.WinLossByProducts.Business.Services.Implement;
+    using Fanex.WinLossByProducts.Business.Services.Interface;
+
     public class Program
     {
         public static void Main(string[] args)
