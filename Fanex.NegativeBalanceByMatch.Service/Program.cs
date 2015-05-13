@@ -12,7 +12,7 @@ namespace Fanex.NegativeBalanceByMatch.Service
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
                                 {
-                                    new AutomailService()
+                                    new AutoMailService()
                                 };
             ServiceBase.Run(ServicesToRun);
         }
