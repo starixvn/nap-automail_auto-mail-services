@@ -29,7 +29,7 @@ namespace Fanex.Service.Core.Service.Implement.Npoi
         {
             get
             {
-                return CreateFont(_workbook, new FontInformation());
+                return CreateFont(new FontInformation());
             }
         }
 
@@ -37,7 +37,7 @@ namespace Fanex.Service.Core.Service.Implement.Npoi
         {
             get
             {
-                return CreateBoldFont(_workbook, new FontInformation());
+                return CreateBoldFont(new FontInformation());
             }
         }
 
@@ -46,22 +46,22 @@ namespace Fanex.Service.Core.Service.Implement.Npoi
             get
             {
                 FontInformation fontInformation = new FontInformation(NPOIConstants.FontName, NPOIConstants.FontSize, HSSFColor.White.Index);
-                return CreateBoldFont(_workbook, fontInformation);
+                return CreateBoldFont(fontInformation);
             }
         }
 
-        public IFont CreateFont(HSSFWorkbook workbook, FontInformation fontInformation)
+        public IFont CreateFont(FontInformation fontInformation)
         {
-            IFont font = workbook.CreateFont();
+            IFont font = this._workbook.CreateFont();
             font.FontName = fontInformation.FontName;
             font.FontHeightInPoints = fontInformation.FontSize;
             font.Color = fontInformation.FontColor;
             return font;
         }
 
-        public IFont CreateBoldFont(HSSFWorkbook workbook, FontInformation fontInformation)
+        public IFont CreateBoldFont(FontInformation fontInformation)
         {
-            IFont font = CreateFont(workbook, fontInformation);
+            IFont font = CreateFont(fontInformation);
             font.Boldweight = (short)FontBoldWeight.Bold;
             return font;
         }

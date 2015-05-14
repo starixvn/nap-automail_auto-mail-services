@@ -20,8 +20,8 @@ namespace Fanex.Service.Core.Service.Interface.Npoi
 
         XSSFFont WhiteBoldFont { get; }
 
-        XSSFFont CreateFont(XSSFWorkbook workbook, FontInformation fontInformation);
+        XSSFFont CreateFont(FontInformation fontInformation);
 
-        XSSFFont CreateBoldFont(XSSFWorkbook workbook, FontInformation fontInformation);
+        XSSFFont CreateBoldFont(FontInformation fontInformation);
     }
 }

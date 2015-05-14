@@ -37,25 +37,24 @@ namespace Fanex.Service.Core.Extensions
 
         public static void RenderCell(
             XSSFSheet worksheet,
-            XSSFRow currentRow,
             Cell cell,
             XSSFCellStyle cellStyle)
         {
-            currentRow = worksheet.GetRow(cell.CurrentRow) as XSSFRow ?? worksheet.CreateRow(cell.CurrentRow) as XSSFRow;
+            XSSFRow currentRow = worksheet.GetRow(cell.CurrentRow) as XSSFRow ?? worksheet.CreateRow(cell.CurrentRow) as XSSFRow;
             currentRow.Height = NPOIConstants.RowHeight;
             XSSFCell currentCell = currentRow.GetCell(cell.CurrentColumn) as XSSFCell ?? currentRow.CreateCell(cell.CurrentColumn) as XSSFCell;
             NPOIUtility.SetCellValue(currentCell, cell.CellValue);
+            currentCell.CellStyle = cellStyle;
         }
 
         public static void RenderMergeCell(
           XSSFSheet worksheet,
-          XSSFRow currentRow,
           Cell cell,
           XSSFCellStyle cellStyle)
         {
             for (var rowIndex = cell.CurrentRow; rowIndex <= cell.EndRow; rowIndex++)
             {
-                currentRow = worksheet.GetRow(rowIndex) as XSSFRow ?? worksheet.CreateRow(rowIndex) as XSSFRow;
+                XSSFRow currentRow = worksheet.GetRow(rowIndex) as XSSFRow ?? worksheet.CreateRow(rowIndex) as XSSFRow;
                 currentRow.Height = NPOIConstants.RowHeight;
 
                 for (var cellIndex = cell.CurrentColumn; cellIndex <= cell.EndColumn; cellIndex++)

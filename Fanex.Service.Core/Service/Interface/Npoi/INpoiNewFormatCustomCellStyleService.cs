@@ -7,6 +7,7 @@
 namespace Fanex.Service.Core.Service.Interface.Npoi
 {
     using System.Drawing;
+    using Fanex.Service.Core.Model.NpoiBase;
     using Fanex.Service.Core.Model.NpoiNewFormat;
     using NPOI.XSSF.UserModel;
 
@@ -15,8 +16,6 @@ namespace Fanex.Service.Core.Service.Interface.Npoi
     /// </summary>
     public interface INpoiNewFormatCustomCellStyleService
     {
-        XSSFCellStyle CreateCellStyle(XSSFWorkbook workbook, BorderInformation border, BackgroundInformation background, AlignmentInformation alignment, XSSFFont font);
-
         XSSFCellStyle CreateLeftTextStyle(Color backgroundColor, XSSFFont font);
 
         XSSFCellStyle CreateRightTextStyle(Color backgroundColor, XSSFFont font);
@@ -48,5 +47,7 @@ namespace Fanex.Service.Core.Service.Interface.Npoi
         XSSFCellStyle CreateParenthesesPositivePercentageStyle(Color backgroundColor, XSSFFont font);
 
         XSSFCellStyle CreateParenthesesNegativePercentageStyle(Color backgroundColor, XSSFFont font);
+
+        XSSFCellStyle CreateCellStyle(BorderInformation border, BackgroundInformation background, AlignmentInformation alignment, XSSFFont font);
     }
 }

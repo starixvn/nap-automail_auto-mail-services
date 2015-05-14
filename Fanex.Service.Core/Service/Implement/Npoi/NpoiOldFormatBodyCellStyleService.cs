@@ -6,6 +6,7 @@
 
 namespace Fanex.Service.Core.Service.Implement.Npoi
 {
+    using Fanex.Service.Core.Model.NpoiBase;
     using Fanex.Service.Core.Model.NpoiOldFormat;
     using Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.OldFormat.BodyCellStyle;
     using Fanex.Service.Core.Repositories.Npoi.CellStyle.Interface.OldFormat.BodyCellStyle;

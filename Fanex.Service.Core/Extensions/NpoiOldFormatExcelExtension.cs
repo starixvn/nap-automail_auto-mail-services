@@ -37,26 +37,24 @@ namespace Fanex.Service.Core.Extensions
 
         public static void RenderCell(
             ISheet worksheet,
-            IRow row,
             Cell cell,
             ICellStyle cellStyle)
         {
-            row = worksheet.GetRow(cell.CurrentRow) ?? worksheet.CreateRow(cell.CurrentRow);
-            row.Height = NPOIConstants.RowHeight;
-            ICell currentCell = row.GetCell(cell.CurrentColumn) ?? row.CreateCell(cell.CurrentColumn);
+            IRow currentRow = worksheet.GetRow(cell.CurrentRow) ?? worksheet.CreateRow(cell.CurrentRow);
+            currentRow.Height = NPOIConstants.RowHeight;
+            ICell currentCell = currentRow.GetCell(cell.CurrentColumn) ?? currentRow.CreateCell(cell.CurrentColumn);
             NPOIUtility.SetCellValue(currentCell, cell.CellValue);
             currentCell.CellStyle = cellStyle;
         }
 
         public static void RenderMergeCell(
             ISheet worksheet,
-            IRow currentRow,
             Cell cell,
             ICellStyle cellStyle)
         {
             for (var rowIndex = cell.CurrentRow; rowIndex <= cell.EndRow; rowIndex++)
             {
-                currentRow = worksheet.GetRow(rowIndex) ?? worksheet.CreateRow(rowIndex);
+                IRow currentRow = worksheet.GetRow(rowIndex) ?? worksheet.CreateRow(rowIndex);
                 currentRow.Height = NPOIConstants.RowHeight;
 
                 for (var cellIndex = cell.CurrentColumn; cellIndex <= cell.EndColumn; cellIndex++)

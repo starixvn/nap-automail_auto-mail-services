@@ -1,10 +1,10 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="AlignmentInformation.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="AlignmentInformation.cs" company="Nexcel Solutions Vietnam.">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.Service.Core.Model.NpoiNewFormat
+namespace Fanex.Service.Core.Model.NpoiBase
 {
     using System;
     using System.Collections.Generic;

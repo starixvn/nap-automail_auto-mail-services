@@ -6,6 +6,7 @@
 
 namespace Fanex.Service.Core.Service.Interface.Npoi
 {
+    using Fanex.Service.Core.Model.NpoiBase;
     using Fanex.Service.Core.Model.NpoiNewFormat;
     using NPOI.XSSF.UserModel;
 

@@ -21,8 +21,8 @@ namespace Fanex.Service.Core.Service.Interface.Npoi
 
         IFont WhiteBoldFont { get; }
 
-        IFont CreateFont(HSSFWorkbook workbook, FontInformation fontInformation);
+        IFont CreateFont(FontInformation fontInformation);
 
-        IFont CreateBoldFont(HSSFWorkbook workbook, FontInformation fontInformation);
+        IFont CreateBoldFont(FontInformation fontInformation);
     }
 }

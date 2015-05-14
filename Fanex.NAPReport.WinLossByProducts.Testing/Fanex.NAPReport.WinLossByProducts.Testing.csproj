@@ -35,11 +35,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging">
+      <HintPath>..\_Dependencies\MailStation\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core">
+      <HintPath>..\_Dependencies\MailStation\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EasyNetQ">
+      <HintPath>..\_Dependencies\MailStation\EasyNetQ.dll</HintPath>
+    </Reference>
     <Reference Include="Fanex.Data">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Data.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.MailDeliver.MailClient">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.MailDeliver.MailClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.MailDelivery.Client">
+      <HintPath>..\_Dependencies\MailStation\Fanex.MailDelivery.Client.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.NAP.Core">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Core.dll</HintPath>
@@ -59,6 +71,15 @@
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging">
       <HintPath>..\_Dependencies\Entlib\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
     </Reference>
+    <Reference Include="Quartz">
+      <HintPath>..\_Dependencies\MailStation\Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client">
+      <HintPath>..\_Dependencies\MailStation\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine">
+      <HintPath>..\packages\RazorEngine.3.3.0\lib\net40\RazorEngine.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -73,13 +94,20 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fanex.WinLossByProducts.Business\Fanex.WinLossByProducts.Business.csproj">
-      <Project>{25CB500D-17F9-4031-8D5E-8981E58111A7}</Project>
-      <Name>Fanex.WinLossByProducts.Business</Name>
+    <ProjectReference Include="..\Fanex.NAPReport.WinLossByProducts.Business\Fanex.NAPReport.WinLossByProducts.Business.csproj">
+      <Project>{FA306BD2-0F8F-4453-AC72-92905D715DDE}</Project>
+      <Name>Fanex.NAPReport.WinLossByProducts.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.Service.Core\Fanex.Service.Core.csproj">
+      <Project>{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}</Project>
+      <Name>Fanex.Service.Core %28Fanex.Service.Core\Fanex.Service.Core%29</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Templates\WinLossByProductsEmailTemplate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\DBACC.bodb02.bodbAdminNet.xml">

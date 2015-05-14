@@ -7,6 +7,7 @@
 namespace Fanex.Service.Core.Service.Implement.Npoi
 {
     using System.Drawing;
+    using Fanex.Service.Core.Model.NpoiBase;
     using Fanex.Service.Core.Model.NpoiNewFormat;
     using Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.NewFormat.BodyCellStyle;
     using Fanex.Service.Core.Repositories.Npoi.CellStyle.Interface.NewFormat.BodyCellStyle;

@@ -14,6 +14,8 @@ namespace Fanex.WinLossByProducts.Business.Services.Interface
     /// </summary>
     public interface IWinLossByProductsExportDataService
     {
-        string ExportReportToExcel(WinLossByProducts report, GetWinLossByProductsCriteria criteria);
+        string ReportPath { get; }
+
+        void ExportReportToExcel(WinLossByProducts report, GetWinLossByProductsCriteria criteria);
     }
 }

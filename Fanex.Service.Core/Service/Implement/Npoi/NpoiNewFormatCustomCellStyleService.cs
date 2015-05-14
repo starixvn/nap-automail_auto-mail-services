@@ -7,6 +7,7 @@
 namespace Fanex.Service.Core.Service.Implement.Npoi
 {
     using System.Drawing;
+    using Fanex.Service.Core.Model.NpoiBase;
     using Fanex.Service.Core.Model.NpoiNewFormat;
     using Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.NewFormat.CustomCellStyle;
     using Fanex.Service.Core.Repositories.Npoi.CellStyle.Interface.NewFormat.CustomCellStyle;
@@ -35,9 +36,9 @@ namespace Fanex.Service.Core.Service.Implement.Npoi
             this._percentageStyle = new CelPercentageStyle(_workbook);
         }
 
-        public XSSFCellStyle CreateCellStyle(XSSFWorkbook workbook, BorderInformation border, BackgroundInformation background, AlignmentInformation alignment, XSSFFont font)
+        public XSSFCellStyle CreateCellStyle(BorderInformation border, BackgroundInformation background, AlignmentInformation alignment, XSSFFont font)
         {
-            XSSFCellStyle cellStyle = workbook.CreateCellStyle() as XSSFCellStyle;
+            XSSFCellStyle cellStyle = this._workbook.CreateCellStyle() as XSSFCellStyle;
             cellStyle.BorderLeft = (BorderStyle)border.LeftBorderStyle;
             cellStyle.BorderTop = (BorderStyle)border.TopBorderStyle;
             cellStyle.BorderRight = (BorderStyle)border.RightBorderStyle;

@@ -108,14 +108,13 @@
     </Compile>
     <Compile Include="Model\BalanceUp.cs" />
     <Compile Include="Model\Cell.cs" />
+    <Compile Include="Model\NpoiBase\AlignmentInformation.cs" />
     <Compile Include="Model\NpoiBase\BackgroundInformationBase.cs" />
     <Compile Include="Model\NpoiBase\BorderInformationBase.cs" />
     <Compile Include="Model\NpoiBase\FontInformationBase.cs" />
-    <Compile Include="Model\NpoiNewFormat\AlignmentInformation.cs" />
     <Compile Include="Model\NpoiNewFormat\BackgroundInformation.cs" />
     <Compile Include="Model\NpoiNewFormat\BorderInformation.cs" />
     <Compile Include="Model\NpoiNewFormat\FontInformation.cs" />
-    <Compile Include="Model\NpoiOldFormat\AlignmentInformation.cs" />
     <Compile Include="Model\NpoiOldFormat\BackgroundInformation.cs" />
     <Compile Include="Model\NpoiOldFormat\BorderInformation.cs" />
     <Compile Include="Model\NpoiOldFormat\FontInformation.cs" />
@@ -154,12 +153,14 @@
     <Compile Include="Repositories\Npoi\CellStyle\Interface\OldFormat\CustomCellStyle\ICelPercentageStyle.cs" />
     <Compile Include="Service\BaseService.cs" />
     <Compile Include="Service\CacheRef.cs" />
+    <Compile Include="Service\Implement\Npoi\NpoiNewFormatAlignmentService.cs" />
     <Compile Include="Service\Implement\Npoi\NpoiNewFormatBodyCellStyleService.cs" />
     <Compile Include="Service\Implement\Npoi\NpoiNewFormatCustomCellStyleService.cs" />
     <Compile Include="Service\Implement\Npoi\NpoiNewFormatFontService.cs" />
     <Compile Include="Service\Implement\Npoi\NpoiOldFormatBodyCellStyleService.cs" />
     <Compile Include="Service\Implement\Npoi\NpoiOldFormatCustomCellStyleService.cs" />
     <Compile Include="Service\Implement\Npoi\NpoiOldFormatFontService.cs" />
+    <Compile Include="Service\Interface\Npoi\INpoiAlignmentService.cs" />
     <Compile Include="Service\Interface\Npoi\INpoiNewFormatCustomCellStyleService.cs" />
     <Compile Include="Service\Interface\Npoi\INpoiNewFormatFontService.cs" />
     <Compile Include="Service\Interface\Npoi\INpoiNewFormatBodyCellStyleService.cs" />

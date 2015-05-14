@@ -6,6 +6,7 @@
 
 namespace Fanex.Service.Core.Service.Interface.Npoi
 {
+    using Fanex.Service.Core.Model.NpoiBase;
     using Fanex.Service.Core.Model.NpoiOldFormat;
     using NPOI.HSSF.UserModel;
     using NPOI.SS.UserModel;
@@ -15,8 +16,6 @@ namespace Fanex.Service.Core.Service.Interface.Npoi
     /// </summary>
     public interface INpoiOldFormatCustomCellStyleService
     {
-        ICellStyle CreateCellStyle(HSSFWorkbook workbook, BorderInformation border, BackgroundInformation background, AlignmentInformation alignment, IFont font);
-
         ICellStyle CreateLeftTextStyle(short backgroundColorIndex, IFont font);
 
         ICellStyle CreateRightTextStyle(short backgroundColorIndex, IFont font);
@@ -48,5 +47,7 @@ namespace Fanex.Service.Core.Service.Interface.Npoi
         ICellStyle CreateParenthesesPositivePercentageStyle(short backgroundColorIndex, IFont font);
 
         ICellStyle CreateParenthesesNegativePercentageStyle(short backgroundColorIndex, IFont font);
+
+        ICellStyle CreateCellStyle(BorderInformation border, BackgroundInformation background, AlignmentInformation alignment, IFont font);
     }
 }

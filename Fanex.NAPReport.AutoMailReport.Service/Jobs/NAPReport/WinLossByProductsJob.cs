@@ -6,25 +6,29 @@
 
 namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.NAPReport
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using Fanex.MailDelivery.Client.Enumerations;
     using Fanex.MailDelivery.Client.Jobs;
     using Fanex.MailDelivery.Client.Messages;
     using Fanex.MailDelivery.Client.Models;
+    using Fanex.NAPReport.WinLossByProducts.Business;
+    using Fanex.NAPReport.WinLossByProducts.Business.Constants;
+    using Fanex.NAPReport.WinLossByProducts.Business.Criteria;
+    using Fanex.NAPReport.WinLossByProducts.Business.Model;
+    using Fanex.NAPReport.WinLossByProducts.Business.Services;
+    using Fanex.Service.Core.Extensions;
     using Quartz;
-using Fanex.WinLossByProducts.Business.Criteria;
-    using System;
-    using Fanex.MailDelivery.Client.Enumerations;
-    using System.Collections.Generic;
-    using Fanex.WinLossByProducts.Business.Services.Interface;
-    using Fanex.WinLossByProducts.Business.Services.Implement;
-    using Fanex.WinLossByProducts.Business.Model;
+    using RazorEngine;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class WinLossByProductsJob : JobBase
     {
-        IWinLossByProductsService _winLossByProductsService;
-        IWinLossByProductsExportDataService _exportWinLossByProductsDataService;
+        private IWinLossByProductsService _winLossByProductsService;
+        private IWinLossByProductsExportDataService _exportWinLossByProductsDataService;
 
         public WinLossByProductsJob()
         {
@@ -34,17 +38,25 @@ using Fanex.WinLossByProducts.Business.Criteria;
 
         protected override JobResultMessage Run(Schedule schedule, IJobExecutionContext jobContext)
         {
+            Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
             GetWinLossByProductsCriteria criteria = WinLossByProductsCriteria();
             WinLossByProducts winLossByProducts = _winLossByProductsService.GetWinLossByProductsData(criteria);
-
-            string reportPath = _exportWinLossByProductsDataService.ExportReportToExcel(winLossByProducts, criteria);
+            _exportWinLossByProductsDataService.ExportReportToExcel(winLossByProducts, criteria);
+            string reportPath = _exportWinLossByProductsDataService.ReportPath;
+            var root = AppDomain.CurrentDomain.BaseDirectory;
+            string emailTemplatePath = root + EmailTemplateConstants.WinLossByProductsTemplate;
+            string template = File.ReadAllText(emailTemplatePath);
+            var emailContent = Razor.Parse(template, template);
 
             Mail mail = new Mail()
             {
-                Subject = "subject",
-                Title = "title",
-                Body = "content"
+                Subject = string.Format(AppSettings.Subject, criteria.WinLossDate.ToShortFormatedDateWithHourMinute()),
+                Title = AppSettings.Title,
+                Body = emailContent
             };
+
+            mail.Attachments = new List<MailAttachment>();
+            mail.Attachments.Add(new MailAttachment(reportPath, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
 
             return new JobResultMessage()
             {

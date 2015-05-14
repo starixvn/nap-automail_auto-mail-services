@@ -116,5 +116,10 @@ namespace Fanex.Service.Core.Extensions
                 throw new NullReferenceException();
             }
         }
+
+        public static string DecimalNumberFormat(decimal value)
+        {
+            return value.ToString("#,##0.00");
+        }
     }
 }
