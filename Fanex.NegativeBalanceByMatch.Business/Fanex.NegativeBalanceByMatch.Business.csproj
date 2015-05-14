@@ -64,6 +64,8 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NPOI, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL" />
+    <Reference Include="NPOI.OOXML, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL" />
     <Reference Include="RazorEngine">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\RazorEngine.dll</HintPath>
     </Reference>
@@ -91,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
+    <Compile Include="Business\ImportExport\INegativeBalanceByMatchExcelService.cs" />
     <Compile Include="Business\NegativeBalanceByMatchService.cs" />
     <Compile Include="Criteria\Sel_BySiteCriteria.cs" />
     <Compile Include="Criteria\Sel_MatchLogCriteria.cs" />
@@ -105,6 +108,7 @@
     <Compile Include="Helper\Implement\SendMailExtension.cs" />
     <Compile Include="Helper\Implement\ServiceBase.cs" />
     <Compile Include="Helper\Interface\IServiceBase.cs" />
+    <Compile Include="Business\ImportExport\NegativeBalanceByMatchExcelService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\INegativeBalanceByMatchRepository.cs" />
     <Compile Include="Repositories\NegativeBalanceByMatchRepository.cs" />

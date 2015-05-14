@@ -88,6 +88,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fanex.BalanceReport", "Fane
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.BalanceReport", "Fanex.BalanceReport\Fanex.BalanceReport.csproj", "{4DF39ADE-3E49-4D1E-9211-E48353B65135}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.NegativeBalanceByMatch.Testing", "Fanex.NAPReport.NegativeBalanceByMatch.Testing\Fanex.NAPReport.NegativeBalanceByMatch.Testing.csproj", "{0054F028-D246-4626-A4E4-52868784AD1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

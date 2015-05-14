@@ -28,19 +28,74 @@
             _repository = new NegativeBalanceByMatchRepository();
         }
 
-        private bool ProcessNegativeBalanceByMatch(string licensee, string subject, string title, string filePathAttach, string tomail, string ccMail, string bccMail)
+        public IDictionary<string, IList<Match>> GetLicenseeToMatchs()
+        {
+            var licenseeToMatchs = new Dictionary<string, IList<Match>>();
+
+            string[] licensees = AppSettings.Licensees.Split(',');
+            foreach (string licensee in licensees)
+            {
+               licenseeToMatchs.Add(licensee, GetMatchList(new Sel_BySiteCriteria {Site = licensee}));
+            }
+
+            return licenseeToMatchs;
+        } 
+
+        public void ProcessBusiness()
+        {
+            string[] licenseeNameList = AppSettings.Licensees.Split(',');
+            var timezone = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours;
+
+            foreach (string licenseeName in licenseeNameList)
+            {
+                var mailing = new Mailing();
+                _logData = new List<object>();
+
+                if (AppSettings.IsTesting || AppSettings.IsSendEmailFromConfigFileWithRealCurrency)
+                {
+                    mailing.To = AppSettings.MailTo;
+                    mailing.Cc = AppSettings.MailCC;
+                    mailing.Bcc = AppSettings.MailBCC;
+                }
+                else
+                {
+                    mailing = SelMailAddress(licenseeName);
+                    if (!string.IsNullOrWhiteSpace(AppSettings.MailBCC))
+                    {
+                        if (string.IsNullOrWhiteSpace(mailing.Bcc))
+                        {
+                            mailing.Bcc = AppSettings.MailBCC;
+                        }
+                        else
+                        {
+                            mailing.Bcc += ";" + AppSettings.MailBCC;
+                        }
+                    }
+                }
+
+                if (mailing.IsValid)
+                {
+                    mailing.LicenseeName = licenseeName.ToUpper();
+                    _logData.Add(mailing);
+
+                    var subject = licenseeName.ToUpper() + " - " +
+                                    string.Format(AppSettings.MailSubject, DateTime.Now, timezone > 0 ? ("+" + timezone) : timezone.ToString());
+                    ProcessNegativeBalanceByMatch(licenseeName, subject, AppSettings.MailTitle, "", mailing.To, mailing.Cc, mailing.Bcc);
+                }
+            }
+        }
+
+        private bool ProcessNegativeBalanceByMatch(string licensee, string subject, string title, string filePathAttach,
+            string tomail, string ccMail, string bccMail)
         {
             var result = false;
             var resultUpdate = new Result();
-            int taskId = 0;            
+            int taskId = 0;
             try
             {
-                Sel_BySiteCriteria balanceNegativeSel_BySiteCriteria = new Sel_BySiteCriteria
-                    {
-                        Site = licensee,
-                    };                
+                Sel_BySiteCriteria balanceNegativeSel_BySiteCriteria = new Sel_BySiteCriteria { Site = licensee };
 
-                var matchList = GetMatchList(balanceNegativeSel_BySiteCriteria);
+                List<Match> matchList = GetMatchList(balanceNegativeSel_BySiteCriteria);
                 if (matchList != null && matchList.Count > 0)
                 {
                     NegativeBalanceTaskInfo taskInfo = new NegativeBalanceTaskInfo
@@ -49,7 +104,7 @@
                     };
                     taskId = _repository.InsertTask(taskInfo);
                     string appLocation = AppDomain.CurrentDomain.BaseDirectory;
-                    var template = string.Empty;
+                    string template = string.Empty;
                     if (licensee.ToLower().Equals("haifa"))
                     {
                         template = File.ReadAllText(appLocation + @"/Templates/EmailTemplateDualLanguage.cshtml");
@@ -59,7 +114,7 @@
                         template = File.ReadAllText(appLocation + @"/Templates/EmailTemplateSingleLanguage.cshtml");
                     }
 
-                    Dictionary<object, object> dataSendEmail = new Dictionary<object,object>();
+                    Dictionary<object, object> dataSendEmail = new Dictionary<object, object>();
                     dataSendEmail.Add("DataSendEmail", matchList);
                     _logData.Add(dataSendEmail);
 
@@ -105,7 +160,7 @@
 
             var log = JsonConvert.SerializeObject(_logData);
 
-            _repository.UpdateTaskStatus(taskId, Status.Successful, log);            
+            _repository.UpdateTaskStatus(taskId, Status.Successful, log);
         }
 
         private bool SendEmail(string subject, string title, string tomail, string ccMail, string bccMail, bool result, int taskId, string content)
@@ -183,16 +238,16 @@
             try
             {
                 using (var dbUserInfor = new ObjectDb(criteria.SpName))
-                {              
+                {
                     DataSet dataSet_Userinfo = dbUserInfor.ExecuteDataSet(criteria.GetSpParams());
                     if (dataSet_Userinfo != null
                          && dataSet_Userinfo.Tables.Count > 0)
-                    {                       
+                    {
                         List<CustomerBalanceInfo> customerList = new List<CustomerBalanceInfo>();
                         int index = 1;
                         DataTable userTable = dataSet_Userinfo.Tables[0];
 
-                        criteria.Result = userTable; 
+                        criteria.Result = userTable;
                         _logData.Add(criteria);
 
                         foreach (DataRow row in userTable.Rows)
@@ -212,7 +267,7 @@
 
                         foreach (Match match in matchList)
                         {
-                            match.LicenseeName = criteria.Site;    
+                            match.LicenseeName = criteria.Site;
                             var groupIDList = match.CustomerInfoList.Select(x => x.GroupID).Distinct().ToList();
 
                             foreach (int groupID in groupIDList)
@@ -340,18 +395,18 @@
 
         private List<CustomerBalanceInfo> DistinctCustomer(List<CustomerBalanceInfo> customerList)
         {
-            var ids = customerList.GroupBy(c => new 
-            { 
+            var ids = customerList.GroupBy(c => new
+            {
                 c.MatchID,
-                c.CustID,               
+                c.CustID,
                 c.TotalBalance
             }).Distinct().ToList();
 
             var customers = new List<CustomerBalanceInfo>();
             foreach (var id in ids)
             {
-                var customer = customerList.Where(c => 
-                    c.CustID == id.Key.CustID 
+                var customer = customerList.Where(c =>
+                    c.CustID == id.Key.CustID
                     && c.MatchID == id.Key.MatchID
                     && c.TotalBalance == id.Key.TotalBalance
                     ).FirstOrDefault();
@@ -365,51 +420,6 @@
             }
 
             return customers;
-        }
-
-        public void ProcessBusiness()
-        {
-            string licensee = AppSettings.Licensees;
-            string[] licenseeNameList = licensee.Split(',');
-            var timezone = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours;
-            foreach (string licenseeName in licenseeNameList)
-            {
-                var mailing = new Mailing();
-                _logData = new List<object>();
-
-                bool isTesting = AppSettings.IsTesting;
-                if (isTesting || AppSettings.IsSendEmailFromConfigFileWithRealCurrency)
-                {
-                    mailing.To = AppSettings.MailTo;
-                    mailing.Cc = AppSettings.MailCC;
-                    mailing.Bcc = AppSettings.MailBCC;
-                }
-                else
-                {
-                    mailing = SelMailAddress(licenseeName);
-                    if (!string.IsNullOrWhiteSpace(AppSettings.MailBCC))
-                    {
-                        if (string.IsNullOrWhiteSpace(mailing.Bcc))
-                        {
-                            mailing.Bcc = AppSettings.MailBCC;
-                        }
-                        else
-                        {
-                            mailing.Bcc += ";" + AppSettings.MailBCC;
-                        }
-                    }
-                }
-
-                if (mailing.IsValid)
-                {
-                    mailing.LicenseeName = licenseeName.ToUpper();
-                    _logData.Add(mailing);
-
-                    var subject = licenseeName.ToUpper() + " - " +
-                    string.Format(AppSettings.MailSubject, DateTime.Now, timezone > 0 ? ("+" + timezone) : timezone.ToString());
-                    ProcessNegativeBalanceByMatch(licenseeName, subject, AppSettings.MailTitle, "", mailing.To, mailing.Cc, mailing.Bcc);
-                }
-            }
         }
     }
 }
