@@ -88,7 +88,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fanex.BalanceReport", "Fane
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.BalanceReport", "Fanex.BalanceReport\Fanex.BalanceReport.csproj", "{4DF39ADE-3E49-4D1E-9211-E48353B65135}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.NegativeBalanceByMatch.Testing", "Fanex.NAPReport.NegativeBalanceByMatch.Testing\Fanex.NAPReport.NegativeBalanceByMatch.Testing.csproj", "{0054F028-D246-4626-A4E4-52868784AD1C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.NegativeBalanceByMatch.Testing", "Fanex.NAPReport.NegativeBalanceByMatch.Testing\Fanex.NAPReport.NegativeBalanceByMatch.Testing.csproj", "{463B30EA-8173-4B6E-96CD-9C321DF8B816}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -380,6 +380,16 @@ Global
 		{4DF39ADE-3E49-4D1E-9211-E48353B65135}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{4DF39ADE-3E49-4D1E-9211-E48353B65135}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{4DF39ADE-3E49-4D1E-9211-E48353B65135}.Release|x86.ActiveCfg = Release|Any CPU
+		{463B30EA-8173-4B6E-96CD-9C321DF8B816}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{463B30EA-8173-4B6E-96CD-9C321DF8B816}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{463B30EA-8173-4B6E-96CD-9C321DF8B816}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{463B30EA-8173-4B6E-96CD-9C321DF8B816}.Debug|x86.ActiveCfg = Debug|x86
+		{463B30EA-8173-4B6E-96CD-9C321DF8B816}.Debug|x86.Build.0 = Debug|x86
+		{463B30EA-8173-4B6E-96CD-9C321DF8B816}.Release|Any CPU.ActiveCfg = Release|x86
+		{463B30EA-8173-4B6E-96CD-9C321DF8B816}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{463B30EA-8173-4B6E-96CD-9C321DF8B816}.Release|Mixed Platforms.Build.0 = Release|x86
+		{463B30EA-8173-4B6E-96CD-9C321DF8B816}.Release|x86.ActiveCfg = Release|x86
+		{463B30EA-8173-4B6E-96CD-9C321DF8B816}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -411,6 +421,7 @@ Global
 		{FBA40037-31BF-4EC0-98F5-09CF8067457E} = {DD647794-42ED-4DBB-82FF-75040CE2D8D0}
 		{9CE3B48A-A440-439C-9BA8-0BBA81A4D4A4} = {DD647794-42ED-4DBB-82FF-75040CE2D8D0}
 		{680FEDFA-A197-40BC-BB66-AAD29B359BFD} = {DD647794-42ED-4DBB-82FF-75040CE2D8D0}
+		{463B30EA-8173-4B6E-96CD-9C321DF8B816} = {DD647794-42ED-4DBB-82FF-75040CE2D8D0}
 		{D78585F7-A6CC-4BB9-A9E2-D87A7276CFAF} = {B7D85826-E30B-4A10-B680-0CA1C01061BF}
 		{4DF39ADE-3E49-4D1E-9211-E48353B65135} = {B7D85826-E30B-4A10-B680-0CA1C01061BF}
 	EndGlobalSection
