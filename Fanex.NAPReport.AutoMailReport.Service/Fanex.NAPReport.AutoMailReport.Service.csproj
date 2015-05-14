@@ -118,7 +118,7 @@
     </Compile>
     <Compile Include="Jobs\NAPReport\HorseRacingReport.cs" />
     <Compile Include="Jobs\NAPReport\WinLossByProductsJob.cs" />
-     <Compile Include="Jobs\NAPReport\SMALoss.cs" />
+    <Compile Include="Jobs\NAPReport\SMALoss.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -161,6 +161,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Templates\SMALossTemplate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="SiteConfig\BalanceReport\App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="SiteConfig\BalanceReport\Template\EmailTemplate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\BalanceReport\Template\SMALossTemplate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\BalanceReport\Template\NotificationEmailTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
