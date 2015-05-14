@@ -16,43 +16,45 @@
 
     public class Program
     {
+        private static IWinLossByProductsService _service;
+        private static IWinLossByProductsExportDataService _exportDataService;
+        private static IWinLossByProductsMailService _mailService;
+
         public static void Main(string[] args)
         {
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
             DbSettingProviderManager.Current.Start();
-            IWinLossByProductsService service = new WinLossByProductsService();
-            IWinLossByProductsExportDataService exportDataService = new WinLossByProductsExportDataService();
+            InitServices();
             Console.WriteLine("Running Win Loss By Products Report");
+            GetWinLossByProductsCriteria criteria = CreateWinLossByProductCriteria();
+            var report = _service.GetWinLossByProductsData(criteria);
+            _exportDataService.ExportReportToExcel(report, criteria);
+            string reportPath = _exportDataService.ReportPath;
+            var root = AppDomain.CurrentDomain.BaseDirectory;
+            string emailTemplatePath = root + EmailTemplateConstants.WinLossByProductsTemplate;
+            string template = File.ReadAllText(emailTemplatePath);
+            var emailContent = Razor.Parse(template, report);
+            Mail mail = _mailService.CreateMail(emailContent, reportPath, criteria);
+            _mailService.SendMailByFunction(mail);
+            Console.WriteLine("Done at " + DateTime.Now.ToString());
+            Console.ReadLine();
+        }
+
+        private static void InitServices()
+        {
+            _service = new WinLossByProductsService();
+            _exportDataService = new WinLossByProductsExportDataService();
+            _mailService = new WinLossByProductsMailService();
+        }
+
+        private static GetWinLossByProductsCriteria CreateWinLossByProductCriteria()
+        {
             GetWinLossByProductsCriteria criteria = new GetWinLossByProductsCriteria
             {
                 WinLossDate = DateTime.Now.AddDays(-1)
             };
 
-            var report = service.GetWinLossByProductsData(criteria);
-            exportDataService.ExportReportToExcel(report, criteria);
-            string reportPath = exportDataService.ReportPath;
-
-            var root = AppDomain.CurrentDomain.BaseDirectory;
-            string emailTemplatePath = root + EmailTemplateConstants.WinLossByProductsTemplate;
-            string template = File.ReadAllText(emailTemplatePath);
-            var emailContent = Razor.Parse(template, report);
-
-            Mail mail = new Mail()
-            {
-                Subject = string.Format(AppSettings.Subject, criteria.WinLossDate.ToShortFormatedDateWithHourMinute()),
-                Title = AppSettings.Title,
-                Body = emailContent
-            };
-
-            mail.Attachments = new List<MailAttachment>();
-            mail.Attachments.Add(new MailAttachment(reportPath, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
-
-            mail.MailingListId = mailStationAppSettings.GetFunctionId(AppSettings.MailFunctionName);
-            MailClientHandler.SendMail(mail);
-            Console.WriteLine(reportPath);
-
-            Console.WriteLine("Done at " + DateTime.Now.ToString());
-            Console.ReadLine();
+            return criteria;
         }
     }
 }

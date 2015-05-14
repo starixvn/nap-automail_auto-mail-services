@@ -36,13 +36,5 @@ namespace Fanex.NAPReport.WinLossByProducts.Business
                 return GetSettingValueByKey("WinLossByProductsReport.Title");
             }
         }
-
-        public static string MailFunctionName
-        {
-            get
-            {
-                return GetSettingValueByKey("Fanex.WinLossByProductsReport.SendMailByFunctionKey");
-            }
-        }
     }
 }

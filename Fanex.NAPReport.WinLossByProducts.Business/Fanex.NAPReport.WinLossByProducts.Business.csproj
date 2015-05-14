@@ -40,6 +40,9 @@
     <Reference Include="Fanex.Logging">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Logging.dll</HintPath>
     </Reference>
+    <Reference Include="Fanex.MailDelivery.Client">
+      <HintPath>..\_Dependencies\MailStation\Fanex.MailDelivery.Client.dll</HintPath>
+    </Reference>
     <Reference Include="Fanex.NAP.Core">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Core.dll</HintPath>
     </Reference>
@@ -88,9 +91,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\IWinLossByProductsMailService.cs" />
     <Compile Include="Services\IWinLossByProductsExportDataService.cs" />
     <Compile Include="Services\IWinLossByProductsService.cs" />
     <Compile Include="Services\WinLossByProductsExportDataService.cs" />
+    <Compile Include="Services\WinLossByProductsMailService.cs" />
     <Compile Include="Services\WinLossByProductsService.cs" />
   </ItemGroup>
   <ItemGroup />

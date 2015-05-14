@@ -285,11 +285,5 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
         {
             this._reportPath = Path.Combine(exportDataDirectory, reportNameWithExtension);
         }
-
-        private void CreateWinLossByProductsReportDirectory()
-        {
-            string reportDataDirectory = AppSettings.ExportDataDirectory;
-            DirectoryExtensions.CheckAndCreateDirectory(reportDataDirectory);
-        }
     }
 }

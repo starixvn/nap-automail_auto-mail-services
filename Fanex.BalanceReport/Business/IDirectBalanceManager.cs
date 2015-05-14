@@ -8,7 +8,6 @@ using System.Xml;
 using Fanex.NAPReport.BalanceReport.DataAccess;
 using Fanex.NAPReport.BalanceReport.Helper;
 using Fanex.NAPReport.BalanceReport.Infrastructure.Extensions;
-using DNAide.Core;
 using Fanex.NAPReport.BalanceReport.Model;
 using Fanex.NAPReport.BalanceReport.Core;
 using NPOI.SS.UserModel;

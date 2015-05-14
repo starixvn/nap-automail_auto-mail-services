@@ -29,11 +29,13 @@ namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.NAPReport
     {
         private IWinLossByProductsService _winLossByProductsService;
         private IWinLossByProductsExportDataService _exportWinLossByProductsDataService;
+        private IWinLossByProductsMailService _mailService;
 
         public WinLossByProductsJob()
         {
             _winLossByProductsService = new WinLossByProductsService();
             _exportWinLossByProductsDataService = new WinLossByProductsExportDataService();
+            _mailService = new WinLossByProductsMailService();
         }
 
         protected override JobResultMessage Run(Schedule schedule, IJobExecutionContext jobContext)
@@ -47,17 +49,7 @@ namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.NAPReport
             string emailTemplatePath = root + EmailTemplateConstants.WinLossByProductsTemplate;
             string template = File.ReadAllText(emailTemplatePath);
             var emailContent = Razor.Parse(template, template);
-
-            Mail mail = new Mail()
-            {
-                Subject = string.Format(AppSettings.Subject, criteria.WinLossDate.ToShortFormatedDateWithHourMinute()),
-                Title = AppSettings.Title,
-                Body = emailContent
-            };
-
-            mail.Attachments = new List<MailAttachment>();
-            mail.Attachments.Add(new MailAttachment(reportPath, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
-
+            Mail mail = _mailService.CreateMail(emailContent, reportPath, criteria);
             return new JobResultMessage()
             {
                 JobStatus = JobStatus.Success,
