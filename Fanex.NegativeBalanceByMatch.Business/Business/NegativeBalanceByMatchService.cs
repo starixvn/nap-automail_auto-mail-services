@@ -1,4 +1,6 @@
-﻿namespace Fanex.NegativeBalanceByMatch.Business.Business
+﻿using Fanex.NegativeBalanceByMatch.Business.Business.Licensee;
+
+namespace Fanex.NegativeBalanceByMatch.Business.Business
 {
     using System;
     using System.Collections.Generic;
@@ -22,23 +24,25 @@
         private INegativeBalanceByMatchRepository _repository;
         private string LogIDUpdate = string.Empty;
         private List<object> _logData = new List<object>();
+		private ILicenseeService _licenseeService;
 
-        public NegativeBalanceByMatchService()
-        {
+		public NegativeBalanceByMatchService(ILicenseeService licenseeService)
+		{
+			_licenseeService = licenseeService;
             _repository = new NegativeBalanceByMatchRepository();
         }
 
-        public IDictionary<string, IList<Match>> GetLicenseeToMatchs()
+        public IDictionary<string, IList<Match>> GetLicenseeMatchsMap()
         {
-            var licenseeToMatchs = new Dictionary<string, IList<Match>>();
+            var licenseeMatchsMap = new Dictionary<string, IList<Match>>();
 
-            string[] licensees = AppSettings.Licensees.Split(',');
-            foreach (string licensee in licensees)
+	        IList<string> licensees = _licenseeService.GetLicensees();
+			foreach (string licensee in licensees)
             {
-               licenseeToMatchs.Add(licensee, GetMatchList(new Sel_BySiteCriteria {Site = licensee}));
+               licenseeMatchsMap.Add(licensee, GetMatchList(new Sel_BySiteCriteria {Site = licensee}));
             }
 
-            return licenseeToMatchs;
+            return licenseeMatchsMap;
         } 
 
         public void ProcessBusiness()

@@ -51,6 +51,7 @@
       <HintPath>..\_Dependencies\MailStation\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -68,7 +69,15 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fanex.NegativeBalanceByMatch.Business\Fanex.NegativeBalanceByMatch.Business.csproj">
+      <Project>{8C5FF65C-DC35-417B-9464-35C0CAF05FDD}</Project>
+      <Name>Fanex.NegativeBalanceByMatch.Business</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
