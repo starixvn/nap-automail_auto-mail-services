@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Functions>
+  <Function Name="Aff-Email">
+    <Setting Key="Acc_Rpt_CreditTerm" SpName="Acc_Rpt_CreditTerm" DbName="warehouse" Plain="0" />
+    <Setting Key="Acc_ExchangeCurrencySel" SpName="Acc_ExchangeCurrencySel" DbName="archive" Plain="0" />
+    <Setting Key="Acc_Rpt_Balance_Direct_Agent" SpName="Acc_Rpt_Balance_Direct_Agent" DbName="archive" Plain="0" />
+    <Setting Key="Acc_Rpt_Balance_Direct_Master" SpName="Acc_Rpt_Balance_Direct_Master" DbName="archive" Plain="0" />
+    <Setting Key="Acc_Rpt_Balance_Direct_Member" SpName="Acc_Rpt_Balance_Direct_Member" DbName="archive" Plain="0" />
+  </Function>
+</Functions>

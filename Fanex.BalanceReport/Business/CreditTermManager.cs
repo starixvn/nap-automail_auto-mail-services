@@ -210,6 +210,25 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
             NpoiOldFormatExcelExtension.RenderMergeCell(_workSheet, _cell, headerStyle);
         }
 
+        private void ExportSubHeader(int currency, int rowIndex)
+        {
+            _cell.ResetColumnIndex();
+            _cell.CurrentRow = rowIndex;
+            _cell.EndRow = _cell.CurrentRow;
+            IRow currentRow = _workSheet.CreateRow(_cell.CurrentRow);
+
+            HeaderCellText(currentRow, string.Empty);
+            HeaderCellText(currentRow, "Role");
+            HeaderCellText(currentRow, "UserName");
+            HeaderCellText(currentRow, "Curr");
+            HeaderCellText(currentRow, "Balance");
+            HeaderCellText(currentRow, GetExhange(currency));
+            HeaderCellText(currentRow, "RM");
+            HeaderCellText(currentRow, "Remark");
+            HeaderCellText(currentRow, string.Empty);
+            HeaderCellText(currentRow, "Remark Timestamp");
+        }
+
         private ICellStyle CreateHeaderStyle()
         {
             ICellStyle headerStyle = _customCellStyleService.CreateCenterTextStyle(HeaderColorIndex, _fontService.WhiteBoldFont);
@@ -278,6 +297,11 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
             {
                 var row = _workSheet.CreateRow(index);
                 CreateRowData(row, item);
+                index++;
+
+                var rowTitle = _workSheet.CreateRow(index);
+                ExportSubHeader(item.Currency, index);
+
                 var details = creditTermDetails.Where(s => s.GroupID == item.GroupID).ToList();
                 foreach (var detail in details)
                 {

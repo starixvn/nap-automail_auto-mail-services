@@ -4,6 +4,8 @@
     using System.Globalization;
     using System.IO;
     using Fanex.NAPReport.BalanceReport.Model;
+    using System.Configuration;
+    using RazorEngine;
 
     /// <summary>
     /// Common class.
@@ -24,12 +26,12 @@
 
         public static string LoadSubject(Report report)
         {
-            return ParseTemplate("BalanceReport.htm", report);
+            return ParseTemplate("Subject.cshtml", report);
         }
 
         public static string LoadBody(Report report)
         {
-            return ParseTemplate("BalanceReport.htm", report);
+            return ParseTemplate("Email.cshtml", report);
         }
 
         static string ParseTemplate(string templateFile, Report report)
@@ -41,7 +43,8 @@
 
         static string ResolvePath(string template)
         {
-            return AppDomain.CurrentDomain.BaseDirectory + "Email/BalanceReport/" + template;
+            
+            return AppDomain.CurrentDomain.BaseDirectory + ConfigurationManager.AppSettings["Balance.EmailTemplage"] + template;
         }
     }
 }

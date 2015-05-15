@@ -51,10 +51,17 @@
     <Reference Include="NPOI">
       <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.dll</HintPath>
     </Reference>
+    <Reference Include="RazorEngine">
+      <HintPath>..\packages\RazorEngine.3.7.0\lib\net40\RazorEngine.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -71,6 +78,7 @@
     <Compile Include="Core\IServiceBase.cs" />
     <Compile Include="Core\QueryService.cs" />
     <Compile Include="Core\ServiceBase.cs" />
+    <Compile Include="Core\Utilities.cs" />
     <Compile Include="Criteria\CreditTermReportCriteria.cs" />
     <Compile Include="Criteria\DirectBalanceReportAgentCriteria.cs" />
     <Compile Include="Criteria\DirectBalanceReportMasterCriteria.cs" />
@@ -93,9 +101,6 @@
     <Compile Include="Model\Exchange.cs" />
     <Compile Include="Model\Report.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Data\SPNames.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Email\BalanceReport\" />
