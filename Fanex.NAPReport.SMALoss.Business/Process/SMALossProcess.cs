@@ -1,23 +1,26 @@
-﻿namespace Fanex.NAPReport.SMALoss.Business.Services
+﻿namespace Fanex.NAPReport.SMALoss.Business.Process
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using Fanex.MailDelivery.Client.Handlers;
     using Fanex.MailDelivery.Client.Models;
     using Fanex.NAPReport.SMALoss.Business.Criteria;
     using Fanex.NAPReport.SMALoss.Business.Entities;
+    using Fanex.NAPReport.SMALoss.Business.Services;
+    using Fanex.Service.Core.Extensions;
     using RazorEngine;
 
-    public class SMALossProcessService
+    public class SMALossProcess : ISMALossProcess
     {
         private const string UpwardArrowUrl = @"/Templates/Images/UpwardArrow.png";
         private const string DownwardArrowUrl = @"/Templates/Images/DownardArrow.png";
         private const string HorizontalLineUrl = @"/Templates/Images/HorizontalLine.png";
-        private string _template = null;
         private readonly ISMALossService _lossService = null;
+        private string _template = null;
 
-        public SMALossProcessService()
+        public SMALossProcess()
             : this(null)
         {
         }
@@ -26,7 +29,7 @@
         /// Initializes a new instance of the <see cref="SportsbookController" /> class.
         /// </summary>
         /// <param name="lossService">SMA loss service.</param>
-        private SMALossProcessService(
+        private SMALossProcess(
             ISMALossService lossService)
         {
             _lossService = lossService ?? new SMALossService();
@@ -37,30 +40,52 @@
         /// </summary>
         /// <param name="templateUrl">The template URL.</param>
         /// <returns>Boolean value indicates whether the email is sent successfully or not.</returns>
-        public bool NotifyEmail(Uri templateUrl)
+        public bool NotifyEmail(string templateUrl)
         {
-            var isNotified = true;
             var offset = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours;
             var timezoneInd = DateTime.Now.IsDaylightSavingTime() ? offset - 1 : offset;
             var subject = string.Format(AppSettings.Subject, DateTime.Now, string.Format("{0}{1}", timezoneInd > 0 ? "+" : string.Empty, timezoneInd));
-            var recipients = GetRecipients();
             var lossItems = GetReachedSMALoss();
 
-            if (recipients != null && !string.IsNullOrEmpty(recipients.ToList) && lossItems != null && lossItems.Any())
-            {
-                string template = GetTemplate(templateUrl.ToString());
-                string content = Razor.Parse(template, lossItems);
+            var template = GetTemplate(templateUrl);
+            var content = Razor.Parse(template, lossItems);
 
-                SendMail(new EmailContent
-                {
-                    Recievers = recipients,
-                    Title = AppSettings.Title,
-                    Subject = subject,
-                    Body = content
-                });
-            }
+            var isNotified = SendMail(new EmailContent
+            {
+                Subject = subject,
+                Title = AppSettings.Title,
+                Body = content
+            });
 
             return isNotified;
+        }
+
+        /// <summary>
+        /// Sends the mail.
+        /// </summary>
+        /// <param name="content">The content.</param>
+        /// <returns>Return true or false.</returns>
+        private bool SendMail(EmailContent content)
+        {
+            try
+            {
+                var mail = new Mail()
+                {
+                    Subject = content.Subject,
+                    Title = content.Title,
+                    Body = content.Body
+                };
+                mail.MailingListId = content.MailingListId;
+                MailClientHandler.Start();
+                MailClientHandler.SendMail(mail);
+                MailClientHandler.Stop();
+                return true;
+            }
+            catch (Exception exception)
+            {
+                LogExtensions.ExceptionHandler(exception);
+                return false;
+            }
         }
 
         /// <summary>
@@ -72,25 +97,11 @@
         {
             if (this._template == null)
             {
-                string appLocation = AppDomain.CurrentDomain.BaseDirectory;
-
+                var appLocation = AppDomain.CurrentDomain.BaseDirectory;
                 this._template = File.ReadAllText(appLocation + templateUrl);
             }
 
             return this._template;
-        }
-
-        /// <summary>
-        /// Gets the recipients.
-        /// </summary>
-        /// <returns>Recipients object.</returns>
-        private Recipients GetRecipients()
-        {
-            var recipients = _lossService.GetReceivers(new MailingListSelCriteria { FuncId = AppSettings.FunctionID });
-
-            recipients = recipients.IsAvailabe != 0 ? recipients : null;
-
-            return recipients;
         }
 
         /// <summary>
@@ -99,8 +110,8 @@
         /// <returns>List of FormattedSMALossGroup objects.</returns>
         private IEnumerable<FormattedSMALossGroup> GetReachedSMALoss()
         {
-            IEnumerable<SMALoss> rawData = _lossService.GetNotifiedSMALoss(new MonitorListCriteria());
-            List<FormattedSMALossLevelItem> levels = this.GetSMALossLevels();
+            var rawData = _lossService.GetNotifiedSMALoss(new MonitorListCriteria());
+            var levels = this.GetSMALossLevels();
             List<FormattedSMALossGroup> result = null;
 
             if (rawData != null && rawData.Any())
@@ -157,46 +168,6 @@
             }
 
             return result;
-        }
-
-        /// <summary>
-        /// Sends the mail.
-        /// </summary>
-        /// <param name="content">The content.</param>
-        private void SendMail(EmailContent content)
-        {
-            var mail = new Mail()
-            {
-                Subject = content.Subject,
-                Title = content.Title,
-                Body = content.Body
-            };
-
-            //mail.Attachments = new List<MailAttachment>();
-            //mail.Attachments.Add(new MailAttachment(@service.ReportZipFolderPath, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
-            //using (var client = new Mail())
-            //{
-            //    var mailItem = new MailRecord
-            //    {
-            //        MailTo = content.Recievers.ToList,
-            //        MailCc = content.Recievers.CcList,
-            //        MailBcc = content.Recievers.BccList,
-            //        Title = content.Title,
-            //        Subject = content.Subject,
-            //        Body = content.Body
-            //    };
-            //    string appLocation = AppDomain.CurrentDomain.BaseDirectory;
-            //    var upwardArrow = new MailLinkedResource(appLocation + UpwardArrowUrl, FileExtentions.IMG_PNG, "lruworradrawpu");
-            //    var downwardArrow = new MailLinkedResource(appLocation + DownwardArrowUrl, FileExtentions.IMG_PNG, "lruworradrawnwod");
-            //    var horizontalLineArrow = new MailLinkedResource(appLocation + HorizontalLineUrl, FileExtentions.IMG_PNG, "lruworradrawenillatnoziroh");
-
-            //    mailItem.AlternateView = new List<MailLinkedResource>();
-            //    mailItem.AlternateView.Add(upwardArrow);
-            //    mailItem.AlternateView.Add(downwardArrow);
-            //    mailItem.AlternateView.Add(horizontalLineArrow);
-
-            //    client.SendMail(mailItem);
-            //}
         }
     }
 }

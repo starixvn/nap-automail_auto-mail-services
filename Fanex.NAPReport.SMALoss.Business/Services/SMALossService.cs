@@ -11,16 +11,6 @@
     public class SMALossService : ServiceBase, ISMALossService
     {
         /// <summary>
-        /// Gets the receivers.
-        /// </summary>
-        /// <param name="criteria">Criteria value.</param>
-        /// <returns>Recipients objects.</returns>
-        public Recipients GetReceivers(MailingListSelCriteria criteria)
-        {
-            return GetEntity<Recipients>(criteria);
-        }
-
-        /// <summary>
         /// Gets the SMA list that reached the max loss limit.
         /// </summary>
         /// <param name="criteria">Criteria value.</param>

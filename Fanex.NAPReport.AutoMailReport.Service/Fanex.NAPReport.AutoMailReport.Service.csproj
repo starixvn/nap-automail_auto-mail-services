@@ -118,7 +118,6 @@
     </Compile>
     <Compile Include="Jobs\NAPReport\HorseRacingReport.cs" />
     <Compile Include="Jobs\NAPReport\WinLossByProductsJob.cs" />
-    <Compile Include="Jobs\NAPReport\SMALoss.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -175,9 +174,9 @@
     <Content Include="SiteConfig\BalanceReport\Template\NotificationEmailTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Templates\WinLossByProductsEmailTemplate.cshtml">
+    <Content Include="SiteConfig\SMALoss\SMALossTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.NAPReport.HorseRacingReport.Business\Fanex.NAPReport.HorseRacingReport.Business.csproj">
@@ -195,6 +194,10 @@
     <ProjectReference Include="..\Fanex.Service.Core\Fanex.Service.Core.csproj">
       <Project>{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}</Project>
       <Name>Fanex.Service.Core %28Fanex.Service.Core\Fanex.Service.Core%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.WinLossByProducts.Business\Fanex.WinLossByProducts.Business.csproj">
+      <Project>{25CB500D-17F9-4031-8D5E-8981E58111A7}</Project>
+      <Name>Fanex.WinLossByProducts.Business</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using Fanex.Data.Configuration;
-using Fanex.NAPReport.SMALoss.Business.Services;
+using Fanex.NAPReport.SMALoss.Business.Process;
 
 namespace Fanex.NAPReport.SMALoss.Testing
 {
@@ -15,13 +12,10 @@ namespace Fanex.NAPReport.SMALoss.Testing
         private static void Main(string[] args)
         {
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
-            //DbSettingProviderManager.Current.Start();
+            DbSettingProviderManager.Current.Start();
 
-            var root = AppDomain.CurrentDomain.BaseDirectory;
-            string filePath = root + TemplateUrl;
-
-            var lossProcessService = new SMALossProcessService();
-            lossProcessService.NotifyEmail(new Uri(filePath));
+            var lossProcess = new SMALossProcess();
+            lossProcess.NotifyEmail(TemplateUrl);
         }
     }
 }

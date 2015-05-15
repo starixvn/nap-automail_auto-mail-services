@@ -7,12 +7,11 @@ using Fanex.NAPReport.HorseRacingReport.Business.Criteria;
 using Fanex.Service.Core.Extensions;
 using RazorEngine;
 
-
 namespace Fanex.NAPReport.HorseRacingReport.Testing
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
             DbSettingProviderManager.Current.Start();

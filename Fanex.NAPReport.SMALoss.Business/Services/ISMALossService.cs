@@ -7,8 +7,6 @@
 
     public interface ISMALossService
     {
-        Recipients GetReceivers(MailingListSelCriteria criteria);
-
         IEnumerable<SMALoss> GetNotifiedSMALoss(MonitorListCriteria criteria);
 
         IEnumerable<SMALossLevel> GetSMALossLevels(LimitLossActionConfigCriteria criteria);

@@ -1,14 +1,6 @@
 <Functions>
-  <Function Name="Core - Report Service">
-    <Setting Key="Core_ReportService_GetBalanceUpDay" SpName="Age_SelBalanceUpDay" DbName="DBAGE.bodb02.bodbAdminNet">
-    </Setting>
-    <Setting Key="NAP_ExchangeCurrencySel" SpName="NAP_ExchangeCurrencySel" DbName="DBAGE.bodb02.bodbAdminNet">
-    </Setting>
-  </Function>
-
   <Function Name="SMA Loss Automail">
-    <Setting Key="NAP_LimitLoss_MonitorList" SpName="NAP_LimitLoss_MonitorList" DbName="DBAGE.bodb02.bodbAdminNet" />
-    <Setting Key="NAP_LimitLoss_ActionConfigSel" SpName="NAP_LimitLoss_ActionConfigSel" DbName="DBAGE.bodb02.bodbAdminNet"></Setting>
-    <Setting Key="Acc_MailingListSel" SpName="Acc_MailingListSel" DbName="DBACC.bodb_ACC.bodbAdminNet" />
+    <Setting Key="NAP_LimitLoss_MonitorList" SpName="NAP_LimitLoss_MonitorList" DbName="DBAGE.bodb_AGE.bodbAdminNet" />
+    <Setting Key="NAP_LimitLoss_ActionConfigSel" SpName="NAP_LimitLoss_ActionConfigSel" DbName="DBAGE.bodb_AGE.bodbAdminNet"></Setting>
   </Function>
 </Functions>

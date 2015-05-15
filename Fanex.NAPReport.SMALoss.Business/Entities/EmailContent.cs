@@ -1,11 +1,20 @@
 ﻿namespace Fanex.NAPReport.SMALoss.Business.Entities
 {
+    using Fanex.MailDelivery.Client.Configurations;
+    using Fanex.MailDelivery.Client.Models;
+
     /// <summary>
     /// Email content.
     /// </summary>
     public class EmailContent
     {
-        public Recipients Recievers { get; set; }
+        public int MailingListId
+        {
+            get
+            {
+                return AppSettings.GetFunctionId("Kaden Testing");
+            }
+        }
 
         public string Title { get; set; }
 

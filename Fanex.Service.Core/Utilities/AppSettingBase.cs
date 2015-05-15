@@ -75,6 +75,18 @@ namespace Fanex.Service.Core.Utilities
             }
         }
 
+        public static int Interval
+        {
+            get
+            {
+                var val = ConfigurationManager.AppSettings["Interval.Second"];
+                int interval = val == null ? 10 : Convert.ToInt32(val) * 1000;
+                return interval;
+            }
+        }
+
+        public static bool OnProcessing { get; set; }
+
         protected static string ExportDataDirectory(string key)
         {
             string path = AppSettingBase.GetSettingValueByKey(key);

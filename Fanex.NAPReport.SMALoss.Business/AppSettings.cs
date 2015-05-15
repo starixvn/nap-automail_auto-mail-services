@@ -44,7 +44,7 @@
             {
                 if (title == null)
                 {
-                    title = GetValue("HorseRacingReport.Subject");
+                    title = GetValue("SMA.Subject");
                 }
 
                 return title;
@@ -55,7 +55,7 @@
         {
             get
             {
-                return GetSettingValueByKey("HorseRacingReport.Subject");
+                return GetValue("SMA.Subject");
             }
         }
 
@@ -65,7 +65,7 @@
             {
                 if (functionID == 0)
                 {
-                    functionID = Converter.ToInt(GetValue("FunctionID"));
+                    functionID = Converter.ToInt(GetValue("SMA.FunctionID"));
                 }
 
                 return functionID;

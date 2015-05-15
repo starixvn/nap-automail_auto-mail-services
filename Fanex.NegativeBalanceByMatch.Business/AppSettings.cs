@@ -162,14 +162,5 @@ namespace Fanex.NegativeBalanceByMatch.Business
                 return val == null ? false : (Convert.ToString(ConfigurationManager.AppSettings["IsSendEmailFromConfigFileWithRealCurrency"]) == "1");
             }
         }
-
-        public static string LicenseeFunctionMap
-        {
-            get
-            {
-
-                return ConfigurationManager.AppSettings["LicenseeFunctionMap"];
-            }
-        }
     }
 }
