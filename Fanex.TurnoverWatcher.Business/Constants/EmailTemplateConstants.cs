@@ -15,5 +15,7 @@ namespace Fanex.TurnoverWatcher.Business.Constants
     /// </summary>
     public class EmailTemplateConstants
     {
+        public const string TurnoverWatcherEmailTemplate = @"/Templates/EmailTemplate.cshtml";
+        public const string NotificationEmailTemplate = @"/Templates/NotificationEmailTemplate.cshtml";
     }
 }

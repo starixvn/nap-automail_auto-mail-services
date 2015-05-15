@@ -177,6 +177,15 @@
     <Content Include="SiteConfig\SMALoss\SMALossTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="SiteConfig\TurnoverWatcher\app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SiteConfig\TurnoverWatcher\Templates\EmailTemplate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SiteConfig\TurnoverWatcher\Templates\NotificationEmailTemplate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Templates\WinLossByProductsEmailTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -197,6 +206,10 @@
     <ProjectReference Include="..\Fanex.Service.Core\Fanex.Service.Core.csproj">
       <Project>{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}</Project>
       <Name>Fanex.Service.Core %28Fanex.Service.Core\Fanex.Service.Core%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.TurnoverWatcher.Business\Fanex.TurnoverWatcher.Business.csproj">
+      <Project>{EEEE6EC6-55BC-4C6E-AC8B-2D5B8C8B7179}</Project>
+      <Name>Fanex.TurnoverWatcher.Business</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

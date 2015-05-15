@@ -8,11 +8,12 @@ namespace Fanex.TurnoverWatcher.Business
 {
     using System;
     using System.Configuration;
+    using Fanex.Service.Core.Utilities;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public static class AppSettings
+    public class AppSettings : AppSettingBase
     {
         /// <summary>
         /// Gets the name of the service.
@@ -137,6 +138,14 @@ namespace Fanex.TurnoverWatcher.Business
             {
                 var val = ConfigurationManager.AppSettings["functionid"];
                 return val == null ? 328 : Convert.ToInt32(ConfigurationManager.AppSettings["functionid"]);
+            }
+        }
+
+        public static string ExportDataDirectory
+        {
+            get
+            {
+                return ExportDataDirectory("Fanex.TurnoverWatcherReport.ExportDataDirectory");
             }
         }
     }
