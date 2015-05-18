@@ -1,11 +1,12 @@
 ﻿namespace Fanex.NAPReport.BalanceReport
 {
     using Fanex.Data.Repository;
+    using System;
 
     /// <summary>
     /// Overview Criteria.
     /// </summary>
-    public class DirectBalanceReportMemberCriteria : CriteriaBase
+    public class DirectBalanceReportMemberCriteria : BalanceReportBaseCriteria
     {
         public string Username { get; set; }
 

@@ -18,12 +18,46 @@ namespace Fanex.NAPReport.BalanceReport
                     Name = "Credir Term",
                     Date = DateTime.Now
                 };
+                (new CreditTermManager()).ExportExcel(report);
 
                 var subject = Utilities.LoadSubject(report);
                 var body = Utilities.LoadBody(report);
-                (new CreditTermManager()).ExportExcel();
-                //(new SuperBalanceManager()).SendMail();
-                //(new DirectBalanceManager()).SendMail();
+
+                // Report Super.
+                var superCriteria = new SuperBalanceReportCriteria
+                {
+                    Date = DateTime.Now,
+                    Name = "Super Balance",
+                    Level = "Super"
+                };
+                (new BalanceManager(superCriteria)).ExportExcel();
+
+                // Report Master.
+                var masterCriteria = new DirectBalanceReportMasterCriteria
+                {
+                    Date = DateTime.Now,
+                    Name = "Direct Master",
+                    Level = "Master"
+                };
+                (new BalanceManager(masterCriteria)).ExportExcel();
+
+                // Report Agent.
+                var agentCriteria = new DirectBalanceReportAgentCriteria
+                {
+                    Date = DateTime.Now,
+                    Name = "Direct Agent",
+                    Level = "Agent"
+                };
+                (new BalanceManager(agentCriteria)).ExportExcel();
+
+                // Report Member.
+                var memberCriteria = new DirectBalanceReportMemberCriteria
+                {
+                    Date = DateTime.Now,
+                    Name = "Direct Member",
+                    Level = "Member"
+                };
+                (new BalanceManager(memberCriteria)).ExportExcel();
             }
             catch (Exception ex)
             {

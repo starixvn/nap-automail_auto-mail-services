@@ -23,6 +23,6 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
 {
     public interface ICreditTermManager
     {
-        void ExportExcel();
+        void ExportExcel(Report report);
     }
 }

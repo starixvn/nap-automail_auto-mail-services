@@ -33,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DNAide">
-      <HintPath>..\_Dependencies\DNAide.dll</HintPath>
-    </Reference>
     <Reference Include="Fanex.Common">
       <HintPath>..\packages\Fanex.Common.1.0.404.97\lib\net40\Fanex.Common.dll</HintPath>
     </Reference>
@@ -50,6 +47,18 @@
     </Reference>
     <Reference Include="NPOI">
       <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="RazorEngine">
       <HintPath>..\packages\RazorEngine.3.7.0\lib\net40\RazorEngine.dll</HintPath>
@@ -69,16 +78,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppSettings.cs" />
     <Compile Include="Business\ICreditTermManager.cs" />
-    <Compile Include="Business\IDirectBalanceManager.cs" />
-    <Compile Include="Business\ISuperBalanceManager.cs" />
+    <Compile Include="Business\IBalanceManager.cs" />
     <Compile Include="Business\CreditTermManager.cs" />
-    <Compile Include="Business\DirectBalanceManager.cs" />
-    <Compile Include="Business\SuperBalanceManager.cs" />
+    <Compile Include="Business\BalanceManager.cs" />
     <Compile Include="Core\IServiceBase.cs" />
     <Compile Include="Core\QueryService.cs" />
     <Compile Include="Core\ServiceBase.cs" />
     <Compile Include="Core\Utilities.cs" />
+    <Compile Include="Criteria\BalanceReportBaseCriteria.cs" />
     <Compile Include="Criteria\CreditTermReportCriteria.cs" />
     <Compile Include="Criteria\DirectBalanceReportAgentCriteria.cs" />
     <Compile Include="Criteria\DirectBalanceReportMasterCriteria.cs" />
@@ -95,18 +104,15 @@
     <Compile Include="Infrastructure\Configurations\MailSection.cs" />
     <Compile Include="Infrastructure\Configurations\StoreProceduresSection.cs" />
     <Compile Include="Infrastructure\Extensions\SendMailExtension.cs" />
-    <Compile Include="Model\Balance.cs" />
+    <Compile Include="Model\BalanceModel.cs" />
     <Compile Include="Model\CreditTerm.cs" />
     <Compile Include="Model\CreditTermDetail.cs" />
     <Compile Include="Model\Exchange.cs" />
     <Compile Include="Model\Report.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Email\BalanceReport\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

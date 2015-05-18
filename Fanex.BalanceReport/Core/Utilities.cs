@@ -6,6 +6,7 @@
     using Fanex.NAPReport.BalanceReport.Model;
     using System.Configuration;
     using RazorEngine;
+    using Fanex.BalanceReport;
 
     /// <summary>
     /// Common class.
@@ -43,8 +44,7 @@
 
         static string ResolvePath(string template)
         {
-            
-            return AppDomain.CurrentDomain.BaseDirectory + ConfigurationManager.AppSettings["Balance.EmailTemplage"] + template;
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, AppSettings.EmailTemplageFolder, template);
         }
     }
 }

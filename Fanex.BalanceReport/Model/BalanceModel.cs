@@ -13,7 +13,7 @@
 
         public int Currency { get; set; }
 
-        public double Balance { get; set; }
+        public decimal Balance { get; set; }
 
         public double BaseBalance { get; set; }
     }

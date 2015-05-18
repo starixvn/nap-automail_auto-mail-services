@@ -1,6 +1,7 @@
 ﻿namespace Fanex.NAPReport.BalanceReport.Bussiness
 {
-    public interface ISuperBalanceManager
+    using Fanex.NAPReport.BalanceReport.Model;
+    public interface IBalanceManager
     {
         void ExportExcel();
     }
