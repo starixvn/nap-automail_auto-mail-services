@@ -8,6 +8,8 @@ namespace Fanex.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport
 {
     public interface INegativeBalanceByMatchExcelService
     {
-        void GenerateReportForLicensees();
+	    void GenerateReportForLicensee(string licenseeName, IList<Match> matchs, ExportSettings exportSettings, string saveFileNamePath);
+
+        //void GenerateReportForLicensees();
     }
 }

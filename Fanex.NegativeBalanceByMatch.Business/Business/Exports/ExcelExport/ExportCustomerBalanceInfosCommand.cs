@@ -11,74 +11,74 @@ using NPOI.XSSF.UserModel;
 
 namespace Fanex.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport
 {
-    public class ExportCustomerBalanceInfosCommand : ExportCommandBase
-    {
-        private IList<CustomerBalanceInfo> _customerBalanceInfos;
+	public class ExportCustomerBalanceInfosCommand : ExportCommandBase
+	{
+		private IList<CustomerBalanceInfo> _customerBalanceInfos;
 
-        public ExportCustomerBalanceInfosCommand(ExcelDocument excelDocument, IList<CustomerBalanceInfo> customerBalanceInfos)
-            : base(excelDocument)
-        {
-            _customerBalanceInfos = customerBalanceInfos;
-        }
+		public ExportCustomerBalanceInfosCommand(ExcelDocument excelDocument, IList<CustomerBalanceInfo> customerBalanceInfos)
+			: base(excelDocument)
+		{
+			_customerBalanceInfos = customerBalanceInfos;
+		}
 
-        public override void Execute()
-        {
-            RenderLegend();
-            RenderCustomerBalanceInfosHeader();
+		public override void Execute()
+		{
+			RenderLegend();
+			RenderCustomerBalanceInfosHeader();
 
-            foreach (CustomerBalanceInfo customerBalanceInfo in _customerBalanceInfos)
-            {
-                ExcelDocument.IncreaseRowIndex();
-                ExcelDocument.ResetColumnIndex();
+			foreach (CustomerBalanceInfo customerBalanceInfo in _customerBalanceInfos)
+			{
+				ExcelDocument.IncreaseRowIndex();
+				ExcelDocument.ResetColumnIndex();
 
-                RenderCustomerBalanceInfosRow(customerBalanceInfo);
-            }
-        }
+				RenderCustomerBalanceInfosRow(customerBalanceInfo);
+			}
+		}
 
-        public void RenderLegend()
-        {
-            ExcelDocument.RenderMergeCell(ExcelDocument.CurrentRow, ExcelDocument.CurrentRow,
-                ExcelDocument.CurrentColumn, ExcelDocument.CurrentColumn + ExcelDocument.ExportSettings.MaxNumOfColumns - 1);
-            ExcelDocument.RenderCurrentCell("List of affected members");
-            ExcelDocument.IncreaseRowIndex();
-        }
+		public void RenderLegend()
+		{
+			ExcelDocument.RenderMergeCell(ExcelDocument.CurrentRow, ExcelDocument.CurrentRow,
+				ExcelDocument.CurrentColumn, ExcelDocument.CurrentColumn + ExcelDocument.ExportSettings.MaxNumOfColumns - 1);
+			ExcelDocument.RenderCurrentCell("List of affected members");
+			ExcelDocument.IncreaseRowIndex();
+		}
 
-        public void RenderCustomerBalanceInfosHeader()
-        {
-            XSSFCellStyle style = ExcelDocument.GetCellStyle(FontBoldWeight.Bold, Color.FromArgb(60, 94, 165));
+		public void RenderCustomerBalanceInfosHeader()
+		{
+			XSSFCellStyle style = ExcelDocument.GetCellStyle(FontBoldWeight.Bold, Color.FromArgb(60, 94, 165), Color.FromArgb(0, 0, 0));
 
-            ExcelDocument.RenderCurrentCell("No.", style);
+			ExcelDocument.RenderCurrentCell("No.", style);
 
-            ExcelDocument.IncreaseColumnIndex();
-            ExcelDocument.RenderCurrentCell("Members", style);
+			ExcelDocument.IncreaseColumnIndex();
+			ExcelDocument.RenderCurrentCell("Members", style);
 
-            ExcelDocument.IncreaseColumnIndex();
-            ExcelDocument.RenderCurrentCell("Balance", style);
+			ExcelDocument.IncreaseColumnIndex();
+			ExcelDocument.RenderCurrentCell("Balance", style);
 
-            ExcelDocument.IncreaseColumnIndex();
-            ExcelDocument.RenderCurrentCell("Currency", style);
+			ExcelDocument.IncreaseColumnIndex();
+			ExcelDocument.RenderCurrentCell("Currency", style);
 
-            ExcelDocument.IncreaseColumnIndex();
-            ExcelDocument.RenderCurrentCell("Deposit Name", style);
-        }
+			ExcelDocument.IncreaseColumnIndex();
+			ExcelDocument.RenderCurrentCell("Deposit Name", style);
+		}
 
-        public void RenderCustomerBalanceInfosRow(CustomerBalanceInfo customerBalanceInfo)
-        {
-            XSSFCellStyle style = ExcelDocument.GetCellStyle(FontBoldWeight.None, Color.FromArgb(255, 255, 255), Color.FromArgb(0, 0, 0));
+		public void RenderCustomerBalanceInfosRow(CustomerBalanceInfo customerBalanceInfo)
+		{
+			XSSFCellStyle style = ExcelDocument.GetCellStyle(FontBoldWeight.None, Color.FromArgb(255, 255, 255), Color.FromArgb(0, 0, 0));
 
-            ExcelDocument.RenderCurrentCell(customerBalanceInfo.LogID, style);
+			ExcelDocument.RenderCurrentCell(customerBalanceInfo.LogID, style);
 
-            ExcelDocument.IncreaseColumnIndex();
-            ExcelDocument.RenderCurrentCell(customerBalanceInfo.Username, style);
+			ExcelDocument.IncreaseColumnIndex();
+			ExcelDocument.RenderCurrentCell(customerBalanceInfo.Username, style);
 
-            ExcelDocument.IncreaseColumnIndex();
-            ExcelDocument.RenderCurrentCell(customerBalanceInfo.TotalBalance, style);
+			ExcelDocument.IncreaseColumnIndex();
+			ExcelDocument.RenderCurrentCell(customerBalanceInfo.TotalBalance, style);
 
-            ExcelDocument.IncreaseColumnIndex();
-            ExcelDocument.RenderCurrentCell(customerBalanceInfo.CurrencyName, style);
+			ExcelDocument.IncreaseColumnIndex();
+			ExcelDocument.RenderCurrentCell(customerBalanceInfo.CurrencyName, style);
 
-            ExcelDocument.IncreaseColumnIndex();
-            ExcelDocument.RenderCurrentCell(customerBalanceInfo.CustomInfo1, style);
-        }
-    }
+			ExcelDocument.IncreaseColumnIndex();
+			ExcelDocument.RenderCurrentCell(customerBalanceInfo.CustomInfo1, style);
+		}
+	}
 }

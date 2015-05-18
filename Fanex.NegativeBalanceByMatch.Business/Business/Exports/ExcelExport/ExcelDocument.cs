@@ -2,127 +2,126 @@
 using System.IO;
 using Fanex.Service.Core.Extensions;
 using Fanex.Service.Core.Model;
+using Fanex.Service.Core.Utilities;
 using NPOI.SS.UserModel;
 using NPOI.SS.Util;
 using NPOI.XSSF.UserModel;
 
 namespace Fanex.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport
 {
-    public class ExcelDocument
-    {
-        public XSSFWorkbook Workbook { get; private set; }
-        public ExportSettings ExportSettings { get; private set; }
+	public class ExcelDocument
+	{
+		public XSSFWorkbook Workbook { get; private set; }
+		public ExportSettings ExportSettings { get; private set; }
 
-        public int CurrentRow
-        {
-            get { return CurrentCell.CurrentRow; } 
-        }
+		public int CurrentRow
+		{
+			get { return CurrentCell.CurrentRow; }
+		}
 
-        public int CurrentColumn
-        {
-            get { return CurrentCell.CurrentColumn; }
-        }
+		public int CurrentColumn
+		{
+			get { return CurrentCell.CurrentColumn; }
+		}
 
-        private XSSFSheet _wooksheet;
+		private XSSFSheet _wooksheet;
 
-        private Cell CurrentCell { get; set; }
+		private Cell CurrentCell { get; set; }
 
-        public ExcelDocument(XSSFWorkbook wookbook, ExportSettings exportSettings, string licenseeName)
-        {
-            Workbook = new XSSFWorkbook();
-            ExportSettings = exportSettings;
-            _wooksheet = Workbook.CreateSheet(licenseeName) as XSSFSheet;
+		public ExcelDocument(XSSFWorkbook wookbook, ExportSettings exportSettings, string licenseeName)
+		{
+			Workbook = new XSSFWorkbook();
+			ExportSettings = exportSettings;
+			_wooksheet = Workbook.CreateSheet(licenseeName) as XSSFSheet;
 
-            CurrentCell = new Cell();
+			CurrentCell = new Cell();
 
-            InitSettings();
-        }
+			InitSettings();
+		}
 
-        public void Save(string saveFileNamePath)
-        {
-            FileStream fileStream = File.Create(saveFileNamePath);
-            Workbook.Write(fileStream);
-            fileStream.Close();
-        }
+		public void Save(string saveFileNamePath)
+		{
+			SaveFile.SaveExcelFile(Path.GetDirectoryName(saveFileNamePath),Path.GetFileName(saveFileNamePath), Workbook);
+		}
 
-        public void RenderCurrentCell(object cellValue, XSSFCellStyle cellStyle = null)
-        {
-            CurrentCell.CellValue = cellValue;
-            NpoiNewFormatExcelExtension.RenderCell(_wooksheet, CurrentCell, cellStyle);
-        }
+		public void RenderCurrentCell(object cellValue, XSSFCellStyle cellStyle = null)
+		{
+			CurrentCell.CellValue = cellValue;
+			NpoiNewFormatExcelExtension.RenderCell(_wooksheet, CurrentCell, cellStyle);
+		}
 
-        public void RenderMergeCell(int firstRow, int lastRow, int firstCol, int lastCol)
-        {
-            CellRangeAddress region = new CellRangeAddress(firstRow, lastRow, firstCol, lastCol);
-            _wooksheet.AddMergedRegion(region);
-        }
+		public void RenderMergeCell(int firstRow, int lastRow, int firstCol, int lastCol)
+		{
+			CellRangeAddress region = new CellRangeAddress(firstRow, lastRow, firstCol, lastCol);
+			_wooksheet.AddMergedRegion(region);
+		}
 
-        public XSSFCellStyle GetCellStyle(
-            FontBoldWeight fontBoldWeight, 
-            Color backgroundColor = default(Color), 
-            Color borderColor = default(Color),
-            HorizontalAlignment horizontalAlignment = HorizontalAlignment.Center)
-        {
-            XSSFCellStyle style = Workbook.CreateCellStyle() as XSSFCellStyle;
+		public XSSFCellStyle GetCellStyle(
+			FontBoldWeight fontBoldWeight,
+			Color backgroundColor = default(Color),
+			Color borderColor = default(Color),
+			HorizontalAlignment horizontalAlignment = HorizontalAlignment.Center)
+		{
+			XSSFCellStyle style = Workbook.CreateCellStyle() as XSSFCellStyle;
 
-            IFont font = Workbook.CreateFont();
-            font.Boldweight = (short)fontBoldWeight;
-            style.SetFont(font);
+			IFont font = Workbook.CreateFont();
+			font.Boldweight = (short)fontBoldWeight;
+			style.SetFont(font);
 
-            if (backgroundColor != default(Color))
-            {
-                style.SetFillForegroundColor(new XSSFColor(backgroundColor));
-                style.FillPattern = FillPattern.SolidForeground;
-            }
+			if (backgroundColor != default(Color))
+			{
+				style.SetFillForegroundColor(new XSSFColor(backgroundColor));
+				style.FillPattern = FillPattern.SolidForeground;
+			}
 
-            if (borderColor != default(Color))
-            {
+			if (borderColor != default(Color))
+			{
 
 				style.BorderLeft = BorderStyle.Thin;
 				style.BorderRight = BorderStyle.Thin;
 				style.BorderTop = BorderStyle.Thin;
-                style.BorderBottom = BorderStyle.Thin;
-                style.SetLeftBorderColor(new XSSFColor(borderColor));
-                style.SetRightBorderColor(new XSSFColor(borderColor));
-                style.SetTopBorderColor(new XSSFColor(borderColor));
-                style.SetBottomBorderColor(new XSSFColor(borderColor));
-            }
+				style.BorderBottom = BorderStyle.Thin;
+				style.SetLeftBorderColor(new XSSFColor(borderColor));
+				style.SetRightBorderColor(new XSSFColor(borderColor));
+				style.SetTopBorderColor(new XSSFColor(borderColor));
+				style.SetBottomBorderColor(new XSSFColor(borderColor));
+			}
 
-            style.Alignment = horizontalAlignment;
+			style.Alignment = horizontalAlignment;
 
-            return style;
-        }
+			return style;
+		}
 
-        public void ResetColumnIndex()
-        {
-            CurrentCell.ResetColumnIndex();
-            for (int i = 0; i < ExportSettings.StartColIndex; i++)
-            {
-                CurrentCell.IncreaseColumnIndex();
-            }
-        }
+		public void ResetColumnIndex()
+		{
+			CurrentCell.ResetColumnIndex();
+			for (int i = 0; i < ExportSettings.StartColIndex; i++)
+			{
+				CurrentCell.IncreaseColumnIndex();
+			}
+		}
 
-        public void IncreaseRowIndex()
-        {
-            CurrentCell.IncreaseRowIndex();
-        }
+		public void IncreaseRowIndex()
+		{
+			CurrentCell.IncreaseRowIndex();
+		}
 
-        public void IncreaseColumnIndex()
-        {
-            CurrentCell.IncreaseColumnIndex();
-        }
+		public void IncreaseColumnIndex()
+		{
+			CurrentCell.IncreaseColumnIndex();
+		}
 
-        private void InitSettings()
-        {
-            for (int i = 0; i < ExportSettings.StartRowIndex; i++)
-            {
-                CurrentCell.IncreaseRowIndex();
-            }
+		private void InitSettings()
+		{
+			for (int i = 0; i < ExportSettings.StartRowIndex; i++)
+			{
+				CurrentCell.IncreaseRowIndex();
+			}
 
-            for (int i = 0; i < ExportSettings.StartColIndex; i++)
-            {
-                CurrentCell.IncreaseColumnIndex();
-            }
-        }
-    }
+			for (int i = 0; i < ExportSettings.StartColIndex; i++)
+			{
+				CurrentCell.IncreaseColumnIndex();
+			}
+		}
+	}
 }

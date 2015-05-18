@@ -13,7 +13,7 @@ namespace Fanex.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport
 		public ExportSaveCommand(ExcelDocument excelDocument, string saveFileNamePath)
 			: base(excelDocument)
 		{
-			_saveFileNamePath = saveFileNamePath;
+			_saveFileNamePath= saveFileNamePath;
 		}
 
 		public override void Execute()

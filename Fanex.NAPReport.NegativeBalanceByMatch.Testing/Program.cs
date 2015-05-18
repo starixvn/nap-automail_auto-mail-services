@@ -1,6 +1,7 @@
 ﻿using Fanex.Data.Configuration;
 using Fanex.NegativeBalanceByMatch.Business;
 using Fanex.NegativeBalanceByMatch.Business.Business;
+using Fanex.NegativeBalanceByMatch.Business.Business.Exports;
 using Fanex.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport;
 using Fanex.NegativeBalanceByMatch.Business.Business.Licensee;
 using Fanex.NegativeBalanceByMatch.Business.Helper;
@@ -16,13 +17,13 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Testing
 			LicenseeFunctionParser licenseeFunctionParser = new LicenseeFunctionParser(AppSettings.LicenseeFunctionMap);
 			ILicenseeService licenseeService = new LicenseeService(licenseeFunctionParser);
 			NegativeBalanceByMatchService negativeBalanceByMatchService = new NegativeBalanceByMatchService(licenseeService);
-			INegativeBalanceByMatchExcelService negativeBalanceByMatchExcelService = 
-				new NegativeBalanceByMatchExcelService(licenseeService, negativeBalanceByMatchService);
+			INegativeBalanceByMatchExcelService negativeBalanceByMatchExcelService =
+				new NegativeBalanceByMatchExcelService(negativeBalanceByMatchService);
 
 
-			negativeBalanceByMatchExcelService.GenerateReportForLicensees();
+			//negativeBalanceByMatchExcelService.GenerateReportForLicensees();
 
-			MailService mailService = new MailService(licenseeService, negativeBalanceByMatchExcelService);
+			MailService mailService = new MailService(licenseeService, negativeBalanceByMatchService, negativeBalanceByMatchExcelService);
 			mailService.SendMails();
 
 

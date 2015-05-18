@@ -12,33 +12,28 @@ using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using Match = Fanex.NegativeBalanceByMatch.Business.Entities.Match;
 
-namespace Fanex.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport
+namespace Fanex.NegativeBalanceByMatch.Business.Business.Exports
 {
     public class NegativeBalanceByMatchExcelService : INegativeBalanceByMatchExcelService
     {
         private NegativeBalanceByMatchService _negativeBalanceByMatchService;
-        private ILicenseeService _licenseeService;
 
-        public NegativeBalanceByMatchExcelService(ILicenseeService licenseeService, NegativeBalanceByMatchService negativeBalanceByMatchService)
+        public NegativeBalanceByMatchExcelService(NegativeBalanceByMatchService negativeBalanceByMatchService)
         {
             _negativeBalanceByMatchService = negativeBalanceByMatchService;
-            _licenseeService = licenseeService;
         }
 
-        public void GenerateReportForLicensees()
-        {
-            IDictionary<string, IList<Match>> licenseeToMatchs = _negativeBalanceByMatchService.GetLicenseeMatchsMap();
+		//public void GenerateReportForLicensees()
+		//{
+		//    IDictionary<string, IList<Match>> licenseeToMatchs = _negativeBalanceByMatchService.GetLicenseeMatchsMap();
+		//    //IDictionary<string, IList<Match>> licenseeToMatchs = GenLicenseeMatchs();
 
+		//    ExportSettings exportSettings = new ExportSettings();
 
-            //IDictionary<string, IList<Match>> licenseeToMatchs = GenLicenseeMatchs();
+		//    licenseeToMatchs.ForEach(m => GenerateReportForLicensee(m.Key, m.Value, exportSettings));
+		//}
 
-            ExportSettings exportSettings = new ExportSettings();
-
-            licenseeToMatchs.ForEach(m => GenerateReportForLicensee(m.Key, m.Value, exportSettings));
-
-        }
-
-        public void GenerateReportForLicensee(string licenseeName, IList<Match> matchs, ExportSettings exportSettings)
+        public void GenerateReportForLicensee(string licenseeName, IList<Match> matchs, ExportSettings exportSettings, string saveFileNamePath)
         {
             XSSFWorkbook workbook = new XSSFWorkbook();
 
@@ -63,7 +58,7 @@ namespace Fanex.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport
 
             IExportCommand autoSizeColumnCommand = new ExportAutoSizeColumCommand(excelDocument);
 
-			IExportCommand saveCommand = new ExportSaveCommand(excelDocument, @"C:\Users\george.nguyen\Desktop\Workspace\NegativeBalanceByMatch\" + licenseeName + ".xlsx");
+			IExportCommand saveCommand = new ExportSaveCommand(excelDocument, saveFileNamePath);
 
             exportCommand.Add(exportMatchsCommand);
             exportCommand.Add(autoSizeColumnCommand);
