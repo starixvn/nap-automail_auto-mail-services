@@ -82,9 +82,9 @@ namespace Fanex.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport
             if (borderColor != default(Color))
             {
 
-                //style.BorderLeft = BorderStyle.Thin;
-                //style.BorderRight = BorderStyle.Thin;
-                //style.BorderTop = BorderStyle.Thin;
+				style.BorderLeft = BorderStyle.Thin;
+				style.BorderRight = BorderStyle.Thin;
+				style.BorderTop = BorderStyle.Thin;
                 style.BorderBottom = BorderStyle.Thin;
                 style.SetLeftBorderColor(new XSSFColor(borderColor));
                 style.SetRightBorderColor(new XSSFColor(borderColor));
