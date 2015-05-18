@@ -14,9 +14,6 @@
 
     public class SMALossProcess : ISMALossProcess
     {
-        private const string UpwardArrowUrl = @"/Templates/Images/UpwardArrow.png";
-        private const string DownwardArrowUrl = @"/Templates/Images/DownardArrow.png";
-        private const string HorizontalLineUrl = @"/Templates/Images/HorizontalLine.png";
         private readonly ISMALossService _lossService = null;
         private string _template = null;
 
