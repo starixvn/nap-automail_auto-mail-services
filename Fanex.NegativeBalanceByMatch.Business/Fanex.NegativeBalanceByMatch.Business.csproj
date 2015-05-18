@@ -55,6 +55,9 @@
     <Reference Include="Fanex.MailDeliver.MailClient">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.MailDeliver.MailClient.dll</HintPath>
     </Reference>
+    <Reference Include="Fanex.MailDelivery.Client">
+      <HintPath>..\_Dependencies\MailStation\Fanex.MailDelivery.Client.dll</HintPath>
+    </Reference>
     <Reference Include="Fanex.NAP.Framework">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Framework.dll</HintPath>
     </Reference>
@@ -109,13 +112,14 @@
     <Compile Include="Business\Exports\ExcelExport\ExportCompositeCommand.cs" />
     <Compile Include="Business\Exports\ExcelExport\ExportCustomerBalanceInfosCommand.cs" />
     <Compile Include="Business\Exports\ExcelExport\ExportMatchCommand.cs" />
-    <Compile Include="Business\Exports\ExcelExport\ExportMatchsCommand.cs" />
-    <Compile Include="Business\Exports\ExcelExport\ExportSaveCommand.cs" />
-    <Compile Include="Business\Exports\ExcelExport\IExportCommand.cs" />
     <Compile Include="Business\Exports\ExcelExport\ExportMatchInfoCommand.cs" />
+    <Compile Include="Business\Exports\ExcelExport\ExportMatchsCommand.cs" />
     <Compile Include="Business\Exports\ExcelExport\ExportMatchSettleLogsCommand.cs" />
+    <Compile Include="Business\Exports\ExcelExport\ExportSaveCommand.cs" />
     <Compile Include="Business\Exports\ExcelExport\ExportSettings.cs" />
+    <Compile Include="Business\Exports\ExcelExport\IExportCommand.cs" />
     <Compile Include="Business\Exports\INegativeBalanceByMatchExcelService.cs" />
+    <Compile Include="Business\Exports\NegativeBalanceByMatchExcelService.cs" />
     <Compile Include="Business\Licensee\ILicenseeService.cs" />
     <Compile Include="Business\Licensee\LicenseeService.cs" />
     <Compile Include="Business\MailService.cs" />
@@ -134,17 +138,19 @@
     <Compile Include="Helper\Implement\SendMailExtension.cs" />
     <Compile Include="Helper\Implement\ServiceBase.cs" />
     <Compile Include="Helper\Interface\IServiceBase.cs" />
-    <Compile Include="Business\Exports\NegativeBalanceByMatchExcelService.cs" />
     <Compile Include="Helper\LicenseeFunctionParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\INegativeBalanceByMatchRepository.cs" />
     <Compile Include="Repositories\NegativeBalanceByMatchRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Fanex.OandaExChangeRate.Business\Fanex.OandaExChangeRate.Business.csproj">
+      <Project>{41B6421F-B8A6-48AA-A9FF-FB3040E5C43F}</Project>
+      <Name>Fanex.OandaExChangeRate.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fanex.Service.Core\Fanex.Service.Core.csproj">
       <Project>{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}</Project>
       <Name>Fanex.Service.Core %28Fanex.Service.Core\Fanex.Service.Core%29</Name>

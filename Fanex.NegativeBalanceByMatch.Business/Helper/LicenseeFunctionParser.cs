@@ -25,8 +25,6 @@ namespace Fanex.NegativeBalanceByMatch.Business.Helper
 
 			string[] licenseeFunctionGroups = _stringToParse.Split(';');
 
-			//licenseeFunctionGroups.ForEach(lf => lf = lf.Trim(' ', '(', ')'));
-
 			foreach (string licenseeFunctionGroup in licenseeFunctionGroups)
 			{
 				string[] licenseeFunctionTokens = licenseeFunctionGroup.Trim(' ', '(', ')').Split(',');

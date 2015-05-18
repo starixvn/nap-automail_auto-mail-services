@@ -27,10 +27,10 @@ namespace Fanex.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport
 
         public void GenerateReportForLicensees()
         {
-            //  IDictionary<string, IList<Match>> licenseeToMatchs = _negativeBalanceByMatchService.GetLicenseeMatchsMap();
+            IDictionary<string, IList<Match>> licenseeToMatchs = _negativeBalanceByMatchService.GetLicenseeMatchsMap();
 
 
-            IDictionary<string, IList<Match>> licenseeToMatchs = GenLicenseeMatchs();
+            //IDictionary<string, IList<Match>> licenseeToMatchs = GenLicenseeMatchs();
 
             ExportSettings exportSettings = new ExportSettings();
 

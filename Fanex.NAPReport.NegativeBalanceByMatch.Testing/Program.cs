@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using Fanex.Data.Configuration;
-using Fanex.MailDelivery.Client.Handlers;
-using Fanex.MailDelivery.Client.Models;
-using Fanex.NegativeBalanceByMatch.Business.Business.Licensee;
-using Fanex.NegativeBalanceByMatch.Business.Helper;
+﻿using Fanex.Data.Configuration;
 using Fanex.NegativeBalanceByMatch.Business;
 using Fanex.NegativeBalanceByMatch.Business.Business;
 using Fanex.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport;
+using Fanex.NegativeBalanceByMatch.Business.Business.Licensee;
+using Fanex.NegativeBalanceByMatch.Business.Helper;
 
 namespace Fanex.NAPReport.NegativeBalanceByMatch.Testing
 {
@@ -28,6 +21,11 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Testing
 
 
 			negativeBalanceByMatchExcelService.GenerateReportForLicensees();
+
+			MailService mailService = new MailService(licenseeService, negativeBalanceByMatchExcelService);
+			mailService.SendMails();
+
+
 			//Mail mail = new Mail
 			//{
 			//    Subject = "Mail Station Test (Function Mail).",

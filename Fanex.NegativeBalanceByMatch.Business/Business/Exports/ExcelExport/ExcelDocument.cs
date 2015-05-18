@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using Fanex.Service.Core.Extensions;
 using Fanex.Service.Core.Model;
 using NPOI.SS.UserModel;

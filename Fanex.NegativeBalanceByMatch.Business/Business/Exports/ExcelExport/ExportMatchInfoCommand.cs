@@ -25,7 +25,7 @@ namespace Fanex.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport
         {
             ExcelDocument.RenderMergeCell(ExcelDocument.CurrentRow, ExcelDocument.CurrentRow, ExcelDocument.CurrentColumn, ExcelDocument.CurrentColumn + ExcelDocument.ExportSettings.MaxNumOfColumns - 1);
 
-            ExcelDocument.RenderCurrentCell(string.Format("Event Date: {0}", _matchInfo.EventDate));
+            ExcelDocument.RenderCurrentCell(string.Format("Event Date: {0}", _matchInfo.EventDate.ToShortDateString()));
 
             ExcelDocument.IncreaseRowIndex();
             ExcelDocument.RenderMergeCell(ExcelDocument.CurrentRow, ExcelDocument.CurrentRow, ExcelDocument.CurrentColumn, ExcelDocument.CurrentColumn + ExcelDocument.ExportSettings.MaxNumOfColumns - 1);

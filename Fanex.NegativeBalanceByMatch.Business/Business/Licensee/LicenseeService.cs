@@ -9,16 +9,23 @@ namespace Fanex.NegativeBalanceByMatch.Business.Business.Licensee
 {
 	public class LicenseeService : ILicenseeService
 	{
-	    private readonly IList<LicenseeFunction> _licenseeFunctions;
+		private readonly LicenseeFunctionParser _licenseeFunctionParser;
+		private readonly IList<LicenseeFunction> _licenseeFunctions;
 
 		public LicenseeService(LicenseeFunctionParser licenseeFunctionParser)
 		{
-		    _licenseeFunctions = licenseeFunctionParser.LicenseeFunctions;
+			_licenseeFunctionParser = licenseeFunctionParser;
+			_licenseeFunctions = _licenseeFunctionParser.LicenseeFunctions;
 		}
 
-	    public IList<string> GetLicensees()
+		public IList<string> GetLicensees()
 		{
 			return _licenseeFunctions.Select(lf => lf.LicenseeName).ToList();
 		}
+
+		public IList<LicenseeFunction>  GetLicenseeFunctions()
+		{
+			return _licenseeFunctions;
+		} 
 	}
 }
