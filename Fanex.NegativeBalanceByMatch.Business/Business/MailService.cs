@@ -48,7 +48,7 @@ namespace Fanex.NegativeBalanceByMatch.Business.Business
 					};
 
 					string fileNamePath = Path.Combine(AppSettings.ExportDataDirectory,
-													licenseeName + "_" + curDateTime.ToString("yyyy-MM-dd") + ".xlsx");
+													licenseeName + "_" + curDateTime.ToString("yyyy-MM-dd-hh-mm-ss") + ".xlsx");
 
 					_negativeBalanceByMatchExcelService.GenerateReportForLicensee(licenseeName, licenseeToMatchs[licenseeName], exportSettings, fileNamePath);
 
@@ -56,9 +56,9 @@ namespace Fanex.NegativeBalanceByMatch.Business.Business
 					mail.Attachments.Add(new MailAttachment(fileNamePath,
 						MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
 
-					//MailClientHandler.Start();
-					//MailClientHandler.SendMail(mail);
-					//MailClientHandler.Stop();
+					MailClientHandler.Start();
+					MailClientHandler.SendMail(mail);
+					MailClientHandler.Stop();
 				}
 			}
 		}
