@@ -207,7 +207,7 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
             ICellStyle headerStyle = CreateHeaderStyle();
             _cell.EndColumn = _cell.CurrentColumn + 9;
             _cell.CellValue = "CREDIT TERM (PRE AGREE REPORT)";
-            NpoiOldFormatExcelExtension.RenderMergeCell(_workSheet, currentRow, _cell, headerStyle);
+            NpoiOldFormatExcelExtension.RenderMergeCell(_workSheet, _cell, headerStyle);
         }
 
         private ICellStyle CreateHeaderStyle()
@@ -220,7 +220,7 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
         {
             ICellStyle headerStyle = CreateHeaderStyle();
             _cell.CellValue = textTitle;
-            NpoiOldFormatExcelExtension.RenderCell(_workSheet, currentRow, _cell, headerStyle);
+            NpoiOldFormatExcelExtension.RenderCell(_workSheet, _cell, headerStyle);
             _cell.IncreaseColumnIndex();
         }
 

@@ -1,6 +1,6 @@
 ﻿namespace Fanex.NegativeBalanceByMatch.Service
 {
-    partial class AutomailService
+    partial class AutoMailService
     {
         /// <summary> 
         /// Required designer variable.

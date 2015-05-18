@@ -61,8 +61,19 @@
     <Reference Include="IBCFile">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\IBCFile.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
+      <HintPath>..\_Dependencies\Entlib\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL" />
+    <Reference Include="NPOI.OOXML, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL" />
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="RazorEngine">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\RazorEngine.dll</HintPath>
@@ -79,6 +90,7 @@
     <Reference Include="System.Data.SQLite">
       <HintPath>..\_Dependencies\SQLite\System.Data.SQLite.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
@@ -91,10 +103,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
+    <Compile Include="Business\Exports\ExcelExport\ExcelDocument.cs" />
+    <Compile Include="Business\Exports\ExcelExport\ExportAutoSizeColumCommand.cs" />
+    <Compile Include="Business\Exports\ExcelExport\ExportCommandBase.cs" />
+    <Compile Include="Business\Exports\ExcelExport\ExportCompositeCommand.cs" />
+    <Compile Include="Business\Exports\ExcelExport\ExportCustomerBalanceInfosCommand.cs" />
+    <Compile Include="Business\Exports\ExcelExport\ExportMatchCommand.cs" />
+    <Compile Include="Business\Exports\ExcelExport\ExportMatchsCommand.cs" />
+    <Compile Include="Business\Exports\ExcelExport\ExportSaveCommand.cs" />
+    <Compile Include="Business\Exports\ExcelExport\IExportCommand.cs" />
+    <Compile Include="Business\Exports\ExcelExport\ExportMatchInfoCommand.cs" />
+    <Compile Include="Business\Exports\ExcelExport\ExportMatchSettleLogsCommand.cs" />
+    <Compile Include="Business\Exports\ExcelExport\ExportSettings.cs" />
+    <Compile Include="Business\Exports\INegativeBalanceByMatchExcelService.cs" />
+    <Compile Include="Business\Licensee\ILicenseeService.cs" />
+    <Compile Include="Business\Licensee\LicenseeService.cs" />
+    <Compile Include="Business\MailService.cs" />
     <Compile Include="Business\NegativeBalanceByMatchService.cs" />
     <Compile Include="Criteria\Sel_BySiteCriteria.cs" />
     <Compile Include="Criteria\Sel_MatchLogCriteria.cs" />
     <Compile Include="Criteria\Upd_StatusIDCriteria.cs" />
+    <Compile Include="Entities\LicenseeFunction.cs" />
     <Compile Include="Entities\Mailing.cs" />
     <Compile Include="Entities\Match.cs" />
     <Compile Include="Entities\NegativeBalanceTaskInfo.cs" />
@@ -105,11 +134,14 @@
     <Compile Include="Helper\Implement\SendMailExtension.cs" />
     <Compile Include="Helper\Implement\ServiceBase.cs" />
     <Compile Include="Helper\Interface\IServiceBase.cs" />
+    <Compile Include="Business\Exports\NegativeBalanceByMatchExcelService.cs" />
+    <Compile Include="Helper\LicenseeFunctionParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\INegativeBalanceByMatchRepository.cs" />
     <Compile Include="Repositories\NegativeBalanceByMatchRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
