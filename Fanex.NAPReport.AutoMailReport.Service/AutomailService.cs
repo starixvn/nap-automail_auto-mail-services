@@ -14,14 +14,13 @@ namespace Fanex.NAPReport.AutoMailReport.Service
     using Fanex.NAPReport.HorseRacingReport.Business;
     using Fanex.NAPReport.SMALoss.Business.Business;
     using Fanex.Service.Core.Extensions;
+    using System.Diagnostics;
 
     /// <summary>
     /// Auto mail service.
     /// </summary>
     public partial class AutoMailService : System.ServiceProcess.ServiceBase
     {
-        private const string TemplateUrl = @"/SiteConfig/SMALoss/SMALossTemplate.cshtml";
-        private TimeSpan _startTime;
         private Timer _timer = null;
         private ISMALossProcess _smaLossProcess = null;
 
@@ -36,7 +35,14 @@ namespace Fanex.NAPReport.AutoMailReport.Service
 
         protected override void OnStart(string[] args)
         {
-            ResetTimer();
+            try
+            {
+                ResetTimer();
+            }
+            catch(Exception ex)
+            {
+                File.AppendAllText(@"D:\test.txt", ex.ToString());
+            }
         }
 
         protected override void OnStop()
@@ -77,7 +83,7 @@ namespace Fanex.NAPReport.AutoMailReport.Service
 
                     if (this._smaLossProcess != null)
                     {
-                        this._smaLossProcess.NotifyEmail(TemplateUrl);
+                        this._smaLossProcess.NotifyEmail();
                     }
 
                     AppSettings.OnProcessing = false;

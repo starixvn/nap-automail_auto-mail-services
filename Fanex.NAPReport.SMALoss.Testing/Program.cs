@@ -1,21 +1,23 @@
 ﻿using System;
 using System.IO;
 using Fanex.Data.Configuration;
-using Fanex.NAPReport.SMALoss.Business.Business;
+using Fanex.NAPReport.AutoMailReport.Service;
 
 namespace Fanex.NAPReport.SMALoss.Testing
 {
     internal class Program
     {
-        private const string TemplateUrl = @"/Templates/SMALossTemplate.cshtml";
-
         private static void Main(string[] args)
         {
-            Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
-            DbSettingProviderManager.Current.Start();
+            System.ServiceProcess.ServiceBase[] ServicesToRun;
+            ServicesToRun = new System.ServiceProcess.ServiceBase[] { new AutoMailService() };
+            System.ServiceProcess.ServiceBase.Run(ServicesToRun);
 
-            var lossProcess = new SMALossProcess();
-            lossProcess.NotifyEmail(TemplateUrl);
+            //Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
+            //DbSettingProviderManager.Current.Start();
+
+            //var lossProcess = new SMALossProcess();
+            //lossProcess.NotifyEmail();
         }
     }
 }

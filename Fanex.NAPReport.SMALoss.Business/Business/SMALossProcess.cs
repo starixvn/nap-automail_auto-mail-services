@@ -4,20 +4,24 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using Fanex.MailDelivery.Client.Enumerations;
     using Fanex.MailDelivery.Client.Handlers;
     using Fanex.MailDelivery.Client.Models;
     using Fanex.NAPReport.SMALoss.Business.Criteria;
     using Fanex.NAPReport.SMALoss.Business.Entities;
     using Fanex.NAPReport.SMALoss.Business.Services;
+    using Fanex.NAPReport.SMALoss.Business.Services.ExcelExport;
     using Fanex.Service.Core.Extensions;
     using RazorEngine;
-    using Fanex.NAPReport.SMALoss.Business.Services.ExcelExport;
 
     public class SMALossProcess : ISMALossProcess
     {
+        private const string UpwardArrowUrl = @"/SiteConfig/SMALoss/Templates/Images/UpwardArrow.png";
+        private const string DownwardArrowUrl = @"/SiteConfig/SMALoss/Templates/Images/DownardArrow.png";
+        private const string HorizontalLineUrl = @"/SiteConfig/SMALoss/Templates/Images/HorizontalLine.png";
+        private const string TemplateUrl = @"/SiteConfig/SMALoss/Templates/EmailTemplate.cshtml";
         private readonly ISMALossService _lossService = null;
         private readonly ISMALossExcelService _lossExcelService = null;
-        private string _template = null;
 
         public SMALossProcess()
             : this(null, null)
@@ -38,19 +42,31 @@
         }
 
         /// <summary>
-        /// Notifies the email.
+        /// Gets the template.
         /// </summary>
         /// <param name="templateUrl">The template URL.</param>
+        /// <returns>The email template.</returns>
+        private string GetTemplate
+        {
+            get
+            {
+                var appLocation = AppDomain.CurrentDomain.BaseDirectory;
+                return File.ReadAllText(appLocation + TemplateUrl);
+            }
+        }
+
+        /// <summary>
+        /// Notifies the email.
+        /// </summary>
         /// <returns>Boolean value indicates whether the email is sent successfully or not.</returns>
-        public bool NotifyEmail(string templateUrl)
+        public bool NotifyEmail()
         {
             var offset = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours;
             var timezoneInd = DateTime.Now.IsDaylightSavingTime() ? offset - 1 : offset;
             var subject = string.Format(AppSettings.Subject, DateTime.Now, string.Format("{0}{1}", timezoneInd > 0 ? "+" : string.Empty, timezoneInd));
 
             var lossItems = GetReachedSMALoss();
-            var template = GetTemplate(templateUrl);
-            var content = Razor.Parse(template, lossItems);
+            var content = Razor.Parse(GetTemplate, lossItems);
 
             var isNotified = SendMail(new EmailContent
             {
@@ -91,6 +107,15 @@
                 mail.Attachments = new List<MailAttachment>();
                 mail.Attachments.Add(new MailAttachment(fileNamePath, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
 
+                //var appLocation = AppDomain.CurrentDomain.BaseDirectory;
+                //var upwardArrow = new MailLinkedResource(appLocation + UpwardArrowUrl, FileExtension.IMG_PNG, "lruworradrawpu");
+                //var downwardArrow = new MailLinkedResource(appLocation + DownwardArrowUrl, FileExtension.IMG_PNG, "lruworradrawnwod");
+                //var horizontalLineArrow = new MailLinkedResource(appLocation + HorizontalLineUrl, FileExtension.IMG_PNG, "lruworradrawenillatnoziroh");
+                //mail.AlternativeViews = new List<MailLinkedResource>();
+                //mail.AlternativeViews.Add(upwardArrow);
+                //mail.AlternativeViews.Add(downwardArrow);
+                //mail.AlternativeViews.Add(horizontalLineArrow);
+
                 MailClientHandler.Start();
                 MailClientHandler.SendMail(mail);
                 MailClientHandler.Stop();
@@ -101,22 +126,6 @@
                 LogExtensions.ExceptionHandler(exception);
                 return false;
             }
-        }
-
-        /// <summary>
-        /// Gets the template.
-        /// </summary>
-        /// <param name="templateUrl">The template URL.</param>
-        /// <returns>The email template.</returns>
-        private string GetTemplate(string templateUrl)
-        {
-            if (this._template == null)
-            {
-                var appLocation = AppDomain.CurrentDomain.BaseDirectory;
-                this._template = File.ReadAllText(appLocation + templateUrl);
-            }
-
-            return this._template;
         }
 
         /// <summary>

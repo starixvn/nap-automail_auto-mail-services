@@ -120,6 +120,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20715.0\lib\net40\System.Web.Razor.dll</HintPath>
@@ -138,10 +139,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SiteConfig\SMALoss\Templates\Images\DownardArrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\SMALoss\Templates\Images\HorizontalLine.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\SMALoss\Templates\Images\UpwardArrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Templates\SMALossTemplate.cshtml">
+    <Content Include="SiteConfig\SMALoss\Templates\EmailTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config">
@@ -149,11 +159,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\DBAGE.bodb02.bodbAdminNet.xml">
+    <Content Include="App_Data\DBAGE.bodb_AGE.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Fanex.NAPReport.AutoMailReport.Service\Fanex.NAPReport.AutoMailReport.Service.csproj">
+      <Project>{A26D737A-8655-40AD-AA5D-13DC22FCFF7C}</Project>
+      <Name>Fanex.NAPReport.AutoMailReport.Service %28Fanex.NAPReport.AutoMailReport.Service\Fanex.NAPReport.AutoMailReport.Service%29</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fanex.NAPReport.SMALoss.Business\Fanex.NAPReport.SMALoss.Business.csproj">
       <Project>{DA6DE65A-5D27-4B28-A928-422B664502C2}</Project>
       <Name>Fanex.NAPReport.SMALoss.Business</Name>
