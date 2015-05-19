@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Functions>
+  <Function Name="Horse3rd">
+    <Setting Key="Acc_Rpt_Racing_Transaction3rdIns" SpName="spo.Acc_Rpt_Racing_Transaction3rdIns" DbName="DBDWH.bodb_dwrs.dwrs" TimeOut="0"/>
+    <Setting Key="Acc_Rpt_Racing_ComparisionTO3rd" SpName="spo.Acc_Rpt_Racing_ComparisionTO3rd" DbName="DBDWH.bodb_dwrs.dwrs" TimeOut="0"/>
+  </Function>
+
+  <Function Name="warehouse">
+    <Setting Key="Acc_Rpt_Racing_Transaction3rdIns" SpName="spo.Acc_Rpt_Racing_Transaction3rdIns" DbName="DBDWH.bodb_dwrs.dwrs" TimeOut="0"/>
+    <Setting Key="Acc_Rpt_WinlostRacing_Tote14" SpName="spo.Acc_Rpt_WinlostRacing_Tote14" DbName="DBDWH.bodb_dwrs.dwrs" TimeOut="0"/>
+  </Function>
+
+  <Function Name="Archive">
+    <Setting Key="Acc_ExchangeCurrencySel" SpName="spo.Acc_ExchangeCurrencySel" DbName="DBDWH.bodb_dwrs.dwrs" TimeOut="0"/>
+    
+  </Function>
+
+  <Function Name="DB053">
+    <Setting Key="Age_SelBalanceUpDay" SpName="spo.Age_SelBalanceUpDay" DbName="DBDWH.bodb_dwrs.dwrs" TimeOut="0"/>
+    
+  </Function>
+
+</Functions>
