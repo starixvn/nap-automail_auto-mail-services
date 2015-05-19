@@ -1,10 +1,6 @@
-﻿
-
-
-using Fanex.NAPReport.BalanceReport.Infrastructure.Configurations;
-
-namespace Fanex.NAPReport.BalanceReport.DataAccess
+﻿namespace Fanex.NAPReport.BalanceReport.DataAccess
 {
+    using Fanex.NAPReport.BalanceReport.Infrastructure.Configurations;
     public class BaseDataAccess
     {
         protected virtual StoreProcedureElement GetStoreProcedure(StoreProcedureSection.StoreCollection storeCollection, string aliasName)

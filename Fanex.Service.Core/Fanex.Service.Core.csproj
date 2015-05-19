@@ -40,6 +40,9 @@
     <Reference Include="Fanex.Logging">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Logging.dll</HintPath>
     </Reference>
+    <Reference Include="Fanex.MailDelivery.Client">
+      <HintPath>..\_Dependencies\MailStation\Fanex.MailDelivery.Client.dll</HintPath>
+    </Reference>
     <Reference Include="Fanex.NAP.Core">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Core.dll</HintPath>
     </Reference>
@@ -160,6 +163,8 @@
     <Compile Include="Service\Implement\Npoi\NpoiOldFormatBodyCellStyleService.cs" />
     <Compile Include="Service\Implement\Npoi\NpoiOldFormatCustomCellStyleService.cs" />
     <Compile Include="Service\Implement\Npoi\NpoiOldFormatFontService.cs" />
+    <Compile Include="Service\Implement\MailService.cs" />
+    <Compile Include="Service\Interface\IMailService.cs" />
     <Compile Include="Service\Interface\Npoi\INpoiAlignmentService.cs" />
     <Compile Include="Service\Interface\Npoi\INpoiNewFormatCustomCellStyleService.cs" />
     <Compile Include="Service\Interface\Npoi\INpoiNewFormatFontService.cs" />

@@ -23,7 +23,8 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
     {
         private readonly IReportDAO _reportDao;
         private readonly List<Exchange> _exchangeList;
-        public string CreditTermExcelFileName {
+        public string ReportPath
+        {
             get;
             set;
         }
@@ -74,7 +75,7 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
             ExportExcelFile();
 
             string fileNameWithExtension = CreateReportNameWithExtension(report);
-            CreditTermExcelFileName = Path.Combine(AppSettings.ExportDataDirectory, fileNameWithExtension);
+            ReportPath = Path.Combine(AppSettings.ExportDataDirectory, fileNameWithExtension);
 
             SaveFile.SaveExcelFile(AppSettings.ExportDataDirectory, fileNameWithExtension, this._workbook);
             Console.WriteLine("Credit term mail was sent!.");

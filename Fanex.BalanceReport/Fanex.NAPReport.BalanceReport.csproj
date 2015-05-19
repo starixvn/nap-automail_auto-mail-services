@@ -8,8 +8,8 @@
     <ProjectGuid>{4DF39ADE-3E49-4D1E-9211-E48353B65135}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Fanex.BalanceReport</RootNamespace>
-    <AssemblyName>Fanex.BalanceReport</AssemblyName>
+    <RootNamespace>Fanex.NAPReport.BalanceReport</RootNamespace>
+    <AssemblyName>Fanex.NAPReport.BalanceReport</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>

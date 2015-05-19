@@ -54,9 +54,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.Data, Version=0.5.404.59, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Data.dll</HintPath>
+    <Reference Include="Fanex.Data">
+      <HintPath>..\packages\Fanex.Data.0.5.404.63\lib\net40\Fanex.Data.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.MailDelivery.Client">
       <HintPath>..\_Dependencies\MailStation\Fanex.MailDelivery.Client.dll</HintPath>
@@ -73,13 +72,22 @@
       <HintPath>..\_Dependencies\Entlib\Microsoft.Practices.EnterpriseLibrary.Caching.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common">
-      <HintPath>..\_Dependencies\Entlib\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+      <HintPath>..\packages\EnterpriseLibrary.Common.5.0.414.0\lib\net40\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
-      <HintPath>..\_Dependencies\Entlib\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+      <HintPath>..\packages\EnterpriseLibrary.Data.5.0.414.0\lib\net40\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging">
       <HintPath>..\_Dependencies\Entlib\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\EnterpriseLibrary.Unity.5.0.414.0\lib\net40\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\packages\EnterpriseLibrary.Unity.5.0.414.0\lib\net40\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception">
+      <HintPath>..\packages\EnterpriseLibrary.Unity.5.0.414.0\lib\net40\Microsoft.Practices.Unity.Interception.dll</HintPath>
     </Reference>
     <Reference Include="Quartz">
       <HintPath>..\_Dependencies\MailStation\Quartz.dll</HintPath>
@@ -116,6 +124,9 @@
     <Compile Include="AutomailService.Designer.cs">
       <DependentUpon>AutomailService.cs</DependentUpon>
     </Compile>
+    <Compile Include="Jobs\NAPReport\DirectBalanceReport.cs" />
+    <Compile Include="Jobs\NAPReport\SuperBalanceReport.cs" />
+    <Compile Include="Jobs\NAPReport\CreditTermReport.cs" />
     <Compile Include="Jobs\NAPReport\HorseRacingReport.cs" />
     <Compile Include="Jobs\NAPReport\WinLossByProductsJob.cs" />
     <Compile Include="Program.cs" />
@@ -177,15 +188,6 @@
     <None Include="SiteConfig\BalanceReport\App.config">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="SiteConfig\BalanceReport\Template\EmailTemplate.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\BalanceReport\Template\SMALossTemplate.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\BalanceReport\Template\NotificationEmailTemplate.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="SiteConfig\SMALoss\Templates\EmailTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>
@@ -197,6 +199,9 @@
     <Content Include="SiteConfig\NegativeBalanceByMatch\Templates\EmailTemplateSingleLanguage.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="SiteConfig\BalanceReport\Email\Direct Balance Email.cshtml" />
+    <None Include="SiteConfig\BalanceReport\Email\Email.cshtml" />
+    <None Include="SiteConfig\BalanceReport\Email\Subject.cshtml" />
     <None Include="SiteConfig\NegativeBalanceByMatch\app.config">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -215,6 +220,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Fanex.BalanceReport\Fanex.NAPReport.BalanceReport.csproj">
+      <Project>{4DF39ADE-3E49-4D1E-9211-E48353B65135}</Project>
+      <Name>Fanex.NAPReport.BalanceReport</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fanex.NAPReport.HorseRacingReport.Business\Fanex.NAPReport.HorseRacingReport.Business.csproj">
       <Project>{AFE10301-BCFD-4D11-885C-A43A46B5B2BF}</Project>
       <Name>Fanex.NAPReport.HorseRacingReport.Business</Name>
@@ -230,10 +239,6 @@
     <ProjectReference Include="..\Fanex.Service.Core\Fanex.Service.Core.csproj">
       <Project>{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}</Project>
       <Name>Fanex.Service.Core %28Fanex.Service.Core\Fanex.Service.Core%29</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fanex.TurnoverWatcher.Business\Fanex.TurnoverWatcher.Business.csproj">
-      <Project>{EEEE6EC6-55BC-4C6E-AC8B-2D5B8C8B7179}</Project>
-      <Name>Fanex.TurnoverWatcher.Business</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -23,7 +23,7 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
         private readonly List<Exchange> _exchangeList;
         private readonly string _superBalanceExcelFileName;
 
-        public string FilePath
+        public string ReportPath
         {
             get;
             set;
@@ -74,7 +74,7 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
             ExportReportTitle();
             ExportReportContent();
             string fileNameWithExtension = CreateReportNameWithExtension();
-            FilePath = Path.Combine(AppSettings.ExportDataDirectory, fileNameWithExtension);
+            ReportPath = Path.Combine(AppSettings.ExportDataDirectory, fileNameWithExtension);
             SaveFile.SaveExcelFile(AppSettings.ExportDataDirectory, fileNameWithExtension, this._workbook);
 
             Console.WriteLine("Super balance mail was sent!.");

@@ -1,0 +1,5 @@
+﻿@model Fanex.NAPReport.BalanceReport.Model.Report
+
+<i>This is an auto mail. Please do not reply. </i><br/><br/>
+<b>Accounting System - @Model.Name Report for @Model.Date.ToString("yyyy-m-d") </b><br/><br/>
+The message is ready to be sent with the following link attachment(s):<br/> @(Model.Name + Model.Date.ToString(" (yyyy-m-d).xlsx"))
