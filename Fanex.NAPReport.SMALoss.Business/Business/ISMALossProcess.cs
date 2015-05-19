@@ -1,4 +1,4 @@
-﻿namespace Fanex.NAPReport.SMALoss.Business.Process
+﻿namespace Fanex.NAPReport.SMALoss.Business.Business
 {
     public interface ISMALossProcess
     {

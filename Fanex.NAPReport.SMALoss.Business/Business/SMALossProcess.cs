@@ -1,4 +1,4 @@
-﻿namespace Fanex.NAPReport.SMALoss.Business.Process
+﻿namespace Fanex.NAPReport.SMALoss.Business.Business
 {
     using System;
     using System.Collections.Generic;
@@ -11,14 +11,16 @@
     using Fanex.NAPReport.SMALoss.Business.Services;
     using Fanex.Service.Core.Extensions;
     using RazorEngine;
+    using Fanex.NAPReport.SMALoss.Business.Services.ExcelExport;
 
     public class SMALossProcess : ISMALossProcess
     {
         private readonly ISMALossService _lossService = null;
+        private readonly ISMALossExcelService _lossExcelService = null;
         private string _template = null;
 
         public SMALossProcess()
-            : this(null)
+            : this(null, null)
         {
         }
 
@@ -27,9 +29,12 @@
         /// </summary>
         /// <param name="lossService">SMA loss service.</param>
         private SMALossProcess(
-            ISMALossService lossService)
+            ISMALossService lossService,
+            ISMALossExcelService lossExcelService
+            )
         {
             _lossService = lossService ?? new SMALossService();
+            _lossExcelService = lossExcelService ?? new SMALossExcelService();
         }
 
         /// <summary>
@@ -42,8 +47,8 @@
             var offset = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours;
             var timezoneInd = DateTime.Now.IsDaylightSavingTime() ? offset - 1 : offset;
             var subject = string.Format(AppSettings.Subject, DateTime.Now, string.Format("{0}{1}", timezoneInd > 0 ? "+" : string.Empty, timezoneInd));
-            var lossItems = GetReachedSMALoss();
 
+            var lossItems = GetReachedSMALoss();
             var template = GetTemplate(templateUrl);
             var content = Razor.Parse(template, lossItems);
 
@@ -70,9 +75,22 @@
                 {
                     Subject = content.Subject,
                     Title = content.Title,
-                    Body = content.Body
+                    Body = content.Body,
+                    MailingListId = content.MailingListId
                 };
-                mail.MailingListId = content.MailingListId;
+
+                var curDateTime = DateTime.UtcNow;
+                var fileName = string.Format("SMA_Loss_Report_{0}.xlsx", curDateTime.ToString("yyyy-MM-dd"));
+                var fileNamePath = Path.Combine(AppSettings.ExportDataDirectory, fileName);
+                var sheetName = "SMA Loss Report";
+                var exportSettings = new ExportSettings();
+                var lossItems = GetReachedSMALoss();
+
+                _lossExcelService.GenerateReport(content.Subject, sheetName, lossItems, exportSettings, fileNamePath);
+
+                mail.Attachments = new List<MailAttachment>();
+                mail.Attachments.Add(new MailAttachment(fileNamePath, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
+
                 MailClientHandler.Start();
                 MailClientHandler.SendMail(mail);
                 MailClientHandler.Stop();

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using Fanex.Data.Configuration;
-using Fanex.NAPReport.SMALoss.Business.Process;
+using Fanex.NAPReport.SMALoss.Business.Business;
 
 namespace Fanex.NAPReport.SMALoss.Testing
 {

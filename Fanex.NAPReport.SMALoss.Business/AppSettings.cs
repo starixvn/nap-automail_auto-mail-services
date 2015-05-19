@@ -10,6 +10,7 @@
         private static int sendEmailMinute = -1;
         private static string title;
         private static string subject;
+        private static string exportDataDirectory;
         private static int functionID;
 
         public static int SendEmailHour
@@ -44,18 +45,34 @@
             {
                 if (title == null)
                 {
-                    title = GetValue("SMA.Subject");
+                    title = GetValue("SMA.Title");
                 }
 
                 return title;
             }
         }
 
+        public static string ExportDataDirectory
+        {
+            get
+            {
+                if (exportDataDirectory == null)
+                {
+                    exportDataDirectory = GetValue("SMA.ExportDataDirectory");
+                }
+
+                return exportDataDirectory;
+            }
+        }
         public static string Subject
         {
             get
             {
-                return GetValue("SMA.Subject");
+                if (subject == null)
+                {
+                    return GetValue("SMA.Subject");
+                }
+                return subject;
             }
         }
 

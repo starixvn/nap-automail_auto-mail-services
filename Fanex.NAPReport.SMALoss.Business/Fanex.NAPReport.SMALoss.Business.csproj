@@ -98,6 +98,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -115,11 +116,22 @@
     <Compile Include="Entities\FormattedSMALossLevelItem.cs" />
     <Compile Include="Entities\SMALoss.cs" />
     <Compile Include="Entities\SMALossLevel.cs" />
-    <Compile Include="Process\ISMALossProcess.cs" />
+    <Compile Include="Business\ISMALossProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Process\SMALossProcess.cs" />
+    <Compile Include="Business\SMALossProcess.cs" />
+    <Compile Include="Services\ExcelExport\ExcelDocument.cs" />
+    <Compile Include="Services\ExcelExport\ExportAutoSizeColumCommand.cs" />
+    <Compile Include="Services\ExcelExport\ExportCommandBase.cs" />
+    <Compile Include="Services\ExcelExport\ExportCompositeCommand.cs" />
+    <Compile Include="Services\ExcelExport\ExportContentCommand.cs" />
+    <Compile Include="Services\ExcelExport\ExportHeaderCommand.cs" />
+    <Compile Include="Services\ExcelExport\ExportSaveCommand.cs" />
+    <Compile Include="Services\ExcelExport\ExportSettings.cs" />
+    <Compile Include="Services\ExcelExport\IExportCommand.cs" />
+    <Compile Include="Services\ISMALossExcelService.cs" />
     <Compile Include="Services\ISMALossService.cs" />
     <Compile Include="Services\ServiceBase.cs" />
+    <Compile Include="Services\SMALossExcelService.cs" />
     <Compile Include="Services\SMALossService.cs" />
   </ItemGroup>
   <ItemGroup>

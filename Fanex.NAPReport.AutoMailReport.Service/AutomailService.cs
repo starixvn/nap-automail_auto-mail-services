@@ -12,8 +12,7 @@ namespace Fanex.NAPReport.AutoMailReport.Service
     using Fanex.Data.Configuration;
     using Fanex.MailDelivery.Client.Handlers;
     using Fanex.NAPReport.HorseRacingReport.Business;
-    using Fanex.NAPReport.SMALoss.Business.Process;
-    using Fanex.NAPReport.SMALoss.Business.Services;
+    using Fanex.NAPReport.SMALoss.Business.Business;
     using Fanex.Service.Core.Extensions;
 
     /// <summary>
