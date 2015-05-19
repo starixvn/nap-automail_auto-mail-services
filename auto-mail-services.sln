@@ -45,12 +45,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.MonthlyWinlossByLeagu
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fanex.NAPReport.AutoMailReport.Service", "Fanex.NAPReport.AutoMailReport.Service", "{84385BB5-6DA3-4429-B535-7ECB1089FCC0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fanex.NegativeBalanceByMatch", "Fanex.NegativeBalanceByMatch", "{34118556-0AEE-476F-95A7-E883077402C2}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NegativeBalanceByMatch.Business", "Fanex.NegativeBalanceByMatch.Business\Fanex.NegativeBalanceByMatch.Business.csproj", "{8C5FF65C-DC35-417B-9464-35C0CAF05FDD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NegativeBalanceByMatch.Service", "Fanex.NegativeBalanceByMatch.Service\Fanex.NegativeBalanceByMatch.Service.csproj", "{24EF4AC8-A61B-4366-95D2-4A90041BF5CA}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fanex.DW.AutoMailReport.Service", "Fanex.DW.AutoMailReport.Service", "{ADC782A9-F916-4F43-9E28-B8C6D7579D55}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fanex.ConsoleApps.Testing", "Fanex.ConsoleApps.Testing", "{DD647794-42ED-4DBB-82FF-75040CE2D8D0}"
@@ -93,6 +87,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.NegativeBalanceByMatch.Testing", "Fanex.NAPReport.NegativeBalanceByMatch.Testing\Fanex.NAPReport.NegativeBalanceByMatch.Testing.csproj", "{463B30EA-8173-4B6E-96CD-9C321DF8B816}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.TurnoverWatcher.Service.Testing", "Fanex.TurnoverWatcher.Service.Testing\Fanex.TurnoverWatcher.Service.Testing.csproj", "{19757FF5-3D1C-41A2-97E0-83ED31FDCC2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.NegativeBalanceByMatch.Service", "Fanex.NAPReport.NegativeBalanceByMatch.Service\Fanex.NAPReport.NegativeBalanceByMatch.Service.csproj", "{24EF4AC8-A61B-4366-95D2-4A90041BF5CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -244,26 +240,6 @@ Global
 		{EAFD6A4F-86D0-4A3B-B192-8341F84798B6}.Release|Mixed Platforms.Build.0 = Release|x86
 		{EAFD6A4F-86D0-4A3B-B192-8341F84798B6}.Release|x86.ActiveCfg = Release|x86
 		{EAFD6A4F-86D0-4A3B-B192-8341F84798B6}.Release|x86.Build.0 = Release|x86
-		{8C5FF65C-DC35-417B-9464-35C0CAF05FDD}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{8C5FF65C-DC35-417B-9464-35C0CAF05FDD}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{8C5FF65C-DC35-417B-9464-35C0CAF05FDD}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{8C5FF65C-DC35-417B-9464-35C0CAF05FDD}.Debug|x86.ActiveCfg = Debug|x86
-		{8C5FF65C-DC35-417B-9464-35C0CAF05FDD}.Debug|x86.Build.0 = Debug|x86
-		{8C5FF65C-DC35-417B-9464-35C0CAF05FDD}.Release|Any CPU.ActiveCfg = Release|x86
-		{8C5FF65C-DC35-417B-9464-35C0CAF05FDD}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{8C5FF65C-DC35-417B-9464-35C0CAF05FDD}.Release|Mixed Platforms.Build.0 = Release|x86
-		{8C5FF65C-DC35-417B-9464-35C0CAF05FDD}.Release|x86.ActiveCfg = Release|x86
-		{8C5FF65C-DC35-417B-9464-35C0CAF05FDD}.Release|x86.Build.0 = Release|x86
-		{24EF4AC8-A61B-4366-95D2-4A90041BF5CA}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{24EF4AC8-A61B-4366-95D2-4A90041BF5CA}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{24EF4AC8-A61B-4366-95D2-4A90041BF5CA}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{24EF4AC8-A61B-4366-95D2-4A90041BF5CA}.Debug|x86.ActiveCfg = Debug|x86
-		{24EF4AC8-A61B-4366-95D2-4A90041BF5CA}.Debug|x86.Build.0 = Debug|x86
-		{24EF4AC8-A61B-4366-95D2-4A90041BF5CA}.Release|Any CPU.ActiveCfg = Release|x86
-		{24EF4AC8-A61B-4366-95D2-4A90041BF5CA}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{24EF4AC8-A61B-4366-95D2-4A90041BF5CA}.Release|Mixed Platforms.Build.0 = Release|x86
-		{24EF4AC8-A61B-4366-95D2-4A90041BF5CA}.Release|x86.ActiveCfg = Release|x86
-		{24EF4AC8-A61B-4366-95D2-4A90041BF5CA}.Release|x86.Build.0 = Release|x86
 		{FBA40037-31BF-4EC0-98F5-09CF8067457E}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{FBA40037-31BF-4EC0-98F5-09CF8067457E}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{FBA40037-31BF-4EC0-98F5-09CF8067457E}.Debug|Mixed Platforms.Build.0 = Debug|x86
@@ -414,6 +390,16 @@ Global
 		{19757FF5-3D1C-41A2-97E0-83ED31FDCC2E}.Release|Mixed Platforms.Build.0 = Release|x86
 		{19757FF5-3D1C-41A2-97E0-83ED31FDCC2E}.Release|x86.ActiveCfg = Release|x86
 		{19757FF5-3D1C-41A2-97E0-83ED31FDCC2E}.Release|x86.Build.0 = Release|x86
+		{24EF4AC8-A61B-4366-95D2-4A90041BF5CA}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{24EF4AC8-A61B-4366-95D2-4A90041BF5CA}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{24EF4AC8-A61B-4366-95D2-4A90041BF5CA}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{24EF4AC8-A61B-4366-95D2-4A90041BF5CA}.Debug|x86.ActiveCfg = Debug|x86
+		{24EF4AC8-A61B-4366-95D2-4A90041BF5CA}.Debug|x86.Build.0 = Debug|x86
+		{24EF4AC8-A61B-4366-95D2-4A90041BF5CA}.Release|Any CPU.ActiveCfg = Release|x86
+		{24EF4AC8-A61B-4366-95D2-4A90041BF5CA}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{24EF4AC8-A61B-4366-95D2-4A90041BF5CA}.Release|Mixed Platforms.Build.0 = Release|x86
+		{24EF4AC8-A61B-4366-95D2-4A90041BF5CA}.Release|x86.ActiveCfg = Release|x86
+		{24EF4AC8-A61B-4366-95D2-4A90041BF5CA}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -438,8 +424,7 @@ Global
 		{DA6DE65A-5D27-4B28-A928-422B664502C2} = {84385BB5-6DA3-4429-B535-7ECB1089FCC0}
 		{FA306BD2-0F8F-4453-AC72-92905D715DDE} = {84385BB5-6DA3-4429-B535-7ECB1089FCC0}
 		{EEEE6EC6-55BC-4C6E-AC8B-2D5B8C8B7179} = {84385BB5-6DA3-4429-B535-7ECB1089FCC0}
-		{8C5FF65C-DC35-417B-9464-35C0CAF05FDD} = {34118556-0AEE-476F-95A7-E883077402C2}
-		{24EF4AC8-A61B-4366-95D2-4A90041BF5CA} = {34118556-0AEE-476F-95A7-E883077402C2}
+		{24EF4AC8-A61B-4366-95D2-4A90041BF5CA} = {84385BB5-6DA3-4429-B535-7ECB1089FCC0}
 		{BA901E4A-BFE7-49DB-83DC-54DC467A44B8} = {ADC782A9-F916-4F43-9E28-B8C6D7579D55}
 		{E1A6904E-FD26-47CE-A1EB-4A6E8F3126E6} = {ADC782A9-F916-4F43-9E28-B8C6D7579D55}
 		{FBA40037-31BF-4EC0-98F5-09CF8067457E} = {DD647794-42ED-4DBB-82FF-75040CE2D8D0}

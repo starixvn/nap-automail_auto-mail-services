@@ -1,11 +1,11 @@
 ﻿using System;
 using Fanex.Data.Configuration;
-using Fanex.NegativeBalanceByMatch.Business;
-using Fanex.NegativeBalanceByMatch.Business.Business;
-using Fanex.NegativeBalanceByMatch.Business.Business.Exports;
-using Fanex.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport;
-using Fanex.NegativeBalanceByMatch.Business.Business.Licensee;
-using Fanex.NegativeBalanceByMatch.Business.Helper;
+using Fanex.NAPReport.Business.Business.Exports;
+using Fanex.NAPReport.NegativeBalanceByMatch.Business;
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business;
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports;
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Licensee;
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Helper;
 
 namespace Fanex.NAPReport.NegativeBalanceByMatch.Testing
 {
@@ -20,12 +20,13 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Testing
 				LicenseeFunctionParser licenseeFunctionParser = new LicenseeFunctionParser(AppSettings.LicenseeFunctionMap);
 				ILicenseeService licenseeService = new LicenseeService(licenseeFunctionParser);
 
-				NegativeBalanceByMatchService negativeBalanceByMatchService = new NegativeBalanceByMatchService(licenseeService);
-				INegativeBalanceByMatchExcelService negativeBalanceByMatchExcelService =
-					new NegativeBalanceByMatchExcelService(negativeBalanceByMatchService);
+				INegativeBalanceByMatchExcelService negativeBalanceByMatchExcelService = new NegativeBalanceByMatchExcelService();
 
-				MailService mailService = new MailService(licenseeService, negativeBalanceByMatchService, negativeBalanceByMatchExcelService);
-				mailService.SendMails();
+				MailService mailService = new MailService(negativeBalanceByMatchExcelService);
+
+				NegativeBalanceByMatchService negativeBalanceByMatchService = new NegativeBalanceByMatchService(licenseeService, mailService);
+
+				negativeBalanceByMatchService.ProcessBusiness();
 			}
 			catch (Exception ex)
 			{

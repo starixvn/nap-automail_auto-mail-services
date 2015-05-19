@@ -73,11 +73,17 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Templates\EmailTemplateDualLanguage.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\EmailTemplateSingleLanguage.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fanex.NegativeBalanceByMatch.Business\Fanex.NegativeBalanceByMatch.Business.csproj">
+    <ProjectReference Include="..\Fanex.NAPReport.NegativeBalanceByMatch.Business\Fanex.NAPReport.NegativeBalanceByMatch.Business.csproj">
       <Project>{8C5FF65C-DC35-417B-9464-35C0CAF05FDD}</Project>
-      <Name>Fanex.NegativeBalanceByMatch.Business</Name>
+      <Name>Fanex.NAPReport.NegativeBalanceByMatch.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.Service.Core\Fanex.Service.Core.csproj">
       <Project>{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}</Project>
