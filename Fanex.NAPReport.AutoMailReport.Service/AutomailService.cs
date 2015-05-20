@@ -1,127 +1,116 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="AutomailService.cs" company="Nexcel Solutions Vietnam.">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business;
-using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports;
-using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Licensee;
-using Fanex.NAPReport.NegativeBalanceByMatch.Business.Helper;
-
-namespace Fanex.NAPReport.AutoMailReport.Service
+﻿namespace Fanex.NAPReport.AutoMailReport.Service
 {
-	using System;
-	using System.IO;
-	using System.Timers;
-	using Fanex.Data.Configuration;
-	using Fanex.MailDelivery.Client.Handlers;
-	using Fanex.NAPReport.HorseRacingReport.Business;
-	using Fanex.NAPReport.SMALoss.Business.Business;
-	using Fanex.Service.Core.Extensions;
-	using System.Diagnostics;
+    using System;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Timers;
+    using Fanex.Data.Configuration;
+    using Fanex.MailDelivery.Client.Handlers;
+    using Fanex.NAPReport.HorseRacingReport.Business;
+    using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business;
+    using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports;
+    using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Licensee;
+    using Fanex.NAPReport.NegativeBalanceByMatch.Business.Helper;
+    using Fanex.NAPReport.SMALoss.Business.Business;
+    using Fanex.Service.Core.Extensions;
+    using Fanex.TurnoverWatcher.Business.Process;
 
-	/// <summary>
-	/// Auto mail service.
-	/// </summary>
-	public partial class AutoMailService : System.ServiceProcess.ServiceBase
-	{
-		private Timer _timer = null;
-		private ISMALossProcess _smaLossProcess = null;
-		private NegativeBalanceByMatchService _negativeBalanceByMatchService = null;
+    public partial class AutoMailService : System.ServiceProcess.ServiceBase
+    {
+        private Timer _timer = null;
+        private ISMALossProcess _smaLossProcess = null;
+        private ITurnoverWatcherProcess _turnoverWatcherProcess = null;
+        private NegativeBalanceByMatchService _negativeBalanceByMatchService = null;
 
-		public AutoMailService()
-		{
-			InitializeComponent(AppSettings.ServiceName);
-			Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
-			DbSettingProviderManager.Current.Start();
-			MailClientHandler.Start();
+        public AutoMailService()
+        {
+            InitializeComponent(AppSettings.ServiceName);
+            Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
+            DbSettingProviderManager.Current.Start();
+            MailClientHandler.Start();
 
-			this._smaLossProcess = new SMALossProcess();
+            this._smaLossProcess = new SMALossProcess();
+            _turnoverWatcherProcess = new TurnoverWatcherProcess();
 
-			//
-			LicenseeFunctionParser licenseeFunctionParser = new LicenseeFunctionParser(NegativeBalanceByMatch.Business.AppSettings.LicenseeFunctionMap);
-			ILicenseeService licenseeService = new LicenseeService(licenseeFunctionParser);
+            LicenseeFunctionParser licenseeFunctionParser = new LicenseeFunctionParser(NegativeBalanceByMatch.Business.AppSettings.LicenseeFunctionMap);
+            ILicenseeService licenseeService = new LicenseeService(licenseeFunctionParser);
 
-			INegativeBalanceByMatchExcelService negativeBalanceByMatchExcelService = new NegativeBalanceByMatchExcelService();
+            INegativeBalanceByMatchExcelService negativeBalanceByMatchExcelService = new NegativeBalanceByMatchExcelService();
 
-			MailService mailService = new MailService(negativeBalanceByMatchExcelService);
+            MailService mailService = new MailService(negativeBalanceByMatchExcelService);
 
-			_negativeBalanceByMatchService = new NegativeBalanceByMatchService(licenseeService, mailService);
+            _negativeBalanceByMatchService = new NegativeBalanceByMatchService(licenseeService, mailService);
+        }
 
+        protected override void OnStart(string[] args)
+        {
+            try
+            {
+                ResetTimer();
+            }
+            catch (Exception ex)
+            {
+                File.AppendAllText(@"D:\test.txt", ex.ToString());
+            }
+        }
 
-			//
+        protected override void OnStop()
+        {
+            MailClientHandler.Stop();
+            this._timer.Stop();
+            this._timer = null;
+            this._smaLossProcess = null;
+            AppSettings.OnProcessing = false;
+            GC.Collect();
+        }
 
-		}
+        /// <summary>
+        /// Resets the timer.
+        /// </summary>
+        private void ResetTimer()
+        {
+            this._timer = new Timer();
+            this._timer.Interval = AppSettings.Interval;
+            this._timer.Elapsed += new ElapsedEventHandler(this.CallService);
+            this._timer.AutoReset = true;
+            this._timer.Enabled = true;
+            AppSettings.OnProcessing = false;
+        }
 
-		protected override void OnStart(string[] args)
-		{
-			try
-			{
-				ResetTimer();
-			}
-			catch (Exception ex)
-			{
-				File.AppendAllText(@"D:\test.txt", ex.ToString());
-			}
-		}
+        /// <summary>
+        /// Calls the service.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="ElapsedEventArgs"/> instance containing the event data.</param>
+        private void CallService(object sender, ElapsedEventArgs e)
+        {
+            try
+            {
+                if (!AppSettings.OnProcessing)
+                {
+                    AppSettings.OnProcessing = true;
 
-		protected override void OnStop()
-		{
-			MailClientHandler.Stop();
-			this._timer.Stop();
-			this._timer = null;
-			this._smaLossProcess = null;
-			AppSettings.OnProcessing = false;
-			GC.Collect();
-		}
+                    this._smaLossProcess.NotifyEmail();
+                    _negativeBalanceByMatchService.ProcessBusiness();
+                    _turnoverWatcherProcess.Process();
 
-		/// <summary>
-		/// Resets the timer.
-		/// </summary>
-		private void ResetTimer()
-		{
-			this._timer = new Timer();
-			this._timer.Interval = AppSettings.Interval;
-			this._timer.Elapsed += new ElapsedEventHandler(this.CallService);
-			this._timer.AutoReset = true;
-			this._timer.Enabled = true;
-			AppSettings.OnProcessing = false;
-		}
+                    AppSettings.OnProcessing = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogExtensions.ExceptionHandler(ex);
+                AppSettings.OnProcessing = false;
+                throw;
+            }
+        }
 
-		/// <summary>
-		/// Calls the service.
-		/// </summary>
-		/// <param name="sender">The sender.</param>
-		/// <param name="e">The <see cref="ElapsedEventArgs"/> instance containing the event data.</param>
-		private void CallService(object sender, ElapsedEventArgs e)
-		{
-			try
-			{
-				if (!AppSettings.OnProcessing)
-				{
-					AppSettings.OnProcessing = true;
-
-					this._smaLossProcess.NotifyEmail();
-					_negativeBalanceByMatchService.ProcessBusiness();
-
-					AppSettings.OnProcessing = false;
-				}
-			}
-			catch (Exception ex)
-			{
-				LogExtensions.ExceptionHandler(ex);
-				AppSettings.OnProcessing = false;
-				throw;
-			}
-		}
-
-		/// <summary>
-		/// Test
-		/// </summary>
-		public void StartAndStop()
-		{
-			OnStart(null);
-		}
-	}
+        /// <summary>
+        /// Test
+        /// </summary>
+        public void StartAndStop()
+        {
+            OnStart(null);
+        }
+    }
 }
