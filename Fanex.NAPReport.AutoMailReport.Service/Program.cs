@@ -22,15 +22,15 @@ namespace Fanex.NAPReport.AutoMailReport.Service
         /// </summary>
         private static void Main()
         {
-			//ServiceBase[] servicesToRun;
-			//servicesToRun = new ServiceBase[]
-			//{
-			//    new AutoMailService()
-			//};
-			//ServiceBase.Run(servicesToRun);
-			AutoMailService mailService = new AutoMailService();
+			ServiceBase[] servicesToRun;
+			servicesToRun = new ServiceBase[]
+			{
+			    new AutoMailService()
+			};
+			ServiceBase.Run(servicesToRun);
+			//AutoMailService mailService = new AutoMailService();
 
-			mailService.StartAndStop();
+			//mailService.StartAndStop();
         }
     }
 }
