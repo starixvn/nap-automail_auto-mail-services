@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A26D737A-8655-40AD-AA5D-13DC22FCFF7C}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Fanex.NAPReport.AutoMailReport.Service</RootNamespace>
     <AssemblyName>Fanex.NAPReport.AutoMailReport.Service</AssemblyName>
@@ -128,7 +128,16 @@
     <Compile Include="AutomailService.Designer.cs">
       <DependentUpon>AutomailService.cs</DependentUpon>
     </Compile>
+    <Compile Include="Jobs\NAPReport\CreditTermReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Jobs\NAPReport\DirectBalanceReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Jobs\NAPReport\HorseRacingReport.cs" />
+    <Compile Include="Jobs\NAPReport\SuperBalanceReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Jobs\NAPReport\WinLossByProductsJob.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -227,6 +236,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Fanex.BalanceReport\Fanex.NAPReport.BalanceReport.csproj">
+      <Project>{4DF39ADE-3E49-4D1E-9211-E48353B65135}</Project>
+      <Name>Fanex.NAPReport.BalanceReport</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fanex.NAPReport.HorseRacingReport.Business\Fanex.NAPReport.HorseRacingReport.Business.csproj">
       <Project>{AFE10301-BCFD-4D11-885C-A43A46B5B2BF}</Project>
       <Name>Fanex.NAPReport.HorseRacingReport.Business</Name>
