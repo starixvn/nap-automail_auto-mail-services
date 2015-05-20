@@ -4,5 +4,6 @@
     </Setting>
     <Setting Key="NAP_ExchangeCurrencySel" SpName="NAP_ExchangeCurrencySel" DbName="DBAGE.bodb02.bodbAdminNet">
     </Setting>
+    <Setting Key="Acc_ExchangeCurrencySel" SpName="Acc_ExchangeCurrencySel" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0" />
   </Function>
 </Functions>

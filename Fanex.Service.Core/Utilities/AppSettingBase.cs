@@ -101,8 +101,15 @@ namespace Fanex.Service.Core.Utilities
 
         protected static string GetSettingValueByKey(string key)
         {
-            var val = ConfigurationManager.AppSettings[key];
-            return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings[key]);
+            try
+            {
+                var val = ConfigurationManager.AppSettings[key];
+                return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings[key]);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Test: " + key);
+            }
         }
     }
 }
