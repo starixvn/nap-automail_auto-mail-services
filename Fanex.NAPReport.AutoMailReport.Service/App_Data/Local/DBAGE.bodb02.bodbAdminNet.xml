@@ -12,4 +12,10 @@
     <Setting Key="NAP_LimitLoss_ActionConfigSel" SpName="NAP_LimitLoss_ActionConfigSel" DbName="DBAGE.bodb02.bodbAdminNet"></Setting>
     <Setting Key="Acc_MailingListSel" SpName="Acc_MailingListSel" DbName="DBACC.bodb_ACC.bodbAdminNet" />
   </Function>
+  <Functions>
+    <Function Name="SMA Turnover Automail">
+      <Setting Key="TurnoverNotifiedSelect" SpName="NAP_SMATurnover_IsNotifiedSel_xtest" DbName="DBAGE.bodb02.bodbAdminNet" TimeOut="0" />
+      <Setting Key="TurnoverNotifiedUpdate" SpName="NAP_SMATurnover_IsNotifiedUpd_xtest" DbName="DBAGE.bodb02.bodbAdminNet" TimeOut="0" />
+    </Function>
+  </Functions>
 </Functions>

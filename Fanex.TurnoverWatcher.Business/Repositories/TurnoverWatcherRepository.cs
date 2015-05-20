@@ -8,7 +8,6 @@ namespace Fanex.TurnoverWatcher.Business.Repositories
     using System;
     using System.Collections.Generic;
     using System.Data;
-    using Fanex.AccountingReports.SqLiteDatabase;
     using Fanex.Common;
     using Fanex.Data;
     using Fanex.Service.Core.Enums;
@@ -16,120 +15,10 @@ namespace Fanex.TurnoverWatcher.Business.Repositories
     using Fanex.TurnoverWatcher.Business.Criteria;
     using Fanex.TurnoverWatcher.Business.Model;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class TurnoverWatcherRepository : ITurnoverWatcherRepository
     {
-        private SqLite _db = null;
-
         public TurnoverWatcherRepository()
         {
-            _db = new SqLite(AppSettings.ConnectionString);
-        }
-
-        /// <summary>
-        /// Inserts the task.
-        /// </summary>
-        /// <param name="task">The SMA task.</param>
-        /// <returns>Identifier of the task.</returns>
-        public int InsertTask(TurnoverWatcherTask task)
-        {
-            int id = 0;
-            try
-            {
-                Dictionary<string, string> data = new Dictionary<string, string>();
-                data.Add("Status", ((int)Status.Running).ToString());
-                data.Add("CreatedDate", DateTime.Now.ToString());
-
-                id = Converter.ToInt(_db.Insert("Log", data));
-            }
-            catch (Exception ex)
-            {
-                LogExtensions.ExceptionHandler(ex);
-                throw;
-            }
-
-            return id;
-        }
-
-        /// <summary>
-        /// Updates the task.
-        /// </summary>
-        /// <param name="task">The task be updated.</param>
-        /// <param name="status">The status.</param>
-        public void UpdateTask(TurnoverWatcherTask task, Status status)
-        {
-            try
-            {
-                Dictionary<string, string> data = new Dictionary<string, string>();
-                data.Add("Status", ((int)status).ToString());
-                data.Add("MailReceiver", task.EmailReceiver);
-                data.Add("UpdatedDate", DateTime.Now.ToString());
-
-                string where = " Id = " + task.Id;
-                _db.Update("Log", data, where);
-            }
-            catch (Exception ex)
-            {
-                LogExtensions.ExceptionHandler(ex);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Gets the current task.
-        /// </summary>
-        /// <returns>The current task.</returns>
-        public TurnoverWatcherTask GetCurrentTask()
-        {
-            TurnoverWatcherTask task = null;
-            try
-            {
-                string sql = "select * from log where Status = " + (int)Status.Running + " LIMIT 1";
-                DataTable dataTable = _db.GetDataTable(sql);
-
-                if (dataTable.Rows.Count == 0)
-                {
-                    return task;
-                }
-
-                DataRow row = dataTable.Rows[0];
-                task = this.MapTaskData(row);
-            }
-            catch (Exception ex)
-            {
-                LogExtensions.ExceptionHandler(ex);
-                throw;
-            }
-
-            return task;
-        }
-
-        /// <summary>
-        /// Mailings the receiver.
-        /// </summary>
-        /// <param name="functionId">The function identifier.</param>
-        /// <returns>The receiver.</returns>
-        public EmailReceiver MailingReceiver(int functionId)
-        {
-            EmailReceiver receiver = new EmailReceiver();
-            var criteria = new EmailReceiverCriteria { FuncId = functionId };
-
-            using (var objDB = new ObjectDb(criteria.GetSettingKey()))
-            {
-                IDataReader reader = objDB.ExecuteReader(criteria.GetSpParams());
-                while (reader.Read())
-                {
-                    receiver.To = Convert.ToString(reader["tolist"]);
-                    receiver.Cc = Convert.ToString(reader["cclist"]);
-                    receiver.Bcc = Convert.ToString(reader["bcclist"]);
-                }
-
-                reader.Close();
-            }
-
-            return receiver;
         }
 
         /// <summary>
