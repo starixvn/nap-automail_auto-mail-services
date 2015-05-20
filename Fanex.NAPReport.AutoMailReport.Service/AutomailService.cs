@@ -4,97 +4,124 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business;
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports;
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Licensee;
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Helper;
+
 namespace Fanex.NAPReport.AutoMailReport.Service
 {
-    using System;
-    using System.IO;
-    using System.Timers;
-    using Fanex.Data.Configuration;
-    using Fanex.MailDelivery.Client.Handlers;
-    using Fanex.NAPReport.HorseRacingReport.Business;
-    using Fanex.NAPReport.SMALoss.Business.Business;
-    using Fanex.Service.Core.Extensions;
-    using System.Diagnostics;
+	using System;
+	using System.IO;
+	using System.Timers;
+	using Fanex.Data.Configuration;
+	using Fanex.MailDelivery.Client.Handlers;
+	using Fanex.NAPReport.HorseRacingReport.Business;
+	using Fanex.NAPReport.SMALoss.Business.Business;
+	using Fanex.Service.Core.Extensions;
+	using System.Diagnostics;
 
-    /// <summary>
-    /// Auto mail service.
-    /// </summary>
-    public partial class AutoMailService : System.ServiceProcess.ServiceBase
-    {
-        private Timer _timer = null;
-        private ISMALossProcess _smaLossProcess = null;
+	/// <summary>
+	/// Auto mail service.
+	/// </summary>
+	public partial class AutoMailService : System.ServiceProcess.ServiceBase
+	{
+		private Timer _timer = null;
+		private ISMALossProcess _smaLossProcess = null;
+		private NegativeBalanceByMatchService _negativeBalanceByMatchService = null;
 
-        public AutoMailService()
-        {
-            InitializeComponent(AppSettings.ServiceName);
-            Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
-            DbSettingProviderManager.Current.Start();
-            MailClientHandler.Start();
-            this._smaLossProcess = new SMALossProcess();
-        }
+		public AutoMailService()
+		{
+			InitializeComponent(AppSettings.ServiceName);
+			Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
+			DbSettingProviderManager.Current.Start();
+			MailClientHandler.Start();
 
-        protected override void OnStart(string[] args)
-        {
-            try
-            {
-                ResetTimer();
-            }
-            catch(Exception ex)
-            {
-                File.AppendAllText(@"D:\test.txt", ex.ToString());
-            }
-        }
+			this._smaLossProcess = new SMALossProcess();
 
-        protected override void OnStop()
-        {
-            MailClientHandler.Stop();
-            this._timer.Stop();
-            this._timer = null;
-            this._smaLossProcess = null;
-            AppSettings.OnProcessing = false;
-            GC.Collect();
-        }
+			//
+			LicenseeFunctionParser licenseeFunctionParser = new LicenseeFunctionParser(NegativeBalanceByMatch.Business.AppSettings.LicenseeFunctionMap);
+			ILicenseeService licenseeService = new LicenseeService(licenseeFunctionParser);
 
-        /// <summary>
-        /// Resets the timer.
-        /// </summary>
-        private void ResetTimer()
-        {
-            this._timer = new Timer();
-            this._timer.Interval = AppSettings.Interval;
-            this._timer.Elapsed += new ElapsedEventHandler(this.CallService);
-            this._timer.AutoReset = true;
-            this._timer.Enabled = true;
-            AppSettings.OnProcessing = false;
-        }
+			INegativeBalanceByMatchExcelService negativeBalanceByMatchExcelService = new NegativeBalanceByMatchExcelService();
 
-        /// <summary>
-        /// Calls the service.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="ElapsedEventArgs"/> instance containing the event data.</param>
-        private void CallService(object sender, ElapsedEventArgs e)
-        {
-            try
-            {
-                if (!AppSettings.OnProcessing)
-                {
-                    AppSettings.OnProcessing = true;
+			MailService mailService = new MailService(negativeBalanceByMatchExcelService);
 
-                    if (this._smaLossProcess != null)
-                    {
-                        this._smaLossProcess.NotifyEmail();
-                    }
+			_negativeBalanceByMatchService = new NegativeBalanceByMatchService(licenseeService, mailService);
 
-                    AppSettings.OnProcessing = false;
-                }
-            }
-            catch (Exception ex)
-            {
-                LogExtensions.ExceptionHandler(ex);
-                AppSettings.OnProcessing = false;
-                throw;
-            }
-        }
-    }
+
+			//
+
+		}
+
+		protected override void OnStart(string[] args)
+		{
+			try
+			{
+				ResetTimer();
+			}
+			catch (Exception ex)
+			{
+				File.AppendAllText(@"D:\test.txt", ex.ToString());
+			}
+		}
+
+		protected override void OnStop()
+		{
+			MailClientHandler.Stop();
+			this._timer.Stop();
+			this._timer = null;
+			this._smaLossProcess = null;
+			AppSettings.OnProcessing = false;
+			GC.Collect();
+		}
+
+		/// <summary>
+		/// Resets the timer.
+		/// </summary>
+		private void ResetTimer()
+		{
+			this._timer = new Timer();
+			this._timer.Interval = AppSettings.Interval;
+			this._timer.Elapsed += new ElapsedEventHandler(this.CallService);
+			this._timer.AutoReset = true;
+			this._timer.Enabled = true;
+			AppSettings.OnProcessing = false;
+		}
+
+		/// <summary>
+		/// Calls the service.
+		/// </summary>
+		/// <param name="sender">The sender.</param>
+		/// <param name="e">The <see cref="ElapsedEventArgs"/> instance containing the event data.</param>
+		private void CallService(object sender, ElapsedEventArgs e)
+		{
+			try
+			{
+				if (!AppSettings.OnProcessing)
+				{
+					AppSettings.OnProcessing = true;
+
+					this._smaLossProcess.NotifyEmail();
+					_negativeBalanceByMatchService.ProcessBusiness();
+
+					AppSettings.OnProcessing = false;
+				}
+			}
+			catch (Exception ex)
+			{
+				LogExtensions.ExceptionHandler(ex);
+				AppSettings.OnProcessing = false;
+				throw;
+			}
+		}
+
+		/// <summary>
+		/// Test
+		/// </summary>
+		public void StartAndStop()
+		{
+			OnStart(null);
+		}
+	}
 }

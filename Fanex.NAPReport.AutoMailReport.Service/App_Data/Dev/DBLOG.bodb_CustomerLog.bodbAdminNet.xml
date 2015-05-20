@@ -1,0 +1,5 @@
+﻿<Functions>
+	<Function Name="Live Casino - GET PT Setting">
+		<Setting Key="Acc_BalanceNegativeSel_MatchLog" SpName="Acc_BalanceNegativeSel_MatchLog" DbName="DBLOG.bodb_CustomerLog.bodbAdminNet" />
+	</Function>
+</Functions>

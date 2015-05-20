@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A26D737A-8655-40AD-AA5D-13DC22FCFF7C}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Fanex.NAPReport.AutoMailReport.Service</RootNamespace>
     <AssemblyName>Fanex.NAPReport.AutoMailReport.Service</AssemblyName>
@@ -35,6 +35,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Logging">
@@ -134,7 +137,16 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="App_Data\Dev\DBACC.bodb_ACC.bodbAdminNet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="App_Data\Dev\DBAGE.bodb_AGE.bodbAdminNet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\Dev\DBLOG.bodb_CustomerLog.bodbAdminNet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\Dev\DBTXN.bodb02.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Data\PRO\DBACC.bodb02.bodbAdminNet.xml">
@@ -188,17 +200,17 @@
       <SubType>
       </SubType>
     </Content>
-    <Content Include="SiteConfig\NegativeBalanceByMatch\Templates\EmailTemplateDualLanguage.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\NegativeBalanceByMatch\Templates\EmailTemplateSingleLanguage.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="SiteConfig\BalanceReport\Email\Direct Balance Email.cshtml" />
     <None Include="SiteConfig\BalanceReport\Email\Email.cshtml" />
     <None Include="SiteConfig\BalanceReport\Email\Subject.cshtml" />
     <None Include="SiteConfig\NegativeBalanceByMatch\app.config">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SiteConfig\NegativeBalanceByMatch\Templates\EmailTemplateDualLanguage.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SiteConfig\NegativeBalanceByMatch\Templates\EmailTemplateSingleLanguage.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="SiteConfig\TurnoverWatcher\app.config">
@@ -218,6 +230,10 @@
     <ProjectReference Include="..\Fanex.NAPReport.HorseRacingReport.Business\Fanex.NAPReport.HorseRacingReport.Business.csproj">
       <Project>{AFE10301-BCFD-4D11-885C-A43A46B5B2BF}</Project>
       <Name>Fanex.NAPReport.HorseRacingReport.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.NAPReport.NegativeBalanceByMatch.Business\Fanex.NAPReport.NegativeBalanceByMatch.Business.csproj">
+      <Project>{8C5FF65C-DC35-417B-9464-35C0CAF05FDD}</Project>
+      <Name>Fanex.NAPReport.NegativeBalanceByMatch.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.NAPReport.SMALoss.Business\Fanex.NAPReport.SMALoss.Business.csproj">
       <Project>{DA6DE65A-5D27-4B28-A928-422B664502C2}</Project>
