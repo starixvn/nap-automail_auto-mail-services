@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Fanex.NAPReport.Business.Business.Exports.ExcelExport;
-using Fanex.NAPReport.Business.Entities;
+﻿using System.Collections.Generic;
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport;
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities;
 
-namespace Fanex.NAPReport.Business.Business.Exports
+namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports
 {
 	public interface INegativeBalanceByMatchExcelService
 	{

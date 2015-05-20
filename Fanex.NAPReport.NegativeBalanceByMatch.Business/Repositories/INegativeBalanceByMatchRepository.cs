@@ -4,12 +4,12 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities;
+using Fanex.Service.Core.Enums;
+
 namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Repositories
 {
-    using Fanex.NAPReport.Business.Entities;
-    using Fanex.Service.Core.Enums;
-
-    /// <summary>
+	/// <summary>
     /// TODO: Update summary.
     /// </summary>
     public interface INegativeBalanceByMatchRepository

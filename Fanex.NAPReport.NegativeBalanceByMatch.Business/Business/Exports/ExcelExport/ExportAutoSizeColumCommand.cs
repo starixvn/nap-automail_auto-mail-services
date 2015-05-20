@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Fanex.NAPReport.Business.Business.Exports.ExcelExport;
-using NPOI.SS.UserModel;
-using NPOI.XSSF.UserModel;
+﻿using NPOI.XSSF.UserModel;
 
-namespace Fanex.NAPReport.Business.Business.Exports.ExcelExport
+namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport
 {
     public class ExportAutoSizeColumCommand : ExportCommandBase
     {

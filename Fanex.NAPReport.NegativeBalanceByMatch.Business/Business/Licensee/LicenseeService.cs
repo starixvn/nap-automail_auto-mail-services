@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Fanex.NAPReport.Business.Entities;
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities;
 using Fanex.NAPReport.NegativeBalanceByMatch.Business.Helper;
 
 namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Licensee

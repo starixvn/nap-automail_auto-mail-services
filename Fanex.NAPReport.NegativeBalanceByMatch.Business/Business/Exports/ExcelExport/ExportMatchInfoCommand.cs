@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Fanex.NAPReport.Business.Business.Exports.ExcelExport;
-using Fanex.NAPReport.Business.Entities;
-using Fanex.Service.Core.Model;
-using NPOI.SS.UserModel;
-using NPOI.SS.Util;
-using NPOI.XSSF.UserModel;
+﻿using Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities;
 
-namespace Fanex.NAPReport.Business.Business.Exports.ExcelExport
+namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport
 {
     public class ExportMatchInfoCommand : ExportCommandBase
     {

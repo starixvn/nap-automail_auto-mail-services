@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Fanex.MailDelivery.Client.Enumerations;
 using Fanex.MailDelivery.Client.Handlers;
 using Fanex.MailDelivery.Client.Models;
-using Fanex.NAPReport.Business.Business.Exports;
-using Fanex.NAPReport.Business.Business.Exports.ExcelExport;
-using Fanex.NAPReport.Business.Entities;
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports;
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport;
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities;
 
 namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 {
@@ -40,7 +41,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 			{
 				mail.Attachments = new List<MailAttachment>
                 {
-                    new MailAttachment(fileNamePath, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL)
+                    new MailAttachment(fileNamePath, FileExtension.MS_EXCEL)
                 };
 			}
 

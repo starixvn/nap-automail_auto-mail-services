@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Fanex.NAPReport.Business.Business.Exports;
 using Fanex.NAPReport.Business.Business.Exports.ExcelExport;
-using Fanex.NAPReport.Business.Entities;
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport;
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities;
 using NPOI.XSSF.UserModel;
 
 namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports

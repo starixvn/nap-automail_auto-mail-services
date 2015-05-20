@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Fanex.Service.Core.Model;
-
-namespace Fanex.NAPReport.Business.Business.Exports.ExcelExport
+﻿namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport
 {
     public class ExportMatchCommand : ExportCommandBase
     {
