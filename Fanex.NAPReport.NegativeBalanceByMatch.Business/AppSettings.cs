@@ -85,8 +85,8 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business
 		{
 			get
 			{
-				var val = ConfigurationManager.AppSettings["SQLiteDBPath"];
-				return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["SQLiteDBPath"]);
+				var val = ConfigurationManager.AppSettings["NegativeBalanceByMatch.SQLiteDBPath"];
+				return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["NegativeBalanceByMatch.SQLiteDBPath"]);
 			}
 		}
 
