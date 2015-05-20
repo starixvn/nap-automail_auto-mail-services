@@ -80,8 +80,7 @@
                       DateTime.Now,
                       mailTimezone);
 
-            var filePath = root + EmailTemplateConstants.TurnoverWatcherEmailTemplate;
-            var template = GetTemplate(filePath);
+            var template = GetTemplate(EmailTemplateConstants.TurnoverWatcherEmailTemplate);
             var content = Razor.Parse(template, turnoverInfo);
 
             var mail = new Mail

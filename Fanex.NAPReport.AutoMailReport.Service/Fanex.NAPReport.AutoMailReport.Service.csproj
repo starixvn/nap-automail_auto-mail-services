@@ -260,6 +260,10 @@
       <Project>{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}</Project>
       <Name>Fanex.Service.Core %28Fanex.Service.Core\Fanex.Service.Core%29</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Fanex.TurnoverWatcher.Business\Fanex.TurnoverWatcher.Business.csproj">
+      <Project>{EEEE6EC6-55BC-4C6E-AC8B-2D5B8C8B7179}</Project>
+      <Name>Fanex.TurnoverWatcher.Business</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Dev\DBACC.bodb02.bodbAdminNet.xml">

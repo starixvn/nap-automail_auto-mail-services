@@ -1,5 +1,0 @@
-﻿<Functions>
-  <Function Name="SMA Turnover Automail">
-    <Setting Key="EmailReceiver" SpName="Acc_MailingListSel" DbName="DBACC.bodb_ACC.bodbAdminNet" TimeOut="0" />
-  </Function>
-</Functions>

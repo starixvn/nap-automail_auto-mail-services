@@ -100,7 +100,7 @@ namespace Fanex.TurnoverWatcher.Business
         {
             get
             {
-                var val = ConfigurationManager.AppSettings["Subject"];
+                var val = ConfigurationManager.AppSettings["TurnoverWatcher.Subject"];
                 return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["Subject"]);
             }
         }
@@ -109,7 +109,7 @@ namespace Fanex.TurnoverWatcher.Business
         {
             get
             {
-                var val = ConfigurationManager.AppSettings["Title"];
+                var val = ConfigurationManager.AppSettings["TurnoverWatcher.Title"];
                 return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["Title"]);
             }
         }
