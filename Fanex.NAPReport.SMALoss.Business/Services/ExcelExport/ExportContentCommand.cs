@@ -1,15 +1,10 @@
-﻿
-
-namespace Fanex.NAPReport.SMALoss.Business.Services.ExcelExport
+﻿namespace Fanex.NAPReport.SMALoss.Business.Services.ExcelExport
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
+    using System.Drawing;
     using Fanex.NAPReport.SMALoss.Business.Entities;
     using NPOI.SS.UserModel;
-    using System.Drawing;
-    using NPOI.XSSF.UserModel;
+
     public class ExportContentCommand : ExportCommandBase
     {
         private IEnumerable<FormattedSMALossGroup> _lossGroup;
@@ -20,12 +15,11 @@ namespace Fanex.NAPReport.SMALoss.Business.Services.ExcelExport
             _lossGroup = lossGroup;
         }
 
-
         public override void Execute()
         {
             this.RenderContent();
-
         }
+
         private Color LevelColor(byte level)
         {
             switch (level)
@@ -46,6 +40,7 @@ namespace Fanex.NAPReport.SMALoss.Business.Services.ExcelExport
                     return Color.FromArgb(0, 0, 0);
             }
         }
+
         private void RenderContent()
         {
             var counter = 0;
@@ -65,7 +60,6 @@ namespace Fanex.NAPReport.SMALoss.Business.Services.ExcelExport
                     ExcelDocument.IncreaseRowIndex();
                     this.LossData(counter, data);
                 }
-
             }
         }
 

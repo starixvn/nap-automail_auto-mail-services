@@ -1,5 +1,4 @@
-﻿
-namespace Fanex.NAPReport.SMALoss.Business.Services.ExcelExport
+﻿namespace Fanex.NAPReport.SMALoss.Business.Services.ExcelExport
 {
     using System.Drawing;
     using System.IO;
@@ -12,7 +11,27 @@ namespace Fanex.NAPReport.SMALoss.Business.Services.ExcelExport
 
     public class ExcelDocument
     {
+        private XSSFSheet _wooksheet;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExcelDocument" /> class.
+        /// </summary>
+        /// <param name="wookbook">Wookbook value.</param>
+        /// <param name="exportSettings">Export Settings.</param>
+        /// <param name="sheetName">Sheet name.</param>
+        public ExcelDocument(XSSFWorkbook wookbook, ExportSettings exportSettings, string sheetName)
+        {
+            Workbook = new XSSFWorkbook();
+            ExportSettings = exportSettings;
+            _wooksheet = Workbook.CreateSheet(sheetName) as XSSFSheet;
+
+            CurrentCell = new Cell();
+
+            InitSettings();
+        }
+
         public XSSFWorkbook Workbook { get; private set; }
+
         public ExportSettings ExportSettings { get; private set; }
 
         public int CurrentRow
@@ -25,20 +44,7 @@ namespace Fanex.NAPReport.SMALoss.Business.Services.ExcelExport
             get { return CurrentCell.CurrentColumn; }
         }
 
-        private XSSFSheet _wooksheet;
-
         private Cell CurrentCell { get; set; }
-
-        public ExcelDocument(XSSFWorkbook wookbook, ExportSettings exportSettings, string sheetName)
-        {
-            Workbook = new XSSFWorkbook();
-            ExportSettings = exportSettings;
-            _wooksheet = Workbook.CreateSheet(sheetName) as XSSFSheet;
-
-            CurrentCell = new Cell();
-
-            InitSettings();
-        }
 
         public void Save(string saveFileNamePath)
         {
@@ -102,7 +108,6 @@ namespace Fanex.NAPReport.SMALoss.Business.Services.ExcelExport
 
             if (borderColor != default(Color))
             {
-
                 style.BorderLeft = BorderStyle.Thin;
                 style.BorderRight = BorderStyle.Thin;
                 style.BorderTop = BorderStyle.Thin;

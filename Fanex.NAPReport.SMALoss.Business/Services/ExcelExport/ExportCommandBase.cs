@@ -1,5 +1,4 @@
-﻿
-namespace Fanex.NAPReport.SMALoss.Business.Services.ExcelExport
+﻿namespace Fanex.NAPReport.SMALoss.Business.Services.ExcelExport
 {
     public abstract class ExportCommandBase : IExportCommand
     {

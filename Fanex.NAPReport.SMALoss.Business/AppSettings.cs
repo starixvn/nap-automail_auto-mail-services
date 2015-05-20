@@ -11,7 +11,6 @@
         private static string title;
         private static string subject;
         private static string exportDataDirectory;
-        private static int functionID;
 
         public static int SendEmailHour
         {
@@ -64,28 +63,17 @@
                 return exportDataDirectory;
             }
         }
+
         public static string Subject
         {
             get
             {
                 if (subject == null)
                 {
-                    return GetValue("SMA.Subject");
+                    subject = GetValue("SMA.Subject");
                 }
+
                 return subject;
-            }
-        }
-
-        public static int FunctionID
-        {
-            get
-            {
-                if (functionID == 0)
-                {
-                    functionID = Converter.ToInt(GetValue("SMA.FunctionID"));
-                }
-
-                return functionID;
             }
         }
 

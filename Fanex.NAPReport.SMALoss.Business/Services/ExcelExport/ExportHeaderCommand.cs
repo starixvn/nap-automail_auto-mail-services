@@ -1,15 +1,12 @@
 ﻿namespace Fanex.NAPReport.SMALoss.Business.Services.ExcelExport
 {
-    using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-    using NPOI.XSSF.UserModel;
-    using NPOI.SS.UserModel;
     using System.Drawing;
+    using NPOI.SS.UserModel;
+
     public class ExportHeaderCommand : ExportCommandBase
     {
         private string _title = string.Empty;
+
         public ExportHeaderCommand(ExcelDocument excelDocument, string title)
             : base(excelDocument)
         {

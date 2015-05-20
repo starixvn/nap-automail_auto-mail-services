@@ -3,9 +3,10 @@
     using System.Collections.Generic;
     using System.Linq;
     using Fanex.Common.Extensions;
+
     public class ExportCompositeCommand<T> : ExportCommandBase where T : IExportCommand
     {
-        protected IList<T> _commands;
+        private IList<T> _commands;
 
         public ExportCompositeCommand(ExcelDocument excelDocument)
             : base(excelDocument)

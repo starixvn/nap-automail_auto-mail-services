@@ -1,15 +1,11 @@
-﻿
-
-namespace Fanex.NAPReport.SMALoss.Business.Services
+﻿namespace Fanex.NAPReport.SMALoss.Business.Services
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.NAPReport.SMALoss.Business.Services.ExcelExport;
     using Fanex.NAPReport.SMALoss.Business.Entities;
-    using NPOI.XSSF.UserModel;
+    using Fanex.NAPReport.SMALoss.Business.Services.ExcelExport;
     using Fanex.Service.Core.Service.Implement.Npoi;
+    using NPOI.XSSF.UserModel;
+
     public class SMALossExcelService : ISMALossExcelService
     {
         /// <summary>
@@ -42,7 +38,6 @@ namespace Fanex.NAPReport.SMALoss.Business.Services
             exportCommand.Add(saveCommand);
 
             exportCommand.Execute();
-        
         }
     }
 }

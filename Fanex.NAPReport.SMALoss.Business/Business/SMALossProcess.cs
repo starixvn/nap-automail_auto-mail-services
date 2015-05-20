@@ -34,8 +34,7 @@
         /// <param name="lossService">SMA loss service.</param>
         private SMALossProcess(
             ISMALossService lossService,
-            ISMALossExcelService lossExcelService
-            )
+            ISMALossExcelService lossExcelService)
         {
             _lossService = lossService ?? new SMALossService();
             _lossExcelService = lossExcelService ?? new SMALossExcelService();
@@ -64,16 +63,20 @@
             var offset = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours;
             var timezoneInd = DateTime.Now.IsDaylightSavingTime() ? offset - 1 : offset;
             var subject = string.Format(AppSettings.Subject, DateTime.Now, string.Format("{0}{1}", timezoneInd > 0 ? "+" : string.Empty, timezoneInd));
-
+            var isNotified = true;
             var lossItems = GetReachedSMALoss();
-            var content = Razor.Parse(GetTemplate, lossItems);
 
-            var isNotified = SendMail(new EmailContent
+            if (lossItems != null && lossItems.Any())
             {
-                Subject = subject,
-                Title = AppSettings.Title,
-                Body = content
-            });
+                var content = Razor.Parse(GetTemplate, lossItems);
+
+                isNotified = SendMail(new EmailContent
+                {
+                    Subject = subject,
+                    Title = AppSettings.Title,
+                    Body = content
+                });
+            }
 
             return isNotified;
         }
@@ -94,10 +97,11 @@
                     Body = content.Body,
                     MailingListId = content.MailingListId
                 };
+                var reportDirectory = this.CreateSMAReportDataDirectory();
 
                 var curDateTime = DateTime.UtcNow;
                 var fileName = string.Format("SMA_Loss_Report_{0}.xlsx", curDateTime.ToString("yyyy-MM-dd"));
-                var fileNamePath = Path.Combine(AppSettings.ExportDataDirectory, fileName);
+                var fileNamePath = Path.Combine(reportDirectory, fileName);
                 var sheetName = "SMA Loss Report";
                 var exportSettings = new ExportSettings();
                 var lossItems = GetReachedSMALoss();
@@ -107,14 +111,14 @@
                 mail.Attachments = new List<MailAttachment>();
                 mail.Attachments.Add(new MailAttachment(fileNamePath, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
 
-                //var appLocation = AppDomain.CurrentDomain.BaseDirectory;
-                //var upwardArrow = new MailLinkedResource(appLocation + UpwardArrowUrl, FileExtension.IMG_PNG, "lruworradrawpu");
-                //var downwardArrow = new MailLinkedResource(appLocation + DownwardArrowUrl, FileExtension.IMG_PNG, "lruworradrawnwod");
-                //var horizontalLineArrow = new MailLinkedResource(appLocation + HorizontalLineUrl, FileExtension.IMG_PNG, "lruworradrawenillatnoziroh");
-                //mail.AlternativeViews = new List<MailLinkedResource>();
-                //mail.AlternativeViews.Add(upwardArrow);
-                //mail.AlternativeViews.Add(downwardArrow);
-                //mail.AlternativeViews.Add(horizontalLineArrow);
+                ////var appLocation = AppDomain.CurrentDomain.BaseDirectory;
+                ////var upwardArrow = new MailLinkedResource(appLocation + UpwardArrowUrl, FileExtension.IMG_PNG, "lruworradrawpu");
+                ////var downwardArrow = new MailLinkedResource(appLocation + DownwardArrowUrl, FileExtension.IMG_PNG, "lruworradrawnwod");
+                ////var horizontalLineArrow = new MailLinkedResource(appLocation + HorizontalLineUrl, FileExtension.IMG_PNG, "lruworradrawenillatnoziroh");
+                ////mail.AlternativeViews = new List<MailLinkedResource>();
+                ////mail.AlternativeViews.Add(upwardArrow);
+                ////mail.AlternativeViews.Add(downwardArrow);
+                ////mail.AlternativeViews.Add(horizontalLineArrow);
 
                 MailClientHandler.Start();
                 MailClientHandler.SendMail(mail);
@@ -126,6 +130,14 @@
                 LogExtensions.ExceptionHandler(exception);
                 return false;
             }
+        }
+
+        private string CreateSMAReportDataDirectory()
+        {
+            var reportDataDirectory = string.Format("{0}\\{1}\\{2}", AppSettings.ExportDataDirectory, DateTime.Now.Year, DateTime.Now.Month);
+            DirectoryExtensions.CheckAndCreateDirectory(reportDataDirectory);
+
+            return reportDataDirectory;
         }
 
         /// <summary>

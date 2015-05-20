@@ -1,5 +1,4 @@
-﻿
-namespace Fanex.NAPReport.SMALoss.Business.Services.ExcelExport
+﻿namespace Fanex.NAPReport.SMALoss.Business.Services.ExcelExport
 {
     using NPOI.XSSF.UserModel;
 
