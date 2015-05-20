@@ -69,15 +69,11 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
         /// </summary>
         public void ExportExcel()
         {
-            Console.WriteLine("Please wait...");
-            
             ExportReportTitle();
             ExportReportContent();
             string fileNameWithExtension = CreateReportNameWithExtension();
             ReportPath = Path.Combine(AppSettings.ExportDataDirectory, fileNameWithExtension);
             SaveFile.SaveExcelFile(AppSettings.ExportDataDirectory, fileNameWithExtension, this._workbook);
-
-            Console.WriteLine("Super balance mail was sent!.");
         }
 
         private void CreateColor()

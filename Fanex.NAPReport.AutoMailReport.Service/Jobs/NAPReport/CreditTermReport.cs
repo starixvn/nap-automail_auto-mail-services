@@ -49,13 +49,40 @@ namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.NAPReport
             _creditTermService.ExportExcel(report);
             var listAttachment = new List<MailAttachment>();
             listAttachment.Add(new MailAttachment(_creditTermService.ReportPath, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
-            Mail mail = _mailService.CreateMail(subject, string.Empty, body, listAttachment, "Credit Term");
+            Mail mail = _mailService.CreateMail(subject, string.Empty, body, listAttachment);
 
             return new JobResultMessage()
             {
                 JobStatus = JobStatus.Success,
                 Mail = mail,
                 Schedule = schedule,
+                Result = new ResultMessage
+                {
+                    ErrCode = 0,
+                    ErrMsg = string.Empty
+                }
+            };
+        }
+        
+        public JobResultMessage Test()
+        {
+            var report = new Report
+            {
+                Name = "Credir Term",
+                Date = DateTime.Now
+            };
+            var subject = Utilities.LoadSubject(report);
+            var body = Utilities.LoadBody(report);
+            _creditTermService.ExportExcel(report);
+            var listAttachment = new List<MailAttachment>();
+            listAttachment.Add(new MailAttachment(_creditTermService.ReportPath, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
+            Mail mail = _mailService.CreateMail(subject, string.Empty, body, listAttachment);
+
+            return new JobResultMessage()
+            {
+                JobStatus = JobStatus.Success,
+                Mail = mail,
+                //Schedule = schedule,
                 Result = new ResultMessage
                 {
                     ErrCode = 0,

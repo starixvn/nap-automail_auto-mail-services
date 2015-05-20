@@ -59,7 +59,7 @@ namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.NAPReport
             var listAttachment = new List<MailAttachment>();
             listAttachment.Add(new MailAttachment(_balanceService.ReportPath, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
 
-            Mail mail = _mailService.CreateMail(subject, string.Empty, body, listAttachment, "Super Balance Report");
+            Mail mail = _mailService.CreateMail(subject, string.Empty, body, listAttachment);
 
             return new JobResultMessage()
             {

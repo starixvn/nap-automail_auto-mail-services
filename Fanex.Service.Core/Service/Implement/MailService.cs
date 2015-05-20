@@ -17,18 +17,15 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
     /// </summary>
     public class MailService : IMailService
     {
-        public Mail CreateMail(string subject, string title, string emailContent, List<MailAttachment> listAttachment, string functionName)
+        public Mail CreateMail(string subject, string title, string emailContent, List<MailAttachment> listAttachment)
         {
-            Mail mail = new Mail()
+            return new Mail()
             {
                 Subject = subject,
                 Title = title,
                 Body = emailContent,
                 Attachments = listAttachment
             };
-
-            mail.MailingListId = mailStationAppSettings.GetFunctionId(functionName);
-            return mail;
         }
 
         public void SendMailByFunction(Mail mail)

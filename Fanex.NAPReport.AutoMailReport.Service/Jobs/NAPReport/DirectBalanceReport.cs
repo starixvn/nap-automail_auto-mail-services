@@ -83,7 +83,7 @@ namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.NAPReport
             listAttachment.Add(new MailAttachment(_agentBalanceService.ReportPath, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
             listAttachment.Add(new MailAttachment(_memberBalanceService.ReportPath, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
 
-            Mail mail = _mailService.CreateMail(subject, string.Empty, body, listAttachment, "Direct Balance Report");
+            Mail mail = _mailService.CreateMail(subject, string.Empty, body, listAttachment);
 
             return new JobResultMessage()
             {

@@ -71,14 +71,11 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
         {
             CreateSheet();
             InitColumnWidth();
-            Console.WriteLine("Please wait...");
             ExportExcelFile();
-
             string fileNameWithExtension = CreateReportNameWithExtension(report);
             ReportPath = Path.Combine(AppSettings.ExportDataDirectory, fileNameWithExtension);
 
             SaveFile.SaveExcelFile(AppSettings.ExportDataDirectory, fileNameWithExtension, this._workbook);
-            Console.WriteLine("Credit term mail was sent!.");
         }
 
         private void CreateColor()

@@ -40,14 +40,14 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Logging">
-      <HintPath>..\_Dependencies\MailStation\Common.Logging.dll</HintPath>
+    <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.MailStation.1.0.2\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Common.Logging.Core">
       <HintPath>..\_Dependencies\MailStation\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="EasyNetQ">
-      <HintPath>..\_Dependencies\MailStation\EasyNetQ.dll</HintPath>
+    <Reference Include="EasyNetQ, Version=0.47.10.380, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.MailStation.1.0.2\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.AccountingReports.SqLiteDatabase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -60,8 +60,11 @@
     <Reference Include="Fanex.Data">
       <HintPath>..\packages\Fanex.Data.0.5.404.63\lib\net40\Fanex.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.MailDelivery.Client">
-      <HintPath>..\_Dependencies\MailStation\Fanex.MailDelivery.Client.dll</HintPath>
+    <Reference Include="Fanex.Logging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Logging.1.0.0.0\lib\net40\Fanex.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.MailDelivery.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.MailStation.1.0.2\lib\net40\Fanex.MailDelivery.Client.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.NAP.Core, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -80,8 +83,8 @@
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
       <HintPath>..\packages\EnterpriseLibrary.Data.5.0.414.0\lib\net40\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging">
-      <HintPath>..\_Dependencies\Entlib\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.Logging.5.0.414.0\lib\net40\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\EnterpriseLibrary.Unity.5.0.414.0\lib\net40\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -92,12 +95,11 @@
     <Reference Include="Microsoft.Practices.Unity.Interception">
       <HintPath>..\packages\EnterpriseLibrary.Unity.5.0.414.0\lib\net40\Microsoft.Practices.Unity.Interception.dll</HintPath>
     </Reference>
-    <Reference Include="Quartz">
-      <HintPath>..\_Dependencies\MailStation\Quartz.dll</HintPath>
+    <Reference Include="Quartz, Version=2.2.4.400, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.MailStation.1.0.2\lib\net40\Quartz.dll</HintPath>
     </Reference>
     <Reference Include="RabbitMQ.Client, Version=3.4.3.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\MailStation\RabbitMQ.Client.dll</HintPath>
+      <HintPath>..\packages\Fanex.MailStation.1.0.2\lib\net40\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="RazorEngine">
       <HintPath>..\packages\RazorEngine.3.3.0\lib\net40\RazorEngine.dll</HintPath>
@@ -209,9 +211,15 @@
       <SubType>
       </SubType>
     </Content>
-    <None Include="SiteConfig\BalanceReport\Email\Direct Balance Email.cshtml" />
-    <None Include="SiteConfig\BalanceReport\Email\Email.cshtml" />
-    <None Include="SiteConfig\BalanceReport\Email\Subject.cshtml" />
+    <None Include="SiteConfig\BalanceReport\Email\Direct Balance Email.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SiteConfig\BalanceReport\Email\Email.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SiteConfig\BalanceReport\Email\Subject.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="SiteConfig\NegativeBalanceByMatch\app.config">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

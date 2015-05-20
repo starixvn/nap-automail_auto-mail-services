@@ -14,7 +14,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
     /// </summary>
     public interface IMailService
     {
-        Mail CreateMail(string subject, string title, string emailContent, List<MailAttachment> listAttachment, string functionName);
+        Mail CreateMail(string subject, string title, string emailContent, List<MailAttachment> listAttachment);
 
         void SendMailByFunction(Mail mail);
     }
