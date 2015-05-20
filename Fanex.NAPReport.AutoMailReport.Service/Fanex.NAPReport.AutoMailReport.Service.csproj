@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A26D737A-8655-40AD-AA5D-13DC22FCFF7C}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Fanex.NAPReport.AutoMailReport.Service</RootNamespace>
     <AssemblyName>Fanex.NAPReport.AutoMailReport.Service</AssemblyName>
