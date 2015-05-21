@@ -120,9 +120,7 @@
                 ////mail.AlternativeViews.Add(downwardArrow);
                 ////mail.AlternativeViews.Add(horizontalLineArrow);
 
-                MailClientHandler.Start();
                 MailClientHandler.SendMail(mail);
-                MailClientHandler.Stop();
                 return true;
             }
             catch (Exception exception)
