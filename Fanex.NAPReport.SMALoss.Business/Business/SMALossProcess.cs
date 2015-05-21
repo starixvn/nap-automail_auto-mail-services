@@ -111,16 +111,17 @@
                 mail.Attachments = new List<MailAttachment>();
                 mail.Attachments.Add(new MailAttachment(fileNamePath, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
 
-                ////var appLocation = AppDomain.CurrentDomain.BaseDirectory;
-                ////var upwardArrow = new MailLinkedResource(appLocation + UpwardArrowUrl, FileExtension.IMG_PNG, "lruworradrawpu");
-                ////var downwardArrow = new MailLinkedResource(appLocation + DownwardArrowUrl, FileExtension.IMG_PNG, "lruworradrawnwod");
-                ////var horizontalLineArrow = new MailLinkedResource(appLocation + HorizontalLineUrl, FileExtension.IMG_PNG, "lruworradrawenillatnoziroh");
-                ////mail.AlternativeViews = new List<MailLinkedResource>();
-                ////mail.AlternativeViews.Add(upwardArrow);
-                ////mail.AlternativeViews.Add(downwardArrow);
-                ////mail.AlternativeViews.Add(horizontalLineArrow);
+                var appLocation = AppDomain.CurrentDomain.BaseDirectory;
+                var upwardArrow = new MailLinkedResource(appLocation + UpwardArrowUrl, FileExtension.IMG_PNG, "lruworradrawpu");
+                var downwardArrow = new MailLinkedResource(appLocation + DownwardArrowUrl, FileExtension.IMG_PNG, "lruworradrawnwod");
+                var horizontalLineArrow = new MailLinkedResource(appLocation + HorizontalLineUrl, FileExtension.IMG_PNG, "lruworradrawenillatnoziroh");
+                mail.AlternativeViews = new List<MailLinkedResource>();
+                mail.AlternativeViews.Add(upwardArrow);
+                mail.AlternativeViews.Add(downwardArrow);
+                mail.AlternativeViews.Add(horizontalLineArrow);
 
                 MailClientHandler.SendMail(mail);
+                
                 return true;
             }
             catch (Exception exception)

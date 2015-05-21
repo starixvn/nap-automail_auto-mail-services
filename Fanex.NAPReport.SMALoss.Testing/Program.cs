@@ -3,6 +3,7 @@ using System.IO;
 using Fanex.Data.Configuration;
 using Fanex.NAPReport.AutoMailReport.Service;
 using Fanex.NAPReport.SMALoss.Business.Business;
+using Fanex.MailDelivery.Client.Handlers;
 
 namespace Fanex.NAPReport.SMALoss.Testing
 {
@@ -16,9 +17,10 @@ namespace Fanex.NAPReport.SMALoss.Testing
 
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
             DbSettingProviderManager.Current.Start();
-
+            MailClientHandler.Start();
             var lossProcess = new SMALossProcess();
             lossProcess.NotifyEmail();
+            MailClientHandler.Stop();
         }
     }
 }

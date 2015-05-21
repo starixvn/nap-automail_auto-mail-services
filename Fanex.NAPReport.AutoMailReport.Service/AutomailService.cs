@@ -44,14 +44,7 @@
 
         protected override void OnStart(string[] args)
         {
-            try
-            {
-                ResetTimer();
-            }
-            catch (Exception ex)
-            {
-                File.AppendAllText(@"D:\test.txt", ex.ToString());
-            }
+            ResetTimer();
         }
 
         protected override void OnStop()
