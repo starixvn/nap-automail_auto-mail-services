@@ -24,12 +24,12 @@ namespace Fanex.NAPReport.AutoMailReport.Service
         /// </summary>
         private static void Main()
         {
-			ServiceBase[] servicesToRun;
-			servicesToRun = new ServiceBase[]
+            ServiceBase[] servicesToRun;
+            servicesToRun = new ServiceBase[]
             {
                 new AutoMailService()
             };
-			ServiceBase.Run(servicesToRun);
+            ServiceBase.Run(servicesToRun);
 
 
 			//AutoMailService mailService = new AutoMailService();
@@ -37,8 +37,8 @@ namespace Fanex.NAPReport.AutoMailReport.Service
 			//mailService.StartAndStop();
 
             //DbSettingProviderManager.Current.Start();
-            //CreditTermReport cs = new CreditTermReport();
-            //cs.Test();
+            //DirectBalanceReport cs = new DirectBalanceReport();
+            //cs.Run2();
         }
     }
 }

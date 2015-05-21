@@ -39,7 +39,7 @@ namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.NAPReport
             var masterCriteria = new DirectBalanceReportMasterCriteria
                 {
                     Date = DateTime.Now,
-                    Name = "Master Balance",
+                    Name = "Direct Master",
                     Level = "Master"
                 };
             _masterBalanceService = new BalanceManager(masterCriteria);
@@ -90,6 +90,41 @@ namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.NAPReport
                 JobStatus = JobStatus.Success,
                 Mail = mail,
                 Schedule = schedule,
+                Result = new ResultMessage
+                {
+                    ErrCode = 0,
+                    ErrMsg = string.Empty
+                }
+            };
+        }
+
+        public JobResultMessage Run2()
+        {
+            var report = new Report
+            {
+                Name = "Direct Balance",
+                Date = DateTime.Now,
+                IsDirectReport = true
+            };
+            var subject = Utilities.LoadSubject(report);
+            var body = Utilities.LoadBody(report);
+
+            _masterBalanceService.ExportExcel();
+            _agentBalanceService.ExportExcel();
+            _memberBalanceService.ExportExcel();
+
+            var listAttachment = new List<MailAttachment>();
+            listAttachment.Add(new MailAttachment(_masterBalanceService.ReportPath, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
+            listAttachment.Add(new MailAttachment(_agentBalanceService.ReportPath, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
+            listAttachment.Add(new MailAttachment(_memberBalanceService.ReportPath, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
+
+            Mail mail = _mailService.CreateMail(subject, string.Empty, body, listAttachment);
+
+            return new JobResultMessage()
+            {
+                JobStatus = JobStatus.Success,
+                Mail = mail,
+                //Schedule = schedule,
                 Result = new ResultMessage
                 {
                     ErrCode = 0,

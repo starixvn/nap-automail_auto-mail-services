@@ -1,40 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Xml;
-using Fanex.BalanceReport;
-using Fanex.Data;
-using Fanex.NAPReport.BalanceReport.DataAccess;
-using Fanex.NAPReport.BalanceReport.Helper;
-using Fanex.NAPReport.BalanceReport.Model;
-using Fanex.Service.Core.Constants;
-using Fanex.Service.Core.Extensions;
-using Fanex.Service.Core.Model;
-using Fanex.Service.Core.Service.Implement.Npoi;
-using Fanex.Service.Core.Service.Interface.Npoi;
-using Fanex.Service.Core.Utilities;
-using NPOI.XSSF.UserModel;
-
-namespace Fanex.NAPReport.BalanceReport.Bussiness
+﻿namespace Fanex.NAPReport.BalanceReport.Bussiness
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using System.IO;
+    using System.Linq;
+    using System.Xml;
+    using Fanex.BalanceReport;
+    using Fanex.Data;
+    using Fanex.NAPReport.BalanceReport.DataAccess;
+    using Fanex.NAPReport.BalanceReport.Helper;
+    using Fanex.NAPReport.BalanceReport.Model;
+    using Fanex.Service.Core.Constants;
+    using Fanex.Service.Core.Extensions;
+    using Fanex.Service.Core.Model;
+    using Fanex.Service.Core.Service.Implement.Npoi;
+    using Fanex.Service.Core.Service.Interface.Npoi;
+    using Fanex.Service.Core.Utilities;
+    using NPOI.XSSF.UserModel;
+
+    /// <summary>
+    /// Credit Term Manager class.
+    /// </summary>
     public class CreditTermManager : ICreditTermManager
     {
         private readonly IReportDAO _reportDao;
         private readonly List<Exchange> _exchangeList;
-        public string ReportPath
-        {
-            get;
-            set;
-        }
-
         private Color _headerColor;
         private Color _overLimitColor;
         private Color _normalColor;
         private Color _contentColor;
         private Color _borderColor;
-
         private XSSFWorkbook _workbook;
         private XSSFSheet _workSheet;
         private Cell _cell;
@@ -43,11 +39,6 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
         private INpoiNewFormatCustomCellStyleService _customCellStyleService;
         private INpoiAlignmentService _alignmentService;
         private XSSFFont _regularFont;
-
-        /// <summary>
-        /// Check exist of config files
-        /// </summary>
-        private readonly bool _bCanDo = true;
 
         #region Constructors
         public CreditTermManager() 
@@ -64,9 +55,12 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
             _alignmentService = new NpoiNewFormatAlignmentService();
         }
 
-        /// <summary>
-        /// Send mail: Credit term report excel file, super balance report excel file, direct balace excel file
-        /// </summary>
+        public string ReportPath
+        {
+            get;
+            set;
+        }
+
         public void ExportExcel(Report report)
         {
             CreateSheet();
@@ -74,7 +68,6 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
             ExportExcelFile();
             string fileNameWithExtension = CreateReportNameWithExtension(report);
             ReportPath = Path.Combine(AppSettings.ExportDataDirectory, fileNameWithExtension);
-
             SaveFile.SaveExcelFile(AppSettings.ExportDataDirectory, fileNameWithExtension, this._workbook);
         }
 
@@ -93,6 +86,9 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
             _workSheet = _workbook.CreateSheet(sheetName) as XSSFSheet;
         }
 
+        /// <summary>
+        /// Initializes the width of the column.
+        /// </summary>
         private void InitColumnWidth()
         {
             _workSheet.SetColumnWidth(0, 60 * NPOIConstants.FontWidth);
@@ -106,38 +102,16 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
             _workSheet.SetColumnWidth(8, 100 * NPOIConstants.FontWidth);
             _workSheet.SetColumnWidth(9, 150 * NPOIConstants.FontWidth);
         }
-
-
         #endregion
 
-        /// <summary>
-        /// Use for MailSection.Config file
-        /// </summary>
-        /// <param name="parent"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        private static XmlNode GetNodeByName(XmlNode parent, string name)
-        {
-            return (from XmlNode xmlNode in parent.ChildNodes
-                    where xmlNode.Attributes != null
-                    // ReSharper disable PossibleNullReferenceException
-                    where xmlNode.Attributes["name"] != null
-                    // ReSharper restore PossibleNullReferenceException
-                    // ReSharper disable PossibleNullReferenceException
-                    select xmlNode).FirstOrDefault(xmlNode => xmlNode.Attributes["name"].Value.ToLower().Contains(name.ToLower()));
-            // ReSharper restore PossibleNullReferenceException
-        }
-
-        /// <summary>
-        /// Get exchange from cache
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
         private string GetExhange(int key)
         {
             return CacheHelper.GetExchangeName(key);
         }
 
+        /// <summary>
+        /// Exports the report header.
+        /// </summary>
         private void ExportReportHeader()
         {
             ExportReportTitle();
@@ -177,6 +151,10 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
             return _customCellStyleService.CreateCenterTextStyle(_headerColor, _fontService.BlackBoldFont);
         }
 
+        /// <summary>
+        /// Exports the sub header.
+        /// </summary>
+        /// <param name="currency">The currency.</param>
         private void ExportSubHeader(int currency)
         {
             _cell.ResetColumnIndex();
@@ -193,7 +171,11 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
             HeaderCellText(headerStyle, "Remark Timestamp");
         }
 
-        void CreateRowData(CreditTerm item)
+        /// <summary>
+        /// Creates the row data.
+        /// </summary>
+        /// <param name="item">The row item.</param>
+        private void CreateRowData(CreditTerm item)
         {
             _cell.ResetColumnIndex();
             var color = item.OverLimit ? _overLimitColor : _normalColor;
@@ -201,37 +183,41 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
             var usernameStyle = _customCellStyleService.CreateCenterTextStyle(color, _fontService.BlackBoldFont);
             var decimalNumberStyle = _customCellStyleService.CreatePositiveDecimalNumberStyle(color, _fontService.RegularFont);
             var textLeftStyle = _customCellStyleService.CreateLeftTextStyle(color, _fontService.RegularFont);
-            bindData(item.Role, textStyle);
-            bindData(item.Username, usernameStyle);
-            bindData(GetExhange(item.Currency), textStyle);
-            bindData(item.PreAgreeAmount, decimalNumberStyle);
-            bindData(item.Balance, decimalNumberStyle);
-            bindData(item.Balance_Base, decimalNumberStyle);
-            bindData(item.AccountRemark, textLeftStyle);
-            bindData(item.Phone, textLeftStyle);
-            bindData(item.CheckerName, textLeftStyle);
-            bindData(FormatDate(item.AccountRemarkDate), textLeftStyle);
+            BindData(item.Role, textStyle);
+            BindData(item.Username, usernameStyle);
+            BindData(GetExhange(item.Currency), textStyle);
+            BindData(item.PreAgreeAmount, decimalNumberStyle);
+            BindData(item.Balance, decimalNumberStyle);
+            BindData(item.Balance_Base, decimalNumberStyle);
+            BindData(item.AccountRemark, textLeftStyle);
+            BindData(item.Phone, textLeftStyle);
+            BindData(item.CheckerName, textLeftStyle);
+            BindData(FormatDate(item.AccountRemarkDate), textLeftStyle);
         }
 
-        void CreateRowDetail(CreditTermDetail item)
+        /// <summary>
+        /// Creates the row detail.
+        /// </summary>
+        /// <param name="item">The row item.</param>
+        private void CreateRowDetail(CreditTermDetail item)
         {
             _cell.ResetColumnIndex();
             var textStyle = _bodyCellStyleService.LeftTextStyle;
             var decimalNumberStyle = _bodyCellStyleService.PositiveDecimalNumberStyle;
             var usernameStyle = _customCellStyleService.CreateLeftTextStyle(Color.White, _fontService.BlackBoldFont);            
             _cell.IncreaseColumnIndex();
-            bindData(item.Role, textStyle);
-            bindData(item.Username, usernameStyle);
-            bindData(GetExhange(item.Currency), textStyle);
-            bindData(item.Balance, decimalNumberStyle);
-            bindData(item.Balance_Group, decimalNumberStyle);
-            bindData(item.Balance_Base, decimalNumberStyle);
-            bindData(item.AccountRemark, textStyle);
-            bindData("Edit", textStyle);
-            bindData(FormatDate(item.AccountRemarkDate), textStyle);
+            BindData(item.Role, textStyle);
+            BindData(item.Username, usernameStyle);
+            BindData(GetExhange(item.Currency), textStyle);
+            BindData(item.Balance, decimalNumberStyle);
+            BindData(item.Balance_Group, decimalNumberStyle);
+            BindData(item.Balance_Base, decimalNumberStyle);
+            BindData(item.AccountRemark, textStyle);
+            BindData("Edit", textStyle);
+            BindData(FormatDate(item.AccountRemarkDate), textStyle);
         }
 
-        void bindData(object dataValue, XSSFCellStyle cellStyle)
+        private void BindData(object dataValue, XSSFCellStyle cellStyle)
         {
             _cell.CellValue = dataValue;
             NpoiNewFormatExcelExtension.RenderCell(_workSheet, _cell, cellStyle);
@@ -239,7 +225,7 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
         }
 
         /// <summary>
-        /// Create credit term report excel file
+        /// Create credit term report excel file.
         /// </summary>
         private void ExportExcelFile()
         {
@@ -250,8 +236,7 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
             {
                 using (var multi = db.QueryMultiple())
                 {
-                    //var employees = multi.Read<CreditTerm, CreditTermDetail>();
-                    creditTerms = multi.Read<CreditTerm>().Take(10).ToList();
+                    creditTerms = multi.Read<CreditTerm>().ToList();
                     creditTermDetails = multi.Read<CreditTermDetail>().ToList();
                 }
             }            

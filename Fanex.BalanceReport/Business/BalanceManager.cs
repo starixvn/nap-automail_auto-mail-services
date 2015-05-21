@@ -1,33 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using Fanex.BalanceReport;
-using Fanex.Data;
-using Fanex.NAPReport.BalanceReport.DataAccess;
-using Fanex.NAPReport.BalanceReport.Helper;
-using Fanex.NAPReport.BalanceReport.Model;
-using Fanex.Service.Core.Constants;
-using Fanex.Service.Core.Extensions;
-using Fanex.Service.Core.Model;
-using Fanex.Service.Core.Service.Implement.Npoi;
-using Fanex.Service.Core.Service.Interface.Npoi;
-using Fanex.Service.Core.Utilities;
-using NPOI.XSSF.UserModel;
-
-namespace Fanex.NAPReport.BalanceReport.Bussiness
+﻿namespace Fanex.NAPReport.BalanceReport.Bussiness
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using System.IO;
+    using Fanex.BalanceReport;
+    using Fanex.Data;
+    using Fanex.NAPReport.BalanceReport.DataAccess;
+    using Fanex.NAPReport.BalanceReport.Helper;
+    using Fanex.NAPReport.BalanceReport.Model;
+    using Fanex.Service.Core.Constants;
+    using Fanex.Service.Core.Extensions;
+    using Fanex.Service.Core.Model;
+    using Fanex.Service.Core.Service.Implement.Npoi;
+    using Fanex.Service.Core.Service.Interface.Npoi;
+    using Fanex.Service.Core.Utilities;
+    using NPOI.XSSF.UserModel;
+
+    /// <summary>
+    /// Balance Manager class.
+    /// </summary>
     public class BalanceManager : IBalanceManager
     {
         private readonly IReportDAO _reportDao;
         private readonly List<Exchange> _exchangeList;
-        private readonly string _superBalanceExcelFileName;
-
-        public string ReportPath
-        {
-            get;
-            set;
-        }
 
         private Color _headerColor;
         private Color _evenColor;
@@ -62,10 +58,16 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
             CreateSheet();
             InitColumnWidth();
         }
+
+        public string ReportPath
+        {
+            get;
+            set;
+        }
         #endregion
 
         /// <summary>
-        /// Send mail: Credit term report excel file, super balance report excel file, direct balace excel file
+        /// Send mail: Credit term report excel file, super balance report excel file, direct balance excel file.
         /// </summary>
         public void ExportExcel()
         {
@@ -100,17 +102,17 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
             _workSheet.SetColumnWidth(4, 150 * NPOIConstants.FontWidth);
         }
 
-        /// <summary>
-        /// Get exchange from cache
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
         private string GetExhange(int key)
         {
             return CacheHelper.GetExchangeName(key);
         }
 
-        void CreateRowData(BalanceModel item, int rowIndex)
+        /// <summary>
+        /// Creates the row data.
+        /// </summary>
+        /// <param name="item">The item balance.</param>
+        /// <param name="rowIndex">Index of the row.</param>
+        private void CreateRowData(BalanceModel item, int rowIndex)
         {
             _cell.ResetColumnIndex();
             var color = rowIndex % 2 == 0 ? _evenColor : _oddColor;
@@ -118,14 +120,14 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
             var decimalNumberStyle = _customCellStyleService.CreateDecimalNumberStyle(color, _fontService.RegularFont);
             var textLeftStyle = _customCellStyleService.CreateLeftTextStyle(color, _fontService.RegularFont);
             
-            bindData(rowIndex, textCenterStyle);
-            bindData(item.Username, textLeftStyle);
-            bindData(GetExhange(item.Currency), textCenterStyle);
-            bindData(item.Balance, decimalNumberStyle);
-            bindData(item.BaseBalance, decimalNumberStyle);
+            BindData(rowIndex, textCenterStyle);
+            BindData(item.Username, textLeftStyle);
+            BindData(GetExhange(item.Currency), textCenterStyle);
+            BindData(item.Balance, decimalNumberStyle);
+            BindData(item.BaseBalance, decimalNumberStyle);
         }
 
-        void bindData(object dataValue, XSSFCellStyle cellStyle)
+        private void BindData(object dataValue, XSSFCellStyle cellStyle)
         {
             _cell.CellValue = dataValue;
             NpoiNewFormatExcelExtension.RenderCell(_workSheet, _cell, cellStyle);
@@ -133,11 +135,10 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
         }
 
         /// <summary>
-        /// Create super balance excel file
+        /// Create super balance excel file.
         /// </summary>
         private void ExportReportContent()
         {
-            //var superBalance = _reportDao.GetSuperBalance(new SuperBalanceReportCriteria()).Take(10).ToList();
             var index = 1;
             double total = 0;
             using (ObjectDb db = new ObjectDb(_criteria.GetSettingKey()))
@@ -146,10 +147,6 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
                 {
                     while (reader.Read())
                     {
-                        if (index == 10)
-                        {
-                            break;
-                        }
                         var baseBalanceAmount = reader.GetDouble(4);
                         var balanceAmount = reader.GetDecimal(3);
                         if (baseBalanceAmount != 0 || balanceAmount != 0)
@@ -174,6 +171,10 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
             ExportGrandTotal(total);
         }
 
+        /// <summary>
+        /// Exports the grand total.
+        /// </summary>
+        /// <param name="total">The total.</param>
         private void ExportGrandTotal(double total)
         {
             _cell.ResetColumnIndex();
@@ -188,6 +189,9 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
             NpoiNewFormatExcelExtension.RenderCell(_workSheet, _cell, footerTotalStyle);
         }
 
+        /// <summary>
+        /// Exports the report title.
+        /// </summary>
         private void ExportReportTitle()
         {
             var headerStyle = _customCellStyleService.CreateCenterTextStyle(_headerColor, _fontService.BlackBoldFont);
@@ -202,7 +206,6 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
             HeaderCellText(headerStyle, "CURR");
             HeaderCellText(headerStyle, "BALANCE");
             HeaderCellText(headerStyle, "BASE(RM)");
-
         }
 
         private void HeaderCellText(XSSFCellStyle headerStyle, string textTitle)
