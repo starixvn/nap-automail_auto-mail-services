@@ -9,6 +9,8 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Configuration
 {
 	public class Settings : AppSettingBase, ISettings
 	{
+		public static bool IsActive { get; set; }
+
 		public static bool IsTesting { get; set; }
 
 		public static string Subject { get; set; }

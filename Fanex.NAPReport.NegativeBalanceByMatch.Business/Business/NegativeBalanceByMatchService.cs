@@ -38,6 +38,11 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 
 		public void ProcessBusiness()
 		{
+			if (Settings.IsActive == false)
+			{
+				return;
+			}
+
 			DateTime curDateTime = DateTime.UtcNow;
 			ExportSettings exportSettings = new ExportSettings();
 
@@ -83,10 +88,10 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 		{
 			string appLocation = AppDomain.CurrentDomain.BaseDirectory;
 			string template = licenseeName.ToLower().Equals("haifa")
-									//? File.ReadAllText(appLocation + @"/SiteConfig/NegativeBalanceByMatch/Templates/EmailTemplateDualLanguage.cshtml")
-									//: File.ReadAllText(appLocation + @"/SiteConfig/NegativeBalanceByMatch/Templates/EmailTemplateSingleLanguage.cshtml");
-									? File.ReadAllText(appLocation + @"/Templates/EmailTemplateDualLanguage.cshtml")
-									: File.ReadAllText(appLocation + @"/Templates/EmailTemplateSingleLanguage.cshtml");
+									? File.ReadAllText(appLocation + @"/SiteConfig/NegativeBalanceByMatch/Templates/EmailTemplateDualLanguage.cshtml")
+									: File.ReadAllText(appLocation + @"/SiteConfig/NegativeBalanceByMatch/Templates/EmailTemplateSingleLanguage.cshtml");
+									//? File.ReadAllText(appLocation + @"/Templates/EmailTemplateDualLanguage.cshtml")
+									//: File.ReadAllText(appLocation + @"/Templates/EmailTemplateSingleLanguage.cshtml");
 			return Razor.Parse(template, matches);
 		}
 

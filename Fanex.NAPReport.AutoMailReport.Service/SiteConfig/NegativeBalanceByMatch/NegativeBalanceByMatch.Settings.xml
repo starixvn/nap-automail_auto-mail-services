@@ -1,5 +1,6 @@
 ﻿<Settings>
-
+	
+	<Setting key="IsActive" value="true" />
 	<Setting key="IsTesting" value="true" />
 	<Setting key="Subject" value="List Of Members With Negative Balance - {0} (GMT {1})" />
 	<Setting key="Title" value="IT Team" />
