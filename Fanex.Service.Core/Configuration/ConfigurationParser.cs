@@ -32,7 +32,7 @@ namespace Fanex.Service.Core.Configuration
 
 		public T Parse<T>() where T : ISettings
 		{
-			IDictionary<string, string> keyToValue = GetKeyToValue();
+			IDictionary<string, string> keyToValue = Parse();
 
 			T settings = Activator.CreateInstance<T>();
 
@@ -47,19 +47,6 @@ namespace Fanex.Service.Core.Configuration
 			}
 
 			return settings;
-		}
-
-		private IDictionary<string, string> GetKeyToValue()
-		{
-			IDictionary<string, string> keyToValue = new Dictionary<string, string>();
-
-			XElement xSettings = XElement.Load(_fileNamePath);
-			foreach (XElement xSetting in xSettings.Elements())
-			{
-				keyToValue.Add(xSetting.Attribute("key").Value, xSetting.Attribute("value").Value);
-			}
-
-			return keyToValue;
 		}
 	}
 }
