@@ -148,5 +148,14 @@ namespace Fanex.TurnoverWatcher.Business
                 return ExportDataDirectory("Fanex.TurnoverWatcherReport.ExportDataDirectory");
             }
         }
+
+        public static string ExcelPassword
+        {
+            get
+            {
+                var val = ConfigurationManager.AppSettings["TurnoverWatcherReport.ExcelPassword"];
+                return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["TurnoverWatcherReport.ExcelPassword"]);
+            }
+        }
     }
 }
