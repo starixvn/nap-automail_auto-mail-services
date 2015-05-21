@@ -180,6 +180,9 @@
     <Content Include="App_Data\Local\DBAGE.bodb02.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Configurations\NegativeBalanceByMatch.Settings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Fanex.NAPReport.AutoMailReport.Service.Local.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
