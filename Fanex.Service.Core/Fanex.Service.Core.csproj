@@ -87,6 +87,8 @@
     <Compile Include="Common\CellInfo.cs" />
     <Compile Include="Common\FontInfo.cs" />
     <Compile Include="Common\NPOIUtility.cs" />
+    <Compile Include="Configuration\ConfigurationParser.cs" />
+    <Compile Include="Configuration\ISettings.cs" />
     <Compile Include="Constants\BetTypeConstants.cs" />
     <Compile Include="Constants\CombinationTypeConstants.cs" />
     <Compile Include="Constants\DateTimeFormatConstants.cs" />

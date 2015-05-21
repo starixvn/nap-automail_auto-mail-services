@@ -1,0 +1,12 @@
+﻿<Settings>
+
+	<Setting key="IsTesting" value="true" />
+	<Setting key="Subject" value="List Of Members With Negative Balance - {0} (GMT {1})" />
+	<Setting key="Title" value="IT Team" />
+	<Setting key="SqLiteDbPath" value="Data Source=D:\Project_Nexcel\auto-mail-services\Fanex.NAPReport.NegativeBalanceByMatch.Service\SQLiteDatabase\AutoMail-NegativeBalanceByMatch.s3db;Version=3;" />
+	<Setting key="AttachReport" value="true" />
+	<Setting key="ExcelPassword" value="we123" />
+	<Setting key="ExportDataDirectory" value="\\10.18.200.202\Web\1.Rome\2.Nap\2.Report\_Fanex.ExcelFiles\NegativeBalanceByMatch" />
+	<Setting key="LicenseeFunctionMap" value="(Haifa, 33, Negative Balance By Match: Haifa); (12Bet, 35, Negative Balance By Match: 12Bet)"/>
+	
+</Settings>

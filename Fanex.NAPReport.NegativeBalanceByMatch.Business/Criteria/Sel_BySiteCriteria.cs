@@ -4,6 +4,8 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Configuration;
+
 namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Criteria
 {
     using System;
@@ -19,7 +21,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Criteria
     {
         public string Site { get; set; }
 
-        public bool IsTest { get { return AppSettings.IsTesting; } }
+        public bool IsTest { get { return Settings.IsTesting; } }
 
         [SpParam(Ignored = true)]
         public string SpName

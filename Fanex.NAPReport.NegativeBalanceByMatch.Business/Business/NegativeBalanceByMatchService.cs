@@ -8,6 +8,7 @@ using Fanex.Data;
 using Fanex.NAPReport.Business.Criteria;
 using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport;
 using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Licensee;
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Configuration;
 using Fanex.NAPReport.NegativeBalanceByMatch.Business.Criteria;
 using Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities;
 using Fanex.NAPReport.NegativeBalanceByMatch.Business.Helper.Implement;
@@ -46,7 +47,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 
 				int timezone = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours;
 				string subject = licenseeName.ToUpper() + " - " +
-								string.Format(AppSettings.MailSubject, DateTime.Now, timezone > 0 ? ("+" + timezone) : timezone.ToString());
+								string.Format(Settings.Subject, DateTime.Now, timezone > 0 ? ("+" + timezone) : timezone.ToString());
 
 				int taskId = 0;
 				try
@@ -60,7 +61,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 						_logData.Add(new Dictionary<object, object> { { "DataSendEmail", matches } });
 
 						string body = GetMailBody(licenseeName, matches);
-						var result = SendEmail(licenseeFunction, subject, AppSettings.MailTitle, body, AppSettings.AttachReport,
+						var result = SendEmail(licenseeFunction, subject, Settings.Title, body, Settings.AttachReport,
 												matches, curDateTime, exportSettings, taskId);
 
 						if (result)
@@ -82,9 +83,10 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 		{
 			string appLocation = AppDomain.CurrentDomain.BaseDirectory;
 			string template = licenseeName.ToLower().Equals("haifa")
-									? File.ReadAllText(appLocation + @"/SiteConfig/NegativeBalanceByMatch/Templates/EmailTemplateDualLanguage.cshtml")
-									: File.ReadAllText(appLocation + @"/SiteConfig/NegativeBalanceByMatch/Templates/EmailTemplateSingleLanguage.cshtml");
-
+									//? File.ReadAllText(appLocation + @"/SiteConfig/NegativeBalanceByMatch/Templates/EmailTemplateDualLanguage.cshtml")
+									//: File.ReadAllText(appLocation + @"/SiteConfig/NegativeBalanceByMatch/Templates/EmailTemplateSingleLanguage.cshtml");
+									? File.ReadAllText(appLocation + @"/Templates/EmailTemplateDualLanguage.cshtml")
+									: File.ReadAllText(appLocation + @"/Templates/EmailTemplateSingleLanguage.cshtml");
 			return Razor.Parse(template, matches);
 		}
 

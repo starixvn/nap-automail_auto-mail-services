@@ -6,6 +6,7 @@ using Fanex.MailDelivery.Client.Handlers;
 using Fanex.MailDelivery.Client.Models;
 using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports;
 using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport;
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Configuration;
 using Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities;
 
 namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
@@ -32,7 +33,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 				MailingListId = licenseeFunction.Function.Id
 			};
 
-			string fileNamePath = Path.Combine(AppSettings.ExportDataDirectory,
+			string fileNamePath = Path.Combine(Settings.ExportDataDirectoryWithYearMonth,
 									licenseeName + "_" + dateTime.ToString("yyyy-MM-dd-hh-mm-ss") + ".xlsx");
 
 			_negativeBalanceByMatchExcelService.GenerateReportForLicensee(licenseeName, matches, exportSettings, fileNamePath);

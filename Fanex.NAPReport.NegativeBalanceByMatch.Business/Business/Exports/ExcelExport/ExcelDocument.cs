@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.IO;
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Configuration;
 using Fanex.Service.Core.Extensions;
 using Fanex.Service.Core.Model;
 using Fanex.Service.Core.Utilities;
@@ -41,7 +42,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.Excel
 
 		public void Save(string saveFileNamePath)
 		{
-			SaveFile.SaveExcelFile(Path.GetDirectoryName(saveFileNamePath),Path.GetFileName(saveFileNamePath), Workbook, AppSettings.ExcelPassword);
+			SaveFile.SaveExcelFile(Path.GetDirectoryName(saveFileNamePath),Path.GetFileName(saveFileNamePath), Workbook, Settings.ExcelPassword);
 		}
 
 		public void RenderCurrentCell(object cellValue, XSSFCellStyle cellStyle = null)

@@ -1,4 +1,5 @@
-﻿namespace Fanex.NAPReport.AutoMailReport.Service
+﻿using Fanex.NAPReport.NegativeBalanceByMatch.Business.Configuration;
+namespace Fanex.NAPReport.AutoMailReport.Service
 {
     using System;
     using System.Diagnostics;
@@ -32,7 +33,7 @@
             this._smaLossProcess = new SMALossProcess();
             _turnoverWatcherProcess = new TurnoverWatcherProcess();
 
-            LicenseeFunctionParser licenseeFunctionParser = new LicenseeFunctionParser(NegativeBalanceByMatch.Business.AppSettings.LicenseeFunctionMap);
+			LicenseeFunctionParser licenseeFunctionParser = new LicenseeFunctionParser(Settings.LicenseeFunctionMap);
             ILicenseeService licenseeService = new LicenseeService(licenseeFunctionParser);
 
             INegativeBalanceByMatchExcelService negativeBalanceByMatchExcelService = new NegativeBalanceByMatchExcelService();

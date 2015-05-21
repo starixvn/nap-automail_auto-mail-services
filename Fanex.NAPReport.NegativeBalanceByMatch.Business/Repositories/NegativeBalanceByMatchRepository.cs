@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using Fanex.AccountingReports.SqLiteDatabase;
 using Fanex.Common;
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Configuration;
 using Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities;
 using Fanex.Service.Core.Enums;
 using Fanex.Service.Core.Extensions;
@@ -23,7 +24,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Repositories
 
         public NegativeBalanceByMatchRepository()
         {
-            _db = new SqLite(AppSettings.ConnectionString);
+            _db = new SqLite(Settings.SqLiteDbPath);
         }
 
         public int InsertTask(NegativeBalanceTaskInfo task)

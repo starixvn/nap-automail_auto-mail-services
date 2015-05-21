@@ -90,14 +90,20 @@ namespace Fanex.Service.Core.Utilities
         protected static string ExportDataDirectory(string key)
         {
             string path = AppSettingBase.GetSettingValueByKey(key);
-            string month = DateTime.Today.Month < 10
-                ? "0" + DateTime.Today.Month
-                : DateTime.Today.Month + string.Empty;
 
-            path += @"\" + DateTime.Today.Year + @"\" + month;
-
-            return path;
+			return ExportDataDirectoryWithYearMonth(path);
         }
+
+	    protected static string ExportDataDirectoryWithYearMonth(string exportDataDirectory)
+	    {
+			string month = DateTime.Today.Month < 10
+			   ? "0" + DateTime.Today.Month
+			   : DateTime.Today.Month + string.Empty;
+
+			exportDataDirectory += @"\" + DateTime.Today.Year + @"\" + month;
+
+			return exportDataDirectory;
+	    }
 
         protected static string GetSettingValueByKey(string key)
         {

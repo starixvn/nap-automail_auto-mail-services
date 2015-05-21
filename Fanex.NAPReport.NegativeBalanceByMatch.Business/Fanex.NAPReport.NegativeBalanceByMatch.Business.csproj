@@ -132,7 +132,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppSettings.cs" />
     <Compile Include="Business\Exports\ExcelExport\ExcelDocument.cs" />
     <Compile Include="Business\Exports\ExcelExport\ExportAutoSizeColumCommand.cs" />
     <Compile Include="Business\Exports\ExcelExport\ExportCommandBase.cs" />
@@ -151,6 +150,7 @@
     <Compile Include="Business\Licensee\LicenseeService.cs" />
     <Compile Include="Business\MailService.cs" />
     <Compile Include="Business\NegativeBalanceByMatchService.cs" />
+    <Compile Include="Configuration\Settings.cs" />
     <Compile Include="Criteria\Sel_BySiteCriteria.cs" />
     <Compile Include="Criteria\Sel_MatchLogCriteria.cs" />
     <Compile Include="Criteria\Upd_StatusIDCriteria.cs" />
@@ -183,6 +183,11 @@
       <Project>{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}</Project>
       <Name>Fanex.Service.Core %28Fanex.Service.Core\Fanex.Service.Core%29</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configuration\Settings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
