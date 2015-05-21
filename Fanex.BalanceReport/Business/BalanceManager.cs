@@ -214,7 +214,7 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
 
         private string FormatDate(DateTime value)
         {
-            return value.ToString("m/d/yyyy");
+            return value.ToString("M/d/yyyy");
         }
 
         private string FormatDateExcel(DateTime value)

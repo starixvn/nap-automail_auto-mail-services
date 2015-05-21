@@ -48,7 +48,7 @@ namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.NAPReport
         {
             var report = new Report
             {
-                Name = "Credir Term",
+                Name = "Super Balance",
                 Date = DateTime.Now
             };
             var subject = Utilities.LoadSubject(report);
