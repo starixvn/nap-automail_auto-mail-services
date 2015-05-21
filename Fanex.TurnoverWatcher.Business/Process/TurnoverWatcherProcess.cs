@@ -56,14 +56,14 @@
                         sendMailSuccess = NotifyEmail(notifiedCustomerMatchTurnovers, fromPercentage, reportPath);
                     }
 
-                    //    if (sendMailSuccess)
-                    //    {
-                    //        var resultRemove = service.RemoveNotifiedCustomer(notifiedCustomerMatchTurnovers, fromPercentage);
-                    //        if (!resultRemove.ErrorCode.Equals(0))
-                    //        {
-                    //            Mailing.ErrorEmailNotification(fromPercentage, resultRemove);
-                    //        }
-                    //    }
+                    if (sendMailSuccess)
+                    {
+                        var resultRemove = service.RemoveNotifiedCustomer(notifiedCustomerMatchTurnovers, fromPercentage);
+                        if (!resultRemove.ErrorCode.Equals(0))
+                        {
+                            Mailing.ErrorEmailNotification(fromPercentage, resultRemove);
+                        }
+                    }
                 }
             }
         }
@@ -102,11 +102,9 @@
         {
             try
             {
-                mail.MailingListId = mailStationAppSettings.GetFunctionId("Jeff test");
-
-                MailClientHandler.Start();
+                mail.MailingListId = mailStationAppSettings.GetFunctionId("Turnover Watcher Report");
                 MailClientHandler.SendMail(mail);
-                MailClientHandler.Stop();
+
                 return true;
             }
             catch (Exception exception)
