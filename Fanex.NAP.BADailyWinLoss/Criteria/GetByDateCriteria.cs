@@ -1,4 +1,4 @@
-﻿namespace Fanex.NAP.BADailyWinLoss.Business.Criteria
+﻿namespace Fanex.NAPReport.BADailyWinLoss.Business.Criteria
 {
     using System;
     using System.Collections;

@@ -1,10 +1,10 @@
-﻿namespace Fanex.HorseTransaction3rdServices.Service
+﻿namespace Fanex.NAP.HorseTransaction3rd.Business.Service
 {
     using System;
     using System.Linq;
     using System.Text;
     using DNAide.Utils;
-    using Fanex.HorseTransaction3rdServices.Criteria;
+    using Fanex.NAP.HorseTransaction3rd.Business.Criteria;
 
     public class ComparisionManager
     {

@@ -1,4 +1,4 @@
-﻿namespace Fanex.NAP.BADailyWinLoss.Business.Model
+﻿namespace Fanex.NAPReport.BADailyWinLoss.Business.Model
 {
     using System;
 

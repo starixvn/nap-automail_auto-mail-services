@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.NAP.BAMonthlyWinLoss.Business
+namespace Fanex.NAPReport.BAMonthlyWinLoss.Business
 {
     using System;
     using System.Configuration;

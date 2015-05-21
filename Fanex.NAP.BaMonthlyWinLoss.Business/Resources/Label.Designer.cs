@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Fanex.NAP.BAMonthlyWinLoss.Business.Resources {
+namespace Fanex.NAPReport.BAMonthlyWinLoss.Business.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Fanex.NAP.BAMonthlyWinLoss.Business.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Fanex.NAP.BAMonthlyWinLoss.Business.Resources.Label", typeof(Label).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Fanex.NAPReport.BAMonthlyWinLoss.Business.Resources.Label", typeof(Label).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

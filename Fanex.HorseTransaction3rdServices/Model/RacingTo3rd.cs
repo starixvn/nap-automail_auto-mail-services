@@ -1,4 +1,4 @@
-﻿namespace Fanex.HorseTransaction3rdServices.Model
+﻿namespace Fanex.NAP.HorseTransaction3rd.Business.Model
 {
     public class RacingTo3rd
     {

@@ -1,8 +1,8 @@
 ﻿namespace Fanex.BAMonthlyWinLoss.Business.Repository
 {
     using System.Collections.Generic;
-    using Fanex.NAP.BADailyWinLoss.Business.Criteria;
-    using Fanex.NAP.BADailyWinLoss.Business.Model;
+    using Fanex.NAPReport.BADailyWinLoss.Business.Criteria;
+    using Fanex.NAPReport.BADailyWinLoss.Business.Model;
 
     public interface IBetAggregatorRepository
     {

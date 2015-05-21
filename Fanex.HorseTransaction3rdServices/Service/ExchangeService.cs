@@ -1,9 +1,9 @@
-﻿namespace Fanex.HorseTransaction3rdServices.Service
+﻿namespace Fanex.NAP.HorseTransaction3rd.Business.Service
 {
     using System.Collections.Generic;
-    using Fanex.HorseTransaction3rdServices.Criteria;
-    using Fanex.HorseTransaction3rdServices.Model;
-    using Fanex.HorseTransaction3rdServices.Repository;
+    using Fanex.NAP.HorseTransaction3rd.Business.Criteria;
+    using Fanex.NAP.HorseTransaction3rd.Business.Model;
+    using Fanex.NAP.HorseTransaction3rd.Business.Repository;
 
     public class ExchangeService : IExchangeService
     {

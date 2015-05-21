@@ -1,7 +1,7 @@
-﻿namespace Fanex.HorseTransaction3rdServices.Libs
+﻿namespace Fanex.NAP.HorseTransaction3rd.Business.Libs
 {
     using System;
-    using Fanex.HorseTransaction3rdServices.Service;
+    using Fanex.NAP.HorseTransaction3rd.Business.Service;
 
     public class Program
     {

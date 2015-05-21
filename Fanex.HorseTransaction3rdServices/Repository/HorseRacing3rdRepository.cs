@@ -1,12 +1,12 @@
-﻿namespace Fanex.HorseTransaction3rdServices.Repository
+﻿namespace Fanex.NAP.HorseTransaction3rd.Business.Repository
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
     using Fanex.Data;
-    using Fanex.HorseTransaction3rdServices.Criteria;
-    using Fanex.HorseTransaction3rdServices.Libs;
-    using Fanex.HorseTransaction3rdServices.Model;
+    using Fanex.NAP.HorseTransaction3rd.Business.Criteria;
+    using Fanex.NAP.HorseTransaction3rd.Business.Libs;
+    using Fanex.NAP.HorseTransaction3rd.Business.Model;
 
     public class HorseRacing3rdRepository : IHorseRacing3rdRepository
     {

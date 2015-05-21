@@ -1,4 +1,4 @@
-﻿namespace Fanex.HorseTransaction3rdServices.Model
+﻿namespace Fanex.NAP.HorseTransaction3rd.Business.Model
 {
     /// <summary>
     /// Exchange Information.

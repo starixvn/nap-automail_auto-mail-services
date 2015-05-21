@@ -86,13 +86,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.TurnoverWatcher.Servi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.TurnoverWatcher.Business", "Fanex.TurnoverWatcher.Business\Fanex.TurnoverWatcher.Business.csproj", "{EEEE6EC6-55BC-4C6E-AC8B-2D5B8C8B7179}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.BADailyWinLoss.Testing", "Fanex.NAP.BADailyWinLoss.Testing\Fanex.NAP.BADailyWinLoss.Testing.csproj", "{F63933BB-A6C9-4D53-A8D2-976883539902}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.BADailyWinLoss.Testing", "Fanex.NAP.BADailyWinLoss.Testing\Fanex.NAPReport.BADailyWinLoss.Testing.csproj", "{F63933BB-A6C9-4D53-A8D2-976883539902}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.BAMonthlyWinLoss.Testing", "Fanex.NAP.BAMonthlyWinLoss.Testing\Fanex.NAP.BAMonthlyWinLoss.Testing.csproj", "{2E68F6ED-72FE-4059-9ED5-F7600BDD93B9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.BAMonthlyWinLoss.Testing", "Fanex.NAP.BAMonthlyWinLoss.Testing\Fanex.NAPReport.BAMonthlyWinLoss.Testing.csproj", "{2E68F6ED-72FE-4059-9ED5-F7600BDD93B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.BADailyWinLoss.Business", "Fanex.NAP.BADailyWinLoss\Fanex.NAP.BADailyWinLoss.Business.csproj", "{D8FF5D62-BFFD-4710-98AA-B0E338033252}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.BADailyWinLoss.Business", "Fanex.NAP.BADailyWinLoss\Fanex.NAPReport.BADailyWinLoss.Business.csproj", "{D8FF5D62-BFFD-4710-98AA-B0E338033252}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.BAMonthlyWinLoss.Business", "Fanex.NAP.BaMonthlyWinLoss.Business\Fanex.NAP.BAMonthlyWinLoss.Business.csproj", "{AF1F498A-2733-40CE-8B6B-84A02827E0A5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.BAMonthlyWinLoss.Business", "Fanex.NAP.BaMonthlyWinLoss.Business\Fanex.NAPReport.BAMonthlyWinLoss.Business.csproj", "{AF1F498A-2733-40CE-8B6B-84A02827E0A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.HorseTransaction3rd.Business", "Fanex.HorseTransaction3rdServices\Fanex.NAPReport.HorseTransaction3rd.Business.csproj", "{446FBE1E-58F9-41A8-B442-8012B884BF7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -444,6 +446,16 @@ Global
 		{AF1F498A-2733-40CE-8B6B-84A02827E0A5}.Release|Mixed Platforms.Build.0 = Release|x86
 		{AF1F498A-2733-40CE-8B6B-84A02827E0A5}.Release|x86.ActiveCfg = Release|x86
 		{AF1F498A-2733-40CE-8B6B-84A02827E0A5}.Release|x86.Build.0 = Release|x86
+		{446FBE1E-58F9-41A8-B442-8012B884BF7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{446FBE1E-58F9-41A8-B442-8012B884BF7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{446FBE1E-58F9-41A8-B442-8012B884BF7F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{446FBE1E-58F9-41A8-B442-8012B884BF7F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{446FBE1E-58F9-41A8-B442-8012B884BF7F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{446FBE1E-58F9-41A8-B442-8012B884BF7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{446FBE1E-58F9-41A8-B442-8012B884BF7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{446FBE1E-58F9-41A8-B442-8012B884BF7F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{446FBE1E-58F9-41A8-B442-8012B884BF7F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{446FBE1E-58F9-41A8-B442-8012B884BF7F}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -472,6 +484,7 @@ Global
 		{EEEE6EC6-55BC-4C6E-AC8B-2D5B8C8B7179} = {84385BB5-6DA3-4429-B535-7ECB1089FCC0}
 		{AF1F498A-2733-40CE-8B6B-84A02827E0A5} = {84385BB5-6DA3-4429-B535-7ECB1089FCC0}
 		{D8FF5D62-BFFD-4710-98AA-B0E338033252} = {84385BB5-6DA3-4429-B535-7ECB1089FCC0}
+		{446FBE1E-58F9-41A8-B442-8012B884BF7F} = {84385BB5-6DA3-4429-B535-7ECB1089FCC0}
 		{BA901E4A-BFE7-49DB-83DC-54DC467A44B8} = {ADC782A9-F916-4F43-9E28-B8C6D7579D55}
 		{E1A6904E-FD26-47CE-A1EB-4A6E8F3126E6} = {ADC782A9-F916-4F43-9E28-B8C6D7579D55}
 		{FBA40037-31BF-4EC0-98F5-09CF8067457E} = {DD647794-42ED-4DBB-82FF-75040CE2D8D0}

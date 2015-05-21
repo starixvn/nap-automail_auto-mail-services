@@ -1,4 +1,4 @@
-﻿namespace Fanex.NAP.BAMonthlyWinLoss.Business.Criteria
+﻿namespace Fanex.NAPReport.BAMonthlyWinLoss.Business.Criteria
 {
     using System;
     using Fanex.NAP.Framework.Data;

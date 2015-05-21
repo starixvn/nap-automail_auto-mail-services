@@ -3,9 +3,9 @@
      using System;
      using System.Collections.Generic;
      using System.IO;
-     using Fanex.NAP.BADailyWinLoss.Business;
-     using Fanex.NAP.BADailyWinLoss.Business.Resource;
-     using Fanex.NAP.BADailyWinLoss.Business.Service;
+     using Fanex.NAPReport.BADailyWinLoss.Business;
+     using Fanex.NAPReport.BADailyWinLoss.Business.Resource;
+     using Fanex.NAPReport.BADailyWinLoss.Business.Service;
      using Fanex.MailDelivery.Client.Enumerations;
      using Fanex.MailDelivery.Client.Jobs;
      using Fanex.MailDelivery.Client.Messages;

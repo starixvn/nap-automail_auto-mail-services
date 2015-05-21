@@ -1,4 +1,4 @@
-﻿namespace Fanex.HorseTransaction3rdServices.Libs
+﻿namespace Fanex.NAP.HorseTransaction3rd.Business.Libs
 {
     using System;
     using System.IO;

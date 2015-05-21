@@ -1,14 +1,14 @@
-﻿namespace Fanex.HorseTransaction3rdServices.Service
+﻿namespace Fanex.NAP.HorseTransaction3rd.Business.Service
 {
     using System;
     using System.Collections;
     using System.IO;
     using System.Text;
     using DNAide.Utils;
-    using Fanex.HorseTransaction3rdServices.Configurations;
-    using Fanex.HorseTransaction3rdServices.Criteria;
-    using Fanex.HorseTransaction3rdServices.Libs;
-    using Fanex.HorseTransaction3rdServices.Libs.Libs;
+    using Fanex.NAP.HorseTransaction3rd.Business.Configurations;
+    using Fanex.NAP.HorseTransaction3rd.Business.Criteria;
+    using Fanex.NAP.HorseTransaction3rd.Business.Libs;
+    using Fanex.NAP.HorseTransaction3rd.Business.Libs.Libs;
     using Fanex.MailDelivery.Client.Handlers;
     using Fanex.MailDelivery.Client.Models;
 

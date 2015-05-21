@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using Fanex.NAP.BADailyWinLoss.Business.Model;
+    using Fanex.NAPReport.BADailyWinLoss.Business.Model;
 
     public interface IBetAggregatorService
     {        

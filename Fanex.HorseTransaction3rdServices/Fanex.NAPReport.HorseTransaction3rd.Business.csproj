@@ -8,8 +8,8 @@
     <ProjectGuid>{446FBE1E-58F9-41A8-B442-8012B884BF7F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Fanex.HorseTransaction3rdServices</RootNamespace>
-    <AssemblyName>Fanex.HorseTransaction3rdServices</AssemblyName>
+    <RootNamespace>Fanex.NAP.HorseTransaction3rd.Business</RootNamespace>
+    <AssemblyName>Fanex.NAP.HorseTransaction3rd.Business</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>

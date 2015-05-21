@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Fanex.HorseTransaction3rdServices.Resource {
+namespace Fanex.NAP.HorseTransaction3rd.Business.Resource {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Fanex.HorseTransaction3rdServices.Resource {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Fanex.HorseTransaction3rdServices.Resource.Resource", typeof(Resource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Fanex.NAP.HorseTransaction3rd.Business.Resource.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

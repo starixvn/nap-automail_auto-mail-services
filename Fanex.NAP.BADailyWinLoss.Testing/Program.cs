@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using Fanex.Data.Configuration;
 using Fanex.MailDelivery.Client.Models;
-using Fanex.NAP.BADailyWinLoss.Business;
-using Fanex.NAP.BADailyWinLoss.Business.Resource;
-using Fanex.NAP.BADailyWinLoss.Business.Service;
+using Fanex.NAPReport.BADailyWinLoss.Business;
+using Fanex.NAPReport.BADailyWinLoss.Business.Resource;
+using Fanex.NAPReport.BADailyWinLoss.Business.Service;
 
-namespace Fanex.NAP.BADailyWinLoss.Testing
+namespace Fanex.NAPReport.BADailyWinLoss.Testing
 {
     class Program
     {

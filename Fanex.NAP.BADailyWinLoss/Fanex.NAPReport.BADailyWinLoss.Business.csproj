@@ -8,8 +8,8 @@
     <ProjectGuid>{D8FF5D62-BFFD-4710-98AA-B0E338033252}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Fanex.NAP.BADailyWinLoss.Business</RootNamespace>
-    <AssemblyName>Fanex.NAP.BADailyWinLoss.Business</AssemblyName>
+    <RootNamespace>Fanex.NAPReport.BADailyWinLoss.Business</RootNamespace>
+    <AssemblyName>Fanex.NAPReport.BADailyWinLoss.Business</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

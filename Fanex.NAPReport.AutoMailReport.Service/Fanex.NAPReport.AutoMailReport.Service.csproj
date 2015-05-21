@@ -258,13 +258,13 @@
       <Project>{B9C0CA6B-C407-4E48-B672-4CA10B8BA6FE}</Project>
       <Name>Fanex.MonthlyWinlossByLeague.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Fanex.NAP.BADailyWinLoss\Fanex.NAP.BADailyWinLoss.Business.csproj">
+    <ProjectReference Include="..\Fanex.NAP.BADailyWinLoss\Fanex.NAPReport.BADailyWinLoss.Business.csproj">
       <Project>{D8FF5D62-BFFD-4710-98AA-B0E338033252}</Project>
-      <Name>Fanex.NAP.BADailyWinLoss.Business</Name>
+      <Name>Fanex.NAPReport.BADailyWinLoss.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Fanex.NAP.BaMonthlyWinLoss.Business\Fanex.NAP.BAMonthlyWinLoss.Business.csproj">
+    <ProjectReference Include="..\Fanex.NAP.BaMonthlyWinLoss.Business\Fanex.NAPReport.BAMonthlyWinLoss.Business.csproj">
       <Project>{AF1F498A-2733-40CE-8B6B-84A02827E0A5}</Project>
-      <Name>Fanex.NAP.BAMonthlyWinLoss.Business</Name>
+      <Name>Fanex.NAPReport.BAMonthlyWinLoss.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.NAPReport.HorseRacingReport.Business\Fanex.NAPReport.HorseRacingReport.Business.csproj">
       <Project>{AFE10301-BCFD-4D11-885C-A43A46B5B2BF}</Project>

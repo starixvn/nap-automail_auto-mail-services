@@ -1,4 +1,4 @@
-﻿namespace Fanex.NAP.BADailyWinLoss.Business.Service
+﻿namespace Fanex.NAPReport.BADailyWinLoss.Business.Service
 {
     using System;
     using System.Collections.Generic;
@@ -6,8 +6,8 @@
     using Fanex.BAMonthlyWinLoss.Business.Repository;
     using Fanex.BAMonthlyWinLoss.Business.Service;
     using Fanex.Data;
-    using Fanex.NAP.BADailyWinLoss.Business.Criteria;
-    using Fanex.NAP.BADailyWinLoss.Business.Model;
+    using Fanex.NAPReport.BADailyWinLoss.Business.Criteria;
+    using Fanex.NAPReport.BADailyWinLoss.Business.Model;
 
     public class BetAggregatorService : IBetAggregatorService
     {

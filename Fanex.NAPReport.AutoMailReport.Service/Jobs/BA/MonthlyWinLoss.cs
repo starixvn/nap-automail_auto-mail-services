@@ -3,13 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using Fanex.NAP.BAMonthlyWinLoss.Business;
-    using Fanex.NAP.BAMonthlyWinLoss.Business.Resources;
-    using Fanex.NAP.BAMonthlyWinLoss.Business.Service;
     using Fanex.MailDelivery.Client.Enumerations;
     using Fanex.MailDelivery.Client.Jobs;
     using Fanex.MailDelivery.Client.Messages;
     using Fanex.MailDelivery.Client.Models;
+    using Fanex.NAPReport.BAMonthlyWinLoss.Business;
+    using Fanex.NAPReport.BAMonthlyWinLoss.Business.Resources;
+    using Fanex.NAPReport.BAMonthlyWinLoss.Business.Service;
     using Quartz;
 
     /// <summary>

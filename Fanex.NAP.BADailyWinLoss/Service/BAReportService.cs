@@ -1,11 +1,11 @@
-﻿namespace Fanex.NAP.BADailyWinLoss.Business.Service
+﻿namespace Fanex.NAPReport.BADailyWinLoss.Business.Service
 {
     using System;
     using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
-    using Fanex.NAP.BADailyWinLoss.Business.Model;
-    using Fanex.NAP.BADailyWinLoss.Business.Resource;
+    using Fanex.NAPReport.BADailyWinLoss.Business.Model;
+    using Fanex.NAPReport.BADailyWinLoss.Business.Resource;
     using Fanex.Service.Core.Constants;
     using Fanex.Service.Core.Extensions;
     using Fanex.Service.Core.Model;

@@ -1,4 +1,4 @@
-﻿namespace Fanex.HorseTransaction3rdServices.Configurations
+﻿namespace Fanex.NAP.HorseTransaction3rd.Business.Configurations
 {
     using System.Configuration;
 

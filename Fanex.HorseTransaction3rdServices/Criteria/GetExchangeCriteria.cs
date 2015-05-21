@@ -1,4 +1,4 @@
-﻿namespace Fanex.HorseTransaction3rdServices.Criteria
+﻿namespace Fanex.NAP.HorseTransaction3rd.Business.Criteria
 {
     using Fanex.NAP.Framework.Data;
 

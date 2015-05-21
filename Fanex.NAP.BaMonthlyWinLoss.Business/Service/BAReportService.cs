@@ -1,12 +1,12 @@
-﻿namespace Fanex.NAP.BAMonthlyWinLoss.Business.Service
+﻿namespace Fanex.NAPReport.BAMonthlyWinLoss.Business.Service
 {
     using System;
     using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
-    using Fanex.NAP.BAMonthlyWinLoss.Business.Criteria;
-    using Fanex.NAP.BAMonthlyWinLoss.Business.Model;
-    using Fanex.NAP.BAMonthlyWinLoss.Business.Resources;
+    using Fanex.NAPReport.BAMonthlyWinLoss.Business.Criteria;
+    using Fanex.NAPReport.BAMonthlyWinLoss.Business.Model;
+    using Fanex.NAPReport.BAMonthlyWinLoss.Business.Resources;
     using Fanex.Service.Core.Constants;
     using Fanex.Service.Core.Extensions;
     using Fanex.Service.Core.Model;
