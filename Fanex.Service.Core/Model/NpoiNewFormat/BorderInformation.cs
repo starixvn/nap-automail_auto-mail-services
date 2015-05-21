@@ -45,7 +45,7 @@ namespace Fanex.Service.Core.Model.NpoiNewFormat
             this._leftBoderColor = leftBoderColor;
             this._topBoderColor = topBoderColor;
             this._rightBoderColor = rightBoderColor;
-            this._bottomBoderColor = BottomBoderColor;
+            this._bottomBoderColor = bottomBoderColor;
         }
 
         public Color LeftBoderColor
