@@ -81,7 +81,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fanex.NAP.BaMonthlyWinLoss.Business\Fanex.NAP.BAMonthlyWinLoss.Business.csproj">
+    <ProjectReference Include="..\Fanex.NAP.BaMonthlyWinLoss.Business\Fanex.NAPReport.BAMonthlyWinLoss.Business.csproj">
       <Project>{AF1F498A-2733-40CE-8B6B-84A02827E0A5}</Project>
       <Name>Fanex.NAP.BAMonthlyWinLoss.Business</Name>
     </ProjectReference>

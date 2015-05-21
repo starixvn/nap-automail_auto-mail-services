@@ -60,7 +60,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fanex.NAP.BADailyWinLoss\Fanex.NAP.BADailyWinLoss.Business.csproj">
+    <ProjectReference Include="..\Fanex.NAP.BADailyWinLoss\Fanex.NAPReport.BADailyWinLoss.Business.csproj">
       <Project>{D8FF5D62-BFFD-4710-98AA-B0E338033252}</Project>
       <Name>Fanex.NAP.BADailyWinLoss.Business</Name>
     </ProjectReference>

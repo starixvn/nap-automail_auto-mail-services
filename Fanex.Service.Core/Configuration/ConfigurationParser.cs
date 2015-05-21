@@ -30,9 +30,9 @@ namespace Fanex.Service.Core.Configuration
 			return keyToValue;
 		}
 
-		public T Parse<T>()
+		public T Parse<T>() where T : ISettings
 		{
-			IDictionary<string, string>  keyToValue = GetKeyToValue();
+			IDictionary<string, string> keyToValue = GetKeyToValue();
 
 			T settings = Activator.CreateInstance<T>();
 
@@ -60,6 +60,6 @@ namespace Fanex.Service.Core.Configuration
 			}
 
 			return keyToValue;
-		} 
+		}
 	}
 }
