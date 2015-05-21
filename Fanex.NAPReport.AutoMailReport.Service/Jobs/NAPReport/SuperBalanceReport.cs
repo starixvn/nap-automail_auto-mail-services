@@ -73,5 +73,35 @@ namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.NAPReport
                 }
             };
         }
+
+        public JobResultMessage Run2()
+        {
+            var report = new Report
+            {
+                Name = "Super Balance",
+                Date = DateTime.Now
+            };
+            var subject = Utilities.LoadSubject(report);
+            var body = Utilities.LoadBody(report);
+
+            _balanceService.ExportExcel();
+
+            var listAttachment = new List<MailAttachment>();
+            listAttachment.Add(new MailAttachment(_balanceService.ReportPath, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
+
+            Mail mail = _mailService.CreateMail(subject, string.Empty, body, listAttachment);
+
+            return new JobResultMessage()
+            {
+                JobStatus = JobStatus.Success,
+                Mail = mail,
+                // Schedule = schedule,
+                Result = new ResultMessage
+                {
+                    ErrCode = 0,
+                    ErrMsg = string.Empty
+                }
+            };
+        }
     }
 }
