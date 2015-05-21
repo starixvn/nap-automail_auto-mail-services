@@ -85,8 +85,8 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business
 		{
 			get
 			{
-				var val = ConfigurationManager.AppSettings["SQLiteDBPath"];
-				return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["SQLiteDBPath"]);
+				var val = ConfigurationManager.AppSettings["NegativeBalanceByMatch.SQLiteDBPath"];
+				return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["NegativeBalanceByMatch.SQLiteDBPath"]);
 			}
 		}
 
@@ -121,8 +121,8 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business
 		{
 			get
 			{
-				var val = ConfigurationManager.AppSettings["Subject"];
-				return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["Subject"]);
+				var val = ConfigurationManager.AppSettings["NegativeBalanceByMatch.Subject"];
+				return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["NegativeBalanceByMatch.Subject"]);
 			}
 		}
 
@@ -130,8 +130,8 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business
 		{
 			get
 			{
-				var val = ConfigurationManager.AppSettings["Title"];
-				return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["Title"]);
+				var val = ConfigurationManager.AppSettings["NegativeBalanceByMatch.Title"];
+				return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["NegativeBalanceByMatch.Title"]);
 			}
 		}
 
@@ -142,8 +142,8 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business
 		{
 			get
 			{
-				var val = ConfigurationManager.AppSettings["isTesting"];
-				return val == null ? false : (Convert.ToString(ConfigurationManager.AppSettings["isTesting"]) == "1");
+				var val = ConfigurationManager.AppSettings["NegativeBalanceByMatch.IsTesting"];
+				return val == null ? false : (Convert.ToString(ConfigurationManager.AppSettings["NegativeBalanceByMatch.IsTesting"]) == "1");
 			}
 		}
 
@@ -170,7 +170,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business
 			get
 			{
 
-				return ConfigurationManager.AppSettings["LicenseeFunctionMap"];
+				return ConfigurationManager.AppSettings["NegativeBalanceByMatch.LicenseeFunctionMap"];
 			}
 		}
 
@@ -178,7 +178,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business
 		{
 			get
 			{
-				return ExportDataDirectory("ExportDataDirectory");
+				return ExportDataDirectory("NegativeBalanceByMatch.ExportDataDirectory");
 			}
 		}
 
@@ -186,9 +186,16 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business
 		{
 			get
 			{
-				return bool.Parse(ConfigurationManager.AppSettings["AttachReport"]);
+				return bool.Parse(ConfigurationManager.AppSettings["NegativeBalanceByMatch.AttachReport"]);
 			}
 		}
 
+		public new static string ExcelPassword
+		{
+			get
+			{
+				return GetSettingValueByKey("NegativeBalanceByMatch.ExcelPassword");
+			}
+		}
 	}
 }

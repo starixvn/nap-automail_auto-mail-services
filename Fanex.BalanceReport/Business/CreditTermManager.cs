@@ -23,7 +23,8 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
     {
         private readonly IReportDAO _reportDao;
         private readonly List<Exchange> _exchangeList;
-        public string CreditTermExcelFileName {
+        public string ReportPath
+        {
             get;
             set;
         }
@@ -70,14 +71,11 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
         {
             CreateSheet();
             InitColumnWidth();
-            Console.WriteLine("Please wait...");
             ExportExcelFile();
-
             string fileNameWithExtension = CreateReportNameWithExtension(report);
-            CreditTermExcelFileName = Path.Combine(AppSettings.ExportDataDirectory, fileNameWithExtension);
+            ReportPath = Path.Combine(AppSettings.ExportDataDirectory, fileNameWithExtension);
 
             SaveFile.SaveExcelFile(AppSettings.ExportDataDirectory, fileNameWithExtension, this._workbook);
-            Console.WriteLine("Credit term mail was sent!.");
         }
 
         private void CreateColor()
@@ -280,12 +278,7 @@ namespace Fanex.NAPReport.BalanceReport.Bussiness
 
         private string FormatDate(DateTime value)
         {
-            return value.ToString("m/d/yyyy");
-        }
-
-        private string FormatDateExcel(DateTime value)
-        {
-            return value.ToString("yyyy-M-d");
+            return value.ToString("M/d/yyyy");
         }
 
         private string CreateReportNameWithExtension(Report report)

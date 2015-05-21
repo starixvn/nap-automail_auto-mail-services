@@ -32,7 +32,8 @@
 
         public static string LoadBody(Report report)
         {
-            return ParseTemplate("Email.cshtml", report);
+            var template = report.IsDirectReport ? "Direct Balance Email.cshtml" : "Email.cshtml";
+            return ParseTemplate(template, report);
         }
 
         static string ParseTemplate(string templateFile, Report report)

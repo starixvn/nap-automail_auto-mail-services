@@ -3,11 +3,11 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using Fanex.BAMonthlyWinLoss.Business;
-    using Fanex.BAMonthlyWinLoss.Business.Resources;
-    using Fanex.BAMonthlyWinLoss.Business.Service;
     using Fanex.Data.Configuration;
     using Fanex.MailDelivery.Client.Models;
+    using Fanex.NAP.BAMonthlyWinLoss.Business;
+    using Fanex.NAP.BAMonthlyWinLoss.Business.Resources;
+    using Fanex.NAP.BAMonthlyWinLoss.Business.Service;
 
     public class Program
     {

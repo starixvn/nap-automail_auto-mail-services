@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Fanex.Data.Configuration;
 using Fanex.MailDelivery.Client.Models;
-using System.Collections.Generic;
-using Fanex.BADailyWinLoss.Business.Resource;
-using Fanex.BADailyWinLoss.Business.Service;
-using Fanex.BADailyWinLoss.Business;
+using Fanex.NAP.BADailyWinLoss.Business;
+using Fanex.NAP.BADailyWinLoss.Business.Resource;
+using Fanex.NAP.BADailyWinLoss.Business.Service;
 
 namespace Fanex.NAP.BADailyWinLoss.Testing
 {

@@ -1,6 +1,6 @@
 ﻿using Fanex.NAPReport.Business.Business.Exports.ExcelExport;
 
-namespace Fanex.NAPReport.Business.Business.Exports.ExcelExport
+namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport
 {
 	public abstract class ExportCommandBase: IExportCommand
 	{

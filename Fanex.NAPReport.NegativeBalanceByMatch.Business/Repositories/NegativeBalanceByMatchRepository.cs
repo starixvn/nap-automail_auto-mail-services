@@ -4,18 +4,17 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using Fanex.AccountingReports.SqLiteDatabase;
+using Fanex.Common;
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities;
+using Fanex.Service.Core.Enums;
+using Fanex.Service.Core.Extensions;
+
 namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Repositories
 {
-    using System;
-    using System.Collections.Generic;
-    using Fanex.AccountingReports.SqLiteDatabase;
-    using Fanex.NAPReport.Business.Entities;
-    using Fanex.Service.Core.Enums;
-    using Fanex.Service.Core.Extensions;
-    using Fanex.Common;
-    using System.Data;
-
-    /// <summary>
+	/// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class NegativeBalanceByMatchRepository : INegativeBalanceByMatchRepository

@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace Fanex.NAPReport.Business.Entities
+namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities
 {
     public class Mailing
     {

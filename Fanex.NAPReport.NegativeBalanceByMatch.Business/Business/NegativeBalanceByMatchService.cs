@@ -5,11 +5,11 @@ using System.IO;
 using System.Linq;
 using Fanex.Common;
 using Fanex.Data;
-using Fanex.NAPReport.Business.Business.Exports.ExcelExport;
 using Fanex.NAPReport.Business.Criteria;
-using Fanex.NAPReport.Business.Entities;
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport;
 using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Licensee;
 using Fanex.NAPReport.NegativeBalanceByMatch.Business.Criteria;
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities;
 using Fanex.NAPReport.NegativeBalanceByMatch.Business.Helper.Implement;
 using Fanex.NAPReport.NegativeBalanceByMatch.Business.Repositories;
 using Fanex.Service.Core.Enums;
@@ -82,8 +82,8 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 		{
 			string appLocation = AppDomain.CurrentDomain.BaseDirectory;
 			string template = licenseeName.ToLower().Equals("haifa")
-									? File.ReadAllText(appLocation + @"/Templates/EmailTemplateDualLanguage.cshtml")
-									: File.ReadAllText(appLocation + @"/Templates/EmailTemplateSingleLanguage.cshtml");
+									? File.ReadAllText(appLocation + @"/SiteConfig/NegativeBalanceByMatch/Templates/EmailTemplateDualLanguage.cshtml")
+									: File.ReadAllText(appLocation + @"/SiteConfig/NegativeBalanceByMatch/Templates/EmailTemplateSingleLanguage.cshtml");
 
 			return Razor.Parse(template, matches);
 		}

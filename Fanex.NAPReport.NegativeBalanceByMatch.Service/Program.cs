@@ -9,12 +9,16 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Service
         /// </summary>
         private static void Main()
         {
-            ServiceBase[] ServicesToRun;
-            ServicesToRun = new ServiceBase[]
-                                {
-                                    new AutoMailService()
-                                };
-            ServiceBase.Run(ServicesToRun);
+			ServiceBase[] ServicesToRun;
+			ServicesToRun = new ServiceBase[]
+			                    {
+			                        new AutoMailService()
+			                    };
+			ServiceBase.Run(ServicesToRun);
+
+			//AutoMailService mailService = new AutoMailService();
+
+			//mailService.StartAndStop();
         }
     }
 }

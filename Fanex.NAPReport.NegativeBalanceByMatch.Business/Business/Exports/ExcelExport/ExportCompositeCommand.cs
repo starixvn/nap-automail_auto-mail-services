@@ -6,7 +6,7 @@ using Fanex.Common.Extensions;
 using Fanex.NAPReport.Business.Business.Exports.ExcelExport;
 using NPOI.XSSF.UserModel;
 
-namespace Fanex.NAPReport.Business.Business.Exports.ExcelExport
+namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport
 {
     public class ExportCompositeCommand<T> : ExportCommandBase where T : IExportCommand
     {

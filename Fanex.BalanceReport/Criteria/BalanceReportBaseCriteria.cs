@@ -3,9 +3,6 @@
     using Fanex.Data.Repository;
     using System;
 
-    /// <summary>
-    /// Overview Criteria.
-    /// </summary>
     public class BalanceReportBaseCriteria : CriteriaBase
     {
         [SpParam(Ignored=true)]

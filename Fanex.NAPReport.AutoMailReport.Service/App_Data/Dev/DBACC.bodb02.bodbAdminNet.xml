@@ -16,4 +16,11 @@
     <Setting Key="Acc_Rpt_BALicWinloss" SpName="Acc_Rpt_BALicWinloss" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="36000"/>
   </Function>
 
+  <Function Name="Balance Report">
+    <Setting Key="Acc_Rpt_CreditTerm" SpName="Acc_Rpt_CreditTerm" DbName="DBACC.bodb02.bodbAdminNet" Plain="0" />
+    <Setting Key="Acc_Rpt_Balance_Super_Yesterday" SpName="Acc_Rpt_Balance_Super_Yesterday" DbName="DBACC.bodb02.bodbAdminNet" Plain="0" />
+    <Setting Key="Acc_Rpt_Balance_Direct_Master" SpName="Acc_Rpt_Balance_Direct_Master" DbName="DBACC.bodb02.bodbAdminNet" Plain="0" />
+    <Setting Key="Acc_Rpt_Balance_Direct_Agent" SpName="Acc_Rpt_Balance_Direct_Agent" DbName="DBACC.bodb02.bodbAdminNet" Plain="0" />
+    <Setting Key="Acc_Rpt_Balance_Direct_Member" SpName="Acc_Rpt_Balance_Direct_Member" DbName="DBACC.bodb02.bodbAdminNet" Plain="0" />
+  </Function>
 </Functions>

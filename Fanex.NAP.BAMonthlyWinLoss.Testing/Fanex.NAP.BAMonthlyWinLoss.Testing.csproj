@@ -81,10 +81,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fanex.BaMonthlyWinLoss.Business\Fanex.BAMonthlyWinLoss.Business.csproj">
-      <Project>{AF1F498A-2733-40CE-8B6B-84A02827E0A5}</Project>
-      <Name>Fanex.BAMonthlyWinLoss.Business</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Fanex.Service.Core\Fanex.Service.Core.csproj">
       <Project>{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}</Project>
       <Name>Fanex.Service.Core %28Fanex.Service.Core\Fanex.Service.Core%29</Name>

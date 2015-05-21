@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.NAPReport.Business.Entities
+namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities
 {
     using Fanex.Service.Core.Enums;
 

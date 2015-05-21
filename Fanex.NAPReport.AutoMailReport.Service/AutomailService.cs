@@ -1,30 +1,26 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="AutomailService.cs" company="Nexcel Solutions Vietnam.">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.NAPReport.AutoMailReport.Service
+﻿namespace Fanex.NAPReport.AutoMailReport.Service
 {
     using System;
+    using System.Diagnostics;
     using System.IO;
     using System.Timers;
     using Fanex.Data.Configuration;
     using Fanex.MailDelivery.Client.Handlers;
     using Fanex.NAPReport.HorseRacingReport.Business;
-    using Fanex.NAPReport.SMALoss.Business.Process;
-    using Fanex.NAPReport.SMALoss.Business.Services;
+    using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business;
+    using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports;
+    using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Licensee;
+    using Fanex.NAPReport.NegativeBalanceByMatch.Business.Helper;
+    using Fanex.NAPReport.SMALoss.Business.Business;
     using Fanex.Service.Core.Extensions;
+    using Fanex.TurnoverWatcher.Business.Process;
 
-    /// <summary>
-    /// Auto mail service.
-    /// </summary>
     public partial class AutoMailService : System.ServiceProcess.ServiceBase
     {
-        private const string TemplateUrl = @"/SiteConfig/SMALoss/SMALossTemplate.cshtml";
-        private TimeSpan _startTime;
         private Timer _timer = null;
         private ISMALossProcess _smaLossProcess = null;
+        private ITurnoverWatcherProcess _turnoverWatcherProcess = null;
+        private NegativeBalanceByMatchService _negativeBalanceByMatchService = null;
 
         public AutoMailService()
         {
@@ -32,7 +28,18 @@ namespace Fanex.NAPReport.AutoMailReport.Service
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
             DbSettingProviderManager.Current.Start();
             MailClientHandler.Start();
+
             this._smaLossProcess = new SMALossProcess();
+            _turnoverWatcherProcess = new TurnoverWatcherProcess();
+
+            LicenseeFunctionParser licenseeFunctionParser = new LicenseeFunctionParser(NegativeBalanceByMatch.Business.AppSettings.LicenseeFunctionMap);
+            ILicenseeService licenseeService = new LicenseeService(licenseeFunctionParser);
+
+            INegativeBalanceByMatchExcelService negativeBalanceByMatchExcelService = new NegativeBalanceByMatchExcelService();
+
+            MailService mailService = new MailService(negativeBalanceByMatchExcelService);
+
+            _negativeBalanceByMatchService = new NegativeBalanceByMatchService(licenseeService, mailService);
         }
 
         protected override void OnStart(string[] args)
@@ -76,10 +83,9 @@ namespace Fanex.NAPReport.AutoMailReport.Service
                 {
                     AppSettings.OnProcessing = true;
 
-                    if (this._smaLossProcess != null)
-                    {
-                        this._smaLossProcess.NotifyEmail(TemplateUrl);
-                    }
+                    this._smaLossProcess.NotifyEmail();
+                    _negativeBalanceByMatchService.ProcessBusiness();
+                    _turnoverWatcherProcess.Process();
 
                     AppSettings.OnProcessing = false;
                 }
@@ -90,6 +96,14 @@ namespace Fanex.NAPReport.AutoMailReport.Service
                 AppSettings.OnProcessing = false;
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Test
+        /// </summary>
+        public void StartAndStop()
+        {
+            OnStart(null);
         }
     }
 }

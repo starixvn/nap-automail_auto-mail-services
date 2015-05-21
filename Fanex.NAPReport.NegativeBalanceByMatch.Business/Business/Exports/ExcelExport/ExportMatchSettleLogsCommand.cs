@@ -1,20 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using Fanex.NAPReport.Business.Business.Exports.ExcelExport;
-using Fanex.NAPReport.Business.Entities;
-using Fanex.NAPReport.NegativeBalanceByMatch.Business.Helper.Implement;
-using Fanex.Service.Core.Extensions;
-using Fanex.Service.Core.Model;
-using Fanex.Service.Core.Service.Implement.Npoi;
-using NPOI.OpenXmlFormats.Spreadsheet;
-using NPOI.SS.Format;
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 
-namespace Fanex.NAPReport.Business.Business.Exports.ExcelExport
+namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport
 {
 	public class ExportMatchSettleLogsCommand : ExportCommandBase
 	{
@@ -30,18 +20,18 @@ namespace Fanex.NAPReport.Business.Business.Exports.ExcelExport
 		{
 			RenderMatchSettleLogsHeader();
 
-			foreach (MatchSettleLog matchSettleLog in _matchSettleLogs)
+			for (int index = 0; index < _matchSettleLogs.Count; index++)
 			{
 				ExcelDocument.IncreaseRowIndex();
 				ExcelDocument.ResetColumnIndex();
 
-				RenderMatchSettleLogsRow(matchSettleLog);
+				RenderMatchSettleLogsRow(index, _matchSettleLogs[index]);
 			}
 		}
 
 		public void RenderMatchSettleLogsHeader()
 		{
-			XSSFCellStyle style = ExcelDocument.GetCellStyle(FontBoldWeight.Bold, Color.FromArgb(60, 94, 165));
+			XSSFCellStyle style = ExcelDocument.GetCellStyle(FontBoldWeight.Bold, Color.FromArgb(60, 94, 165), Color.FromArgb(0, 0, 0));
 
 			ExcelDocument.RenderCurrentCell("#", style);
 
@@ -58,11 +48,11 @@ namespace Fanex.NAPReport.Business.Business.Exports.ExcelExport
 			ExcelDocument.RenderCurrentCell("FT Score", style);
 		}
 
-		public void RenderMatchSettleLogsRow(MatchSettleLog matchSettleLog)
+		public void RenderMatchSettleLogsRow(int index, MatchSettleLog matchSettleLog)
 		{
 			XSSFCellStyle style = ExcelDocument.GetCellStyle(FontBoldWeight.None, Color.FromArgb(255, 255, 255), Color.FromArgb(0, 0, 0));
 
-			ExcelDocument.RenderCurrentCell(matchSettleLog.LogID, style);
+			ExcelDocument.RenderCurrentCell(index + 1, style);
 
 			ExcelDocument.IncreaseColumnIndex();
 			ExcelDocument.RenderCurrentCell(matchSettleLog.SettlementTime, style);

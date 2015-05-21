@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using Fanex.NAPReport.Business.Business.Exports.ExcelExport;
-using Fanex.NAPReport.Business.Entities;
-using Fanex.Service.Core.Model;
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 
-namespace Fanex.NAPReport.Business.Business.Exports.ExcelExport
+namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport
 {
 	public class ExportCustomerBalanceInfosCommand : ExportCommandBase
 	{
@@ -26,12 +21,12 @@ namespace Fanex.NAPReport.Business.Business.Exports.ExcelExport
 			RenderLegend();
 			RenderCustomerBalanceInfosHeader();
 
-			foreach (CustomerBalanceInfo customerBalanceInfo in _customerBalanceInfos)
+			for (int index = 0; index < _customerBalanceInfos.Count; index++)
 			{
 				ExcelDocument.IncreaseRowIndex();
 				ExcelDocument.ResetColumnIndex();
 
-				RenderCustomerBalanceInfosRow(customerBalanceInfo);
+				RenderCustomerBalanceInfosRow(index, _customerBalanceInfos[index]);
 			}
 		}
 
@@ -62,17 +57,17 @@ namespace Fanex.NAPReport.Business.Business.Exports.ExcelExport
 			ExcelDocument.RenderCurrentCell("Deposit Name", style);
 		}
 
-		public void RenderCustomerBalanceInfosRow(CustomerBalanceInfo customerBalanceInfo)
+		public void RenderCustomerBalanceInfosRow(int index, CustomerBalanceInfo customerBalanceInfo)
 		{
-			XSSFCellStyle style = ExcelDocument.GetCellStyle(FontBoldWeight.None, Color.FromArgb(255, 255, 255), Color.FromArgb(0, 0, 0));
+			XSSFCellStyle style = ExcelDocument.GetCellStyle(FontBoldWeight.None, Color.FromArgb(255, 255, 255), Color.FromArgb(0, 0, 0), HorizontalAlignment.Right);
 
-			ExcelDocument.RenderCurrentCell(customerBalanceInfo.LogID, style);
+			ExcelDocument.RenderCurrentCell(index + 1, ExcelDocument.GetCellStyle(FontBoldWeight.None, Color.FromArgb(255, 255, 255), Color.FromArgb(0, 0, 0)));
 
 			ExcelDocument.IncreaseColumnIndex();
 			ExcelDocument.RenderCurrentCell(customerBalanceInfo.Username, style);
 
 			ExcelDocument.IncreaseColumnIndex();
-			ExcelDocument.RenderCurrentCell(customerBalanceInfo.TotalBalance, style);
+			ExcelDocument.RenderCurrentCell(customerBalanceInfo.TotalBalance.ToString(".00"), style);
 
 			ExcelDocument.IncreaseColumnIndex();
 			ExcelDocument.RenderCurrentCell(customerBalanceInfo.CurrencyName, style);

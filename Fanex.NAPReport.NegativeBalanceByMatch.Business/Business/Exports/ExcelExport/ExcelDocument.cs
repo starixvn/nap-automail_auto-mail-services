@@ -7,7 +7,7 @@ using NPOI.SS.UserModel;
 using NPOI.SS.Util;
 using NPOI.XSSF.UserModel;
 
-namespace Fanex.NAPReport.Business.Business.Exports.ExcelExport
+namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport
 {
 	public class ExcelDocument
 	{
@@ -41,7 +41,7 @@ namespace Fanex.NAPReport.Business.Business.Exports.ExcelExport
 
 		public void Save(string saveFileNamePath)
 		{
-			SaveFile.SaveExcelFile(Path.GetDirectoryName(saveFileNamePath),Path.GetFileName(saveFileNamePath), Workbook);
+			SaveFile.SaveExcelFile(Path.GetDirectoryName(saveFileNamePath),Path.GetFileName(saveFileNamePath), Workbook, AppSettings.ExcelPassword);
 		}
 
 		public void RenderCurrentCell(object cellValue, XSSFCellStyle cellStyle = null)
