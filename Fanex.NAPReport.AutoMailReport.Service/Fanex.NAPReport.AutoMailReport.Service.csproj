@@ -190,14 +190,13 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
-    <Content Include="SiteConfig\BADailyWinLoss\BADailyWinLoss.txt"/>
+    <Content Include="SiteConfig\BADailyWinLoss\BADailyWinLoss.txt" />
     <Content Include="SiteConfig\SMALoss\Templates\Images\DownardArrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SiteConfig\BAMonthlyWinLoss\BAMonthlyWinLoss.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>    
-    
+    </Content>
     <Content Include="SiteConfig\SMALoss\Templates\Images\HorizontalLine.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -254,6 +253,18 @@
     <ProjectReference Include="..\Fanex.BalanceReport\Fanex.NAPReport.BalanceReport.csproj">
       <Project>{4DF39ADE-3E49-4D1E-9211-E48353B65135}</Project>
       <Name>Fanex.NAPReport.BalanceReport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.MonthlyWinlossByLeague.Business\Fanex.MonthlyWinlossByLeague.Business.csproj">
+      <Project>{B9C0CA6B-C407-4E48-B672-4CA10B8BA6FE}</Project>
+      <Name>Fanex.MonthlyWinlossByLeague.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.NAP.BADailyWinLoss\Fanex.NAP.BADailyWinLoss.Business.csproj">
+      <Project>{D8FF5D62-BFFD-4710-98AA-B0E338033252}</Project>
+      <Name>Fanex.NAP.BADailyWinLoss.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.NAP.BaMonthlyWinLoss.Business\Fanex.NAP.BAMonthlyWinLoss.Business.csproj">
+      <Project>{AF1F498A-2733-40CE-8B6B-84A02827E0A5}</Project>
+      <Name>Fanex.NAP.BAMonthlyWinLoss.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.NAPReport.HorseRacingReport.Business\Fanex.NAPReport.HorseRacingReport.Business.csproj">
       <Project>{AFE10301-BCFD-4D11-885C-A43A46B5B2BF}</Project>
