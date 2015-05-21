@@ -7,10 +7,12 @@
     using Fanex.MailDelivery.Client.Enumerations;
     using Fanex.MailDelivery.Client.Handlers;
     using Fanex.MailDelivery.Client.Models;
+    using Fanex.NAPReport.SMALoss.Business.Configuration;
     using Fanex.NAPReport.SMALoss.Business.Criteria;
     using Fanex.NAPReport.SMALoss.Business.Entities;
     using Fanex.NAPReport.SMALoss.Business.Services;
     using Fanex.NAPReport.SMALoss.Business.Services.ExcelExport;
+    using Fanex.Service.Core.Configuration;
     using Fanex.Service.Core.Extensions;
     using RazorEngine;
 
@@ -20,6 +22,7 @@
         private const string DownwardArrowUrl = @"/SiteConfig/SMALoss/Templates/Images/DownardArrow.png";
         private const string HorizontalLineUrl = @"/SiteConfig/SMALoss/Templates/Images/HorizontalLine.png";
         private const string TemplateUrl = @"/SiteConfig/SMALoss/Templates/EmailTemplate.cshtml";
+        private const string AppSettings = @"/SiteConfig/SMALoss/SMALoss.Settings.xml";
         private readonly ISMALossService _lossService = null;
         private readonly ISMALossExcelService _lossExcelService = null;
 
@@ -36,6 +39,10 @@
             ISMALossService lossService,
             ISMALossExcelService lossExcelService)
         {
+            var configurationParser = new ConfigurationParser(AppDomain.CurrentDomain.BaseDirectory + AppSettings);
+            configurationParser.Parse();
+            configurationParser.Parse<Settings>();
+
             _lossService = lossService ?? new SMALossService();
             _lossExcelService = lossExcelService ?? new SMALossExcelService();
         }
@@ -60,22 +67,25 @@
         /// <returns>Boolean value indicates whether the email is sent successfully or not.</returns>
         public bool NotifyEmail()
         {
-            var offset = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours;
-            var timezoneInd = DateTime.Now.IsDaylightSavingTime() ? offset - 1 : offset;
-            var subject = string.Format(AppSettings.Subject, DateTime.Now, string.Format("{0}{1}", timezoneInd > 0 ? "+" : string.Empty, timezoneInd));
             var isNotified = true;
-            var lossItems = GetReachedSMALoss();
-
-            if (lossItems != null && lossItems.Any())
+            if (Settings.ActiveService)
             {
-                var content = Razor.Parse(GetTemplate, lossItems);
+                var offset = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours;
+                var timezoneInd = DateTime.Now.IsDaylightSavingTime() ? offset - 1 : offset;
+                var subject = string.Format(Settings.Subject, DateTime.Now, string.Format("{0}{1}", timezoneInd > 0 ? "+" : string.Empty, timezoneInd));
+                var lossItems = GetReachedSMALoss();
 
-                isNotified = SendMail(new EmailContent
+                if (lossItems != null && lossItems.Any())
                 {
-                    Subject = subject,
-                    Title = AppSettings.Title,
-                    Body = content
-                });
+                    var content = Razor.Parse(GetTemplate, lossItems);
+
+                    isNotified = SendMail(new EmailContent
+                    {
+                        Subject = subject,
+                        Title = Settings.Title,
+                        Body = content
+                    });
+                }
             }
 
             return isNotified;
@@ -97,11 +107,10 @@
                     Body = content.Body,
                     MailingListId = content.MailingListId
                 };
-                var reportDirectory = this.CreateSMAReportDataDirectory();
 
                 var curDateTime = DateTime.UtcNow;
                 var fileName = string.Format("SMA_Loss_Report_{0}.xlsx", curDateTime.ToString("yyyy-MM-dd"));
-                var fileNamePath = Path.Combine(reportDirectory, fileName);
+                var fileNamePath = Path.Combine(Settings.ExportDataDirectoryWithYearMonth, fileName);
                 var sheetName = "SMA Loss Report";
                 var exportSettings = new ExportSettings();
                 var lossItems = GetReachedSMALoss();
@@ -111,17 +120,17 @@
                 mail.Attachments = new List<MailAttachment>();
                 mail.Attachments.Add(new MailAttachment(fileNamePath, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
 
-                //var appLocation = AppDomain.CurrentDomain.BaseDirectory;
-                //var upwardArrow = new MailLinkedResource(appLocation + UpwardArrowUrl, FileExtension.IMG_PNG, "lruworradrawpu");
-                //var downwardArrow = new MailLinkedResource(appLocation + DownwardArrowUrl, FileExtension.IMG_PNG, "lruworradrawnwod");
-                //var horizontalLineArrow = new MailLinkedResource(appLocation + HorizontalLineUrl, FileExtension.IMG_PNG, "lruworradrawenillatnoziroh");
-                //mail.AlternativeViews = new List<MailLinkedResource>();
-                //mail.AlternativeViews.Add(upwardArrow);
-                //mail.AlternativeViews.Add(downwardArrow);
-                //mail.AlternativeViews.Add(horizontalLineArrow);
+                ////var appLocation = AppDomain.CurrentDomain.BaseDirectory;
+                ////var upwardArrow = new MailLinkedResource(appLocation + UpwardArrowUrl, FileExtension.IMG_PNG, "lruworradrawpu");
+                ////var downwardArrow = new MailLinkedResource(appLocation + DownwardArrowUrl, FileExtension.IMG_PNG, "lruworradrawnwod");
+                ////var horizontalLineArrow = new MailLinkedResource(appLocation + HorizontalLineUrl, FileExtension.IMG_PNG, "lruworradrawenillatnoziroh");
+                ////mail.AlternativeViews = new List<MailLinkedResource>();
+                ////mail.AlternativeViews.Add(upwardArrow);
+                ////mail.AlternativeViews.Add(downwardArrow);
+                ////mail.AlternativeViews.Add(horizontalLineArrow);
 
                 MailClientHandler.SendMail(mail);
-                
+
                 return true;
             }
             catch (Exception exception)
@@ -129,14 +138,6 @@
                 LogExtensions.ExceptionHandler(exception);
                 return false;
             }
-        }
-
-        private string CreateSMAReportDataDirectory()
-        {
-            var reportDataDirectory = string.Format("{0}\\{1}\\{2}", AppSettings.ExportDataDirectory, DateTime.Now.Year, DateTime.Now.Month);
-            DirectoryExtensions.CheckAndCreateDirectory(reportDataDirectory);
-
-            return reportDataDirectory;
         }
 
         /// <summary>

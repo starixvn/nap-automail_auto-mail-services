@@ -1,0 +1,6 @@
+﻿<appSettings>
+  <add key="ActiveService" value="true" />
+  <add key="Subject" value="List of SMA Reaching Allowable Max Loss - {0} (GMT {1})" />
+  <add key="Title" value="Limit Loss Administrator" />
+  <add key="ExportDataDirectory" value="\\10.18.200.202\Web\1.Rome\2.Nap\2.Report\_Fanex.ExcelFiles\SMALossReport" />
+</appSettings>

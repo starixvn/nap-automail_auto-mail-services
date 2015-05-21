@@ -194,6 +194,9 @@
     </Content>
     <None Include="packages.config" />
     <Content Include="SiteConfig\BADailyWinLoss\BADailyWinLoss.txt" />
+    <Content Include="SiteConfig\SMALoss\SMALoss.Settings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="SiteConfig\SMALoss\Templates\Images\DownardArrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

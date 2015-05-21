@@ -140,6 +140,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SiteConfig\SMALoss\SMALoss.Settings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="SiteConfig\SMALoss\Templates\Images\DownardArrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
