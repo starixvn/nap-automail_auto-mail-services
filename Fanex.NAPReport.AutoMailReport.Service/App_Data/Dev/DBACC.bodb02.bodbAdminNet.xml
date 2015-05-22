@@ -23,4 +23,18 @@
     <Setting Key="Acc_Rpt_Balance_Direct_Agent" SpName="Acc_Rpt_Balance_Direct_Agent" DbName="DBACC.bodb02.bodbAdminNet" Plain="0" />
     <Setting Key="Acc_Rpt_Balance_Direct_Member" SpName="Acc_Rpt_Balance_Direct_Member" DbName="DBACC.bodb02.bodbAdminNet" Plain="0" />
   </Function>
+
+  <Function Name="Horse3rd">
+    <Setting Key="Acc_Rpt_Racing_Transaction3rdIns" SpName="Acc_Rpt_Racing_Transaction3rdIns" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Acc_Rpt_Racing_ComparisionTO3rd" SpName="Acc_Rpt_Racing_ComparisionTO3rd" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
+  </Function>
+
+  <Function Name="warehouse">
+    <Setting Key="Acc_Rpt_Racing_Transaction3rdIns" SpName="Acc_Rpt_Racing_Transaction3rdIns" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Acc_Rpt_WinlostRacing_Tote" SpName="Acc_Rpt_WinlostRacing_Tote" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
+  </Function>
+
+  <Function Name="Core - Report Service">
+    <Setting Key="Core_ReportService_GetBalanceUpDay" SpName="Age_SelBalanceUpDay" DbName="DBACC.bodb02.bodbAdminNet"/>
+  </Function>
 </Functions>

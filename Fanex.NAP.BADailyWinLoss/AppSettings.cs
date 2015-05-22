@@ -19,7 +19,7 @@ namespace Fanex.NAPReport.BADailyWinLoss.Business
         {
             get
             {
-                return ExportDataDirectory("Fanex.BADailyWinLoss.ExportDataDirectory");
+                return ExportDataDirectory("Fanex.NAPReport.BADailyWinLoss.ExportDataDirectory");
             }
         }
 
@@ -27,7 +27,7 @@ namespace Fanex.NAPReport.BADailyWinLoss.Business
         {
             get
             {
-                return ConfigurationManager.AppSettings["Fanex.BADailyWinLoss.TemplateDirectory"];
+                return ConfigurationManager.AppSettings["Fanex.NAPReport.BADailyWinLoss.TemplateDirectory"];
             }
         }
 
@@ -35,7 +35,7 @@ namespace Fanex.NAPReport.BADailyWinLoss.Business
         {
             get
             {
-                return Convert.ToBoolean(ConfigurationManager.AppSettings["Fanex.BADailyWinLoss.IsTesting"]);
+                return Convert.ToBoolean(ConfigurationManager.AppSettings["Fanex.NAPReport.BADailyWinLoss.IsTesting"]);
             }
         }
 
@@ -43,7 +43,7 @@ namespace Fanex.NAPReport.BADailyWinLoss.Business
         {
             get
             {
-                return Convert.ToDateTime(ConfigurationManager.AppSettings["Fanex.BADailyWinLoss.TestedDate"]);
+                return Convert.ToDateTime(ConfigurationManager.AppSettings["Fanex.NAPReport.BADailyWinLoss.TestedDate"]);
             }
         }
     }

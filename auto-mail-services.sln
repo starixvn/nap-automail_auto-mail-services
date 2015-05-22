@@ -92,7 +92,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.BADailyWinL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.BAMonthlyWinLoss.Business", "Fanex.NAP.BaMonthlyWinLoss.Business\Fanex.NAPReport.BAMonthlyWinLoss.Business.csproj", "{AF1F498A-2733-40CE-8B6B-84A02827E0A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.HorseTransaction3rd.Business", "Fanex.HorseTransaction3rdServices\Fanex.NAPReport.HorseTransaction3rd.Business.csproj", "{446FBE1E-58F9-41A8-B442-8012B884BF7F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.HorseTransaction3rd.Testing", "Fanex.NAPReport.HorseTransaction3rd.Testing\Fanex.NAPReport.HorseTransaction3rd.Testing.csproj", "{28127410-CF82-4859-967C-1F1A06780538}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.HorseTransaction3rd.Business", "Fanex.NAPReport.HorseTransaction3rdServices\Fanex.NAPReport.HorseTransaction3rd.Business.csproj", "{446FBE1E-58F9-41A8-B442-8012B884BF7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -434,6 +436,16 @@ Global
 		{AF1F498A-2733-40CE-8B6B-84A02827E0A5}.Release|Mixed Platforms.Build.0 = Release|x86
 		{AF1F498A-2733-40CE-8B6B-84A02827E0A5}.Release|x86.ActiveCfg = Release|x86
 		{AF1F498A-2733-40CE-8B6B-84A02827E0A5}.Release|x86.Build.0 = Release|x86
+		{28127410-CF82-4859-967C-1F1A06780538}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{28127410-CF82-4859-967C-1F1A06780538}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{28127410-CF82-4859-967C-1F1A06780538}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{28127410-CF82-4859-967C-1F1A06780538}.Debug|x86.ActiveCfg = Debug|x86
+		{28127410-CF82-4859-967C-1F1A06780538}.Debug|x86.Build.0 = Debug|x86
+		{28127410-CF82-4859-967C-1F1A06780538}.Release|Any CPU.ActiveCfg = Release|x86
+		{28127410-CF82-4859-967C-1F1A06780538}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{28127410-CF82-4859-967C-1F1A06780538}.Release|Mixed Platforms.Build.0 = Release|x86
+		{28127410-CF82-4859-967C-1F1A06780538}.Release|x86.ActiveCfg = Release|x86
+		{28127410-CF82-4859-967C-1F1A06780538}.Release|x86.Build.0 = Release|x86
 		{446FBE1E-58F9-41A8-B442-8012B884BF7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{446FBE1E-58F9-41A8-B442-8012B884BF7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{446FBE1E-58F9-41A8-B442-8012B884BF7F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -483,6 +495,7 @@ Global
 		{19757FF5-3D1C-41A2-97E0-83ED31FDCC2E} = {DD647794-42ED-4DBB-82FF-75040CE2D8D0}
 		{F63933BB-A6C9-4D53-A8D2-976883539902} = {DD647794-42ED-4DBB-82FF-75040CE2D8D0}
 		{2E68F6ED-72FE-4059-9ED5-F7600BDD93B9} = {DD647794-42ED-4DBB-82FF-75040CE2D8D0}
+		{28127410-CF82-4859-967C-1F1A06780538} = {DD647794-42ED-4DBB-82FF-75040CE2D8D0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35;packages\Unity.Interception.2.1.505.2\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Data.5.0.505.0\lib\NET35

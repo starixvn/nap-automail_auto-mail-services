@@ -132,6 +132,7 @@
     </Compile>
     <Compile Include="Jobs\BA\DailyWinLoss.cs" />
     <Compile Include="Jobs\BA\MonthlyWinLoss.cs" />
+    <Compile Include="Jobs\HorseTransaction3rd\HorseTransaction3rd.cs" />
     <Compile Include="Jobs\NAPReport\CreditTermReport.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -232,6 +233,12 @@
     <None Include="SiteConfig\BalanceReport\Email\Subject.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="SiteConfig\HorseTransaction3rd\SuccessEmail.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\HorseTransaction3rd\UnsuccessEmail.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="SiteConfig\NegativeBalanceByMatch\Templates\EmailTemplateDualLanguage.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -271,6 +278,10 @@
     <ProjectReference Include="..\Fanex.NAPReport.HorseRacingReport.Business\Fanex.NAPReport.HorseRacingReport.Business.csproj">
       <Project>{AFE10301-BCFD-4D11-885C-A43A46B5B2BF}</Project>
       <Name>Fanex.NAPReport.HorseRacingReport.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.NAPReport.HorseTransaction3rdServices\Fanex.NAPReport.HorseTransaction3rd.Business.csproj">
+      <Project>{446FBE1E-58F9-41A8-B442-8012B884BF7F}</Project>
+      <Name>Fanex.NAPReport.HorseTransaction3rd.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.NAPReport.NegativeBalanceByMatch.Business\Fanex.NAPReport.NegativeBalanceByMatch.Business.csproj">
       <Project>{8C5FF65C-DC35-417B-9464-35C0CAF05FDD}</Project>
