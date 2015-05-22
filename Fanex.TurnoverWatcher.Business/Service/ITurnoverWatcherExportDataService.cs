@@ -1,7 +1,7 @@
-﻿namespace Fanex.TurnoverWatcher.Business.Service
+﻿namespace Fanex.NAPReport.TurnoverWatcher.Business.Service
 {
     using System.Collections.Generic;
-    using Fanex.TurnoverWatcher.Business.Model;
+    using Fanex.NAPReport.TurnoverWatcher.Business.Model;
 
     public interface ITurnoverWatcherExportDataService
     {

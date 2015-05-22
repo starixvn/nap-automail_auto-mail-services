@@ -1,4 +1,4 @@
-﻿namespace Fanex.TurnoverWatcher.Business.Process
+﻿namespace Fanex.NAPReport.TurnoverWatcher.Business.Process
 {
     using System;
     using System.Collections.Generic;
@@ -7,10 +7,10 @@
     using System.Linq;
     using Fanex.MailDelivery.Client.Handlers;
     using Fanex.MailDelivery.Client.Models;
+    using Fanex.NAPReport.TurnoverWatcher.Business.Constants;
+    using Fanex.NAPReport.TurnoverWatcher.Business.Model;
+    using Fanex.NAPReport.TurnoverWatcher.Business.Service;
     using Fanex.Service.Core.Extensions;
-    using Fanex.TurnoverWatcher.Business.Constants;
-    using Fanex.TurnoverWatcher.Business.Model;
-    using Fanex.TurnoverWatcher.Business.Service;
     using RazorEngine;
     using mailStationAppSettings = Fanex.MailDelivery.Client.Configurations.AppSettings;
 

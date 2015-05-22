@@ -3,7 +3,7 @@
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
-namespace Fanex.TurnoverWatcher.Business.Constants
+namespace Fanex.NAPReport.TurnoverWatcher.Business.Constants
 {
     using System;
     using System.Collections.Generic;

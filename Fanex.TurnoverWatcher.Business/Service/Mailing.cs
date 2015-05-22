@@ -1,11 +1,11 @@
-﻿namespace Fanex.TurnoverWatcher.Business.Service
+﻿namespace Fanex.NAPReport.TurnoverWatcher.Business.Service
 {
     using System;
     using System.Globalization;
     using System.IO;
     using Fanex.MailDelivery.Client.Handlers;
+    using Fanex.NAPReport.TurnoverWatcher.Business.Model;
     using Fanex.Service.Core.Extensions;
-    using Fanex.TurnoverWatcher.Business.Model;
     using RazorEngine;
     using mailStationAppSettings = Fanex.MailDelivery.Client.Configurations.AppSettings;
 

@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.TurnoverWatcher.Business.Criteria
+namespace Fanex.NAPReport.TurnoverWatcher.Business.Criteria
 {
     using Fanex.NAP.Framework.Data;
 

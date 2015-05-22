@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Fanex.TurnoverWatcher.Business.Resources {
+namespace Fanex.NAPReport.TurnoverWatcher.Business.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Fanex.TurnoverWatcher.Business.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Fanex.TurnoverWatcher.Business.Resources.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Fanex.NAPReport.TurnoverWatcher.Business.Resources.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

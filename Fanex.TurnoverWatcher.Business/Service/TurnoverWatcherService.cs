@@ -1,9 +1,9 @@
-﻿namespace Fanex.TurnoverWatcher.Business.Service
+﻿namespace Fanex.NAPReport.TurnoverWatcher.Business.Service
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Fanex.TurnoverWatcher.Business.Model;
-    using Fanex.TurnoverWatcher.Business.Repositories;
+    using Fanex.NAPReport.TurnoverWatcher.Business.Model;
+    using Fanex.NAPReport.TurnoverWatcher.Business.Repositories;
 
     public class TurnoverWatcherService : ITurnoverWatcherService
     {

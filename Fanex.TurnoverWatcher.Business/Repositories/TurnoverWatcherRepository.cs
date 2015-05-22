@@ -3,17 +3,17 @@
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
-namespace Fanex.TurnoverWatcher.Business.Repositories
+namespace Fanex.NAPReport.TurnoverWatcher.Business.Repositories
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
     using Fanex.Common;
     using Fanex.Data;
+    using Fanex.NAPReport.TurnoverWatcher.Business.Criteria;
+    using Fanex.NAPReport.TurnoverWatcher.Business.Model;
     using Fanex.Service.Core.Enums;
     using Fanex.Service.Core.Extensions;
-    using Fanex.TurnoverWatcher.Business.Criteria;
-    using Fanex.TurnoverWatcher.Business.Model;
 
     public class TurnoverWatcherRepository : ITurnoverWatcherRepository
     {

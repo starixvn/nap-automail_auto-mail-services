@@ -1,8 +1,8 @@
-﻿namespace Fanex.TurnoverWatcher.Business.Repositories
+﻿namespace Fanex.NAPReport.TurnoverWatcher.Business.Repositories
 {
     using System.Collections.Generic;
+    using Fanex.NAPReport.TurnoverWatcher.Business.Model;
     using Fanex.Service.Core.Enums;
-    using Fanex.TurnoverWatcher.Business.Model;
 
     public interface ITurnoverWatcherRepository
     {

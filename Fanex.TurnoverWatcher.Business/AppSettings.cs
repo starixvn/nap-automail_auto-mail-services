@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.TurnoverWatcher.Business
+namespace Fanex.NAPReport.TurnoverWatcher.Business
 {
     using System;
     using System.Configuration;

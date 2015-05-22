@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.TurnoverWatcher.Business.Model
+namespace Fanex.NAPReport.TurnoverWatcher.Business.Model
 {
     /// <summary>
     /// TODO: Update summary.

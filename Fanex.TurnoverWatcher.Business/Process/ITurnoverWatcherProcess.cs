@@ -1,4 +1,4 @@
-﻿namespace Fanex.TurnoverWatcher.Business.Process
+﻿namespace Fanex.NAPReport.TurnoverWatcher.Business.Process
 {
     public interface ITurnoverWatcherProcess
     {
