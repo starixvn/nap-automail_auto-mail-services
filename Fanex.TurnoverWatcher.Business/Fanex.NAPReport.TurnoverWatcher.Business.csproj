@@ -8,8 +8,8 @@
     <ProjectGuid>{EEEE6EC6-55BC-4C6E-AC8B-2D5B8C8B7179}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Fanex.TurnoverWatcher.Business</RootNamespace>
-    <AssemblyName>Fanex.TurnoverWatcher.Business</AssemblyName>
+    <RootNamespace>Fanex.NAPReport.TurnoverWatcher.Business</RootNamespace>
+    <AssemblyName>Fanex.NAPReport.TurnoverWatcher.Business</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
