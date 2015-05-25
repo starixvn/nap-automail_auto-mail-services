@@ -133,6 +133,7 @@
     <Compile Include="Jobs\BA\DailyWinLoss.cs" />
     <Compile Include="Jobs\BA\MonthlyWinLoss.cs" />
     <Compile Include="Jobs\HorseTransaction3rd\HorseTransaction3rd.cs" />
+    <Compile Include="Jobs\NAPReport\VirtualSportWinLoss.cs" />
     <Compile Include="Jobs\NAPReport\CreditTermReport.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -214,6 +215,10 @@
     <Content Include="SiteConfig\SMALoss\Templates\Images\UpwardArrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="SiteConfig\VirtualSportWinLoss\VirtualSportWinLoss.Settings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Templates\EmailTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -261,6 +266,9 @@
     <None Include="SiteConfig\TurnoverWatcher\Templates\NotificationEmailTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="SiteConfig\VirtualSportWinLoss\Templates\EmailTemplate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Templates\WinLossByProductsEmailTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -297,6 +305,10 @@
     <ProjectReference Include="..\Fanex.NAPReport.SMALoss.Business\Fanex.NAPReport.SMALoss.Business.csproj">
       <Project>{DA6DE65A-5D27-4B28-A928-422B664502C2}</Project>
       <Name>Fanex.NAPReport.SMALoss.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.NAPReport.VirtualSportWinLoss.Business\Fanex.NAPReport.VirtualSportWinLoss.Business.csproj">
+      <Project>{6004DBB8-7209-4690-A158-62D12B49EAE4}</Project>
+      <Name>Fanex.NAPReport.VirtualSportWinLoss.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.NAPReport.WinLossByProducts.Business\Fanex.NAPReport.WinLossByProducts.Business.csproj">
       <Project>{FA306BD2-0F8F-4453-AC72-92905D715DDE}</Project>

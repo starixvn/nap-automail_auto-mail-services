@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace WinLossByProducts.Service.Implement
+namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
 {
     using System;
     using System.Collections.Generic;

@@ -83,6 +83,7 @@
     <Compile Include="AppSettings.cs" />
     <Compile Include="Common\DirectoryExtensions.cs" />
     <Compile Include="Common\LogExtensions.cs" />
+    <Compile Include="Configuration\Settings.cs" />
     <Compile Include="Constants\DateTimeFormatConstants.cs" />
     <Compile Include="Criteria\WinLossDetailOldCriteria.cs" />
     <Compile Include="Criteria\WinLossSummaryOldCriteria.cs" />
@@ -136,6 +137,12 @@
       <LastGenOutput>WinLossVirtualSportResoure.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fanex.Service.Core\Fanex.Service.Core.csproj">
+      <Project>{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}</Project>
+      <Name>Fanex.Service.Core %28Fanex.Service.Core\Fanex.Service.Core%29</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
