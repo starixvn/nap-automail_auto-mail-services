@@ -1,6 +1,6 @@
 ﻿<Functions>
   <Function Name="SMA - Report">
-    <Setting Key="SMA_Report_GetData" SpName="Acc_Rpt_SMAAutomail" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
+    <Setting Key="SMA_Report_GetData" SpName="Acc_Rpt_SMAAutomail" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
   </Function>
 
   <Function Name="WinLoss - Virtual Sport">
