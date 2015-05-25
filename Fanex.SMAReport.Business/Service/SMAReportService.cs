@@ -25,6 +25,7 @@ namespace Fanex.SMAReport.Business.Service
     using NPOI.XSSF.UserModel;
     using OfficeOpenXmlCrypto;
     using Resources = Fanex.SMAReport.Business.Resources.Resources;
+using Fanex.MailDelivery.Client.Models;
 
     /// <summary>
     /// TODO: Update summary.
@@ -94,63 +95,23 @@ namespace Fanex.SMAReport.Business.Service
         /// <summary>
         /// Processes the SMA report.
         /// </summary>
-        public void ProcessSMAReport()
+        public Mail SMAReport()
         {
-            if (!AppSettings.OnProcessing)
-            {
-                AppSettings.OnProcessing = true;
-                SMAReportModel model = _repository.GetCurrentTask();
+            this.InitColor();
+            this.InitAlignmentInfo();
+            this.InitBorderStyleInfo();
+            this.InitFontInfo();
+            this.InitBackgroundColorInfo();
+            _lastMonth = DateTime.Now.AddMonths(-1);
+            DateTime firstMonth = new DateTime(_lastMonth.Year, 1, 1);
+            _reportFrom = firstMonth.ToString("MMM yyyy");
+            _reportTo = _lastMonth.ToString("MMM yyyy");
 
-                try
-                {
-                    this.InitColor();
-                    this.InitAlignmentInfo();
-                    this.InitBorderStyleInfo();
-                    this.InitFontInfo();
-                    this.InitBackgroundColorInfo();
-                    _lastMonth = DateTime.Now.AddMonths(-1);
-                    DateTime firstMonth = new DateTime(_lastMonth.Year, 1, 1);
-                    _reportFrom = firstMonth.ToString("MMM yyyy");
-                    _reportTo = _lastMonth.ToString("MMM yyyy");
+            SMAReport report = _repository.GetSMAReport();
 
-                    SMAReport report = _repository.GetSMAReport();
+            this.ExportReport(report);
 
-                    this.ExportReport(report);
-
-                    bool isSuccess = Mailing.SendSMAReportEmail(_reportDirectory, _reportFrom, _reportTo);
-
-                    if (isSuccess)
-                    {
-                        _repository.UpdateTaskStatus(model.Id, Status.Successful);
-                    }
-                    else
-                    {
-                        _repository.UpdateTaskStatus(model.Id, Status.Failed);
-                        Mailing.ErrorEmailNotification(_reportFrom, _reportTo);
-                    }
-
-                    AppSettings.OnProcessing = false;
-                }
-                catch (Exception ex)
-                {
-                    LogExtensions.ExceptionHandler(ex);
-                    _repository.UpdateTaskStatus(model.Id, Status.Failed);
-                    throw;
-                }
-            }
-        }
-
-        public int InsertTask(SMAReportModel task)
-        {
-            int id = _repository.InsertTask(task);
-            return id;
-        }
-
-        public SMAReportModel GetTaskReadyToRun()
-        {
-            SMAReportModel task = _repository.GetTaskReadyRun();
-
-            return task;
+            return Mailing.SendSMAReportEmail(_reportDirectory, _reportFrom, _reportTo);
         }
 
         /// <summary>

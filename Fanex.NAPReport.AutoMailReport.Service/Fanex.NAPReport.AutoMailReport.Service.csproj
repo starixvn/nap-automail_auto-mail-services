@@ -140,6 +140,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Jobs\NAPReport\HorseRacingReport.cs" />
+    <Compile Include="Jobs\NAPReport\SMAReport.cs" />
     <Compile Include="Jobs\NAPReport\SuperBalanceReport.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -155,6 +156,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Data\Dev\DBAGE.bodb_AGE.bodbAdminNet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\Dev\DBDWH.bodb_dwrs.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Data\Dev\DBLOG.bodb_CustomerLog.bodbAdminNet.xml">
@@ -245,6 +249,9 @@
     <None Include="SiteConfig\NegativeBalanceByMatch\Templates\EmailTemplateSingleLanguage.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="SiteConfig\SMAReport\Email.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="SiteConfig\TurnoverWatcher\app.config">
       <SubType>Designer</SubType>
     </None>
@@ -298,6 +305,10 @@
     <ProjectReference Include="..\Fanex.Service.Core\Fanex.Service.Core.csproj">
       <Project>{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}</Project>
       <Name>Fanex.Service.Core %28Fanex.Service.Core\Fanex.Service.Core%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.SMAReport.Business\Fanex.SMAReport.Business.csproj">
+      <Project>{56CC0914-78E8-4BF8-8664-5DB8807C1488}</Project>
+      <Name>Fanex.SMAReport.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.TurnoverWatcher.Business\Fanex.NAPReport.TurnoverWatcher.Business.csproj">
       <Project>{EEEE6EC6-55BC-4C6E-AC8B-2D5B8C8B7179}</Project>

@@ -15,16 +15,6 @@ namespace Fanex.SMAReport.Business.Repositories
     /// </summary>
     public interface ISMAReportRepository
     {
-        void UpdateTaskStatus(int id, Status status);
-
-        SMAReportModel GetCurrentTask();
-
-        SMAReportModel GetTaskById(int id);
-
-        int InsertTask(SMAReportModel task);
-
-        SMAReportModel GetTaskReadyRun();
-
         SMAReport GetSMAReport();
     }
 }

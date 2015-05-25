@@ -12,6 +12,7 @@ namespace Fanex.SMAReport.Business.Service
     using Fanex.Service.Core.Extensions;
     using Fanex.SMAReport.Business.Constants;
     using RazorEngine;
+using Fanex.MailDelivery.Client.Models;
 
     /// <summary>
     /// TODO: Update summary.
@@ -25,85 +26,20 @@ namespace Fanex.SMAReport.Business.Service
         /// <param name="reportFrom">The report from.</param>
         /// <param name="reportTo">The report to.</param>
         /// <returns>Email will be send success or not.</returns>
-        public static bool SendSMAReportEmail(List<string> fileNames, string reportFrom, string reportTo)
+        public static Mail SendSMAReportEmail(List<string> fileNames, string reportFrom, string reportTo)
         {
-            bool isSuccess = true;
-            try
+            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, AppSettings.EmailTemplate);
+            string template = File.ReadAllText(filePath);
+            var emailContent = Razor.Parse(template, fileNames);
+            string emailSubject = string.Format(AppSettings.MailSubject, reportFrom, reportTo);
+            string emailTitle = AppSettings.MailTitle;
+
+            return new Mail
             {
-                var root = AppDomain.CurrentDomain.BaseDirectory;
-                string filePath = root + EmailTemplateConstants.SMAReportEmailTemplate;
-                string template = File.ReadAllText(filePath);
-                var emailContent = Razor.Parse(template, fileNames);
-                string emailTo = AppSettings.MailTo;
-                string emailSubject = string.Format(AppSettings.MailSubject, reportFrom, reportTo);
-                string emailTitle = AppSettings.MailTitle;
-
-                var mailItem = new Fanex.MailDeliver.Model.MailRecord
-                {
-                    MailTo = emailTo,
-                    MailCc = AppSettings.MailCcTo,
-                    MailBcc = AppSettings.MailBCcTo,
-                    Subject = emailSubject,
-                    Title = emailTitle,
-                    Body = emailContent
-                };
-
-                if (!string.IsNullOrEmpty(mailItem.MailTo.Trim()))
-                {
-                    using (var client = new Fanex.MailDeliver.MailClient.API.MailDeliver())
-                    {
-                        client.SendMail(mailItem);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                LogExtensions.ExceptionHandler(ex);
-                isSuccess = false;
-                throw;
-            }
-
-            return isSuccess;
-        }
-
-        /// <summary>
-        /// Errors the email notification.
-        /// </summary>
-        /// <param name="reportFrom">The report from.</param>
-        /// <param name="reportTo">The report to.</param>
-        public static void ErrorEmailNotification(string reportFrom, string reportTo)
-        {
-            try
-            {
-                var root = AppDomain.CurrentDomain.BaseDirectory;
-                string filePath = root + EmailTemplateConstants.SMAReportEmailNotificationTemplate;
-                string template = File.ReadAllText(filePath);
-                var emailContent = Razor.Parse(template);
-                string emailTo = AppSettings.AdminEmail;
-                string emailSubject = string.Format(AppSettings.MailSubject, reportFrom, reportTo);
-                string emailTitle = AppSettings.MailTitle;
-
-                var mailItem = new Fanex.MailDeliver.Model.MailRecord
-                {
-                    MailTo = emailTo,
-                    Subject = emailSubject,
-                    Title = emailTitle,
-                    Body = emailContent
-                };
-
-                if (!string.IsNullOrEmpty(mailItem.MailTo.Trim()))
-                {
-                    using (var client = new Fanex.MailDeliver.MailClient.API.MailDeliver())
-                    {
-                        client.SendMail(mailItem);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                LogExtensions.ExceptionHandler(ex);
-                throw;
-            }
+                Subject = emailSubject,
+                Title = emailTitle,
+                Body = emailContent
+            };
         }
     }
 }

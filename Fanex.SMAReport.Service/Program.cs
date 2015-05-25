@@ -7,6 +7,8 @@
 namespace Fanex.SMAReport.Service
 {
     using System.ServiceProcess;
+    using System;
+    using Fanex.Data.Configuration;
 
     /// <summary>
     /// Main program.
@@ -18,12 +20,16 @@ namespace Fanex.SMAReport.Service
         /// </summary>
         private static void Main()
         {
-            ServiceBase[] servicesToRun;
-            servicesToRun = new ServiceBase[]
-            {
-                new AutoMailService()
-            };
-            ServiceBase.Run(servicesToRun);
+            //ServiceBase[] servicesToRun;
+            //servicesToRun = new ServiceBase[]
+            //{
+            //    new AutoMailService()
+            //};
+            //ServiceBase.Run(servicesToRun);
+            DbSettingProviderManager.Current.Start();
+            var service = new SMAReport.Business.Service.SMAReportService();
+            var email = service.SMAReport();
+            Console.WriteLine("Test Done");
         }
     }
 }

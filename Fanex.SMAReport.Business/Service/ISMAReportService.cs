@@ -7,16 +7,13 @@
 namespace Fanex.SMAReport.Business.Service
 {
     using Fanex.SMAReport.Business.Model;
+    using Fanex.MailDelivery.Client.Models;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public interface ISMAReportService
     {
-        void ProcessSMAReport();
-
-        int InsertTask(SMAReportModel task);
-
-        SMAReportModel GetTaskReadyToRun();
+        Mail SMAReport();
     }
 }

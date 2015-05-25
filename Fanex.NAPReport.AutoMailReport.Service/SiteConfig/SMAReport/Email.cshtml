@@ -1,0 +1,32 @@
+﻿@using System.Collections.Generic;
+@using Fanex.SMAReport.Business;
+@using Fanex.Service.Core.Extensions;
+@using fanexCommon = Fanex.Common;
+
+<div>
+    <div>
+        Dear All,<br />
+        <br />
+    </div>
+    <div>
+        Please click on the following links to download the report files.</div>
+    <br />
+    @{
+        DateTime currentTime = DateTime.Now;
+        string timeToEncrypt = currentTime.ToString();
+        string encryptText = fanexCommon.Cryptography.CfsEnCrypt(timeToEncrypt);
+        string reportPath = AppSettings.DownloadUrl;
+    }
+    @foreach (string fileName in @Model)
+    {
+        string encryptReportName = fanexCommon.Cryptography.CfsEnCrypt(fileName);
+        string reportDownloadUrl = string.Format("{0}?time={1}&reportName={2}", reportPath, encryptText, encryptReportName);
+        <a href="@reportDownloadUrl">@fileName</a><br /><br />
+    }
+    <div>Note: <span style="font-style: italic;">The links will be expired on @currentTime.AddMonths(1).ToShortFormatedDate(). Please contact Starix IT if you can not download them!</span></div><br /><br />
+    <div>
+        Thanks & Regards,<br />
+        <br />
+        Starix IT.
+    </div>
+</div>

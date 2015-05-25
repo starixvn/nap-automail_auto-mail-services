@@ -1,0 +1,5 @@
+﻿<Functions>
+  <Function Name="SMA - Report">
+    <Setting Key="SMA_Report_GetData" SpName="Acc_Rpt_SMAAutomail" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
+  </Function>
+</Functions>
