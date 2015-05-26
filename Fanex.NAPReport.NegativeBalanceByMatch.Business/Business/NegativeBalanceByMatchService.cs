@@ -28,11 +28,13 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 		private readonly List<object> _logData = new List<object>();
 		private readonly ILicenseeService _licenseeService;
 		private readonly MailService _mailService;
+		private readonly string _templateBaseDir;
 
-		public NegativeBalanceByMatchService(ILicenseeService licenseeService, MailService mailService)
+		public NegativeBalanceByMatchService(ILicenseeService licenseeService, MailService mailService, string templateBaseDir = "")
 		{
 			_licenseeService = licenseeService;
 			_mailService = mailService;
+			_templateBaseDir = templateBaseDir;
 			_repository = new NegativeBalanceByMatchRepository();
 		}
 
@@ -42,7 +44,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 			{
 				return;
 			}
-
+ 
 			DateTime curDateTime = DateTime.UtcNow;
 			ExportSettings exportSettings = new ExportSettings();
 
@@ -86,12 +88,9 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 
 		private string GetMailBody(string licenseeName, IList<Match> matches)
 		{
-			string appLocation = AppDomain.CurrentDomain.BaseDirectory;
 			string template = licenseeName.ToLower().Equals("haifa")
-									? File.ReadAllText(appLocation + @"/SiteConfig/NegativeBalanceByMatch/Templates/EmailTemplateDualLanguage.cshtml")
-									: File.ReadAllText(appLocation + @"/SiteConfig/NegativeBalanceByMatch/Templates/EmailTemplateSingleLanguage.cshtml");
-									//? File.ReadAllText(appLocation + @"/Templates/EmailTemplateDualLanguage.cshtml")
-									//: File.ReadAllText(appLocation + @"/Templates/EmailTemplateSingleLanguage.cshtml");
+									? File.ReadAllText(Path.Combine(_templateBaseDir, @"Templates\EmailTemplateDualLanguage.cshtml"))
+									: File.ReadAllText(Path.Combine(_templateBaseDir, @"Templates\EmailTemplateSingleLanguage.cshtml"));
 			return Razor.Parse(template, matches);
 		}
 

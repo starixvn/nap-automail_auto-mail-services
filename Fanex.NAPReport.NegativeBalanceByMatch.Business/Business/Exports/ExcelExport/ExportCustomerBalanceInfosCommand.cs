@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities;
+using Fanex.Service.Core.Extensions;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 
@@ -40,7 +41,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.Excel
 
 		public void RenderCustomerBalanceInfosHeader()
 		{
-			XSSFCellStyle style = ExcelDocument.GetCellStyle(FontBoldWeight.Bold, Color.FromArgb(60, 94, 165), Color.FromArgb(0, 0, 0));
+			XSSFCellStyle style = ExcelDocument.GetCellStyle(FontBoldWeight.Bold, Color.FromArgb(122, 151, 209), Color.FromArgb(0, 0, 0));
 
 			ExcelDocument.RenderCurrentCell("No.", style);
 
@@ -67,7 +68,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.Excel
 			ExcelDocument.RenderCurrentCell(customerBalanceInfo.Username, style);
 
 			ExcelDocument.IncreaseColumnIndex();
-			ExcelDocument.RenderCurrentCell(customerBalanceInfo.TotalBalance.ToString(".00"), style);
+			ExcelDocument.RenderCurrentCell(customerBalanceInfo.TotalBalance.Format(2), style);
 
 			ExcelDocument.IncreaseColumnIndex();
 			ExcelDocument.RenderCurrentCell(customerBalanceInfo.CurrencyName, style);

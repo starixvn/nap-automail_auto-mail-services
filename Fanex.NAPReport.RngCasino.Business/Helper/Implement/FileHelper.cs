@@ -3,12 +3,12 @@
 // TODO: Steven.Nguyen
 // </copyright>
 
-namespace Robot.Report.RngCasino.Helper.Implement
-{
-    using System;
-    using System.IO;
+using System;
+using System.IO;
 
-    /// <summary>
+namespace Fanex.NAPReport.RngCasino.Business.Helper.Implement
+{
+	/// <summary>
     /// File Extension.
     /// </summary>
     public class FileHelper

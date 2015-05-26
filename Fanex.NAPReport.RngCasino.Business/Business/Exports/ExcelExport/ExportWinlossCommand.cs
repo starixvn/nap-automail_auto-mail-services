@@ -2,9 +2,9 @@
 using System.Drawing;
 using Fanex.NAPReport.RngCasino.Business.Configuration;
 using Fanex.NAPReport.RngCasino.Business.Entities;
+using Fanex.NAPReport.RngCasino.Business.Helper.Implement;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
-using Robot.Report.RngCasino.Helper.Implement;
 
 namespace Fanex.NAPReport.RngCasino.Business.Business.Exports.ExcelExport
 {
@@ -37,7 +37,7 @@ namespace Fanex.NAPReport.RngCasino.Business.Business.Exports.ExcelExport
 			ExcelDocument.RenderCurrentCell("Agency", style);
 
 			ExcelDocument.IncreaseColumnIndex();
-			ExcelDocument.RenderCurrentCell(string.Format("Winloss Amount in {0}", AppSetting.BaseCurrency), style);
+			ExcelDocument.RenderCurrentCell(string.Format("Winloss Amount in {0}", RngCasinoSettings.BaseCurrency), style);
 
 			ExcelDocument.IncreaseColumnIndex();
 			ExcelDocument.RenderCurrentCell("Winloss Amount in user currency (UserCurrency)", style);
@@ -61,7 +61,7 @@ namespace Fanex.NAPReport.RngCasino.Business.Business.Exports.ExcelExport
 
 			var styleRight = ExcelDocument.GetCellStyle(FontBoldWeight.None, borderColor: Color.FromArgb(0, 0, 0), horizontalAlignment: HorizontalAlignment.Right);
 
-			ExcelDocument.RenderCurrentCell(index, styleCenter);
+			ExcelDocument.RenderCurrentCell(index + 1, styleCenter);
 
 			ExcelDocument.IncreaseColumnIndex();
 			ExcelDocument.RenderCurrentCell(userInfo.Member, styleCenter);

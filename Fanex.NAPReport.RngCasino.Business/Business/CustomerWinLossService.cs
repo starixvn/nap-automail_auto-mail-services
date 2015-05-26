@@ -11,11 +11,10 @@ using Fanex.Common;
 using Fanex.NAPReport.RngCasino.Business.Business.Exports;
 using Fanex.NAPReport.RngCasino.Business.Business.Exports.ExcelExport;
 using Fanex.NAPReport.RngCasino.Business.Configuration;
+using Fanex.NAPReport.RngCasino.Business.Criteria;
 using Fanex.NAPReport.RngCasino.Business.Entities;
 using Fanex.NAPReport.RngCasino.Business.Helper.Implement;
 using RazorEngine;
-using Robot.Report.RngCasino.Criteria;
-using Robot.Report.RngCasino.Helper.Implement;
 
 namespace Fanex.NAPReport.RngCasino.Business.Business
 {
@@ -30,8 +29,11 @@ namespace Fanex.NAPReport.RngCasino.Business.Business
 			_exportSettings = exportSettings;
 		}
 
-		public bool SendMail(DateTime fromDate, DateTime toDate, decimal winlost, string subject, string title, string mailTo, string cc, string bcc)
+		public bool SendMail(DateTime fromDate, DateTime toDate, decimal winlost, string subject, string title)
 		{
+			if (RngCasinoSettings.IsActive == false)
+				return false;
+
 			var result = false;
 			try
 			{
@@ -42,13 +44,10 @@ namespace Fanex.NAPReport.RngCasino.Business.Business
 					var template = File.ReadAllText(appLocation + @"/Templates/EmailTemplate.cshtml");
 					var body = Razor.Parse(template, userInfos);
 
-
 					var fileNamePath = Path.Combine(RngCasinoSettings.ExportDataDirectoryWithYearMonth,
 														RngCasinoSettings.ExcelFileName + "_" + DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss") + ".xlsx");
 					_excelService.GenerateReport(userInfos, _exportSettings, fileNamePath);
-
-					//result = EmailHelper.SendMail(mailTo, cc, bcc, title, subject, content, null);
-
+				 
 					result = EmailHelper.SendMail(subject, title, body, fileNamePath);
 				}
 			}

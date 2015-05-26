@@ -46,9 +46,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
                 };
 			}
 
-			MailClientHandler.Start();
 			MailClientHandler.SendMail(mail);
-			MailClientHandler.Stop();
 		}
 	}
 }

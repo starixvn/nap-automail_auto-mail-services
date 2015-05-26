@@ -4,11 +4,11 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Robot.Report.RngCasino.Entities
-{
-    using System.Net.Mail;
+using System.Net.Mail;
 
-    /// <summary>
+namespace Fanex.NAPReport.RngCasino.Business.Entities
+{
+	/// <summary>
     /// TODO: Email detail.
     /// </summary>
     public class MailSend

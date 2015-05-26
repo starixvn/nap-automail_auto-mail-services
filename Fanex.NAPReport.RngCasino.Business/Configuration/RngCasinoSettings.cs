@@ -5,15 +5,20 @@ namespace Fanex.NAPReport.RngCasino.Business.Configuration
 {
 	public class RngCasinoSettings : AppSettingBase, ISettings
 	{
-		//public static bool IsActive { get; set; }
+		public static bool IsActive { get; set; }
 
-		//public static bool IsTesting { get; set; }
 
-		//public static string Subject { get; set; }
+		public static string Subject { get; set; }
 
-		//public static string Title { get; set; }
+		public static string Title { get; set; }
 
-		//public static string SqLiteDbPath { get; set; }
+
+		public static int TimeInterval { get; set; }
+
+		public static string BaseCurrency { get; set; }
+
+		public static decimal WinLoss { get; set; }
+
 
 		public static bool AttachReport { get; set; }
 
@@ -25,7 +30,9 @@ namespace Fanex.NAPReport.RngCasino.Business.Configuration
 
 		public static string ExportDataDirectory { get; set; }
 
+
 		public static int FunctionId { get; set; }
+
 
 		public static string ExportDataDirectoryWithYearMonth
 		{

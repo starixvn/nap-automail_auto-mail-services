@@ -4,15 +4,11 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Robot.Report.RngCasino.Criteria
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.NAP.Framework.Data;
+using Fanex.NAP.Framework.Data;
 
-    /// <summary>
+namespace Fanex.NAPReport.RngCasino.Business.Criteria
+{
+	/// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class GetCurrencyListCriteria : CriteriaBase

@@ -1,10 +1,12 @@
 ﻿<Settings>
+	<Setting key="IsActive" value="true" />
 
-	<!--<Setting key="IsActive" value="true" />
-	<Setting key="IsTesting" value="true" />
-	<Setting key="Subject" value="List Of Members With Negative Balance - {0} (GMT {1})" />
+	<Setting key="Subject" value="RNG Casino - Members with winloss greater or equal {0}${1} from {2} to {3}" />
 	<Setting key="Title" value="IT Team" />
-	<Setting key="SqLiteDbPath" value="Data Source=D:\Project_Nexcel\auto-mail-services\Fanex.NAPReport.NegativeBalanceByMatch.Service\SQLiteDatabase\AutoMail-NegativeBalanceByMatch.s3db;Version=3;" />-->
+
+	<Setting key="TimeInterval" value="2" />
+	<Setting key="BaseCurrency" value="MYR" />
+	<Setting key="WinLoss" value="5000" />
 
 	<Setting key="AttachReport" value="true" />
 	<Setting key="ExcelPassword" value="we123" />

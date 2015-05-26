@@ -29,7 +29,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.Excel
 
 		private Cell CurrentCell { get; set; }
 
-		public ExcelDocument(XSSFWorkbook wookbook, ExportSettings exportSettings, string licenseeName)
+		public ExcelDocument(ExportSettings exportSettings, string licenseeName)
 		{
 			Workbook = new XSSFWorkbook();
 			ExportSettings = exportSettings;

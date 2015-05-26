@@ -29,7 +29,7 @@ namespace Fanex.NAPReport.RngCasino.Business.Business.Exports.ExcelExport
 
 		private Cell CurrentCell { get; set; }
 
-		public ExcelDocument(XSSFWorkbook wookbook, ExportSettings exportSettings, string sheetName)
+		public ExcelDocument(ExportSettings exportSettings, string sheetName)
 		{
 			Workbook = new XSSFWorkbook();
 			ExportSettings = exportSettings;

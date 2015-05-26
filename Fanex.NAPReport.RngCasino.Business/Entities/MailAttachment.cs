@@ -3,11 +3,12 @@
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
-namespace Robot.Report.RngCasino.Entities
-{
-    using System.IO;
 
-    /// <summary>
+using System.IO;
+
+namespace Fanex.NAPReport.RngCasino.Business.Entities
+{
+	/// <summary>
     /// Email's attachment detail.
     /// </summary>
     public class MailAttachment

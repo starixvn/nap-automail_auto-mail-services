@@ -4,16 +4,15 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Robot.Report.RngCasino.Helper.Implement
-{
-    using System;
-    using System.Collections.Generic;
-    using Fanex.Common.Helper;
-    using Fanex.NAP.Framework.Data;
-    using Robot.Report.RngCasino.Helper;
-    using Robot.Report.RngCasino.Helper.Interface;
+using System;
+using System.Collections.Generic;
+using Fanex.Common.Helper;
+using Fanex.NAP.Framework.Data;
+using Fanex.NAPReport.RngCasino.Business.Helper.Interface;
 
-    /// <summary>
+namespace Fanex.NAPReport.RngCasino.Business.Helper.Implement
+{
+	/// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class ServiceBase : IServiceBase

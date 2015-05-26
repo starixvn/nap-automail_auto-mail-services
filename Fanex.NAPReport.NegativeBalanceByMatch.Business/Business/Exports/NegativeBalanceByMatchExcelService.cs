@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Fanex.NAPReport.Business.Business.Exports.ExcelExport;
 using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport;
 using Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities;
-using NPOI.XSSF.UserModel;
 
 namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports
 {
@@ -10,7 +9,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports
 	{
 		public void GenerateReportForLicensee(string licenseeName, IList<Match> matchs, ExportSettings exportSettings, string saveFileNamePath)
 		{
-			ExcelDocument excelDocument = new ExcelDocument(new XSSFWorkbook(), exportSettings, licenseeName);
+			ExcelDocument excelDocument = new ExcelDocument(exportSettings, licenseeName);
 
 			ExportCompositeCommand<IExportCommand> exportCommand = new ExportCompositeCommand<IExportCommand>(excelDocument);
 

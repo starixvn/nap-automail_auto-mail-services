@@ -25,8 +25,6 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Configuration
 
 		public static string ExportDataDirectory { get; set; }
 
-		public static string LicenseeFunctionMap { get; set; }
-
 		public static string ExportDataDirectoryWithYearMonth
 		{
 			get { return ExportDataDirectoryWithYearMonth(ExportDataDirectory); } 

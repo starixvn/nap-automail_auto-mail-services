@@ -1,11 +1,10 @@
 ﻿@using Fanex.NAPReport.RngCasino.Business.Configuration
-@using Robot.Report.RngCasino.Helper.Implement
-@using Robot.Report.RngCasino.Configuration
+@using Fanex.NAPReport.RngCasino.Business.Helper.Implement
 @{ int index = 0; }  
 <div>
     <div>
         Dear All,<br /> <br/>
-        Please be informed that here's the list of members that win/lose greater or equal @AppSetting.BaseCurrency$@NumberExtension.WinLossFormat(@AppSetting.WinLoss, 0)<br />
+        Please be informed that here's the list of members that win/lose greater or equal @RngCasinoSettings.BaseCurrency$@NumberExtension.WinLossFormat(@RngCasinoSettings.WinLoss, 0)<br />
     </div>
     <br/>
     <table cellspacing="0" border="1" style="border-color: #0000ff; border-style: Solid;
@@ -22,7 +21,7 @@
                     Agency
                 </td>
                 <td align="center" style="background-color: #0000ff; width: 150px">
-                   Winloss Amount in @AppSetting.BaseCurrency
+                   Winloss Amount in @RngCasinoSettings.BaseCurrency
                 </td>
                 <td align="center" style="background-color: #0000ff; width: 220px">
                    Winloss Amount in user currency (UserCurrency)

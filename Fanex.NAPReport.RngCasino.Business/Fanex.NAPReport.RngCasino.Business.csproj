@@ -157,8 +157,6 @@
     <Compile Include="Business\Exports\ExcelExport\IExportCommand.cs" />
     <Compile Include="Business\Exports\IRngCasinoExcelService.cs" />
     <Compile Include="Business\Exports\RngCasinoExcelService.cs" />
-    <Compile Include="Configuration\AppSetting.cs" />
-    <Compile Include="Configuration\EmailSetting.cs" />
     <Compile Include="Configuration\RngCasinoSettings.cs" />
     <Compile Include="Criteria\CustomerWinLossCriteria.cs" />
     <Compile Include="Criteria\GetCurrencyListCriteria.cs" />
@@ -176,7 +174,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

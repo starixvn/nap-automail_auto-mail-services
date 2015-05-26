@@ -31,7 +31,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.Excel
 
 		public void RenderMatchSettleLogsHeader()
 		{
-			XSSFCellStyle style = ExcelDocument.GetCellStyle(FontBoldWeight.Bold, Color.FromArgb(60, 94, 165), Color.FromArgb(0, 0, 0));
+			XSSFCellStyle style = ExcelDocument.GetCellStyle(FontBoldWeight.Bold, Color.FromArgb(122, 151, 209), Color.FromArgb(0, 0, 0));
 
 			ExcelDocument.RenderCurrentCell("#", style);
 

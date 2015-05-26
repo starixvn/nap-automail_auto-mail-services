@@ -1,38 +1,36 @@
 ﻿using System.Collections.Generic;
+using System.Xml.Linq;
 using Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities;
 
 namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Helper
 {
 	public class LicenseeFunctionParser
 	{
-		public LicenseeFunctionParser(string stringToParse)
+		public LicenseeFunctionParser(string fileNamePath)
 		{
-			_stringToParse = stringToParse;
+			_fileNamePath = fileNamePath;
+			LicenseeFunctions = new List<LicenseeFunction>();
 			Parse();
 		}
 
 		public IList<LicenseeFunction> LicenseeFunctions;
 
-		private string _stringToParse;
+		private readonly string _fileNamePath;
 
 		private void Parse()
 		{
-			LicenseeFunctions = new List<LicenseeFunction>();
+			XElement licenseeFunctions = XElement.Load(_fileNamePath);
 
-			string[] licenseeFunctionGroups = _stringToParse.Split(';');
-
-			foreach (string licenseeFunctionGroup in licenseeFunctionGroups)
+			foreach (XElement licenseeFunction in licenseeFunctions.Elements())
 			{
-				string[] licenseeFunctionTokens = licenseeFunctionGroup.Trim(' ', '(', ')').Split(',');
-
 				LicenseeFunctions.Add(
 					new LicenseeFunction()
 					{
-						LicenseeName = licenseeFunctionTokens[0],
-						Function = new Function
+						LicenseeName = licenseeFunction.Attribute("licenseeName").Value,
+						Function	 = new Function
 						{
-							Id = int.Parse(licenseeFunctionTokens[1]),
-							Name = licenseeFunctionTokens[2]
+							Id = int.Parse(licenseeFunction.Attribute("functionId").Value),
+							Name = licenseeFunction.Attribute("functionName").Value
 						}
 					}
 				);

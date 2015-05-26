@@ -37,14 +37,14 @@
             ConfigurationParser configurationParser = new ConfigurationParser(@"SiteConfig\NegativeBalanceByMatch\NegativeBalanceByMatch.Settings.xml");
             configurationParser.Parse<Settings>();
 
-            LicenseeFunctionParser licenseeFunctionParser = new LicenseeFunctionParser(Settings.LicenseeFunctionMap);
+			LicenseeFunctionParser licenseeFunctionParser = new LicenseeFunctionParser(@"SiteConfig\NegativeBalanceByMatch\LicenseeFunctionMap.xml");
             ILicenseeService licenseeService = new LicenseeService(licenseeFunctionParser);
 
             INegativeBalanceByMatchExcelService negativeBalanceByMatchExcelService = new NegativeBalanceByMatchExcelService();
 
             MailService mailService = new MailService(negativeBalanceByMatchExcelService);
 
-            _negativeBalanceByMatchService = new NegativeBalanceByMatchService(licenseeService, mailService);
+			_negativeBalanceByMatchService = new NegativeBalanceByMatchService(licenseeService, mailService, AppDomain.CurrentDomain.BaseDirectory + @"SiteConfig\NegativeBalanceByMatch");
         }
 
         protected override void OnStart(string[] args)

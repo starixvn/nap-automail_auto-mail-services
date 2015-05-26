@@ -4,14 +4,9 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Robot.Report.RngCasino.Entities
+namespace Fanex.NAPReport.RngCasino.Business.Entities
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
-    /// <summary>
+	/// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class Currency

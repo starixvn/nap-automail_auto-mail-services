@@ -4,12 +4,12 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Robot.Report.RngCasino.Criteria
-{
-    using System;
-    using Fanex.NAP.Framework.Data;
+using System;
+using Fanex.NAP.Framework.Data;
 
-    /// <summary>
+namespace Fanex.NAPReport.RngCasino.Business.Criteria
+{
+	/// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class CustomerWinLossCriteria : CriteriaBase
