@@ -101,9 +101,9 @@
     <Reference Include="RabbitMQ.Client, Version=3.4.3.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.MailStation.1.0.2\lib\net40\RabbitMQ.Client.dll</HintPath>
     </Reference>
-    <Reference Include="RazorEngine, Version=3.7.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+    <Reference Include="RazorEngine, Version=3.3.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\RazorEngine.3.7.0\lib\net40\RazorEngine.dll</HintPath>
+      <HintPath>..\packages\RazorEngine.3.3.0\lib\net40\RazorEngine.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -134,6 +134,7 @@
     <Compile Include="Jobs\BA\DailyWinLoss.cs" />
     <Compile Include="Jobs\BA\MonthlyWinLoss.cs" />
     <Compile Include="Jobs\HorseTransaction3rd\HorseTransaction3rd.cs" />
+    <Compile Include="Jobs\NAPReport\CreditMovement.cs" />
     <Compile Include="Jobs\NAPReport\VirtualSportWinLoss.cs" />
     <Compile Include="Jobs\NAPReport\CreditTermReport.cs">
       <SubType>Code</SubType>
@@ -253,6 +254,9 @@
     <Content Include="SiteConfig\HorseTransaction3rd\UnsuccessEmail.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="SiteConfig\CreditMovement\Email.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="SiteConfig\NegativeBalanceByMatch\Templates\EmailTemplateDualLanguage.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -282,6 +286,10 @@
     <ProjectReference Include="..\Fanex.BalanceReport\Fanex.NAPReport.BalanceReport.csproj">
       <Project>{4DF39ADE-3E49-4D1E-9211-E48353B65135}</Project>
       <Name>Fanex.NAPReport.BalanceReport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.CreditMovement.Business\Fanex.NAPReport.CreditMovement.Business.csproj">
+      <Project>{11920088-769E-4635-9222-19CF072BC6E1}</Project>
+      <Name>Fanex.NAPReport.CreditMovement.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.MonthlyWinlossByLeague.Business\Fanex.MonthlyWinlossByLeague.Business.csproj">
       <Project>{B9C0CA6B-C407-4E48-B672-4CA10B8BA6FE}</Project>

@@ -104,6 +104,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.RngCasino.T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.RngCasino.Business", "Fanex.NAPReport.RngCasino.Business\Fanex.NAPReport.RngCasino.Business.csproj", "{506C2FB3-261A-4EDD-B7BB-16F9567DE39D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NapReport.CreditMovement.Testing", "Fanex.CreditMovement.Service\Fanex.NapReport.CreditMovement.Testing.csproj", "{987720DD-921C-4814-A0F2-FAA08B4BFC70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.CreditMovement.Business", "Fanex.CreditMovement.Business\Fanex.NAPReport.CreditMovement.Business.csproj", "{11920088-769E-4635-9222-19CF072BC6E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -500,6 +504,26 @@ Global
 		{506C2FB3-261A-4EDD-B7BB-16F9567DE39D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{506C2FB3-261A-4EDD-B7BB-16F9567DE39D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{506C2FB3-261A-4EDD-B7BB-16F9567DE39D}.Release|x86.ActiveCfg = Release|Any CPU
+		{987720DD-921C-4814-A0F2-FAA08B4BFC70}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{987720DD-921C-4814-A0F2-FAA08B4BFC70}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{987720DD-921C-4814-A0F2-FAA08B4BFC70}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{987720DD-921C-4814-A0F2-FAA08B4BFC70}.Debug|x86.ActiveCfg = Debug|x86
+		{987720DD-921C-4814-A0F2-FAA08B4BFC70}.Debug|x86.Build.0 = Debug|x86
+		{987720DD-921C-4814-A0F2-FAA08B4BFC70}.Release|Any CPU.ActiveCfg = Release|x86
+		{987720DD-921C-4814-A0F2-FAA08B4BFC70}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{987720DD-921C-4814-A0F2-FAA08B4BFC70}.Release|Mixed Platforms.Build.0 = Release|x86
+		{987720DD-921C-4814-A0F2-FAA08B4BFC70}.Release|x86.ActiveCfg = Release|x86
+		{987720DD-921C-4814-A0F2-FAA08B4BFC70}.Release|x86.Build.0 = Release|x86
+		{11920088-769E-4635-9222-19CF072BC6E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11920088-769E-4635-9222-19CF072BC6E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11920088-769E-4635-9222-19CF072BC6E1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{11920088-769E-4635-9222-19CF072BC6E1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{11920088-769E-4635-9222-19CF072BC6E1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{11920088-769E-4635-9222-19CF072BC6E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11920088-769E-4635-9222-19CF072BC6E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11920088-769E-4635-9222-19CF072BC6E1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{11920088-769E-4635-9222-19CF072BC6E1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{11920088-769E-4635-9222-19CF072BC6E1}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -530,6 +554,7 @@ Global
 		{446FBE1E-58F9-41A8-B442-8012B884BF7F} = {84385BB5-6DA3-4429-B535-7ECB1089FCC0}
 		{6004DBB8-7209-4690-A158-62D12B49EAE4} = {84385BB5-6DA3-4429-B535-7ECB1089FCC0}
 		{506C2FB3-261A-4EDD-B7BB-16F9567DE39D} = {84385BB5-6DA3-4429-B535-7ECB1089FCC0}
+		{11920088-769E-4635-9222-19CF072BC6E1} = {84385BB5-6DA3-4429-B535-7ECB1089FCC0}
 		{BA901E4A-BFE7-49DB-83DC-54DC467A44B8} = {ADC782A9-F916-4F43-9E28-B8C6D7579D55}
 		{E1A6904E-FD26-47CE-A1EB-4A6E8F3126E6} = {ADC782A9-F916-4F43-9E28-B8C6D7579D55}
 		{FBA40037-31BF-4EC0-98F5-09CF8067457E} = {DD647794-42ED-4DBB-82FF-75040CE2D8D0}
@@ -544,6 +569,7 @@ Global
 		{28127410-CF82-4859-967C-1F1A06780538} = {DD647794-42ED-4DBB-82FF-75040CE2D8D0}
 		{72643EEE-7DEA-48A1-B543-51DD0EF0FBF2} = {DD647794-42ED-4DBB-82FF-75040CE2D8D0}
 		{04CFDC07-417D-499F-B202-F457C6263DB0} = {DD647794-42ED-4DBB-82FF-75040CE2D8D0}
+		{987720DD-921C-4814-A0F2-FAA08B4BFC70} = {DD647794-42ED-4DBB-82FF-75040CE2D8D0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35;packages\Unity.Interception.2.1.505.2\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Data.5.0.505.0\lib\NET35

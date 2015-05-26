@@ -37,7 +37,7 @@ namespace Fanex.NAPReport.AutoMailReport.Service
             //mailService.StartAndStop();
 
             //DbSettingProviderManager.Current.Start();
-            //SMAReport report = new SMAReport();
+            //CreditMovement report = new CreditMovement();
             //report.Run();
             //DirectBalanceReport cs = new DirectBalanceReport();
             //cs.Run2();

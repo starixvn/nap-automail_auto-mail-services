@@ -1,0 +1,23 @@
+﻿@using System.Collections.Generic;
+@using Fanex.CreditMovement.Business.Criteria;
+@{
+    string reportFrom = Model.FromDate.ToString("yyyy-MM-dd");
+    string reportTo = Model.ToDate.ToString("yyyy-MM-dd");
+}
+<div>
+    <div>
+        Dear All,<br />
+        <br />
+    </div>
+    <div>
+        This is to provide the Credit Movement report from @reportFrom to 
+        @reportTo </div>
+    <br />
+
+    <div>
+        This is an auto-generated email, please do not reply.<br />
+        <br />
+        Thanks & Regards,<br /><br />
+        Automail System.
+    </div>
+</div>
