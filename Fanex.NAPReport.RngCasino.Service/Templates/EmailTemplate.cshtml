@@ -1,0 +1,65 @@
+﻿@using Fanex.NAPReport.RngCasino.Business.Configuration
+@using Robot.Report.RngCasino.Helper.Implement
+@using Robot.Report.RngCasino.Configuration
+@{ int index = 0; }  
+<div>
+    <div>
+        Dear All,<br /> <br/>
+        Please be informed that here's the list of members that win/lose greater or equal @AppSetting.BaseCurrency$@NumberExtension.WinLossFormat(@AppSetting.WinLoss, 0)<br />
+    </div>
+    <br/>
+    <table cellspacing="0" border="1" style="border-color: #0000ff; border-style: Solid;
+                                      font-size: 8pt; font-family: Tahoma,Arial,Verdana,Sans-Serif" rules="all">
+        <tbody>
+            <tr style="color: white; font-weight: bold">
+                <td align="center" style="width: 40px; background-color: #0000ff; ">
+                    Index
+                </td>
+                <td align="center" style="background-color: #0000ff; width: 150px">
+                    Member
+                </td>
+                <td align="center" style="background-color: #0000ff; width: 120px">
+                    Agency
+                </td>
+                <td align="center" style="background-color: #0000ff; width: 150px">
+                   Winloss Amount in @AppSetting.BaseCurrency
+                </td>
+                <td align="center" style="background-color: #0000ff; width: 220px">
+                   Winloss Amount in user currency (UserCurrency)
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div style=" max-height: 496px; overflow-y: scroll">
+    
+        <table cellspacing="0" rules="all" border="1" 
+               style="border-color: #0000ff; border-style: Solid;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   font-size: 8pt; font-family: Tahoma, Arial, Verdana, Sans-Serif;">
+            @foreach (var customer in @Model)
+            {
+                index++;
+                <tr style="height: 25px;">
+                    <td align="center" style="width: 40px">
+                        @index
+                    </td>
+                    <td align="center" width="150px">
+                        @customer.Member
+                    </td>
+                    <td align="center" width="120px">
+                        @customer.Agency
+                    </td>
+                    <td align="right" style="width: 150px">
+                        @NumberExtension.WinLossFormat(@customer.WinlossBaseCurrency, 2)
+                    </td>
+                    <td align="right" style="width: 220px">
+                       @NumberExtension.WinLossFormat(@customer.Winloss, 2) <span>(@customer.CurrencyName)</span>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <br/>
+    <div>
+    <p style="font-style: italic">Please do not reply directly to this email. It was sent from an unattended mailbox.<br/>
+    Thanks & Regards,<br/>
+    Automail System</p>
+</div>

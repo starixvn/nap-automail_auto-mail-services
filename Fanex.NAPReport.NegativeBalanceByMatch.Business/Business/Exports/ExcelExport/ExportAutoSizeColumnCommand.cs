@@ -2,9 +2,9 @@
 
 namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport
 {
-    public class ExportAutoSizeColumCommand : ExportCommandBase
+    public class ExportAutoSizeColumnCommand : ExportCommandBase
     {
-        public ExportAutoSizeColumCommand(ExcelDocument excelDocument)
+        public ExportAutoSizeColumnCommand(ExcelDocument excelDocument)
             : base(excelDocument)
         {
         }

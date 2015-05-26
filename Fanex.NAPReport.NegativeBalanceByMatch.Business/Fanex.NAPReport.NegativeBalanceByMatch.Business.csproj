@@ -133,7 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\Exports\ExcelExport\ExcelDocument.cs" />
-    <Compile Include="Business\Exports\ExcelExport\ExportAutoSizeColumCommand.cs" />
+    <Compile Include="Business\Exports\ExcelExport\ExportAutoSizeColumnCommand.cs" />
     <Compile Include="Business\Exports\ExcelExport\ExportCommandBase.cs" />
     <Compile Include="Business\Exports\ExcelExport\ExportCompositeCommand.cs" />
     <Compile Include="Business\Exports\ExcelExport\ExportCustomerBalanceInfosCommand.cs" />

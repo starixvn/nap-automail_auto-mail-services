@@ -26,7 +26,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports
 				exportMatchsCommand.Add(matchCommand);
 			}
 
-			IExportCommand autoSizeColumnCommand = new ExportAutoSizeColumCommand(excelDocument);
+			IExportCommand autoSizeColumnCommand = new ExportAutoSizeColumnCommand(excelDocument);
 
 			IExportCommand saveCommand = new ExportSaveCommand(excelDocument, saveFileNamePath);
 

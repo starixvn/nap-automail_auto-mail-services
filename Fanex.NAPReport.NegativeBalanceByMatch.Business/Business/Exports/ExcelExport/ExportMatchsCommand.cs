@@ -7,7 +7,6 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.Excel
 {
     public class ExportMatchsCommand : ExportCompositeCommand<ExportMatchCommand>
     {
-        //private readonly IList<ExportMatchCommand> _matchCommands;
         private readonly ExcelDocument _excelDocument;
         private readonly IList<Match> _matchs;
         private readonly int _numOfRowBreaks;
@@ -18,7 +17,6 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.Excel
             _excelDocument = excelDocument;
             _matchs = matchs;
             _numOfRowBreaks = numOfRowBreaks;
-            //_matchCommands = new List<ExportMatchCommand>();
         }
 
         public override void Execute()

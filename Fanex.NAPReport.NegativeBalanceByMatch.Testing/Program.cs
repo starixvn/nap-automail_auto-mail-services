@@ -18,11 +18,10 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Testing
 		{
 			try
 			{
-				ConfigurationParser configurationParser = new ConfigurationParser(
-					@"D:\Project_Nexcel\auto-mail-services\Fanex.NAPReport.NegativeBalanceByMatch.Business\bin\Debug\Configuration\Settings.xml");
+				ConfigurationParser configurationParser = new ConfigurationParser(@"\Configuration\NegativeBalanceByMatch.Settings.xml");
 
 				IDictionary<string, string> keyToValue =  configurationParser.Parse();
-				Settings settings =	configurationParser.Parse<Settings>();
+				configurationParser.Parse<Settings>();
 
 				DbSettingProviderManager.Current.Start();
 
