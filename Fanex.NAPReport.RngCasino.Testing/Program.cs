@@ -31,17 +31,8 @@ namespace Fanex.NAPReport.RngCasino.Testing
 
 				CustomerWinLossService customerService = new CustomerWinLossService(excelService, exportSettings);
 
-				var winloss = RngCasinoSettings.WinLoss;
-
-				var dateTimeFormat = "{0:yyyy-MM-dd HH:mm}";
-				var toDate = string.Format(dateTimeFormat, DateTime.Now);
-				var fromDate = string.Format(dateTimeFormat, DateTime.Now.AddMinutes(-RngCasinoSettings.TimeInterval - 10000));
-
-				var subject = string.Format(RngCasinoSettings.Subject, RngCasinoSettings.BaseCurrency,
-					NumberExtension.WinLossFormat(winloss, 0), fromDate, toDate);
-
 				MailClientHandler.Start();
-				customerService.SendMail(Converter.ToDateTime(fromDate), Converter.ToDateTime(toDate), winloss, subject, RngCasinoSettings.Title);
+				customerService.SendMail(10000);
 				MailClientHandler.Stop();
 			}
 			catch (Exception ex)

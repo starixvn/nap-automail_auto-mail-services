@@ -204,8 +204,15 @@
     <Content Include="Fanex.NAPReport.AutoMailReport.Service.UAT.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="App_Data\Dev\DBRPT.bodb02.bodbAdminNet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <Content Include="SiteConfig\BADailyWinLoss\BADailyWinLoss.txt" />
+    <Content Include="SiteConfig\RngCasino\RngCasino.Settings.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="SiteConfig\SMALoss\SMALoss.Settings.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -263,6 +270,9 @@
     <None Include="SiteConfig\NegativeBalanceByMatch\Templates\EmailTemplateSingleLanguage.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="SiteConfig\RngCasino\Templates\EmailTemplate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="SiteConfig\SMAReport\Email.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -314,6 +324,10 @@
     <ProjectReference Include="..\Fanex.NAPReport.NegativeBalanceByMatch.Business\Fanex.NAPReport.NegativeBalanceByMatch.Business.csproj">
       <Project>{8C5FF65C-DC35-417B-9464-35C0CAF05FDD}</Project>
       <Name>Fanex.NAPReport.NegativeBalanceByMatch.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.NAPReport.RngCasino.Business\Fanex.NAPReport.RngCasino.Business.csproj">
+      <Project>{506C2FB3-261A-4EDD-B7BB-16F9567DE39D}</Project>
+      <Name>Fanex.NAPReport.RngCasino.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.NAPReport.SMALoss.Business\Fanex.NAPReport.SMALoss.Business.csproj">
       <Project>{DA6DE65A-5D27-4B28-A928-422B664502C2}</Project>

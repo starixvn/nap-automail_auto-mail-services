@@ -1,4 +1,9 @@
-﻿namespace Fanex.NAPReport.AutoMailReport.Service
+﻿using Fanex.NAPReport.RngCasino.Business.Business;
+using Fanex.NAPReport.RngCasino.Business.Business.Exports;
+using Fanex.NAPReport.RngCasino.Business.Business.Exports.ExcelExport;
+using Fanex.NAPReport.RngCasino.Business.Configuration;
+
+namespace Fanex.NAPReport.AutoMailReport.Service
 {
     using System;
     using System.Diagnostics;
@@ -23,6 +28,7 @@
         private ISMALossProcess _smaLossProcess = null;
         private ITurnoverWatcherProcess _turnoverWatcherProcess = null;
         private NegativeBalanceByMatchService _negativeBalanceByMatchService = null;
+	    private CustomerWinLossService _customerWinLossService;
 
         public AutoMailService()
         {
@@ -44,8 +50,19 @@
 
             MailService mailService = new MailService(negativeBalanceByMatchExcelService);
 
-			_negativeBalanceByMatchService = new NegativeBalanceByMatchService(licenseeService, mailService, AppDomain.CurrentDomain.BaseDirectory + @"SiteConfig\NegativeBalanceByMatch");
-        }
+			_negativeBalanceByMatchService = new NegativeBalanceByMatchService(licenseeService, mailService, 
+                AppDomain.CurrentDomain.BaseDirectory + @"SiteConfig\NegativeBalanceByMatch");
+		
+			// RNG Casino
+			ConfigurationParser rngConfigurationParser = new ConfigurationParser(@"SiteConfig\RngCasino\RngCasino.Settings.xml");
+			rngConfigurationParser.Parse<RngCasinoSettings>();
+
+			IRngCasinoExcelService rngCasinoExcelService = new RngCasinoExcelService();
+			ExportSettings rngExportSettings = new ExportSettings();
+
+            _customerWinLossService = new CustomerWinLossService(rngCasinoExcelService, rngExportSettings, 
+                AppDomain.CurrentDomain.BaseDirectory + @"SiteConfig\RngCasino");
+		}
 
         protected override void OnStart(string[] args)
         {
@@ -88,9 +105,10 @@
                 {
                     AppSettings.OnProcessing = true;
 
-                    this._smaLossProcess.NotifyEmail();
-                    _negativeBalanceByMatchService.ProcessBusiness();
-                    _turnoverWatcherProcess.Process();
+					this._smaLossProcess.NotifyEmail();
+					_negativeBalanceByMatchService.ProcessBusiness();
+					_turnoverWatcherProcess.Process();
+					_customerWinLossService.SendMail();
 
                     AppSettings.OnProcessing = false;
                 }
