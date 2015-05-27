@@ -14,8 +14,35 @@
         public DailyBettypeWith3rdProductsCriteria()
         {
             var now = DateTime.Now;
-            this.DateStart = new DateTime(now.Year, now.Month, 1);
+            int year = now.Year;
+            int month = now.Month;
+
+            if (now.Day == 1)
+            {
+                if (month == 1)
+                {
+                    month = 12;
+                    year = year - 1;
+                }
+                else
+                {
+                    month = month - 1;
+                }
+
+                this.DateStart = new DateTime(year, month , 1);                
+            }
+            else
+            {
+                this.DateStart = new DateTime(now.Year, now.Month, 1);                
+            }
+
             this.DateEnd = now.AddDays(-1);
+
+            if (AppSettings.IsManually)
+            {
+                this.DateStart = Convert.ToDateTime(AppSettings.DateStart);
+                this.DateEnd = Convert.ToDateTime(AppSettings.DateEnd);
+            }
         }
 
         public DateTime DateStart { get; set; }

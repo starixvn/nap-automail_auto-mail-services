@@ -112,6 +112,9 @@
     <Compile Include="AppSettings.cs" />
     <Compile Include="Criteria\DailyBettypeWith3rdProductsCriteria.cs" />
     <Compile Include="Criteria\GetAllSportType.cs" />
+    <Compile Include="Jobs\DailyBettypeWith3rdProductJob.cs" />
+    <Compile Include="Jobs\IDailyBettypeWith3rdProductJob.cs" />
+    <Compile Include="Model\MailInfo.cs" />
     <Compile Include="Model\Sporttype.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource\Label.Designer.cs" />
@@ -123,7 +126,9 @@
     <Content Include="App_Data\Dev\DBDWHFN.FN.fin.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resource\Label.resx" />
+    <EmbeddedResource Include="Resource\Label.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Service.Core\Fanex.Service.Core.csproj">
@@ -131,6 +136,7 @@
       <Name>Fanex.Service.Core %28Fanex.Service.Core\Fanex.Service.Core%29</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

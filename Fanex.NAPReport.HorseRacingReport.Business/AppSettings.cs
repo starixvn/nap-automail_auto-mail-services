@@ -38,5 +38,13 @@ namespace Fanex.NAPReport.HorseRacingReport.Business
                 return GetSettingValueByKey("HorseRacingReport.Title");
             }
         }
+
+        public static string [] BaseCurrencies
+        {
+            get
+            {
+                return GetSettingValueByKey("OandaExchangeRate.BaseCurrencies").Split(',');
+            }
+        }
     }
 }
