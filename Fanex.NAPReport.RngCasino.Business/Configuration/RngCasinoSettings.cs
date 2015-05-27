@@ -33,6 +33,7 @@ namespace Fanex.NAPReport.RngCasino.Business.Configuration
 
 		public static int FunctionId { get; set; }
 
+		public static int ConsoleTestAddedDeltaMinute { get; set; }
 
 		public static string ExportDataDirectoryWithYearMonth
 		{
