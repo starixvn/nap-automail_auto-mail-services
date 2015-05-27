@@ -21,6 +21,7 @@ namespace Fanex.CreditMovement.Business.Service
     using NPOI.SS.UserModel;
     using NPOI.XSSF.UserModel;
     using Fanex.MailDelivery.Client.Models;
+    using OfficeOpenXmlCrypto;
 
     /// <summary>
     /// TODO: Update summary.
@@ -107,6 +108,12 @@ namespace Fanex.CreditMovement.Business.Service
                     FileMode.Create,
                     FileAccess.Write);
             _workbook.Write(fileStream);
+
+            OfficeCryptoStream stream = OfficeCryptoStream.Open(fullReportPath);
+            stream.Password = AppSettings.ExcelPassword;
+            stream.SaveAs(fullReportPath);
+            stream.Close();
+
             fileStream.Close();
             GC.Collect();
             return fullReportPath;

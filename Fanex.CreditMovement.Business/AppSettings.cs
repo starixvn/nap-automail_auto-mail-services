@@ -51,6 +51,14 @@ namespace Fanex.CreditMovement.Business
             }
         }
 
+        public static string ExcelPassword
+        {
+            get
+            {
+                return GetSettingValueByKey("CreditMovement.ExcelPassword");
+            }
+        }
+
         public static int Amount
         {
             get
