@@ -52,8 +52,6 @@
 
         private bool _isVirtual;
 
-        private string _exportDataDirectoryKey = "Fanex.DW.DailyBettypeWith3rdProducts.ExportDataDirectory";
-
         public DailyBettypeWith3rdProductsService()
         {
             this._criteria = new DailyBettypeWith3rdProductsCriteria();
@@ -66,7 +64,7 @@
         /// Generates the report.
         /// </summary>
         /// <param name="isVirtual">If set to <c>true</c> [is virtual].</param>
-        public void GenerateReport(bool isVirtual)
+        public void GenerateReport(bool isVirtual, string exportDataDirectory)
         {
             this.Init();
             this._isVirtual = isVirtual;
@@ -83,10 +81,8 @@
                 this.GenerateSporttypeSection(sporttype);
             }
 
-            string exportDataDirectory = AppSettings.ExportDataDirectory;
             this.GetFileName = exportDataDirectory + @"\" + this.FileName;
-            SaveFile.SaveExcelFile(exportDataDirectory, this.FileName, this.Workbook);            
-            
+            SaveFile.SaveExcelFile(exportDataDirectory, this.FileName, this.Workbook);         
         }
 
         private void Init()

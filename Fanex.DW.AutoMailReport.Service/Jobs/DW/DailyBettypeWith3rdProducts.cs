@@ -4,6 +4,9 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+
+using Fanex.DW.DailyBettypeWith3rdProducts.Business.Model;
+
 namespace Fanex.DW.AutoMailReport.Service.Jobs.DW
 {
     using System;
@@ -15,6 +18,8 @@ namespace Fanex.DW.AutoMailReport.Service.Jobs.DW
     using Quartz;
     using Fanex.DW.DailyBettypeWith3rdProducts.Business.Service;
     using Fanex.DW.DailyBettypeWith3rdProducts.Business.Resource;
+    using DailyBettypeWith3rdProductsSetting = Fanex.DW.DailyBettypeWith3rdProducts.Business;
+    using Fanex.DW.DailyBettypeWith3rdProducts.Business.Jobs;
 
     /// <summary>
     /// TODO: Update summary.
@@ -23,19 +28,9 @@ namespace Fanex.DW.AutoMailReport.Service.Jobs.DW
     {
         protected override JobResultMessage Run(Schedule schedule, IJobExecutionContext jobContext)
         {
-            DailyBettypeWith3rdProductsService service = new DailyBettypeWith3rdProductsService();
-            service.GenerateReport(false);
-            Mail mail = new Mail()
-            {
-                Subject = string.Format(Label.DailyBettype3rdProductMailSubject, DateTime.Now.ToString("yyyy-MM-dd")),
-                Title = string.Format(Label.DailyBettype3rdProductMailSubject, DateTime.Now.ToString("yyyy-MM-dd")),
-                Body = Label.DailyBettype3rdProductMailBody
-            };
+            IDailyBettypeWith3rdProductJob job = new DailyBettypeWith3rdProductJob();
+            var mail = job.ProcessExportDailyBettypeWith3rdProducts(true);
 
-            mail.Attachments = new List<MailAttachment>();
-            mail.Attachments.Add(new MailAttachment(@service.GetFileName, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
-            service.GenerateReport(true);
-            mail.Attachments.Add(new MailAttachment(@service.GetFileName, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
             return new JobResultMessage()
             {
                 JobStatus = JobStatus.Success,

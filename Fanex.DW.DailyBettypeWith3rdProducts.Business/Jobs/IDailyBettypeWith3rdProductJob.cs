@@ -1,29 +1,25 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="Status.cs" company="Microsoft">
+// <copyright file="IDailyBettypeWith3rdProductJob.cs" company="Microsoft">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.OandaExChangeRate.Business.Enums
+
+
+namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Jobs
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using Fanex.MailDelivery.Client.Messages;
+    using Fanex.MailDelivery.Client.Models;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public enum Status
+    public interface IDailyBettypeWith3rdProductJob
     {
-        /// <summary>
-        /// Task is running.
-        /// </summary>
-        Running,
-
-        /// <summary>
-        /// Task is completed
-        /// </summary>
-        Completed
+        Mail ProcessExportDailyBettypeWith3rdProducts(bool IsDaily);
     }
 }

@@ -117,8 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DailyBettype3rdProductMailBody" xml:space="preserve">
+  <data name="DailyBettype3rdProductMailBody_Daily" xml:space="preserve">
     <value>This is the Bettype with 3rd products Daily update. Please see attached files for details.</value>
+  </data>
+  <data name="DailyBettype3rdProductMailBody_Weekly" xml:space="preserve">
+    <value>This is the Bettype with 3rd products Weekly update. Please see attached files for details.</value>
   </data>
   <data name="DailyBettype3rdProductMailSubject" xml:space="preserve">
     <value>Automail Daily Bettype with 3rd Products {0}</value>

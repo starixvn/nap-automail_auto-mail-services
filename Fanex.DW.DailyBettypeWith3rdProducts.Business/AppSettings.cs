@@ -15,11 +15,19 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business
     /// </summary>
     public class AppSettings : AppSettingBase
     {
-        public static string ExportDataDirectory
+        public static string ExportDataDirectoryDaily
         {
             get
             {
-                return ExportDataDirectory("Fanex.DW.DailyBettypeWith3rdProducts.ExportDataDirectory");
+                return ExportDataDirectory("Fanex.DW.DailyBettypeWith3rdProducts.ExportDataDirectory.Daily");
+            }
+        }
+
+        public static string ExportDataDirectoryWeekly
+        {
+            get
+            {
+                return ExportDataDirectory("Fanex.DW.DailyBettypeWith3rdProducts.ExportDataDirectory.Weekly");
             }
         }
 
@@ -52,6 +60,22 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business
             get
             {
                 return GetSettingValueByKey("Fanex.DW.DailyBettypeWith3rdProducts.IsSingleSport") == "1";
+            }
+        }
+
+        public static string SubjectDaily
+        {
+            get
+            {
+                return GetSettingValueByKey("Fanex.DW.DailyBettypeWith3rdProducts.Subject.Daily");
+            }
+        }
+
+        public static string SubjectWeekly
+        {
+            get
+            {
+                return GetSettingValueByKey("Fanex.DW.DailyBettypeWith3rdProducts.Subject.Weekly");
             }
         }
     }
