@@ -32,8 +32,7 @@ namespace Fanex.CreditMovement.Business.Service
             string template = File.ReadAllText(filePath);
             var emailContent = Razor.Parse(template, criteria);
             string emailSubject = string.Format(
-                AppSettings.MailSubject,
-                criteria.FromDate.ToString("yyyy-MM-dd"),
+                AppSettings.MailSubject,                
                 criteria.ToDate.ToString("yyyy-MM-dd"));
             string emailTitle = AppSettings.MailTitle;
 
