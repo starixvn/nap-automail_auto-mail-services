@@ -22,6 +22,7 @@ namespace Fanex.CreditMovement.Business.Service
     using NPOI.XSSF.UserModel;
     using Fanex.MailDelivery.Client.Models;
     using OfficeOpenXmlCrypto;
+    using Fanex.Service.Core.Utilities;
 
     /// <summary>
     /// TODO: Update summary.
@@ -82,7 +83,6 @@ namespace Fanex.CreditMovement.Business.Service
         /// <returns>The report URL.</returns>
         private string ExportReport(List<CreditMovement> report, GetCreditMovementCriteria criteria)
         {
-            FileStream fileStream = null;
             string sheetName = "Credit Movement";
             string reportTitle = string.Empty;
             _workbook = new XSSFWorkbook();
@@ -92,30 +92,19 @@ namespace Fanex.CreditMovement.Business.Service
             this.InitFont();
             this.InitCellStyleInfo();
             _cellInfo = new CellInfo(0, 0, 0, 0, string.Empty);
-            ExportReportHeader(worksheet);
+            ExportReportHeader(worksheet, criteria);
             ExportReportContent(worksheet, report);
-            worksheet.CreateFreezePane(0, 2, 0, 2);
-            var reportDirectory = this.CreateCreditMovementReportDirectory(criteria);
-            string reportName = string.Format(
-                CreditMovementResource.CreditMovement_ReportName,
-                criteria.FromDate.ToShortFormatedDateWithSlash().Replace("/", "-"),
-                criteria.ToDate.ToShortFormatedDateWithSlash().Replace("/", "-"));
-            var reportPath = Path.Combine(reportDirectory, reportName);
-            var fullReportPath = string.Format("{0}.{1}", reportPath, "xlsx");
+            worksheet.CreateFreezePane(0, 4, 0, 4);            
 
-            fileStream = new FileStream(
-                    fullReportPath,
-                    FileMode.Create,
-                    FileAccess.Write);
-            _workbook.Write(fileStream);
+            string reportName = string.Format("Credit_Movement_Report_On_{0}.xlsx", criteria.ToDate.ToShortFormatedDateWithSlash().Replace("/", "-"));            
+            var fullReportPath = string.Empty;
 
-            OfficeCryptoStream stream = OfficeCryptoStream.Open(fullReportPath);
-            stream.Password = AppSettings.ExcelPassword;
-            stream.SaveAs(fullReportPath);
-            stream.Close();
+            string parentDirectory = AppSettings.ExportDataDirectory;
+            fullReportPath = parentDirectory + @"\" + reportName;
+            SaveFile.SaveExcelFile(parentDirectory, reportName, _workbook, AppSettings.ExcelPassword);
 
-            fileStream.Close();
             GC.Collect();
+
             return fullReportPath;
         }
 
@@ -143,12 +132,19 @@ namespace Fanex.CreditMovement.Business.Service
         /// Exports the report header.
         /// </summary>
         /// <param name="worksheet">The worksheet.</param>
-        private void ExportReportHeader(XSSFSheet worksheet)
+        private void ExportReportHeader(XSSFSheet worksheet, GetCreditMovementCriteria criteria)
         {
             Color headerBackgroundColor = Color.FromArgb(60, 94, 165);
             BackgroundStyleInfo headerBackgroundInfo = new BackgroundStyleInfo(headerBackgroundColor, (int)FillPattern.SolidForeground);
             XSSFCellStyle headerStyle = NPOIHighVersion.CreateCellStyle(_workbook, _borderInfo, headerBackgroundInfo, _centerAlignmentInfo, _headerFont);
             XSSFRow row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
+
+            _cellInfo.CellValue = string.Format("Accounts which have been allocated with more than 300KRM credits for SMA + Member  Line on {0}", criteria.ToDate.ToShortFormatedDate());
+            _cellInfo.EndColumn = _cellInfo.CurrentColumn + 6;
+            _cellInfo.EndRow = _cellInfo.CurrentRow + 1;
+            NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, headerStyle);
+            NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+            NPOIUtility.ResetColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = "#";
             _cellInfo.EndRow = _cellInfo.CurrentRow + 1;
@@ -328,7 +324,7 @@ namespace Fanex.CreditMovement.Business.Service
             DirectoryExtensions.CheckAndCreateDirectory(parentDirectory);
             string reportFrom = criteria.FromDate.ToShortFormatedDateWithSlash().Replace("/", "-");
             string reportTo = criteria.ToDate.ToShortFormatedDateWithSlash().Replace("/", "-");
-            string reportFolder = string.Format("CreditMovement_Report_From_{0}_To_{1}", reportFrom, reportTo);
+            string reportFolder = string.Format("CreditMovement_Report_On_{0}", reportTo);
             string reportDirectory = Path.Combine(parentDirectory, reportFolder);
             DirectoryExtensions.CheckAndCreateDirectory(reportDirectory);
             return reportDirectory;
