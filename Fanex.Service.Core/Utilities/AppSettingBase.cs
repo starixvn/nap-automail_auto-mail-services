@@ -80,7 +80,7 @@ namespace Fanex.Service.Core.Utilities
 			get
 			{
 				var val = ConfigurationManager.AppSettings["Interval.Minute"];
-				int interval = val == null ? 10 : Convert.ToInt32(val) * 60 * 1000;
+				int interval = val == null ? 1000 * 3600 : Convert.ToInt32(val) * 60 * 1000;
 				return interval;
 			}
 		}

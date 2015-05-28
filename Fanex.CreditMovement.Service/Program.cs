@@ -12,6 +12,7 @@ namespace Fanex.CreditMovement.Service
     using Fanex.CreditMovement.Business.Criteria;
     using Fanex.CreditMovement.Business.Repositories;
     using Fanex.Data.Configuration;
+    using Fanex.Service.Core.Configuration;
 
     /// <summary>
     /// The main program.
@@ -24,7 +25,9 @@ namespace Fanex.CreditMovement.Service
         private static void Main()
         {
             DbSettingProviderManager.Current.Start();
-            var repository = new CreditMovementRepository();
+            var repository = new CreditMovementRepository();            
+            var service = new CreditMovementService();
+
             GetCreditMovementCriteria criteria = new GetCreditMovementCriteria
             {
                 FromDate = AppSettings.FromDate,
@@ -32,7 +35,7 @@ namespace Fanex.CreditMovement.Service
                 SiteList = string.Join(",", AppSettings.ListSite),
                 Amount = AppSettings.Amount
             };
-            var service = new CreditMovementService();
+            
             service.ProcessToSendEmail(criteria);
 
             Console.WriteLine(string.Format("Done at {0}", DateTime.Now.ToString("yyyy-MM-dd")));

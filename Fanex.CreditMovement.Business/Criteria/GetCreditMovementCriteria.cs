@@ -17,6 +17,16 @@ namespace Fanex.CreditMovement.Business.Criteria
     /// </summary>
     public class GetCreditMovementCriteria : CriteriaBase
     {
+
+        public GetCreditMovementCriteria()
+        {
+            if (!AppSettings.IsTest)
+            {
+                AppSettings.FromDate = DateTime.Now.AddDays(-1).Date;
+                AppSettings.ToDate = DateTime.Now.Date.AddSeconds(-1);
+            }
+        }
+
         public DateTime FromDate { get; set; }
 
         public DateTime ToDate { get; set; }

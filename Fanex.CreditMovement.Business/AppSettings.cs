@@ -11,79 +11,72 @@ namespace Fanex.CreditMovement.Business
     using System.Configuration;
     using Fanex.CreditMovement.Business.Repositories;
     using Fanex.Service.Core.Utilities;
+    using Fanex.Service.Core.Configuration;
 
     /// <summary>
     /// Application setting.
     /// </summary>
-    public class AppSettings : AppSettingBase
+    public class AppSettings : AppSettingBase, ISettings
     {
         private List<string> _listSite;
 
         public static string ExportDataDirectory
         {
-            get
-            {
-                return GetSettingValueByKey("CreditMovement.ExportDataDirectory");
-            }
+            get;
+            set;
+        }
+
+        public static string ExportDataDirectoryWithYearMonth
+        {
+            get { return ExportDataDirectoryWithYearMonth(ExportDataDirectory); }
         }
 
         public static string EmailTemplate
         {
-            get
-            {
-                return GetSettingValueByKey("CreditMovement.EmailTemplate");
-            }
+            get;
+            set;
         }
 
         public static string MailSubject
         {
-            get
-            {
-                return GetSettingValueByKey("CreditMovement.Subject");
-            }
+            get;
+            set;
         }
 
         public static string MailTitle
         {
-            get
-            {
-                return GetSettingValueByKey("CreditMovement.Title");
-            }
+            get;
+            set;
         }
 
         public static string ExcelPassword
         {
-            get
-            {
-                return GetSettingValueByKey("CreditMovement.ExcelPassword");
-            }
+            get;
+            set;
         }
 
         public static int Amount
         {
-            get
-            {
-                var val = ConfigurationManager.AppSettings["CreditMovement.Amount"];
-                return val == null ? 300000 : Convert.ToInt32(ConfigurationManager.AppSettings["CreditMovement.Amount"]);
-            }
+            get;
+            set;
         }
 
         public static DateTime FromDate
         {
-            get
-            {
-                var val = ConfigurationManager.AppSettings["CreditMovement.FromDate"];
-                return string.IsNullOrEmpty(val) ? DateTime.Now.AddDays(-1).Date : Convert.ToDateTime(ConfigurationManager.AppSettings["CreditMovement.FromDate"]);
-            }
+            get;
+            set;
         }
 
         public static DateTime ToDate
         {
-            get
-            {
-                var val = ConfigurationManager.AppSettings["CreditMovement.ToDate"];
-                return string.IsNullOrEmpty(val) ? DateTime.Now.Date.AddSeconds(-1) : Convert.ToDateTime(ConfigurationManager.AppSettings["CreditMovement.ToDate"]);
-            }
+            get;
+            set;
+        }
+
+        public static bool IsTest
+        {
+            get;
+            set;
         }
 
         public static List<string> ListSite

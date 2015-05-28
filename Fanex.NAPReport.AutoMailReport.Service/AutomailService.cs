@@ -30,6 +30,7 @@ namespace Fanex.NAPReport.AutoMailReport.Service
 		protected override void OnStop()
 		{
 			_timerServiceFacade.StopServices();
+            MailClientHandler.Stop();
 
 		}
 

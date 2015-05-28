@@ -13,6 +13,7 @@ namespace Fanex.CreditMovement.Business.Service
     using Fanex.CreditMovement.Business.Model;
     using Fanex.CreditMovement.Business.Repositories;
     using Fanex.MailDelivery.Client.Models;
+    using Fanex.Service.Core.Configuration;
     using Fanex.Service.Core.Constants;
     using Fanex.Service.Core.Extensions;
     using Fanex.Service.Core.Model;
@@ -44,6 +45,9 @@ namespace Fanex.CreditMovement.Business.Service
             _regularFont = _fontService.RegularFont;
             _bodyCellStyleService = new NpoiNewFormatBodyCellStyleService(_workbook, _regularFont);
             _customCellStyleService = new NpoiNewFormatCustomCellStyleService(_workbook);
+
+            ConfigurationParser configurationParser = new ConfigurationParser(@"SiteConfig\CreditMovement\Settings\CreditMovement.Settings.xml");
+            configurationParser.Parse<AppSettings>();
         }
 
         /// <summary>
@@ -81,7 +85,7 @@ namespace Fanex.CreditMovement.Business.Service
             string reportName = string.Format("Credit_Movement_Report_On_{0}.xlsx", criteria.ToDate.ToShortFormatedDateWithSlash().Replace("/", "-"));
             var fullReportPath = string.Empty;
 
-            string parentDirectory = AppSettings.ExportDataDirectory;
+            string parentDirectory = AppSettings.ExportDataDirectoryWithYearMonth;
             fullReportPath = parentDirectory + @"\" + reportName;
             SaveFile.SaveExcelFile(parentDirectory, reportName, _workbook, AppSettings.ExcelPassword);
 

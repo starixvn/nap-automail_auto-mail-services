@@ -121,10 +121,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="SQLiteDatabase\AutoMail-CreditMovementReport.s3db" />
-    <None Include="SiteConfig\CreditMovement\Email.cshtml">
+    <Content Include="SiteConfig\CreditMovement\Templates\CreditMovementEmail.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.CreditMovement.Business\Fanex.NAPReport.CreditMovement.Business.csproj">
@@ -141,6 +140,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Data\DBLOG.bodb_CustomerLog.bodbAdminNet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="SiteConfig\CreditMovement\Settings\CreditMovement.Settings.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Settings>
+  <add key="FromDate" value="2015-03-01" />
+  <add key="ToDate" value="2015-03-16" />
+  <add key="MailSubject" value="Credit Movement Notification {0}" />
+  <add key="MailTitle" value="Starix IT" />
+  <add key="ExportDataDirectory" value="\\10.18.200.202\_Fanex.ExcelFiles\CreditMovement" />
+  <add key="EmailTemplate" value="SiteConfig\CreditMovement\Templates\CreditMovementEmail.cshtml" />
+  <add key="Amount" value="300" />
+  <add key="ExcelPassword" value="we168" />
+  <add key="IsTest" value="true" />
+</Settings>
