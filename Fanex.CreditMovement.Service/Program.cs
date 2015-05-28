@@ -6,13 +6,12 @@
 
 namespace Fanex.CreditMovement.Service
 {
-    using System.ServiceProcess;
-    using Fanex.CreditMovement.Business.Criteria;
-    using Fanex.Data.Configuration;
     using System;
     using CreditMovement.Business.Service;
-    using Fanex.CreditMovement.Business.Repositories;
     using Fanex.CreditMovement.Business;
+    using Fanex.CreditMovement.Business.Criteria;
+    using Fanex.CreditMovement.Business.Repositories;
+    using Fanex.Data.Configuration;
 
     /// <summary>
     /// The main program.

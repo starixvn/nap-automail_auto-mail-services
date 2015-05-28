@@ -143,10 +143,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="App_Data\Dev\DBACC.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\Local\DBACC.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\PRO\DBACC.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\UAT\DBACC.bodb02.bodbAdminNet.xml" />
     <Content Include="Fanex.DW.AutoMailReport.Service.Local.exe.config">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -7,10 +7,10 @@
 namespace Fanex.CreditMovement.Business
 {
     using System;
-    using System.Configuration;
-    using Fanex.Service.Core.Utilities;
-    using Fanex.CreditMovement.Business.Repositories;
     using System.Collections.Generic;
+    using System.Configuration;
+    using Fanex.CreditMovement.Business.Repositories;
+    using Fanex.Service.Core.Utilities;
 
     /// <summary>
     /// Application setting.

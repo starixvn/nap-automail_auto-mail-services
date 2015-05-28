@@ -10,10 +10,8 @@ namespace Fanex.CreditMovement.Business.Service
     using System.Collections.Generic;
     using System.IO;
     using Fanex.CreditMovement.Business.Criteria;
-    using Fanex.HorseRacingReport.Business.Constants;
-    using Fanex.Service.Core.Extensions;
-    using RazorEngine;
     using Fanex.MailDelivery.Client.Models;
+    using RazorEngine;
 
     /// <summary>
     /// TODO: Update summary.
@@ -32,7 +30,7 @@ namespace Fanex.CreditMovement.Business.Service
             string template = File.ReadAllText(filePath);
             var emailContent = Razor.Parse(template, criteria);
             string emailSubject = string.Format(
-                AppSettings.MailSubject,                
+                AppSettings.MailSubject,
                 criteria.ToDate.ToString("yyyy-MM-dd"));
             string emailTitle = AppSettings.MailTitle;
 

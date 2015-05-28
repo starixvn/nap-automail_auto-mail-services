@@ -142,6 +142,7 @@
     </Content>
     <Content Include="App_Data\DBLOG.bodb_CustomerLog.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -6,6 +6,11 @@
     <Setting Key="Racing_GetMainReport_14" SpName="Acc_Rpt_WinlostRacing_Tote14" DbName="DBACC.bodb02.bodbAdminNet" Timeout="0" />
     <Setting Key="Racing_GetDetailReport_14" SpName="Acc_Rpt_WinlostRacing_Tote_Details14" DbName="DBACC.bodb02.bodbAdminNet" Timeout="0" />
   </Function>
+
+  <Function Name="Credit Movedment">
+    <Setting Key="Misc_CreditMovement_GetSites" SpName="SiteSel" DbName="DBACC.bodb02.bodbAdminNet" Timeout="0"/>
+  </Function>
+
   <Function Name="Win Loss By Products Report">
     <Setting Key="Win_Loss_By_Products_Report" SpName="Acc_Rpt_AllProductWLAutomail" DbName="DBACC.bodb02.bodbAdminNet" Timeout="0" />
   </Function>

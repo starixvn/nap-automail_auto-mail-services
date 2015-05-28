@@ -182,18 +182,12 @@
     <Content Include="App_Data\Dev\DBTXN.bodb02.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="App_Data\Local\DBEXT.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\Local\DBTXN.CustDB.bodbAdminNet.xml" />
     <Content Include="App_Data\PRO\DBACC.bodb02.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Data\PRO\DBAGE.bodb02.bodbAdminNet.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App_Data\PRO\DBEXT.bodb02.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App_Data\PRO\DBTXN.CustDB.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Data\UAT\DBACC.bodb02.bodbAdminNet.xml">
@@ -206,6 +200,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Data\Local\DBAGE.bodb02.bodbAdminNet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\UAT\DBLOG.bodb_CustomerLog.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SiteConfig\NegativeBalanceByMatch\LicenseeFunctionMap.xml">
