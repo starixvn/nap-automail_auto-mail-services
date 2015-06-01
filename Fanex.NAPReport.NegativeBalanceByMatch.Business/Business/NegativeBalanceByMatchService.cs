@@ -74,7 +74,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 
 						if (result)
 						{
-							//UpdateLog(taskId);
+							UpdateLog(taskId);
 						}
 					}
 				}
