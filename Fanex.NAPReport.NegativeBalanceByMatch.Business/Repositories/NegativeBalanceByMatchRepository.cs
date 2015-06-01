@@ -24,7 +24,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Repositories
 
         public NegativeBalanceByMatchRepository()
         {
-            _db = new SqLite(Settings.SqLiteDbPath);
+            _db = new SqLite(NegativeBalanceByMatchSettings.SqLiteDbPath);
         }
 
         public int InsertTask(NegativeBalanceTaskInfo task)

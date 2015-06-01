@@ -25,12 +25,12 @@ namespace Fanex.NAPReport.RngCasino.Testing
 				configurationParser.Parse<RngCasinoSettings>();
 
 				var excelService = new RngCasinoExcelService();
-				var exportSettings = new ExportSettings();
+				var exportSettings = new RngCasinoExportSettings();
 
 				CustomerWinLossService customerService = new CustomerWinLossService(excelService, exportSettings);
 
 				MailClientHandler.Start();
-				customerService.SendMail();
+				customerService.NotifyMail();
 				MailClientHandler.Stop();
 			}
 			catch (Exception ex)

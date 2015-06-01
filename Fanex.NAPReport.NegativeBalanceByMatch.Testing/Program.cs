@@ -22,7 +22,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Testing
 				ConfigurationParser configurationParser = new ConfigurationParser(baseDir + @"\Configuration\NegativeBalanceByMatch.Settings.xml");
 
 				IDictionary<string, string> keyToValue = configurationParser.Parse();
-				configurationParser.Parse<Settings>();
+				configurationParser.Parse<NegativeBalanceByMatchSettings>();
 
 				DbSettingProviderManager.Current.Start();
 
@@ -36,7 +36,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Testing
 				NegativeBalanceByMatchService negativeBalanceByMatchService = new NegativeBalanceByMatchService(licenseeService, mailService, baseDir);
 
 				MailClientHandler.Start();
-				negativeBalanceByMatchService.ProcessBusiness();
+				negativeBalanceByMatchService.NotifyMail();
 				MailClientHandler.Stop();
 			}
 			catch (Exception ex)

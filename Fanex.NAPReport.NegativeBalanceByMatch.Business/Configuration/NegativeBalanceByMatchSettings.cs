@@ -7,7 +7,7 @@ using Fanex.Service.Core.Utilities;
 
 namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Configuration
 {
-	public class Settings : AppSettingBase, ISettings
+	public class NegativeBalanceByMatchSettings : AppSettingBase, ISettings
 	{
 		public static bool IsActive { get; set; }
 

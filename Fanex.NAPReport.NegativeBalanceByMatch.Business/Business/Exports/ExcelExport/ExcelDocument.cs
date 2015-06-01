@@ -42,7 +42,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.Excel
 
 		public void Save(string saveFileNamePath)
 		{
-			SaveFile.SaveExcelFile(Path.GetDirectoryName(saveFileNamePath),Path.GetFileName(saveFileNamePath), Workbook, Settings.ExcelPassword);
+			SaveFile.SaveExcelFile(Path.GetDirectoryName(saveFileNamePath),Path.GetFileName(saveFileNamePath), Workbook, NegativeBalanceByMatchSettings.ExcelPassword);
 		}
 
 		public void RenderCurrentCell(object cellValue, XSSFCellStyle cellStyle = null)

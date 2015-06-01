@@ -16,6 +16,6 @@
 
 	<Setting key="FunctionId" value="57"/>
 
-	<Setting key="ConsoleTestAddedDeltaMinute" value="10000"/>
+	<Setting key="ConsoleTestAddedDeltaMinute" value="15000"/>
 	
 </Settings>

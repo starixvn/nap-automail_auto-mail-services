@@ -15,13 +15,14 @@ using Fanex.NAPReport.NegativeBalanceByMatch.Business.Helper.Implement;
 using Fanex.NAPReport.NegativeBalanceByMatch.Business.Repositories;
 using Fanex.Service.Core.Enums;
 using Fanex.Service.Core.Extensions;
+using Fanex.Service.Core.MailService;
 using Newtonsoft.Json;
 using RazorEngine;
 using RemotingRef;
 
 namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 {
-	public class NegativeBalanceByMatchService : ServiceBase
+	public class NegativeBalanceByMatchService : ServiceBase, ICommonTimerFunctionMailService
 	{
 		private readonly INegativeBalanceByMatchRepository _repository;
 		private string _logIdUpdate = string.Empty;
@@ -38,13 +39,13 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 			_repository = new NegativeBalanceByMatchRepository();
 		}
 
-		public void ProcessBusiness()
+		public override void NotifyMailSync()
 		{
-			if (Settings.IsActive == false)
+			if (NegativeBalanceByMatchSettings.IsActive == false)
 			{
 				return;
 			}
- 
+
 			DateTime curDateTime = DateTime.UtcNow;
 			ExportSettings exportSettings = new ExportSettings();
 
@@ -54,7 +55,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 
 				int timezone = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours;
 				string subject = licenseeName.ToUpper() + " - " +
-								string.Format(Settings.Subject, DateTime.Now, timezone > 0 ? ("+" + timezone) : timezone.ToString());
+								string.Format(NegativeBalanceByMatchSettings.Subject, DateTime.Now, timezone > 0 ? ("+" + timezone) : timezone.ToString());
 
 				int taskId = 0;
 				try
@@ -68,12 +69,12 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 						_logData.Add(new Dictionary<object, object> { { "DataSendEmail", matches } });
 
 						string body = GetMailBody(licenseeName, matches);
-						var result = SendEmail(licenseeFunction, subject, Settings.Title, body, Settings.AttachReport,
+						var result = SendEmail(licenseeFunction, subject, NegativeBalanceByMatchSettings.Title, body, NegativeBalanceByMatchSettings.AttachReport,
 												matches, curDateTime, exportSettings, taskId);
 
 						if (result)
 						{
-							UpdateLog(taskId);
+							//UpdateLog(taskId);
 						}
 					}
 				}

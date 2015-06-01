@@ -31,3 +31,4 @@ _ReSharper*/
 /packages
 *.orig
 *.Cache
+Fanex.Service.Core/MailService/MailService.cd

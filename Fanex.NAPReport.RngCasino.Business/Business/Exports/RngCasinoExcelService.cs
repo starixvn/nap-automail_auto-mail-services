@@ -7,9 +7,9 @@ namespace Fanex.NAPReport.RngCasino.Business.Business.Exports
 {
 	public class RngCasinoExcelService : IRngCasinoExcelService
 	{
-		public void GenerateReport(IList<UserInfo> userInfos, ExportSettings exportSettings, string saveFileNamePath)
+		public void GenerateReport(IList<UserInfo> userInfos, RngCasinoExportSettings rngCasinoExportSettings, string saveFileNamePath)
 		{
-			var excelDocument = new ExcelDocument(exportSettings, RngCasinoSettings.ExcelSheetName);
+			var excelDocument = new ExcelDocument(rngCasinoExportSettings, RngCasinoSettings.ExcelSheetName);
 
 			var exportCommand = new ExportCompositeCommand<IExportCommand>(excelDocument);
 

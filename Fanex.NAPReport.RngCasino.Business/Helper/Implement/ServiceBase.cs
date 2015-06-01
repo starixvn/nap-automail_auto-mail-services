@@ -9,13 +9,14 @@ using System.Collections.Generic;
 using Fanex.Common.Helper;
 using Fanex.NAP.Framework.Data;
 using Fanex.NAPReport.RngCasino.Business.Helper.Interface;
+using Fanex.Service.Core.MailService;
 
 namespace Fanex.NAPReport.RngCasino.Business.Helper.Implement
 {
 	/// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class ServiceBase : IServiceBase
+	public class ServiceBase : TimerFunctionMailServiceBase, IServiceBase
     {
         protected readonly IDynamicRepository DynamicRepository;
 

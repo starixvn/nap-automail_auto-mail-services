@@ -21,7 +21,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Criteria
     {
         public string Site { get; set; }
 
-        public bool IsTest { get { return Settings.IsTesting; } }
+        public bool IsTest { get { return NegativeBalanceByMatchSettings.IsTesting; } }
 
         [SpParam(Ignored = true)]
         public string SpName

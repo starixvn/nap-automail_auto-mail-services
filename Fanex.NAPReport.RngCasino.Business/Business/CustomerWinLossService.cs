@@ -14,35 +14,35 @@ using Fanex.NAPReport.RngCasino.Business.Configuration;
 using Fanex.NAPReport.RngCasino.Business.Criteria;
 using Fanex.NAPReport.RngCasino.Business.Entities;
 using Fanex.NAPReport.RngCasino.Business.Helper.Implement;
+using Fanex.Service.Core.MailService;
 using Fanex.Service.Core.Utilities;
 using RazorEngine;
 
 namespace Fanex.NAPReport.RngCasino.Business.Business
 {
-	public class CustomerWinLossService : ServiceBase
+	public class CustomerWinLossService : ServiceBase, IStandaloneTimerFunctionMailService
 	{
 		private readonly IRngCasinoExcelService _excelService;
-		private readonly ExportSettings _exportSettings;
+		private readonly RngCasinoExportSettings _rngCasinoExportSettings;
 		private readonly string _templateBaseDir;
 
-		public CustomerWinLossService(IRngCasinoExcelService excelService, ExportSettings exportSettings, string templateBaseDir = "")
+		public CustomerWinLossService(IRngCasinoExcelService excelService, RngCasinoExportSettings rngCasinoExportSettings, string templateBaseDir = "")
 		{
 			_excelService = excelService;
-			_exportSettings = exportSettings;
+			_rngCasinoExportSettings = rngCasinoExportSettings;
 			_templateBaseDir = templateBaseDir;
 		}
 
-		public bool SendMail()
+		public override void NotifyMailSync()
 		{
 			if (RngCasinoSettings.IsActive == false)
-				return false;
+				return;
 
-			var result = false;
 			try
 			{
 				var dateTimeFormat = "{0:yyyy-MM-dd HH:mm}";
 				var toDate = string.Format(dateTimeFormat, DateTime.Now);
-				var fromDate = string.Format(dateTimeFormat, DateTime.Now.AddMinutes(-AppSettingBase.Interval / (60 * 1000) - RngCasinoSettings.ConsoleTestAddedDeltaMinute));
+				var fromDate = string.Format(dateTimeFormat, DateTime.Now.AddMinutes(-Interval - RngCasinoSettings.ConsoleTestAddedDeltaMinute));
 
 				var userInfos = GetCustomerWinLoss(Converter.ToDateTime(fromDate), Converter.ToDateTime(toDate), RngCasinoSettings.WinLoss);
 				if (userInfos != null && userInfos.Count > 0)
@@ -52,19 +52,17 @@ namespace Fanex.NAPReport.RngCasino.Business.Business
 
 					var fileNamePath = Path.Combine(RngCasinoSettings.ExportDataDirectoryWithYearMonth,
 														RngCasinoSettings.ExcelFileName + "_" + DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss") + ".xlsx");
-					_excelService.GenerateReport(userInfos, _exportSettings, fileNamePath);
+					_excelService.GenerateReport(userInfos, _rngCasinoExportSettings, fileNamePath);
 
 					var subject = string.Format(RngCasinoSettings.Subject, RngCasinoSettings.BaseCurrency,
 													NumberExtension.WinLossFormat(RngCasinoSettings.WinLoss, 0), fromDate, toDate);
-					result = EmailHelper.SendMail(subject, RngCasinoSettings.Title, body, fileNamePath);
+					EmailHelper.SendMail(subject, RngCasinoSettings.Title, body, fileNamePath);
 				}
 			}
 			catch (Exception ex)
 			{
 				HandleException(ex);
 			}
-
-			return result;
 		}
 
 		private List<UserInfo> GetCustomerWinLoss(DateTime fromDate, DateTime toDate, decimal winlost)

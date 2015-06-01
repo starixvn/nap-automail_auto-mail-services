@@ -157,7 +157,7 @@
     <Compile Include="Business\Exports\ExcelExport\ExportCompositeCommand.cs" />
     <Compile Include="Business\Exports\ExcelExport\ExportSaveCommand.cs" />
     <Compile Include="Business\Exports\ExcelExport\ExportWinlossCommand.cs" />
-    <Compile Include="Business\Exports\ExcelExport\ExportSettings.cs" />
+    <Compile Include="Business\Exports\ExcelExport\RngCasinoExportSettings.cs" />
     <Compile Include="Business\Exports\ExcelExport\IExportCommand.cs" />
     <Compile Include="Business\Exports\IRngCasinoExcelService.cs" />
     <Compile Include="Business\Exports\RngCasinoExcelService.cs" />
@@ -168,6 +168,7 @@
     <Compile Include="Entities\MailAttachment.cs" />
     <Compile Include="Entities\MailSend.cs" />
     <Compile Include="Entities\UserInfo.cs" />
+    <Compile Include="ServiceFactory\RngCasinoServiceFactory.cs" />
     <Compile Include="Helper\Implement\FileHelper.cs" />
     <Compile Include="Helper\Implement\NumberExtension.cs" />
     <Compile Include="Helper\Interface\IServiceBase.cs" />

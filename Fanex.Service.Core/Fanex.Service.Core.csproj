@@ -111,6 +111,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Labels.resx</DependentUpon>
     </Compile>
+    <Compile Include="MailService\ICommonTimerFunctionMailService.cs" />
+    <Compile Include="MailService\IFunctionMailService.cs" />
+    <Compile Include="MailService\IntervalConverter.cs" />
+    <Compile Include="MailService\ITimerFunctionMailService.cs" />
+    <Compile Include="MailService\ITimerService.cs" />
+    <Compile Include="MailService\IStartable.cs" />
+    <Compile Include="MailService\IStandaloneTimerFunctionMailService.cs" />
+    <Compile Include="MailService\ServiceFactory\ITimerServiceFactory.cs" />
+    <Compile Include="MailService\ServiceFactory\TimerServiceFactoryLoader.cs" />
+    <Compile Include="MailService\StandaloneTimerService.cs" />
+    <Compile Include="MailService\CommonTimerService.cs" />
+    <Compile Include="MailService\TimerFunctionMailServiceBase.cs" />
+    <Compile Include="MailService\TimerServiceFacade.cs" />
+    <Compile Include="MailService\TimeUnit.cs" />
     <Compile Include="Model\BalanceUp.cs" />
     <Compile Include="Model\Cell.cs" />
     <Compile Include="Model\NpoiBase\AlignmentInformation.cs" />
@@ -188,7 +202,9 @@
       <LastGenOutput>Labels.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="MailService\MailService.cd" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

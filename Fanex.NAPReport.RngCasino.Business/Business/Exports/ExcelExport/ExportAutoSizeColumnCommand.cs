@@ -13,11 +13,11 @@ namespace Fanex.NAPReport.RngCasino.Business.Business.Exports.ExcelExport
         {
             XSSFSheet workSheet = ExcelDocument.Workbook.GetSheetAt(0) as XSSFSheet;
 
-            for (int i = 0; i < ExcelDocument.ExportSettings.MaxNumOfColumns; i++)
+            for (int i = 0; i < ExcelDocument.RngCasinoExportSettings.MaxNumOfColumns; i++)
             {
-                int colIndex = i + ExcelDocument.ExportSettings.StartColIndex;
+                int colIndex = i + ExcelDocument.RngCasinoExportSettings.StartColIndex;
                 workSheet.AutoSizeColumn(colIndex);
-                workSheet.SetColumnWidth(colIndex, workSheet.GetColumnWidth(colIndex) + ExcelDocument.ExportSettings.ColumnPadding);
+                workSheet.SetColumnWidth(colIndex, workSheet.GetColumnWidth(colIndex) + ExcelDocument.RngCasinoExportSettings.ColumnPadding);
             }
         }
     }

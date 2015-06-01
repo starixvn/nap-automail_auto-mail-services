@@ -13,7 +13,7 @@ namespace Fanex.NAPReport.RngCasino.Business.Business.Exports.ExcelExport
 	public class ExcelDocument
 	{
 		public XSSFWorkbook Workbook { get; private set; }
-		public ExportSettings ExportSettings { get; private set; }
+		public RngCasinoExportSettings RngCasinoExportSettings { get; private set; }
 
 		public int CurrentRow
 		{
@@ -29,10 +29,10 @@ namespace Fanex.NAPReport.RngCasino.Business.Business.Exports.ExcelExport
 
 		private Cell CurrentCell { get; set; }
 
-		public ExcelDocument(ExportSettings exportSettings, string sheetName)
+		public ExcelDocument(RngCasinoExportSettings rngCasinoExportSettings, string sheetName)
 		{
 			Workbook = new XSSFWorkbook();
-			ExportSettings = exportSettings;
+			RngCasinoExportSettings = rngCasinoExportSettings;
 			_wooksheet = Workbook.CreateSheet(sheetName) as XSSFSheet;
 
 			CurrentCell = new Cell();
@@ -101,7 +101,7 @@ namespace Fanex.NAPReport.RngCasino.Business.Business.Exports.ExcelExport
 		public void ResetColumnIndex()
 		{
 			CurrentCell.ResetColumnIndex();
-			for (int i = 0; i < ExportSettings.StartColIndex; i++)
+			for (int i = 0; i < RngCasinoExportSettings.StartColIndex; i++)
 			{
 				CurrentCell.IncreaseColumnIndex();
 			}
@@ -119,12 +119,12 @@ namespace Fanex.NAPReport.RngCasino.Business.Business.Exports.ExcelExport
 
 		private void InitSettings()
 		{
-			for (int i = 0; i < ExportSettings.StartRowIndex; i++)
+			for (int i = 0; i < RngCasinoExportSettings.StartRowIndex; i++)
 			{
 				CurrentCell.IncreaseRowIndex();
 			}
 
-			for (int i = 0; i < ExportSettings.StartColIndex; i++)
+			for (int i = 0; i < RngCasinoExportSettings.StartColIndex; i++)
 			{
 				CurrentCell.IncreaseColumnIndex();
 			}

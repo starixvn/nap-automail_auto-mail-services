@@ -6,6 +6,6 @@ namespace Fanex.NAPReport.RngCasino.Business.Business.Exports
 {
 	public interface IRngCasinoExcelService
 	{
-		void GenerateReport(IList<UserInfo> matchs, ExportSettings exportSettings, string saveFileNamePath);
+		void GenerateReport(IList<UserInfo> matchs, RngCasinoExportSettings rngCasinoExportSettings, string saveFileNamePath);
 	}
 }
