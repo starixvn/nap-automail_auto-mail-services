@@ -9,9 +9,11 @@ namespace Fanex.Service.Core.MailService
 	public abstract class ScheduleMailBase : JobBase
 	{
 		protected override JobResultMessage Run(Schedule schedule, IJobExecutionContext jobContext)
-		{
-			SendMailToNormalGroup();
-			return SendMailToVipGroup(schedule, jobContext);
+		{			
+			var jobResult = SendMailToVipGroup(schedule, jobContext);
+            SendMailToNormalGroup();
+
+            return jobResult;
 		}
 
 		public abstract JobResultMessage SendMailToVipGroup(Schedule schedule, IJobExecutionContext jobContext);

@@ -6,11 +6,7 @@
 
 namespace Fanex.NAPReport.HorseRacingReport.Business.Service
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-using Fanex.NAPReport.HorseRacingReport.Business.Criteria;
+    using Fanex.NAPReport.HorseRacingReport.Business.Criteria;
 
     /// <summary>
     /// TODO: Update summary.
@@ -21,6 +17,12 @@ using Fanex.NAPReport.HorseRacingReport.Business.Criteria;
         {
             get;
             set;
+        }
+
+        string FileName 
+        { 
+            get; 
+            set; 
         }
 
         TimeRangeCriteria GetTimeRangeCriteria();

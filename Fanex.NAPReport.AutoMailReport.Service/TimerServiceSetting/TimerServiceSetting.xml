@@ -1,6 +1,6 @@
 <TimerServices >
 	<CommonTimerServices interval="10" timeUnit="Second">
-		<CommonTimerService serviceFactoryFullTypeName="Fanex.NAPReport.NegativeBalanceByMatch.Business.ServiceFactory.NegativeBalanceByMatchServiceFactory, Fanex.NAPReport.NegativeBalanceByMatch.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"/>
+		<!--<CommonTimerService serviceFactoryFullTypeName="Fanex.NAPReport.NegativeBalanceByMatch.Business.ServiceFactory.NegativeBalanceByMatchServiceFactory, Fanex.NAPReport.NegativeBalanceByMatch.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"/>-->
 	</CommonTimerServices>
 	
 	<StandaloneTimerServices>

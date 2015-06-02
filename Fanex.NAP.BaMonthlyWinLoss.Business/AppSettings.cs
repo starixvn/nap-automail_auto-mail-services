@@ -7,44 +7,47 @@
 namespace Fanex.NAPReport.BAMonthlyWinLoss.Business
 {
     using System;
-    using System.Configuration;
+    using Fanex.Service.Core.Configuration;
     using Fanex.Service.Core.Utilities;    
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class AppSettings : AppSettingBase
+    public class AppSettings : AppSettingBase, ISettings
     {
-        public static string ExportDataDirectory
+        public static string DataDirectory
         {
-            get
-            {
-                return ExportDataDirectory("Fanex.NAPReport.BAMonthlyWinLoss.ExportDataDirectory");  
-            }
+            get;
+            set;
         }
 
-        public static string TemplateDirectory
+        public static string DataDirectoryWithYearMonth
         {
-            get
-            {
-                return ConfigurationManager.AppSettings["Fanex.NAPReport.BAMonthlyWinLoss.TemplateDirectory"];
-            }
+            get { return ExportDataDirectoryWithYearMonth(DataDirectory); }
         }
 
-        public static bool IsTesting
+        public static string ExcelPasswordProtected
         {
-            get
-            {
-                return Convert.ToBoolean(ConfigurationManager.AppSettings["Fanex.NAPReport.BAMonthlyWinLoss.IsTesting"]);
-            }
+            get;
+            set;
+        }
+
+        public static bool IsTest
+        {
+            get;
+            set;
         }
 
         public static DateTime TestedDate
         {
-            get
-            {
-                return Convert.ToDateTime(ConfigurationManager.AppSettings["Fanex.NAPReport.BAMonthlyWinLoss.TestedDate"]);
-            }
-        }  
+            get;
+            set;
+        }
+
+        public static int FunctionId
+        {
+            get;
+            set;
+        }
     }
 }

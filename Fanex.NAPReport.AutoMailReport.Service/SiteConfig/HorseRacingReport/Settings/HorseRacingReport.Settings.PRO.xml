@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Settings>
+  <add key="IsTest" value="false" />
+  <add key="FromDate" value="2015-03-01" />
+  <add key="ToDate" value="2015-03-16" />    
+  <add key="DataDirectory" value="\\10.40.40.52\NAP_Reports\HorseRacingReport" />  
+  <add key="ExcelPasswordProtected" value="we168" />
+  <add key="FunctionId" value="0" />
+</Settings>

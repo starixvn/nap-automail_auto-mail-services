@@ -25,11 +25,15 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
 
         public HorseRacingService()
         {
-            ConfigurationParser configurationParser = new ConfigurationParser(@"SiteConfig\HorseRacingReport\Settings\HorseRacingReport.Settings.xml");
-            configurationParser.Parse<AppSettings>();
         }
 
         public string ReportZipFolderPath
+        {
+            get;
+            set;
+        }
+
+        public string FileName
         {
             get;
             set;
@@ -63,8 +67,8 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
                     _horseRacingReportService.ExportDetailReport(detailReport, detailRacingReportCriteria.PartnerId, detailRacingReportCriteria.WinLostDate, criteria);
                 }
 
-                string reportZipFolderName = CreateZipReportFolder(criteria);
-                ReportZipFolderPath = Path.Combine(AppSettings.DataDirectory, reportZipFolderName);
+                FileName = CreateZipReportFolder(criteria);
+                ReportZipFolderPath = Path.Combine(AppSettings.DataDirectoryWithYearMonth, FileName); 
 
                 string[] listFiles = GetFileToCompressed(_horseRacingReportService.GetReportDirectory);
                 using (ZipFile zip = new ZipFile())
@@ -217,6 +221,6 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
             string reportFrom = criteria.FromDate.ToString("d MMM");
             string reportTo = criteria.ToDate.ToString("d MMM");
             return string.Format(RacingResource.Racing_Report_Directory, reportFrom, reportTo);
-        }
+        }       
     }
 }

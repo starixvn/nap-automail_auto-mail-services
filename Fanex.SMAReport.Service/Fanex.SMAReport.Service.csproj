@@ -40,11 +40,20 @@
     <Reference Include="Common.Logging">
       <HintPath>..\packages\Fanex.MailStation.1.0.3\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
+    <Reference Include="Couchbase, Version=1.0.0.0, Culture=neutral, PublicKeyToken=81137140da4e57ef, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Caching.1.0.404.95\lib\net40\Couchbase.dll</HintPath>
+    </Reference>
     <Reference Include="EasyNetQ">
       <HintPath>..\packages\Fanex.MailStation.1.0.3\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
+    <Reference Include="Enyim.Caching, Version=2.12.0.0, Culture=neutral, PublicKeyToken=81137140da4e57ef, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Caching.1.0.404.95\lib\net40\Enyim.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Caching, Version=1.0.404.95, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Caching.1.0.404.95\lib\net40\Fanex.Caching.dll</HintPath>
+    </Reference>
     <Reference Include="Fanex.Common">
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Common.dll</HintPath>
+      <HintPath>..\packages\Fanex.Common.1.0.404.97\lib\net40\Fanex.Common.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Data">
       <HintPath>..\packages\Fanex.Data.0.5.404.63\lib\net40\Fanex.Data.dll</HintPath>
@@ -52,21 +61,26 @@
     <Reference Include="Fanex.Logging">
       <HintPath>..\packages\Fanex.Logging.1.0.0.0\lib\net40\Fanex.Logging.dll</HintPath>
     </Reference>
+    <Reference Include="Fanex.MailDeliver.MailClient">
+      <HintPath>..\packages\Fanex.MailDeliver.MailClient.1.0.0.2\lib\net40\Fanex.MailDeliver.MailClient.dll</HintPath>
+    </Reference>
     <Reference Include="Fanex.MailDelivery.Client">
       <HintPath>..\packages\Fanex.MailStation.1.0.3\lib\net40\Fanex.MailDelivery.Client.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.NAP.Core, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Core.dll</HintPath>
+    <Reference Include="Fanex.NAP.Core">
+      <HintPath>..\packages\Fanex.NAP.Core.2.0.0\lib\net40\Fanex.NAP.Core.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.NAP.Framework">
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Framework.dll</HintPath>
+      <HintPath>..\packages\Fanex.NAP.Framework.1.0.0.3\lib\net40\Fanex.NAP.Framework.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Service.Core">
       <HintPath>..\Fanex.Service.Core\bin\Debug\Fanex.Service.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Caching">
-      <HintPath>..\_Dependencies\Entlib\Microsoft.Practices.EnterpriseLibrary.Caching.dll</HintPath>
+    <Reference Include="IBCFile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.File.1.0.0\lib\net40\IBCFile.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Caching, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.Caching.5.0.414.0\lib\net40\Microsoft.Practices.EnterpriseLibrary.Caching.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common">
       <HintPath>..\packages\EnterpriseLibrary.Common.5.0.414.0\lib\net40\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
@@ -86,11 +100,21 @@
     <Reference Include="Microsoft.Practices.Unity.Interception">
       <HintPath>..\packages\EnterpriseLibrary.Unity.5.0.414.0\lib\net40\Microsoft.Practices.Unity.Interception.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcPager">
+      <HintPath>..\packages\MvcPager.1.5.0.28157\lib\net40\MvcPager.dll</HintPath>
+    </Reference>
     <Reference Include="Quartz">
       <HintPath>..\packages\Fanex.MailStation.1.0.3\lib\net40\Quartz.dll</HintPath>
     </Reference>
     <Reference Include="RabbitMQ.Client">
       <HintPath>..\packages\Fanex.MailStation.1.0.3\lib\net40\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="SPSRemoting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SPSRemoting.1.0.0\lib\net40\SPSRemoting.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -104,6 +128,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml" />
+    <Reference Include="UMControllerLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UMControllerLibrary.1.0.0\lib\net40\UMControllerLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />

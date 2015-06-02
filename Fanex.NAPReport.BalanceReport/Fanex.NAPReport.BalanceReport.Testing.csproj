@@ -182,9 +182,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fanex.BalanceReport\Fanex.NAPReport.BalanceReport.csproj">
+    <ProjectReference Include="..\Fanex.NAPReport.BalanceMonthlyReport.Business\Fanex.NAPReport.BalanceMonthlyReport.Business.csproj">
       <Project>{4DF39ADE-3E49-4D1E-9211-E48353B65135}</Project>
-      <Name>Fanex.NAPReport.BalanceReport</Name>
+      <Name>Fanex.NAPReport.BalanceMonthlyReport.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.Service.Core\Fanex.Service.Core.csproj">
       <Project>{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}</Project>

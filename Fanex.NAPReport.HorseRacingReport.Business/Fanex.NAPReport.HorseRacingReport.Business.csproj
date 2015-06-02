@@ -33,24 +33,70 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Fanex.AccountingReports.SqLiteDatabase">
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.AccountingReports.SqLiteDatabase.dll</HintPath>
+    <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.MailStation.1.0.6.0\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Couchbase">
+      <HintPath>..\packages\Fanex.Caching.1.0.404.95\lib\net40\Couchbase.dll</HintPath>
+    </Reference>
+    <Reference Include="EasyNetQ, Version=0.47.10.380, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.MailStation.1.0.6.0\lib\net40\EasyNetQ.dll</HintPath>
+    </Reference>
+    <Reference Include="Enyim.Caching">
+      <HintPath>..\packages\Fanex.Caching.1.0.404.95\lib\net40\Enyim.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Caching">
+      <HintPath>..\packages\Fanex.Caching.1.0.404.95\lib\net40\Fanex.Caching.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Common">
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Common.dll</HintPath>
+      <HintPath>..\packages\Fanex.Common.1.0.404.97\lib\net40\Fanex.Common.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Data">
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Data.dll</HintPath>
+      <HintPath>..\packages\Fanex.Data.0.5.404.63\lib\net40\Fanex.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.NAP.Core, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Fanex.MailDeliver.MailClient">
+      <HintPath>..\packages\Fanex.MailDeliver.MailClient.1.0.0.2\lib\net40\Fanex.MailDeliver.MailClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.MailDelivery.Client, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Core.dll</HintPath>
+      <HintPath>..\packages\Fanex.MailStation.1.0.6.0\lib\net40\Fanex.MailDelivery.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.NAP.Core">
+      <HintPath>..\packages\Fanex.NAP.Core.2.0.0\lib\net40\Fanex.NAP.Core.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.NAP.Framework">
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Framework.dll</HintPath>
+      <HintPath>..\packages\Fanex.NAP.Framework.1.0.0.3\lib\net40\Fanex.NAP.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="IBCFile">
+      <HintPath>..\packages\Fanex.File.1.0.0\lib\net40\IBCFile.dll</HintPath>
     </Reference>
     <Reference Include="Ionic.Zip">
       <HintPath>..\packages\DotNetZip.1.9.1.5\lib\net40\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Caching, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.Caching.5.0.414.0\lib\net40\Microsoft.Practices.EnterpriseLibrary.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.Common.5.0.414.0\lib\net40\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.Logging.5.0.414.0\lib\net40\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.Unity.5.0.414.0\lib\net40\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.Unity.5.0.414.0\lib\net40\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.Unity.5.0.414.0\lib\net40\Microsoft.Practices.Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcPager">
+      <HintPath>..\packages\MvcPager.1.5.0.28157\lib\net40\MvcPager.dll</HintPath>
     </Reference>
     <Reference Include="NPOI, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -68,15 +114,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
+    <Reference Include="Quartz, Version=2.2.4.400, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.MailStation.1.0.6.0\lib\net40\Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=3.4.3.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.MailStation.1.0.6.0\lib\net40\RabbitMQ.Client.dll</HintPath>
+    </Reference>
     <Reference Include="RazorEngine">
       <HintPath>..\packages\RazorEngine.3.3.0\lib\net40\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="SPSRemoting">
+      <HintPath>..\packages\SPSRemoting.1.0.0\lib\net40\SPSRemoting.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.SQLite">
-      <HintPath>..\_Dependencies\SQLite\System.Data.SQLite.dll</HintPath>
-    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -87,6 +139,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="UMControllerLibrary">
+      <HintPath>..\packages\UMControllerLibrary.1.0.0\lib\net40\UMControllerLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
@@ -95,7 +150,6 @@
     <Compile Include="Criteria\TimeRangeCriteria.cs" />
     <Compile Include="Enums\RowType.cs" />
     <Compile Include="Model\RacingWinLoss.cs" />
-    <Compile Include="Model\TaskModel.cs" />
     <Compile Include="Service\IHorseRacingService.cs" />
     <Compile Include="Service\HorseRacingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -111,6 +165,8 @@
     </Compile>
     <Compile Include="Service\ExportExcelService.cs" />
     <Compile Include="Service\IExportExcelService.cs" />
+    <Compile Include="Service\IMaillingService.cs" />
+    <Compile Include="Service\MailingService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Service.Core\Fanex.Service.Core.csproj">
@@ -130,7 +186,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

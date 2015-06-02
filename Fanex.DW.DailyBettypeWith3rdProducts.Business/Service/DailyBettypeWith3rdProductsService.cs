@@ -82,7 +82,7 @@
             }
 
             this.GetFileName = exportDataDirectory + @"\" + this.FileName;
-            SaveFile.SaveExcelFile(exportDataDirectory, this.FileName, this.Workbook);         
+            SaveFile.SaveExcelFile(exportDataDirectory, this.FileName, this.Workbook, AppSettings.ExcelPassword);         
         }
 
         private void Init()

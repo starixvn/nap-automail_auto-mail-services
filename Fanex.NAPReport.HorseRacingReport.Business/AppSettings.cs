@@ -26,24 +26,6 @@ namespace Fanex.NAPReport.HorseRacingReport.Business
             get { return ExportDataDirectoryWithYearMonth(DataDirectory); }
         }
 
-        public static string EmailTemplate
-        {
-            get;
-            set;
-        }
-
-        public static string MailSubject
-        {
-            get;
-            set;
-        }
-
-        public static string MailTitle
-        {
-            get;
-            set;
-        }
-
         public static string ExcelPasswordProtected
         {
             get;
@@ -63,6 +45,12 @@ namespace Fanex.NAPReport.HorseRacingReport.Business
         }
 
         public static bool IsTest
+        {
+            get;
+            set;
+        }
+
+        public static int FunctionId
         {
             get;
             set;

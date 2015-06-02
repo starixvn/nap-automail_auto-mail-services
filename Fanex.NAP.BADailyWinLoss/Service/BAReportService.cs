@@ -28,8 +28,10 @@
         private FontInformation _headerFont;
         private Color _borderColor = Color.FromArgb(124, 152, 164);
         private INpoiNewFormatCustomCellStyleService _customCellStyleService;
+        private INpoiNewFormatBodyCellStyleService _bodyCellStyleService;
         private Cell _cell;
         private INpoiNewFormatFontService _fontService;
+        private INpoiAlignmentService _alignmentService;
 
         public string FileName { get; set; }
 
@@ -38,7 +40,7 @@
         public void GenerateReport(DateTime winLossDate)
         {
             this.FileName = string.Format(Resource.FileName, winLossDate.ToString("yyyy-MM-dd"));
-            this.DirectoryOfFileName = AppSettings.ExportDataDirectory + @"\" + this.FileName;
+            this.DirectoryOfFileName = AppSettings.DataDirectoryWithYearMonth + @"\" + this.FileName;
             var service = new BetAggregatorService();
             this._workbook = new XSSFWorkbook();
 
@@ -58,7 +60,7 @@
 
             BuildMonthYearToDate(Resource.YearToDate, yearToDateList);
 
-            SaveFile.SaveExcelFile(AppSettings.ExportDataDirectory, this.FileName, this._workbook);
+            SaveFile.SaveExcelFile(AppSettings.DataDirectoryWithYearMonth, this.FileName, this._workbook, AppSettings.ExcelPasswordProtected);
         }
 
         private void InitWorkBook()
@@ -67,9 +69,12 @@
             this._sheet = this._workbook.CreateSheet("Sheet1") as XSSFSheet;
             _headerFont = new FontInformation(NPOIConstants.FontName, 16, Color.Black);
             _customCellStyleService = new NpoiNewFormatCustomCellStyleService(_workbook);
+            
             _cell = new Cell();
             _fontService = new NpoiNewFormatFontService(_workbook);
             _sheet.DefaultColumnWidth = ColumnWidth;
+            _bodyCellStyleService = new NpoiNewFormatBodyCellStyleService(_workbook, _fontService.RegularFont);
+            _alignmentService = new NpoiNewFormatAlignmentService();
         }
 
         private void BuildDaily(DateTime date, List<BALicWinLossDaily> dailyList)
@@ -117,7 +122,7 @@
 
         private void BuildIndicatorSection(string sectionName, Color backgroundColor, int rowBegin, int rowEnd)
         {
-            var cellStyle = _customCellStyleService.CreateCenterTextStyle(backgroundColor, null);
+            var cellStyle = _customCellStyleService.CreateCenterTextStyle(backgroundColor, _fontService.RegularFont);
             this._cell = new Cell(0, rowBegin, 0, rowEnd, sectionName);
             NpoiNewFormatExcelExtension.RenderMergeCell(this._sheet, _cell, cellStyle);
         }
@@ -171,14 +176,12 @@
 
         private void BuildTitle()
         {
-            var cellStyle = this._customCellStyleService.CreateCenterTextStyle(Color.White, _fontService.CreateBoldFont(_headerFont));
-            cellStyle.SetBorderColor(BorderSide.TOP, new XSSFColor(Color.White));
-            cellStyle.SetBorderColor(BorderSide.RIGHT, new XSSFColor(Color.White));
-            cellStyle.SetBorderColor(BorderSide.LEFT, new XSSFColor(Color.White));
-            cellStyle.SetBorderColor(BorderSide.BOTTOM, new XSSFColor(Color.White));
-
-            this._cell = new Cell(0, this._currentRow, 8, this._currentRow++, Resource.Title);
+            var borderInformation = new BorderInformation((short)BorderStyle.None, (short)BorderStyle.None, (short)BorderStyle.None, (short)BorderStyle.None, Color.White, Color.White, Color.White, Color.White);
+            var backgroundInformation = new BackgroundInformation((int)FillPattern.SolidForeground, Color.White);            
+            var cellStyle = this._customCellStyleService.CreateCellStyle(borderInformation, backgroundInformation, _alignmentService.CenterAlignment,  _fontService.CreateBoldFont(_headerFont));
+            this._cell = new Cell(0, this._currentRow, 8, this._currentRow + 1, Resource.Title);
             NpoiNewFormatExcelExtension.RenderMergeCell(this._sheet, this._cell, cellStyle);
+            this._currentRow++;
         }
 
         private void BuildHeaderSection(int rowIndex, string sectionName)
@@ -202,17 +205,18 @@
 
         private int BuildTableBobyForLicensee(int rowIndex, string licenseeName, List<BALicWinLossDaily> list)
         {
-            var cellStyleOfDateTime = this._customCellStyleService.CreateCenterTextStyle(Color.White, null);
+            var cellStyleOfDateTime = this._customCellStyleService.CreateCenterTextStyle(Color.White, _fontService.RegularFont);
 
-            var cellStyleOfNumber = this._customCellStyleService.CreateDecimalNumberStyle(Color.White, null);
+            var cellStyleOfNumber = this._customCellStyleService.CreateDecimalNumberStyle(Color.White, _fontService.RegularFont);
 
-            var cellStyleOfCurrency = this._customCellStyleService.CreateLeftTextStyle(Color.White, null);
+            var cellStyleOfCurrency = this._customCellStyleService.CreateLeftTextStyle(Color.White, _fontService.RegularFont);
 
             double turnOverRM_SubTotal = 0;
             double betCount_SubTotal = 0;
             double winlostRM_SubTotal = 0;
             double commRM_SubTotal = 0;
             double amtDueToBARM_SubTotal = 0;
+            var percentStyle = _bodyCellStyleService.PercentageStyle;
 
             int beginRow = rowIndex;
             foreach (var item in list)
@@ -234,7 +238,7 @@
                     NpoiNewFormatExcelExtension.RenderCell(this._sheet, this._cell, cellStyleOfNumber);
                     betCount_SubTotal += item.BetCount;
 
-                    this._cell = new Cell(columnIndex, rowIndex, columnIndex++, rowIndex, item.CommRM);
+                    this._cell = new Cell(columnIndex, rowIndex, columnIndex++, rowIndex, item.WinlostRM);
                     NpoiNewFormatExcelExtension.RenderCell(this._sheet, this._cell, cellStyleOfNumber);
                     winlostRM_SubTotal += item.WinlostRM;
 
@@ -246,10 +250,17 @@
                     NpoiNewFormatExcelExtension.RenderCell(this._sheet, this._cell, cellStyleOfNumber);
                     amtDueToBARM_SubTotal += item.AmtDueToBARM;
 
-                    var marginSubTotal = CalculateMargin(item.WinlostRM, item.TurnOverRM);
-                    this._cell = new Cell(columnIndex, rowIndex, columnIndex++, rowIndex, marginSubTotal);
-                    NpoiNewFormatExcelExtension.RenderCell(this._sheet, this._cell, cellStyleOfNumber);
-
+                    if (item.TurnOverRM == 0)
+                    {
+                        this._cell = new Cell(columnIndex, rowIndex, columnIndex++, rowIndex, NotAvailableStr);
+                        NpoiNewFormatExcelExtension.RenderCell(this._sheet, this._cell, cellStyleOfCurrency);
+                    }
+                    else
+                    {
+                        var marginSubTotal = CalculateMargin(item.WinlostRM, item.TurnOverRM);
+                        this._cell = new Cell(columnIndex, rowIndex, columnIndex++, rowIndex, marginSubTotal);
+                        NpoiNewFormatExcelExtension.RenderCell(this._sheet, this._cell, percentStyle);
+                    }
                     rowIndex++;
                 }
             }
@@ -268,6 +279,8 @@
             var cellStyleOfSubTotal = this._customCellStyleService.CreateCenterTextStyle(Color.FromArgb(196, 189, 151), _fontService.BlackBoldFont);
 
             var cellStyleOfSubTotalNumber = this._customCellStyleService.CreateDecimalNumberStyle(Color.FromArgb(196, 189, 151), _fontService.BlackBoldFont);
+
+            var cellStyleOfPercent = this._customCellStyleService.CreatePercentageStyle(Color.FromArgb(196, 189, 151), _fontService.BlackBoldFont);
 
             var columnIndex = 1;
 
@@ -292,9 +305,17 @@
             this._cell = new Cell(columnIndex, rowIndex, columnIndex++, rowIndex, amtDueToBARM_Total);
             NpoiNewFormatExcelExtension.RenderCell(this._sheet, _cell, cellStyleOfSubTotalNumber);
 
-            var marginSubTotal = CalculateMargin(winlostRM_Total, turnOverRM_Total);
-            this._cell = new Cell(columnIndex, rowIndex, columnIndex++, rowIndex, marginSubTotal);
-            NpoiNewFormatExcelExtension.RenderCell(this._sheet, _cell, cellStyleOfSubTotalNumber);
+            if (turnOverRM_Total == 0)
+            {
+                this._cell = new Cell(columnIndex, rowIndex, columnIndex++, rowIndex, NotAvailableStr);
+                NpoiNewFormatExcelExtension.RenderCell(this._sheet, _cell, cellStyleOfSubTotal);
+            }
+            else
+            {
+                var marginSubTotal = CalculateMargin(winlostRM_Total, turnOverRM_Total);
+                this._cell = new Cell(columnIndex, rowIndex, columnIndex++, rowIndex, marginSubTotal);
+                NpoiNewFormatExcelExtension.RenderCell(this._sheet, _cell, cellStyleOfPercent);
+            }
         }
 
         private void BuildTotal(int rowIndex, List<BALicWinLossDaily> list)
@@ -302,6 +323,8 @@
             var cellStyleOfTotal = this._customCellStyleService.CreateCenterTextStyle(Color.FromArgb(33, 89, 103), _fontService.WhiteBoldFont);
 
             var cellStyleOfNumber = this._customCellStyleService.CreateDecimalNumberStyle(Color.FromArgb(33, 89, 103), _fontService.WhiteBoldFont);
+
+            var cellStyleOfPercent = this._customCellStyleService.CreatePercentageStyle(Color.FromArgb(33, 89, 103), _fontService.BlackBoldFont);
 
             var columnIndex = 1;
             this._cell = new Cell(columnIndex, rowIndex, ++columnIndex, rowIndex, Resource.Total);
@@ -326,9 +349,17 @@
             this._cell = new Cell(columnIndex, rowIndex, columnIndex++, rowIndex, list.Sum(wl => wl.AmtDueToBARM));
             NpoiNewFormatExcelExtension.RenderCell(this._sheet, _cell, cellStyleOfNumber);
 
-            var marginSubTotal = CalculateMargin(winlossRM, turnOverRM);
-            this._cell = new Cell(columnIndex, rowIndex, columnIndex++, rowIndex, marginSubTotal);
-            NpoiNewFormatExcelExtension.RenderCell(this._sheet, _cell, cellStyleOfNumber);
+            if (turnOverRM == 0)
+            {
+                this._cell = new Cell(columnIndex, rowIndex, columnIndex++, rowIndex, NotAvailableStr);
+                NpoiNewFormatExcelExtension.RenderCell(this._sheet, _cell, cellStyleOfTotal);
+            }
+            else
+            {
+                var marginSubTotal = CalculateMargin(winlossRM, turnOverRM);
+                this._cell = new Cell(columnIndex, rowIndex, columnIndex++, rowIndex, marginSubTotal);
+                NpoiNewFormatExcelExtension.RenderCell(this._sheet, _cell, cellStyleOfPercent);
+            }
         }
 
         private void BuildGrandTotal(int rowIndex, List<BALicWinLossDaily> list)
@@ -336,6 +367,8 @@
             var cellStyleOfTotal = this._customCellStyleService.CreateCenterTextStyle(Color.FromArgb(184, 204, 228), _fontService.BlackBoldFont);
 
             var cellStyleOfNumber = this._customCellStyleService.CreateDecimalNumberStyle(Color.FromArgb(184, 204, 228), _fontService.BlackBoldFont);
+
+            var cellStyleOfPercent = this._customCellStyleService.CreatePercentageStyle(Color.FromArgb(184, 204, 228), _fontService.BlackBoldFont);
 
             var columnIndex = 0;
             this._cell = new Cell(columnIndex, rowIndex, columnIndex + 2, rowIndex, Resource.GrandTotal);
@@ -363,26 +396,25 @@
             this._cell = new Cell(columnIndex, rowIndex, columnIndex++, rowIndex, list.Sum(item => item.AmtDueToBARM));
             NpoiNewFormatExcelExtension.RenderCell(this._sheet, _cell, cellStyleOfNumber);
 
-            var margin = CalculateMargin(winlossRM, turnOverRM);
-            this._cell = new Cell(columnIndex, rowIndex, columnIndex++, rowIndex, margin);
-            NpoiNewFormatExcelExtension.RenderCell(this._sheet, _cell, cellStyleOfNumber);
-        }
-
-        private string CalculateMargin(double winloss, double turnover)
-        {
-            string margin = string.Empty;
-            if (winloss == 0)
+            
+            if (turnOverRM == 0)
             {
-                margin = "0";
-            }
-            else if (turnover == 0)
-            {
-                margin = NotAvailableStr;
+                this._cell = new Cell(columnIndex, rowIndex, columnIndex++, rowIndex, NotAvailableStr);
+                NpoiNewFormatExcelExtension.RenderCell(this._sheet, _cell, cellStyleOfTotal);
             }
             else
             {
-                margin = Convert.ToDouble(-(winloss / turnover)).ToString(NPOIConstants.NormalPercentFormat);
+                var margin = CalculateMargin(winlossRM, turnOverRM);
+                this._cell = new Cell(columnIndex, rowIndex, columnIndex++, rowIndex, margin);
+                NpoiNewFormatExcelExtension.RenderCell(this._sheet, _cell, cellStyleOfPercent);
             }
+            
+        }
+
+        private double CalculateMargin(double winloss, double turnover)
+        {
+            double margin = 0;
+            margin = Convert.ToDouble(-(winloss / turnover));
 
             return margin;
         }

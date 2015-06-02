@@ -36,6 +36,7 @@
         private int _currentRow = 1;
         private BorderInformation _borderInformation;
         private IDataFormat _dataFormat;
+        private XSSFFont _font;
 
         public string FileName { get; set; }
 
@@ -48,7 +49,7 @@
             var winLossList = service.GetBALicWinlossMonthly(criteria);
 
             this.FileName = string.Format(Label.FileName, winLossDate.ToString("yyyy-MM"));
-            this.DirectoryOfFileName = AppSettings.ExportDataDirectory + @"\" + this.FileName;
+            this.DirectoryOfFileName = AppSettings.DataDirectoryWithYearMonth + @"\" + this.FileName;
 
             this._workbook = new XSSFWorkbook();
 
@@ -70,7 +71,17 @@
                 BuildTableTotal(winLossByLicensee);
             }
 
-            SaveFile.SaveExcelFile(AppSettings.ExportDataDirectory, this.FileName, this._workbook);
+            if (licenseeList.Count == 0)
+            {
+                string licenseeName = "There is no data";
+                InitSheet(licenseeName);
+
+                BuildTitle();
+
+                BuildLicenseeName(licenseeName);
+            }
+
+            SaveFile.SaveExcelFile(AppSettings.DataDirectoryWithYearMonth, this.FileName, this._workbook, AppSettings.ExcelPasswordProtected);
         }
 
         private void InitSheet(string licenseeName)
@@ -79,6 +90,7 @@
             _sheet.DefaultColumnWidth = 15;
             _customCellStyleService = new NpoiNewFormatCustomCellStyleService(_workbook);
             _fontService = new NpoiNewFormatFontService(_workbook);
+            _font = _fontService.RegularFont;
             _cell = new Cell();
             _currentRow = 1;
             _dataFormat = this._workbook.CreateDataFormat();
@@ -139,12 +151,12 @@
         private void BuildTableBody(List<BALicWinlossDaily> winLossList)
         {
             var backgroundInformation = new BackgroundInformation((int)FillPattern.SolidForeground, Color.White);
-            var cellStyleOfDateTime = this._customCellStyleService.CreateCellStyle(_borderInformation, backgroundInformation, _alignmentCenter, null);
+            var cellStyleOfDateTime = this._customCellStyleService.CreateCellStyle(_borderInformation, backgroundInformation, _alignmentCenter, _font);
 
-            var cellStyleOfNumber = _customCellStyleService.CreateCellStyle(_borderInformation, backgroundInformation, _alignmentRight, null);
+            var cellStyleOfNumber = _customCellStyleService.CreateCellStyle(_borderInformation, backgroundInformation, _alignmentRight, _font);
             cellStyleOfNumber.DataFormat = _dataFormat.GetFormat(NPOIConstants.NormalDecimalNumberFormat);
 
-            var cellStyleOfCurrency = _customCellStyleService.CreateCellStyle(_borderInformation, backgroundInformation, _alignmentLeft, null);
+            var cellStyleOfCurrency = _customCellStyleService.CreateCellStyle(_borderInformation, backgroundInformation, _alignmentLeft, _font);
 
             var listDate = GetDistinDate(winLossList);
             foreach (var date in listDate)
@@ -195,7 +207,7 @@
             var backgroundInformation = new BackgroundInformation((int)FillPattern.SolidForeground, Color.FromArgb(255, 255, 153));
             var backgroundDateTime = new BackgroundInformation((int)FillPattern.SolidForeground, Color.White);
             var cellStyleOfSubTotal = _customCellStyleService.CreateCellStyle(_borderInformation, backgroundInformation, _alignmentCenter, _fontService.BlackBoldFont);
-            var cellStyleOfDateTime = this._customCellStyleService.CreateCellStyle(_borderInformation, backgroundDateTime, _alignmentCenter, null);
+            var cellStyleOfDateTime = this._customCellStyleService.CreateCellStyle(_borderInformation, backgroundDateTime, _alignmentCenter, _font);
 
             var cellStyleOfSubTotalNumber = _customCellStyleService.CreateCellStyle(_borderInformation, backgroundInformation, _alignmentRight, _fontService.BlackBoldFont);
             cellStyleOfSubTotalNumber.DataFormat = _dataFormat.GetFormat(NPOIConstants.NormalDecimalNumberFormat);

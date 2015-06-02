@@ -1,15 +1,21 @@
 <Functions>
   <Function Name="Core - Report Service">
-    <Setting Key="Core_ReportService_GetBalanceUpDay" SpName="Age_SelBalanceUpDay" DbName="DBAGE.bodb02.bodbAdminNet">
-    </Setting>
-    <Setting Key="NAP_ExchangeCurrencySel" SpName="NAP_ExchangeCurrencySel" DbName="DBAGE.bodb02.bodbAdminNet">
-    </Setting>
+    <Setting Key="Core_ReportService_GetBalanceUpDay" SpName="Age_SelBalanceUpDay" DbName="DBAGE.bodb02.bodbAdminNet"></Setting>
+    <Setting Key="NAP_ExchangeCurrencySel" SpName="NAP_ExchangeCurrencySel" DbName="DBAGE.bodb02.bodbAdminNet"></Setting>
     <Setting Key="Acc_ExchangeCurrencySel" SpName="Acc_ExchangeCurrencySel" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0" />
   </Function>
+
+  <Function Name="BA">
+    <Setting Key="Acc_Rpt_BALicWinlossMonthly" SpName="Acc_Rpt_BALicWinlossMonthly" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_BALicWinlossDaily" SpName="Acc_Rpt_BALicWinlossDaily" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_BALicWinloss" SpName="Acc_Rpt_BALicWinloss" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" />
+  </Function>
+  
   <Function Name="SMA Loss Automail">
     <Setting Key="NAP_LimitLoss_MonitorList" SpName="NAP_LimitLoss_MonitorList" DbName="DBAGE.bodb_AGE.bodbAdminNet" />
     <Setting Key="NAP_LimitLoss_ActionConfigSel" SpName="NAP_LimitLoss_ActionConfigSel" DbName="DBAGE.bodb_AGE.bodbAdminNet"></Setting>
   </Function>
+  
   <Functions>
     <Function Name="SMA Turnover Automail">
       <Setting Key="TurnoverNotifiedSelect" SpName="NAP_SMATurnover_IsNotifiedSel_xtest" DbName="DBAGE.bodb02.bodbAdminNet" TimeOut="0" />

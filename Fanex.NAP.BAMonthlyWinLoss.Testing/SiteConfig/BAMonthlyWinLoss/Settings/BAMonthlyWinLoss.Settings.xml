@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Settings>
+  <add key="IsTest" value="false" />
+  <add key="TestedDate" value="1/30/2015" />  
+  <add key="DataDirectory" value="\\10.18.200.202\_Fanex.ExcelFiles\BAMonthlyWinLoss" />  
+  <add key="ExcelPasswordProtected" value="we168" />
+  <add key="FunctionId" value="79" />
+</Settings>

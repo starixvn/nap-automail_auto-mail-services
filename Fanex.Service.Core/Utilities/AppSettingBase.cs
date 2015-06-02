@@ -110,5 +110,29 @@ namespace Fanex.Service.Core.Utilities
 			var val = ConfigurationManager.AppSettings[key];
 			return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings[key]);
 		}
+
+        public static string NapReportURL
+        {
+            get 
+            {
+                return GetSettingValueByKey("NapReportURL");
+            }
+        }
+
+        public static string Title
+        {
+            get 
+            {
+                return GetSettingValueByKey("Title");
+            }
+        }
+
+        public static string Subject
+        {
+            get
+            {
+                return GetSettingValueByKey("Subject");
+            }
+        }        
 	}
 }

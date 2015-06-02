@@ -13,16 +13,16 @@ namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.NAPReport
     using Fanex.MailDelivery.Client.Jobs;
     using Fanex.MailDelivery.Client.Messages;
     using Fanex.MailDelivery.Client.Models;
-    using Fanex.NAPReport.BalanceReport.Bussiness;
-    using Fanex.NAPReport.BalanceReport.Model;
+    using Fanex.NAPReport.BalanceMonthlyReport.Business.Bussiness;
+    using Fanex.NAPReport.BalanceMonthlyReport.Business.Model;
     using Fanex.NAPReport.WinLossByProducts.Business.Constants;
     using Fanex.NAPReport.WinLossByProducts.Business.Criteria;
     using Fanex.NAPReport.WinLossByProducts.Business.Model;
     using Fanex.NAPReport.WinLossByProducts.Business.Services;
     using Quartz;
     using RazorEngine;
-    using Fanex.NAPReport.BalanceReport.Core;
-    using Fanex.NAPReport.BalanceReport;
+    using Fanex.NAPReport.BalanceMonthlyReport.Business.Core;
+    using Fanex.NAPReport.BalanceMonthlyReport.Business;
 
     /// <summary>
     /// TODO: Update summary.

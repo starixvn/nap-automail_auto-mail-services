@@ -52,13 +52,11 @@
     <Reference Include="Fanex.Caching">
       <HintPath>..\packages\Fanex.Caching.1.0.404.95\lib\net40\Fanex.Caching.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.Common, Version=1.0.404.97, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Common.dll</HintPath>
+    <Reference Include="Fanex.Common">
+      <HintPath>..\packages\Fanex.Common.1.0.404.97\lib\net40\Fanex.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.Data, Version=0.5.404.63, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Data.dll</HintPath>
+    <Reference Include="Fanex.Data">
+      <HintPath>..\packages\Fanex.Data.0.5.404.63\lib\net40\Fanex.Data.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Logging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.Logging.1.0.0.0\lib\net40\Fanex.Logging.dll</HintPath>
@@ -69,13 +67,11 @@
     <Reference Include="Fanex.MailDelivery.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.MailStation.1.0.1\lib\net40\Fanex.MailDelivery.Client.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.NAP.Core, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Core.dll</HintPath>
+    <Reference Include="Fanex.NAP.Core">
+      <HintPath>..\packages\Fanex.NAP.Core.2.0.0\lib\net40\Fanex.NAP.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.NAP.Framework, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Framework.dll</HintPath>
+    <Reference Include="Fanex.NAP.Framework">
+      <HintPath>..\packages\Fanex.NAP.Framework.1.0.0.3\lib\net40\Fanex.NAP.Framework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Caching, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\EnterpriseLibrary.Caching.5.0.414.0\lib\net40\Microsoft.Practices.EnterpriseLibrary.Caching.dll</HintPath>

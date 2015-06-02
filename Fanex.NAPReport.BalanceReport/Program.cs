@@ -1,10 +1,10 @@
 ﻿using System;
-using Fanex.NAPReport.BalanceReport.Bussiness;
+using Fanex.NAPReport.BalanceMonthlyReport.Business.Bussiness;
 using Fanex.Data.Configuration;
-using Fanex.NAPReport.BalanceReport.Model;
-using Fanex.NAPReport.BalanceReport.Core;
+using Fanex.NAPReport.BalanceMonthlyReport.Business.Model;
+using Fanex.NAPReport.BalanceMonthlyReport.Business.Core;
 
-namespace Fanex.NAPReport.BalanceReport
+namespace Fanex.NAPReport.BalanceMonthlyReport.Business
 {
     class Program
     {
@@ -19,7 +19,7 @@ namespace Fanex.NAPReport.BalanceReport
                     Date = DateTime.Now,
                     IsDirectReport = true
                 };
-                // (new CreditTermManager()).ExportExcel(report);
+                 (new CreditTermManager()).ExportExcel(report);
 
                 var subject = Utilities.LoadSubject(report);
                 var body = Utilities.LoadBody(report);

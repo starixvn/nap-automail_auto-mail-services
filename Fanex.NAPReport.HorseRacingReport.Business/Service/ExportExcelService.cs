@@ -371,7 +371,7 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
 
             worksheet.CreateFreezePane(2, 4, 2, 4);
             reportName = string.Format("{0}.{1}", reportName, "xlsx");
-            SaveFile.SaveExcelFile(_reportDataDirectory, reportName, _workbook);
+            SaveFile.SaveExcelFile(_reportDataDirectory, reportName, _workbook, AppSettings.ExcelPasswordProtected);
 
             GC.Collect();
         }
@@ -413,7 +413,7 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
             worksheet.CreateFreezePane(2, 4, 2, 4);
 
             reportName = string.Format("{0}.{1}", reportName, "xlsx");
-            SaveFile.SaveExcelFile(_reportDataDirectory, reportName, _workbook);
+            SaveFile.SaveExcelFile(_reportDataDirectory, reportName, _workbook, AppSettings.ExcelPasswordProtected);
 
             GC.Collect();
         }
@@ -1246,7 +1246,7 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
             string reportFrom = criteria.FromDate.ToShortFormatedDateWithSlash().Replace("/", "-");
             string reportTo = criteria.ToDate.ToShortFormatedDateWithSlash().Replace("/", "-");
             string reportByPeriodTime = string.Format(RacingResource.Racing_Report_Export_Directory, reportFrom, reportTo);
-            string reportDataDirectory = AppSettings.DataDirectory;
+            string reportDataDirectory = AppSettings.DataDirectoryWithYearMonth;
             DirectoryExtensions.CheckAndCreateDirectory(reportDataDirectory);
             string directoryReportPath = Path.Combine(reportDataDirectory, reportByPeriodTime);
             DirectoryExtensions.CheckAndCreateDirectory(directoryReportPath);
