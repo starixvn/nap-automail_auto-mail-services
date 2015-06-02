@@ -14,8 +14,8 @@ namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.NAPReport
     using Fanex.MailDelivery.Client.Messages;
     using Fanex.MailDelivery.Client.Models;
     using Fanex.NAPReport.HorseRacingReport.Business;
-    using Fanex.NAPReport.HorseRacingReport.Business.Constants;
     using Fanex.NAPReport.HorseRacingReport.Business.Criteria;
+    using Fanex.NAPReport.HorseRacingReport.Business.Service;
     using Fanex.Service.Core.Extensions;
     using Quartz;
     using RazorEngine;
@@ -27,25 +27,25 @@ namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.NAPReport
     {
         protected override JobResultMessage Run(Schedule schedule, IJobExecutionContext jobContext)
         {
-            ProcessHorseRacingService service = new ProcessHorseRacingService();
+            IHorseRacingService service = new HorseRacingService();
             TimeRangeCriteria timeRangeCriteria = AssignRangeDate(service);
 
-            service.ProcessHorseRacingReportService(timeRangeCriteria);
+            service.GetData(timeRangeCriteria);
             string path = service.ReportZipFolderPath;
 
             var root = AppDomain.CurrentDomain.BaseDirectory;
-            string filePath = root + EmailTemplateConstants.RacingReportEmailTemplate;
+            string filePath = root + AppSettings.EmailTemplate;
             string template = File.ReadAllText(filePath);
             var emailContent = Razor.Parse(template, timeRangeCriteria);
             string emailSubject = string.Format(
-                AppSettings.Subject,
+                AppSettings.MailSubject,
                 timeRangeCriteria.FromDate.ToShortFormatedDateWithSlash(),
                 timeRangeCriteria.ToDate.ToShortFormatedDateWithSlash());
 
             Mail mail = new Mail()
             {
                 Subject = emailSubject,
-                Title = AppSettings.Title,
+                Title = AppSettings.MailTitle,
                 Body = emailContent
             };
 
@@ -65,7 +65,7 @@ namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.NAPReport
             };
         }
 
-        private static TimeRangeCriteria AssignRangeDate(ProcessHorseRacingService service)
+        private static TimeRangeCriteria AssignRangeDate(IHorseRacingService service)
         {
             TimeRangeCriteria timeRangeCriteria = new TimeRangeCriteria();
 

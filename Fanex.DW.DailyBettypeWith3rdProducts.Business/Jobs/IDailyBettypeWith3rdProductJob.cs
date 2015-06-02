@@ -20,6 +20,6 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Jobs
     /// </summary>
     public interface IDailyBettypeWith3rdProductJob
     {
-        Mail ProcessExportDailyBettypeWith3rdProducts(bool IsDaily);
+        Mail ProcessExportDailyBettypeWith3rdProducts(bool IsDaily, string Subject);
     }
 }

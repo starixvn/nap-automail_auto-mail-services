@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.NAPReport.HorseRacingReport.Business
+namespace Fanex.NAPReport.HorseRacingReport.Business.Service
 {
     using System;
     using System.Collections.Generic;
@@ -12,16 +12,22 @@ namespace Fanex.NAPReport.HorseRacingReport.Business
     using System.IO;
     using Fanex.NAPReport.HorseRacingReport.Business.Criteria;
     using Fanex.NAPReport.HorseRacingReport.Business.Resources;
-    using Fanex.NAPReport.HorseRacingReport.Business.Service;
+    using Fanex.Service.Core.Configuration;
     using Fanex.Service.Core.Extensions;
     using Ionic.Zip;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class ProcessHorseRacingService
+    public class HorseRacingService : IHorseRacingService
     {
-        private IHorseRacingReportService _horseRacingReportService;
+        private IExportExcelService _horseRacingReportService;
+
+        public HorseRacingService()
+        {
+            ConfigurationParser configurationParser = new ConfigurationParser(@"SiteConfig\HorseRacingReport\Settings\HorseRacingReport.Settings.xml");
+            configurationParser.Parse<AppSettings>();
+        }
 
         public string ReportZipFolderPath
         {
@@ -36,9 +42,9 @@ namespace Fanex.NAPReport.HorseRacingReport.Business
         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
-        public void ProcessHorseRacingReportService(TimeRangeCriteria criteria)
+        public void GetData(TimeRangeCriteria criteria)
         {
-            _horseRacingReportService = new HorseRacingReportService(criteria);
+            _horseRacingReportService = new ExportExcelService(criteria);
 
             try
             {
@@ -58,7 +64,7 @@ namespace Fanex.NAPReport.HorseRacingReport.Business
                 }
 
                 string reportZipFolderName = CreateZipReportFolder(criteria);
-                ReportZipFolderPath = Path.Combine(AppSettings.ExportDataDirectory, reportZipFolderName);
+                ReportZipFolderPath = Path.Combine(AppSettings.DataDirectory, reportZipFolderName);
 
                 string[] listFiles = GetFileToCompressed(_horseRacingReportService.GetReportDirectory);
                 using (ZipFile zip = new ZipFile())

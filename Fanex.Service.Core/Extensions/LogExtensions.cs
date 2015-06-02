@@ -25,8 +25,7 @@ namespace Fanex.Service.Core.Extensions
                                     "<br>\r\nSOURCE: " + ex.Source +
                                     "<br>\r\nTARGETSITE: " + ex.TargetSite +
                                     "<br>\r\nSTACKTRACE: " + ex.StackTrace;
-
-                IMaintainanceService maintenance = new MaintainanceService();
+                IMaintenanceService maintenance = new MaintenanceService();                
                 var downTime = maintenance.GetDowntimeInfo();
                 if (!downTime.IsDowntime)
                 {

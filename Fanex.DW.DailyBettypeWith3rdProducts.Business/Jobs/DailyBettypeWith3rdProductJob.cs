@@ -24,16 +24,18 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Jobs
     public class DailyBettypeWith3rdProductJob : IDailyBettypeWith3rdProductJob
     {
 
-        public Mail ProcessExportDailyBettypeWith3rdProducts(bool IsDaily)
+        public Mail ProcessExportDailyBettypeWith3rdProducts(bool IsDaily, string Subject)
         {
             MailInfo info = new MailInfo(IsDaily);
             DailyBettypeWith3rdProductsService service = new DailyBettypeWith3rdProductsService();
             service.GenerateReport(false, info.ExportDataDirectory);
 
+            string subject = Subject + " - " + DateTime.Now.ToString("yyyy-MM-dd");
+
             Mail mail = new Mail()
             {
-                Subject = string.Format(info.DailyBettype3rdProductMailSubject, DateTime.Now.ToString("yyyy-MM-dd")),
-                Title = string.Format(info.DailyBettype3rdProductMailSubject, DateTime.Now.ToString("yyyy-MM-dd")),
+                Subject = subject,
+                Title = subject,
                 Body = info.DailyBettype3rdProductMailBody
             };
 

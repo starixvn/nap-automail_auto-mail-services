@@ -46,10 +46,6 @@
     <Reference Include="EasyNetQ">
       <HintPath>..\packages\Fanex.MailStation.1.0.3\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.AccountingReports.SqLiteDatabase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.AccountingReports.SqLiteDatabase.dll</HintPath>
-    </Reference>
     <Reference Include="Fanex.Data">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Data.dll</HintPath>
     </Reference>

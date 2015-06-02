@@ -24,13 +24,13 @@ namespace Fanex.CreditMovement.Business.Service
         /// <param name="reportUrl">The report URL.</param>
         /// <param name="criteria">The criteria.</param>
         /// <returns>Email sent success or fail.</returns>
-        public static Mail SendCreditMovementReportEmail(string reportUrl, GetCreditMovementCriteria criteria)
+        public static Mail SendCreditMovementReportEmail(string reportUrl, GetCreditMovementCriteria criteria, string mailSubject)
         {
             string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, AppSettings.EmailTemplate);
             string template = File.ReadAllText(filePath);
             var emailContent = Razor.Parse(template, criteria);
             string emailSubject = string.Format(
-                AppSettings.MailSubject,
+                mailSubject,
                 criteria.ToDate.ToString("yyyy-MM-dd"));
             string emailTitle = AppSettings.MailTitle;
 

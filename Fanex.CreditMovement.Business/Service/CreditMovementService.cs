@@ -54,13 +54,13 @@ namespace Fanex.CreditMovement.Business.Service
         /// Processes to send email.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        public Mail ProcessToSendEmail(GetCreditMovementCriteria criteria)
+        public Mail ProcessToSendEmail(GetCreditMovementCriteria criteria, string mailSubject)
         {
             var report = _repository.GetReportData(criteria);
             if (report.Count > 0)
             {
                 string reportUrl = ExportReport(report, criteria);
-                return Mailing.SendCreditMovementReportEmail(reportUrl, criteria);
+                return Mailing.SendCreditMovementReportEmail(reportUrl, criteria, mailSubject);
             }
 
             return new Mail();

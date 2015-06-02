@@ -19,17 +19,18 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
     using Fanex.NAPReport.HorseRacingReport.Business.Model;
     using Fanex.NAPReport.HorseRacingReport.Business.Resources;
     using Fanex.Service.Core.Common;
+    using Fanex.Service.Core.Configuration;
     using Fanex.Service.Core.Constants;
     using Fanex.Service.Core.Extensions;
     using Fanex.Service.Core.Service;
+    using Fanex.Service.Core.Utilities;
     using NPOI.SS.UserModel;
     using NPOI.XSSF.UserModel;
-    using Fanex.Service.Core.Utilities;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class HorseRacingReportService : IHorseRacingReportService
+    public class ExportExcelService : IExportExcelService
     {
         private const string RMCurrency = "RM2";
         private Dictionary<int, string> _currencies;
@@ -87,12 +88,12 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
 
         private string _reportDataDirectory;
 
-        public HorseRacingReportService()
+        public ExportExcelService()
             : this(null)
         {
         }
 
-        public HorseRacingReportService(TimeRangeCriteria criteria)
+        public ExportExcelService(TimeRangeCriteria criteria)
         {
             _currencies = BaseService.ExchangeCurrencies;
             this.InitColor();
@@ -100,7 +101,7 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
             this.InitBorderInfo();
             this.InitFontInfo();
             this.InitBackgroundColorInfo();
-            _reportDataDirectory = this.CreateHorseRacingReportDataDirectory(criteria);
+            _reportDataDirectory = this.CreateHorseRacingReportDataDirectory(criteria);            
         }
 
         public string GetReportDirectory
@@ -346,7 +347,6 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
             string reportName = string.Empty;
             string sheetName = string.Empty;
             string reportTitle = string.Empty;
-            //FileStream fileStream = null;
             _workbook = new XSSFWorkbook();
             GetExportMainReportInfo(reportType, winlostDate, out reportName, out sheetName, out reportTitle);
             XSSFSheet worksheet = _workbook.GetSheet(sheetName) as XSSFSheet ?? _workbook.CreateSheet(sheetName) as XSSFSheet;
@@ -376,8 +376,6 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
             GC.Collect();
         }
 
-      
-
         /// <summary>
         /// Exports the detail report.
         /// </summary>
@@ -387,7 +385,6 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
         /// <param name="criteria">The criteria.</param>
         public void ExportDetailReport(RacingWinLoss report, int partnerId, DateTime winlostDate, TimeRangeCriteria criteria)
         {
-            //FileStream fileStream = null;
             string reportName = string.Empty;
             string sheetName = string.Empty;
             string reportTitle = string.Empty;
@@ -420,7 +417,6 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
 
             GC.Collect();
         }
-        
 
         private void InitColumnWidth(XSSFSheet worksheet)
         {
@@ -1250,7 +1246,7 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
             string reportFrom = criteria.FromDate.ToShortFormatedDateWithSlash().Replace("/", "-");
             string reportTo = criteria.ToDate.ToShortFormatedDateWithSlash().Replace("/", "-");
             string reportByPeriodTime = string.Format(RacingResource.Racing_Report_Export_Directory, reportFrom, reportTo);
-            string reportDataDirectory = AppSettings.ExportDataDirectory;
+            string reportDataDirectory = AppSettings.DataDirectory;
             DirectoryExtensions.CheckAndCreateDirectory(reportDataDirectory);
             string directoryReportPath = Path.Combine(reportDataDirectory, reportByPeriodTime);
             DirectoryExtensions.CheckAndCreateDirectory(directoryReportPath);

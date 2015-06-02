@@ -50,7 +50,7 @@ using Fanex.CreditMovement.Business;
                 Amount = AppSettings.Amount
             };
 
-            var mail = _creditMovementService.ProcessToSendEmail(criteria);
+            var mail = _creditMovementService.ProcessToSendEmail(criteria, schedule.Name);
 
             return new JobResultMessage()
             {

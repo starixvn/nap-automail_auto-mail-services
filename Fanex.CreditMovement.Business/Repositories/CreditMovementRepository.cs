@@ -6,15 +6,12 @@
 
 namespace Fanex.CreditMovement.Business.Repositories
 {
-    using System;
     using System.Collections.Generic;
     using System.Data;
-    using Fanex.AccountingReports.SqLiteDatabase;
     using Fanex.Common;
     using Fanex.CreditMovement.Business.Criteria;
     using Fanex.CreditMovement.Business.Model;
     using Fanex.Data;
-    using Fanex.Service.Core.Enums;
     using Fanex.Service.Core.Extensions;
 
     /// <summary>

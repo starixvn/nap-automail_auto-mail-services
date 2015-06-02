@@ -29,7 +29,7 @@ namespace Fanex.DW.AutoMailReport.Service.Jobs.DW
         protected override JobResultMessage Run(Schedule schedule, IJobExecutionContext jobContext)
         {
             IDailyBettypeWith3rdProductJob job = new DailyBettypeWith3rdProductJob();
-            var mail = job.ProcessExportDailyBettypeWith3rdProducts(true);
+            var mail = job.ProcessExportDailyBettypeWith3rdProducts(true, schedule.Name);
 
             return new JobResultMessage()
             {

@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A26D737A-8655-40AD-AA5D-13DC22FCFF7C}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Fanex.NAPReport.AutoMailReport.Service</RootNamespace>
     <AssemblyName>Fanex.NAPReport.AutoMailReport.Service</AssemblyName>
@@ -59,9 +59,6 @@
     </Reference>
     <Reference Include="Fanex.Data">
       <HintPath>..\packages\Fanex.Data.0.5.404.63\lib\net40\Fanex.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="Fanex.Logging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.Logging.1.0.0.0\lib\net40\Fanex.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Logging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.Logging.1.0.0.0\lib\net40\Fanex.Logging.dll</HintPath>
@@ -211,6 +208,7 @@
     </Content>
     <Content Include="SiteConfig\CreditMovement\Settings\CreditMovement.Settings.PRO.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="SiteConfig\CreditMovement\Settings\CreditMovement.Settings.UAT.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -234,6 +232,7 @@
     </Content>
     <Content Include="Fanex.NAPReport.AutoMailReport.Service.PRO.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Fanex.NAPReport.AutoMailReport.Service.UAT.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

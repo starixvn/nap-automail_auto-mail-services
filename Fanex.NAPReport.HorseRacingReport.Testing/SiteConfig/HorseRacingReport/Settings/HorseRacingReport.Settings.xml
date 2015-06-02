@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Settings>
+  <add key="IsTest" value="false" />
+  <add key="FromDate" value="2015-03-01" />
+  <add key="ToDate" value="2015-03-16" />  
+  <add key="MailSubject" value="Automail report - Daily Racing Report from {0} to {1}" />
+  <add key="MailTitle" value="Starix IT" />
+  <add key="DataDirectory" value="\\10.18.200.202\_Fanex.ExcelFiles\HorseRacingReport" />
+  <add key="EmailTemplate" value="SiteConfig\HorseRacingReport\Templates\HorseRacingReportEmail.cshtml" />
+  <add key="ExcelPasswordProtected" value="we168" />
+</Settings>

@@ -62,21 +62,5 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business
                 return GetSettingValueByKey("Fanex.DW.DailyBettypeWith3rdProducts.IsSingleSport") == "1";
             }
         }
-
-        public static string SubjectDaily
-        {
-            get
-            {
-                return GetSettingValueByKey("Fanex.DW.DailyBettypeWith3rdProducts.Subject.Daily");
-            }
-        }
-
-        public static string SubjectWeekly
-        {
-            get
-            {
-                return GetSettingValueByKey("Fanex.DW.DailyBettypeWith3rdProducts.Subject.Weekly");
-            }
-        }
     }
 }

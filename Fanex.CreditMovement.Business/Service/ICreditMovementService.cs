@@ -15,6 +15,6 @@ namespace Fanex.CreditMovement.Business.Service
     /// </summary>
     public interface ICreditMovementService
     {
-        Mail ProcessToSendEmail(GetCreditMovementCriteria criteria);
+        Mail ProcessToSendEmail(GetCreditMovementCriteria criteria, string mailSubject);
     }
 }

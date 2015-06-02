@@ -2,10 +2,10 @@
 using System.IO;
 using Fanex.Data.Configuration;
 using Fanex.NAPReport.HorseRacingReport.Business;
-using Fanex.NAPReport.HorseRacingReport.Business.Constants;
 using Fanex.NAPReport.HorseRacingReport.Business.Criteria;
 using Fanex.Service.Core.Extensions;
 using RazorEngine;
+using Fanex.NAPReport.HorseRacingReport.Business.Service;
 
 namespace Fanex.NAPReport.HorseRacingReport.Testing
 {
@@ -18,27 +18,27 @@ namespace Fanex.NAPReport.HorseRacingReport.Testing
 
             Console.WriteLine("Starting ProcessHorseRacingService at: " + DateTime.Now.ToString());
 
-            ProcessHorseRacingService service = new ProcessHorseRacingService();
+            IHorseRacingService service = new HorseRacingService();
             TimeRangeCriteria timeRangeCriteria = AssignRangeDate(service);
 
-            service.ProcessHorseRacingReportService(timeRangeCriteria);
+            service.GetData(timeRangeCriteria);
             string path = service.ReportZipFolderPath;
 
             var root = AppDomain.CurrentDomain.BaseDirectory;
-            string filePath = root + EmailTemplateConstants.RacingReportEmailTemplate;
+            string filePath = root + AppSettings.EmailTemplate;
             string template = File.ReadAllText(filePath);
             var emailContent = Razor.Parse(template, timeRangeCriteria);
             string emailSubject = string.Format(
-                AppSettings.Subject,
+                AppSettings.MailSubject,
                 timeRangeCriteria.FromDate.ToShortFormatedDateWithSlash(),
                 timeRangeCriteria.ToDate.ToShortFormatedDateWithSlash());
-            string emailTitle = AppSettings.Title;
+            string emailTitle = AppSettings.MailTitle;
 
             Console.WriteLine("Done ProcessHorseRacingService at: " + DateTime.Now.ToString());
             Console.ReadLine();
         }
 
-        private static TimeRangeCriteria AssignRangeDate(ProcessHorseRacingService service)
+        private static TimeRangeCriteria AssignRangeDate(IHorseRacingService service)
         {
             TimeRangeCriteria timeRangeCriteria = new TimeRangeCriteria();
 

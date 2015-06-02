@@ -103,7 +103,9 @@
     <Compile Include="Service\IMonthlyWinLossByLeagueService.cs" />
     <Compile Include="Service\MonthlyWinLossByLeagueService.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Service.Core\Fanex.Service.Core.csproj">
       <Project>{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}</Project>

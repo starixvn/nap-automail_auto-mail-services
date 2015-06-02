@@ -40,21 +40,6 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Model
             }
         }
 
-        public string DailyBettype3rdProductMailSubject
-        {
-            get
-            {
-                if (_isDaily)
-                {
-                    return AppSettings.SubjectDaily;
-                }
-                else
-                {
-                    return AppSettings.SubjectWeekly;
-                }
-            }
-        }
-
         public string ExportDataDirectory
         {
             get

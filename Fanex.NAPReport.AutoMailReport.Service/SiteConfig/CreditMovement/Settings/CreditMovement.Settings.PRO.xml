@@ -3,7 +3,6 @@
   <add key="FromDate" value="2015-03-01" />
   <add key="ToDate" value="2015-03-16" />
   <add key="IsTest" value="false" />
-  <add key="MailSubject" value="Credit Movement Notification {0}" />
   <add key="MailTitle" value="Starix IT" />
   <add key="ExportDataDirectory" value="\\10.40.40.52\NAP_Reports\CreditMovement" />
   <add key="EmailTemplate" value="SiteConfig\CreditMovement\Templates\CreditMovementEmail.cshtml" />

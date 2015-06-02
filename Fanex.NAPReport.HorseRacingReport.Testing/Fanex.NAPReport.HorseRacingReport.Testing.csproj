@@ -132,12 +132,9 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Templates\EmailTemplate.cshtml">
+    <Content Include="SiteConfig\HorseRacingReport\Templates\HorseRacingReportEmail.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Templates\NotificationEmailTemplate.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.NAPReport.HorseRacingReport.Business\Fanex.NAPReport.HorseRacingReport.Business.csproj">
@@ -154,6 +151,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Data\DBAGE.bodb02.bodbAdminNet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\HorseRacingReport\Settings\HorseRacingReport.Settings.xml">
+      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

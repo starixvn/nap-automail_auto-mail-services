@@ -20,7 +20,9 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Testing
             Console.WriteLine("Running DailyBettypeWith3rdProductsService");
 
             IDailyBettypeWith3rdProductJob job = new DailyBettypeWith3rdProductJob();
-            job.ProcessExportDailyBettypeWith3rdProducts(false);
+
+            string subject = "Bettype With 3rd Products";
+            job.ProcessExportDailyBettypeWith3rdProducts(false, subject);
             Console.WriteLine("Done at " + DateTime.Now.ToString());
             Console.ReadLine();
         }

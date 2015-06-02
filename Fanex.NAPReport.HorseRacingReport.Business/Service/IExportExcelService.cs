@@ -13,7 +13,7 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public interface IHorseRacingReportService
+    public interface IExportExcelService
     {
         string GetReportDirectory { get; }
 

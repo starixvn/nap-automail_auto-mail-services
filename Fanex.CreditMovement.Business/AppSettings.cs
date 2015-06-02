@@ -37,12 +37,6 @@ namespace Fanex.CreditMovement.Business
             set;
         }
 
-        public static string MailSubject
-        {
-            get;
-            set;
-        }
-
         public static string MailTitle
         {
             get;

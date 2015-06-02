@@ -98,7 +98,9 @@
     <Compile Include="Services\WinLossByProductsMailService.cs" />
     <Compile Include="Services\WinLossByProductsService.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Labels.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -35,8 +35,8 @@ namespace Fanex.CreditMovement.Service
                 SiteList = string.Join(",", AppSettings.ListSite),
                 Amount = AppSettings.Amount
             };
-            
-            service.ProcessToSendEmail(criteria);
+
+            service.ProcessToSendEmail(criteria, "Credit Movement Notification");
 
             Console.WriteLine(string.Format("Done at {0}", DateTime.Now.ToString("yyyy-MM-dd")));
         }
