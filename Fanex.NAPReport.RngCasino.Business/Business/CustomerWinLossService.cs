@@ -42,7 +42,7 @@ namespace Fanex.NAPReport.RngCasino.Business.Business
 			{
 				var dateTimeFormat = "{0:yyyy-MM-dd HH:mm}";
 				var toDate = string.Format(dateTimeFormat, DateTime.Now);
-				var fromDate = string.Format(dateTimeFormat, DateTime.Now.AddMinutes(-Interval - RngCasinoSettings.ConsoleTestAddedDeltaMinute));
+				var fromDate = string.Format(dateTimeFormat, DateTime.Now.AddMinutes(-Interval / 1000 / 60 - RngCasinoSettings.ConsoleTestAddedDeltaMinute));
 
 				var userInfos = GetCustomerWinLoss(Converter.ToDateTime(fromDate), Converter.ToDateTime(toDate), RngCasinoSettings.WinLoss);
 				if (userInfos != null && userInfos.Count > 0)

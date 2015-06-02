@@ -8,7 +8,7 @@ namespace Fanex.Service.Core.MailService
 	public class CommonTimerService : ITimerService<ICommonTimerFunctionMailService>
 	{
 		private readonly int _commonInterval;
-		private readonly Timer _commonTimer = new Timer();
+		private Timer _commonTimer;
 
 		public CommonTimerService(int commonInterval)
 		{
@@ -17,17 +17,27 @@ namespace Fanex.Service.Core.MailService
 
 		public void Start()
 		{
-			_commonTimer.Start();
+			if (_commonTimer != null)
+			{
+				_commonTimer.Start();
+			}
 		}
 
 		public void Dispose()
 		{
-			_commonTimer.Dispose();
+			if (_commonTimer != null)
+			{
+				_commonTimer.Dispose();
+			}
 		}
 
 		public void Register(ICommonTimerFunctionMailService standaloneTimerTimerFunctionMailService)
 		{
-			_commonTimer.Interval = _commonInterval;
+			if (_commonTimer == null)
+			{
+				_commonTimer = new Timer { Interval = _commonInterval };
+			}
+
 			_commonTimer.Elapsed += (sender, e) =>
 			{
 				standaloneTimerTimerFunctionMailService.NotifyMail();
