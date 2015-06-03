@@ -9,11 +9,27 @@
 		{
 			lock (this)
 			{
-				NotifyMailSync();
+				if (IsActive() == true)
+				{
+					ResetState();
+
+					if (NotifyMailVipGroup() == true)
+					{
+						NotifyMailNormalGroup();
+					}
+				}
 			}
 		}
 
-		public virtual void NotifyMailSync()
+		public abstract bool IsActive();
+
+		public virtual void ResetState()
+		{
+		}
+
+		public abstract bool NotifyMailVipGroup();
+
+		public virtual void NotifyMailNormalGroup()
 		{
 		}
 

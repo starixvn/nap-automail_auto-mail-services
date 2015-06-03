@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Fanex.Service.Core.MailService
 {
-	public interface ICommonTimerFunctionMailService: ITimerFunctionMailService
+	public interface ICommonTimerFunctionMailService : ITimerFunctionMailService
 	{
 	}
 }

@@ -29,7 +29,8 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Helper
 						LicenseeName = licenseeFunction.Attribute("licenseeName").Value,
 						Function	 = new Function
 						{
-							Id = int.Parse(licenseeFunction.Attribute("functionId").Value),
+							IdVipGroup = int.Parse(licenseeFunction.Attribute("functionIdVipGroup").Value),
+							IdNormalGroup = int.Parse(licenseeFunction.Attribute("functionIdNormalGroup").Value),
 							Name = licenseeFunction.Attribute("functionName").Value
 						}
 					}

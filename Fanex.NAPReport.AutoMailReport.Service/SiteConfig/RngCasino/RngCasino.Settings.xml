@@ -14,7 +14,8 @@
 	<Setting key="ExcelSheetName" value="WinLoss" />
 	<Setting key="ExportDataDirectory" value="\\10.18.200.202\Web\1.Rome\2.Nap\2.Report\_Fanex.ExcelFiles\RNGCasino" />
 
-	<Setting key="FunctionId" value="57"/>
+	<Setting key="FunctionIdVipGroup" value="57"/>
+	<Setting key="FunctionIdNormalGroup" value="66"/>
 
 	<Setting key="ConsoleTestAddedDeltaMinute" value="15000"/>
 	

@@ -25,11 +25,14 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 	public class NegativeBalanceByMatchService : ServiceBase, ICommonTimerFunctionMailService
 	{
 		private readonly INegativeBalanceByMatchRepository _repository;
-		private string _logIdUpdate = string.Empty;
-		private readonly List<object> _logData = new List<object>();
 		private readonly ILicenseeService _licenseeService;
 		private readonly MailService _mailService;
 		private readonly string _templateBaseDir;
+		private string _logIdUpdate = string.Empty;
+
+		// State data
+		private List<object> _logData = new List<object>();
+		private IDictionary<LicenseeFunction, string> _sentLicenseeFunctionToSubject;
 
 		public NegativeBalanceByMatchService(ILicenseeService licenseeService, MailService mailService, string templateBaseDir = "")
 		{
@@ -37,15 +40,23 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 			_mailService = mailService;
 			_templateBaseDir = templateBaseDir;
 			_repository = new NegativeBalanceByMatchRepository();
+
+			_sentLicenseeFunctionToSubject = new Dictionary<LicenseeFunction, string>();
 		}
 
-		public override void NotifyMailSync()
+		public override bool IsActive()
 		{
-			if (NegativeBalanceByMatchSettings.IsActive == false)
-			{
-				return;
-			}
+			return NegativeBalanceByMatchSettings.IsActive;
+		}
 
+		public override void ResetState()
+		{
+			_logData = new List<object>();
+			_sentLicenseeFunctionToSubject = new Dictionary<LicenseeFunction, string>();
+		}
+
+		public override bool NotifyMailVipGroup()
+		{
 			DateTime curDateTime = DateTime.UtcNow;
 			ExportSettings exportSettings = new ExportSettings();
 
@@ -68,13 +79,15 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 
 						_logData.Add(new Dictionary<object, object> { { "DataSendEmail", matches } });
 
-						string body = GetMailBody(licenseeName, matches);
+						string body = GetMailVipGroupBody(licenseeName, matches);
 						var result = SendEmail(licenseeFunction, subject, NegativeBalanceByMatchSettings.Title, body, NegativeBalanceByMatchSettings.AttachReport,
 												matches, curDateTime, exportSettings, taskId);
 
 						if (result)
 						{
-							UpdateLog(taskId);
+							_sentLicenseeFunctionToSubject.Add(licenseeFunction, subject);
+
+							//UpdateLog(taskId);
 						}
 					}
 				}
@@ -85,14 +98,36 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 					LogExtensions.ExceptionHandler(ex);
 				}
 			}
+
+			return _sentLicenseeFunctionToSubject.Count != 0;
 		}
 
-		private string GetMailBody(string licenseeName, IList<Match> matches)
+		public override void NotifyMailNormalGroup()
+		{
+			foreach (LicenseeFunction licenseeFunction in _sentLicenseeFunctionToSubject.Keys)
+			{
+				if (licenseeFunction.Function.IdNormalGroup != -1)
+				{
+					_mailService.SendMail(licenseeFunction.Function.IdNormalGroup, _sentLicenseeFunctionToSubject[licenseeFunction], 
+						NegativeBalanceByMatchSettings.Title, GetMailNormalGroupBody(licenseeFunction.LicenseeName));
+				}
+			}
+		}
+
+		private string GetMailVipGroupBody(string licenseeName, IList<Match> matches)
 		{
 			string template = licenseeName.ToLower().Equals("haifa")
-									? File.ReadAllText(Path.Combine(_templateBaseDir, @"Templates\EmailTemplateDualLanguage.cshtml"))
-									: File.ReadAllText(Path.Combine(_templateBaseDir, @"Templates\EmailTemplateSingleLanguage.cshtml"));
+									? File.ReadAllText(Path.Combine(_templateBaseDir, @"Templates\DualLanguageTemplate.Vip.cshtml"))
+									: File.ReadAllText(Path.Combine(_templateBaseDir, @"Templates\SingleLanguageTemplate.Vip.cshtml"));
 			return Razor.Parse(template, matches);
+		}
+
+		private string GetMailNormalGroupBody(string licenseeName)
+		{
+			string template = licenseeName.ToLower().Equals("haifa")
+									? File.ReadAllText(Path.Combine(_templateBaseDir, @"Templates\DualLanguageTemplate.Normal.cshtml"))
+									: File.ReadAllText(Path.Combine(_templateBaseDir, @"Templates\SingleLanguageTemplate.Normal.cshtml"));
+			return Razor.Parse(template);
 		}
 
 		private void UpdateLog(int taskId)

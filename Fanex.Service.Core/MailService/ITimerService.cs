@@ -5,8 +5,10 @@ using System.Text;
 
 namespace Fanex.Service.Core.MailService
 {
-	public interface ITimerService<in T> : IStartable, IDisposable where T : ITimerFunctionMailService
+	public interface ITimerService<in T> : IDisposable where T : ITimerFunctionMailService
 	{
 		void Register(T functionMailService);
+
+		void Start();
 	}
 }

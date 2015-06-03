@@ -16,7 +16,7 @@ namespace Fanex.NAPReport.RngCasino.Business.Helper.Implement
 	/// </summary>
 	public class EmailHelper
 	{
-		public static bool SendMail(string subject, string title, string body, string fileNamePath)
+		public static bool SendMail(int functionId, string subject, string title, string body, string fileNamePath = null)
 		{
 			try
 			{
@@ -25,15 +25,18 @@ namespace Fanex.NAPReport.RngCasino.Business.Helper.Implement
 					Subject = subject,
 					Title = title,
 					Body = body,
-					MailingListId = RngCasinoSettings.FunctionId
+					MailingListId = functionId
 				};
 
-				if (RngCasinoSettings.AttachReport == true)
+				if (fileNamePath != null)
 				{
-					mail.Attachments = new List<MailAttachment>
+					if (RngCasinoSettings.AttachReport == true)
 					{
-						new MailAttachment(fileNamePath, FileExtension.MS_EXCEL)
-					};
+						mail.Attachments = new List<MailAttachment>
+						{
+							new MailAttachment(fileNamePath, FileExtension.MS_EXCEL)
+						};
+					}
 				}
 
 				MailClientHandler.SendMail(mail);

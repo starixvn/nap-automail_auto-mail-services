@@ -7,7 +7,7 @@ using Fanex.Service.Core.MailService;
 
 namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Helper.Implement
 {
-	public class ServiceBase : TimerFunctionMailServiceBase, IServiceBase
+	public abstract class ServiceBase : TimerFunctionMailServiceBase, IServiceBase
 	{
 		protected readonly IDynamicRepository DynamicRepository;
 

@@ -30,7 +30,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 				Subject = subject,
 				Title = title,
 				Body = body,
-				MailingListId = licenseeFunction.Function.Id
+				MailingListId = licenseeFunction.Function.IdVipGroup
 			};
 
 			string fileNamePath = Path.Combine(NegativeBalanceByMatchSettings.ExportDataDirectoryWithYearMonth,
@@ -45,6 +45,19 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
                     new MailAttachment(fileNamePath, FileExtension.MS_EXCEL)
                 };
 			}
+
+			MailClientHandler.SendMail(mail);
+		}
+
+		public void SendMail(int functionId, string subject, string title, string body)
+		{
+			Mail mail = new Mail
+			{
+				Subject = subject,
+				Title = title,
+				Body = body,
+				MailingListId = functionId
+			};
 
 			MailClientHandler.SendMail(mail);
 		}

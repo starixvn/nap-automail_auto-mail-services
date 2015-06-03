@@ -16,7 +16,7 @@ namespace Fanex.NAPReport.RngCasino.Business.Helper.Implement
 	/// <summary>
     /// TODO: Update summary.
     /// </summary>
-	public class ServiceBase : TimerFunctionMailServiceBase, IServiceBase
+	public abstract class ServiceBase : TimerFunctionMailServiceBase, IServiceBase
     {
         protected readonly IDynamicRepository DynamicRepository;
 

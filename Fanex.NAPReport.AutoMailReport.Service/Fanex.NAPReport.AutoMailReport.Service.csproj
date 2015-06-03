@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?> 
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A26D737A-8655-40AD-AA5D-13DC22FCFF7C}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Fanex.NAPReport.AutoMailReport.Service</RootNamespace>
     <AssemblyName>Fanex.NAPReport.AutoMailReport.Service</AssemblyName>
@@ -301,13 +301,22 @@
     <Content Include="SiteConfig\CreditMovement\Templates\CreditMovementEmail.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="SiteConfig\NegativeBalanceByMatch\Templates\EmailTemplateDualLanguage.cshtml">
+    <None Include="SiteConfig\NegativeBalanceByMatch\Templates\DualLanguageTemplate.Normal.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="SiteConfig\NegativeBalanceByMatch\Templates\EmailTemplateSingleLanguage.cshtml">
+    <None Include="SiteConfig\NegativeBalanceByMatch\Templates\SingleLanguageTemplate.Normal.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="SiteConfig\RngCasino\Templates\EmailTemplate.cshtml">
+    <None Include="SiteConfig\NegativeBalanceByMatch\Templates\DualLanguageTemplate.Vip.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SiteConfig\NegativeBalanceByMatch\Templates\SingleLanguageTemplate.Vip.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SiteConfig\RngCasino\Templates\Template.Normal.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SiteConfig\RngCasino\Templates\Template.Vip.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="SiteConfig\SMAReport\Email.cshtml">

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities
+﻿namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities
 {
     public class LicenseeFunction
     {
@@ -14,7 +9,9 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities
 
     public class Function
     {
-        public int Id { get; set; }
+        public int IdVipGroup { get; set; }
+
+		public int IdNormalGroup { get; set; }
 
         public string Name { get; set; }
     }

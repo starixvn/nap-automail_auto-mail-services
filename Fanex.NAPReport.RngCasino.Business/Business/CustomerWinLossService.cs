@@ -25,6 +25,8 @@ namespace Fanex.NAPReport.RngCasino.Business.Business
 		private readonly IRngCasinoExcelService _excelService;
 		private readonly RngCasinoExportSettings _rngCasinoExportSettings;
 		private readonly string _templateBaseDir;
+		private string _subject;
+
 
 		public CustomerWinLossService(IRngCasinoExcelService excelService, RngCasinoExportSettings rngCasinoExportSettings, string templateBaseDir = "")
 		{
@@ -33,11 +35,14 @@ namespace Fanex.NAPReport.RngCasino.Business.Business
 			_templateBaseDir = templateBaseDir;
 		}
 
-		public override void NotifyMailSync()
+		public override bool IsActive()
 		{
-			if (RngCasinoSettings.IsActive == false)
-				return;
+			return RngCasinoSettings.IsActive;
+		}
 
+		public override bool NotifyMailVipGroup()
+		{
+			bool result = false;
 			try
 			{
 				var dateTimeFormat = "{0:yyyy-MM-dd HH:mm}";
@@ -47,22 +52,43 @@ namespace Fanex.NAPReport.RngCasino.Business.Business
 				var userInfos = GetCustomerWinLoss(Converter.ToDateTime(fromDate), Converter.ToDateTime(toDate), RngCasinoSettings.WinLoss);
 				if (userInfos != null && userInfos.Count > 0)
 				{
-					var template = File.ReadAllText(Path.Combine(_templateBaseDir, @"Templates\EmailTemplate.cshtml"));
-					var body = Razor.Parse(template, userInfos);
+					var body = GetMailVipGroupBody(userInfos);
 
 					var fileNamePath = Path.Combine(RngCasinoSettings.ExportDataDirectoryWithYearMonth,
 														RngCasinoSettings.ExcelFileName + "_" + DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss") + ".xlsx");
 					_excelService.GenerateReport(userInfos, _rngCasinoExportSettings, fileNamePath);
 
-					var subject = string.Format(RngCasinoSettings.Subject, RngCasinoSettings.BaseCurrency,
+					_subject = string.Format(RngCasinoSettings.Subject, RngCasinoSettings.BaseCurrency,
 													NumberExtension.WinLossFormat(RngCasinoSettings.WinLoss, 0), fromDate, toDate);
-					EmailHelper.SendMail(subject, RngCasinoSettings.Title, body, fileNamePath);
+					result = EmailHelper.SendMail(RngCasinoSettings.FunctionIdVipGroup, _subject, RngCasinoSettings.Title, body, fileNamePath);
 				}
 			}
 			catch (Exception ex)
 			{
 				HandleException(ex);
 			}
+
+			return result;
+		}
+
+		public override void NotifyMailNormalGroup()
+		{
+			if (RngCasinoSettings.FunctionIdNormalGroup != -1)
+			{
+				EmailHelper.SendMail(RngCasinoSettings.FunctionIdNormalGroup, _subject, RngCasinoSettings.Title, GetMailNormalGroupBody());
+			}
+		}
+
+		private string GetMailVipGroupBody(IList<UserInfo> userInfos)
+		{
+			var template = File.ReadAllText(Path.Combine(_templateBaseDir, @"Templates\Template.Vip.cshtml"));
+			return Razor.Parse(template, userInfos);
+		}
+
+		private string GetMailNormalGroupBody()
+		{
+			var template = File.ReadAllText(Path.Combine(_templateBaseDir, @"Templates\Template.Normal.cshtml"));
+			return Razor.Parse(template);
 		}
 
 		private List<UserInfo> GetCustomerWinLoss(DateTime fromDate, DateTime toDate, decimal winlost)
