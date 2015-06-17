@@ -13,5 +13,33 @@
 
         [SpParam(Ignored = true)]
         public string Level { get; set; }
+
+        [SpParam(Ignored = true)]
+        public string DataDirectory
+        {
+            get;
+            set;
+        }
+
+        [SpParam(Ignored = true)]
+        public string DataDirectoryWithYear
+        {
+            get;
+            set;
+        }
+
+        [SpParam(Ignored = true)]
+        public string ExcelPasswordProtected
+        {
+            get;
+            set;
+        }
+
+        [SpParam(Ignored = true)]
+        public int FunctionId
+        {
+            get;
+            set;
+        }
     }
 }

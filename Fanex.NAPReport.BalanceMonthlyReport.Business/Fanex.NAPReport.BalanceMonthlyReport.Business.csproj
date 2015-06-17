@@ -111,14 +111,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
-    <Compile Include="Business\ICreditTermManager.cs" />
-    <Compile Include="Business\IBalanceManager.cs" />
-    <Compile Include="Business\CreditTermManager.cs" />
-    <Compile Include="Business\BalanceManager.cs" />
-    <Compile Include="Core\IServiceBase.cs" />
-    <Compile Include="Core\QueryService.cs" />
-    <Compile Include="Core\ServiceBase.cs" />
-    <Compile Include="Core\Utilities.cs" />
+    <Compile Include="Model\CreditTerm.cs" />
+    <Compile Include="Service\CreditTerm\ICreditTermService.cs" />
+    <Compile Include="Service\Balance\IBalanceService.cs" />
+    <Compile Include="Service\CreditTerm\CreditTermService.cs" />
+    <Compile Include="Service\Balance\BalanceService.cs" />
     <Compile Include="Criteria\BalanceReportBaseCriteria.cs" />
     <Compile Include="Criteria\CreditTermReportCriteria.cs" />
     <Compile Include="Criteria\DirectBalanceReportAgentCriteria.cs" />
@@ -126,26 +123,19 @@
     <Compile Include="Criteria\DirectBalanceReportMemberCriteria.cs" />
     <Compile Include="Criteria\ExchangeCriteria.cs" />
     <Compile Include="Criteria\SuperBalanceReportCriteria.cs" />
-    <Compile Include="DataAccess\BaseDataAccess.cs" />
-    <Compile Include="DataAccess\HelperDAO.cs" />
-    <Compile Include="DataAccess\IHelperDAO.cs" />
-    <Compile Include="DataAccess\IReportDAO.cs" />
-    <Compile Include="DataAccess\ReportDAO.cs" />
-    <Compile Include="Helper\CacheHelper.cs" />
-    <Compile Include="Helper\Logger.cs" />
-    <Compile Include="Infrastructure\Configurations\MailSection.cs" />
-    <Compile Include="Infrastructure\Configurations\StoreProceduresSection.cs" />
-    <Compile Include="Infrastructure\Extensions\SendMailExtension.cs" />
     <Compile Include="Model\BalanceModel.cs" />
-    <Compile Include="Model\CreditTerm.cs" />
+    <Compile Include="Model\CreditTermMain.cs" />
     <Compile Include="Model\CreditTermDetail.cs" />
     <Compile Include="Model\Exchange.cs" />
     <Compile Include="Model\Report.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\BalanceRepository.cs" />
+    <Compile Include="Repository\IBalanceRepository.cs" />
+    <Compile Include="Service\Mailing\IMailingService.cs" />
+    <Compile Include="Service\Mailing\MailingService.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -58,7 +58,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{13DD1A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.SMALoss.Business", "Fanex.NAPReport.SMALoss.Business\Fanex.NAPReport.SMALoss.Business.csproj", "{DA6DE65A-5D27-4B28-A928-422B664502C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.BalanceReport.Testing", "Fanex.NAPReport.BalanceReport\Fanex.NAPReport.BalanceReport.Testing.csproj", "{D78585F7-A6CC-4BB9-A9E2-D87A7276CFAF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.BalanceMonthlyReport.Testing", "Fanex.NAPReport.BalanceReport\Fanex.NAPReport.BalanceMonthlyReport.Testing.csproj", "{D78585F7-A6CC-4BB9-A9E2-D87A7276CFAF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.SMALoss.Testing", "Fanex.NAPReport.SMALoss.Testing\Fanex.SMALoss.Testing.csproj", "{01502577-50B0-4B8C-B622-7725FEB12F76}"
 EndProject

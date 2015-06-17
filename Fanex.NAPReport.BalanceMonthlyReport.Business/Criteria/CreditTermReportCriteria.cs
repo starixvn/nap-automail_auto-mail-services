@@ -7,8 +7,6 @@
     /// </summary>
     public class CreditTermReportCriteria : CriteriaBase
     {
-        public int GroupID { get; set; }
-
         /// <summary>
         /// Get SP name.
         /// </summary>

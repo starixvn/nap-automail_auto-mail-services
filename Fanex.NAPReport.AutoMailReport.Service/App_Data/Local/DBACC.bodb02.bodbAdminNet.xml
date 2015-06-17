@@ -10,21 +10,22 @@
   <Function Name="Credit Movedment">
     <Setting Key="Misc_CreditMovement_GetSites" SpName="SiteSel" DbName="DBACC.bodb02.bodbAdminNet" Timeout="0"/>
   </Function>
-
-  <Function Name="Win Loss By Products Report">
-    <Setting Key="Win_Loss_By_Products_Report" SpName="Acc_Rpt_AllProductWLAutomail" DbName="DBACC.bodb02.bodbAdminNet" Timeout="0" />
-  </Function>
-
-  <Function Name="Balance Report">
-    <Setting Key="Acc_Rpt_CreditTerm" SpName="Acc_Rpt_CreditTerm" DbName="DBACC.bodb02.bodbAdminNet" Plain="0" />
-    <Setting Key="Acc_Rpt_Balance_Super_Yesterday" SpName="Acc_Rpt_Balance_Super_Yesterday" DbName="DBACC.bodb02.bodbAdminNet" Plain="0" />
-    <Setting Key="Acc_Rpt_Balance_Direct_Master" SpName="Acc_Rpt_Balance_Direct_Master" DbName="DBACC.bodb02.bodbAdminNet" Plain="0" />
-    <Setting Key="Acc_Rpt_Balance_Direct_Agent" SpName="Acc_Rpt_Balance_Direct_Agent" DbName="DBACC.bodb02.bodbAdminNet" Plain="0" />
-    <Setting Key="Acc_Rpt_Balance_Direct_Member" SpName="Acc_Rpt_Balance_Direct_Member" DbName="DBACC.bodb02.bodbAdminNet" Plain="0" />
+  
+  <Function Name="Balance Monthly Win Loss">
+    <Setting Key="Acc_Rpt_CreditTerm" SpName="Acc_Rpt_CreditTerm" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_Balance_Super_Yesterday" SpName="Acc_Rpt_Balance_Super_Yesterday" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_Balance_Direct_Master" SpName="Acc_Rpt_Balance_Direct_Master" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_Balance_Direct_Agent" SpName="Acc_Rpt_Balance_Direct_Agent" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_Balance_Direct_Member" SpName="Acc_Rpt_Balance_Direct_Member" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
 
   <Function Name="WinLoss - Virtual Sport">
     <Setting Key="Acc_Rpt_WLAutomail_VS_Detail" SpName="Acc_Rpt_WLAutomail_VS_Detail" DbName="DBACC.bodb02.bodbAdminNet" />
     <Setting Key="Acc_Rpt_WLAutomail_VS_Summary" SpName="Acc_Rpt_WLAutomail_VS_Summary" DbName="DBACC.bodb02.bodbAdminNet" />
   </Function>
+
+  <Function Name="Win Loss By Products Report">
+    <Setting Key="Win_Loss_By_Products_Report" SpName="Acc_Rpt_AllProductWLAutomail" DbName="DBACC.bodb02.bodbAdminNet" Timeout="0" />
+  </Function>
+
 </Functions>

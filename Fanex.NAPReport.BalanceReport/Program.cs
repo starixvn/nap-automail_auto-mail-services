@@ -1,8 +1,7 @@
 ﻿using System;
-using Fanex.NAPReport.BalanceMonthlyReport.Business.Bussiness;
 using Fanex.Data.Configuration;
-using Fanex.NAPReport.BalanceMonthlyReport.Business.Model;
-using Fanex.NAPReport.BalanceMonthlyReport.Business.Core;
+using Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Balance;
+using Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Mailing;
 
 namespace Fanex.NAPReport.BalanceMonthlyReport.Business
 {
@@ -13,57 +12,16 @@ namespace Fanex.NAPReport.BalanceMonthlyReport.Business
             try
             {
                 DbSettingProviderManager.Current.Start();
-                var report = new Report
-                {
-                    Name = "Direct Balance",
-                    Date = DateTime.Now,
-                    IsDirectReport = true
-                };
-                 (new CreditTermManager()).ExportExcel(report);
 
-                var subject = Utilities.LoadSubject(report);
-                var body = Utilities.LoadBody(report);
-
-                // Report Super.
-                //var superCriteria = new SuperBalanceReportCriteria
-                //{
-                //    Date = DateTime.Now,
-                //    Name = "Super Balance",
-                //    Level = "Super"
-                //};
-                //(new BalanceManager(superCriteria)).ExportExcel();
-
-                //// Report Master.
-                //var masterCriteria = new DirectBalanceReportMasterCriteria
-                //{
-                //    Date = DateTime.Now,
-                //    Name = "Direct Master",
-                //    Level = "Master"
-                //};
-                //(new BalanceManager(masterCriteria)).ExportExcel();
-
-                //// Report Agent.
-                //var agentCriteria = new DirectBalanceReportAgentCriteria
-                //{
-                //    Date = DateTime.Now,
-                //    Name = "Direct Agent",
-                //    Level = "Agent"
-                //};
-                //(new BalanceManager(agentCriteria)).ExportExcel();
-
-                //// Report Member.
-                //var memberCriteria = new DirectBalanceReportMemberCriteria
-                //{
-                //    Date = DateTime.Now,
-                //    Name = "Direct Member",
-                //    Level = "Member"
-                //};
-                //(new BalanceManager(memberCriteria)).ExportExcel();
+                IMailingService mailingService = new MailingService();
+                var mail = mailingService.SendMailCreditTermToVIPGroup();
+                mail = mailingService.SendMailSuperBalanceToVIPGroup();
+                mail = mailingService.SendMailDirectBalanceToVIPGroup();
+                
             }
             catch (Exception ex)
             {
-                Helper.Logger.WriteLog(ex.Message);
-                Helper.Logger.WriteLog(ex.StackTrace);
+               
             }
         }
     }

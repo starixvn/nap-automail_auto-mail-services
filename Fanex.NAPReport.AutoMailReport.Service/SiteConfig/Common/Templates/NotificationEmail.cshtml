@@ -4,11 +4,13 @@
 @{
     string fileName = Model.FileName;
     string linkNapReport = Model.NapReportURL;
+    bool isSingle = Model.FileNamesPath.Count == 1;
+    string verb = isSingle ? "has" : "have";
 }
 <div>
     Deal Admins, <br/><br/>
 
-    The @fileName has been created and ready to download. <br/><br/>
+    The @fileName @verb been created and ready to download. <br/><br/>
 
     Please kindly access to this link to download report file(s).<br/><br/>
 

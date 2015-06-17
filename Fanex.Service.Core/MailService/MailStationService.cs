@@ -32,12 +32,12 @@ namespace Fanex.Service.Core.MailService
             { 
                 Subject = string.Format(AppSettingBase.Subject, mailInfo.FileName),
                 Title = AppSettingBase.Title,
-                Body = emailContent
+                Body = emailContent,
+                Attachments = new List<MailAttachment>()
             };
 
             foreach (string fileNamePath in mailInfo.FileNamesPath)
-            {
-                mail.Attachments = new List<MailAttachment>();
+            {                
                 mail.Attachments.Add(new MailAttachment(fileNamePath, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
             }            
 

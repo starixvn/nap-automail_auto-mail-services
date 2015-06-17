@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BalanceReport")]
+[assembly: AssemblyTitle("Fanex.NAPReport.BalanceMonthlyReport.Testing")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SMS")]
-[assembly: AssemblyProduct("BalanceReport")]
+[assembly: AssemblyProduct("Fanex.NAPReport.BalanceMonthlyReport.Testing")]
 [assembly: AssemblyCopyright("Copyright © SMS 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

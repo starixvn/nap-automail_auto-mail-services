@@ -96,14 +96,18 @@ namespace Fanex.Service.Core.Utilities
 
 		protected static string ExportDataDirectoryWithYearMonth(string exportDataDirectory)
 		{
-			string month = DateTime.Today.Month < 10
-			   ? "0" + DateTime.Today.Month
-			   : DateTime.Today.Month + string.Empty;
-
+			string month = DateTime.Today.ToString("MM");
 			exportDataDirectory += @"\" + DateTime.Today.Year + @"\" + month;
 
 			return exportDataDirectory;
 		}
+
+        protected static string ExportDataDirectoryWithYear(string exportDataDirectory)
+        {
+            exportDataDirectory += @"\" + DateTime.Today.Year;
+
+            return exportDataDirectory;
+        }
 
 		protected static string GetSettingValueByKey(string key)
 		{

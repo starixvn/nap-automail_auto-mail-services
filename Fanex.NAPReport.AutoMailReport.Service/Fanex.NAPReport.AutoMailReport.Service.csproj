@@ -165,22 +165,18 @@
     <Compile Include="AutomailService.Designer.cs">
       <DependentUpon>AutomailService.cs</DependentUpon>
     </Compile>
+    <Compile Include="Jobs\BalanceMonthlyReport\DirectBalance.cs" />
+    <Compile Include="Jobs\BalanceMonthlyReport\SuperBalance.cs" />
     <Compile Include="Jobs\BA\DailyWinLoss.cs" />
     <Compile Include="Jobs\BA\MonthlyWinLoss.cs" />
     <Compile Include="Jobs\HorseTransaction3rd\HorseTransaction3rd.cs" />
     <Compile Include="Jobs\NAPReport\CreditMovement.cs" />
     <Compile Include="Jobs\NAPReport\VirtualSportWinLoss.cs" />
-    <Compile Include="Jobs\NAPReport\CreditTermReport.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Jobs\NAPReport\DirectBalanceReport.cs">
+    <Compile Include="Jobs\BalanceMonthlyReport\CreditTerm.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Jobs\NAPReport\HorseRacingReport.cs" />
     <Compile Include="Jobs\NAPReport\SMAReport.cs" />
-    <Compile Include="Jobs\NAPReport\SuperBalanceReport.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Jobs\NAPReport\WinLossByProductsJob.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -214,6 +210,22 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SiteConfig\BADailyWinLoss\Settings\BADailyWinLoss.Settings.UAT.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\BalanceMonthlyReport\Settings\BalanceMonthlyReport.Settings.Dev.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\BalanceMonthlyReport\Settings\BalanceMonthlyReport.Settings.Local.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\BalanceMonthlyReport\Settings\BalanceMonthlyReport.Settings.PRO.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\BalanceMonthlyReport\Settings\BalanceMonthlyReport.Settings.UAT.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -357,15 +369,6 @@
       <SubType>
       </SubType>
     </Content>
-    <None Include="SiteConfig\BalanceReport\Email\Direct Balance Email.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="SiteConfig\BalanceReport\Email\Email.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="SiteConfig\BalanceReport\Email\Subject.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <Content Include="SiteConfig\HorseTransaction3rd\SuccessEmail.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
