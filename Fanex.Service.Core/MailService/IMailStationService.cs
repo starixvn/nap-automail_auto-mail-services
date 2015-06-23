@@ -16,6 +16,8 @@ namespace Fanex.Service.Core.MailService
     {
         Mail CreateMailWithAttachedFile(MailInfo mailInfo);
 
+        Mail CreateMailCustomContentWithAttachedFile(MailInfo mailInfo, string bodyContent);
+
         Mail CreateMailWithNotification(MailInfo mailInfo);
 
         void SendFunctionMailWithAttachedFile(int functionId, MailInfo mailInfo);

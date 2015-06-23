@@ -177,7 +177,7 @@
     </Compile>
     <Compile Include="Jobs\NAPReport\HorseRacingReport.cs" />
     <Compile Include="Jobs\NAPReport\SMAReport.cs" />
-    <Compile Include="Jobs\NAPReport\WinLossByProductsJob.cs" />
+    <Compile Include="Jobs\WinLossByProducts\WinLossByProducts.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -258,6 +258,22 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SiteConfig\HorseRacingReport\Settings\HorseRacingReport.Settings.DEV.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\WinLossByProducts\Settings\WinLossByProducts.Settings.PRO.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\WinLossByProducts\Settings\WinLossByProducts.Settings.UAT.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\WinLossByProducts\Settings\WinLossByProducts.Settings.Local.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\WinLossByProducts\Settings\WinLossByProducts.Settings.DEV.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -415,6 +431,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="SiteConfig\VirtualSportWinLoss\Templates\EmailTemplate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SiteConfig\WinLossByProducts\Templates\WinLossByProductsEmailTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Templates\WinLossByProductsEmailTemplate.cshtml">

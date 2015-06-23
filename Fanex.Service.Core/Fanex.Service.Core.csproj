@@ -184,6 +184,7 @@
       <DependentUpon>Labels.resx</DependentUpon>
     </Compile>
     <Compile Include="MailService\ICommonTimerFunctionMailService.cs" />
+    <Compile Include="MailService\IMailingServiceBase.cs" />
     <Compile Include="MailService\IMailStationService.cs" />
     <Compile Include="MailService\IntervalConverter.cs" />
     <Compile Include="MailService\ITimerFunctionMailService.cs" />

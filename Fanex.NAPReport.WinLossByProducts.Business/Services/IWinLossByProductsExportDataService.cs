@@ -14,7 +14,9 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
     /// </summary>
     public interface IWinLossByProductsExportDataService
     {
-        string ReportPath { get; }
+        string DirectoryOfFileName { get; }
+
+        string FileName { get; set; }
 
         void ExportReportToExcel(WinLossByProducts report, GetWinLossByProductsCriteria criteria);
     }

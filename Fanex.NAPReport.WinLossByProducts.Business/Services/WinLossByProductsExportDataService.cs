@@ -56,7 +56,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
             _alignmentService = new NpoiNewFormatAlignmentService();
         }
 
-        public string ReportPath
+        public string DirectoryOfFileName
         {
             get
             {
@@ -64,14 +64,16 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
             }
         }
 
+        public string FileName { get; set; }
+
         public void ExportReportToExcel(WinLossByProducts report, GetWinLossByProductsCriteria criteria)
         {
             CreateSheet();
             InitColumnWidth();
             ExportReport(report);
-            string reportNameWithExtension = CreateReportNameWithExtension(criteria);
-            CreateReportPath(AppSettings.ExportDataDirectory, reportNameWithExtension);
-            SaveFile.SaveExcelFile(AppSettings.ExportDataDirectory, reportNameWithExtension, this._workbook);
+            FileName = CreateReportNameWithExtension(criteria);
+            _reportPath = AppSettings.DataDirectoryWithYearMonth + @"\" + FileName;
+            SaveFile.SaveExcelFile(AppSettings.DataDirectoryWithYearMonth, FileName, this._workbook, AppSettings.ExcelPasswordProtected); 
         }
 
         private void ExportReport(WinLossByProducts report)
@@ -279,11 +281,6 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
                 criteria.WinLossDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
             var reportNameWithExtension = string.Format("{0}.{1}", reportName, "xlsx");
             return reportNameWithExtension;
-        }
-
-        private void CreateReportPath(string exportDataDirectory, string reportNameWithExtension)
-        {
-            this._reportPath = Path.Combine(exportDataDirectory, reportNameWithExtension);
-        }
+        }        
     }
 }

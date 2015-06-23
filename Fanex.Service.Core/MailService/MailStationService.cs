@@ -76,5 +76,24 @@ namespace Fanex.Service.Core.MailService
 
             MailClientHandler.SendMail(mail);
         }
+
+        public Mail CreateMailCustomContentWithAttachedFile(MailInfo mailInfo, string bodyContent)
+        {
+            var root = AppDomain.CurrentDomain.BaseDirectory;           
+            Mail mail = new Mail()
+            {
+                Subject = string.Format(AppSettingBase.Subject, mailInfo.FileName),
+                Title = AppSettingBase.Title,
+                Body = bodyContent, 
+                Attachments = new List<MailAttachment>()
+            };
+
+            foreach (string fileNamePath in mailInfo.FileNamesPath)
+            {
+                mail.Attachments.Add(new MailAttachment(fileNamePath, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
+            }
+
+            return mail;
+        }
     }
 }

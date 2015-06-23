@@ -28,6 +28,6 @@ namespace Fanex.Service.Core.Model
 
         public string NapReportURL { get; set; }
 
-        public List<string> FileNamesPath { get; set; }
+        public List<string> FileNamesPath { get; set; }        
     }
 }

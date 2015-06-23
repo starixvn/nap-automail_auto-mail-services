@@ -6,35 +6,35 @@
 
 namespace Fanex.NAPReport.WinLossByProducts.Business
 {
+    using Fanex.Service.Core.Configuration;
     using Fanex.Service.Core.Utilities;
 
     /// <summary>
     /// Application setting.
     /// </summary>
-    public class AppSettings : AppSettingBase
+    public class AppSettings : AppSettingBase, ISettings
     {
-        public static string ExportDataDirectory
+        public static string DataDirectory
         {
-            get
-            {
-                return ExportDataDirectory("Fanex.WinLossByProductsReport.ExportDataDirectory");
-            }
+            get;
+            set;
         }
 
-        public static string Subject
+        public static string DataDirectoryWithYearMonth
         {
-            get
-            {
-                return GetSettingValueByKey("WinLossByProductsReport.Subject");
-            }
+            get { return ExportDataDirectoryWithYearMonth(DataDirectory); }
+        }
+      
+        public static string ExcelPasswordProtected
+        {
+            get;
+            set;
         }
 
-        public static string Title
+        public static int FunctionId
         {
-            get
-            {
-                return GetSettingValueByKey("WinLossByProductsReport.Title");
-            }
+            get;
+            set;
         }
     }
 }
