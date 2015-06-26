@@ -24,7 +24,7 @@ namespace Fanex.Service.Core.MailService
 			timer.Interval = standaloneTimerFunctionMailService.Interval;
 			timer.Elapsed += (sender, e) =>
 			{
-				standaloneTimerFunctionMailService.NotifyMail();
+				standaloneTimerFunctionMailService.NotifyMail();                
 			};
 
 			_standaloneTimers.Add(timer);

@@ -37,14 +37,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Logging">
-      <HintPath>..\packages\Fanex.MailStation.1.0.3\lib\net40\Common.Logging.dll</HintPath>
+    <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.MailStation.1.0.7.0\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Couchbase, Version=1.0.0.0, Culture=neutral, PublicKeyToken=81137140da4e57ef, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.Caching.1.0.404.95\lib\net40\Couchbase.dll</HintPath>
     </Reference>
-    <Reference Include="EasyNetQ">
-      <HintPath>..\packages\Fanex.MailStation.1.0.3\lib\net40\EasyNetQ.dll</HintPath>
+    <Reference Include="EasyNetQ, Version=0.47.10.380, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.MailStation.1.0.7.0\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="Enyim.Caching, Version=2.12.0.0, Culture=neutral, PublicKeyToken=81137140da4e57ef, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.Caching.1.0.404.95\lib\net40\Enyim.Caching.dll</HintPath>
@@ -64,17 +64,15 @@
     <Reference Include="Fanex.MailDeliver.MailClient">
       <HintPath>..\packages\Fanex.MailDeliver.MailClient.1.0.0.2\lib\net40\Fanex.MailDeliver.MailClient.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.MailDelivery.Client">
-      <HintPath>..\packages\Fanex.MailStation.1.0.3\lib\net40\Fanex.MailDelivery.Client.dll</HintPath>
+    <Reference Include="Fanex.MailDelivery.Client, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Fanex.MailStation.1.0.7.0\lib\net40\Fanex.MailDelivery.Client.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.NAP.Core">
       <HintPath>..\packages\Fanex.NAP.Core.2.0.0\lib\net40\Fanex.NAP.Core.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.NAP.Framework">
       <HintPath>..\packages\Fanex.NAP.Framework.1.0.0.3\lib\net40\Fanex.NAP.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Fanex.Service.Core">
-      <HintPath>..\Fanex.Service.Core\bin\Debug\Fanex.Service.Core.dll</HintPath>
     </Reference>
     <Reference Include="IBCFile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.File.1.0.0\lib\net40\IBCFile.dll</HintPath>
@@ -107,11 +105,11 @@
     <Reference Include="MvcPager">
       <HintPath>..\packages\MvcPager.1.5.0.28157\lib\net40\MvcPager.dll</HintPath>
     </Reference>
-    <Reference Include="Quartz">
-      <HintPath>..\packages\Fanex.MailStation.1.0.3\lib\net40\Quartz.dll</HintPath>
+    <Reference Include="Quartz, Version=2.2.4.400, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.MailStation.1.0.7.0\lib\net40\Quartz.dll</HintPath>
     </Reference>
-    <Reference Include="RabbitMQ.Client">
-      <HintPath>..\packages\Fanex.MailStation.1.0.3\lib\net40\RabbitMQ.Client.dll</HintPath>
+    <Reference Include="RabbitMQ.Client, Version=3.4.3.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.MailStation.1.0.7.0\lib\net40\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="SPSRemoting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SPSRemoting.1.0.0\lib\net40\SPSRemoting.dll</HintPath>
@@ -137,11 +135,23 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SiteConfig\SMAReport\Settings\SMAReport.Settings.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <None Include="SiteConfig\SMAReport\Email.cshtml" />
+    <Content Include="SiteConfig\Common\Templates\AttachedFileEmail.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\Common\Templates\NotificationEmail.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\SMAReport\Templates\SMAReportTemplate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="SQLiteDatabase\AutoMail-SMAReport.s3db" />
     <None Include="Templates\EmailTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -155,9 +165,9 @@
       <Project>{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}</Project>
       <Name>Fanex.Service.Core %28Fanex.Service.Core\Fanex.Service.Core%29</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Fanex.SMAReport.Business\Fanex.SMAReport.Business.csproj">
+    <ProjectReference Include="..\Fanex.SMAReport.Business\Fanex.NAPReport.SMAReport.Business.csproj">
       <Project>{56CC0914-78E8-4BF8-8664-5DB8807C1488}</Project>
-      <Name>Fanex.SMAReport.Business</Name>
+      <Name>Fanex.NAPReport.SMAReport.Business</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

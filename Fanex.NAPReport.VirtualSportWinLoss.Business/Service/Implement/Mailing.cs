@@ -55,27 +55,27 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
                 string emailCcTo = AppSettings.MailCcTo;
                 string emailBCcTo = AppSettings.MailBCcTo;
 
-                var mailItem = new Fanex.MailDeliver.Model.MailRecord
-                {
-                    MailTo = emailTo,
-                    MailCc = emailCcTo,
-                    MailBcc = emailBCcTo,
-                    Subject = emailSubject,
-                    Title = emailTitle,
-                    Body = emailContent
-                };
+                //var mailItem = new Fanex.MailDeliver.Model.MailRecord
+                //{
+                //    MailTo = emailTo,
+                //    MailCc = emailCcTo,
+                //    MailBcc = emailBCcTo,
+                //    Subject = emailSubject,
+                //    Title = emailTitle,
+                //    Body = emailContent
+                //};
 
-                mailItem.Attachments = new List<Fanex.MailDeliver.Model.MailAttachment>();
-                var attachmentItem = new Fanex.MailDeliver.Model.MailAttachment(@fileAttachment, Fanex.MailDeliver.Model.FileExtentions.MS_EXCEL);
-                mailItem.Attachments.Add(attachmentItem);
+                //mailItem.Attachments = new List<Fanex.MailDeliver.Model.MailAttachment>();
+                //var attachmentItem = new Fanex.MailDeliver.Model.MailAttachment(@fileAttachment, Fanex.MailDeliver.Model.FileExtentions.MS_EXCEL);
+                //mailItem.Attachments.Add(attachmentItem);
 
-                if (!string.IsNullOrEmpty(mailItem.MailTo.Trim()))
-                {
-                    using (var client = new Fanex.MailDeliver.MailClient.API.MailDeliver())
-                    {
-                        client.SendMail(mailItem);
-                    }
-                }
+                //if (!string.IsNullOrEmpty(mailItem.MailTo.Trim()))
+                //{
+                //    using (var client = new Fanex.MailDeliver.MailClient.API.MailDeliver())
+                //    {
+                //        client.SendMail(mailItem);
+                //    }
+                //}
             }
             catch (Exception ex)
             {

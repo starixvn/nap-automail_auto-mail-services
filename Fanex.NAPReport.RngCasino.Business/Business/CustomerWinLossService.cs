@@ -17,6 +17,8 @@ using Fanex.NAPReport.RngCasino.Business.Helper.Implement;
 using Fanex.Service.Core.MailService;
 using Fanex.Service.Core.Utilities;
 using RazorEngine;
+using Fanex.MailDelivery.Client.Models;
+using Fanex.MailDelivery.Client.Handlers;
 
 namespace Fanex.NAPReport.RngCasino.Business.Business
 {
@@ -45,6 +47,7 @@ namespace Fanex.NAPReport.RngCasino.Business.Business
 			bool result = false;
 			try
 			{
+                
 				var dateTimeFormat = "{0:yyyy-MM-dd HH:mm}";
 				var toDate = string.Format(dateTimeFormat, DateTime.Now);
 				var fromDate = string.Format(dateTimeFormat, DateTime.Now.AddMinutes(-Interval / 1000 / 60 - RngCasinoSettings.ConsoleTestAddedDeltaMinute));
@@ -61,7 +64,7 @@ namespace Fanex.NAPReport.RngCasino.Business.Business
 					_subject = string.Format(RngCasinoSettings.Subject, RngCasinoSettings.BaseCurrency,
 													NumberExtension.WinLossFormat(RngCasinoSettings.WinLoss, 0), fromDate, toDate);
 					result = EmailHelper.SendMail(RngCasinoSettings.FunctionIdVipGroup, _subject, RngCasinoSettings.Title, body, fileNamePath);
-				}
+				}           
 			}
 			catch (Exception ex)
 			{
@@ -75,7 +78,7 @@ namespace Fanex.NAPReport.RngCasino.Business.Business
 		{
 			if (RngCasinoSettings.FunctionIdNormalGroup != -1)
 			{
-				EmailHelper.SendMail(RngCasinoSettings.FunctionIdNormalGroup, _subject, RngCasinoSettings.Title, GetMailNormalGroupBody());
+				EmailHelper.SendMail(RngCasinoSettings.FunctionIdNormalGroup, _subject, RngCasinoSettings.Title, GetMailNormalGroupBody());                
 			}
 		}
 

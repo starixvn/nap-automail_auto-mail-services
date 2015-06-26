@@ -18,10 +18,14 @@ namespace Fanex.Service.Core.MailService
 
         Mail CreateMailCustomContentWithAttachedFile(MailInfo mailInfo, string bodyContent);
 
+        Mail CreateMailCustomContent(MailInfo mailInfo, string bodyContent);
+
         Mail CreateMailWithNotification(MailInfo mailInfo);
 
         void SendFunctionMailWithAttachedFile(int functionId, MailInfo mailInfo);
 
         void SendFunctionMailWithNotification(int functionId, MailInfo mailInfo);
+
+        void SendFunctionMailCustomContentNotification(int functionId, MailInfo mailInfo, string bodyContent);
     }
 }

@@ -49,11 +49,6 @@ namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.NAPReport
                 JobStatus = JobStatus.Success,
                 Mail = mail,
                 Schedule = schedule,
-                Result = new ResultMessage
-                {
-                    ErrCode = 0,
-                    ErrMsg = string.Empty
-                }
             };
         }
     }

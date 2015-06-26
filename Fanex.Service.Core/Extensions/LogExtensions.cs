@@ -24,12 +24,30 @@ namespace Fanex.Service.Core.Extensions
                                     "<br>\r\nINNEREXCEPTION: " + ex.InnerException +
                                     "<br>\r\nSOURCE: " + ex.Source +
                                     "<br>\r\nTARGETSITE: " + ex.TargetSite +
-                                    "<br>\r\nSTACKTRACE: " + ex.StackTrace;
+                                    "<br>\r\nSTACKTRACE: " + ex.StackTrace;                
                 IMaintenanceService maintenance = new MaintenanceService();                
                 var downTime = maintenance.GetDowntimeInfo();
                 if (!downTime.IsDowntime)
                 {
                     Logger.Log.Error(message);
+                }
+            }
+            catch (Exception exception)
+            {
+                Logger.Log.Error(exception.ToString());
+            }
+        }
+
+        public static void LogInfo(string msg)
+        {
+            try
+            {
+                string message = msg;
+                IMaintenanceService maintenance = new MaintenanceService();
+                var downTime = maintenance.GetDowntimeInfo();
+                if (!downTime.IsDowntime)
+                {
+                    Logger.Log.Info(message);
                 }
             }
             catch (Exception exception)

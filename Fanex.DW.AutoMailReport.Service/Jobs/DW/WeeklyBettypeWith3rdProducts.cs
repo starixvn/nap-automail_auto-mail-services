@@ -34,12 +34,7 @@ namespace Fanex.DW.AutoMailReport.Service.Jobs.DW
             {
                 JobStatus = JobStatus.Success,
                 Mail = mail,
-                Schedule = schedule,
-                Result = new ResultMessage
-                {
-                    ErrCode = 0,
-                    ErrMsg = string.Empty
-                }
+                Schedule = schedule,                
             };
         }
     }

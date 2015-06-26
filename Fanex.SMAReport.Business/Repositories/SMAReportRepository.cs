@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.SMAReport.Business.Repositories
+namespace Fanex.NAPReport.SMAReport.Business.Repositories
 {
     using System;
     using System.Collections.Generic;
@@ -18,8 +18,8 @@ namespace Fanex.SMAReport.Business.Repositories
     using Fanex.Service.Core.Enums;
     using Fanex.Service.Core.Extensions;
     using Fanex.Service.Core.Service;
-    using Fanex.SMAReport.Business.Constants;
-    using Fanex.SMAReport.Business.Model;
+    using Fanex.NAPReport.SMAReport.Business.Constants;
+    using Fanex.NAPReport.SMAReport.Business.Model;
 
     /// <summary>
     /// TODO: Update summary.

@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.SMAReport.Business.Constants
+namespace Fanex.NAPReport.SMAReport.Business.Constants
 {
     using System;
     using System.Collections.Generic;

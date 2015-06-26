@@ -9,7 +9,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using Fanex.MailDelivery.Client.Models;
+    using Fanex.MailDelivery.Client.Enumerations;
     using Fanex.NAPReport.WinLossByProducts.Business.Constants;
     using Fanex.NAPReport.WinLossByProducts.Business.Criteria;
     using Fanex.NAPReport.WinLossByProducts.Business.Model;
@@ -27,6 +27,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
         private MailInfo _mailInfo;
         private IWinLossByProductsService _service;
         private IWinLossByProductsExportDataService _exportDataService;
+        private bool isEnoughData = false;
 
         public MailingService()
         {
@@ -40,19 +41,31 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
             _exportDataService = new WinLossByProductsExportDataService();
         }
 
-        public Mail SendMailToVIPGroup()
+        public MailResult SendMailToVIPGroup()
         {
+            MailResult mailResult = new MailResult();
+
             GetWinLossByProductsCriteria criteria = new GetWinLossByProductsCriteria
             {
                 WinLossDate = DateTime.Now.AddDays(-1)
             };
 
             var report = _service.GetWinLossByProductsData(criteria);
+            isEnoughData = report.IsEnoughData;
+
+            if (!isEnoughData)
+            {
+                mailResult.JobStatus = JobStatus.SuccessWithoutSendmail;
+                SendFunctionMailCustomContentNotification();
+
+                return mailResult;
+            }
+
             _exportDataService.ExportReportToExcel(report, criteria);
             string reportPath = _exportDataService.DirectoryOfFileName;
 
             var root = AppDomain.CurrentDomain.BaseDirectory;
-            string emailTemplatePath = root + EmailTemplateConstants.WinLossByProductsTemplate;
+            string emailTemplatePath = root + EmailTemplateConstants.WIN_LOSS_BY_PRODUCTS_TEMPLATE;
             string template = File.ReadAllText(emailTemplatePath);
 
             WinLossProductsDTO data = new WinLossProductsDTO();
@@ -70,16 +83,27 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
             };
 
             var mail = mailStation.CreateMailCustomContentWithAttachedFile(_mailInfo, bodyContent);
+            mailResult.Mail = mail;
 
-            return mail;
+            return mailResult;
         }
 
-        public void  SendMailToNormalGroup()
+        public void SendMailToNormalGroup()
         {
-            if (AppSettings.FunctionId > 0)
+            if (isEnoughData && AppSettings.FunctionId > 0)
             {
                 mailStation.SendFunctionMailWithNotification(AppSettings.FunctionId, _mailInfo);
             }
+        }
+
+        private void SendFunctionMailCustomContentNotification()
+        {
+            var root = AppDomain.CurrentDomain.BaseDirectory;
+            string emailTemplatePath = root + EmailTemplateConstants.NOTIFICATION_EMAIL_TEMPLATE;
+            string template = File.ReadAllText(emailTemplatePath);
+
+            _mailInfo.FileName = "Win Loss By Products";
+            mailStation.SendFunctionMailCustomContentNotification(AppSettings.NotificationEmailFunctionId, _mailInfo, template);
         }
     }
 }

@@ -16,6 +16,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Constants
     /// </summary>
     public static class EmailTemplateConstants
     {
-        public const string WinLossByProductsTemplate = @"SiteConfig\WinLossByProducts\Templates\WinLossByProductsEmailTemplate.cshtml";
+        public const string WIN_LOSS_BY_PRODUCTS_TEMPLATE = @"SiteConfig\WinLossByProducts\Templates\WinLossByProductsEmailTemplate.cshtml";
+        public const string NOTIFICATION_EMAIL_TEMPLATE = @"SiteConfig\WinLossByProducts\Templates\NotificationEmailTemplate.cshtml";
     }
 }

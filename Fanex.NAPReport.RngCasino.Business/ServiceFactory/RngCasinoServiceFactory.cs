@@ -13,14 +13,16 @@ namespace Fanex.NAPReport.RngCasino.Business.ServiceFactory
 	{
 		public IStandaloneTimerFunctionMailService GetService()
 		{
-			ConfigurationParser rngConfigurationParser = new ConfigurationParser(@"SiteConfig\RngCasino\RngCasino.Settings.xml");
-			rngConfigurationParser.Parse<RngCasinoSettings>();
+            ConfigurationParser rngConfigurationParser = new ConfigurationParser(@"SiteConfig\RngCasino\RngCasino.Settings.xml");
+            rngConfigurationParser.Parse<RngCasinoSettings>();
 
-			IRngCasinoExcelService rngCasinoExcelService = new RngCasinoExcelService();
-			RngCasinoExportSettings rngRngCasinoExportSettings = new RngCasinoExportSettings();
+            IRngCasinoExcelService rngCasinoExcelService = new RngCasinoExcelService();
+            RngCasinoExportSettings rngRngCasinoExportSettings = new RngCasinoExportSettings();
 
-			return new CustomerWinLossService(rngCasinoExcelService, rngRngCasinoExportSettings,
-				AppDomain.CurrentDomain.BaseDirectory + @"SiteConfig\RngCasino");
+            //return new CustomerWinLossService(rngCasinoExcelService, rngRngCasinoExportSettings,
+            //    AppDomain.CurrentDomain.BaseDirectory + @"SiteConfig\RngCasino");
+
+            return new Testing();
 		}
 	}
 }

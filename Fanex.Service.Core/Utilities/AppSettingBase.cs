@@ -94,6 +94,15 @@ namespace Fanex.Service.Core.Utilities
 			return ExportDataDirectoryWithYearMonth(path);
 		}
 
+        protected static string ExportDataDirectoryWithYearMonthDay(string exportDataDirectory)
+        {
+            string month = DateTime.Today.ToString("MM");
+            string day = DateTime.Today.ToString("dd");
+            exportDataDirectory += @"\" + DateTime.Today.Year + @"\" + month + @"\" + day;
+
+            return exportDataDirectory;
+        }
+
 		protected static string ExportDataDirectoryWithYearMonth(string exportDataDirectory)
 		{
 			string month = DateTime.Today.ToString("MM");
@@ -137,6 +146,15 @@ namespace Fanex.Service.Core.Utilities
             {
                 return GetSettingValueByKey("Subject");
             }
-        }        
+        } 
+       
+        public static int NotificationEmailFunctionId
+        {
+            get
+            {
+                var val = ConfigurationManager.AppSettings["NotificationEmailFunctionId"];
+                return val == null ? 0 : Convert.ToInt32(ConfigurationManager.AppSettings["NotificationEmailFunctionId"]);
+            }
+        }
 	}
 }

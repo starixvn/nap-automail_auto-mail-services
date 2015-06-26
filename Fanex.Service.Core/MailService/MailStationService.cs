@@ -79,7 +79,6 @@ namespace Fanex.Service.Core.MailService
 
         public Mail CreateMailCustomContentWithAttachedFile(MailInfo mailInfo, string bodyContent)
         {
-            var root = AppDomain.CurrentDomain.BaseDirectory;           
             Mail mail = new Mail()
             {
                 Subject = string.Format(AppSettingBase.Subject, mailInfo.FileName),
@@ -94,6 +93,33 @@ namespace Fanex.Service.Core.MailService
             }
 
             return mail;
+        }
+
+        public Mail CreateMailCustomContent(MailInfo mailInfo, string bodyContent)
+        {
+            Mail mail = new Mail()
+            {
+                Subject = string.Format(AppSettingBase.Subject, mailInfo.FileName),
+                Title = AppSettingBase.Title,
+                Body = bodyContent,
+                Attachments = new List<MailAttachment>()
+            };
+
+            return mail;
+        }
+
+        public void SendFunctionMailCustomContentNotification(int functionId, MailInfo mailInfo, string bodyContent)
+        {
+            Mail mail = new Mail()
+            {
+                Subject = string.Format(AppSettingBase.Subject, mailInfo.FileName),
+                Title = AppSettingBase.Title,
+                Body = bodyContent,
+                Attachments = new List<MailAttachment>(),
+                MailingListId = functionId
+            };
+
+            MailClientHandler.SendMail(mail);
         }
     }
 }

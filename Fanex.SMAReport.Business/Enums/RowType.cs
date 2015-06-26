@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.SMAReport.Business.Enums
+namespace Fanex.NAPReport.SMAReport.Business.Enums
 {
     using System;
     using System.Collections.Generic;

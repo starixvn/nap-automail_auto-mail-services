@@ -39,7 +39,6 @@ namespace Fanex.Service.Core.Utilities
             exportDataDirectory += @"\" + fileName;
 
             FileInfo file = new FileInfo(exportDataDirectory);
-            file.Delete();
 
             workbook.Write(new FileStream(exportDataDirectory, FileMode.Create)); 
 
@@ -47,6 +46,7 @@ namespace Fanex.Service.Core.Utilities
             stream1.Password = ExcelPassword;
             stream1.SaveAs(exportDataDirectory);
             stream1.Close();
+            stream1.Dispose();            
         }
 
         private static void SaveFileWithAuthenticate(string exportDataDirectory, string fileName, IWorkbook workbook, string ExcelPassword)
@@ -72,7 +72,6 @@ namespace Fanex.Service.Core.Utilities
                 exportDataDirectory += @"\" + fileName;
 
                 FileInfo file = new FileInfo(exportDataDirectory); 
-                file.Delete();
 
                 workbook.Write(new FileStream(exportDataDirectory, FileMode.Create)); 
 
@@ -80,6 +79,7 @@ namespace Fanex.Service.Core.Utilities
                 stream1.Password = ExcelPassword;
                 stream1.SaveAs(exportDataDirectory);
                 stream1.Close();
+                stream1.Dispose();                
             }
         }
     }

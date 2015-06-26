@@ -4,63 +4,45 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.SMAReport.Business
+namespace Fanex.NAPReport.SMAReport.Business
 {
     using System;
     using System.Configuration;
     using Fanex.Service.Core.Utilities;
+    using Fanex.Service.Core.Configuration;
 
     /// <summary>
     /// Application setting.
     /// </summary>
-    public class AppSettings : AppSettingBase
+    public class AppSettings : AppSettingBase, ISettings
     {
-        public static string EmailTemplate
+        public static string DataDirectory
         {
-            get
-            {
-                return GetSettingValueByKey("SMAReport.EmailTemplate");
-            }
+            get;
+            set;
         }
 
-        public static string ExportDataDirectory
+        public static new string DataDirectoryWithYear
         {
-            get
-            {
-                return GetSettingValueByKey("SMAReport.ExportDataDirectory");
-            }
+            get { return ExportDataDirectoryWithYear(DataDirectory); }
         }
 
-        public static string MailSubject
+        public static string ExcelPasswordProtected
         {
-            get
-            {
-                return GetSettingValueByKey("SMAReport.Subject");
-            }
+            get;
+            set;
         }
 
-        public static string MailTitle
+        public static int FunctionId
         {
-            get
-            {
-                return GetSettingValueByKey("SMAReport.Title");
-            }
+            get;
+            set;
         }
 
         public static string DownloadUrl
         {
-            get
-            {
-                return GetSettingValueByKey("SMAReport.DownloadUrl");
-            }
-        }
-
-        public static string ExcelPassword
-        {
-            get
-            {
-                return GetSettingValueByKey("SMAReport.ExcelPassword");
-            }
-        }
+            get;
+            set;
+        }       
     }
 }

@@ -30,17 +30,6 @@ namespace Fanex.NAPReport.AutoMailReport.Service
 			    new AutoMailService()
 			};
             ServiceBase.Run(servicesToRun);
-
-
-            //AutoMailService mailService = new AutoMailService();
-
-            //mailService.StartAndStop();
-
-            //DbSettingProviderManager.Current.Start();
-            //CreditMovement report = new CreditMovement();
-            //report.Run();
-            //DirectBalanceReport cs = new DirectBalanceReport();
-            //cs.Run2();
         }
     }
 }

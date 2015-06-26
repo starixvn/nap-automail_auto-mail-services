@@ -28,17 +28,12 @@ namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.WinLossByProducts
         public override JobResultMessage SendMailToVipGroup(Schedule schedule, IJobExecutionContext jobContext)
         {
             var mail = service.SendMailToVIPGroup();
-
+            
             return new JobResultMessage()
             {
-                JobStatus = JobStatus.Success,
-                Mail = mail,
+                JobStatus = mail.JobStatus,
+                Mail = mail.Mail,
                 Schedule = schedule,
-                Result = new ResultMessage
-                {
-                    ErrCode = 0,
-                    ErrMsg = string.Empty
-                }
             };
         }
 
