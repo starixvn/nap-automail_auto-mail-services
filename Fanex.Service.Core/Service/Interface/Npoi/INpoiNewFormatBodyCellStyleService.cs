@@ -37,6 +37,12 @@ namespace Fanex.Service.Core.Service.Interface.Npoi
 
         XSSFCellStyle ParenthesesNegativeDecimalNumberStyle { get; }
 
+        XSSFCellStyle ParenthesesBlackPositiveDecimalNumberStyle { get; }
+
+        XSSFCellStyle ParenthesesBlackNegativeDecimalNumberStyle { get; }
+
+        XSSFCellStyle ParenthesesUnsignedNegativeDecimalNumberStyle { get; }
+
         XSSFCellStyle PercentageStyle { get; }
 
         XSSFCellStyle PositivePercentageStyle { get; }

@@ -1,0 +1,65 @@
+﻿// -----------------------------------------------------------------------
+// <copyright file="DailyTurnoverService.cs" company="Nexcel Solutions Vietnam">
+// TODO: Update copyright text.
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace Fanex.NAPReport.ReportingServices.Business.Service.Business.DailyTurnover
+{
+    using System;
+    using System.Collections.Generic;
+    using Fanex.NAPReport.ReportingServices.Business.Criteria.DailyTurnover;
+    using Fanex.NAPReport.ReportingServices.Business.Model.DailyTurnover;
+    using Fanex.NAPReport.ReportingServices.Business.Repositories.DailyTurnover;
+    using Fanex.NAPReport.ReportingServices.Business.Resources;
+    using Fanex.Service.Core.Extensions;
+
+    /// <summary>
+    /// TODO: Update summary.
+    /// </summary>
+    public class DailyTurnoverService : IDailyTurnoverService
+    {
+        private IDailyTurnoverRepository _repository;
+
+        public DailyTurnoverService()
+            : this(null)
+        {
+        }
+
+        public DailyTurnoverService(IDailyTurnoverRepository repository)
+        {
+            this._repository = repository ?? new DailyTuroverRepository();
+        }
+
+        public List<DailyTurnover> GetDailyTurnover(DateTime currentTime)
+        {
+            var report = new List<DailyTurnover>();
+            try
+            {
+                var virtualCurrency = _repository.GetDailyTurnoverByCurrency(
+                    new GetDailyTurnoverCriteria
+                    {
+                        FromDate = currentTime.AddDays(-1),
+                        IsActual = false
+                    });
+                virtualCurrency.CurrencyType = Labels.Virtual_Currency;
+                report.Add(virtualCurrency);
+
+                var actualCurrency = _repository.GetDailyTurnoverByCurrency(
+                   new GetDailyTurnoverCriteria
+                   {
+                       FromDate = currentTime.AddDays(-1),
+                       IsActual = true
+                   });
+                actualCurrency.CurrencyType = Labels.Actual_Currency;
+                report.Add(actualCurrency);
+            }
+            catch (Exception ex)
+            {
+                LogExtensions.ExceptionHandler(ex);
+            }
+
+            return report;
+        }
+    }
+}

@@ -22,5 +22,11 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Interface.NewFormat.Bod
         XSSFCellStyle ParenthesesPositiveDecimalNumberStyle { get; }
 
         XSSFCellStyle ParenthesesNegativeDecimalNumberStyle { get; }
+
+        XSSFCellStyle ParenthesesBlackPositiveDecimalNumberStyle { get; }
+
+        XSSFCellStyle ParenthesesBlackNegativeDecimalNumberStyle { get; }
+
+        XSSFCellStyle ParenthesesUnsignedNegativeDecimalNumberStyle { get; }
     }
 }

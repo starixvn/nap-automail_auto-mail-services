@@ -24,6 +24,9 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.NewFormat.Bod
         private XSSFCellStyle _negativeDecimalNumberStyle;
         private XSSFCellStyle _parenthesesPositiveDecimalNumberStyle;
         private XSSFCellStyle _parenthesesNegativeDecimalNumberStyle;
+        private XSSFCellStyle _parenthesesBlackPositiveDecimalNumberStyle;
+        private XSSFCellStyle _parenthesesBlackNegativeDecimalNumberStyle;
+        private XSSFCellStyle _parenthesesUnsignedNegativeDecimalNumberStyle;
         private XSSFDataFormat _dataFormat;
         private XSSFFont _font;
 
@@ -37,6 +40,9 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.NewFormat.Bod
             this.CreateNegativeDecimalNumberStyle();
             this.CreateParenthesesPositiveDecimalNumberStyle();
             this.CreateParenthesesNegativeDecimalNumberStyle();
+            this.CreateParenthesesBlackPositiveDecimalNumberStyle();
+            this.CreateParenthesesBlackNegativeDecimalNumberStyle();
+            this.CreateParenthesesUnsignedNegativeDecimalNumberStyle();
         }
 
         public XSSFCellStyle DecimalNumberStyle
@@ -76,6 +82,29 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.NewFormat.Bod
             get
             {
                 return _parenthesesNegativeDecimalNumberStyle;
+            }
+        }
+
+        public XSSFCellStyle ParenthesesBlackPositiveDecimalNumberStyle
+        {
+            get
+            {
+                return _parenthesesBlackPositiveDecimalNumberStyle;
+            }
+        }
+
+        public XSSFCellStyle ParenthesesBlackNegativeDecimalNumberStyle
+        {
+            get
+            {
+                return _parenthesesBlackNegativeDecimalNumberStyle;
+            }
+        }
+        public XSSFCellStyle ParenthesesUnsignedNegativeDecimalNumberStyle
+        {
+            get
+            {
+                return _parenthesesUnsignedNegativeDecimalNumberStyle;
             }
         }
 
@@ -122,6 +151,33 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.NewFormat.Bod
             this._parenthesesNegativeDecimalNumberStyle.Alignment = HorizontalAlignment.Right;
             this._parenthesesNegativeDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.ParenthesesNegativeDecimalNumberFormat);
             this._parenthesesNegativeDecimalNumberStyle.SetFont(_font);
+        }
+
+        private void CreateParenthesesBlackPositiveDecimalNumberStyle()
+        {
+            this._parenthesesBlackPositiveDecimalNumberStyle = this._workbook.CreateCellStyle() as XSSFCellStyle;
+            NPOIUtility.AssignNewFormatCellStyleData(this._parenthesesBlackPositiveDecimalNumberStyle, Color.White);
+            this._parenthesesBlackPositiveDecimalNumberStyle.Alignment = HorizontalAlignment.Right;
+            this._parenthesesBlackPositiveDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.ParenthesesBlackPositiveDecimalNumberFormat);
+            this._parenthesesBlackPositiveDecimalNumberStyle.SetFont(_font);
+        }
+
+        private void CreateParenthesesBlackNegativeDecimalNumberStyle()
+        {
+            this._parenthesesBlackNegativeDecimalNumberStyle = this._workbook.CreateCellStyle() as XSSFCellStyle;
+            NPOIUtility.AssignNewFormatCellStyleData(this._parenthesesBlackNegativeDecimalNumberStyle, Color.White);
+            this._parenthesesBlackNegativeDecimalNumberStyle.Alignment = HorizontalAlignment.Right;
+            this._parenthesesBlackNegativeDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.ParenthesesBlackNegativeDecimalNumberFormat);
+            this._parenthesesBlackNegativeDecimalNumberStyle.SetFont(_font);
+        }
+
+        private void CreateParenthesesUnsignedNegativeDecimalNumberStyle()
+        {
+            this._parenthesesUnsignedNegativeDecimalNumberStyle = this._workbook.CreateCellStyle() as XSSFCellStyle;
+            NPOIUtility.AssignNewFormatCellStyleData(this._parenthesesUnsignedNegativeDecimalNumberStyle, Color.White);
+            this._parenthesesUnsignedNegativeDecimalNumberStyle.Alignment = HorizontalAlignment.Right;
+            this._parenthesesUnsignedNegativeDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.ParenthesesUnsignedNegativeDecimalNumberFormat);
+            this._parenthesesUnsignedNegativeDecimalNumberStyle.SetFont(_font);
         }
     }
 }

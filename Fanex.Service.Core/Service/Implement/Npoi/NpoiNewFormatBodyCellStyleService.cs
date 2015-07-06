@@ -124,6 +124,30 @@ namespace Fanex.Service.Core.Service.Implement.Npoi
             }
         }
 
+        public XSSFCellStyle ParenthesesBlackPositiveDecimalNumberStyle
+        {
+            get
+            {
+                return this._decimalNumberStyle.ParenthesesBlackPositiveDecimalNumberStyle;
+            }
+        }
+
+        public XSSFCellStyle ParenthesesBlackNegativeDecimalNumberStyle
+        {
+            get
+            {
+                return this._decimalNumberStyle.ParenthesesBlackNegativeDecimalNumberStyle;
+            }
+        }
+
+        public XSSFCellStyle ParenthesesUnsignedNegativeDecimalNumberStyle
+        {
+            get
+            {
+                return this._decimalNumberStyle.ParenthesesUnsignedNegativeDecimalNumberStyle;
+            }
+        }
+
         public XSSFCellStyle PercentageStyle
         {
             get

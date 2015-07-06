@@ -411,14 +411,93 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\CompanyBalance\CompanyBalance.Settings.DEV.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TimerServiceSetting\TimerServiceSetting.PRO.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TimerServiceSetting\TimerServiceSetting.UAT.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\CompanyBalance\CompanyBalance.Settings.Local.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
     <Content Include="TimerServiceSetting\TimerServiceSetting.DEV.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\CompanyBalance\CompanyBalance.Settings.PRO.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\CompanyBalance\CompanyBalance.Settings.UAT.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\CompanyBalance\CompanyBalance.Settings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\CompanyStatement\CompanyStatement.Settings.DEV.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\CompanyStatement\CompanyStatement.Settings.Local.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\CompanyStatement\CompanyStatement.Settings.PRO.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\CompanyStatement\CompanyStatement.Settings.UAT.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\CompanyStatement\CompanyStatement.Settings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\DailyTurnover\DailyTurnover.Settings.DEV.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\DailyTurnover\DailyTurnover.Settings.Local.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\DailyTurnover\DailyTurnover.Settings.PRO.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\DailyTurnover\DailyTurnover.Settings.UAT.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\DailyTurnover\DailyTurnover.Settings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\MatchWinLoss2a\MatchWinLoss2a.Settings.DEV.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\MatchWinLoss2a\MatchWinLoss2a.Settings.Local.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\MatchWinLoss2a\MatchWinLoss2a.Settings.PRO.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\MatchWinLoss2a\MatchWinLoss2a.Settings.UAT.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\MatchWinLoss2a\MatchWinLoss2a.Settings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\SuperYesterdayBalance\SuperYesterdayBalance.Settings.PRO.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\SuperYesterdayBalance\SuperYesterdayBalance.Settings.UAT.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\SuperYesterdayBalance\SuperYesterdayBalance.Settings.Local.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\SuperYesterdayBalance\SuperYesterdayBalance.Settings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\SuperYesterdayBalance\SuperYesterdayBalance.Settings.DEV.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TimerServiceSetting\TimerServiceSetting.Local.xml">

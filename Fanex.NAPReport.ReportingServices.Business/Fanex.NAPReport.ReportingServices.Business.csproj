@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3221F978-C15B-427F-991C-3E00E2780D22}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fanex.NAPReport.ReportingServices.Business</RootNamespace>
+    <AssemblyName>Fanex.NAPReport.ReportingServices.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Fanex.Common">
+      <HintPath>..\packages\Fanex.Common.1.0.404.97\lib\net40\Fanex.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Data">
+      <HintPath>..\packages\Fanex.Data.0.5.404.63\lib\net40\Fanex.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.NAP.Framework">
+      <HintPath>..\packages\Fanex.NAP.Framework.1.0.0.3\lib\net40\Fanex.NAP.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common">
+      <HintPath>..\packages\EnterpriseLibrary.Common.5.0.414.0\lib\net40\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
+      <HintPath>..\packages\EnterpriseLibrary.Data.5.0.414.0\lib\net40\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\EnterpriseLibrary.Unity.5.0.414.0\lib\net40\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\packages\EnterpriseLibrary.Unity.5.0.414.0\lib\net40\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception">
+      <HintPath>..\packages\EnterpriseLibrary.Unity.5.0.414.0\lib\net40\Microsoft.Practices.Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppSettings.cs" />
+    <Compile Include="Configurations\CustomBettype\CustomBettypeCollection.cs" />
+    <Compile Include="Configurations\CustomBettype\CustomBettypeElement.cs" />
+    <Compile Include="Configurations\CustomBettype\CustomBettypeSection.cs" />
+    <Compile Include="Configurations\ExcludeVirtualLineTotal\ExcludeVirtualLineTotalCollection.cs" />
+    <Compile Include="Configurations\ExcludeVirtualLineTotal\ExcludeVirtualLineTotalElement.cs" />
+    <Compile Include="Configurations\ExcludeVirtualLineTotal\ExcludeVirtualLineTotalSection.cs" />
+    <Compile Include="Configurations\RM\RMCollection.cs" />
+    <Compile Include="Configurations\RM\RMElement.cs" />
+    <Compile Include="Configurations\RM\RMSection.cs" />
+    <Compile Include="Constants\RowType.cs" />
+    <Compile Include="Criteria\CompanyBalance\GetCompanyBalanceCriteria.cs" />
+    <Compile Include="Criteria\CompanyStatement\GetCompanyStatementCriteria.cs" />
+    <Compile Include="Criteria\DailyTurnover\GetDailyTurnoverCriteria.cs" />
+    <Compile Include="Criteria\MatchWinLoss2a\GetSportsWinLossCriteria.cs" />
+    <Compile Include="Criteria\MatchWinLoss2a\GetFullReportCriteria.cs" />
+    <Compile Include="Criteria\MatchWinLoss2a\GetSummaryBettypesWinLossCriteria.cs" />
+    <Compile Include="Criteria\SuperYesterdayBalance\GetSuperYesterdayBalanceCriteria.cs" />
+    <Compile Include="Entities\MatchWinLoss2a\MatchAndSportWinLoss.cs" />
+    <Compile Include="Entities\MatchWinLoss2a\MatchWinLoss.cs" />
+    <Compile Include="Entities\MatchWinLoss2a\SportWinLoss.cs" />
+    <Compile Include="Entities\MatchWinLoss2a\SummaryBettypeAndMatchAndSportWinLoss.cs" />
+    <Compile Include="Entities\MatchWinLoss2a\SummaryBettypeWinLoss.cs" />
+    <Compile Include="Enums\SuperBalance.cs" />
+    <Compile Include="Model\CompanyBalance\CompanyBalance.cs" />
+    <Compile Include="Model\CompanyStatement\CompanyStatement.cs" />
+    <Compile Include="Model\DailyTurnover\DailyTurnover.cs" />
+    <Compile Include="Model\DailyTurnover\TurnoverDetail.cs" />
+    <Compile Include="Model\MatchWinLoss2a\BettypeRangeBySport.cs" />
+    <Compile Include="Model\MatchWinLoss2a\SportsAndThirdPartyProductsWinLoss.cs" />
+    <Compile Include="Model\MatchWinLoss2a\SportsWinLoss.cs" />
+    <Compile Include="Model\MatchWinLoss2a\SummarySportsWinLoss.cs" />
+    <Compile Include="Model\MatchWinLoss2a\BettypeWinLoss.cs" />
+    <Compile Include="Model\MatchWinLoss2a\SummaryBettypesWinLoss.cs" />
+    <Compile Include="Model\MatchWinLoss2a\BettypesAndSportsAndThirdPartyProductsWinLoss.cs" />
+    <Compile Include="Model\MatchWinLoss2a\WinLossBySport.cs" />
+    <Compile Include="Model\MatchWinLoss2a\MatchWinLoss.cs" />
+    <Compile Include="Model\SuperYesterdayBalance\SuperYesterdayBalance.cs" />
+    <Compile Include="Model\SuperYesterdayBalance\SuperYesterdayBalanceDetail.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CompanyBalance\CompanyBalanceRepository.cs" />
+    <Compile Include="Repositories\CompanyBalance\ICompanyBalanceRepository.cs" />
+    <Compile Include="Repositories\CompanyStatement\CompanyStatementRepository.cs" />
+    <Compile Include="Repositories\CompanyStatement\ICompanyStatementRepository.cs" />
+    <Compile Include="Repositories\DailyTurnover\DailyTuroverRepository.cs" />
+    <Compile Include="Repositories\DailyTurnover\IDailyTurnoverRepository.cs" />
+    <Compile Include="Repositories\MatchWinLoss2a\IMatchWinLoss2aRepository.cs" />
+    <Compile Include="Repositories\MatchWinLoss2a\MatchWinLoss2aRepository.cs" />
+    <Compile Include="Repositories\SuperYesterdayBalance\ISuperYesterdayBalanceRepository.cs" />
+    <Compile Include="Repositories\SuperYesterdayBalance\SuperYesterdayBalanceRepository.cs" />
+    <Compile Include="Resources\Labels.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Labels.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ReportingServicesResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportingServicesResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Service\Business\CompanyBalance\CompanyBalanceService.cs" />
+    <Compile Include="Service\Business\CompanyBalance\ICompanyBalanceService.cs" />
+    <Compile Include="Service\Business\CompanyStatement\CompanyStatementService.cs" />
+    <Compile Include="Service\Business\CompanyStatement\ICompanyStatementService.cs" />
+    <Compile Include="Service\Business\DailyTurnover\DailyTurnoverService.cs" />
+    <Compile Include="Service\Business\DailyTurnover\IDailyTurnoverService.cs" />
+    <Compile Include="Service\Business\MatchWinLoss2a\IMatchWinLoss2aBettypeName.cs" />
+    <Compile Include="Service\Business\MatchWinLoss2a\IMatchWinLoss2aConfiguration.cs" />
+    <Compile Include="Service\Business\MatchWinLoss2a\IMatchWinLoss2aExcludeVirtualLineTotal.cs" />
+    <Compile Include="Service\Business\MatchWinLoss2a\IMatchWinLoss2aService.cs" />
+    <Compile Include="Service\Business\MatchWinLoss2a\MatchWinLoss2aBettypeName.cs" />
+    <Compile Include="Service\Business\MatchWinLoss2a\MatchWinLoss2aConfiguration.cs" />
+    <Compile Include="Service\Business\MatchWinLoss2a\MatchWinLoss2aExcludeVirtualLineTotal.cs" />
+    <Compile Include="Service\Business\MatchWinLoss2a\MatchWinLoss2aService.cs" />
+    <Compile Include="Service\Business\SuperYesterdayBalance\ISuperYesterdayBalanceService.cs" />
+    <Compile Include="Service\Business\SuperYesterdayBalance\SuperYesterdayBalanceService.cs" />
+    <Compile Include="Service\CompanyBalanceProcessData.cs" />
+    <Compile Include="Service\CompanyStatementProcessData.cs" />
+    <Compile Include="Service\DailyTurnoverProcessData.cs" />
+    <Compile Include="Service\Export\CompanyBalance\CompanyBalanceExportService.cs" />
+    <Compile Include="Service\Export\CompanyBalance\ICompanyBalanceExportService.cs" />
+    <Compile Include="Service\Export\CompanyStatement\CompanyStatementExportService.cs" />
+    <Compile Include="Service\Export\CompanyStatement\ICompanyStatementExportService.cs" />
+    <Compile Include="Service\Export\DailyTurnover\DailyTurnoverExportService.cs" />
+    <Compile Include="Service\Export\DailyTurnover\IDailyTurnoverExportService.cs" />
+    <Compile Include="Service\Export\MatchWinLoss2a\IMatchWinLoss2aExportService.cs" />
+    <Compile Include="Service\Export\MatchWinLoss2a\MatchWinLoss2aExportService.cs">
+      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Service\Export\SuperYesterdayBalance\ISuperYesterdayBalanceExportService.cs" />
+    <Compile Include="Service\Export\SuperYesterdayBalance\SuperYesterdayBalanceExportService.cs" />
+    <Compile Include="Service\IObserver.cs" />
+    <Compile Include="Service\ISubject.cs" />
+    <Compile Include="Service\MatchWinLoss2aProcessData.cs" />
+    <Compile Include="Service\ServiceProcess.cs" />
+    <Compile Include="Service\SuperYesterdayBalanceProcessData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Configurations\CustomBettype\CustomBettypeSection.config" />
+    <None Include="Configurations\ExcludeVirtualLineTotal\ExcludeVirtualLineTotal.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Configurations\RM\RMSection.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fanex.Service.Core\Fanex.Service.Core.csproj">
+      <Project>{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}</Project>
+      <Name>Fanex.Service.Core %28Fanex.Service.Core\Fanex.Service.Core%29</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CodeAnalysis\CodeAnalysisConfiguration.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Labels.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Labels.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ReportingServicesResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ReportingServicesResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

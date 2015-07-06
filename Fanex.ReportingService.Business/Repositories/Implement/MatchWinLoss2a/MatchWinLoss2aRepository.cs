@@ -71,80 +71,80 @@ namespace Fanex.ReportingService.Business.Repositories.Implement.MatchWinLoss2a
         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
-        public List<dynamic> GetAllDetailReport(GetMainReportCriteria criteria, ref Hashtable outputParam)
-        {
-            DataSet result = null;
-            List<dynamic> report = new List<dynamic>();
-            var settingKey = criteria.GetSettingKey();
-            using (var objDb = new ObjectDb(settingKey))
-            {
-                if (settingKey.EndsWith(ReportService.WarehouseSPSuffix))
-                {
-                    objDb.AddInParameter("fromdate", DbType.DateTime, criteria.Winlostdate);
-                    objDb.AddInParameter("todate", DbType.DateTime, criteria.Winlostdate);
-                }
-                else
-                {
-                    objDb.AddInParameter("winlostdate", DbType.DateTime, criteria.Winlostdate);
-                }
+        //public List<dynamic> GetAllDetailReport(GetMainReportCriteria criteria, ref Hashtable outputParam)
+        //{
+        //    DataSet result = null;
+        //    List<dynamic> report = new List<dynamic>();
+        //    var settingKey = criteria.GetSettingKey();
+        //    using (var objDb = new ObjectDb(settingKey))
+        //    {
+        //        if (settingKey.EndsWith(ReportService.WarehouseSPSuffix))
+        //        {
+        //            objDb.AddInParameter("fromdate", DbType.DateTime, criteria.Winlostdate);
+        //            objDb.AddInParameter("todate", DbType.DateTime, criteria.Winlostdate);
+        //        }
+        //        else
+        //        {
+        //            objDb.AddInParameter("winlostdate", DbType.DateTime, criteria.Winlostdate);
+        //        }
 
-                objDb.AddOutParameter("winlost_8rm", DbType.Double, 8);
-                objDb.AddOutParameter("winlost_barm", DbType.Double, 8);
-                result = objDb.ExecuteDataSet();
-                outputParam = objDb.GetOuputParams();
-            }
+        //        objDb.AddOutParameter("winlost_8rm", DbType.Double, 8);
+        //        objDb.AddOutParameter("winlost_barm", DbType.Double, 8);
+        //        result = objDb.ExecuteDataSet();
+        //        outputParam = objDb.GetOuputParams();
+        //    }
 
-            var rawData = new List<dynamic>();
-            if (result != null && result.Tables.Count >= 1)
-            {
-                var nonThirdPartyData = result.Tables[0];
-                foreach (DataRow row in nonThirdPartyData.Rows)
-                {
-                    rawData.Add(new
-                    {
-                        leaguenametc = Converter.ToString2(row["leaguenametc"]),
-                        bettype = Converter.ToInt(row["bettype"]),
-                        comm = Converter.ToDecimal(row["comm"]),
-                        VirtualComm = Converter.ToDecimal(row["VirtualComm"]),
-                        LineTotal = Converter.ToDecimal(row["LineTotal"]),
-                        VirtualLineTotal = Converter.ToDecimal(row["VirtualLineTotal"]),
-                        homeid = Converter.ToInt(row["homeid"]),
-                        awayid = Converter.ToInt(row["awayid"]),
-                        pos = Converter.ToDecimal(row["pos"]),
-                        winlost = Converter.ToDecimal(row["winlost"]),
-                        liveindicator = Converter.ToBool(row["liveindicator"]),
-                        matchcode = Converter.ToString2(row["matchcode"]),
-                        eventdate = Converter.ToDateTime(row["eventdate"]),
-                        kickofftime = Converter.ToDateTime(row["kickofftime"]),
-                        IsNeutral = Converter.ToBool(row["IsNeutral"])
-                    });
-                }
-            }
+        //    var rawData = new List<dynamic>();
+        //    if (result != null && result.Tables.Count >= 1)
+        //    {
+        //        var nonThirdPartyData = result.Tables[0];
+        //        foreach (DataRow row in nonThirdPartyData.Rows)
+        //        {
+        //            rawData.Add(new
+        //            {
+        //                leaguenametc = Converter.ToString2(row["leaguenametc"]),
+        //                bettype = Converter.ToInt(row["bettype"]),
+        //                comm = Converter.ToDecimal(row["comm"]),
+        //                VirtualComm = Converter.ToDecimal(row["VirtualComm"]),
+        //                LineTotal = Converter.ToDecimal(row["LineTotal"]),
+        //                VirtualLineTotal = Converter.ToDecimal(row["VirtualLineTotal"]),
+        //                homeid = Converter.ToInt(row["homeid"]),
+        //                awayid = Converter.ToInt(row["awayid"]),
+        //                pos = Converter.ToDecimal(row["pos"]),
+        //                winlost = Converter.ToDecimal(row["winlost"]),
+        //                liveindicator = Converter.ToBool(row["liveindicator"]),
+        //                matchcode = Converter.ToString2(row["matchcode"]),
+        //                eventdate = Converter.ToDateTime(row["eventdate"]),
+        //                kickofftime = Converter.ToDateTime(row["kickofftime"]),
+        //                IsNeutral = Converter.ToBool(row["IsNeutral"])
+        //            });
+        //        }
+        //    }
 
-            report.Add(rawData);
-            rawData = new List<dynamic>();
-            if (result != null && result.Tables.Count >= 2)
-            {
-                var thirdPartyData = result.Tables[1];
-                foreach (DataRow row in thirdPartyData.Rows)
-                {
-                    rawData.Add(new
-                    {
-                        bettype = Converter.ToString2(row["bettype"]),
-                        comm = Converter.ToDecimal(row["comm"]),
-                        VirtualComm = Converter.ToDecimal(row["VirtualComm"]),
-                        LineTotal = Converter.ToDecimal(row["LineTotal"]),
-                        VirtualLineTotal = Converter.ToDecimal(row["VirtualLineTotal"]),
-                        pos = Converter.ToDecimal(row["pos"]),
-                        winlost = Converter.ToDecimal(row["winlost"]),
-                        winlostdate = Converter.ToDateTime(row["winlostdate"])
-                    });
-                }
-            }
+        //    report.Add(rawData);
+        //    rawData = new List<dynamic>();
+        //    if (result != null && result.Tables.Count >= 2)
+        //    {
+        //        var thirdPartyData = result.Tables[1];
+        //        foreach (DataRow row in thirdPartyData.Rows)
+        //        {
+        //            rawData.Add(new
+        //            {
+        //                bettype = Converter.ToString2(row["bettype"]),
+        //                comm = Converter.ToDecimal(row["comm"]),
+        //                VirtualComm = Converter.ToDecimal(row["VirtualComm"]),
+        //                LineTotal = Converter.ToDecimal(row["LineTotal"]),
+        //                VirtualLineTotal = Converter.ToDecimal(row["VirtualLineTotal"]),
+        //                pos = Converter.ToDecimal(row["pos"]),
+        //                winlost = Converter.ToDecimal(row["winlost"]),
+        //                winlostdate = Converter.ToDateTime(row["winlostdate"])
+        //            });
+        //        }
+        //    }
 
-            report.Add(rawData);
-            return report;
-        }
+        //    report.Add(rawData);
+        //    return report;
+        //}
 
         /// <summary>
         /// Gets all detail report by sports before balance up day.

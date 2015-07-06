@@ -10,9 +10,6 @@
 namespace Fanex.ReportingService.Business.Criteria.CompanyStatement
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
@@ -24,7 +21,7 @@ namespace Fanex.ReportingService.Business.Criteria.CompanyStatement
         public DateTime FromDate { get; set; }
 
         [SpParam(SqlParamName = "todate")]
-        public DateTime ToDate 
+        public DateTime ToDate
         {
             get
             {

@@ -28,7 +28,7 @@ namespace Fanex.ReportingService.Business.Repositories.Interface
 
         WinLossInfo GetWinLossDetailBeforeBalanceUpDay(GetDetailReportByBetTypeCriteria criteria);
 
-        List<dynamic> GetAllDetailReport(GetMainReportCriteria criteria, ref Hashtable outputParam);
+        //List<dynamic> GetAllDetailReport(GetMainReportCriteria criteria, ref Hashtable outputParam);
 
         List<dynamic> GetAllDetailReportBySportsBeforeBalanceUpDay(GetAllDetailReportBySportsCriteria criteria, ref Hashtable outputParam);
     }
