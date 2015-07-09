@@ -1,0 +1,8 @@
+﻿<appSettings>
+  <add key="DataDirectory" value="\\10.40.40.52\NAP_Reports\UAT\VirtualSportWinLoss" />
+  <add key="ExcelPasswordProtected" value="" />
+  <add key="FunctionId" value="0" />
+  <add key="IsTest" value="false" />
+  <add key="DateStart" value="2015-06-01" />
+  <add key="DateEnd" value="2015-07-08" />
+</appSettings>

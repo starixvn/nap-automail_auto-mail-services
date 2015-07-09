@@ -2,8 +2,8 @@
 using System.IO;
 using Fanex.Data.Configuration;
 using Fanex.MailDelivery.Client.Handlers;
-using Fanex.NAPReport.AutoMailReport.Service;
-using Fanex.NAPReport.SMALoss.Business.Business;
+using Fanex.NAPReport.SMALoss.Business.Services;
+using Fanex.NAPReport.SMALoss.Business;
 
 namespace Fanex.NAPReport.SMALoss.Testing
 {
@@ -15,8 +15,11 @@ namespace Fanex.NAPReport.SMALoss.Testing
             DbSettingProviderManager.Current.Start();
             MailClientHandler.Start();
 
-            var lossProcess = new SMALossProcess();
-            lossProcess.NotifyEmail();
+            var lossProcess = new MailingService();
+            var mail = lossProcess.SendMailToVIPGroup();
+
+            mail.Mail.MailingListId = AppSettings.FunctionId;
+            MailClientHandler.SendMail(mail.Mail);
             MailClientHandler.Stop();
         }
     }

@@ -10,32 +10,34 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
 {
     using System;
     using System.Collections.Generic;
-    using System.Data;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Threading.Tasks;
-    using Fanex.Common;
-    using Fanex.Data;
-    using Fanex.NAP.Framework.Data;
-    using Fanex.NAPReport.VirtualSportWinLoss.Business.Common;
     using Fanex.NAPReport.VirtualSportWinLoss.Business.Criteria;
     using Fanex.NAPReport.VirtualSportWinLoss.Business.Model.Summary;
+    using Fanex.NAPReport.VirtualSportWinLoss.Business.Repositories;
     using Fanex.NAPReport.VirtualSportWinLoss.Business.Resources;
     using Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Interface;
-
-    /// <summary>
-    /// Win loss detail of virtual sport service's interface.
-    /// </summary>
-    public class WinLossSummaryService : VirtualSportServiceBase, IWinLossSummaryService
+    using Fanex.Service.Core.Extensions;
+    
+    public class WinLossSummaryService : IWinLossSummaryService
     {
-        private DateTime _moveBetsDay = VirtualSportServiceBase.BalanceUp.MoveBetsDay;
+        private DateTime _moveBetsDay = DateTime.Today;
         private DateTime _firstDayOfMonth = new DateTime(DateTime.Today.AddDays(-1).Year, DateTime.Today.AddDays(-1).Month, 1);
         private DateTime _yesterday = DateTime.Today.AddDays(-1);
 
-        /// <summary>
-        /// Gets the win loss summary.
-        /// </summary>
-        /// <returns>Win loss summary total.</returns>
+        private IRepository _repository;
+
+        public WinLossSummaryService()
+        {
+            _repository = new Repository();
+            _moveBetsDay = _repository.BalanceUp.MoveBetsDay;
+            if (AppSettings.IsTest)
+            {
+                _firstDayOfMonth = AppSettings.DateStart;
+                _yesterday = AppSettings.DateEnd;
+            }
+        }
+      
         public WinLossSummaryGrandTotal GetWinLossSummary()
         {
             WinLossSummaryGrandTotal model = new WinLossSummaryGrandTotal();
@@ -78,14 +80,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
             return model;
         }
 
-        /// <summary>
-        /// Gets the win loss summary by sport type total list.
-        /// </summary>
-        /// <returns>Win loss summary by sport type.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
-        internal List<WinLossSummaryBySportType> GetWinLossSummaryBySportTypeTotalList()
+        private List<WinLossSummaryBySportType> GetWinLossSummaryBySportTypeTotalList()
         {
             var winlossListFromIBC = new List<WinLossSummaryBySportType>();
             var winlossListFromWH = new List<WinLossSummaryBySportType>();
@@ -93,7 +88,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
 
             if (this._firstDayOfMonth > this._moveBetsDay && this._yesterday > this._moveBetsDay)
             {
-                winlossListFromWH = this.GetWinLossSummaryListBySportType(new WinLossSummaryCriteria
+                winlossListFromWH = _repository.GetWinLossSummaryListBySportType(new WinLossSummaryCriteria
                 {
                     DateStart = this._firstDayOfMonth,
                     DateEnd = this._yesterday
@@ -101,7 +96,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
             }
             else if (this._yesterday == this._moveBetsDay)
             {
-                winlossListFromWH = this.GetWinLossSummaryListBySportType(new WinLossSummaryOldCriteria
+                winlossListFromWH = _repository.GetWinLossSummaryListBySportType(new WinLossSummaryOldCriteria
                 {
                     DateStart = this._firstDayOfMonth,
                     DateEnd = this._yesterday
@@ -111,7 +106,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
             {
                 tasks[0] = Task<List<WinLossSummaryBySportType>>.Factory.StartNew(() =>
                 {
-                    return this.GetWinLossSummaryListBySportType(new WinLossSummaryOldCriteria
+                    return _repository.GetWinLossSummaryListBySportType(new WinLossSummaryOldCriteria
                     {
                         DateStart = this._firstDayOfMonth,
                         DateEnd = this._moveBetsDay
@@ -120,7 +115,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
 
                 tasks[1] = Task<List<WinLossSummaryBySportType>>.Factory.StartNew(() =>
                 {
-                    return this.GetWinLossSummaryListBySportType(new WinLossSummaryCriteria
+                    return _repository.GetWinLossSummaryListBySportType(new WinLossSummaryCriteria
                     {
                         DateStart = this._moveBetsDay.AddDays(1),
                         DateEnd = this._yesterday
@@ -146,39 +141,6 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
                 }).ToList();
 
             return winlossGroupByBettype;
-        }
-
-        /// <summary>
-        /// Get list win loss summary by sport type.
-        /// </summary>
-        /// <param name="criteria">Criteria by start and end day.</param>
-        /// <returns>List win loss summary by sport type.</returns>
-        internal List<WinLossSummaryBySportType> GetWinLossSummaryListBySportType(CriteriaBase criteria)
-        {
-            List<WinLossSummaryBySportType> winlossSummaryListbySportType = new List<WinLossSummaryBySportType>();
-            DataSet dataSet = new DataSet();
-            using (var objDb = new ObjectDb(criteria.GetSettingKey()))
-            {
-                var paramsOuput = criteria.GetSpParams();
-                dataSet = objDb.ExecuteDataSet(paramsOuput);
-                foreach (DataRow row in dataSet.Tables[0].Rows)
-                {
-                    var winlossSummarybySportType = new WinLossSummaryBySportType
-                    {
-                        SportID = Converter.To<int>(row["SportID"]),
-                        SportName = Converter.To<string>(row["SportName"]),
-                        BettypeID = Converter.To<int>(row["BetTypeID"]),
-                        BettypeName = Converter.To<string>(row["BetType"]),
-                        BetCount = Converter.To<int>(row["BetCount"]),
-                        TurnOverIBC = Converter.To<double>(row["TurnoverIBC"]),
-                        WinLostIBC = Converter.To<double>(row["WinLostIBC"])
-                    };
-
-                    winlossSummaryListbySportType.Add(winlossSummarybySportType);
-                }
-            }
-
-            return winlossSummaryListbySportType;
         }
     }
 }

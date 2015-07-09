@@ -58,6 +58,10 @@
     <Reference Include="Fanex.NAP.Framework">
       <HintPath>..\packages\Fanex.NAP.Framework.1.0.0.3\lib\net40\Fanex.NAP.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\EnterpriseLibrary.Common.5.0.414.0\lib\net40\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
     </Reference>
@@ -78,7 +82,16 @@
     </Reference>
     <Reference Include="NPOI, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.dll</HintPath>
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="Quartz, Version=2.2.4.400, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.MailStation.1.0.7.0\lib\net40\Quartz.dll</HintPath>
@@ -111,19 +124,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
-    <Compile Include="Common\DirectoryExtensions.cs" />
-    <Compile Include="Common\LogExtensions.cs" />
-    <Compile Include="Configuration\Settings.cs" />
-    <Compile Include="Constants\DateTimeFormatConstants.cs" />
     <Compile Include="Criteria\WinLossDetailOldCriteria.cs" />
     <Compile Include="Criteria\WinLossSummaryOldCriteria.cs" />
     <Compile Include="Criteria\WinLossDetailCriteria.cs" />
     <Compile Include="Criteria\WinLossSummaryCriteria.cs" />
-    <Compile Include="Enums\Status.cs" />
-    <Compile Include="Enums\TaskType.cs" />
-    <Compile Include="Extensions\DateTimeExtensions.cs" />
-    <Compile Include="Extensions\NpoiExcelExtensions.cs" />
-    <Compile Include="Extensions\NumberFormatExtension.cs" />
     <Compile Include="Model\BalanceUp.cs" />
     <Compile Include="Model\Detail\WinLossDetailBySportType.cs" />
     <Compile Include="Model\Detail\WinLossDetailByBettype.cs" />
@@ -135,31 +139,27 @@
     <Compile Include="Model\Summary\WinLossSummaryBySportType.cs" />
     <Compile Include="Model\VirtualSportExcelSheet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Implement\VirtualSportRepository.cs" />
-    <Compile Include="Repositories\Interface\IVirtualSportRepository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Resources\WinLossVirtualSportResoure.Designer.cs">
       <DependentUpon>WinLossVirtualSportResoure.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Service\Implement\ExportExcelBase.cs" />
     <Compile Include="Service\Implement\ExportExcelWinLossDetailService.cs" />
     <Compile Include="Service\Implement\ExportExcelWinLossSummaryService.cs" />
     <Compile Include="Service\Implement\ExportExcelService.cs" />
+    <Compile Include="Service\Implement\MailingService.cs" />
     <Compile Include="Service\Implement\WinLossDetailService.cs" />
-    <Compile Include="Service\Implement\VirtualSportServiceBase.cs" />
     <Compile Include="Service\Implement\WinLossSummaryService.cs" />
-    <Compile Include="Service\Implement\Mailing.cs" />
     <Compile Include="Service\Interface\IExportExcelService.cs" />
     <Compile Include="Service\Interface\IWinLossDetailService.cs" />
     <Compile Include="Service\Interface\IWinLossSummaryService.cs" />
-    <Compile Include="Service\VirtualSportService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="CodeAnalysis\CodeAnalysisConfiguration.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +175,7 @@
       <Name>Fanex.Service.Core %28Fanex.Service.Core\Fanex.Service.Core%29</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -10,89 +10,181 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using Fanex.Common;
-    using Fanex.NAPReport.VirtualSportWinLoss.Business.Extensions;
+    using System.Drawing;
+    using System.IO;
     using Fanex.NAPReport.VirtualSportWinLoss.Business.Model.Summary;
     using Fanex.NAPReport.VirtualSportWinLoss.Business.Resources;
-    using NPOI.HSSF.UserModel;
-    using NPOI.HSSF.Util;
-    using NPOI.SS.UserModel;
-    using NPOI.SS.Util;
+    using Fanex.Service.Core.Constants;
+    using Fanex.Service.Core.Extensions;
+    using Fanex.Service.Core.Model;
+    using Fanex.Service.Core.Service.Implement.Npoi;
+    using Fanex.Service.Core.Service.Interface.Npoi;
+    using Fanex.Service.Core.Utilities;
+    using NPOI.XSSF.UserModel;
 
     /// <summary>
     /// Export excel for virtual sport's win loss.
     /// </summary>
-    public class ExportExcelWinLossSummaryService : ExportExcelBase
+    public class ExportExcelWinLossSummaryService 
     {
-        private HSSFWorkbook _workbook;
-        private ICellStyle _summaryStyleBase;
-        private int _startRowNumber = 4;
+        private Color _titleColor;
+        private Color _headerColor;
+        private Color _evenColor;
+        private Color _greyColor;
+        private Color _subColor;
+        private Color _grandColor;
 
-        private short _intergerFormat;
-        private short _decimalFormat;
-        private short _pecentFormat;
+        private XSSFWorkbook _workbook;
+        private XSSFSheet _workSheet;
+        private Cell _cell;
+        private INpoiNewFormatFontService _fontService;
+        private INpoiNewFormatBodyCellStyleService _bodyCellStyleService;
+        private INpoiNewFormatCustomCellStyleService _customCellStyleService;
+        private XSSFFont _regularFont;
 
-        public ExportExcelWinLossSummaryService()
+        private XSSFCellStyle _textCenterNormalStyle;
+        private XSSFCellStyle _textLeftTitleStyle;
+        private XSSFCellStyle _textLeftNormalStyle;
+        private XSSFCellStyle _numberNormalStyle;
+        private XSSFCellStyle _decimalNormalStyle;
+        private XSSFCellStyle _percentNormalStyle;
+
+        private XSSFCellStyle _textCenterEvenStyle;
+        private XSSFCellStyle _textLeftEvenStyle;
+        private XSSFCellStyle _numberEvenStyle;
+        private XSSFCellStyle _decimalEvenStyle;
+        private XSSFCellStyle _percentEvenStyle;
+
+        private XSSFCellStyle _textCenterGreyStyle;
+        private XSSFCellStyle _textLeftGreyStyle;
+        private XSSFCellStyle _numberGreyStyle;
+        private XSSFCellStyle _decimalGreyStyle;
+        private XSSFCellStyle _percentGreyStyle;
+
+        private XSSFCellStyle _textTotalCenterStyle;
+        private XSSFCellStyle _textTotalLeftStyle;
+        private XSSFCellStyle _numberTotalStyle;
+        private XSSFCellStyle _decimalTotalStyle;
+        private XSSFCellStyle _percentTotalStyle;
+
+        private XSSFCellStyle _textGrandTotalCenterStyle;
+        private XSSFCellStyle _textGrandTotalLeftStyle;
+        private XSSFCellStyle _numberGrandTotalStyle;
+        private XSSFCellStyle _decimalGrandTotalStyle;
+        private XSSFCellStyle _percentGrandTotalStyle;
+
+        private XSSFCellStyle _textLeftStyle;
+        private XSSFCellStyle _numberStyle;
+        private XSSFCellStyle _decimalStyle;
+        private XSSFCellStyle _percentStyle;
+
+        public ExportExcelWinLossSummaryService(XSSFWorkbook workbook)
         {
+            _cell = new Cell();
+            _workbook = workbook;
+            this.CreateColor();
+            _fontService = new NpoiNewFormatFontService(_workbook);
+            _regularFont = _fontService.RegularFont;
+            _bodyCellStyleService = new NpoiNewFormatBodyCellStyleService(_workbook, _regularFont);
+            _customCellStyleService = new NpoiNewFormatCustomCellStyleService(_workbook);
+
+            CreateStyle();
         }
 
-        /// <summary>
-        /// Exports the excel win loss summary.
-        /// </summary>
-        /// <param name="workbook">The work book.</param>
-        public void ExportExcelWinlossSummary(ref HSSFWorkbook workbook)
+        private void CreateColor()
+        {
+            _titleColor = Color.FromArgb(255, 204, 51);
+            _headerColor = Color.FromArgb(60, 94, 165);
+            _evenColor = Color.FromArgb(228, 242, 253);
+            _greyColor = Color.FromArgb(191, 191, 191);
+            _subColor = Color.FromArgb(244, 244, 190);
+            _grandColor = Color.FromArgb(220, 226, 188);
+        }
+
+        private void CreateSheet()
+        {
+            string sheetName = WinLossVirtualSportResoure.Summary;
+            _workSheet = _workbook.CreateSheet(sheetName) as XSSFSheet;
+            _workSheet.CreateFreezePane(0, 5);
+        }
+
+        private void CreateStyle()
+        {
+            _textLeftTitleStyle = _customCellStyleService.CreateLeftTextStyle(_titleColor, _fontService.BlackBoldFont);
+            _textCenterNormalStyle = _bodyCellStyleService.CenterTextStyle;
+            _textLeftNormalStyle = _bodyCellStyleService.LeftTextStyle;
+            _numberNormalStyle = _bodyCellStyleService.RightNumberStyle;
+            _decimalNormalStyle = _bodyCellStyleService.DecimalNumberStyle;
+            _percentNormalStyle = _bodyCellStyleService.NegativePercentageStyle;
+
+            _textCenterEvenStyle = _customCellStyleService.CreateCenterTextStyle(_evenColor, _fontService.RegularFont);
+            _textLeftEvenStyle = _customCellStyleService.CreateLeftTextStyle(_evenColor, _fontService.RegularFont);
+            _numberEvenStyle = _customCellStyleService.CreateRightNumberStyle(_evenColor, _fontService.RegularFont);
+            _decimalEvenStyle = _customCellStyleService.CreateDecimalNumberStyle(_evenColor, _fontService.RegularFont);
+            _percentEvenStyle = _customCellStyleService.CreateNegativePercentageStyle(_evenColor, _fontService.RegularFont);
+
+            _textCenterGreyStyle = _customCellStyleService.CreateCenterTextStyle(_greyColor, _fontService.RegularFont);
+            _textLeftGreyStyle = _customCellStyleService.CreateLeftTextStyle(_greyColor, _fontService.RegularFont);
+            _numberGreyStyle = _customCellStyleService.CreateRightNumberStyle(_greyColor, _fontService.RegularFont);
+            _decimalGreyStyle = _customCellStyleService.CreateDecimalNumberStyle(_greyColor, _fontService.RegularFont);
+            _percentGreyStyle = _customCellStyleService.CreateNegativePercentageStyle(_greyColor, _fontService.RegularFont);
+
+            _textTotalCenterStyle = _customCellStyleService.CreateCenterTextStyle(_subColor, _fontService.BlackBoldFont);
+            _textTotalLeftStyle = _customCellStyleService.CreateLeftTextStyle(_subColor, _fontService.BlackBoldFont);
+            _numberTotalStyle = _customCellStyleService.CreateRightNumberStyle(_subColor, _fontService.BlackBoldFont);
+            _decimalTotalStyle = _customCellStyleService.CreateDecimalNumberStyle(_subColor, _fontService.BlackBoldFont);
+            _percentTotalStyle = _customCellStyleService.CreateNegativePercentageStyle(_subColor, _fontService.BlackBoldFont);
+
+            _textGrandTotalCenterStyle = _customCellStyleService.CreateCenterTextStyle(_grandColor, _fontService.BlackBoldFont);
+            _textGrandTotalLeftStyle = _customCellStyleService.CreateLeftTextStyle(_grandColor, _fontService.BlackBoldFont);
+            _numberGrandTotalStyle = _customCellStyleService.CreateRightNumberStyle(_grandColor, _fontService.BlackBoldFont);
+            _decimalGrandTotalStyle = _customCellStyleService.CreateDecimalNumberStyle(_grandColor, _fontService.BlackBoldFont);
+            _percentGrandTotalStyle = _customCellStyleService.CreateNegativePercentageStyle(_grandColor, _fontService.BlackBoldFont);
+        }
+        
+        public void ExportExcelMain()
+        {
+            CreateSheet();
+            InitColumnWidth();
+            RenderTitle();
+            RenderHeader();
+            ExportMain();
+        }
+
+        private void ExportMain()
         {
             var service = new WinLossSummaryService();
             var model = service.GetWinLossSummary();
-            _workbook = workbook;
-            this.SetColorAtIndex(_workbook);
-            this._summaryStyleBase = this.CreateStyle(ref _workbook, BorderStyle.Thin, BorderStyle.Thin, BorderStyle.Thin, BorderStyle.Thin, BorderColorIndex);
-
-            this._intergerFormat = _workbook.CreateDataFormat().GetFormat("#,##0;[RED]-#,##0");
-            this._decimalFormat = _workbook.CreateDataFormat().GetFormat("#,##0.00;[RED]-#,##0.00;\"NA\"");
-            this._pecentFormat = _workbook.CreateDataFormat().GetFormat("#,##0.00%;[RED]-#,##0.00%;\"NA\"");
-            var worksheet = _workbook.CreateSheet(WinLossVirtualSportResoure.Summary);
 
             if (model.WinlostTotalList.Count > 0)
             {
-                RenderTitle(ref worksheet);
-                RenderHeader(ref worksheet);
-                RenderBody(ref worksheet, model.WinlostTotalList);
-                RenderFooter(ref worksheet, model.GrandTotal);
+                RenderBody(model.WinlostTotalList);
+                RenderFooter(model.GrandTotal);
             }
             else
             {
-                var nodataRow = worksheet.CreateRow(0);
                 var yesterday = DateTime.Now.AddDays(-1);
                 DateTime startMonth = new DateTime(yesterday.Year, yesterday.Month, 1);
-                string nodataTitle = string.Format(
-                    WinLossVirtualSportResoure.NoData,
-                    startMonth.ToShortFormatedDate(),
-                    yesterday.ToShortFormatedDate());
-                nodataRow.CreateCell(0).SetCellValue(nodataTitle);
+
+                _cell.CellValue = string.Format(WinLossVirtualSportResoure.NoData, startMonth.ToShortFormatedDate(), yesterday.ToShortFormatedDate());
+                _cell.EndColumn = _cell.CurrentColumn + 6;
+                NpoiNewFormatExcelExtension.RenderMergeCell(_workSheet, _cell, _textCenterNormalStyle);
+                _cell.IncreaseColumnIndex();
             }
         }
 
-        /// <summary>
-        /// Renders the title.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        internal void RenderTitle(ref ISheet worksheet)
+        private XSSFCellStyle CreateHeaderStyle()
         {
-            var font = this.CreateFont(ref this._workbook, "Tahoma", 11, HSSFColor.Black.Index, (short)NPOI.SS.UserModel.FontBoldWeight.Bold);
-            IRow row = null;
-            ICell cell = null;
-            var titleStyle = _workbook.CreateCellStyle();
-            titleStyle.CloneStyleFrom(this._summaryStyleBase);
-            titleStyle.FillForegroundColor = TitleColorIndex;
-            titleStyle.SetFont(font);
-            titleStyle.VerticalAlignment = VerticalAlignment.Justify;
+            XSSFCellStyle headerStyle = _customCellStyleService.CreateLeftTextStyle(_headerColor, _fontService.WhiteBoldFont);
+            return headerStyle;
+        }
 
+        private void RenderTitle()
+        {
             var yesterday = DateTime.Now.AddDays(-1);
             DateTime startMonth = new DateTime(yesterday.Year, yesterday.Month, 1);
 
-            string periodTimeTitle = string.Format(
+            string periodTimeTitle = string.Format( 
                 WinLossVirtualSportResoure.SummaryTitleThird,
                 startMonth.ToShortFormatedDate(),
                 yesterday.ToShortFormatedDate());
@@ -105,299 +197,161 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
             };
 
             string title = string.Join(Environment.NewLine, lines);
-            for (int i = 0; i < 4; i++)
+
+            for (int i = 0; i < lines.Length; i++)
             {
-                row = worksheet.CreateRow(i);
-                for (int j = 0; j < 7; j++)
+                _cell.EndColumn = _cell.CurrentColumn + 6;
+                _cell.CellValue = lines[i];
+                NpoiNewFormatExcelExtension.RenderMergeCell(_workSheet, _cell, _textLeftTitleStyle);
+                _cell.ResetColumnIndex();
+                _cell.IncreaseRowIndex();
+            }
+        }
+
+        private void InitColumnWidth()
+        {
+            for (int i = 0; i < 7; i++)
+            {
+                _workSheet.SetColumnWidth(i, 170 * NPOIConstants.FontWidth);
+            }
+
+            _workSheet.SetColumnWidth(0, 220 * NPOIConstants.FontWidth);
+        }
+
+        private void RenderHeader()
+        {
+            var headerStyle = _customCellStyleService.CreateCenterTextStyle(_headerColor, _fontService.WhiteBoldFont);
+
+            _cell.EndRow = _cell.CurrentRow + 1;
+            _cell.CellValue = WinLossVirtualSportResoure.Sport;            
+            NpoiNewFormatExcelExtension.RenderMergeCell(_workSheet, _cell, headerStyle);
+            _cell.IncreaseColumnIndex();
+
+            _cell.EndRow = _cell.CurrentRow + 1;
+            _cell.CellValue = WinLossVirtualSportResoure.BetType;
+            NpoiNewFormatExcelExtension.RenderMergeCell(_workSheet, _cell, headerStyle);
+            _cell.IncreaseColumnIndex();
+
+            _cell.EndRow = _cell.CurrentRow + 1;
+            _cell.CellValue = WinLossVirtualSportResoure.SumBetCount;
+            NpoiNewFormatExcelExtension.RenderMergeCell(_workSheet, _cell, headerStyle);
+            _cell.IncreaseColumnIndex();
+
+            _cell.EndRow = _cell.CurrentRow + 1;
+            _cell.CellValue = WinLossVirtualSportResoure.TurnoverIBC;
+            NpoiNewFormatExcelExtension.RenderMergeCell(_workSheet, _cell, headerStyle);
+            _cell.IncreaseColumnIndex();
+
+            _cell.EndRow = _cell.CurrentRow + 1;
+            _cell.CellValue = WinLossVirtualSportResoure.AvarageValuePerBet;
+            NpoiNewFormatExcelExtension.RenderMergeCell(_workSheet, _cell, headerStyle);
+            _cell.IncreaseColumnIndex();
+
+            _cell.EndRow = _cell.CurrentRow + 1;
+            _cell.CellValue = WinLossVirtualSportResoure.WinLossIBC;
+            NpoiNewFormatExcelExtension.RenderMergeCell(_workSheet, _cell, headerStyle);
+            _cell.IncreaseColumnIndex();
+
+            _cell.EndRow = _cell.CurrentRow + 1;
+            _cell.CellValue = WinLossVirtualSportResoure.Margin;
+            NpoiNewFormatExcelExtension.RenderMergeCell(_workSheet, _cell, headerStyle);
+            
+            _cell.ResetColumnIndex();
+            _cell.IncreaseRowIndex();
+        }
+
+        private void RenderTotalWinLossOfSporttype(WinLossSummaryBySportTypeTotal totalWinlossBySportObj)
+        {
+            var numberOfBettypes = totalWinlossBySportObj.WinlostList.Count;
+            for (int j = 0; j < numberOfBettypes; j++)
+            {
+                var row = totalWinlossBySportObj.WinlostList[j];
+                if (j == 0)
                 {
-                    cell = row.CreateCell(j);
-                    this.RenderCell(ref cell, titleStyle, string.Empty);
+                    _cell.EndRow = _cell.CurrentRow + totalWinlossBySportObj.WinlostList.Count - 1;
+                    _cell.CellValue = row.SportName;
+                    NpoiNewFormatExcelExtension.RenderMergeCell(_workSheet, _cell, _textCenterNormalStyle);
                 }
+
+                _textLeftStyle = row.BetCount == 0 ? _textLeftGreyStyle : (j % 2 == 0 ? _textLeftNormalStyle : _textLeftEvenStyle);
+                _numberStyle = row.BetCount == 0 ? _numberGreyStyle : (j % 2 == 0 ? _numberNormalStyle : _numberEvenStyle);
+                _decimalStyle = row.BetCount == 0 ? _decimalGreyStyle : (j % 2 == 0 ? _decimalNormalStyle : _decimalEvenStyle);
+                _percentStyle = row.BetCount == 0 ? _percentGreyStyle : (j % 2 == 0 ? _percentNormalStyle : _percentEvenStyle);
+
+                _cell.CurrentColumn = 1;
+                _cell.EndColumn = 1;
+                _cell.EndRow = _cell.CurrentRow;
+
+                RenderRow(row);
             }
+            
+            _cell.ResetColumnIndex();
+            
+            var total = totalWinlossBySportObj.Total;
+            _textLeftStyle = _textTotalLeftStyle; 
+            _numberStyle = _numberTotalStyle;
+            _decimalStyle = _decimalTotalStyle;
+            _percentStyle = _percentTotalStyle;
 
-            cell = worksheet.GetRow(0).GetCell(0);
-            this.RenderCell(ref cell, titleStyle, title);
-            worksheet.AddMergedRegion(new CellRangeAddress(0, 3, 0, 6));
+            _cell.CellValue = total.SportName;
+            NpoiNewFormatExcelExtension.RenderCell(_workSheet, _cell, _textLeftStyle);
+            _cell.IncreaseColumnIndex();
+
+            RenderRow(total);
+
+            _cell.ResetColumnIndex();            
         }
 
-        /// <summary>
-        /// Renders the header.
-        /// </summary>
-        /// <param name="worksheet">The work sheet.</param>
-        internal void RenderHeader(ref ISheet worksheet)
+        private void RenderRow(WinLossSummaryBySportType row)
         {
-            var font = this.CreateFont(ref this._workbook, "Tahoma", 9, HSSFColor.White.Index, (short)NPOI.SS.UserModel.FontBoldWeight.Bold);
-            var headerStyle = _workbook.CreateCellStyle();
-            headerStyle.CloneStyleFrom(this._summaryStyleBase);
-            headerStyle.Alignment = HorizontalAlignment.Center;
-            headerStyle.VerticalAlignment = VerticalAlignment.Top;
-            headerStyle.FillForegroundColor = HeaderColorIndex;
-            headerStyle.SetFont(font);
+            _cell.CellValue = row.BettypeName;
+            NpoiNewFormatExcelExtension.RenderCell(_workSheet, _cell, _textLeftStyle);
+            _cell.IncreaseColumnIndex();
 
-            var headerRow = worksheet.CreateRow(_startRowNumber);
-            headerRow.Sheet.SetColumnWidth(0, 25 * 256);
-            headerRow.Sheet.SetColumnWidth(1, 20 * 256);
-            headerRow.Sheet.SetColumnWidth(2, 25 * 256);
-            headerRow.Sheet.SetColumnWidth(3, 15 * 256);
-            headerRow.Sheet.SetColumnWidth(4, 25 * 256);
-            headerRow.Sheet.SetColumnWidth(5, 15 * 256);
-            headerRow.Sheet.SetColumnWidth(6, 15 * 256);
-            headerRow.HeightInPoints = 32;
-            var cell = headerRow.CreateCell(0);
-            this.RenderCell(ref cell, headerStyle, WinLossVirtualSportResoure.Sport);
+            _cell.CellValue = row.BetCount;
+            NpoiNewFormatExcelExtension.RenderCell(_workSheet, _cell, _numberStyle);
+            _cell.IncreaseColumnIndex();
 
-            cell = headerRow.CreateCell(1);
-            this.RenderCell(ref cell, headerStyle, WinLossVirtualSportResoure.BetType);
+            _cell.CellValue = row.TurnOverIBC;
+            NpoiNewFormatExcelExtension.RenderCell(_workSheet, _cell, _numberStyle);
+            _cell.IncreaseColumnIndex();
 
-            cell = headerRow.CreateCell(2);
-            this.RenderCell(ref cell, headerStyle, WinLossVirtualSportResoure.SumBetCount);
+            _cell.CellValue = row.AverageValuePerBet;
+            NpoiNewFormatExcelExtension.RenderCell(_workSheet, _cell, _decimalStyle);
+            _cell.IncreaseColumnIndex();
 
-            cell = headerRow.CreateCell(3);
-            this.RenderCell(ref cell, headerStyle, WinLossVirtualSportResoure.TurnoverIBC);
+            _cell.CellValue = row.WinLostIBC;
+            NpoiNewFormatExcelExtension.RenderCell(_workSheet, _cell, _numberStyle);
+            _cell.IncreaseColumnIndex();
 
-            cell = headerRow.CreateCell(4);
-            this.RenderCell(ref cell, headerStyle, WinLossVirtualSportResoure.AvarageValuePerBet);
-
-            cell = headerRow.CreateCell(5);
-            this.RenderCell(ref cell, headerStyle, WinLossVirtualSportResoure.WinLossIBC);
-
-            cell = headerRow.CreateCell(6);
-            this.RenderCell(ref cell, headerStyle, WinLossVirtualSportResoure.Margin);
+            _cell.CellValue = row.Margin;
+            NpoiNewFormatExcelExtension.RenderCell(_workSheet, _cell, _percentStyle);
+            _cell.IncreaseRowIndex();
         }
 
-        /// <summary>
-        /// Renders the win loss by bet type.
-        /// </summary>
-        /// <param name="newRow">The new row.</param>
-        /// <param name="winlossByBettypeObj">The win loss by bet type object.</param>
-        /// <param name="isOddRow">If set to <c>true</c> [is odd row].</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
-        internal void RenderWinLossByBettype(ref IRow newRow, WinLossSummaryBySportType winlossByBettypeObj, bool isOddRow)
-        {
-            var centerStyle = _workbook.CreateCellStyle();
-            centerStyle.CloneStyleFrom(this._summaryStyleBase);
-            centerStyle.Alignment = HorizontalAlignment.Center;
-            centerStyle.VerticalAlignment = VerticalAlignment.Top;
-            centerStyle.FillForegroundColor = isOddRow ? HSSFColor.White.Index : EvenRowColorIndex;
-
-            var rightStyle = _workbook.CreateCellStyle();
-            rightStyle.CloneStyleFrom(centerStyle);
-            rightStyle.Alignment = HorizontalAlignment.Right;
-            rightStyle.DataFormat = this._intergerFormat;
-
-            var leftStyle = _workbook.CreateCellStyle();
-            leftStyle.CloneStyleFrom(centerStyle);
-            leftStyle.Alignment = HorizontalAlignment.Left;
-
-            var percentStyle = _workbook.CreateCellStyle();
-            percentStyle.CloneStyleFrom(rightStyle);
-            percentStyle.DataFormat = this._pecentFormat;
-
-            var decimalStyle = _workbook.CreateCellStyle();
-            decimalStyle.CloneStyleFrom(rightStyle);
-            decimalStyle.DataFormat = this._decimalFormat;
-
-            var grayBackgroundLeftStyle = _workbook.CreateCellStyle();
-            grayBackgroundLeftStyle.CloneStyleFrom(leftStyle);
-            grayBackgroundLeftStyle.FillForegroundColor = HSSFColor.Grey25Percent.Index;
-
-            var grayBackgroundRightStyle = _workbook.CreateCellStyle();
-            grayBackgroundRightStyle.CloneStyleFrom(rightStyle);
-            grayBackgroundRightStyle.FillForegroundColor = HSSFColor.Grey25Percent.Index;
-
-            var grayBackgroundPercentStyle = _workbook.CreateCellStyle();
-            grayBackgroundPercentStyle.CloneStyleFrom(percentStyle);
-            grayBackgroundPercentStyle.FillForegroundColor = HSSFColor.Grey25Percent.Index;
-
-            var grayBackgroundDecimalStyle = _workbook.CreateCellStyle();
-            grayBackgroundDecimalStyle.CloneStyleFrom(decimalStyle);
-            grayBackgroundDecimalStyle.FillForegroundColor = HSSFColor.Grey25Percent.Index;
-
-            var cell = newRow.CreateCell(0);
-            this.RenderCell(ref cell, centerStyle, winlossByBettypeObj.SportName);
-
-            cell = newRow.CreateCell(1);
-            this.RenderCellValue(cell, winlossByBettypeObj.BetCount, winlossByBettypeObj.BettypeName, grayBackgroundLeftStyle, leftStyle);
-
-            cell = newRow.CreateCell(2);
-            this.RenderCellValue(cell, winlossByBettypeObj.BetCount, winlossByBettypeObj.BetCount, grayBackgroundRightStyle, rightStyle);
-
-            cell = newRow.CreateCell(3);
-            this.RenderCellValue(cell, winlossByBettypeObj.BetCount, winlossByBettypeObj.TurnOverIBC, grayBackgroundRightStyle, rightStyle);
-
-            cell = newRow.CreateCell(4);
-            this.RenderCellValue(cell, winlossByBettypeObj.BetCount, winlossByBettypeObj.AverageValuePerBet, grayBackgroundDecimalStyle, decimalStyle);
-
-            cell = newRow.CreateCell(5);
-            this.RenderCellValue(cell, winlossByBettypeObj.BetCount, winlossByBettypeObj.WinLostIBC, grayBackgroundRightStyle, rightStyle);
-
-            cell = newRow.CreateCell(6);
-            this.RenderCellValue(cell, winlossByBettypeObj.BetCount, winlossByBettypeObj.Margin, grayBackgroundPercentStyle, percentStyle);
-        }
-
-        /// <summary>
-        /// Renders the total win loss.
-        /// </summary>
-        /// <param name="newRow">The new row.</param>
-        /// <param name="winlossByBettypeObj">The win loss by bet type object.</param>
-        internal void RenderTotalWinLoss(ref IRow newRow, WinLossSummaryBySportType winlossByBettypeObj)
-        {
-            var font = this.CreateFont(ref this._workbook, "Tahoma", 9, HSSFColor.Black.Index, (short)NPOI.SS.UserModel.FontBoldWeight.Bold);
-
-            var leftStyle = _workbook.CreateCellStyle();
-            leftStyle.CloneStyleFrom(this._summaryStyleBase);
-            leftStyle.Alignment = HorizontalAlignment.Left;
-            leftStyle.FillForegroundColor = SubTotalColorIndex;
-            leftStyle.SetFont(font);
-
-            var rightStyle = _workbook.CreateCellStyle();
-            rightStyle.CloneStyleFrom(leftStyle);
-            rightStyle.Alignment = HorizontalAlignment.Right;
-            rightStyle.DataFormat = this._intergerFormat;
-
-            var percentStyle = _workbook.CreateCellStyle();
-            percentStyle.CloneStyleFrom(rightStyle);
-            percentStyle.Alignment = HorizontalAlignment.Right;
-            percentStyle.DataFormat = this._pecentFormat;
-
-            var cell = newRow.CreateCell(0);
-            this.RenderCell(ref cell, leftStyle, winlossByBettypeObj.SportName);
-
-            cell = newRow.CreateCell(1);
-            this.RenderCell(ref cell, leftStyle, winlossByBettypeObj.BettypeName);
-
-            cell = newRow.CreateCell(2);
-            this.RenderCell(ref cell, rightStyle, winlossByBettypeObj.BetCount);
-
-            cell = newRow.CreateCell(3);
-            this.RenderCell(ref cell, rightStyle, winlossByBettypeObj.TurnOverIBC);
-
-            cell = newRow.CreateCell(4);
-            this.RenderCell(ref cell, rightStyle, winlossByBettypeObj.AverageValuePerBet);
-
-            cell = newRow.CreateCell(5);
-            this.RenderCell(ref cell, rightStyle, winlossByBettypeObj.WinLostIBC);
-
-            cell = newRow.CreateCell(6);
-            this.RenderCell(ref cell, percentStyle, winlossByBettypeObj.Margin);
-        }
-
-        /// <summary>
-        /// Renders the grand total win loss.
-        /// </summary>
-        /// <param name="newRow">The new row.</param>
-        /// <param name="winlossByBettypeObj">The win loss by bet type object.</param>
-        internal void RenderGrandTotalWinLoss(ref IRow newRow, WinLossSummaryBySportType winlossByBettypeObj)
-        {
-            var font = this.CreateFont(ref this._workbook, "Tahoma", 9, HSSFColor.Black.Index, (short)NPOI.SS.UserModel.FontBoldWeight.Bold);
-
-            var leftStyle = _workbook.CreateCellStyle();
-            leftStyle.CloneStyleFrom(this._summaryStyleBase);
-            leftStyle.Alignment = HorizontalAlignment.Left;
-            leftStyle.FillForegroundColor = GrandTotalColorIndex;
-            leftStyle.SetFont(font);
-
-            var rightStyle = _workbook.CreateCellStyle();
-            rightStyle.CloneStyleFrom(leftStyle);
-            rightStyle.Alignment = HorizontalAlignment.Right;
-            rightStyle.DataFormat = this._intergerFormat;
-
-            var percentStyle = _workbook.CreateCellStyle();
-            percentStyle.CloneStyleFrom(rightStyle);
-            percentStyle.Alignment = HorizontalAlignment.Right;
-            percentStyle.DataFormat = this._pecentFormat;
-
-            var cell = newRow.CreateCell(0);
-            this.RenderCell(ref cell, leftStyle, winlossByBettypeObj.SportName);
-
-            cell = newRow.CreateCell(1);
-            this.RenderCell(ref cell, leftStyle, winlossByBettypeObj.BettypeName);
-
-            cell = newRow.CreateCell(2);
-            this.RenderCell(ref cell, rightStyle, winlossByBettypeObj.BetCount);
-
-            cell = newRow.CreateCell(3);
-            this.RenderCell(ref cell, rightStyle, winlossByBettypeObj.TurnOverIBC);
-
-            cell = newRow.CreateCell(4);
-            this.RenderCell(ref cell, rightStyle, winlossByBettypeObj.AverageValuePerBet);
-
-            cell = newRow.CreateCell(5);
-            this.RenderCell(ref cell, rightStyle, winlossByBettypeObj.WinLostIBC);
-
-            cell = newRow.CreateCell(6);
-            this.RenderCell(ref cell, percentStyle, winlossByBettypeObj.Margin);
-        }
-
-        /// <summary>
-        /// Renders the total win loss of sport type.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="totalWinlossBySportObj">The total win loss by sport object.</param>
-        internal void RenderTotalWinLossOfSporttype(ref ISheet worksheet, WinLossSummaryBySportTypeTotal totalWinlossBySportObj)
-        {
-            var lengOfBettype = totalWinlossBySportObj.WinlostList.Count;
-            int rowStartOfGroup = _startRowNumber + 1;
-            int rowEndOfGroup = _startRowNumber + lengOfBettype;
-
-            ICellStyle oddStyle = _workbook.CreateCellStyle();
-            oddStyle.CloneStyleFrom(this._summaryStyleBase);
-            oddStyle.FillForegroundColor = HSSFColor.White.Index;
-
-            ICellStyle evenStyle = _workbook.CreateCellStyle();
-            evenStyle.CloneStyleFrom(this._summaryStyleBase);
-            evenStyle.FillForegroundColor = EvenRowColorIndex;
-
-            ICellStyle totalStyle = _workbook.CreateCellStyle();
-            totalStyle.CloneStyleFrom(this._summaryStyleBase);
-            totalStyle.FillForegroundColor = SubTotalColorIndex;
-
-            for (int j = 0; j < lengOfBettype; j++)
-            {
-                _startRowNumber++;
-                var newRow = worksheet.CreateRow(_startRowNumber);
-                RenderWinLossByBettype(ref newRow, totalWinlossBySportObj.WinlostList[j], j % 2 == 0 ? true : false);
-            }
-
-            _startRowNumber++;
-
-            var totalRow = worksheet.CreateRow(_startRowNumber);
-            RenderTotalWinLoss(ref totalRow, totalWinlossBySportObj.Total);
-            worksheet.AddMergedRegion(new CellRangeAddress(rowStartOfGroup, rowEndOfGroup, 0, 0));
-        }
-
-        internal void RenderBody(ref ISheet worksheet, List<WinLossSummaryBySportTypeTotal> bodyDataList)
+        private void RenderBody(List<WinLossSummaryBySportTypeTotal> bodyDataList)
         {
             var lengOfTotalRow = bodyDataList.Count;
-
             for (int i = 0; i < lengOfTotalRow; i++)
             {
-                this.RenderTotalWinLossOfSporttype(ref worksheet, bodyDataList[i]);
+                this.RenderTotalWinLossOfSporttype(bodyDataList[i]);
             }
         }
 
-        internal void RenderFooter(ref ISheet worksheet, WinLossSummaryBySportType footerData)
+        private void RenderFooter(WinLossSummaryBySportType footerData)
         {
-            ICellStyle headerStyle = _workbook.CreateCellStyle();
-            headerStyle.CloneStyleFrom(this._summaryStyleBase);
-            headerStyle.FillForegroundColor = GrandTotalColorIndex;
-            _startRowNumber += 1;
-            var grandTotalRow = worksheet.CreateRow(_startRowNumber);
-            RenderGrandTotalWinLoss(ref grandTotalRow, footerData);
-        }
+            _textLeftStyle = _textGrandTotalLeftStyle;
+            _numberStyle = _numberGrandTotalStyle;
+            _decimalStyle = _decimalGrandTotalStyle;
+            _percentStyle = _percentGrandTotalStyle;
 
-        internal void RenderCellValue(ICell cell, decimal betCount, object value, ICellStyle grayBackgroundStyle, ICellStyle normalStyle)
-        {
-            if (betCount == 0)
-            {
-                this.RenderCell(ref cell, grayBackgroundStyle, value);
-            }
-            else
-            {
-                this.RenderCell(ref cell, normalStyle, value);
-            }
+            _cell.CellValue = footerData.SportName;
+            NpoiNewFormatExcelExtension.RenderCell(_workSheet, _cell, _textLeftStyle);
+            _cell.IncreaseColumnIndex();
+
+            RenderRow(footerData);
+
+            _cell.ResetColumnIndex(); 
         }
     }
 }

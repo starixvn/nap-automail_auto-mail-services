@@ -171,18 +171,22 @@
     <Compile Include="Jobs\GameWinLimitControl\GameWinLimitControl.cs" />
     <Compile Include="Jobs\HorseTransaction3rd\HorseTransaction3rd.cs" />
     <Compile Include="Jobs\NAPReport\CreditMovement.cs" />
-    <Compile Include="Jobs\NAPReport\VirtualSportWinLoss.cs" />
     <Compile Include="Jobs\BalanceMonthlyReport\CreditTerm.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Jobs\NAPReport\HorseRacingReport.cs" />
+    <Compile Include="Jobs\SMALossReport\SMALossReport.cs" />
     <Compile Include="Jobs\SMAMonthlyReport\SMAMonthlyReport.cs" />
+    <Compile Include="Jobs\VirtualSportWinLoss\VirtualSportWinLoss.cs" />
     <Compile Include="Jobs\WinLossByProducts\WinLossByProducts.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Local\DBAGE.bodb02.bodbAdminNet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\Local\DBAGE.bodb_AGE.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Data\Local\DBDWH.bodb_dwrs.bodbAdminNet.xml">
@@ -198,6 +202,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Data\PRO\DBLOG.bodb_CustomerLog.bodbAdminNet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\UAT\DBAGE.bodb_AGE.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Data\UAT\DBDWH.bodb_dwrs.bodbAdminNet.xml">
@@ -286,6 +293,18 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="SiteConfig\SMALoss\Settings\SMALoss.Settings.PRO.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\SMALoss\Settings\SMALoss.Settings.Local.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\SMALoss\Settings\SMALoss.Settings.DEV.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\SMALoss\Settings\SMALoss.Settings.UAT.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="SiteConfig\SMAReport\Settings\SMAReport.Settings.PRO.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -296,6 +315,22 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SiteConfig\SMAReport\Settings\SMAReport.Settings.DEV.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\VirtualSportWinLoss\Settings\VirtualSportWinLoss.Settings.PRO.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\VirtualSportWinLoss\Settings\VirtualSportWinLoss.Settings.UAT.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\VirtualSportWinLoss\Settings\VirtualSportWinLoss.Settings.Local.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\VirtualSportWinLoss\Settings\VirtualSportWinLoss.Settings.DEV.xml">
+      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SiteConfig\WinLossByProducts\Settings\WinLossByProducts.Settings.PRO.xml">
@@ -409,9 +444,6 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SiteConfig\SMALoss\SMALoss.Settings.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="SiteConfig\SMALoss\Templates\Images\DownardArrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -420,10 +452,6 @@
     </Content>
     <Content Include="SiteConfig\SMALoss\Templates\Images\UpwardArrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\VirtualSportWinLoss\VirtualSportWinLoss.Settings.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
     </Content>
     <Content Include="Templates\SMALossTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -479,9 +507,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="SiteConfig\TurnoverWatcher\Templates\NotificationEmailTemplate.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="SiteConfig\VirtualSportWinLoss\Templates\EmailTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="SiteConfig\WinLossByProducts\Templates\NotificationEmailTemplate.cshtml">

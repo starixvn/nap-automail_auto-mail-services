@@ -16,6 +16,10 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Interface
     /// </summary>
     public interface IExportExcelService
     {
-        bool ProcessDataToSendMail();
+        string DirectoryOfFileName { get; set; }
+
+        string FileName { get; set; }
+
+        void ExportExcel();
     }
 }

@@ -2,17 +2,38 @@
 {
     using System.Collections.Generic;
     using System.Drawing;
+    using Fanex.Common;
     using Fanex.NAPReport.SMALoss.Business.Entities;
+    using Fanex.Service.Core.Service.Implement.Npoi;
+    using Fanex.Service.Core.Service.Interface.Npoi;
     using NPOI.SS.UserModel;
+    using NPOI.XSSF.UserModel;
 
     public class ExportContentCommand : ExportCommandBase
     {
         private IEnumerable<FormattedSMALossGroup> _lossGroup;
+        private INpoiNewFormatCustomCellStyleService _customCellStyleService;
+        private INpoiNewFormatFontService _fontService;
+        private XSSFFont _regularFont;
+        private XSSFFont _regularBoldFont;
+        private XSSFCellStyle _decimalStyle;
+        private XSSFCellStyle _percentStyle;
+        private XSSFCellStyle _textLeftStyle;
+        private XSSFCellStyle _textCenterStyle;
 
         public ExportContentCommand(ExcelDocument excelDocument, IEnumerable<FormattedSMALossGroup> lossGroup)
             : base(excelDocument)
         {
             _lossGroup = lossGroup;
+
+            _customCellStyleService = new NpoiNewFormatCustomCellStyleService(excelDocument.Workbook);
+            _fontService = new NpoiNewFormatFontService(excelDocument.Workbook); 
+            _regularFont = _fontService.RegularFont;
+            _regularBoldFont = _fontService.BlackBoldFont;            
+            _decimalStyle = _customCellStyleService.CreateDecimalNumberStyle(Color.White, _regularFont);
+            _percentStyle = _customCellStyleService.CreatePercentageStyle(Color.White, _regularFont);
+            _textLeftStyle = _customCellStyleService.CreateLeftTextStyle(Color.White, _regularFont);
+            _textCenterStyle = _customCellStyleService.CreateCenterTextStyle(Color.White, _regularFont);
         }
 
         public override void Execute()
@@ -50,9 +71,12 @@
                 ExcelDocument.IncreaseRowIndex();
                 var levelColor = LevelColor(group.LossLevel);
 
-                var style = ExcelDocument.GetCellStyle(FontBoldWeight.Bold, Color.FromArgb(255, 255, 255), Color.FromArgb(0, 0, 0), levelColor, HorizontalAlignment.Left);
-                ExcelDocument.RenderMergeCell(ExcelDocument.CurrentRow, ExcelDocument.CurrentRow, ExcelDocument.CurrentColumn, ExcelDocument.CurrentColumn + ExcelDocument.ExportSettings.MaxNumOfColumns - 1, style);
-                ExcelDocument.RenderCurrentCell(string.Format("{0} ({1})", group.LossLevelRange, group.SMALossItems.Count), style);
+                _regularBoldFont = _fontService.BlackBoldFont;            
+                _regularBoldFont.SetColor(new XSSFColor(levelColor));
+                var textLeftColorStyle = _customCellStyleService.CreateLeftTextStyle(Color.White, _regularBoldFont);
+                
+                ExcelDocument.RenderMergeCell(ExcelDocument.CurrentRow, ExcelDocument.CurrentRow, ExcelDocument.CurrentColumn, ExcelDocument.CurrentColumn + ExcelDocument.ExportSettings.MaxNumOfColumns - 1, textLeftColorStyle);
+                ExcelDocument.RenderCurrentCell(string.Format("{0} ({1})", group.LossLevelRange, group.SMALossItems.Count), textLeftColorStyle);
 
                 foreach (var data in group.SMALossItems)
                 {
@@ -65,32 +89,28 @@
 
         private void LossData(int index, FormattedSMALossItem data)
         {
-            var styleLeft = ExcelDocument.GetCellStyle(FontBoldWeight.Normal, default(Color), Color.FromArgb(0, 0, 0), default(Color), HorizontalAlignment.Left);
-            var styleRight = ExcelDocument.GetCellStyle(FontBoldWeight.Normal, default(Color), Color.FromArgb(0, 0, 0), default(Color), HorizontalAlignment.Right);
-            var styleCenter = ExcelDocument.GetCellStyle(FontBoldWeight.Normal, default(Color), Color.FromArgb(0, 0, 0), default(Color), HorizontalAlignment.Center);
-
-            ExcelDocument.RenderCurrentCell(index, styleCenter);
+            ExcelDocument.RenderCurrentCell(index, _textCenterStyle);
 
             ExcelDocument.IncreaseColumnIndex();
-            ExcelDocument.RenderCurrentCell(data.Username, styleLeft);
+            ExcelDocument.RenderCurrentCell(data.Username, _textLeftStyle);
 
             ExcelDocument.IncreaseColumnIndex();
-            ExcelDocument.RenderCurrentCell(data.Level, styleCenter);
+            ExcelDocument.RenderCurrentCell(data.Level, _textCenterStyle);
 
             ExcelDocument.IncreaseColumnIndex();
-            ExcelDocument.RenderCurrentCell(data.Currency, styleCenter);
+            ExcelDocument.RenderCurrentCell(data.Currency, _textCenterStyle); 
 
             ExcelDocument.IncreaseColumnIndex();
-            ExcelDocument.RenderCurrentCell(data.YesterdayBalance, styleRight);
+            ExcelDocument.RenderCurrentCell(Converter.To<decimal>(data.YesterdayBalance), _decimalStyle);
 
             ExcelDocument.IncreaseColumnIndex();
-            ExcelDocument.RenderCurrentCell(data.TotalBalance, styleRight);
+            ExcelDocument.RenderCurrentCell(Converter.To<decimal>(data.TotalBalance), _decimalStyle);
 
             ExcelDocument.IncreaseColumnIndex();
-            ExcelDocument.RenderCurrentCell(data.MaxLoss, styleRight);
+            ExcelDocument.RenderCurrentCell(Converter.To<decimal>(data.MaxLoss), _decimalStyle);
 
             ExcelDocument.IncreaseColumnIndex();
-            ExcelDocument.RenderCurrentCell(string.Format("{0}%", data.LossPercentage), styleRight);
+            ExcelDocument.RenderCurrentCell(Converter.To<decimal>(data.LossPercentage), _percentStyle); 
 
             ExcelDocument.ResetColumnIndex();
         }

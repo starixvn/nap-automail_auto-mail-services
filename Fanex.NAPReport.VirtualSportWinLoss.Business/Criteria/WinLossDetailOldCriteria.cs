@@ -10,8 +10,7 @@
 namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Criteria
 {
     using System;
-    using Fanex.NAP.Framework.Data;
-
+    using Fanex.Data.Repository;
     /// <summary>
     /// Get win loss detail from DBACC criteria.
     /// </summary>

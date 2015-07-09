@@ -2,15 +2,26 @@
 {
     using System.Drawing;
     using NPOI.SS.UserModel;
+    using Fanex.Service.Core.Service.Interface.Npoi;
+    using NPOI.XSSF.UserModel;
+    using Fanex.Service.Core.Service.Implement.Npoi;
 
     public class ExportHeaderCommand : ExportCommandBase
     {
         private string _title = string.Empty;
+        private INpoiNewFormatFontService _fontService;
+        private INpoiNewFormatCustomCellStyleService _customCellStyleService;
+        private XSSFFont _regularFont;
+        XSSFCellStyle _headerStyle;
 
         public ExportHeaderCommand(ExcelDocument excelDocument, string title)
             : base(excelDocument)
         {
             _title = title;
+            _fontService = new NpoiNewFormatFontService(excelDocument.Workbook);
+            _regularFont = _fontService.RegularFont;            
+            _customCellStyleService = new NpoiNewFormatCustomCellStyleService(excelDocument.Workbook);
+            _headerStyle = _customCellStyleService.CreateCenterTextStyle(Color.FromArgb(60, 94, 165), _fontService.WhiteBoldFont);
         }
 
         public override void Execute()
@@ -27,30 +38,30 @@
             ExcelDocument.IncreaseRowIndex();
             ExcelDocument.IncreaseRowIndex();
 
-            var style = ExcelDocument.GetCellStyle(FontBoldWeight.Normal, Color.FromArgb(60, 94, 165), Color.FromArgb(0, 0, 0));
+            //var style = ExcelDocument.GetCellStyle(FontBoldWeight.Normal, Color.FromArgb(60, 94, 165), Color.FromArgb(0, 0, 0));
 
-            ExcelDocument.RenderCurrentCell("#", style);
-
-            ExcelDocument.IncreaseColumnIndex();
-            ExcelDocument.RenderCurrentCell("SMA Name", style);
+            ExcelDocument.RenderCurrentCell("#", _headerStyle);
 
             ExcelDocument.IncreaseColumnIndex();
-            ExcelDocument.RenderCurrentCell("Level", style);
+            ExcelDocument.RenderCurrentCell("SMA Name", _headerStyle);
 
             ExcelDocument.IncreaseColumnIndex();
-            ExcelDocument.RenderCurrentCell("Currency", style);
+            ExcelDocument.RenderCurrentCell("Level", _headerStyle);
 
             ExcelDocument.IncreaseColumnIndex();
-            ExcelDocument.RenderCurrentCell("Yesterday Balance", style);
+            ExcelDocument.RenderCurrentCell("Currency", _headerStyle);
 
             ExcelDocument.IncreaseColumnIndex();
-            ExcelDocument.RenderCurrentCell("Total Balance", style);
+            ExcelDocument.RenderCurrentCell("Yesterday Balance", _headerStyle);
 
             ExcelDocument.IncreaseColumnIndex();
-            ExcelDocument.RenderCurrentCell("Max Loss", style);
+            ExcelDocument.RenderCurrentCell("Total Balance", _headerStyle);
 
             ExcelDocument.IncreaseColumnIndex();
-            ExcelDocument.RenderCurrentCell("Loss Percentage", style);
+            ExcelDocument.RenderCurrentCell("Max Loss", _headerStyle);
+
+            ExcelDocument.IncreaseColumnIndex();
+            ExcelDocument.RenderCurrentCell("Loss Percentage", _headerStyle);
 
             ExcelDocument.ResetColumnIndex();
         }

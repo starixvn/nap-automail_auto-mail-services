@@ -24,7 +24,7 @@
             Workbook = new XSSFWorkbook();
             ExportSettings = exportSettings;
             _wooksheet = Workbook.CreateSheet(sheetName) as XSSFSheet;
-
+            _wooksheet.CreateFreezePane(0, 4);
             CurrentCell = new Cell();
 
             InitSettings();
@@ -48,7 +48,7 @@
 
         public void Save(string saveFileNamePath)
         {
-            SaveFile.SaveExcelFile(Path.GetDirectoryName(saveFileNamePath), Path.GetFileName(saveFileNamePath), Workbook);
+            SaveFile.SaveExcelFile(Path.GetDirectoryName(saveFileNamePath), Path.GetFileName(saveFileNamePath), Workbook, AppSettings.ExcelPasswordProtected);
         }
 
         public void RenderCurrentCell(object cellValue, XSSFCellStyle cellStyle = null)

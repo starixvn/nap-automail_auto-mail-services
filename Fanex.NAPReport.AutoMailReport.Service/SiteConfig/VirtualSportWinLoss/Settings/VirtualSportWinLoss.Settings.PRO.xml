@@ -1,0 +1,8 @@
+﻿<appSettings> 
+  <add key="DataDirectory" value="D:\_deploy\_Fanex.ExcelFiles\VirtualSportWinLoss" />
+  <add key="ExcelPasswordProtected" value="" />
+  <add key="FunctionId" value="82" />
+  <add key="IsTest" value="true" />
+  <add key="DateStart" value="2015-06-01" />
+  <add key="DateEnd" value="2015-07-08" />
+</appSettings>

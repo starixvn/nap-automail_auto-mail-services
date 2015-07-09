@@ -10,32 +10,28 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
 {
     using System;
     using System.Collections.Generic;
-    using System.Data;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Threading.Tasks;
-    using Fanex.Common;
-    using Fanex.Data;
-    using Fanex.NAP.Framework.Data;
-    using Fanex.NAPReport.VirtualSportWinLoss.Business.Common;
     using Fanex.NAPReport.VirtualSportWinLoss.Business.Criteria;
     using Fanex.NAPReport.VirtualSportWinLoss.Business.Model.Detail;
+    using Fanex.NAPReport.VirtualSportWinLoss.Business.Repositories;
     using Fanex.NAPReport.VirtualSportWinLoss.Business.Resources;
     using Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Interface;
+    using Fanex.Service.Core.Extensions;
 
-    /// <summary>
-    /// Win loss detail of virtual sport service's interface.
-    /// </summary>
-    public class WinLossDetailService : VirtualSportServiceBase, IWinLossDetailService
+    public class WinLossDetailService : IWinLossDetailService
     {
-        private DateTime _moveBetsDay = VirtualSportServiceBase.BalanceUp.MoveBetsDay;
+        private DateTime _moveBetsDay = DateTime.Today;
         private DateTime _firstDayOfMonth = new DateTime(DateTime.Today.AddDays(-1).Year, DateTime.Today.AddDays(-1).Month, 1);
         private DateTime _yesterday = DateTime.Today.AddDays(-1);
+        IRepository _repository;
 
         private Dictionary<int, string> _sportIDsExistOrNot = new Dictionary<int, string>();
 
         public WinLossDetailService()
         {
+            _repository = new Repository();
+            _moveBetsDay = _repository.BalanceUp.MoveBetsDay;
             _sportIDsExistOrNot.Add(180, "Virtual Soccer");
             _sportIDsExistOrNot.Add(181, "Virtual Horse Racing");
             _sportIDsExistOrNot.Add(182, "Virtual Greyhounds");
@@ -45,13 +41,6 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
             _sportIDsExistOrNot.Add(186, "Virtual Tennis");
         }
 
-        /// <summary>
-        /// Gets the win loss detail.
-        /// </summary>
-        /// <returns>Win loss detail.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
         public List<WinLossDetailBySportType> GetWinLossDetail()
         {
             var winlossBySportList = new List<WinLossDetailBySportType>();
@@ -137,12 +126,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
             return winlossBySportList;
         }
 
-        /// <summary>
-        /// Creates the type of the bet i ds by sport.
-        /// </summary>
-        /// <param name="sportType">Type of the sport.</param>
-        /// <returns>List bet type by sport.</returns>
-        internal Dictionary<int, string> CreateBetIDsBySportType(int sportType)
+        private Dictionary<int, string> CreateBetIDsBySportType(int sportType)
         {
             var betTypeListBySportType = new Dictionary<int, string>();
 
@@ -174,7 +158,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
             return betTypeListBySportType;
         }
 
-        internal void AddRestSportNotExist(ref List<WinLossDetailBySportType> winlossBySportList)
+        private void AddRestSportNotExist(ref List<WinLossDetailBySportType> winlossBySportList)
         {
             foreach (var sportIdElement in _sportIDsExistOrNot)
             {
@@ -186,11 +170,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
             }
         }
 
-        /// <summary>
-        /// Creates the virtual soccer bet type list.
-        /// </summary>
-        /// <returns>List soccer bet type.</returns>
-        internal Dictionary<int, string> CreateVirtualSoccerBetTypeList()
+        private Dictionary<int, string> CreateVirtualSoccerBetTypeList()
         {
             var soccerBettypeList = new Dictionary<int, string>();
 
@@ -204,7 +184,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
             return soccerBettypeList;
         }
 
-        internal Dictionary<int, string> CreateWinAndPlaceBetTypeList()
+        private Dictionary<int, string> CreateWinAndPlaceBetTypeList()
         {
             var hourseRacingBettypeList = new Dictionary<int, string>();
 
@@ -215,7 +195,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
             return hourseRacingBettypeList;
         }
 
-        internal Dictionary<int, string> CreateVirtualTennisBetTypeList()
+        private Dictionary<int, string> CreateVirtualTennisBetTypeList()
         {
             var tennisBettypeList = new Dictionary<int, string>();
 
@@ -226,7 +206,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
             return tennisBettypeList;
         }
 
-        internal Dictionary<int, string> CreateSpeedWayBetTypeList()
+        private Dictionary<int, string> CreateSpeedWayBetTypeList()
         {
             var speedWayBettypeList = new Dictionary<int, string>();
 
@@ -234,12 +214,8 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
 
             return speedWayBettypeList;
         }
-
-        /// <summary>
-        /// Adds the rest day not exist.
-        /// </summary>
-        /// <param name="winlossBySport">The win loss by sport.</param>
-        internal void AddRestDayNotExist(ref WinLossDetailBySportType winlossBySport)
+       
+        private void AddRestDayNotExist(ref WinLossDetailBySportType winlossBySport)
         {
             DateTime firstDayOfMonth = new DateTime(DateTime.Today.AddDays(-1).Year, DateTime.Today.AddDays(-1).Month, 1);
 
@@ -261,14 +237,8 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
                 firstDayOfMonth = firstDayOfMonth.AddDays(1);
             }
         }
-
-        /// <summary>
-        /// Determines whether [is date exist] [the specified win loss by sport].
-        /// </summary>
-        /// <param name="winlossBySport">The win loss by sport.</param>
-        /// <param name="inputDate">The input date.</param>
-        /// <returns>Date is exist in report.</returns>
-        internal bool IsDateExist(ref WinLossDetailBySportType winlossBySport, DateTime inputDate)
+       
+        private bool IsDateExist(ref WinLossDetailBySportType winlossBySport, DateTime inputDate)
         {
             for (int i = 0; i < winlossBySport.WinLossByDateList.Count; i++)
             {
@@ -281,11 +251,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
             return false;
         }
 
-        /// <summary>
-        /// Gets the win loss detail by date list.
-        /// </summary>
-        /// <returns>Win loss detail by date.</returns>
-        internal List<WinLossDetailByDate> GetWinLossDetailByDateList()
+        private List<WinLossDetailByDate> GetWinLossDetailByDateList()
         {
             var winlossGroupByBettype = this.GetWinLossDetailByBettypeList();
 
@@ -302,14 +268,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
             return winlossByDateList;
         }
 
-        /// <summary>
-        /// Gets the win loss detail by bet type list.
-        /// </summary>
-        /// <returns>Win loss by bet type.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
-        internal List<WinLossDetailByBettype> GetWinLossDetailByBettypeList()
+        private List<WinLossDetailByBettype> GetWinLossDetailByBettypeList()
         {
             var winlossListFromIBC = new List<WinLossDetailByBettype>();
             var winlossListFromWH = new List<WinLossDetailByBettype>();
@@ -317,7 +276,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
 
             if (this._firstDayOfMonth > this._moveBetsDay && this._yesterday > this._moveBetsDay)
             {
-                winlossListFromWH = this.GetWinLossDetailListByBettype(new WinLossDetailCriteria
+                winlossListFromWH = _repository.GetWinLossDetailListByBettype(new WinLossDetailCriteria
                 {
                     DateStart = this._firstDayOfMonth,
                     DateEnd = this._yesterday
@@ -325,7 +284,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
             }
             else if (this._yesterday == this._moveBetsDay)
             {
-                winlossListFromWH = this.GetWinLossDetailListByBettype(new WinLossDetailOldCriteria
+                winlossListFromWH = _repository.GetWinLossDetailListByBettype(new WinLossDetailOldCriteria
                 {
                     DateStart = this._firstDayOfMonth,
                     DateEnd = this._yesterday
@@ -335,7 +294,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
             {
                 tasks[0] = Task<List<WinLossDetailByBettype>>.Factory.StartNew(() =>
                 {
-                    return this.GetWinLossDetailListByBettype(new WinLossDetailOldCriteria
+                    return _repository.GetWinLossDetailListByBettype(new WinLossDetailOldCriteria
                     {
                         DateStart = this._firstDayOfMonth,
                         DateEnd = this._moveBetsDay
@@ -344,7 +303,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
 
                 tasks[1] = Task<List<WinLossDetailByBettype>>.Factory.StartNew(() =>
                 {
-                    return this.GetWinLossDetailListByBettype(new WinLossDetailCriteria
+                    return _repository.GetWinLossDetailListByBettype(new WinLossDetailCriteria
                     {
                         DateStart = this._moveBetsDay.AddDays(1),
                         DateEnd = this._yesterday
@@ -372,40 +331,6 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
             }).OrderBy(x => x.SportID).ToList();
 
             return winlossListMerge.Concat(totalWinlossByDateList).Distinct().ToList();
-        }
-
-        /// <summary>
-        /// Get list win loss summary by sport type.
-        /// </summary>
-        /// <param name="criteria">Criteria by start and end day.</param>
-        /// <returns>List win loss summary by sport type.</returns>
-        internal List<WinLossDetailByBettype> GetWinLossDetailListByBettype(CriteriaBase criteria)
-        {
-            List<WinLossDetailByBettype> winlossDetailListbySportType = new List<WinLossDetailByBettype>();
-            DataSet dataSet = new DataSet();
-            using (var objDb = new ObjectDb(criteria.GetSettingKey()))
-            {
-                var paramsOuput = criteria.GetSpParams();
-                dataSet = objDb.ExecuteDataSet(paramsOuput);
-                foreach (DataRow row in dataSet.Tables[0].Rows)
-                {
-                    var winlossDetailbySportType = new WinLossDetailByBettype
-                    {
-                        WinLossDate = Converter.To<DateTime>(row["RPTDate"]),
-                        SportID = Converter.To<int>(row["SportID"]),
-                        SportName = Converter.To<string>(row["SportName"]),
-                        BettypeID = Converter.To<int>(row["BetTypeID"]),
-                        BettypeName = Converter.To<string>(row["BetType"]),
-                        BetCount = Converter.To<int>(row["BetCount"]),
-                        TurnOver = Converter.To<double>(row["TurnoverIBC"]),
-                        WinLoss = Converter.To<double>(row["WinLostIBC"])
-                    };
-
-                    winlossDetailListbySportType.Add(winlossDetailbySportType);
-                }
-            }
-
-            return winlossDetailListbySportType;
         }
     }
 }

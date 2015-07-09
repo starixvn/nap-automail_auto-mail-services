@@ -1,5 +1,0 @@
-﻿<appSettings>
-  <add key="Subject" value="Virtual Sports - Daily Win Loss Report on {0}" />
-  <add key="Title" value="IT Team" />
-  <add key="ExportDataDirectory" value="\\10.18.200.202\Web\1.Rome\2.Nap\2.Report\_Fanex.ExcelFiles\VirtualSportWinLoss" />
-</appSettings>

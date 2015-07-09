@@ -20,8 +20,8 @@
   </Function>
 
   <Function Name="WinLoss - Virtual Sport">
-    <Setting Key="Acc_Rpt_WLAutomail_VS_Detail" SpName="Acc_Rpt_WLAutomail_VS_Detail" DbName="DBACC.bodb02.bodbAdminNet" />
-    <Setting Key="Acc_Rpt_WLAutomail_VS_Summary" SpName="Acc_Rpt_WLAutomail_VS_Summary" DbName="DBACC.bodb02.bodbAdminNet" />
+    <Setting Key="Acc_Rpt_WLAutomail_VS_Detail" SpName="Acc_Rpt_WLAutomail_VS_Detail_robert1" DbName="DBACC.bodb02.bodbAdminNet" />
+    <Setting Key="Acc_Rpt_WLAutomail_VS_Summary" SpName="Acc_Rpt_WLAutomail_VS_Summary_robert1" DbName="DBACC.bodb02.bodbAdminNet" />
   </Function>
 
   <Function Name="Win Loss By Products Report">
