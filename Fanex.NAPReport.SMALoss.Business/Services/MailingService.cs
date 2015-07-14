@@ -129,7 +129,7 @@
 
             string content = string.Empty;
             var lossItems = GetReachedSMALoss();
-
+            
             if (lossItems != null && lossItems.Any())
             {
                 content = Razor.Parse(GetTemplate, lossItems);
@@ -165,7 +165,7 @@
             }
             else
             {
-                mailResult.JobStatus = JobStatus.SuccessWithoutSendmail;
+                mailResult.JobStatus = JobStatus.DataIsNotReady;
             }
 
             return mailResult;

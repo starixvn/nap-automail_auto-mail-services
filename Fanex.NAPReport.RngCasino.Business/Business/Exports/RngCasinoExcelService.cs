@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Fanex.NAPReport.RngCasino.Business.Business.Exports.ExcelExport;
-using Fanex.NAPReport.RngCasino.Business.Configuration;
 using Fanex.NAPReport.RngCasino.Business.Entities;
 
 namespace Fanex.NAPReport.RngCasino.Business.Business.Exports
@@ -9,7 +8,7 @@ namespace Fanex.NAPReport.RngCasino.Business.Business.Exports
 	{
 		public void GenerateReport(IList<UserInfo> userInfos, RngCasinoExportSettings rngCasinoExportSettings, string saveFileNamePath)
 		{
-			var excelDocument = new ExcelDocument(rngCasinoExportSettings, RngCasinoSettings.ExcelSheetName);
+            var excelDocument = new ExcelDocument(rngCasinoExportSettings, "WinLoss");
 
 			var exportCommand = new ExportCompositeCommand<IExportCommand>(excelDocument);
 

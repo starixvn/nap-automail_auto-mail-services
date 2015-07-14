@@ -61,6 +61,6 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business
             {
                 return GetSettingValueByKey("Fanex.DW.DailyBettypeWith3rdProducts.IsSingleSport") == "1";
             }
-        }
+        }        
     }
 }

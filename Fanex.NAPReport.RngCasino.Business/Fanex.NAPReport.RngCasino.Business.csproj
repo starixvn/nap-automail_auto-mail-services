@@ -34,16 +34,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Logging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.MailStation.1.0.7.0\lib\net40\Common.Logging.dll</HintPath>
+      <HintPath>..\packages\Fanex.MailStation.1.0.7.2\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Couchbase">
       <HintPath>..\packages\CouchbaseNetClient.1.3.12\lib\net40\Couchbase.dll</HintPath>
     </Reference>
     <Reference Include="EasyNetQ, Version=0.47.10.380, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.MailStation.1.0.7.0\lib\net40\EasyNetQ.dll</HintPath>
+      <HintPath>..\packages\Fanex.MailStation.1.0.7.2\lib\net40\EasyNetQ.dll</HintPath>
     </Reference>
     <Reference Include="Enyim.Caching">
       <HintPath>..\packages\CouchbaseNetClient.1.3.12\lib\net40\Enyim.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.AccountingReports.SqLiteDatabase">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.AccountingReports.SqLiteDatabase.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Caching">
       <HintPath>..\packages\Fanex.Caching.1.0.405\lib\net40\Fanex.Caching.dll</HintPath>
@@ -61,8 +64,7 @@
       <HintPath>..\packages\Fanex.MailDeliver.MailClient.1.0.0.2\lib\net40\Fanex.MailDeliver.MailClient.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.MailDelivery.Client, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Fanex.MailStation.1.0.7.0\lib\net40\Fanex.MailDelivery.Client.dll</HintPath>
+      <HintPath>..\packages\Fanex.MailStation.1.0.7.2\lib\net40\Fanex.MailDelivery.Client.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.NAP.Framework">
       <HintPath>..\packages\Fanex.NAP.Framework.1.0.0.3\lib\net40\Fanex.NAP.Framework.dll</HintPath>
@@ -120,10 +122,10 @@
       <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="Quartz, Version=2.2.4.400, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.MailStation.1.0.7.0\lib\net40\Quartz.dll</HintPath>
+      <HintPath>..\packages\Fanex.MailStation.1.0.7.2\lib\net40\Quartz.dll</HintPath>
     </Reference>
     <Reference Include="RabbitMQ.Client, Version=3.4.3.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.MailStation.1.0.7.0\lib\net40\RabbitMQ.Client.dll</HintPath>
+      <HintPath>..\packages\Fanex.MailStation.1.0.7.2\lib\net40\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="RazorEngine, Version=3.3.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
       <HintPath>..\packages\RazorEngine.3.3.0\lib\net40\RazorEngine.dll</HintPath>
@@ -137,6 +139,9 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.66.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <HintPath>..\_Dependencies\SQLite\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -163,13 +168,15 @@
     <Compile Include="Business\Exports\IRngCasinoExcelService.cs" />
     <Compile Include="Business\Exports\RngCasinoExcelService.cs" />
     <Compile Include="Business\Testing.cs" />
-    <Compile Include="Configuration\RngCasinoSettings.cs" />
+    <Compile Include="AppSettings.cs" />
     <Compile Include="Criteria\CustomerWinLossCriteria.cs" />
     <Compile Include="Criteria\GetCurrencyListCriteria.cs" />
     <Compile Include="Entities\Currency.cs" />
     <Compile Include="Entities\MailAttachment.cs" />
     <Compile Include="Entities\MailSend.cs" />
     <Compile Include="Entities\UserInfo.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
     <Compile Include="ServiceFactory\RngCasinoServiceFactory.cs" />
     <Compile Include="Helper\Implement\FileHelper.cs" />
     <Compile Include="Helper\Implement\NumberExtension.cs" />
@@ -181,9 +188,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

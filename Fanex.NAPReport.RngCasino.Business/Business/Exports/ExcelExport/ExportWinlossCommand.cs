@@ -1,21 +1,39 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using Fanex.NAPReport.RngCasino.Business.Configuration;
 using Fanex.NAPReport.RngCasino.Business.Entities;
 using Fanex.NAPReport.RngCasino.Business.Helper.Implement;
 using NPOI.SS.UserModel;
+using Fanex.Service.Core.Service.Interface.Npoi;
 using NPOI.XSSF.UserModel;
+using Fanex.Service.Core.Service.Implement.Npoi;
 
 namespace Fanex.NAPReport.RngCasino.Business.Business.Exports.ExcelExport
 {
 	public class ExportWinLossCommand : ExportCommandBase
 	{
 		private readonly IList<UserInfo> _userInfos;
+        private INpoiNewFormatFontService _fontService;
+        private INpoiNewFormatCustomCellStyleService _customCellStyleService;
+        private XSSFFont _regularFont;
+
+        XSSFCellStyle _headerStyle;
+        private XSSFCellStyle _decimalStyle;
+        private XSSFCellStyle _textCenterStyle;
+        private XSSFCellStyle _textRightStyle;
 
 		public ExportWinLossCommand(ExcelDocument excelDocument, IList<UserInfo> userInfos)
 			: base(excelDocument)
 		{
 			_userInfos = userInfos;
+
+            _fontService = new NpoiNewFormatFontService(excelDocument.Workbook);
+            _regularFont = _fontService.RegularFont;            
+            _customCellStyleService = new NpoiNewFormatCustomCellStyleService(excelDocument.Workbook);
+
+            _headerStyle = _customCellStyleService.CreateCenterTextStyle(Color.FromArgb(60, 94, 165), _fontService.WhiteBoldFont);
+            _decimalStyle = _customCellStyleService.CreateDecimalNumberStyle(Color.White, _regularFont);
+            _textCenterStyle = _customCellStyleService.CreateCenterTextStyle(Color.White, _regularFont);
+            _textRightStyle = _customCellStyleService.CreateRightTextStyle(Color.White, _regularFont);
 		}
 
 		public override void Execute()
@@ -26,21 +44,19 @@ namespace Fanex.NAPReport.RngCasino.Business.Business.Exports.ExcelExport
 
 		private void RenderWinLossHeader()
 		{
-			var style = ExcelDocument.GetCellStyle(FontBoldWeight.Bold, Color.FromArgb(0, 0, 255), Color.FromArgb(255, 255, 255), Color.FromArgb(0, 0, 0));
-
-			ExcelDocument.RenderCurrentCell("Index", style);
+            ExcelDocument.RenderCurrentCell("Index", _headerStyle);
 
 			ExcelDocument.IncreaseColumnIndex();
-			ExcelDocument.RenderCurrentCell("Member", style);
+            ExcelDocument.RenderCurrentCell("Member", _headerStyle);
 
 			ExcelDocument.IncreaseColumnIndex();
-			ExcelDocument.RenderCurrentCell("Agency", style);
+            ExcelDocument.RenderCurrentCell("Agency", _headerStyle);
 
 			ExcelDocument.IncreaseColumnIndex();
-			ExcelDocument.RenderCurrentCell(string.Format("Winloss Amount in {0}", RngCasinoSettings.BaseCurrency), style);
+            ExcelDocument.RenderCurrentCell(string.Format("Winloss Amount in {0}", AppSettings.BaseCurrency), _headerStyle);
 
 			ExcelDocument.IncreaseColumnIndex();
-			ExcelDocument.RenderCurrentCell("Winloss Amount in user currency (UserCurrency)", style);
+            ExcelDocument.RenderCurrentCell("Winloss Amount in user currency (UserCurrency)", _headerStyle);
 		}
 
 		private void RenderWinLossBody()
@@ -58,22 +74,21 @@ namespace Fanex.NAPReport.RngCasino.Business.Business.Exports.ExcelExport
 		private void RenderWinLossRow(int index, UserInfo userInfo)
 		{
 			var styleCenter = ExcelDocument.GetCellStyle(FontBoldWeight.None, borderColor: Color.FromArgb(0, 0, 0));
-
 			var styleRight = ExcelDocument.GetCellStyle(FontBoldWeight.None, borderColor: Color.FromArgb(0, 0, 0), horizontalAlignment: HorizontalAlignment.Right);
 
-			ExcelDocument.RenderCurrentCell(index + 1, styleCenter);
+            ExcelDocument.RenderCurrentCell(index + 1, _textCenterStyle);
 
 			ExcelDocument.IncreaseColumnIndex();
-			ExcelDocument.RenderCurrentCell(userInfo.Member, styleCenter);
+            ExcelDocument.RenderCurrentCell(userInfo.Member, _textCenterStyle);
 
 			ExcelDocument.IncreaseColumnIndex();
-			ExcelDocument.RenderCurrentCell(userInfo.Agency, styleCenter);
+            ExcelDocument.RenderCurrentCell(userInfo.Agency, _textCenterStyle);
 
 			ExcelDocument.IncreaseColumnIndex();
-			ExcelDocument.RenderCurrentCell(NumberExtension.WinLossFormat(userInfo.WinlossBaseCurrency, 2), styleRight);
+            ExcelDocument.RenderCurrentCell(userInfo.WinlossBaseCurrency, _decimalStyle);
 
 			ExcelDocument.IncreaseColumnIndex();
-			ExcelDocument.RenderCurrentCell(string.Format("{0} ({1})", NumberExtension.WinLossFormat(userInfo.Winloss, 2), userInfo.CurrencyName), styleRight);
+            ExcelDocument.RenderCurrentCell(string.Format("{0} ({1})", NumberExtension.WinLossFormat(userInfo.Winloss, 2), userInfo.CurrencyName), _textRightStyle);
 		}
 	}
 }

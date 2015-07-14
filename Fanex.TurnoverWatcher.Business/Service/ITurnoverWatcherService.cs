@@ -5,6 +5,8 @@
 
     public interface ITurnoverWatcherService
     {
-        List<TurnoverInfo> ProcessTurnoverWatcher();
+        List<TurnoverInfo> GetSMATurnover();
+
+        Result RemoveNotifiedCustomer(List<TurnoverInfo> notifiedCustomer, int sendMailLevel);
     }
 }

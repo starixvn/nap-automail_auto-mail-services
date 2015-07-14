@@ -7,19 +7,22 @@
 
     public class TurnoverWatcherService : ITurnoverWatcherService
     {
-        private ITurnoverWatcherRepository _repository;
+        private IRepository _repository;
 
         public TurnoverWatcherService()
         {
-            _repository = new TurnoverWatcherRepository();
+            _repository = new Repository();
         }
 
         public Result RemoveNotifiedCustomer(List<TurnoverInfo> notifiedCustomer, int sendMailLevel)
         {
-            return _repository.RemoveNotifiedCustomer(notifiedCustomer, sendMailLevel);
+            Result result = new Result();
+            result = _repository.RemoveNotifiedCustomer(notifiedCustomer, sendMailLevel);
+
+            return result;
         }
 
-        public List<TurnoverInfo> ProcessTurnoverWatcher()
+        public List<TurnoverInfo> GetSMATurnover()
         {
             var turnoverInfo = _repository.GetTurnOverInfo()
                 .OrderBy(x => x.CustomerInfo.PercentageUsed)

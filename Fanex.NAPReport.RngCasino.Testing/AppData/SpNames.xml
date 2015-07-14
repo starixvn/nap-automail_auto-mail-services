@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<Functions>
-  <Function Name="RNG Casino - Get WinLoss">
-    <Setting Key="RNGCasinoCustomerWinLoss" SpName="Acc_Rpt_RNGCasinoAutomail" DbName="DBRPT.bodb02.bodbAdminNet"></Setting>
-    <Setting Key="NAP_ExchangeCurrencySel" SpName="NAP_ExchangeCurrencySel" DbName="DBAGE.bodb02.bodbAdminNet"></Setting>
-  </Function>
-</Functions>

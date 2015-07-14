@@ -4,6 +4,7 @@ using System.ServiceProcess;
 using System.Timers;
 using Fanex.Data.Configuration;
 using Fanex.MailDelivery.Client.Handlers;
+using Fanex.Service.Core.Extensions;
 
 namespace Fanex.DW.AutoMailReport.Service
 {
@@ -20,11 +21,18 @@ namespace Fanex.DW.AutoMailReport.Service
 
         protected override void OnStart(string[] args)
         {
-            Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
+            try
+            {
+                Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
 
-            DbSettingProviderManager.Current.Start();
-            
-            MailClientHandler.Start();
+                DbSettingProviderManager.Current.Start();
+
+                MailClientHandler.Start();
+            }
+            catch (Exception ex)
+            {
+                LogExtensions.ExceptionHandler(ex);
+            }
         }
 
         protected override void OnStop()

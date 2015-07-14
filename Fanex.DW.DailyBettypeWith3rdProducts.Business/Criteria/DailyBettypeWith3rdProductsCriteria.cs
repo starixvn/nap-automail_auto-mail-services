@@ -13,7 +13,7 @@
     {
         public DailyBettypeWith3rdProductsCriteria()
         {
-            var now = DateTime.Now;
+            var now = DateTime.Today;
             int year = now.Year;
             int month = now.Month;
 

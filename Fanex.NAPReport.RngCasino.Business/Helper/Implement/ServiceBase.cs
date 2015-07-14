@@ -10,6 +10,7 @@ using Fanex.Common.Helper;
 using Fanex.NAP.Framework.Data;
 using Fanex.NAPReport.RngCasino.Business.Helper.Interface;
 using Fanex.Service.Core.MailService;
+using Fanex.Service.Core.Extensions;
 
 namespace Fanex.NAPReport.RngCasino.Business.Helper.Implement
 {
@@ -39,7 +40,7 @@ namespace Fanex.NAPReport.RngCasino.Business.Helper.Implement
         /// <param name="ex">Type exception.</param>
         public void HandleException(Exception ex)
         {
-            LogHelper.Log(ex);
+            LogExtensions.ExceptionHandler(ex);
         }
 
         /// <summary>

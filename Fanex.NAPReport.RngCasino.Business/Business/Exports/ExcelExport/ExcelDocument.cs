@@ -1,6 +1,5 @@
 ﻿using System.Drawing;
 using System.IO;
-using Fanex.NAPReport.RngCasino.Business.Configuration;
 using Fanex.Service.Core.Extensions;
 using Fanex.Service.Core.Model;
 using Fanex.Service.Core.Utilities;
@@ -34,7 +33,7 @@ namespace Fanex.NAPReport.RngCasino.Business.Business.Exports.ExcelExport
 			Workbook = new XSSFWorkbook();
 			RngCasinoExportSettings = rngCasinoExportSettings;
 			_wooksheet = Workbook.CreateSheet(sheetName) as XSSFSheet;
-
+            _wooksheet.CreateFreezePane(0, 2);
 			CurrentCell = new Cell();
 
 			InitSettings();
@@ -42,7 +41,7 @@ namespace Fanex.NAPReport.RngCasino.Business.Business.Exports.ExcelExport
 
 		public void Save(string saveFileNamePath)
 		{
-			SaveFile.SaveExcelFile(Path.GetDirectoryName(saveFileNamePath), Path.GetFileName(saveFileNamePath), Workbook, RngCasinoSettings.ExcelPassword);
+            SaveFile.SaveExcelFile(Path.GetDirectoryName(saveFileNamePath), Path.GetFileName(saveFileNamePath), Workbook, AppSettings.ExcelPasswordProtected);
 		}
 
 		public void RenderCurrentCell(object cellValue, XSSFCellStyle cellStyle = null)

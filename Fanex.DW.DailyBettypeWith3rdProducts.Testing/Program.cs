@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using Fanex.Data.Configuration;
-using Fanex.DW.DailyBettypeWith3rdProducts.Business.Resource;
-using Fanex.DW.DailyBettypeWith3rdProducts.Business.Service;
-using Fanex.MailDelivery.Client.Models;
 using Fanex.DW.DailyBettypeWith3rdProducts.Business.Jobs;
-using Fanex.DW.DailyBettypeWith3rdProducts.Business.Model;
+using Fanex.MailDelivery.Client.Handlers;
 
 namespace Fanex.DW.DailyBettypeWith3rdProducts.Testing
 {
@@ -16,13 +12,17 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Testing
         {
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
             DbSettingProviderManager.Current.Start();
+            MailClientHandler.Start();
 
             Console.WriteLine("Running DailyBettypeWith3rdProductsService");
 
-            IDailyBettypeWith3rdProductJob job = new DailyBettypeWith3rdProductJob();
+            var job = new DailyBettypeWith3rdProductJob();
 
             string subject = "Bettype With 3rd Products";
-            job.ProcessExportDailyBettypeWith3rdProducts(true, subject);
+            job.ExportBettypeWith3rdProducts(true, subject);
+
+            MailClientHandler.Stop();
+
             Console.WriteLine("Done at " + DateTime.Now.ToString());
             Console.ReadLine();
         }

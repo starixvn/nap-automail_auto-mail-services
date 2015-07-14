@@ -10,14 +10,14 @@ using System.IO;
 using Fanex.Common;
 using Fanex.NAPReport.RngCasino.Business.Business.Exports;
 using Fanex.NAPReport.RngCasino.Business.Business.Exports.ExcelExport;
-using Fanex.NAPReport.RngCasino.Business.Configuration;
 using Fanex.NAPReport.RngCasino.Business.Criteria;
 using Fanex.NAPReport.RngCasino.Business.Entities;
 using Fanex.NAPReport.RngCasino.Business.Helper.Implement;
 using Fanex.Service.Core.MailService;
-using Fanex.Service.Core.Utilities;
 using RazorEngine;
-using Fanex.MailDelivery.Client.Models;
+using Fanex.Service.Core.Constants;
+using Fanex.NAPReport.RngCasino.Business.Repositories;
+using Fanex.Service.Core.Model;
 using Fanex.MailDelivery.Client.Handlers;
 
 namespace Fanex.NAPReport.RngCasino.Business.Business
@@ -28,6 +28,9 @@ namespace Fanex.NAPReport.RngCasino.Business.Business
 		private readonly RngCasinoExportSettings _rngCasinoExportSettings;
 		private readonly string _templateBaseDir;
 		private string _subject;
+        private IRepository _repository;
+        private IMailStationService _mailStation;
+        private MailInfo _mailInfo;
 
 
 		public CustomerWinLossService(IRngCasinoExcelService excelService, RngCasinoExportSettings rngCasinoExportSettings, string templateBaseDir = "")
@@ -35,11 +38,14 @@ namespace Fanex.NAPReport.RngCasino.Business.Business
 			_excelService = excelService;
 			_rngCasinoExportSettings = rngCasinoExportSettings;
 			_templateBaseDir = templateBaseDir;
+            _repository = new Repository();
+            _mailStation = new MailStationService();
+            _mailInfo = new MailInfo();
 		}
 
 		public override bool IsActive()
 		{
-			return RngCasinoSettings.IsActive;
+            return AppSettings.IsActive;
 		}
 
 		public override bool NotifyMailVipGroup()
@@ -50,20 +56,29 @@ namespace Fanex.NAPReport.RngCasino.Business.Business
                 
 				var dateTimeFormat = "{0:yyyy-MM-dd HH:mm}";
 				var toDate = string.Format(dateTimeFormat, DateTime.Now);
-				var fromDate = string.Format(dateTimeFormat, DateTime.Now.AddMinutes(-Interval / 1000 / 60 - RngCasinoSettings.ConsoleTestAddedDeltaMinute));
+                var fromDate = _repository.GetLastTime();
 
-				var userInfos = GetCustomerWinLoss(Converter.ToDateTime(fromDate), Converter.ToDateTime(toDate), RngCasinoSettings.WinLoss);
+                var userInfos = GetCustomerWinLoss(Converter.ToDateTime(fromDate), Converter.ToDateTime(toDate), AppSettings.WinLoss);
 				if (userInfos != null && userInfos.Count > 0)
 				{
 					var body = GetMailVipGroupBody(userInfos);
 
-					var fileNamePath = Path.Combine(RngCasinoSettings.ExportDataDirectoryWithYearMonth,
-														RngCasinoSettings.ExcelFileName + "_" + DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss") + ".xlsx");
+                    var fileNamePath = Path.Combine(AppSettings.ExportDataDirectoryWithYearMonthDay,
+                                                        "RNG_Casino_WinLoss" + "_" + DateTime.Now.ToString(DateTimeFormatConstants.YEAR_MONTH_DATE_MINUTE) + ".xlsx");                   
+
 					_excelService.GenerateReport(userInfos, _rngCasinoExportSettings, fileNamePath);
 
-					_subject = string.Format(RngCasinoSettings.Subject, RngCasinoSettings.BaseCurrency,
-													NumberExtension.WinLossFormat(RngCasinoSettings.WinLoss, 0), fromDate, toDate);
-					result = EmailHelper.SendMail(RngCasinoSettings.FunctionIdVipGroup, _subject, RngCasinoSettings.Title, body, fileNamePath);
+                    var fileNamesPath = new List<string>();
+                    fileNamesPath.Add(fileNamePath);
+                    _mailInfo.FileName = Path.GetFileName(fileNamePath);
+                    _mailInfo.FileNamesPath = fileNamesPath;
+
+                    var mail = _mailStation.CreateMailCustomContentWithAttachedFile(_mailInfo, body);
+                    mail.MailingListId = AppSettings.FunctionIdVipGroup;
+                    MailClientHandler.SendMail(mail);
+                    _repository.UpdateLastTime();
+
+                    result = true;
 				}           
 			}
 			catch (Exception ex)
@@ -76,22 +91,16 @@ namespace Fanex.NAPReport.RngCasino.Business.Business
 
 		public override void NotifyMailNormalGroup()
 		{
-			if (RngCasinoSettings.FunctionIdNormalGroup != -1)
+            if (AppSettings.FunctionIdNormalGroup > 0)
 			{
-				EmailHelper.SendMail(RngCasinoSettings.FunctionIdNormalGroup, _subject, RngCasinoSettings.Title, GetMailNormalGroupBody());                
+                _mailStation.SendFunctionMailWithNotification(AppSettings.FunctionIdNormalGroup, _mailInfo);
 			}
 		}
 
 		private string GetMailVipGroupBody(IList<UserInfo> userInfos)
 		{
-			var template = File.ReadAllText(Path.Combine(_templateBaseDir, @"Templates\Template.Vip.cshtml"));
+            var template = File.ReadAllText(Path.Combine(_templateBaseDir, @"SiteConfig\RNGCasinoWinLoss\Templates\RNGCasinoWinLossEmailTemplate.cshtml"));
 			return Razor.Parse(template, userInfos);
-		}
-
-		private string GetMailNormalGroupBody()
-		{
-			var template = File.ReadAllText(Path.Combine(_templateBaseDir, @"Templates\Template.Normal.cshtml"));
-			return Razor.Parse(template);
 		}
 
 		private List<UserInfo> GetCustomerWinLoss(DateTime fromDate, DateTime toDate, decimal winlost)

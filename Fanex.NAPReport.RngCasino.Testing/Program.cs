@@ -3,10 +3,10 @@
 using System;
 using Fanex.Data.Configuration;
 using Fanex.MailDelivery.Client.Handlers;
+using Fanex.NAPReport.RngCasino.Business;
 using Fanex.NAPReport.RngCasino.Business.Business;
 using Fanex.NAPReport.RngCasino.Business.Business.Exports;
 using Fanex.NAPReport.RngCasino.Business.Business.Exports.ExcelExport;
-using Fanex.NAPReport.RngCasino.Business.Configuration;
 using Fanex.Service.Core.Configuration;
 
 namespace Fanex.NAPReport.RngCasino.Testing
@@ -20,9 +20,9 @@ namespace Fanex.NAPReport.RngCasino.Testing
 				DbSettingProviderManager.Current.Start();
 
 				var configurationParser = new ConfigurationParser(AppDomain.CurrentDomain.BaseDirectory +
-																@"\Configuration\RngCasino.Settings.xml");
+                                                                @"\SiteConfig\RNGCasinoWinLoss\Settings\RngCasino.Settings.xml");
 
-				configurationParser.Parse<RngCasinoSettings>();
+                configurationParser.Parse<AppSettings>();
 
 				var excelService = new RngCasinoExcelService();
 				var exportSettings = new RngCasinoExportSettings();

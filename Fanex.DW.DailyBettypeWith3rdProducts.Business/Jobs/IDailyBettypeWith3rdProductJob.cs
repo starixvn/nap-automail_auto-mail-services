@@ -14,12 +14,13 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Jobs
     using System.Text;
     using Fanex.MailDelivery.Client.Messages;
     using Fanex.MailDelivery.Client.Models;
+    using Fanex.Service.Core.Model;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public interface IDailyBettypeWith3rdProductJob
     {
-        Mail ProcessExportDailyBettypeWith3rdProducts(bool IsDaily, string Subject);
+        MailResult ExportBettypeWith3rdProducts(bool IsDaily, string Subject);
     }
 }

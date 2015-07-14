@@ -23,12 +23,10 @@ namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.NAPReport
     public class CreditMovement : JobBase
     {
         private ICreditMovementService _creditMovementService;
-        private IMailService _mailService;
 
         public CreditMovement()
         {
             _creditMovementService = new CreditMovementService();
-            _mailService = new MailService();
         }
 
         protected override JobResultMessage Run(Schedule schedule, IJobExecutionContext jobContext)
