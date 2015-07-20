@@ -1,0 +1,8 @@
+﻿<Settings>
+  <Setting key="IsActive" value="true" />
+  <Setting key="IsTesting" value="false" />
+  <Setting key="IsUpdateStatusSendingEmail" value="false" />
+  <Setting key="ExcelPasswordProtected" value="" />
+  <Setting key="LicenseesDualLanguage" value="haifa,bodog" />
+  <Setting key="ExportDataDirectory" value="\\10.40.40.52\NAP_Reports\UAT\NegativeBalanceByMatch" />
+</Settings>

@@ -30,5 +30,5 @@
 
   <Function Name="RNG Casino - Get WinLoss">
     <Setting Key="RNGCasinoCustomerWinLoss" SpName="Acc_Rpt_RNGCasinoAutomail_robert" DbName="DBACC.bodb02.bodbAdminNet" Timeout="0" />
-  </Function>
+  </Function>  
 </Functions>

@@ -204,6 +204,9 @@
     <Content Include="App_Data\PRO\DBLOG.bodb_CustomerLog.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="App_Data\PRO\DBTXN.bodb02.bodbAdminNet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="App_Data\UAT\DBAGE.bodb_AGE.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -211,6 +214,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Data\UAT\DBEXT.bodb02.bodbAdminNet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\UAT\DBTXN.bodb02.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SiteConfig\BADailyWinLoss\Settings\BADailyWinLoss.Settings.DEV.xml">
@@ -291,6 +297,30 @@
     </Content>
     <Content Include="SiteConfig\HorseRacingReport\Settings\HorseRacingReport.Settings.DEV.xml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\NegativeBalanceByMatch\Settings\NegativeBalanceByMatch.Settings.UAT.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\NegativeBalanceByMatch\Settings\NegativeBalanceByMatch.Settings.PRO.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\NegativeBalanceByMatch\Settings\NegativeBalanceByMatch.Settings.DEV.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\NegativeBalanceByMatch\Settings\LicenseeFunctionMap.PRO.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\NegativeBalanceByMatch\Settings\LicenseeFunctionMap.UAT.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\NegativeBalanceByMatch\Settings\LicenseeFunctionMap.Local.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\NegativeBalanceByMatch\Settings\LicenseeFunctionMap.DEV.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\NegativeBalanceByMatch\Settings\NegativeBalanceByMatch.Settings.Local.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SiteConfig\RNGCasinoWinLoss\Settings\RngCasino.Settings.UAT.xml">
@@ -447,13 +477,6 @@
     <Content Include="SiteConfig\CreditMovement\Settings\CreditMovement.Settings.DEV.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SiteConfig\NegativeBalanceByMatch\LicenseeFunctionMap.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\NegativeBalanceByMatch\NegativeBalanceByMatch.Settings.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Fanex.NAPReport.AutoMailReport.Service.Local.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
@@ -507,18 +530,6 @@
     <Content Include="SiteConfig\GameWinLimitControl\Templates\GameWinLimitControlEmailTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="SiteConfig\NegativeBalanceByMatch\Templates\DualLanguageTemplate.Normal.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="SiteConfig\NegativeBalanceByMatch\Templates\SingleLanguageTemplate.Normal.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="SiteConfig\NegativeBalanceByMatch\Templates\DualLanguageTemplate.Vip.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="SiteConfig\NegativeBalanceByMatch\Templates\SingleLanguageTemplate.Vip.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <Content Include="SiteConfig\RNGCasinoWinLoss\SQLite\AutoMail-RNGCasinoWinLoss.s3db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -526,6 +537,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SiteConfig\SMAReport\Templates\SMAReportTemplate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\NegativeBalanceByMatch\Templates\EmailTemplateDualLanguage.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\NegativeBalanceByMatch\Templates\EmailTemplateSingleLanguage.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="SiteConfig\TurnoverWatcher\app.config">

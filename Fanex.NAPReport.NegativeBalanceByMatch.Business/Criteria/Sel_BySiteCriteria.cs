@@ -3,15 +3,8 @@
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
-
-using Fanex.NAPReport.NegativeBalanceByMatch.Business.Configuration;
-
 namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Criteria
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
@@ -21,19 +14,12 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Criteria
     {
         public string Site { get; set; }
 
-        public bool IsTest { get { return NegativeBalanceByMatchSettings.IsTesting; } }
+        public bool IsTest { get { return AppSettings.IsTesting; } }
 
         [SpParam(Ignored = true)]
         public string SpName
         {
             get { return GetSettingKey(); }
-        }
-
-        [SpParam(Ignored = true)]
-        public object Result
-        {
-            get;
-            set;
         }
         
         public override bool IsValid()

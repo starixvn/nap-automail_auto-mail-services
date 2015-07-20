@@ -22,7 +22,7 @@ namespace Fanex.NAPReport.RngCasino.Business.Business
                 Subject = "Subject",
                 Title = "Title",
                 Body = "bodyContent - RNG Casino",
-                MailingListId = 91
+                MailingListId = AppSettings.FunctionIdVipGroup
             };
 
             MailClientHandler.SendMail(mail);

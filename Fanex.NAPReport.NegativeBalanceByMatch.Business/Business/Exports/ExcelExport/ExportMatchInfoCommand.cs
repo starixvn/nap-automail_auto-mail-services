@@ -1,4 +1,8 @@
 ﻿using Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities;
+using Fanex.Service.Core.Service.Interface.Npoi;
+using NPOI.XSSF.UserModel;
+using System.Drawing;
+using Fanex.Service.Core.Service.Implement.Npoi;
 
 namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport
 {

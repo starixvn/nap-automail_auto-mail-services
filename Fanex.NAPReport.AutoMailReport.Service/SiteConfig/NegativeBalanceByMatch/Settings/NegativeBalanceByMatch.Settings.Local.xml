@@ -1,0 +1,8 @@
+﻿<Settings>
+  <Setting key="IsActive" value="true" />
+  <Setting key="IsTesting" value="true" />
+  <Setting key="IsUpdateStatusSendingEmail" value="false" />
+  <Setting key="ExcelPasswordProtected" value="" />
+  <Setting key="LicenseesDualLanguage" value="haifa,bodog" />
+  <Setting key="ExportDataDirectory" value="\\10.18.200.202\Web\1.Rome\2.Nap\2.Report\_Fanex.ExcelFiles\NegativeBalanceByMatch" />
+</Settings>

@@ -5,68 +5,64 @@ using System.IO;
 using System.Linq;
 using Fanex.Common;
 using Fanex.Data;
+using Fanex.MailDelivery.Client.Handlers;
 using Fanex.NAPReport.Business.Criteria;
+using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports;
 using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport;
 using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Licensee;
-using Fanex.NAPReport.NegativeBalanceByMatch.Business.Configuration;
 using Fanex.NAPReport.NegativeBalanceByMatch.Business.Criteria;
 using Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities;
 using Fanex.NAPReport.NegativeBalanceByMatch.Business.Helper.Implement;
-using Fanex.NAPReport.NegativeBalanceByMatch.Business.Repositories;
+using Fanex.Service.Core.Constants;
 using Fanex.Service.Core.Enums;
 using Fanex.Service.Core.Extensions;
 using Fanex.Service.Core.MailService;
+using Fanex.Service.Core.Model;
 using Newtonsoft.Json;
 using RazorEngine;
 using RemotingRef;
 
 namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 {
-	public class NegativeBalanceByMatchService : ServiceBase, ICommonTimerFunctionMailService
+    public class NegativeBalanceByMatchService : ServiceBase, IStandaloneTimerFunctionMailService
 	{
-		private readonly INegativeBalanceByMatchRepository _repository;
-		private readonly ILicenseeService _licenseeService;
-		private readonly MailService _mailService;
+		private readonly ILicenseeService _licenseeService;		
 		private readonly string _templateBaseDir;
 		private string _logIdUpdate = string.Empty;
 
-		// State data
-		private List<object> _logData = new List<object>();
+		// State data		
 		private IDictionary<LicenseeFunction, string> _sentLicenseeFunctionToSubject;
 
-		public NegativeBalanceByMatchService(ILicenseeService licenseeService, MailService mailService, string templateBaseDir = "")
-		{
-			_licenseeService = licenseeService;
-			_mailService = mailService;
-			_templateBaseDir = templateBaseDir;
-			_repository = new NegativeBalanceByMatchRepository();
+        private IMailStationService _mailStation;
+        private MailInfo _mailInfo;
 
+		public NegativeBalanceByMatchService(ILicenseeService licenseeService, string templateBaseDir = "")
+		{
+			_licenseeService = licenseeService;			
+			_templateBaseDir = templateBaseDir;
+            _mailStation = new MailStationService();
+            _mailInfo = new MailInfo();
 			_sentLicenseeFunctionToSubject = new Dictionary<LicenseeFunction, string>();
 		}
 
 		public override bool IsActive()
 		{
-			return NegativeBalanceByMatchSettings.IsActive;
+			return AppSettings.IsActive;
 		}
 
 		public override void ResetState()
 		{
-			_logData = new List<object>();
 			_sentLicenseeFunctionToSubject = new Dictionary<LicenseeFunction, string>();
 		}
 
 		public override bool NotifyMailVipGroup()
 		{
-			DateTime curDateTime = DateTime.UtcNow;
+			DateTime curDateTime = DateTime.Now;
 			ExportSettings exportSettings = new ExportSettings();
 
 			foreach (LicenseeFunction licenseeFunction in _licenseeService.GetLicenseeFunctions())
 			{
-				string licenseeName = licenseeFunction.LicenseeName;
-
-				int timezone = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours;
-				string subject = licenseeName.ToUpper() + " - " +
-								string.Format(NegativeBalanceByMatchSettings.Subject, DateTime.Now, timezone > 0 ? ("+" + timezone) : timezone.ToString());
+				string licenseeName = licenseeFunction.LicenseeName;				
 
 				int taskId = 0;
 				try
@@ -75,26 +71,34 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 
 					if (matches != null && matches.Count > 0)
 					{
-						taskId = _repository.InsertTask(new NegativeBalanceTaskInfo { TaskStatus = Status.Running });
-
-						_logData.Add(new Dictionary<object, object> { { "DataSendEmail", matches } });
 
 						string body = GetMailVipGroupBody(licenseeName, matches);
-						var result = SendEmail(licenseeFunction, subject, NegativeBalanceByMatchSettings.Title, body, NegativeBalanceByMatchSettings.AttachReport,
-												matches, curDateTime, exportSettings, taskId);
+                        
+                        INegativeBalanceByMatchExcelService excel = new NegativeBalanceByMatchExcelService();
+                        string fileNamePath = Path.Combine(AppSettings.ExportDataDirectoryWithYearMonthDay, "NegativeBalanceByMatch_" + licenseeName + "_" + curDateTime.ToString(DateTimeFormatConstants.YEAR_MONTH_DATE_MINUTE) + ".xlsx");
+                        excel.GenerateReportForLicensee(licenseeName, matches, exportSettings, fileNamePath);
+                        
+                        var fileNamesPath = new List<string>();
+                        fileNamesPath.Add(fileNamePath);
+                        
+                        _mailInfo = new MailInfo()
+                        {
+                            FileName = Path.GetFileName(fileNamePath),
+                            FileNamesPath = fileNamesPath
+                        };
 
-						if (result)
-						{
-							_sentLicenseeFunctionToSubject.Add(licenseeFunction, subject);
+                        var mail = _mailStation.CreateMailCustomContentWithAttachedFile(_mailInfo, body);
+                        mail.MailingListId = licenseeFunction.Function.IdVipGroup;
+                        MailClientHandler.SendMail(mail);
 
-							//UpdateLog(taskId);
-						}
+                        if (AppSettings.IsUpdateStatusSendingEmail)
+                        {
+                            UpdateLog();
+                        }
 					}
 				}
 				catch (Exception ex)
 				{
-					string log = JsonConvert.SerializeObject(_logData);
-					_repository.UpdateTaskStatus(taskId, Status.Failed, log);
 					LogExtensions.ExceptionHandler(ex);
 				}
 			}
@@ -104,69 +108,38 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 
 		public override void NotifyMailNormalGroup()
 		{
-			foreach (LicenseeFunction licenseeFunction in _sentLicenseeFunctionToSubject.Keys)
-			{
-				if (licenseeFunction.Function.IdNormalGroup != -1)
-				{
-					_mailService.SendMail(licenseeFunction.Function.IdNormalGroup, _sentLicenseeFunctionToSubject[licenseeFunction], 
-						NegativeBalanceByMatchSettings.Title, GetMailNormalGroupBody(licenseeFunction.LicenseeName));
-				}
-			}
 		}
 
 		private string GetMailVipGroupBody(string licenseeName, IList<Match> matches)
 		{
-			string template = licenseeName.ToLower().Equals("haifa")
-									? File.ReadAllText(Path.Combine(_templateBaseDir, @"Templates\DualLanguageTemplate.Vip.cshtml"))
-									: File.ReadAllText(Path.Combine(_templateBaseDir, @"Templates\SingleLanguageTemplate.Vip.cshtml"));
+            string template = IsDualLanguage(licenseeName)
+                                    ? File.ReadAllText(Path.Combine(_templateBaseDir, @"SiteConfig\NegativeBalanceByMatch\Templates\EmailTemplateDualLanguage.cshtml"))
+                                    : File.ReadAllText(Path.Combine(_templateBaseDir, @"SiteConfig\NegativeBalanceByMatch\Templates\EmailTemplateSingleLanguage.cshtml"));
 			return Razor.Parse(template, matches);
 		}
 
-		private string GetMailNormalGroupBody(string licenseeName)
-		{
-			string template = licenseeName.ToLower().Equals("haifa")
-									? File.ReadAllText(Path.Combine(_templateBaseDir, @"Templates\DualLanguageTemplate.Normal.cshtml"))
-									: File.ReadAllText(Path.Combine(_templateBaseDir, @"Templates\SingleLanguageTemplate.Normal.cshtml"));
-			return Razor.Parse(template);
-		}
+        private bool IsDualLanguage(string licenseeName)
+        {
+            var licensees = AppSettings.LicenseesDualLanguage.ToLower().Split(',');
+            bool isDual = licensees.Contains(licenseeName.ToLower());
 
-		private void UpdateLog(int taskId)
+            return isDual;
+        }
+
+		private void UpdateLog()
 		{
 			Upd_StatusIDCriteria updateLogCriteria = new Upd_StatusIDCriteria { LogIDs = _logIdUpdate };
 
 			using (ObjectDb db = new ObjectDb(updateLogCriteria.SpName))
 			{
-				db.ExecuteNonQuery(updateLogCriteria.GetSpParams());
-				var hashResult = db.GetOuputParams();
-				updateLogCriteria.Result = new Result()
-				{
-					ErrorCode = Converter.To<int>(hashResult["ErrCode"]),
-					ErrorMessage = Converter.ToString2(hashResult["ErrMsg"])
-				};
-
-				_logData.Add(updateLogCriteria);
+                db.ExecuteNonQuery(updateLogCriteria.GetSpParams());
+                var hashResult = db.GetOuputParams();
+                updateLogCriteria.Result = new Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities.Result()
+                {
+                    ErrorCode = Converter.To<int>(hashResult["ErrCode"]),
+                    ErrorMessage = Converter.ToString2(hashResult["ErrMsg"])
+                };
 			}
-
-			string log = JsonConvert.SerializeObject(_logData);
-
-			_repository.UpdateTaskStatus(taskId, Status.Successful, log);
-		}
-
-		private bool SendEmail(LicenseeFunction licenseeFunction, string subject, string title, string body, bool reportAttached,
-			IList<Match> matches, DateTime dateTime, ExportSettings exportSettings, int taskId)
-		{
-			bool result = true;
-			try
-			{
-				_mailService.SendMail(licenseeFunction, subject, title, body, reportAttached, matches, dateTime, exportSettings);
-			}
-			catch (Exception ex)
-			{
-				_repository.UpdateTaskStatus(taskId, Status.Failed);
-				LogExtensions.ExceptionHandler(ex);
-				result = false;
-			}
-			return result;
 		}
 
 		private List<Match> GetMatchList(Sel_BySiteCriteria criteria)
@@ -185,9 +158,6 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 						List<CustomerBalanceInfo> customerList = new List<CustomerBalanceInfo>();
 						int index = 1;
 						DataTable userTable = dataSetUserinfo.Tables[0];
-
-						criteria.Result = userTable;
-						_logData.Add(criteria);
 
 						foreach (DataRow row in userTable.Rows)
 						{
@@ -234,7 +204,6 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 									}
 
 									matchLogCriteria.Result = dataSetMatch;
-									_logData.Add(matchLogCriteria);
 								}
 							}
 						}

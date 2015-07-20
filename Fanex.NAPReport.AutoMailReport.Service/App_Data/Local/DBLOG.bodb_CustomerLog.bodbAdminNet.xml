@@ -3,4 +3,8 @@
   <Function Name="Misc - Credit movement">
     <Setting Key="CreditMovement_GetReport" SpName="Acc_Rpt_CreditMovement" DbName="DBLOG.bodb_CustomerLog.bodbAdminNet" TimeOut="0" />
   </Function>
+
+  <Function Name="Negative Balance Report">
+    <Setting Key="Acc_BalanceNegativeSel_MatchLog" SpName="Acc_BalanceNegativeSel_MatchLog" DbName="DBLOG.bodb_CustomerLog.bodbAdminNet" />
+  </Function>
 </Functions>

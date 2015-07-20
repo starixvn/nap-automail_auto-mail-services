@@ -1,11 +1,11 @@
 <TimerServices >
-	<CommonTimerServices interval="10" timeUnit="Second">
-		<!--<CommonTimerService serviceFactoryFullTypeName="Fanex.NAPReport.NegativeBalanceByMatch.Business.ServiceFactory.NegativeBalanceByMatchServiceFactory, Fanex.NAPReport.NegativeBalanceByMatch.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"/>-->
+	<CommonTimerServices interval="10" timeUnit="Second">		
 	</CommonTimerServices>
 	
 	<StandaloneTimerServices>		    
     <StandaloneTimerService interval="300" timeUnit="Second" serviceFactoryFullTypeName="Fanex.NAPReport.TurnoverWatcher.Business.ServiceFactory.TurnoverWatcherFactory, Fanex.NAPReport.TurnoverWatcher.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"/>
-    <StandaloneTimerService interval="60" timeUnit="Second" serviceFactoryFullTypeName="Fanex.NAPReport.RngCasino.Business.ServiceFactory.RngCasinoServiceFactory, Fanex.NAPReport.RngCasino.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"/>
+    <StandaloneTimerService interval="3600" timeUnit="Second" serviceFactoryFullTypeName="Fanex.NAPReport.RngCasino.Business.ServiceFactory.RngCasinoServiceFactory, Fanex.NAPReport.RngCasino.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"/>
+    <StandaloneTimerService interval="120" timeUnit="Second" serviceFactoryFullTypeName="Fanex.NAPReport.NegativeBalanceByMatch.Business.ServiceFactory.NegativeBalanceByMatchServiceFactory, Fanex.NAPReport.NegativeBalanceByMatch.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"/>
 	</StandaloneTimerServices>
   
 </TimerServices>

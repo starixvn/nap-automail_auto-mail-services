@@ -22,9 +22,9 @@ namespace Fanex.NAPReport.RngCasino.Business.Repositories
         public Repository()
         {
             string path = AppDomain.CurrentDomain.BaseDirectory + @"\SiteConfig\RNGCasinoWinLoss\SQLite\AutoMail-RNGCasinoWinLoss.s3db";
-            string connectstringString = "Data Source={0};Version=3;";
-            connectstringString = string.Format(connectstringString, path);
-            db = new SqLite(connectstringString); 
+            string connectString = "Data Source={0};Version=3;";
+            connectString = string.Format(connectString, path);
+            db = new SqLite(connectString); 
         }
 
         public void UpdateLastTime()
