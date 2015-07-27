@@ -40,12 +40,12 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Business.MatchWinLo
             _excludeVirtualLineTotal = new MatchWinLoss2aExcludeVirtualLineTotal(this._configuration);
         }
 
-        public BettypesAndSportsAndThirdPartyProductsWinLoss GetFullReport(DateTime currentTime)
+        public BettypesAndSportsAndThirdPartyProductsWinLoss GetFullReport(DateTime winlossDate)
         {
             BettypesAndSportsAndThirdPartyProductsWinLoss fullReport = new BettypesAndSportsAndThirdPartyProductsWinLoss();
             try
             {
-                DateTime winLossDate = currentTime.AddDays(-1);
+                DateTime winLossDate = winlossDate;
                 bool isBeforeBalanceUpDay = winLossDate < BaseService.BalanceUp.BalanceUpDay;
                 
                 if (isBeforeBalanceUpDay)
@@ -234,11 +234,9 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Business.MatchWinLo
             }
 
             var eightRMTotal = GetEightRMTotal(outputParams);
-            sportsWinLoss.EightRMTotal = eightRMTotal;
-            sportsWinLoss.GrandTotal.Add(eightRMTotal);
+            sportsWinLoss.EightRMTotal = eightRMTotal;            
             var barmTotal = GetBARMTotal(outputParams);
-            sportsWinLoss.BARMTotal = barmTotal;
-            sportsWinLoss.GrandTotal.Add(barmTotal);
+            sportsWinLoss.BARMTotal = barmTotal;            
             return sportsWinLoss;
         }
 

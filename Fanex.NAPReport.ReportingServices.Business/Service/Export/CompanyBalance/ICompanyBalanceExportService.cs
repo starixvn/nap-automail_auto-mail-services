@@ -14,6 +14,8 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyBalan
     /// </summary>
     public interface ICompanyBalanceExportService
     {
-        void ExportReport(CompanyBalance balance, DateTime currentTime);
+        void ExportReport(CompanyBalance balance, DateTime winlossDate);
+
+        string FileName { get; set; }
     }
 }

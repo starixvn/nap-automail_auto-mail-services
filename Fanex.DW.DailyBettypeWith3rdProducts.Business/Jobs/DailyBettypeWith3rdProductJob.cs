@@ -39,7 +39,9 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Jobs
 
             DailyBettypeWith3rdProductsCriteria criteria = new DailyBettypeWith3rdProductsCriteria();
             var lastDate = _repository.GetLastDateDataAvaiable();
-            if (criteria.DateEnd != lastDate)
+
+            bool isNotifyEmail = criteria.DateEnd != lastDate && AppSettings.IsCheckEnoughData;
+            if (isNotifyEmail)
             {
                 mailResult.JobStatus = JobStatus.DataIsNotReady;
                 SendFunctionMailCustomContentNotification(Subject);
@@ -49,7 +51,7 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Jobs
                 var mail = SendEmail(IsDaily, Subject);
                 mailResult.Mail = mail;
             }
-
+           
             return mailResult;
         }
 

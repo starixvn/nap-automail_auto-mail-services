@@ -20,6 +20,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
     using Fanex.Service.Core.Utilities;
     using NPOI.SS.UserModel;
     using NPOI.XSSF.UserModel;
+    using System.IO;
 
     /// <summary>
     /// TODO: Update summary.
@@ -63,13 +64,11 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
             _fontService = new NpoiNewFormatFontService(_workbook);
             _regularFont = _fontService.RegularFont;
             _bodyCellStyleService = new NpoiNewFormatBodyCellStyleService(_workbook, _regularFont);
-            _customCellStyleService = new NpoiNewFormatCustomCellStyleService(_workbook);
-            ConfigurationParser configurationParser = new ConfigurationParser(@"SiteConfig\ReportingServices\Settings\MatchWinLoss2a\MatchWinLoss2a.Settings.xml");
-            configurationParser.Parse<AppSettings>();
+            _customCellStyleService = new NpoiNewFormatCustomCellStyleService(_workbook);            
             _alignmentService = new NpoiNewFormatAlignmentService();
         }
 
-        public void ExportReport(BettypesAndSportsAndThirdPartyProductsWinLoss fullReport, DateTime currentTime)
+        public void ExportReport(BettypesAndSportsAndThirdPartyProductsWinLoss fullReport, DateTime winlossDate)
         {
             try
             {
@@ -80,14 +79,15 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
                 this.CreateBettypeTotalStyle();
                 this.CreateSportTotalStyle();
                 this.CreateGrandTotalStyle();
-                this.ExportReportTitle(currentTime);
+                this.ExportReportTitle(winlossDate);
                 this.ExportSummaryBettypesReport(fullReport.SummaryBettypesWinLoss);
                 this.ExportSportsAndThirdPartyProductsWinLossReport(fullReport.SportsAndThirdPartyProductsWinLoss);
-                string parentDirectory = AppSettings.ExportDataDirectoryWithYearMonth;
+                string parentDirectory = AppSettings.DataDirectory(AppSettings.ExportDataDirectoryMatchWinLoss2a);
                 string reportName = string.Format(
                     ReportingServicesResource.MatchWinLoss2aAll_ReportName,
-                    currentTime.AddDays(-1).ToShortFormatedDateWithSlash().Replace('/', '_'));
+                    winlossDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
                 string reportNameWithExtension = string.Format("{0}.xlsx", reportName);
+                FileName = Path.Combine(parentDirectory, reportNameWithExtension);
                 SaveFile.SaveExcelFile(parentDirectory, reportNameWithExtension, _workbook, AppSettings.ExcelPassword);
             }
             catch (Exception ex)
@@ -151,7 +151,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
             this.ExportRMTotalRow(sportsAndThirdPartyProductsWinLoss.SportsWinLoss.EightRMTotal, "Total 8RM");
             this.ExportRMTotalRow(sportsAndThirdPartyProductsWinLoss.SportsWinLoss.BARMTotal, "Total BARM");
             this.ExportThirdPartyProductsWinLoss(sportsAndThirdPartyProductsWinLoss.ThirdPartyProductsWinLoss);
-            this.ExportThirdPartyProductsGrandTotal(sportsAndThirdPartyProductsWinLoss.ThirdPartyProductsWinLoss.GrandTotal);
+            this.ExportGrandTotal(sportsAndThirdPartyProductsWinLoss.GrandTotal);
         }
 
         private void ExportSummaryBettypesHeader()
@@ -291,11 +291,11 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
             _cell.IncreaseColumnIndex();
             this.RenderCell(Labels.NotAvailable, _bodyCellStyleService.RightTextStyle);
             _cell.IncreaseColumnIndex();
-            this.RenderCell(bettypeRow.Variance, _bodyCellStyleService.ParenthesesUnsignedNegativeDecimalNumberStyle);
+            this.RenderCell(Labels.NotAvailable, _bodyCellStyleService.ParenthesesUnsignedNegativeDecimalNumberStyle);
             _cell.IncreaseColumnIndex();
             this.RenderCell(bettypeRow.Turnover, _bodyCellStyleService.DecimalNumberStyle);
             _cell.IncreaseColumnIndex();
-            this.RenderCell(bettypeRow.Margin, _bodyCellStyleService.ParenthesesUnsignedNegativeDecimalNumberStyle);
+            this.RenderCell(bettypeRow.Margin == 0 ? (object)Labels.NotAvailable : bettypeRow.Margin, _bodyCellStyleService.ParenthesesUnsignedNegativeDecimalNumberStyle);
         }
 
         private void ExportBettypeRow(SummaryBettypesWinLoss bettypeRow)
@@ -331,7 +331,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
             _cell.IncreaseColumnIndex();
             this.RenderCell(bettypeRow.Turnover, _bodyCellStyleService.DecimalNumberStyle);
             _cell.IncreaseColumnIndex();
-            this.RenderCell(bettypeRow.Margin, _bodyCellStyleService.ParenthesesUnsignedNegativeDecimalNumberStyle);
+            this.RenderCell(bettypeRow.Margin == 0 ? (object)Labels.NotAvailable : bettypeRow.Margin, _bodyCellStyleService.ParenthesesUnsignedNegativeDecimalNumberStyle);
         }
 
         private void ExportSportsAndThirdPartyProductsHeader()
@@ -422,7 +422,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
             _cell.IncreaseColumnIndex();
             this.RenderCell(totalRMRow.Variance, _sportTotalUnsignedNegativeDecimalStyle);
             _cell.IncreaseColumnIndex();
-            this.RenderCell(totalRMRow.Turnover, _sportTotalDecimalStyle);
+            this.RenderCell(totalRMRow.Turnover, _sportTotalUnsignedNegativeDecimalStyle);
             _cell.IncreaseColumnIndex();
             this.RenderCell(totalRMRow.Margin, _sportTotalUnsignedNegativeDecimalStyle);
             _cell.ResetColumnIndex();
@@ -520,7 +520,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
             }
         }
 
-        private void ExportThirdPartyProductsGrandTotal(SummarySportsWinLoss grandTotal)
+        private void ExportGrandTotal(SummarySportsWinLoss grandTotal)
         {
             _cell.EndColumn = _cell.CurrentColumn + 6;
             this.RenderMergeCell(Labels.Grand_Total, _grandTotalTextStyle);
@@ -756,6 +756,13 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
                 _alignmentService.RightAlignment,
                 _fontService.BlackBoldFont);
             _grandTotalUnsignedNegativeDecimalStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.ParenthesesUnsignedNegativeDecimalNumberFormat);
+        }
+
+
+        public string FileName
+        {
+            get;
+            set;
         }
     }
 }

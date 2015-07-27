@@ -175,6 +175,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Jobs\NAPReport\HorseRacingReport.cs" />
+    <Compile Include="Jobs\ReportingServices\ReportingServices.cs" />
     <Compile Include="Jobs\SMALossReport\SMALossReport.cs" />
     <Compile Include="Jobs\SMAMonthlyReport\SMAMonthlyReport.cs" />
     <Compile Include="Jobs\VirtualSportWinLoss\VirtualSportWinLoss.cs" />
@@ -323,6 +324,18 @@
     <Content Include="SiteConfig\NegativeBalanceByMatch\Settings\NegativeBalanceByMatch.Settings.Local.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\ReportingService.Settings.PRO.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\ReportingService.Settings.UAT.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\ReportingService.Settings.Local.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\ReportingService.Settings.DEV.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="SiteConfig\RNGCasinoWinLoss\Settings\RngCasino.Settings.UAT.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -411,93 +424,13 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\CompanyBalance\CompanyBalance.Settings.DEV.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="TimerServiceSetting\TimerServiceSetting.PRO.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TimerServiceSetting\TimerServiceSetting.UAT.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\CompanyBalance\CompanyBalance.Settings.Local.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="TimerServiceSetting\TimerServiceSetting.DEV.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\CompanyBalance\CompanyBalance.Settings.PRO.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\CompanyBalance\CompanyBalance.Settings.UAT.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\CompanyBalance\CompanyBalance.Settings.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\CompanyStatement\CompanyStatement.Settings.DEV.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\CompanyStatement\CompanyStatement.Settings.Local.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\CompanyStatement\CompanyStatement.Settings.PRO.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\CompanyStatement\CompanyStatement.Settings.UAT.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\CompanyStatement\CompanyStatement.Settings.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\DailyTurnover\DailyTurnover.Settings.DEV.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\DailyTurnover\DailyTurnover.Settings.Local.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\DailyTurnover\DailyTurnover.Settings.PRO.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\DailyTurnover\DailyTurnover.Settings.UAT.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\DailyTurnover\DailyTurnover.Settings.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\MatchWinLoss2a\MatchWinLoss2a.Settings.DEV.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\MatchWinLoss2a\MatchWinLoss2a.Settings.Local.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\MatchWinLoss2a\MatchWinLoss2a.Settings.PRO.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\MatchWinLoss2a\MatchWinLoss2a.Settings.UAT.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\MatchWinLoss2a\MatchWinLoss2a.Settings.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\SuperYesterdayBalance\SuperYesterdayBalance.Settings.PRO.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\SuperYesterdayBalance\SuperYesterdayBalance.Settings.UAT.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\SuperYesterdayBalance\SuperYesterdayBalance.Settings.Local.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\SuperYesterdayBalance\SuperYesterdayBalance.Settings.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\SuperYesterdayBalance\SuperYesterdayBalance.Settings.DEV.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TimerServiceSetting\TimerServiceSetting.Local.xml">
@@ -624,6 +557,19 @@
     <Content Include="SiteConfig\NegativeBalanceByMatch\Templates\EmailTemplateSingleLanguage.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="SiteConfig\RNGCasinoWinLoss\Templates\RNGCasinoWinLossEmptyDataEmailTemplate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="SiteConfig\ReportingServices\Configurations\CustomBettype\CustomBettypeSection.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SiteConfig\ReportingServices\Configurations\ExcludeVirtualLineTotal\ExcludeVirtualLineTotal.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SiteConfig\ReportingServices\Configurations\RM\RMSection.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="SiteConfig\TurnoverWatcher\app.config">
       <SubType>Designer</SubType>
     </None>
@@ -676,6 +622,10 @@
     <ProjectReference Include="..\Fanex.NAPReport.NegativeBalanceByMatch.Business\Fanex.NAPReport.NegativeBalanceByMatch.Business.csproj">
       <Project>{8C5FF65C-DC35-417B-9464-35C0CAF05FDD}</Project>
       <Name>Fanex.NAPReport.NegativeBalanceByMatch.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.NAPReport.ReportingServices.Business\Fanex.NAPReport.ReportingServices.Business.csproj">
+      <Project>{3221F978-C15B-427F-991C-3E00E2780D22}</Project>
+      <Name>Fanex.NAPReport.ReportingServices.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.NAPReport.RngCasino.Business\Fanex.NAPReport.RngCasino.Business.csproj">
       <Project>{506C2FB3-261A-4EDD-B7BB-16F9567DE39D}</Project>

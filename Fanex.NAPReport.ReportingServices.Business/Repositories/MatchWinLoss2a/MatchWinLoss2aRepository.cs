@@ -46,7 +46,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Repositories.MatchWinLoss2a
 
             IDataReader reader;
             using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
-            {
+            {                
                 reader = objectDb.ExecuteReader(criteria.GetSpParams());
                 while (reader.Read())
                 {
@@ -62,7 +62,6 @@ namespace Fanex.NAPReport.ReportingServices.Business.Repositories.MatchWinLoss2a
                 }
 
                 reader.Close();
-                //AddOutPutParams(objectDb);
                 matchAndSportWinLoss.OutputParams = objectDb.GetOuputParams();
             }
 
@@ -98,12 +97,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Repositories.MatchWinLoss2a
                     fullReport.SummaryBettypesWinLoss.Add(bettypeWinLoss);
                 }
 
-                reader.Close();
-                if (criteria.Winlostdate < BaseService.BalanceUp.BalanceUpDay)
-                {
-                    AddOutPutParams(objectDb);
-                }
-
+                reader.Close();               
                 fullReport.MatchAndSportWinLoss.OutputParams = objectDb.GetOuputParams();
             }
 
@@ -170,14 +164,6 @@ namespace Fanex.NAPReport.ReportingServices.Business.Repositories.MatchWinLoss2a
             };
 
             return productWinLoss;
-        }
-
-        private void AddOutPutParams(ObjectDb objectDb)
-        {
-            objectDb.AddOutParameter("winlost_8rm", DbType.Double, 8);
-            objectDb.AddOutParameter("winlost_barm", DbType.Double, 8);
-            objectDb.AddOutParameter("ibcturnover_8rm", DbType.Double, 8);
-            objectDb.AddOutParameter("ibcturnover_barm", DbType.Double, 8);
         }
     }
 }

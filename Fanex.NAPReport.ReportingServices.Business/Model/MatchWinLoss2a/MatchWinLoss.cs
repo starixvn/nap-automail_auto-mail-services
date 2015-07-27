@@ -63,7 +63,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Model.MatchWinLoss2a
 
                 if (this.Turnover != 0)
                 {
-                    return this.LineTotal / this.Turnover;
+                    return this.LineTotal / this.Turnover * 100;
                 }
 
                 return margin;
@@ -79,7 +79,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Model.MatchWinLoss2a
         /// </summary>
         /// <param name="winLoss">The win loss.</param>
         public void Add(MatchWinLoss winLoss)
-        {
+        {            
             this.Turnover += winLoss.Turnover;
             this.WinLoss += winLoss.WinLoss;
             this.Position += winLoss.Position;

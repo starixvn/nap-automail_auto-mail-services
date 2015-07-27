@@ -45,7 +45,7 @@ namespace Fanex.NAPReport.RngCasino.Business.Repositories
 
         public DateTime GetLastTime()
         {
-            DateTime lastTime = DateTime.Now.AddMinutes(60);
+            DateTime lastTime = DateTime.Now.AddMinutes(-60);
 
             string sql = "select * from log";
             var dt = db.GetDataTable(sql);

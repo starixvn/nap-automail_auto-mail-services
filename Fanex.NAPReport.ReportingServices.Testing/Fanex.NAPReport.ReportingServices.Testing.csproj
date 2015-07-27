@@ -78,14 +78,14 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Configurations\CustomBettype\CustomBettypeSection.config">
+    <None Include="SiteConfig\ReportingServices\Configurations\CustomBettype\CustomBettypeSection.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Configurations\ExcludeVirtualLineTotal\ExcludeVirtualLineTotal.config">
+    <None Include="SiteConfig\ReportingServices\Configurations\ExcludeVirtualLineTotal\ExcludeVirtualLineTotal.config">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Configurations\RM\RMSection.config">
+    <None Include="SiteConfig\ReportingServices\Configurations\RM\RMSection.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
@@ -104,27 +104,18 @@
     <Content Include="App_Data\DBLOG.bodb_CustomerLog.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\CompanyBalance\CompanyBalance.Settings.xml">
+    <Content Include="SiteConfig\ReportingServices\Settings\ReportingService.Settings.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\CompanyStatement\CompanyStatement.Settings.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\DailyTurnover\DailyTurnover.Settings.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\MatchWinLoss2a\MatchWinLoss2a.Settings.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\ReportingServices\Settings\SuperYesterdayBalance\SuperYesterdayBalance.Settings.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.NAPReport.ReportingServices.Business\Fanex.NAPReport.ReportingServices.Business.csproj">
       <Project>{3221F978-C15B-427F-991C-3E00E2780D22}</Project>
       <Name>Fanex.NAPReport.ReportingServices.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.Service.Core\Fanex.Service.Core.csproj">
+      <Project>{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}</Project>
+      <Name>Fanex.Service.Core %28Fanex.Service.Core\Fanex.Service.Core%29</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

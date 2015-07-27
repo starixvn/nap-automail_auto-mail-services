@@ -20,6 +20,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyBalan
     using Fanex.Service.Core.Utilities;
     using NPOI.SS.UserModel;
     using NPOI.XSSF.UserModel;
+    using System.IO;
 
     /// <summary>
     /// TODO: Update summary.
@@ -51,26 +52,25 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyBalan
             _alignmentService = new NpoiNewFormatAlignmentService();
             _dataFormat = _workbook.CreateDataFormat() as XSSFDataFormat;
             _bodyCellStyleService = new NpoiNewFormatBodyCellStyleService(_workbook, _regularFont);
-            _customCellStyleService = new NpoiNewFormatCustomCellStyleService(_workbook);
-            ConfigurationParser configurationParser = new ConfigurationParser(@"SiteConfig\ReportingServices\Settings\CompanyBalance\CompanyBalance.Settings.xml");
-            configurationParser.Parse<AppSettings>();
+            _customCellStyleService = new NpoiNewFormatCustomCellStyleService(_workbook);            
         }
 
-        public void ExportReport(CompanyBalance balance, DateTime currentTime)
+        public void ExportReport(CompanyBalance balance, DateTime winlossDate)
         {
             try
             {
                 this.CreateSheet();
                 this.InitColumnWidth();
-                this.ExportReportTitle(currentTime);
+                this.ExportReportTitle(winlossDate);
                 this.ExportReportHeader();
                 this.ExportReportContent(balance);
                 this.ExportGrandTotal(balance.GrandTotal);
-                string parentDirectory = AppSettings.ExportDataDirectoryWithYearMonth;
+                string parentDirectory = AppSettings.DataDirectory(AppSettings.ExportDataDirectoryCompanyBalance);
                 string reportName = string.Format(
                     ReportingServicesResource.CompanyBalance_ReportName,
-                    currentTime.AddDays(-1).ToShortFormatedDateWithSlash().Replace('/', '_'));
+                    winlossDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
                 string reportNameWithExtension = string.Format("{0}.xlsx", reportName);
+                FileName = Path.Combine(parentDirectory, reportNameWithExtension);
                 SaveFile.SaveExcelFile(parentDirectory, reportNameWithExtension, _workbook, AppSettings.ExcelPassword);
             }
             catch (Exception ex)
@@ -233,6 +233,12 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyBalan
         {
             _cell.CellValue = cellValue;
             NpoiNewFormatExcelExtension.RenderCell(_workSheet, _cell, cellStyle);
+        }
+
+        public string FileName
+        {
+            get;
+            set;
         }
     }
 }

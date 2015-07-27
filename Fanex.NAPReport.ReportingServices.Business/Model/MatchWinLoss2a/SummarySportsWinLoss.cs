@@ -51,7 +51,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Model.MatchWinLoss2a
                 decimal margin = 0;
                 if (this.IBCTurnover != 0)
                 {
-                    return this.LineTotal / this.IBCTurnover;
+                    return this.LineTotal / this.IBCTurnover * 100;
                 }
 
                 return margin;
@@ -66,13 +66,14 @@ namespace Fanex.NAPReport.ReportingServices.Business.Model.MatchWinLoss2a
 
         public void AddToGrandTotal(SummarySportsWinLoss winLoss)
         {
+            bool isExcludeVirtualLineTotal = winLoss.IsExcludeVirtualLineTotal;
             this.GrandTotal.IBCTurnover += winLoss.IBCTurnover;
             this.GrandTotal.WinLoss += winLoss.WinLoss;
             this.GrandTotal.Position += winLoss.Position;
             this.GrandTotal.Commission += winLoss.Commission;
-            this.GrandTotal.VirtualCommission += winLoss.VirtualCommission;
+            this.GrandTotal.VirtualCommission += isExcludeVirtualLineTotal ? 0 : winLoss.VirtualCommission;
             this.GrandTotal.LineTotal += winLoss.LineTotal;
-            this.GrandTotal.VirtualLineTotal += winLoss.VirtualLineTotal;
+            this.GrandTotal.VirtualLineTotal += isExcludeVirtualLineTotal ? 0 : winLoss.VirtualLineTotal;
         }
     }
 }

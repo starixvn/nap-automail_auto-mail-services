@@ -14,6 +14,6 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Business.MatchWinLo
     /// </summary>
     public interface IMatchWinLoss2aService
     {
-        BettypesAndSportsAndThirdPartyProductsWinLoss GetFullReport(DateTime currentTime);
+        BettypesAndSportsAndThirdPartyProductsWinLoss GetFullReport(DateTime winlossDate);
     }
 }

@@ -6,4 +6,6 @@
 	<Setting key="DataDirectory" value="\\10.40.40.52\NAP_Reports\UAT\RNGCasino" />
 	<Setting key="FunctionIdVipGroup" value="45"/>
   <Setting key="FunctionIdNormalGroup" value="0"/>
+  <Setting key="NormalSubject" value="RNG Casino - Members with winloss greater or equal {0}${1} from {2} to {3}"/>
+  <Setting key="EmptySubject" value="RNG Casino - NO MEMBER FOUND with winloss greater or equal {0}${1} from {2} to {3}"/>
 </Settings>

@@ -15,6 +15,8 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.DailyTurnove
     /// </summary>
     public interface IDailyTurnoverExportService
     {
-        void ExportReport(List<DailyTurnover> dailyTurnover, DateTime currentTime);
+        void ExportReport(List<DailyTurnover> dailyTurnover, DateTime winlossDate);
+
+        string FileName { get; set; }
     }
 }

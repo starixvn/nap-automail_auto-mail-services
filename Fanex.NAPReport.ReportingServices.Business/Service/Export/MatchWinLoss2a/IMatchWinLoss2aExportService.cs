@@ -14,6 +14,8 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
     /// </summary>
     public interface IMatchWinLoss2aExportService
     {
-        void ExportReport(BettypesAndSportsAndThirdPartyProductsWinLoss fullReport, DateTime currentTime);
+        void ExportReport(BettypesAndSportsAndThirdPartyProductsWinLoss fullReport, DateTime winlossDate);
+
+        string FileName { get; set; }
     }
 }

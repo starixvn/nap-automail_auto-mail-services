@@ -7,4 +7,8 @@
   <Function Name="Negative Balance Report">
     <Setting Key="Acc_BalanceNegativeSel_MatchLog" SpName="Acc_BalanceNegativeSel_MatchLog" DbName="DBLOG.bodb_CustomerLog.bodbAdminNet" TimeOut="0"/>
   </Function>
+
+  <Function Name="Reporting Service - Balance - Company Balance Difference">
+    <Setting Key="Balance_CompanyBalance_Difference" SpName="Acc_Rpt_Balance_Company_History" DbName="DBLOG.bodb_CustomerLog.bodbAdminNet" TimeOut="0"></Setting>
+  </Function>
 </Functions>

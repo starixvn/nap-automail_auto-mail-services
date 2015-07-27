@@ -25,12 +25,19 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service
             serviceProcess.RegisterObserver(this);
         }
 
-        public void ProcessData(DateTime currentTime)
+        public void ProcessData(DateTime winlossDate)
         {
             _matchWinLoss2aService = new MatchWinLoss2aService();
             _exportService = new MatchWinLoss2aExportService();
-            var matchWinLoss2aReport = _matchWinLoss2aService.GetFullReport(currentTime);
-            _exportService.ExportReport(matchWinLoss2aReport, currentTime);
+            var matchWinLoss2aReport = _matchWinLoss2aService.GetFullReport(winlossDate);
+            _exportService.ExportReport(matchWinLoss2aReport, winlossDate);
+            FileName = _exportService.FileName;
+        }
+
+        public string FileName
+        {
+            get;
+            set;
         }
     }
 }

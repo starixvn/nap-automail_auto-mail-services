@@ -14,10 +14,12 @@ namespace Fanex.CheckRemotingRef.Testing
             string homeId = ConfigurationSettings.AppSettings["homeId"];
             string awayId = ConfigurationSettings.AppSettings["awayId"];
             string leagueId = ConfigurationSettings.AppSettings["leagueId"];
+            string bettypeId = ConfigurationSettings.AppSettings["bettypeId"];
 
             Console.WriteLine("Home: " + CacheRef.GetTeamName(homeId));
             Console.WriteLine("Away: " + CacheRef.GetTeamName(awayId));
             Console.WriteLine("League: " + CacheRef.GetLeagueName(leagueId));
+            Console.WriteLine("bettype: " + CacheRef.GetBettype(bettypeId));
             Console.ReadLine();
         }
     }

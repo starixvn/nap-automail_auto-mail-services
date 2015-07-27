@@ -15,6 +15,6 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Business.DailyTurno
     /// </summary>
     public interface IDailyTurnoverService
     {
-        List<DailyTurnover> GetDailyTurnover(DateTime currentTime);
+        List<DailyTurnover> GetDailyTurnover(DateTime winlossDate);
     }
 }

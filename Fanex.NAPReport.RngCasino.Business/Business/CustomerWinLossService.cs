@@ -53,20 +53,18 @@ namespace Fanex.NAPReport.RngCasino.Business.Business
 			bool result = false;
 			try
 			{
-                
-				var dateTimeFormat = "{0:yyyy-MM-dd HH:mm}";
                 var toDate = DateTime.Now;
                 var fromDate = _repository.GetLastTime();
 
                 var userInfos = GetCustomerWinLoss(Converter.ToDateTime(fromDate), Converter.ToDateTime(toDate), AppSettings.WinLoss);
-				if (userInfos != null && userInfos.Count > 0)
-				{
-					var body = GetMailVipGroupBody(userInfos);
+                if (userInfos != null && userInfos.Count > 0)
+                {
+                    var body = GetMailVipGroupBody(userInfos);
 
                     var fileNamePath = Path.Combine(AppSettings.ExportDataDirectoryWithYearMonthDay,
-                                                        "RNG_Casino_WinLoss" + "_" + DateTime.Now.ToString(DateTimeFormatConstants.YEAR_MONTH_DATE_MINUTE) + ".xlsx");                   
+                                                        "RNG_Casino_WinLoss" + "_" + DateTime.Now.ToString(DateTimeFormatConstants.YEAR_MONTH_DATE_MINUTE) + ".xlsx");
 
-					_excelService.GenerateReport(userInfos, _rngCasinoExportSettings, fileNamePath);
+                    _excelService.GenerateReport(userInfos, _rngCasinoExportSettings, fileNamePath);
 
                     var fileNamesPath = new List<string>();
                     fileNamesPath.Add(fileNamePath);
@@ -75,11 +73,21 @@ namespace Fanex.NAPReport.RngCasino.Business.Business
 
                     var mail = _mailStation.CreateMailCustomContentWithAttachedFile(_mailInfo, body);
                     mail.MailingListId = AppSettings.FunctionIdVipGroup;
+                    mail.Subject = GetNormalSubject(fromDate, toDate);
                     MailClientHandler.SendMail(mail);
-                    _repository.UpdateLastTime();
 
                     result = true;
-				}           
+                }
+                else
+                {
+                    string bodyContent = GetMailVipGroupBodyEmptydata();
+                    var mail = _mailStation.CreateMailCustomContent(_mailInfo, bodyContent);
+                    mail.Subject = GetEmptySubject(fromDate, toDate);
+                    mail.MailingListId = AppSettings.FunctionIdVipGroup;
+                    MailClientHandler.SendMail(mail);
+                }
+
+                _repository.UpdateLastTime();
 			}
 			catch (Exception ex)
 			{
@@ -102,6 +110,12 @@ namespace Fanex.NAPReport.RngCasino.Business.Business
             var template = File.ReadAllText(Path.Combine(_templateBaseDir, @"SiteConfig\RNGCasinoWinLoss\Templates\RNGCasinoWinLossEmailTemplate.cshtml"));
 			return Razor.Parse(template, userInfos);
 		}
+
+        private string GetMailVipGroupBodyEmptydata()
+        {
+            var template = File.ReadAllText(Path.Combine(_templateBaseDir, @"SiteConfig\RNGCasinoWinLoss\Templates\RNGCasinoWinLossEmptyDataEmailTemplate.cshtml"));
+            return Razor.Parse(template, null);
+        }
 
 		private List<UserInfo> GetCustomerWinLoss(DateTime fromDate, DateTime toDate, decimal winlost)
 		{
@@ -162,5 +176,29 @@ namespace Fanex.NAPReport.RngCasino.Business.Business
 
 			return currencyList;
 		}
+
+        private string GetNormalSubject(DateTime fromDate, DateTime toDate)
+        {
+            string subject = AppSettings.NormalSubject;
+            subject = string.Format(subject,
+                AppSettings.BaseCurrency,
+                NumberExtension.WinLossFormat(AppSettings.WinLoss, 0),
+                fromDate.ToString(DateTimeFormatConstants.YEAR_MONTH_DATE_MINUTE2),
+                toDate.ToString(DateTimeFormatConstants.YEAR_MONTH_DATE_MINUTE2));
+
+            return subject;
+        }
+
+        private string GetEmptySubject(DateTime fromDate, DateTime toDate)
+        {
+            string subject = AppSettings.EmptySubject;
+            subject = string.Format(subject,
+                AppSettings.BaseCurrency,
+                NumberExtension.WinLossFormat(AppSettings.WinLoss, 0),
+                fromDate.ToString(DateTimeFormatConstants.YEAR_MONTH_DATE_MINUTE2),
+                toDate.ToString(DateTimeFormatConstants.YEAR_MONTH_DATE_MINUTE2));
+
+            return subject;
+        }
 	}
 }

@@ -1,5 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<Settings>
-  <add key="ExportDataDirectory" value="\\10.18.200.202\_Fanex.ExcelFiles\ReportingService\CompanyStatement" />
-  <add key="ExcelPassword" value="we168" />
-</Settings>

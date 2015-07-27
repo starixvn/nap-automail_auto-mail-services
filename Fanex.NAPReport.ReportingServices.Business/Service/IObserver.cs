@@ -14,5 +14,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service
     public interface IObserver
     {
         void ProcessData(DateTime currentTime);
+
+        string FileName { get; set; }
     }
 }

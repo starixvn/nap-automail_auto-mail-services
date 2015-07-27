@@ -21,6 +21,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.SuperYesterd
     using Fanex.Service.Core.Utilities;
     using NPOI.SS.UserModel;
     using NPOI.XSSF.UserModel;
+    using System.IO;
 
     /// <summary>
     /// TODO: Update summary.
@@ -52,9 +53,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.SuperYesterd
             _alignmentService = new NpoiNewFormatAlignmentService();
             _regularFont = _fontService.RegularFont;
             _bodyCellStyleService = new NpoiNewFormatBodyCellStyleService(_workbook, _regularFont);
-            _customCellStyleService = new NpoiNewFormatCustomCellStyleService(_workbook);
-            ConfigurationParser configurationParser = new ConfigurationParser(@"SiteConfig\ReportingServices\Settings\SuperYesterdayBalance\SuperYesterdayBalance.Settings.xml");
-            configurationParser.Parse<AppSettings>();
+            _customCellStyleService = new NpoiNewFormatCustomCellStyleService(_workbook);            
         }
 
         public void ExportReport(SuperYesterdayBalance balance, DateTime currentTime)
@@ -67,11 +66,12 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.SuperYesterd
                 this.ExportReportHeader();
                 this.ExportReportContent(balance.ReportRows);
                 this.ExportGrandTotal(balance.BaseBalanceTotal);
-                string parentDirectory = AppSettings.ExportDataDirectoryWithYearMonth;
+                string parentDirectory = AppSettings.DataDirectory(AppSettings.ExportDataDirectorySuperYesterdayBalance);
                 string reportName = string.Format(
                     ReportingServicesResource.SuperYesterdayBalance_ReportName,
                     currentTime.AddDays(-1).ToShortFormatedDateWithSlash().Replace('/', '_'));
                 string reportNameWithExtension = string.Format("{0}.xlsx", reportName);
+                FileName = Path.Combine(parentDirectory, reportNameWithExtension);
                 SaveFile.SaveExcelFile(parentDirectory, reportNameWithExtension, _workbook, AppSettings.ExcelPassword);
             }
             catch (Exception ex)
@@ -237,6 +237,12 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.SuperYesterd
         {
             _cell.CellValue = cellValue;
             NpoiNewFormatExcelExtension.RenderCell(_workSheet, _cell, cellStyle);
+        }
+
+        public string FileName
+        {
+            get;
+            set;
         }
     }
 }

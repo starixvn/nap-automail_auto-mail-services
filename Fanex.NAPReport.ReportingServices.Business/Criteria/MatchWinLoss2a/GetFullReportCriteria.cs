@@ -21,6 +21,10 @@ namespace Fanex.NAPReport.ReportingServices.Business.Criteria.MatchWinLoss2a
 
         public double WinLost_BARM { get; set; }
 
+        public decimal IBCTurnover_8RM { get; set; }
+
+        public decimal IBCTurnover_BARM { get; set; }
+
         public override string GetSettingKey()
         {
             return "Main_MatchWinLoss2a_GetMainReport" + BaseService.GetStoreMappingSuffix(this.Winlostdate);

@@ -23,5 +23,17 @@ namespace Fanex.NAPReport.RngCasino.Business
 		{
             get { return ExportDataDirectoryWithYearMonthDay(DataDirectory); }
 		}
+
+        public static string NormalSubject
+        {
+            get;
+            set;
+        }
+
+        public static string EmptySubject
+        {
+            get;
+            set;
+        }
 	}
 }
