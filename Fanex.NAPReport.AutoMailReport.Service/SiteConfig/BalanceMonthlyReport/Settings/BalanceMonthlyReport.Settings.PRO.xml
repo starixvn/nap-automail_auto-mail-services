@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Settings>
   <add key="IsTest" value="false" />
+
+  <add key="DataDirectoryCreditTerm" value="\\10.40.40.52\NAP_Reports\BalanceMonthlyCreditTerm" />
+  <add key="DataDirectorySuperBalance" value="\\10.40.40.52\NAP_Reports\BalanceMonthlySuperBalance" />
+  <add key="DataDirectoryDirectBalance" value="\\10.40.40.52\NAP_Reports\BalanceMonthlyDirectBalance" />
   
-  <add key="DataDirectoryCreditTerm" value="\\10.18.200.202\_Fanex.ExcelFiles\BalanceMonthlyCreditTerm" />
-  <add key="DataDirectorySuperBalance" value="\\10.18.200.202\_Fanex.ExcelFiles\BalanceMonthlySuperBalance" />
-  <add key="DataDirectoryDirectBalance" value="\\10.18.200.202\_Fanex.ExcelFiles\BalanceMonthlyDirectBalance" />
+  <add key="ExcelPasswordProtectedCreditTerm" value="" />
+  <add key="ExcelPasswordProtectedSuperBalance" value="" />
+  <add key="ExcelPasswordProtectedDirectBalance" value="" />
   
-  <add key="ExcelPasswordProtectedCreditTerm" value="we168" />
-  <add key="ExcelPasswordProtectedSuperBalance" value="we168" />
-  <add key="ExcelPasswordProtectedDirectBalance" value="we168" />
-  
-  <add key="FunctionIdCreditTerm" value="82" />
-  <add key="FunctionIdSuperBalance" value="84" />
-  <add key="FunctionIdDirectBalance" value="86" />
+  <add key="FunctionIdCreditTerm" value="0" />
+  <add key="FunctionIdSuperBalance" value="0" />
+  <add key="FunctionIdDirectBalance" value="0" />
 </Settings>

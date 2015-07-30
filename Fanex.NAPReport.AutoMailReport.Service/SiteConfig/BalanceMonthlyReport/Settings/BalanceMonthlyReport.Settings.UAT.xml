@@ -1,16 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Settings>
-  <add key="IsTest" value="false" />
-  
+  <add key="IsTest" value="false" />  
   <add key="DataDirectoryCreditTerm" value="\\10.40.40.52\NAP_Reports\UAT\BalanceMonthlyCreditTerm" />
   <add key="DataDirectorySuperBalance" value="\\10.40.40.52\NAP_Reports\UAT\BalanceMonthlySuperBalance" />
   <add key="DataDirectoryDirectBalance" value="\\10.40.40.52\NAP_Reports\UAT\BalanceMonthlyDirectBalance" />
   
-  <add key="ExcelPasswordProtectedCreditTerm" value="we168" />
-  <add key="ExcelPasswordProtectedSuperBalance" value="we168" />
-  <add key="ExcelPasswordProtectedDirectBalance" value="we168" />
+  <add key="ExcelPasswordProtectedCreditTerm" value="" />
+  <add key="ExcelPasswordProtectedSuperBalance" value="" />
+  <add key="ExcelPasswordProtectedDirectBalance" value="" />
   
-  <add key="FunctionIdCreditTerm" value="30" />
-  <add key="FunctionIdSuperBalance" value="32" />
-  <add key="FunctionIdDirectBalance" value="34" />
+  <add key="FunctionIdCreditTerm" value="0" />
+  <add key="FunctionIdSuperBalance" value="0" />
+  <add key="FunctionIdDirectBalance" value="0" />
 </Settings>
