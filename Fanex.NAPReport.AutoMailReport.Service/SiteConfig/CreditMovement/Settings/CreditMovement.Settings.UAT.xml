@@ -4,7 +4,7 @@
   <add key="ToDate" value="2015-03-16" />
   <add key="IsTest" value="false" />
   <add key="MailTitle" value="Starix IT" />
-  <add key="ExportDataDirectory" value="\\10.40.40.52\NAP_Reports\UAT\CreditMovement" />
+  <add key="ExportDataDirectory" value="\\10.40.40.52\NAP_Reports\UAT\CreditMovementExcelFile" />
   <add key="EmailTemplate" value="SiteConfig\CreditMovement\Templates\CreditMovementEmail.cshtml" />
   <add key="Amount" value="300000" />
   <add key="ExcelPassword" value="we168" />  

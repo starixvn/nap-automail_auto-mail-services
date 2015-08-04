@@ -48,7 +48,7 @@
             var criteria = new GetByDateCriteria(winLossDate);
             var winLossList = service.GetBALicWinlossMonthly(criteria);
 
-            this.FileName = string.Format(Label.FileName, winLossDate.ToString("yyyy-MM"));
+            this.FileName = string.Format(Label.FileName, winLossDate.ToString("MMM_yyyy"));
             this.DirectoryOfFileName = AppSettings.DataDirectoryWithYearMonth + @"\" + this.FileName;
 
             this._workbook = new XSSFWorkbook();

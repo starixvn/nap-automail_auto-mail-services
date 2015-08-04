@@ -127,7 +127,7 @@
     <value>Customer W/L</value>
   </data>
   <data name="FileName" xml:space="preserve">
-    <value>Bet Aggregator - Daily Win Loss Report {0}.xlsx</value>
+    <value>Bet_Aggregator_Daily_Win_Loss_Report_For_{0}.xlsx</value>
   </data>
   <data name="GrandTotal" xml:space="preserve">
     <value>Grand Total</value>

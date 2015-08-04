@@ -257,7 +257,7 @@
 
         private string CreateReportNameWithExtension()
         {
-            return string.Format("{0} - {1}.xlsx", _criteria.Name, _criteria.Date.ToString("yyyy-MM-dd"));
+            return string.Format("{0}_For_{1}.xlsx", _criteria.Name, _criteria.Date.ToString("MMM_yyyy"));
         }
     }
 }

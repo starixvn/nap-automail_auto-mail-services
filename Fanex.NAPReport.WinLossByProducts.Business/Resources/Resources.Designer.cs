@@ -61,7 +61,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Products_Win_Loss_Report_{0}.
+        ///   Looks up a localized string similar to Win_Loss_By_Products_For_{0}.xlsx.
         /// </summary>
         public static string WinLossByProducts_ReportName {
             get {
@@ -79,11 +79,29 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Win_Loss_By_Products.
+        ///   Looks up a localized string similar to Sportbook Win Loss Report - {0}.
+        /// </summary>
+        public static string WinLossByProducts_ReportTitle3rd {
+            get {
+                return ResourceManager.GetString("WinLossByProducts_ReportTitle3rd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Products_Win_Loss.
         /// </summary>
         public static string WinLossByProducts_SheetName {
             get {
                 return ResourceManager.GetString("WinLossByProducts_SheetName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sportsbook_Win_Loss.
+        /// </summary>
+        public static string WinLossByProducts_SheetName3rd {
+            get {
+                return ResourceManager.GetString("WinLossByProducts_SheetName3rd", resourceCulture);
             }
         }
     }

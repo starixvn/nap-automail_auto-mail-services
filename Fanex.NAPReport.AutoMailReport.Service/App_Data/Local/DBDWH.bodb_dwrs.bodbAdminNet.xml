@@ -12,12 +12,18 @@
   <Function Name="Core - Report Service">
     <Setting Key="NAP_ExchangeCurrencySel" SpName="NAP_ExchangeCurrencySel" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
+  
   <Function Name="Reporting Service - Main - Match Win Loss (2a)">
     <Setting Key="Main_MatchWinLoss2a_GetMainReport_WH" SpName="Acc_Rpt_MatchWinLoss2_New_Old_xtest" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_MatchWinLoss2a_GetThirdPartyCasinoReport_WH" SpName="Acc_Rpt_WinlostCA_Details_Old_xtest" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_MatchWinloss2a_GetWinLossByBettype_WH" SpName="Acc_Rpt_WinlossByBettype_Old_xtest" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_MatchWinLoss2a_GetWinLossDetailReportByBetType_WH" SpName="Acc_Rpt_MatchWinLoss2_Sporttype_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_MatchWinLoss2a_GetAllDetailReportBySportsType_WH" SpName="Acc_Rpt_MatchWinLoss2_Old_xtest" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
+  </Function>
+
+  <Function Name="Overall Win Loss By Products Report">
+    <Setting Key="Acc_Rpt_Automail_WinlossbyProduct" SpName="Acc_Rpt_Automail_WinlossbyProduct" DbName="DBDWH.bodb_dwrs.bodbAdminNet" Timeout="0"/>
+    <Setting Key="Acc_Rpt_Automail_Winloss_3rd" SpName="Acc_Rpt_Automail_Winloss_3rd" DbName="DBDWH.bodb_dwrs.bodbAdminNet" Timeout="0"/>
   </Function>
   
 </Functions>

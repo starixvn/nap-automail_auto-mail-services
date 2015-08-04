@@ -1,16 +1,30 @@
-﻿using System.Collections.Generic;
-using Fanex.Common;
-using Fanex.Data;
-using Fanex.Data.Repository;
-using Fanex.NAPReport.VirtualSportWinLoss.Business.Model.Detail;
-using Fanex.NAPReport.VirtualSportWinLoss.Business.Model.Summary;
-using Fanex.NAPReport.VirtualSportWinLoss.Business.Model;
-using System;
-
-namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Repositories
+﻿namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Repositories
 {
+    using System;
+    using System.Collections.Generic;
+    using Fanex.Common;
+    using Fanex.Data;
+    using Fanex.Data.Repository;
+    using Fanex.NAPReport.VirtualSportWinLoss.Business.Model;
+    using Fanex.NAPReport.VirtualSportWinLoss.Business.Model.Detail;
+    using Fanex.NAPReport.VirtualSportWinLoss.Business.Model.Summary;
+
     public class Repository : IRepository
     {
+        public BalanceUp BalanceUp
+        {
+            get
+            {
+                BalanceUp balanceUp = new BalanceUp();
+                using (ObjectDb objDb = new ObjectDb("Core_ReportService_GetBalanceUpDay"))
+                {
+                    balanceUp = objDb.QueryEntity<BalanceUp>();
+                }
+
+                return balanceUp;
+            }
+        }
+
         public List<WinLossSummaryBySportType> GetWinLossSummaryListBySportType(CriteriaBase criteria)
         {
             List<WinLossSummaryBySportType> winlossSummaryListbySportType = new List<WinLossSummaryBySportType>();
@@ -19,7 +33,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Repositories
                 var param = criteria.GetSpParams();
                 objDb.AssignParamValues(param);
                 var row = objDb.ExecuteReader();
-                while(row.Read())                
+                while (row.Read())
                 {
                     var winlossSummarybySportType = new WinLossSummaryBySportType
                     {
@@ -47,7 +61,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Repositories
                 var param = criteria.GetSpParams();
                 objDb.AssignParamValues(param);
                 var row = objDb.ExecuteReader();
-                while(row.Read())
+                while (row.Read())
                 {
                     var winlossDetailbySportType = new WinLossDetailByBettype
                     {
@@ -66,20 +80,6 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Repositories
             }
 
             return winlossDetailListbySportType;
-        }
-
-        public BalanceUp BalanceUp
-        {
-            get 
-            {
-                BalanceUp balanceUp = new BalanceUp();
-                using (ObjectDb objDb = new ObjectDb("Core_ReportService_GetBalanceUpDay"))
-                {
-                    balanceUp = objDb.QueryEntity<BalanceUp>();
-                }
-
-                return balanceUp;
-            }
         }
     }
 }

@@ -166,7 +166,7 @@
     <value>Winloss IBC</value>
   </data>
   <data name="VirtualSportWinLoss_ReportName" xml:space="preserve">
-    <value>Win_Loss_By_Virtual_Sports_on_{0}</value>
+    <value>Virtual_Sports_Daily_Win_Loss_Report_For_{0}.xlsx</value>
   </data>
   <data name="Sport_Nodata" xml:space="preserve">
     <value>{0}: There is no data of this sport from {1} to {2}</value>

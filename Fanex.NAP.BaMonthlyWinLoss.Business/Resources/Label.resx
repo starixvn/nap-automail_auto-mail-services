@@ -130,7 +130,7 @@
     <value>Date</value>
   </data>
   <data name="FileName" xml:space="preserve">
-    <value>Bet Aggregator - Monthly Win Loss Report {0}.xlsx</value>
+    <value>Bet_Aggregator_Monthly_Win_Loss_Report_For_{0}.xlsx</value>
   </data>
   <data name="LicenseeComm" xml:space="preserve">
     <value>Licensee Comm</value>

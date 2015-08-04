@@ -39,7 +39,7 @@
 
         public void GenerateReport(DateTime winLossDate)
         {
-            this.FileName = string.Format(Resource.FileName, winLossDate.ToString("yyyy-MM-dd"));
+            this.FileName = string.Format(Resource.FileName, winLossDate.ToString("yyyy_MM_dd"));
             this.DirectoryOfFileName = AppSettings.DataDirectoryWithYearMonth + @"\" + this.FileName;
             var service = new BetAggregatorService();
             this._workbook = new XSSFWorkbook();

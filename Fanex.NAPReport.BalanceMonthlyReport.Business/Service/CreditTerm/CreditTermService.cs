@@ -299,7 +299,7 @@
 
         private string CreateReportNameWithExtension()
         {
-            return string.Format("Credit Term - {0}.xlsx", DateTime.Today.ToString("yyyy-MM-dd"));
+            return string.Format("Credit_Term_Report_For_{0}.xlsx", DateTime.Today.ToString("MMM_yyyy"));
         }
     }
 }

@@ -117,7 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Betting_Statistics" xml:space="preserve">
+    <value>Betting Statistics</value>
+  </data>
+  <data name="Last_Month" xml:space="preserve">
+    <value>Last Month</value>
+  </data>
   <data name="MonthtoDate" xml:space="preserve">
+    <value>Month to Date</value>
+  </data>
+  <data name="Month_To_Date" xml:space="preserve">
     <value>Month to Date</value>
   </data>
   <data name="Product" xml:space="preserve">
@@ -126,10 +135,58 @@
   <data name="Sportsbook_Total" xml:space="preserve">
     <value>Sportsbook Total</value>
   </data>
+  <data name="Today" xml:space="preserve">
+    <value>Today</value>
+  </data>
   <data name="Total" xml:space="preserve">
     <value>Total</value>
   </data>
   <data name="Win_Loss" xml:space="preserve">
-    <value>Win_Loss</value>
+    <value>Win/Loss</value>
+  </data>
+  <data name="Year_To_Date" xml:space="preserve">
+    <value>Year to Date</value>
+  </data>
+  <data name="Overall_Win_Loss_Products" xml:space="preserve">
+    <value>Overall_Win_Loss_By_Products_For_{0}.xlsx</value>
+  </data>
+  <data name="All_Products" xml:space="preserve">
+    <value>All Products</value>
+  </data>
+  <data name="Margin" xml:space="preserve">
+    <value>%Margin</value>
+  </data>
+  <data name="Number_Of_bets_WL" xml:space="preserve">
+    <value>Number of bets [W/L]</value>
+  </data>
+  <data name="Total_Turnover_WL" xml:space="preserve">
+    <value>Total Turnover [W/L]</value>
+  </data>
+  <data name="WinLoss" xml:space="preserve">
+    <value>WinLoss</value>
+  </data>
+  <data name="Win_Loss_Due_To_Partners" xml:space="preserve">
+    <value>Win/Loss (Due to Partners)</value>
+  </data>
+  <data name="Note1" xml:space="preserve">
+    <value>- The amount due to 3rd parties for Virtual Sports and Keno products will be manually settled by Oneworks which are not shown here</value>
+  </data>
+  <data name="Note2" xml:space="preserve">
+    <value>- Number of bets of Bettrade product will not be included in All Products Number of bets</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notes:</value>
+  </data>
+  <data name="Racing" xml:space="preserve">
+    <value>Racing</value>
+  </data>
+  <data name="N_A" xml:space="preserve">
+    <value>N/A</value>
+  </data>
+  <data name="Sportsbook_Live" xml:space="preserve">
+    <value>Sportsbook Live</value>
+  </data>
+  <data name="Sportsbook_Non_Live" xml:space="preserve">
+    <value>Sportsbook Non-Live</value>
   </data>
 </root>

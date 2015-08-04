@@ -11,9 +11,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Criteria
 {
     using System;
     using Fanex.Data.Repository;
-    /// <summary>
-    /// Get win loss detail from DBACC criteria.
-    /// </summary>
+    
     public class WinLossDetailOldCriteria : CriteriaBase
     {
         public DateTime DateStart { get; set; }

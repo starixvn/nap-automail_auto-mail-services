@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Interface;
-using Fanex.Service.Core.Configuration;
-using Fanex.Service.Core.MailService;
-using Fanex.Service.Core.Model;
-
-namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
+﻿namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
 {
+    using System.Collections.Generic;
+    using Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Interface;
+    using Fanex.Service.Core.Configuration;
+    using Fanex.Service.Core.MailService;
+    using Fanex.Service.Core.Model;
+
     public class MailingService : IMailingServiceBase
     {
         private IMailStationService mailStation;

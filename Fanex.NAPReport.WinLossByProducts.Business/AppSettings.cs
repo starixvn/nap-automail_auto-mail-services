@@ -8,6 +8,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business
 {
     using Fanex.Service.Core.Configuration;
     using Fanex.Service.Core.Utilities;
+using System;
 
     /// <summary>
     /// Application setting.
@@ -32,6 +33,24 @@ namespace Fanex.NAPReport.WinLossByProducts.Business
         }
 
         public static int FunctionId
+        {
+            get;
+            set;
+        }
+
+        public static bool IsCheckEnoughData
+        {
+            get;
+            set;
+        }
+
+        public static bool IsTesting
+        {
+            get;
+            set;
+        }
+
+        public static DateTime WinLossDate
         {
             get;
             set;

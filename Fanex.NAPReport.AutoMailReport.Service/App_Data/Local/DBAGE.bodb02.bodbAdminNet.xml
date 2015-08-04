@@ -6,8 +6,8 @@
   </Function>
 
   <Function Name="SMA Turnover Automail">
-    <Setting Key="TurnoverNotifiedSelect" SpName="NAP_SMATurnover_IsNotifiedSel_xtest" DbName="DBAGE.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="TurnoverNotifiedUpdate" SpName="NAP_SMATurnover_IsNotifiedUpd_xtest" DbName="DBAGE.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="TurnoverNotifiedSelect" SpName="NAP_SMATurnover_IsNotifiedSel" DbName="DBAGE.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="TurnoverNotifiedUpdate" SpName="NAP_SMATurnover_IsNotifiedUpd" DbName="DBAGE.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
   
 </Functions>

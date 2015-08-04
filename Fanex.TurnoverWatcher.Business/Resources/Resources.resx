@@ -129,7 +129,7 @@
   <data name="Event" xml:space="preserve">
     <value>Event</value>
   </data>
-  <data name="Event Date" xml:space="preserve">
+  <data name="EventDate" xml:space="preserve">
     <value>Event Date</value>
   </data>
   <data name="SmaName" xml:space="preserve">
@@ -157,7 +157,7 @@
     <value>Turnover_Watcher</value>
   </data>
   <data name="TurnoverWatcher_ReportName" xml:space="preserve">
-    <value>Turnover_Watcher_Report_{0}</value>
+    <value>Turnover_Watcher_Report_For_{0}.xlsx</value>
   </data>
   <data name="TurnoverWatcher_ReportTitle" xml:space="preserve">
     <value>Turnover Watcher Report - {0}</value>

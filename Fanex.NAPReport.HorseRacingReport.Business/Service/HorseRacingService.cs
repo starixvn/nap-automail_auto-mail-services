@@ -12,7 +12,6 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
     using System.IO;
     using Fanex.NAPReport.HorseRacingReport.Business.Criteria;
     using Fanex.NAPReport.HorseRacingReport.Business.Resources;
-    using Fanex.Service.Core.Configuration;
     using Fanex.Service.Core.Extensions;
     using Ionic.Zip;
 
@@ -218,8 +217,8 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
 
         private string CreateZipReportFolder(TimeRangeCriteria criteria)
         {
-            string reportFrom = criteria.FromDate.ToString("d MMM");
-            string reportTo = criteria.ToDate.ToString("d MMM");
+            string reportFrom = criteria.FromDate.ToString("dd_MMM_yyy");
+            string reportTo = criteria.ToDate.ToString("dd_MMM_yyy");
             return string.Format(RacingResource.Racing_Report_Directory, reportFrom, reportTo);
         }       
     }

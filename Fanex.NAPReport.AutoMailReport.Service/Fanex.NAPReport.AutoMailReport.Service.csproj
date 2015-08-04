@@ -180,11 +180,16 @@
     <Compile Include="Jobs\SMAMonthlyReport\SMAMonthlyReport.cs" />
     <Compile Include="Jobs\TestSendEmail\TestSendEmail.cs" />
     <Compile Include="Jobs\VirtualSportWinLoss\VirtualSportWinLoss.cs" />
+    <Compile Include="Jobs\WinLossByProducts\OverallWinLossProducts.cs" />
     <Compile Include="Jobs\WinLossByProducts\WinLossByProducts.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Dev\DBDWH.bodb_dwrs.dwrs.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="App_Data\Local\DBAGE.bodb02.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -192,6 +197,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Data\Local\DBDWH.bodb_dwrs.bodbAdminNet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\Local\DBDWH.bodb_dwrs.dwrs.xml">
+      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Data\Local\DBEXT.bodb02.bodbAdminNet.xml">
@@ -213,6 +222,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Data\UAT\DBDWH.bodb_dwrs.bodbAdminNet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\UAT\DBDWH.bodb_dwrs.dwrs.xml">
+      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Data\UAT\DBEXT.bodb02.bodbAdminNet.xml">
@@ -578,6 +591,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SiteConfig\TurnoverWatcher\Templates\TurnoverWatcherEmailTemplate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\WinLossByProducts\Templates\OverallWLNotificationEmailTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="SiteConfig\WinLossByProducts\Templates\WinLossByProductsEmailTemplate.cshtml">

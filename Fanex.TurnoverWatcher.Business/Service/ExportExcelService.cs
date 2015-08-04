@@ -54,6 +54,18 @@
             textStyle = _bodyCellStyleService.CenterTextStyle;            
         }
 
+        public string DirectoryOfFileName
+        {
+            get;
+            set;
+        }
+
+        public string FileName
+        {
+            get;
+            set;
+        }
+
         public void ExportExcel(List<TurnoverInfo> report)
         {
             CreateSheet();
@@ -95,7 +107,7 @@
             _cell.CellValue = Resources.Event;
             NpoiNewFormatExcelExtension.RenderCell(_workSheet, _cell, headerStyle);
             _cell.IncreaseColumnIndex();
-            _cell.CellValue = Resources.Event_Date;
+            _cell.CellValue = Resources.EventDate;
             NpoiNewFormatExcelExtension.RenderCell(_workSheet, _cell, headerStyle);
             _cell.IncreaseColumnIndex();
             _cell.CellValue = Resources.SmaName;
@@ -223,26 +235,14 @@
 
         private string CreateReportNameWithExtension()
         {
-            string reportName = string.Format(Resources.TurnoverWatcher_ReportName, DateTime.Now.ToString(DateTimeFormatConstants.YEAR_MONTH_DATE_MINUTE));
-            var reportNameWithExtension = string.Format("{0}.{1}", reportName, "xlsx");
-            return reportNameWithExtension;
+            string reportName = string.Format(Resources.TurnoverWatcher_ReportName, DateTime.Now.ToString("yyyy_MM_dd"));
+
+            return reportName;
         }
 
         private void CreateReportPath(string exportDataDirectory, string reportNameWithExtension)
         {
             DirectoryOfFileName = Path.Combine(exportDataDirectory, reportNameWithExtension);
-        }
-
-        public string DirectoryOfFileName
-        {
-            get;
-            set;
-        }
-
-        public string FileName
-        {
-            get;
-            set;
-        }
+        }        
     }
 }

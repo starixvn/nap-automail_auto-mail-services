@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="SMA_Master_Report_Name" xml:space="preserve">
-    <value>SMA_Report_For_Master_From_{0}_To_{1}</value>
+    <value>SMA_Report_For_Master_From_{0}_To_{1}.xlsx</value>
   </data>
   <data name="SMA_Master_Report_Title" xml:space="preserve">
     <value>SMA Report for Master - From {0} to {1}</value>
@@ -127,7 +127,7 @@
     <value>SMA Report</value>
   </data>
   <data name="SMA_Super_Report_Name" xml:space="preserve">
-    <value>SMA_Report_For_Super_From_{0}_To_{1}</value>
+    <value>SMA_Report_For_Super_From_{0}_To_{1}.xlsx</value>
   </data>
   <data name="SMA_Super_Report_Title" xml:space="preserve">
     <value>SMA Report for Super - From {0} to {1}</value>

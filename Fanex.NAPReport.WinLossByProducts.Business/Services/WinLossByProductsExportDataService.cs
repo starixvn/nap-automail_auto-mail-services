@@ -276,11 +276,9 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
 
         private string CreateReportNameWithExtension(GetWinLossByProductsCriteria criteria)
         {
-            string reportName = string.Format(
-                Resources.WinLossByProducts_ReportName,
-                criteria.WinLossDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
-            var reportNameWithExtension = string.Format("{0}.{1}", reportName, "xlsx");
-            return reportNameWithExtension;
+            string reportName = string.Format(Resources.WinLossByProducts_ReportName, criteria.WinLossDate.ToString("yyyy_MM_dd"));
+
+            return reportName;
         }        
     }
 }

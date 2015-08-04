@@ -38,8 +38,6 @@
             ExcelDocument.IncreaseRowIndex();
             ExcelDocument.IncreaseRowIndex();
 
-            //var style = ExcelDocument.GetCellStyle(FontBoldWeight.Normal, Color.FromArgb(60, 94, 165), Color.FromArgb(0, 0, 0));
-
             ExcelDocument.RenderCurrentCell("#", _headerStyle);
 
             ExcelDocument.IncreaseColumnIndex();

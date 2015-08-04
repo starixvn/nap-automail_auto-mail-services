@@ -61,11 +61,110 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All Products.
+        /// </summary>
+        public static string All_Products {
+            get {
+                return ResourceManager.GetString("All_Products", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Betting Statistics.
+        /// </summary>
+        public static string Betting_Statistics {
+            get {
+                return ResourceManager.GetString("Betting_Statistics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Month.
+        /// </summary>
+        public static string Last_Month {
+            get {
+                return ResourceManager.GetString("Last_Month", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to %Margin.
+        /// </summary>
+        public static string Margin {
+            get {
+                return ResourceManager.GetString("Margin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Month to Date.
+        /// </summary>
+        public static string Month_To_Date {
+            get {
+                return ResourceManager.GetString("Month_To_Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Month to Date.
         /// </summary>
         public static string MonthtoDate {
             get {
                 return ResourceManager.GetString("MonthtoDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to N/A.
+        /// </summary>
+        public static string N_A {
+            get {
+                return ResourceManager.GetString("N_A", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to - The amount due to 3rd parties for Virtual Sports and Keno products will be manually settled by Oneworks which are not shown here.
+        /// </summary>
+        public static string Note1 {
+            get {
+                return ResourceManager.GetString("Note1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to - Number of bets of Bettrade product will not be included in All Products Number of bets.
+        /// </summary>
+        public static string Note2 {
+            get {
+                return ResourceManager.GetString("Note2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notes:.
+        /// </summary>
+        public static string Notes {
+            get {
+                return ResourceManager.GetString("Notes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of bets [W/L].
+        /// </summary>
+        public static string Number_Of_bets_WL {
+            get {
+                return ResourceManager.GetString("Number_Of_bets_WL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Overall_Win_Loss_By_Products_For_{0}.xlsx.
+        /// </summary>
+        public static string Overall_Win_Loss_Products {
+            get {
+                return ResourceManager.GetString("Overall_Win_Loss_Products", resourceCulture);
             }
         }
         
@@ -79,11 +178,47 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Racing.
+        /// </summary>
+        public static string Racing {
+            get {
+                return ResourceManager.GetString("Racing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sportsbook Live.
+        /// </summary>
+        public static string Sportsbook_Live {
+            get {
+                return ResourceManager.GetString("Sportsbook_Live", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sportsbook Non-Live.
+        /// </summary>
+        public static string Sportsbook_Non_Live {
+            get {
+                return ResourceManager.GetString("Sportsbook_Non_Live", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sportsbook Total.
         /// </summary>
         public static string Sportsbook_Total {
             get {
                 return ResourceManager.GetString("Sportsbook_Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Today.
+        /// </summary>
+        public static string Today {
+            get {
+                return ResourceManager.GetString("Today", resourceCulture);
             }
         }
         
@@ -97,11 +232,47 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Win_Loss.
+        ///   Looks up a localized string similar to Total Turnover [W/L].
+        /// </summary>
+        public static string Total_Turnover_WL {
+            get {
+                return ResourceManager.GetString("Total_Turnover_WL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Win/Loss.
         /// </summary>
         public static string Win_Loss {
             get {
                 return ResourceManager.GetString("Win_Loss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Win/Loss (Due to Partners).
+        /// </summary>
+        public static string Win_Loss_Due_To_Partners {
+            get {
+                return ResourceManager.GetString("Win_Loss_Due_To_Partners", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WinLoss.
+        /// </summary>
+        public static string WinLoss {
+            get {
+                return ResourceManager.GetString("WinLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Year to Date.
+        /// </summary>
+        public static string Year_To_Date {
+            get {
+                return ResourceManager.GetString("Year_To_Date", resourceCulture);
             }
         }
     }

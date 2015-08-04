@@ -71,7 +71,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service
             };
 
             var mail = _mailStation.CreateMailWithNotification(_mailInfo);
-            mail.Subject = "Automail Report - Reporting Service on " + AppSettings.WinLossDate.ToShortDateString();
+            mail.Subject = "Automail Report - Reporting Service on " + currentDate.ToShortDateString();
             mailResult.Mail = mail;
 
             return mailResult;

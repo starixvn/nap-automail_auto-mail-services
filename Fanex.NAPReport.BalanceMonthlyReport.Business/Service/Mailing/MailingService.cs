@@ -69,7 +69,7 @@ namespace Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Mailing
 
         public void SendMailToDirectBalanceNormalGroup()
         {
-            if (AppSettings.FunctionIdDirectBalance> 0)
+            if (AppSettings.FunctionIdDirectBalance > 0)
             {
                 mailStation.SendFunctionMailWithNotification(AppSettings.FunctionIdDirectBalance, _mailInfo);
             }
@@ -80,7 +80,7 @@ namespace Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Mailing
             var superCriteria = new SuperBalanceReportCriteria
             {
                 Date = DateTime.Now,
-                Name = "Super Balance",
+                Name = "Super_Balance_Report",
                 Level = "Super",
 
                 DataDirectory = AppSettings.DataDirectoryDirectBalance,
@@ -111,7 +111,7 @@ namespace Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Mailing
             var masterCriteria = new DirectBalanceReportMasterCriteria
             {
                 Date = DateTime.Now,
-                Name = "Direct Master",
+                Name = "Direct_Master_Report",
                 Level = "Master",
 
                 DataDirectory = AppSettings.DataDirectoryDirectBalance,
@@ -123,7 +123,7 @@ namespace Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Mailing
             var agentCriteria = new DirectBalanceReportAgentCriteria
             {
                 Date = DateTime.Now,
-                Name = "Direct Agent",
+                Name = "Direct_Agent_Report",
                 Level = "Agent",
 
                 DataDirectory = AppSettings.DataDirectoryDirectBalance,
@@ -135,7 +135,7 @@ namespace Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Mailing
             var memberCriteria = new DirectBalanceReportMemberCriteria
             {
                 Date = DateTime.Now,
-                Name = "Direct Member",
+                Name = "Direct_Member_Report",
                 Level = "Member",
 
                 DataDirectory = AppSettings.DataDirectoryDirectBalance,

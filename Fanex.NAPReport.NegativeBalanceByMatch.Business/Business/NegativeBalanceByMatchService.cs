@@ -63,8 +63,6 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 			foreach (LicenseeFunction licenseeFunction in _licenseeService.GetLicenseeFunctions())
 			{
 				string licenseeName = licenseeFunction.LicenseeName;				
-
-				int taskId = 0;
 				try
 				{
 					List<Match> matches = GetMatchList(new Sel_BySiteCriteria { Site = licenseeName });
@@ -75,7 +73,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business
 						string body = GetMailVipGroupBody(licenseeName, matches);
                         
                         INegativeBalanceByMatchExcelService excel = new NegativeBalanceByMatchExcelService();
-                        string fileNamePath = Path.Combine(AppSettings.ExportDataDirectoryWithYearMonthDay, "NegativeBalanceByMatch_" + licenseeName + "_" + curDateTime.ToString(DateTimeFormatConstants.YEAR_MONTH_DATE_MINUTE) + ".xlsx");
+                        string fileNamePath = Path.Combine(AppSettings.ExportDataDirectoryWithYearMonthDay, "Negative_Balance_By_Match_Report_" + licenseeName + "_For_" + curDateTime.ToString("yyyy_MM_dd_hh_mm_tt") + ".xlsx");
                         excel.GenerateReportForLicensee(licenseeName, matches, exportSettings, fileNamePath);
                         
                         var fileNamesPath = new List<string>();

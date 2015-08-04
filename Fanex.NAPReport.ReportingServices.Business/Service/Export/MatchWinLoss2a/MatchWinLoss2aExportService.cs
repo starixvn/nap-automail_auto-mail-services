@@ -8,9 +8,9 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
 {
     using System;
     using System.Drawing;
+    using System.IO;
     using Fanex.NAPReport.ReportingServices.Business.Model.MatchWinLoss2a;
     using Fanex.NAPReport.ReportingServices.Business.Resources;
-    using Fanex.Service.Core.Configuration;
     using Fanex.Service.Core.Constants;
     using Fanex.Service.Core.Extensions;
     using Fanex.Service.Core.Model;
@@ -20,7 +20,6 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
     using Fanex.Service.Core.Utilities;
     using NPOI.SS.UserModel;
     using NPOI.XSSF.UserModel;
-    using System.IO;
 
     /// <summary>
     /// TODO: Update summary.
@@ -68,6 +67,12 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
             _alignmentService = new NpoiNewFormatAlignmentService();
         }
 
+        public string FileName
+        {
+            get;
+            set;
+        }
+
         public void ExportReport(BettypesAndSportsAndThirdPartyProductsWinLoss fullReport, DateTime winlossDate)
         {
             try
@@ -83,12 +88,9 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
                 this.ExportSummaryBettypesReport(fullReport.SummaryBettypesWinLoss);
                 this.ExportSportsAndThirdPartyProductsWinLossReport(fullReport.SportsAndThirdPartyProductsWinLoss);
                 string parentDirectory = AppSettings.DataDirectory(AppSettings.ExportDataDirectoryMatchWinLoss2a);
-                string reportName = string.Format(
-                    ReportingServicesResource.MatchWinLoss2aAll_ReportName,
-                    winlossDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
-                string reportNameWithExtension = string.Format("{0}.xlsx", reportName);
-                FileName = Path.Combine(parentDirectory, reportNameWithExtension);
-                SaveFile.SaveExcelFile(parentDirectory, reportNameWithExtension, _workbook, AppSettings.ExcelPassword);
+                string reportName = string.Format(ReportingServicesResource.MatchWinLoss2aAll_ReportName, winlossDate.ToString("yyyy_MM_dd"));
+                FileName = Path.Combine(parentDirectory, reportName);
+                SaveFile.SaveExcelFile(parentDirectory, reportName, _workbook, AppSettings.ExcelPassword);
             }
             catch (Exception ex)
             {
@@ -756,13 +758,6 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
                 _alignmentService.RightAlignment,
                 _fontService.BlackBoldFont);
             _grandTotalUnsignedNegativeDecimalStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.ParenthesesUnsignedNegativeDecimalNumberFormat);
-        }
-
-
-        public string FileName
-        {
-            get;
-            set;
-        }
+        }       
     }
 }

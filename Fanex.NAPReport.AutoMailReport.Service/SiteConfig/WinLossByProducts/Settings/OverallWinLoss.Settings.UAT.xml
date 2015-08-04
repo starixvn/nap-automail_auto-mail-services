@@ -2,5 +2,8 @@
 <Settings>  
   <add key="DataDirectory" value="\\10.40.40.52\NAP_Reports\UAT\WinLossByProducts" />
   <add key="ExcelPasswordProtected" value="" />
-  <add key="FunctionId" value="0" />  
+  <add key="FunctionId" value="0" />
+  <add key="IsCheckEnoughData" value="false" />
+  <add key="IsTesting" value="true" />
+  <add key="WinLossDate" value="2015-08-06" />
 </Settings>

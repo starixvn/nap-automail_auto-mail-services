@@ -9,9 +9,9 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.DailyTurnove
     using System;
     using System.Collections.Generic;
     using System.Drawing;
+    using System.IO;
     using Fanex.NAPReport.ReportingServices.Business.Model.DailyTurnover;
     using Fanex.NAPReport.ReportingServices.Business.Resources;
-    using Fanex.Service.Core.Configuration;
     using Fanex.Service.Core.Constants;
     using Fanex.Service.Core.Extensions;
     using Fanex.Service.Core.Model;
@@ -19,7 +19,6 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.DailyTurnove
     using Fanex.Service.Core.Service.Interface.Npoi;
     using Fanex.Service.Core.Utilities;
     using NPOI.XSSF.UserModel;
-    using System.IO;
 
     /// <summary>
     /// TODO: Update summary.
@@ -48,6 +47,12 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.DailyTurnove
             _customCellStyleService = new NpoiNewFormatCustomCellStyleService(_workbook);            
         }
 
+        public string FileName
+        {
+            get;
+            set;
+        }
+
         public void ExportReport(List<DailyTurnover> dailyTurnover, DateTime winlossDate)
         {
             try
@@ -58,12 +63,9 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.DailyTurnove
                 this.ExportReportHeader();
                 this.ExportReportContent(dailyTurnover);
                 string parentDirectory = AppSettings.DataDirectory(AppSettings.ExportDataDirectoryDailyTurnover);
-                string reportName = string.Format(
-                    ReportingServicesResource.DailyTurnover_ReportName,
-                    winlossDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
-                string reportNameWithExtension = string.Format("{0}.xlsx", reportName);
-                FileName = Path.Combine(parentDirectory, reportNameWithExtension);
-                SaveFile.SaveExcelFile(parentDirectory, reportNameWithExtension, _workbook, AppSettings.ExcelPassword);
+                string reportName = string.Format(ReportingServicesResource.DailyTurnover_ReportName, winlossDate.ToString("yyyy_MM_dd"));
+                FileName = Path.Combine(parentDirectory, reportName);
+                SaveFile.SaveExcelFile(parentDirectory, reportName, _workbook, AppSettings.ExcelPassword);
             }
             catch (Exception ex)
             {
@@ -170,13 +172,6 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.DailyTurnove
         {
             _cell.CellValue = cellValue;
             NpoiNewFormatExcelExtension.RenderCell(_workSheet, _cell, cellStyle);
-        }
-
-
-        public string FileName
-        {
-            get;
-            set;
-        }
+        }        
     }
 }

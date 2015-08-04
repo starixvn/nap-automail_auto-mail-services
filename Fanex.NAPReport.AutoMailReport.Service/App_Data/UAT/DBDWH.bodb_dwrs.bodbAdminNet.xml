@@ -19,5 +19,10 @@
     <Setting Key="Main_MatchWinLoss2a_GetWinLossDetailReportByBetType_WH" SpName="Acc_Rpt_MatchWinLoss2_Sporttype_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_MatchWinLoss2a_GetAllDetailReportBySportsType_WH" SpName="Acc_Rpt_MatchWinLoss2_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
   </Function>
+
+  <Function Name="Overall Win Loss By Products Report">
+    <Setting Key="Acc_Rpt_Automail_WinlossbyProduct" SpName="Acc_Rpt_Automail_WinlossbyProduct" DbName="DBDWH.bodb_dwrs.bodbAdminNet" Timeout="0"/>
+    <Setting Key="Acc_Rpt_Automail_Winloss_3rd" SpName="Acc_Rpt_Automail_Winloss_3rd" DbName="DBDWH.bodb_dwrs.bodbAdminNet" Timeout="0"/>
+  </Function>
   
 </Functions>

@@ -61,7 +61,7 @@ namespace Fanex.NAPReport.SMAReport.Business.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SMA_Report_For_Master_From_{0}_To_{1}.
+        ///   Looks up a localized string similar to SMA_Report_For_Master_From_{0}_To_{1}.xlsx.
         /// </summary>
         internal static string SMA_Master_Report_Name {
             get {
@@ -88,7 +88,7 @@ namespace Fanex.NAPReport.SMAReport.Business.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SMA_Report_For_Super_From_{0}_To_{1}.
+        ///   Looks up a localized string similar to SMA_Report_For_Super_From_{0}_To_{1}.xlsx.
         /// </summary>
         internal static string SMA_Super_Report_Name {
             get {

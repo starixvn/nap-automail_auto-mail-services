@@ -82,7 +82,7 @@ namespace Fanex.CreditMovement.Business.Service
             ExportReportContent(report);
             _workSheet.CreateFreezePane(0, 4, 0, 4);
 
-            string reportName = string.Format("Credit_Movement_Report_On_{0}.xlsx", criteria.ToDate.ToShortFormatedDateWithSlash().Replace("/", "-"));
+            string reportName = string.Format("Credit_Movement_Report_For_{0}.xlsx", criteria.ToDate.ToString("yyyy_MM_dd"));
             var fullReportPath = string.Empty;
 
             string parentDirectory = AppSettings.ExportDataDirectoryWithYearMonth;

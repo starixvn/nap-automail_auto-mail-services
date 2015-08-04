@@ -135,7 +135,7 @@
                 content = Razor.Parse(GetTemplate, lossItems);
 
                 var curDateTime = DateTime.UtcNow;
-                FileName = string.Format("SMA_Loss_Report_{0}.xlsx", curDateTime.ToString("yyyy-MM-dd"));
+                FileName = string.Format("SMA_Loss_Email_Notification_For_{0}.xlsx", curDateTime.ToString("yyyy_MM_dd"));
                 DirectoryOfFileName = Path.Combine(AppSettings.ExportDataDirectoryWithYearMonth, FileName);
                 var sheetName = "SMA Loss Report";
                 var exportSettings = new ExportSettings();

@@ -61,7 +61,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Company_Balance_Date_{0}.
+        ///   Looks up a localized string similar to Company_Balance_For_{0}.xlsx.
         /// </summary>
         internal static string CompanyBalance_ReportName {
             get {
@@ -88,7 +88,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Company_Statement_Date_{0}.
+        ///   Looks up a localized string similar to Company_Statement_For_{0}.xlsx.
         /// </summary>
         internal static string CompanyStatement_ReportName {
             get {
@@ -115,7 +115,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Daily_Turnover_Date_{0}.
+        ///   Looks up a localized string similar to Daily_Turnover_For_{0}.xlsx.
         /// </summary>
         internal static string DailyTurnover_ReportName {
             get {
@@ -160,7 +160,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Match_Win_Loss_Report_On_{0}.
+        ///   Looks up a localized string similar to Match_Win_Loss_2a_For_{0}.xlsx.
         /// </summary>
         internal static string MatchWinLoss2a_ReportName {
             get {
@@ -205,7 +205,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MatchWinLoss2aAllReports_{0}.
+        ///   Looks up a localized string similar to Match_Win_Loss_2a_For_{0}.xlsx.
         /// </summary>
         internal static string MatchWinLoss2aAll_ReportName {
             get {
@@ -277,7 +277,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Super_Yesterday_Balance_{0}.
+        ///   Looks up a localized string similar to Super_Yesterday_Balance_For_{0}.xlsx.
         /// </summary>
         internal static string SuperYesterdayBalance_ReportName {
             get {

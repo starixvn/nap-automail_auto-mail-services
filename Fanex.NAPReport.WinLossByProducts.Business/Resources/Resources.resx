@@ -118,12 +118,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="WinLossByProducts_ReportName" xml:space="preserve">
-    <value>Products_Win_Loss_Report_{0}</value>
+    <value>Win_Loss_By_Products_For_{0}.xlsx</value>
   </data>
   <data name="WinLossByProducts_ReportTitle" xml:space="preserve">
     <value>Products Win Loss Report - {0}</value>
   </data>
+  <data name="WinLossByProducts_ReportTitle3rd" xml:space="preserve">
+    <value>Sportbook Win Loss Report - {0}</value>
+  </data>
   <data name="WinLossByProducts_SheetName" xml:space="preserve">
-    <value>Win_Loss_By_Products</value>
+    <value>Products_Win_Loss</value>
+  </data>
+  <data name="WinLossByProducts_SheetName3rd" xml:space="preserve">
+    <value>Sportsbook_Win_Loss</value>
   </data>
 </root>

@@ -8,28 +8,21 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
-    using System.IO;
     using System.Linq;
     using Fanex.Common;
-    using Fanex.MailDelivery.Client.Models;
-    using Fanex.Service.Core.Common;
-    using Fanex.Service.Core.Constants;
-    using Fanex.Service.Core.Extensions;
     using Fanex.NAPReport.SMAReport.Business.Constants;
     using Fanex.NAPReport.SMAReport.Business.Enums;
     using Fanex.NAPReport.SMAReport.Business.Model;
     using Fanex.NAPReport.SMAReport.Business.Repositories;
+    using Fanex.Service.Core.Common;
+    using Fanex.Service.Core.Constants;
+    using Fanex.Service.Core.Extensions;
+    using Fanex.Service.Core.Utilities;
     using NPOI.SS.UserModel;
     using NPOI.XSSF.UserModel;
-    using OfficeOpenXmlCrypto;
     using Resources = Fanex.NAPReport.SMAReport.Business.Resources.Resources;
-    using Fanex.Service.Core.Utilities;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class SMAExportExcelService : ISMAExportExcelService
     {
         private readonly ISMAReportRepository _repository = null;
@@ -91,6 +84,18 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
             Init();
         }
 
+        public List<string> DirectoryOfFileNames
+        {
+            get;
+            set;
+        }
+
+        public List<string> FileNames
+        {
+            get;
+            set;
+        }
+
         private void Init()
         {
             this.InitColor();
@@ -100,8 +105,8 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
             this.InitBackgroundColorInfo();
             _lastMonth = DateTime.Now.AddMonths(-1);
             DateTime firstMonth = new DateTime(_lastMonth.Year, 1, 1);
-            _reportFrom = firstMonth.ToString("MMM yyyy");
-            _reportTo = _lastMonth.ToString("MMM yyyy");
+            _reportFrom = firstMonth.ToString("MMM_yyyy");
+            _reportTo = _lastMonth.ToString("MMM_yyyy");
             FileNames = new List<string>();
             DirectoryOfFileNames = new List<string>();
         }
@@ -129,10 +134,11 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
                 this.ExportReportByLevel(report.ReportRows[i], isSuperReport);
 
                 fileName = string.Format(
-                    isSuperReport ? Resources.SMA_Super_Report_Name :
-                    Resources.SMA_Master_Report_Name,
-                    _reportFrom.Replace(' ', '_'),
-                    _reportTo.Replace(' ', '_')) + ".xlsx";
+                    isSuperReport 
+                    ? Resources.SMA_Super_Report_Name 
+                    : Resources.SMA_Master_Report_Name,
+                    _reportFrom,
+                    _reportTo);
 
                 directoryOfFileName = AppSettings.DataDirectoryWithYear + @"\" + fileName;
                 SaveFile.SaveExcelFile(AppSettings.DataDirectoryWithYear, fileName, this._workbook, AppSettings.ExcelPasswordProtected);
@@ -150,11 +156,6 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
             this.ExportVirtualRateReport(report, isSuperReport);
         }
 
-        /// <summary>
-        /// Exports the win loss report.
-        /// </summary>
-        /// <param name="report">The report.</param>
-        /// <param name="isSuperReport">If set to <c>true</c> [is super report].</param>
         private void ExportWinLossReport(SMAReport report, bool isSuperReport)
         {
             _cellInfo = new CellInfo(0, 0, 0, 0, string.Empty);
@@ -169,11 +170,6 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
             NPOIUtility.ResetColumnIndex(ref _cellInfo);
         }
 
-        /// <summary>
-        /// Exports the virtual rate report.
-        /// </summary>
-        /// <param name="report">The report.</param>
-        /// <param name="isSuperReport">If set to <c>true</c> [is super report].</param>
         private void ExportVirtualRateReport(SMAReport report, bool isSuperReport)
         {
             int maxUserPerSheet = ExcelConstants.MaxUserPerSheet;
@@ -199,11 +195,6 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
             }
         }
 
-        /// <summary>
-        /// Initializes the width of the column.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="isSuperReport">If set to <c>true</c> [is super report].</param>
         private void InitWinLossReportColumnWidthAndTitle(XSSFSheet worksheet, bool isSuperReport)
         {
             int numberColumn = _lastMonth.Month + 6;
@@ -226,11 +217,6 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
             NPOIUtility.IncreaseRowIndex(ref _cellInfo);
         }
 
-        /// <summary>
-        /// Initializes the virtual rate report column width and title.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="isSuperReport">If set to <c>true</c> [is super report].</param>
         private void InitVirtualRateReportColumnWidthAndTitle(XSSFSheet worksheet, bool isSuperReport)
         {
             for (int i = 0; i < 13; i++)
@@ -256,14 +242,6 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
             NPOIUtility.IncreaseRowIndex(ref _cellInfo);
         }
 
-        /// <summary>
-        /// Exports the report header.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="isSuperReport">If set to <c>true</c> [is super report].</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportWinLossReportHeader(
             XSSFSheet worksheet,
             bool isSuperReport)
@@ -302,15 +280,7 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
             _cellInfo.CellValue = "Total";
             NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerStyle);
         }
-
-        /// <summary>
-        /// Exports the virtual rate report header.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="isSuperReport">If set to <c>true</c> [is super report].</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportVirtualRateReportHeader(
             XSSFSheet worksheet,
             bool isSuperReport)
@@ -370,14 +340,6 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
             NPOIUtility.IncreaseRowIndex(ref _cellInfo);
         }
 
-        /// <summary>
-        /// Exports the content of the report.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="report">The report.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportWinLossReportContent(
             XSSFSheet worksheet,
             SMAReport report)
@@ -457,15 +419,6 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
             this.ExportWinLossTotalReport(worksheet, report.SMAWinLoss.ReportRows[reportLength - 1]);
         }
 
-        /// <summary>
-        /// Exports the virtual rate by user.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="userIndex">Index of the user.</param>
-        /// <param name="virtualRateByUser">The virtual rate by user.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportVirtualRateByUser(XSSFSheet worksheet, int userIndex, SMAVirtualRate virtualRateByUser)
         {
             int numberMergeRow = virtualRateByUser.ReportRows.Count;
@@ -524,14 +477,6 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
             NPOIUtility.ResetColumnIndex(ref _cellInfo);
         }
 
-        /// <summary>
-        /// Exports the win loss total report.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="totalInfo">The total information.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportWinLossTotalReport(XSSFSheet worksheet, SMAWinLoss totalInfo)
         {
             NPOIUtility.ResetColumnIndex(ref _cellInfo);
@@ -567,13 +512,7 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
 
             this.ExportWinLossInfoByMonth(worksheet, totalInfo, RowType.Total);
         }
-
-        /// <summary>
-        /// Exports the win loss information by month.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="winLossInfo">The win loss information.</param>
-        /// <param name="rowType">Type of the row.</param>
+       
         private void ExportWinLossInfoByMonth(XSSFSheet worksheet, SMAWinLoss winLossInfo, RowType rowType)
         {
             for (int i = 0; i < winLossInfo.ReportByMonths.Count; i++)
@@ -631,9 +570,6 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
             _headerBackgroundColor = Color.FromArgb(146, 209, 79);
         }
 
-        /// <summary>
-        /// Initializes the background color information.
-        /// </summary>
         private void InitBackgroundColorInfo()
         {
             _normalRowBackgroundInfo = new BackgroundStyleInfo(
@@ -652,13 +588,7 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
                 _headerBackgroundColor,
                 (int)FillPattern.SolidForeground);
         }
-
-        /// <summary>
-        /// Initializes the cell style information.
-        /// </summary>
-         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+       
         private void InitCellStyleInfo()
         {
             _specialRowTextStyle = NPOIHighVersion.CreateCellStyle(
@@ -803,10 +733,7 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
                        _font);
             _oddRowPercentStyle.DataFormat = _dataFormat.GetFormat("0%");
         }
-
-        /// <summary>
-        /// Initializes the border style information.
-        /// </summary>
+     
         private void InitBorderStyleInfo()
         {
             _borderInfo = new BorderInfo(
@@ -840,9 +767,6 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
                 Color.Gray);
         }
 
-        /// <summary>
-        /// Initializes the font information.
-        /// </summary>
         private void InitFontInfo()
         {
             _fontInfo = new FontAndColorInfo(
@@ -861,9 +785,6 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
                 Color.Black);
         }
 
-        /// <summary>
-        /// Initializes the alignment information.
-        /// </summary>
         private void InitAlignmentInfo()
         {
             _centerAlignmentInfo = new AlignmentInfo(
@@ -893,12 +814,7 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
                 sheetIndexBeforRounding + 1;
             return string.Format("Virtual Rate {0}", sheetIndex);
         }
-
-        /// <summary>
-        /// Sets the cell value.
-        /// </summary>
-        /// <param name="virtualRate">The virtual rate.</param>
-        /// <param name="cellInfo">The cell information.</param>
+        
         private void SetCellValue(decimal? virtualRate, ref CellInfo cellInfo)
         {
             decimal? virtualRateValue = virtualRate / 100;
@@ -911,19 +827,6 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
             {
                 cellInfo.CellValue = virtualRateValue;
             }
-        }
-
-
-        public List<string> DirectoryOfFileNames
-        {
-            get;
-            set;
-        }
-
-        public List<string> FileNames
-        {
-            get;
-            set;
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
         private DateTime _moveBetsDay = DateTime.Today;
         private DateTime _firstDayOfMonth = new DateTime(DateTime.Today.AddDays(-1).Year, DateTime.Today.AddDays(-1).Month, 1);
         private DateTime _yesterday = DateTime.Today.AddDays(-1);
-        IRepository _repository;
+        private IRepository _repository;
 
         private Dictionary<int, string> _sportIDsExistOrNot = new Dictionary<int, string>();
 

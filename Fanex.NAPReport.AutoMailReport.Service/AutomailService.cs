@@ -5,6 +5,7 @@ using Fanex.Data.Configuration;
 using Fanex.MailDelivery.Client.Handlers;
 using Fanex.Service.Core.MailService;
 using Fanex.Service.Core.Utilities;
+using Fanex.Service.Core.Extensions;
 
 namespace Fanex.NAPReport.AutoMailReport.Service
 {
@@ -14,17 +15,31 @@ namespace Fanex.NAPReport.AutoMailReport.Service
 
 		public AutoMailService()
 		{
-			InitializeComponent(AppSettingBase.ServiceName);
-			Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
-			DbSettingProviderManager.Current.Start();
-			MailClientHandler.Start();
+            try
+            {
+                InitializeComponent(AppSettingBase.ServiceName);
+                Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
+                DbSettingProviderManager.Current.Start();
+                MailClientHandler.Start();
 
-			_timerServiceFacade = new TimerServiceFacade(AppDomain.CurrentDomain.BaseDirectory + @"TimerServiceSetting\TimerServiceSetting.xml");
+                _timerServiceFacade = new TimerServiceFacade(AppDomain.CurrentDomain.BaseDirectory + @"TimerServiceSetting\TimerServiceSetting.xml");
+            }
+            catch (Exception ex)
+            {
+                LogExtensions.ExceptionHandler(ex);
+            }
 		}
 
 		protected override void OnStart(string[] args)
 		{
-			_timerServiceFacade.StartServices();
+            try
+            {
+                _timerServiceFacade.StartServices();
+            }
+            catch (Exception ex)
+            {
+                LogExtensions.ExceptionHandler(ex);
+            }
 		}
 
 		protected override void OnStop()

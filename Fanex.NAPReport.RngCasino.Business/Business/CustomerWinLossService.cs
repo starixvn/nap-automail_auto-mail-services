@@ -62,7 +62,11 @@ namespace Fanex.NAPReport.RngCasino.Business.Business
                     var body = GetMailVipGroupBody(userInfos);
 
                     var fileNamePath = Path.Combine(AppSettings.ExportDataDirectoryWithYearMonthDay,
-                                                        "RNG_Casino_WinLoss" + "_" + DateTime.Now.ToString(DateTimeFormatConstants.YEAR_MONTH_DATE_MINUTE) + ".xlsx");
+                                                        "RNG_Casino_Members_With_Win_Loss_Greater_Or_Equal_"
+                                                        + AppSettings.BaseCurrency + "$"
+                                                        + NumberExtension.WinLossFormat(AppSettings.WinLoss,0)                                                        
+                                                        + "_From_" + fromDate.ToString("yyyy_MM_dd_hh_mm_tt")
+                                                        + "_To_" + DateTime.Now.ToString("yyyy_MM_dd_hh_mm_tt") + ".xlsx");
 
                     _excelService.GenerateReport(userInfos, _rngCasinoExportSettings, fileNamePath);
 

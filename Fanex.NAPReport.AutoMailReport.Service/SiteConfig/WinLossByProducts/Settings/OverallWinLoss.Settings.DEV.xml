@@ -2,5 +2,8 @@
 <Settings>
   <add key="DataDirectory" value="\\10.18.200.202\_Fanex.ExcelFiles\WinLossByProducts" />
   <add key="ExcelPasswordProtected" value="we168" />
-  <add key="FunctionId" value="89" />  
+  <add key="FunctionId" value="89" />
+  <add key="IsCheckEnoughData" value="true" />
+  <add key="IsTesting" value="true" />
+  <add key="WinLossDate" value="2015-08-06" />
 </Settings>

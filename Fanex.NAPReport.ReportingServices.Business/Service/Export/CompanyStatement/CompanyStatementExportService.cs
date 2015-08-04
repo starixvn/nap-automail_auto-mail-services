@@ -8,9 +8,9 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyState
 {
     using System;
     using System.Drawing;
+    using System.IO;
     using Fanex.NAPReport.ReportingServices.Business.Model.CompanyStatement;
     using Fanex.NAPReport.ReportingServices.Business.Resources;
-    using Fanex.Service.Core.Configuration;
     using Fanex.Service.Core.Constants;
     using Fanex.Service.Core.Extensions;
     using Fanex.Service.Core.Model;
@@ -18,7 +18,6 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyState
     using Fanex.Service.Core.Service.Interface.Npoi;
     using Fanex.Service.Core.Utilities;
     using NPOI.XSSF.UserModel;
-    using System.IO;
 
     /// <summary>
     /// TODO: Update summary.
@@ -45,6 +44,12 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyState
             _customCellStyleService = new NpoiNewFormatCustomCellStyleService(_workbook);            
         }
 
+        public string FileName
+        {
+            get;
+            set;
+        }
+
         public void ExportReport(CompanyStatement companyStatement, DateTime winlossDate)
         {
             try
@@ -55,12 +60,9 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyState
                 this.ExportReportHeader();
                 this.ExportReportContent(companyStatement);
                 string parentDirectory = AppSettings.DataDirectory(AppSettings.ExportDataDirectoryCompanyStatement);
-                string reportName = string.Format(
-                    ReportingServicesResource.CompanyStatement_ReportName,
-                    winlossDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
-                string reportNameWithExtension = string.Format("{0}.xlsx", reportName);
-                FileName = Path.Combine(parentDirectory, reportNameWithExtension);
-                SaveFile.SaveExcelFile(parentDirectory, reportNameWithExtension, _workbook, AppSettings.ExcelPassword);
+                string reportName = string.Format(ReportingServicesResource.CompanyStatement_ReportName, winlossDate.ToString("yyyy_MM_dd"));
+                FileName = Path.Combine(parentDirectory, reportName);
+                SaveFile.SaveExcelFile(parentDirectory, reportName, _workbook, AppSettings.ExcelPassword);
             }
             catch (Exception ex)
             {
@@ -149,13 +151,6 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyState
         {
             _cell.CellValue = cellValue;
             NpoiNewFormatExcelExtension.RenderCell(_workSheet, _cell, cellStyle);
-        }
-
-
-        public string FileName
-        {
-            get;
-            set;
-        }
+        }       
     }
 }
