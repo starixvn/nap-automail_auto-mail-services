@@ -12,6 +12,8 @@ namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.WinLossByProducts
     using Fanex.NAPReport.WinLossByProducts.Business.Services;
     using Fanex.Service.Core.MailService;
     using Quartz;
+    using System;
+    using Fanex.Service.Core.Extensions;
 
     /// <summary>
     /// TODO: Update summary.
@@ -27,14 +29,26 @@ namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.WinLossByProducts
 
         public override JobResultMessage SendMailToVipGroup(Schedule schedule, IJobExecutionContext jobContext)
         {
-            var mail = service.SendMailToVIPGroup();
-            
-            return new JobResultMessage()
+            JobResultMessage result = new JobResultMessage();
+
+            try
             {
-                JobStatus = mail.JobStatus,
-                Mail = mail.Mail,
-                Schedule = schedule,
-            };
+                var mail = service.SendMailToVIPGroup();
+
+                return new JobResultMessage()
+                {
+                    JobStatus = mail.JobStatus,
+                    Mail = mail.Mail,
+                    Schedule = schedule,
+                };
+
+            }
+            catch (Exception ex)
+            {
+                LogExtensions.ExceptionHandler(ex);
+            }
+
+            return result;
         }
 
         public override void SendMailToNormalGroup()

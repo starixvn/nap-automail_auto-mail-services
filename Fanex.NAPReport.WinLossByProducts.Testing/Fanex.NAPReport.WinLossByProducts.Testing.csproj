@@ -171,7 +171,7 @@
     <Content Include="App_Data\DBACC.bodb02.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SiteConfig\WinLossByProducts\Settings\WinLossByProducts.Settings.xml">
+    <Content Include="SiteConfig\WinLossByProducts\Settings\OverallWinLoss.Settings.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

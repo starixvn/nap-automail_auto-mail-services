@@ -31,7 +31,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
 
         public MailingService()
         {
-            ConfigurationParser configurationParser = new ConfigurationParser(@"SiteConfig\WinLossByProducts\Settings\WinLossByProducts.Settings.xml");
+            ConfigurationParser configurationParser = new ConfigurationParser(@"SiteConfig\WinLossByProducts\Settings\OverallWinLoss.Settings.xml");
             configurationParser.Parse<AppSettings>();
 
             mailStation = new MailStationService();

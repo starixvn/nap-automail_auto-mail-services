@@ -178,6 +178,7 @@
     <Compile Include="Jobs\ReportingServices\ReportingServices.cs" />
     <Compile Include="Jobs\SMALossReport\SMALossReport.cs" />
     <Compile Include="Jobs\SMAMonthlyReport\SMAMonthlyReport.cs" />
+    <Compile Include="Jobs\TestSendEmail\TestSendEmail.cs" />
     <Compile Include="Jobs\VirtualSportWinLoss\VirtualSportWinLoss.cs" />
     <Compile Include="Jobs\WinLossByProducts\WinLossByProducts.cs" />
     <Compile Include="Program.cs" />
@@ -408,19 +409,19 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SiteConfig\WinLossByProducts\Settings\WinLossByProducts.Settings.PRO.xml">
+    <Content Include="SiteConfig\WinLossByProducts\Settings\OverallWinLoss.Settings.PRO.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SiteConfig\WinLossByProducts\Settings\WinLossByProducts.Settings.UAT.xml">
+    <Content Include="SiteConfig\WinLossByProducts\Settings\OverallWinLoss.Settings.UAT.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SiteConfig\WinLossByProducts\Settings\WinLossByProducts.Settings.Local.xml">
+    <Content Include="SiteConfig\WinLossByProducts\Settings\OverallWinLoss.Settings.Local.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SiteConfig\WinLossByProducts\Settings\WinLossByProducts.Settings.DEV.xml">
+    <Content Include="SiteConfig\WinLossByProducts\Settings\OverallWinLoss.Settings.DEV.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
