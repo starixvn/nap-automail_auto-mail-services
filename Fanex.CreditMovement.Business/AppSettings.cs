@@ -37,12 +37,6 @@ namespace Fanex.CreditMovement.Business
             set;
         }
 
-        public static string MailTitle
-        {
-            get;
-            set;
-        }
-
         public static string ExcelPassword
         {
             get;
@@ -80,6 +74,12 @@ namespace Fanex.CreditMovement.Business
                 var repository = new CreditMovementRepository();
                 return repository.GetSiteId();
             }
+        }
+
+        public static int FunctionId
+        {
+            get;
+            set;
         }
     }
 }

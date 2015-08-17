@@ -40,12 +40,12 @@ namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.NAPReport
             };
 
             string subject = schedule.Name + " - " + DateTime.Now.ToString("yyyy-MM-dd");
-            var mail = _creditMovementService.ProcessToSendEmail(criteria, subject);
+            _creditMovementService.ExportExcel(criteria);
 
             return new JobResultMessage()
             {
                 JobStatus = JobStatus.Success,
-                Mail = mail,
+                Mail = null,
                 Schedule = schedule,
             };
         }

@@ -15,6 +15,10 @@ namespace Fanex.CreditMovement.Business.Service
     /// </summary>
     public interface ICreditMovementService
     {
-        Mail ProcessToSendEmail(GetCreditMovementCriteria criteria, string mailSubject);
+        void ExportExcel(GetCreditMovementCriteria criteria);
+
+        string DirectoryOfFileName { get; set; }
+
+        string FileName { get; set; }
     }
 }

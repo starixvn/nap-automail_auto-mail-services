@@ -168,6 +168,7 @@
     <Compile Include="Jobs\BalanceMonthlyReport\SuperBalance.cs" />
     <Compile Include="Jobs\BA\DailyWinLoss.cs" />
     <Compile Include="Jobs\BA\MonthlyWinLoss.cs" />
+    <Compile Include="Jobs\CreditMovement\CreditMovement.cs" />
     <Compile Include="Jobs\GameWinLimitControl\GameWinLimitControl.cs" />
     <Compile Include="Jobs\HorseTransaction3rd\HorseTransaction3rd.cs" />
     <Compile Include="Jobs\NAPReport\CreditMovement.cs" />
@@ -547,12 +548,6 @@
     <Content Include="SiteConfig\CreditMovement\Templates\CreditMovementEmail.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SiteConfig\Common\Templates\AttachedFileEmail.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\Common\Templates\NotificationEmail.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="SiteConfig\GameWinLimitControl\Templates\GameWinLimitControlEmailTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -572,6 +567,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SiteConfig\RNGCasinoWinLoss\Templates\RNGCasinoWinLossEmptyDataEmailTemplate.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\Common\Templates\NotificationEmail.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\Common\Templates\AttachedFileEmail.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="SiteConfig\ReportingServices\Configurations\CustomBettype\CustomBettypeSection.config">

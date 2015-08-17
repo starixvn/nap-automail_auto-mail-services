@@ -25,18 +25,13 @@ namespace Fanex.CreditMovement.Service
         private static void Main()
         {
             DbSettingProviderManager.Current.Start();
-            var repository = new CreditMovementRepository();            
-            var service = new CreditMovementService();
 
-            GetCreditMovementCriteria criteria = new GetCreditMovementCriteria
-            {
-                FromDate = AppSettings.FromDate,
-                ToDate = AppSettings.ToDate,
-                SiteList = string.Join(",", AppSettings.ListSite),
-                Amount = AppSettings.Amount
-            };
+            ConfigurationParser configurationParser = new ConfigurationParser(@"SiteConfig\CreditMovement\Settings\CreditMovement.Settings.xml");
+            configurationParser.Parse<AppSettings>();
 
-            service.ProcessToSendEmail(criteria, "Credit Movement Notification");
+            var repository = new CreditMovementRepository();
+            MailingService service = new MailingService();
+            var mail = service.SendMailToVIPGroup();
 
             Console.WriteLine(string.Format("Done at {0}", DateTime.Now.ToString("yyyy-MM-dd")));
         }

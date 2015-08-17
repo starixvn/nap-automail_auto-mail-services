@@ -32,7 +32,7 @@ namespace Fanex.CreditMovement.Business.Service
             string emailSubject = string.Format(
                 mailSubject,
                 criteria.ToDate.ToString("yyyy-MM-dd"));
-            string emailTitle = AppSettings.MailTitle;
+            string emailTitle = string.Empty;
 
             var listAttachment = new List<MailAttachment>();
             listAttachment.Add(new MailAttachment(reportUrl, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));

@@ -162,6 +162,7 @@
     <Compile Include="Service\CreditMovementService.cs" />
     <Compile Include="Service\ICreditMovementService.cs" />
     <Compile Include="Service\Mailing.cs" />
+    <Compile Include="Service\MailingService.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\CreditMovementResource.resx">

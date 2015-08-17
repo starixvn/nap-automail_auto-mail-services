@@ -44,35 +44,23 @@ namespace Fanex.CreditMovement.Business.Service
             _fontService = new NpoiNewFormatFontService(_workbook);
             _regularFont = _fontService.RegularFont;
             _bodyCellStyleService = new NpoiNewFormatBodyCellStyleService(_workbook, _regularFont);
-            _customCellStyleService = new NpoiNewFormatCustomCellStyleService(_workbook);
-
-            ConfigurationParser configurationParser = new ConfigurationParser(@"SiteConfig\CreditMovement\Settings\CreditMovement.Settings.xml");
-            configurationParser.Parse<AppSettings>();
+            _customCellStyleService = new NpoiNewFormatCustomCellStyleService(_workbook);            
         }
 
-        /// <summary>
-        /// Processes to send email.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        public Mail ProcessToSendEmail(GetCreditMovementCriteria criteria, string mailSubject)
+        public string DirectoryOfFileName { get; set; }
+
+        public string FileName { get; set; }
+        
+        public void ExportExcel(GetCreditMovementCriteria criteria)
         {
             var report = _repository.GetReportData(criteria);
             if (report.Count > 0)
             {
-                string reportUrl = ExportReport(report, criteria);
-                return Mailing.SendCreditMovementReportEmail(reportUrl, criteria, mailSubject);
+                ExportReport(report, criteria);
             }
-
-            return new Mail();
         }
-
-        /// <summary>
-        /// Exports the report.
-        /// </summary>
-        /// <param name="report">The report.</param>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The report URL.</returns>
-        private string ExportReport(List<CreditMovement> report, GetCreditMovementCriteria criteria)
+        
+        private void ExportReport(List<CreditMovement> report, GetCreditMovementCriteria criteria)
         {
             string sheetName = "Credit Movement";
             string reportTitle = string.Empty;
@@ -82,22 +70,15 @@ namespace Fanex.CreditMovement.Business.Service
             ExportReportContent(report);
             _workSheet.CreateFreezePane(0, 4, 0, 4);
 
-            string reportName = string.Format("Credit_Movement_Report_For_{0}.xlsx", criteria.ToDate.ToString("yyyy_MM_dd"));
-            var fullReportPath = string.Empty;
-
+            FileName = string.Format("Credit_Movement_Report_For_{0}.xlsx", criteria.ToDate.ToString("yyyy_MM_dd"));
             string parentDirectory = AppSettings.ExportDataDirectoryWithYearMonth;
-            fullReportPath = parentDirectory + @"\" + reportName;
-            SaveFile.SaveExcelFile(parentDirectory, reportName, _workbook, AppSettings.ExcelPassword);
+            DirectoryOfFileName = parentDirectory + @"\" + FileName;
+
+            SaveFile.SaveExcelFile(parentDirectory, FileName, _workbook, AppSettings.ExcelPassword);
 
             GC.Collect();
-
-            return fullReportPath;
         }
-
-        /// <summary>
-        /// Initializes the width of the column.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
+        
         private void InitColumnWidth()
         {
             int numberColumn = 6;
@@ -114,10 +95,6 @@ namespace Fanex.CreditMovement.Business.Service
             _workSheet.SetColumnWidth(6, 200 * NPOIConstants.FontWidth);
         }
 
-        /// <summary>
-        /// Exports the report header.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
         private void ExportReportHeader(GetCreditMovementCriteria criteria)
         {
             Color headerBackgroundColor = Color.FromArgb(60, 94, 165);
@@ -167,12 +144,7 @@ namespace Fanex.CreditMovement.Business.Service
             NpoiNewFormatExcelExtension.RenderCell(_workSheet, _cell, headerStyle);
             _cell.IncreaseRowIndex();
         }
-
-        /// <summary>
-        /// Exports the content of the report.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="report">The report.</param>
+       
         private void ExportReportContent(List<CreditMovement> report)
         {
             for (int i = 0; i < report.Count; i++)

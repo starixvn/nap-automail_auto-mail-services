@@ -122,6 +122,12 @@
     <Content Include="SiteConfig\CreditMovement\Templates\CreditMovementEmail.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="SiteConfig\Common\Templates\AttachedFileEmail.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\Common\Templates\NotificationEmail.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.CreditMovement.Business\Fanex.NAPReport.CreditMovement.Business.csproj">
