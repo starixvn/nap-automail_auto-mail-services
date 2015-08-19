@@ -8,10 +8,10 @@
     using Fanex.Service.Core.MailService;
     using Fanex.Service.Core.MailService.ServiceFactory;
 
-	public class RngCasinoServiceFactory : ITimerServiceFactory<IStandaloneTimerFunctionMailService>
-	{
-		public IStandaloneTimerFunctionMailService GetService()
-		{
+    public class RngCasinoServiceFactory : ITimerServiceFactory<IStandaloneTimerFunctionMailService>
+    {
+        public IStandaloneTimerFunctionMailService GetService()
+        {
             var configurationParser = new ConfigurationParser(AppDomain.CurrentDomain.BaseDirectory + @"\SiteConfig\RNGCasinoWinLoss\Settings\RngCasino.Settings.xml");
             configurationParser.Parse<AppSettings>();
 
@@ -19,7 +19,6 @@
             RngCasinoExportSettings rngRngCasinoExportSettings = new RngCasinoExportSettings();
 
             return new CustomerWinLossService(rngCasinoExcelService, rngRngCasinoExportSettings, AppDomain.CurrentDomain.BaseDirectory);
-            //return new Testing();
-		}
-	}
+        }
+    }
 }

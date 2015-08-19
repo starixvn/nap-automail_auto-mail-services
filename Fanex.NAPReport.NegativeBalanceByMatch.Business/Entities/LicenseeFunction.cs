@@ -6,13 +6,4 @@
 
         public Function Function { get; set; }
     }
-
-    public class Function
-    {
-        public int IdVipGroup { get; set; }
-
-		public int IdNormalGroup { get; set; }
-
-        public string Name { get; set; }
-    }
 }

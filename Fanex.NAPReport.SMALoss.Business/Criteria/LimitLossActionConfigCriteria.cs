@@ -1,6 +1,6 @@
 ﻿namespace Fanex.NAPReport.SMALoss.Business.Criteria
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     public class LimitLossActionConfigCriteria : CriteriaBase
     {

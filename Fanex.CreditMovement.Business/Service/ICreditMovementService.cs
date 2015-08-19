@@ -14,11 +14,11 @@ namespace Fanex.CreditMovement.Business.Service
     /// TODO: Update summary.
     /// </summary>
     public interface ICreditMovementService
-    {
-        void ExportExcel(GetCreditMovementCriteria criteria);
-
+    {       
         string DirectoryOfFileName { get; set; }
 
         string FileName { get; set; }
+
+        void ExportExcel(GetCreditMovementCriteria criteria);
     }
 }

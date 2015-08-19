@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Fanex.Service.Core.MailService;
-using Fanex.MailDelivery.Client.Models;
-using Fanex.MailDelivery.Client.Handlers;
-
-namespace Fanex.NAPReport.RngCasino.Business.Business
+﻿namespace Fanex.NAPReport.RngCasino.Business.Business
 {
+    using Fanex.MailDelivery.Client.Handlers;
+    using Fanex.MailDelivery.Client.Models;
+    using Fanex.Service.Core.MailService;
+
     public class Testing : TimerFunctionMailServiceBase, IStandaloneTimerFunctionMailService
     {
         public override bool IsActive()

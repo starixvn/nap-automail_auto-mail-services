@@ -1,11 +1,11 @@
 ﻿namespace Fanex.NAPReport.BalanceMonthlyReport.Business
 {
-    using Fanex.Data.Repository;
     using System;
+    using Fanex.Data.Repository;
 
     public class BalanceReportBaseCriteria : CriteriaBase
     {
-        [SpParam(Ignored=true)]
+        [SpParam(Ignored = true)]
         public DateTime Date { get; set; }
 
         [SpParam(Ignored = true)]

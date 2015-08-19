@@ -1,16 +1,7 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="NumberExtension.cs" company="Nexel">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-using System;
-
-namespace Fanex.NAPReport.RngCasino.Business.Helper.Implement
+﻿namespace Fanex.NAPReport.RngCasino.Business.Helper.Implement
 {
-	/// <summary>
-    /// TODO: Update summary.
-    /// </summary>
+    using System;
+
     public static class NumberExtension
     {
         /// <summary>

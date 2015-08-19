@@ -7,9 +7,6 @@
 namespace Fanex.NAPReport.RngCasino.Business.Repositories
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Fanex.AccountingReports.SqLiteDatabase;
     using Fanex.Common;
 
@@ -19,6 +16,7 @@ namespace Fanex.NAPReport.RngCasino.Business.Repositories
     public class Repository : IRepository
     {
         private SqLite db;
+
         public Repository()
         {
             string path = AppDomain.CurrentDomain.BaseDirectory + @"\SiteConfig\RNGCasinoWinLoss\SQLite\AutoMail-RNGCasinoWinLoss.s3db";
@@ -37,7 +35,7 @@ namespace Fanex.NAPReport.RngCasino.Business.Repositories
             }
             else
             {
-                sql = "update Log set LastTime = '"+ DateTime.Now.ToString() +"'";
+                sql = "update Log set LastTime = '" + DateTime.Now.ToString() + "'";
             }
 
             db.ExecuteNonQuery(sql);

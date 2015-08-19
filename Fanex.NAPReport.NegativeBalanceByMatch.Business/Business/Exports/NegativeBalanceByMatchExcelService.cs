@@ -1,39 +1,39 @@
-using System.Collections.Generic;
-using Fanex.NAPReport.Business.Business.Exports.ExcelExport;
-using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport;
-using Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities;
-
 namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports
 {
-	public class NegativeBalanceByMatchExcelService : INegativeBalanceByMatchExcelService
-	{
-		public void GenerateReportForLicensee(string licenseeName, IList<Match> matchs, ExportSettings exportSettings, string saveFileNamePath)
-		{
-			ExcelDocument excelDocument = new ExcelDocument(exportSettings, licenseeName);
+    using System.Collections.Generic;
+    using Fanex.NAPReport.Business.Business.Exports.ExcelExport;
+    using Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport;
+    using Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities;
 
-			ExportCompositeCommand<IExportCommand> exportCommand = new ExportCompositeCommand<IExportCommand>(excelDocument);
+    public class NegativeBalanceByMatchExcelService : INegativeBalanceByMatchExcelService
+    {
+        public void GenerateReportForLicensee(string licenseeName, IList<Match> matchs, ExportSettings exportSettings, string saveFileNamePath)
+        {
+            ExcelDocument excelDocument = new ExcelDocument(exportSettings, licenseeName);
 
-			ExportMatchsCommand exportMatchsCommand = new ExportMatchsCommand(excelDocument, matchs, 3);
-			foreach (var match in matchs)
-			{
-				ExportMatchInfoCommand matchInfoCommand = new ExportMatchInfoCommand(excelDocument, match.MatchInfo);
-				ExportMatchSettleLogsCommand matchSettleLogsCommand = new ExportMatchSettleLogsCommand(excelDocument, match.MatchSettleLogList);
-				ExportCustomerBalanceInfosCommand customerBalanceInfoCommand = new ExportCustomerBalanceInfosCommand(excelDocument, match.CustomerInfoList);
+            ExportCompositeCommand<IExportCommand> exportCommand = new ExportCompositeCommand<IExportCommand>(excelDocument);
 
-				ExportMatchCommand matchCommand = new ExportMatchCommand(excelDocument, matchInfoCommand, matchSettleLogsCommand, customerBalanceInfoCommand);
+            ExportMatchsCommand exportMatchsCommand = new ExportMatchsCommand(excelDocument, matchs, 3);
+            foreach (var match in matchs)
+            {
+                ExportMatchInfoCommand matchInfoCommand = new ExportMatchInfoCommand(excelDocument, match.MatchInfo);
+                ExportMatchSettleLogsCommand matchSettleLogsCommand = new ExportMatchSettleLogsCommand(excelDocument, match.MatchSettleLogList);
+                ExportCustomerBalanceInfosCommand customerBalanceInfoCommand = new ExportCustomerBalanceInfosCommand(excelDocument, match.CustomerInfoList);
 
-				exportMatchsCommand.Add(matchCommand);
-			}
+                ExportMatchCommand matchCommand = new ExportMatchCommand(excelDocument, matchInfoCommand, matchSettleLogsCommand, customerBalanceInfoCommand);
 
-			IExportCommand autoSizeColumnCommand = new ExportAutoSizeColumnCommand(excelDocument);
+                exportMatchsCommand.Add(matchCommand);
+            }
 
-			IExportCommand saveCommand = new ExportSaveCommand(excelDocument, saveFileNamePath);
+            IExportCommand autoSizeColumnCommand = new ExportAutoSizeColumnCommand(excelDocument);
 
-			exportCommand.Add(exportMatchsCommand);
-			exportCommand.Add(autoSizeColumnCommand);
-			exportCommand.Add(saveCommand);
+            IExportCommand saveCommand = new ExportSaveCommand(excelDocument, saveFileNamePath);
 
-			exportCommand.Execute();
-		}
-	}
+            exportCommand.Add(exportMatchsCommand);
+            exportCommand.Add(autoSizeColumnCommand);
+            exportCommand.Add(saveCommand);
+
+            exportCommand.Execute();
+        }
+    }
 }

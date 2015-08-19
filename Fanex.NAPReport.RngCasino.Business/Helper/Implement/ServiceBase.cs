@@ -1,23 +1,14 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ServiceBase.cs" company="Nexcel">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-using System;
-using System.Collections.Generic;
-using Fanex.Common.Helper;
-using Fanex.NAP.Framework.Data;
-using Fanex.NAPReport.RngCasino.Business.Helper.Interface;
-using Fanex.Service.Core.MailService;
-using Fanex.Service.Core.Extensions;
-
-namespace Fanex.NAPReport.RngCasino.Business.Helper.Implement
+﻿namespace Fanex.NAPReport.RngCasino.Business.Helper.Implement
 {
-	/// <summary>
-    /// TODO: Update summary.
-    /// </summary>
-	public abstract class ServiceBase : TimerFunctionMailServiceBase, IServiceBase
+    using System;
+    using System.Collections.Generic;
+    using Fanex.Common.Helper;
+    using Fanex.Data.Repository;
+    using Fanex.NAPReport.RngCasino.Business.Helper.Interface;
+    using Fanex.Service.Core.Extensions;
+    using Fanex.Service.Core.MailService;
+
+    public abstract class ServiceBase : TimerFunctionMailServiceBase, IServiceBase
     {
         protected readonly IDynamicRepository DynamicRepository;
 
@@ -29,8 +20,8 @@ namespace Fanex.NAPReport.RngCasino.Business.Helper.Implement
         protected IDynamicRepository Repository
         {
             get
-            { 
-                return DynamicRepository; 
+            {
+                return DynamicRepository;
             }
         }
 

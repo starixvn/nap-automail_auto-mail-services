@@ -17,19 +17,19 @@ namespace Fanex.Service.Core.Utilities
     /// </summary>
     public class SaveFile
     {
-        public static void SaveExcelFile(string exportDataDirectory, string fileName, IWorkbook workbook, string ExcelPassword = "")
+        public static void SaveExcelFile(string exportDataDirectory, string fileName, IWorkbook workbook, string excelPassword = "")
         {
             if (AppSettingBase.IsAuthenticate)
             {
-                SaveFileWithAuthenticate(exportDataDirectory, fileName, workbook, ExcelPassword);
+                SaveFileWithAuthenticate(exportDataDirectory, fileName, workbook, excelPassword);
             }
             else
             {
-                SaveFileWithNoneAuthenticate(exportDataDirectory, fileName, workbook, ExcelPassword);
+                SaveFileWithNoneAuthenticate(exportDataDirectory, fileName, workbook, excelPassword);
             }
         }
 
-        private static void SaveFileWithNoneAuthenticate(string exportDataDirectory, string fileName, IWorkbook workbook, string ExcelPassword)
+        private static void SaveFileWithNoneAuthenticate(string exportDataDirectory, string fileName, IWorkbook workbook, string excelPassword)
         {
             if (!Directory.Exists(exportDataDirectory))
             {
@@ -43,13 +43,13 @@ namespace Fanex.Service.Core.Utilities
             workbook.Write(new FileStream(exportDataDirectory, FileMode.Create)); 
 
             OfficeCryptoStream stream1 = OfficeCryptoStream.Open(exportDataDirectory);
-            stream1.Password = ExcelPassword;
+            stream1.Password = excelPassword;
             stream1.SaveAs(exportDataDirectory);
             stream1.Close();
             stream1.Dispose();            
         }
 
-        private static void SaveFileWithAuthenticate(string exportDataDirectory, string fileName, IWorkbook workbook, string ExcelPassword)
+        private static void SaveFileWithAuthenticate(string exportDataDirectory, string fileName, IWorkbook workbook, string excelPassword)
         {
             string ip = AppSettingBase.IP;
             string password = AppSettingBase.Password;
@@ -76,7 +76,7 @@ namespace Fanex.Service.Core.Utilities
                 workbook.Write(new FileStream(exportDataDirectory, FileMode.Create)); 
 
                 OfficeCryptoStream stream1 = OfficeCryptoStream.Open(exportDataDirectory);
-                stream1.Password = ExcelPassword;
+                stream1.Password = excelPassword;
                 stream1.SaveAs(exportDataDirectory);
                 stream1.Close();
                 stream1.Dispose();                

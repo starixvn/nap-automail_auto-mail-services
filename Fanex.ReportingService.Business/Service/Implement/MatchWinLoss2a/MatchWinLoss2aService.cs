@@ -315,32 +315,6 @@ namespace Fanex.ReportingService.Business.Service.Implement.MatchWinLoss2a
             return betTypeName;
         }
 
-        /// <summary>
-        /// Gets the name of the third party bet type.
-        /// </summary>
-        /// <param name="betType">Type of the bet.</param>
-        /// <returns>The name of the third party bet type.</returns>
-        //private string GetThirdPartyBetTypeName(int betType)
-        //{
-        //    var result = string.Empty;
-        //    switch (betType)
-        //    {
-        //        case CoreConstants.BetTypeConstants.CasinoGames:
-        //            result = Labels.Casino;
-        //            break;
-
-        //        case CoreConstants.BetTypeConstants.P2P:
-        //            result = Labels.P2P;
-        //            break;
-
-        //        default:
-        //            result = string.Empty;
-        //            break;
-        //    }
-
-        //    return result;
-        //}
-
         private bool IsExcludeVirtualLineTotal(string betTypeName)
         {
             return !string.IsNullOrEmpty(betTypeName) &&
@@ -374,28 +348,6 @@ namespace Fanex.ReportingService.Business.Service.Implement.MatchWinLoss2a
 
             return currentStorage;
         }
-
-        ///// <summary>
-        ///// Cache the bet type reference.
-        ///// </summary>
-        ///// <param name="betTypeIdList">The bet type identifier list.</param>
-        ///// <param name="currentStorage">The current storage.</param>
-        ///// <returns>The bet type cache reference.</returns>
-        //private Dictionary<object, string> CachedBetTypeRef(
-        //    List<int> betTypeIdList,
-        //    ref Dictionary<object, string> currentStorage)
-        //{
-        //    currentStorage = currentStorage ?? new Dictionary<object, string>();
-        //    foreach (var betTypeIdInfo in betTypeIdList)
-        //    {
-        //        if (!currentStorage.ContainsKey(betTypeIdInfo))
-        //        {
-        //            currentStorage.Add(betTypeIdInfo, this.GetBetTypeName(Converter.ToInt(betTypeIdInfo)));
-        //        }
-        //    }
-
-        //    return currentStorage;
-        //}
 
         /// <summary>
         /// Formats the summary report by bet type.
@@ -1219,50 +1171,6 @@ namespace Fanex.ReportingService.Business.Service.Implement.MatchWinLoss2a
             return result;
         }
 
-        /// <summary>
-        /// Compares the match information.
-        /// </summary>
-        /// <param name="winLossInfo">The win loss information.</param>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>True: There is data changes; False: No change.</returns>
-        //private bool CompareMatchInfo(WinLossInfo winLossInfo, GetDetailReportByBetTypeCriteria criteria)
-        //{
-        //    if (string.Compare(criteria.Sporttype, winLossInfo.LeagueName, true) != 0 ||
-        //            (criteria.Bettype != 0 && (criteria.Bettype != winLossInfo.Id ||
-        //                                       criteria.LiveIndicator != winLossInfo.LiveIndicatorId)))
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
-
-        /// <summary>
-        /// Compares the match information before balance up day.
-        /// </summary>
-        /// <param name="winLossInfo">The win loss information.</param>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>True: There is data changes; False: No change.</returns>
-        //private bool CompareMatchInfoBeforeBalanceUpDay(WinLossInfo winLossInfo, GetDetailReportByBetTypeCriteria criteria)
-        //{
-        //    if (criteria.Bettype != 0 && (criteria.Bettype != winLossInfo.Id ||
-        //                                       criteria.LiveIndicator != winLossInfo.LiveIndicatorId))
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
-
-        /// <summary>
-        /// Determines whether [is keno bet type] [the specified bet type identifier].
-        /// </summary>
-        /// <param name="betTypeId">The bet type identifier.</param>
-        /// <returns>Bet type is KENO.</returns>
         private bool IsKenoBetType(int betTypeId)
         {
             if (betTypeId < CoreConstants.BetTypeConstants.MinKenoBetType ||

@@ -2,12 +2,35 @@
 {
     public class ExportSettings
     {
-        public int StartRowIndex = 1;
+        public ExportSettings()
+        { 
+            StartRowIndex = 1;
+            StartColIndex = 1;
+            MaxNumOfColumns = 5;
+            ColumnPadding = 500;
+        }
 
-        public int StartColIndex = 1;
+        public int StartRowIndex 
+        { 
+            get; set; 
+        }
 
-        public int MaxNumOfColumns = 5;
+        public int StartColIndex
+        {
+            get;
+            set;
+        }
 
-        public int ColumnPadding = 500;
+        public int MaxNumOfColumns
+        {
+            get;
+            set;
+        }
+
+        public int ColumnPadding
+        {
+            get;
+            set;
+        }
     }
 }

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Fanex.Data.Repository;
-
-namespace Fanex.NAPReport.WinLossByProducts.Business.Criteria
+﻿namespace Fanex.NAPReport.WinLossByProducts.Business.Criteria
 {
+    using Fanex.Data.Repository;
+
     public class GetDWStatusByCubeCriteria : CriteriaBase
     {
         public string Cube

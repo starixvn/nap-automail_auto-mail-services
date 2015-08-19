@@ -17,6 +17,10 @@ namespace Fanex.NAPReport.GameWinLimitControl.Business.Criteria
     /// </summary>
     public class SelMemberWinLimitCriteria : CriteriaBase
     {
+        public int ErrCode { get; set; }
+
+        public string ErrMsg { get; set; }
+
         public override string GetSettingKey()
         {
             return "NAP_WinLimit_Notification_MemSel";
@@ -26,9 +30,5 @@ namespace Fanex.NAPReport.GameWinLimitControl.Business.Criteria
         {
             return true;
         }
-
-        public int ErrCode { get; set; }
-
-        public string ErrMsg { get; set; }
     }
 }

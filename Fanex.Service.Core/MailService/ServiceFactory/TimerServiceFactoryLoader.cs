@@ -1,94 +1,93 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Xml.Linq;
-
-namespace Fanex.Service.Core.MailService.ServiceFactory
+﻿namespace Fanex.Service.Core.MailService.ServiceFactory
 {
-	public class TimerServiceFactoryLoader
-	{
-		public TimerServiceFactoryLoader(string fileNamePath)
-		{
-			CommonTimerFunctionMailServices = new List<ICommonTimerFunctionMailService>();
-			StandaloneTimerFunctionMailServices = new List<IStandaloneTimerFunctionMailService>();
+    using System;
+    using System.Collections.Generic;
+    using System.Xml.Linq;
 
-			XElement timerServicesXElement = XElement.Load(fileNamePath);
+    public class TimerServiceFactoryLoader
+    {
+        private const string CommonTimerServices = "CommonTimerServices";
 
-			LoadCommonTimerServices(timerServicesXElement);
-			LoadStandaloneTimerServices(timerServicesXElement);
-		}
+        private const string StandaloneTimerServices = "StandaloneTimerServices";
 
-		private void LoadCommonTimerServices(XElement timerServicesXElement)
-		{
-			XElement commonElements = timerServicesXElement.Element(CommonTimerServices);
+        private const string Interval = "interval";
 
-			CommonInterval = GetNormalizedInterval(commonElements);
+        private const string TimeUnit = "timeUnit";
 
-			foreach (XElement commonTimerServiceXElement in commonElements.Elements())
-			{
-				ICommonTimerFunctionMailService commonTimerService =
-					GetService<ICommonTimerFunctionMailService>(commonTimerServiceXElement, CommonInterval);
+        private const string ServiceFactoryFullTypeName = "serviceFactoryFullTypeName";
 
-				CommonTimerFunctionMailServices.Add(commonTimerService);
-			}
-		}
+        public TimerServiceFactoryLoader(string fileNamePath)
+        {
+            CommonTimerFunctionMailServices = new List<ICommonTimerFunctionMailService>();
+            StandaloneTimerFunctionMailServices = new List<IStandaloneTimerFunctionMailService>();
 
-		private void LoadStandaloneTimerServices(XElement timerServicesXElement)
-		{
-			XElement standaloneElements = timerServicesXElement.Element(StandaloneTimerServices);
-			foreach (XElement standaloneTimerServiceXElement in standaloneElements.Elements())
-			{
-				int interval = GetNormalizedInterval(standaloneTimerServiceXElement);
+            XElement timerServicesXElement = XElement.Load(fileNamePath);
 
-				IStandaloneTimerFunctionMailService standaloneTimerService =
-					GetService<IStandaloneTimerFunctionMailService>(standaloneTimerServiceXElement, interval);
+            LoadCommonTimerServices(timerServicesXElement);
+            LoadStandaloneTimerServices(timerServicesXElement);
+        }
 
-				StandaloneTimerFunctionMailServices.Add(standaloneTimerService);
-			}
-		}
+        public int CommonInterval { get; private set; }
 
-		private T GetService<T>(XElement xTimerServicesXElement, int interval) where T : ITimerFunctionMailService
-		{
-			string serviceFactoryFullTypeName = xTimerServicesXElement.Attribute(ServiceFactoryFullTypeName).Value;
-			Type serviceFactoryType = Type.GetType(serviceFactoryFullTypeName);
+        public IList<ICommonTimerFunctionMailService> CommonTimerFunctionMailServices { get; private set; }
 
-			ITimerServiceFactory<T> timerServiceFactory = (ITimerServiceFactory<T>)Activator.CreateInstance(serviceFactoryType);
+        public IList<IStandaloneTimerFunctionMailService> StandaloneTimerFunctionMailServices { get; private set; }
 
-			T commonTimerFunctionMailService = timerServiceFactory.GetService();
+        private void LoadCommonTimerServices(XElement timerServicesXElement)
+        {
+            XElement commonElements = timerServicesXElement.Element(CommonTimerServices);
 
-			// Local interval has highest precedence
-			if (commonTimerFunctionMailService.Interval == 0)
-			{
-				commonTimerFunctionMailService.Interval = interval;
-			}
+            CommonInterval = GetNormalizedInterval(commonElements);
 
-			return commonTimerFunctionMailService;
-		}
+            foreach (XElement commonTimerServiceXElement in commonElements.Elements())
+            {
+                ICommonTimerFunctionMailService commonTimerService =
+                    GetService<ICommonTimerFunctionMailService>(commonTimerServiceXElement, CommonInterval);
 
-		private int GetNormalizedInterval(XElement xXElement)
-		{
-			int interval = int.Parse(xXElement.Attribute(Interval).Value);
+                CommonTimerFunctionMailServices.Add(commonTimerService);
+            }
+        }
 
-			string strTimeUnit = xXElement.Attribute(TimeUnit) == null ? MailService.TimeUnit.Second.ToString() : xXElement.Attribute(TimeUnit).Value;
-			TimeUnit timeUnit = (TimeUnit)Enum.Parse(typeof(TimeUnit), strTimeUnit);
+        private void LoadStandaloneTimerServices(XElement timerServicesXElement)
+        {
+            XElement standaloneElements = timerServicesXElement.Element(StandaloneTimerServices);
+            foreach (XElement standaloneTimerServiceXElement in standaloneElements.Elements())
+            {
+                int interval = GetNormalizedInterval(standaloneTimerServiceXElement);
 
-			return IntervalConverter.ToMiliSeconds(interval, timeUnit);
-		}
+                IStandaloneTimerFunctionMailService standaloneTimerService =
+                    GetService<IStandaloneTimerFunctionMailService>(standaloneTimerServiceXElement, interval);
 
-		public int CommonInterval { get; private set; }
+                StandaloneTimerFunctionMailServices.Add(standaloneTimerService);
+            }
+        }
 
-		public IList<ICommonTimerFunctionMailService> CommonTimerFunctionMailServices { get; private set; }
+        private T GetService<T>(XElement timerServicesXElement, int interval) where T : ITimerFunctionMailService
+        {
+            string serviceFactoryFullTypeName = timerServicesXElement.Attribute(ServiceFactoryFullTypeName).Value;
+            Type serviceFactoryType = Type.GetType(serviceFactoryFullTypeName);
 
-		public IList<IStandaloneTimerFunctionMailService> StandaloneTimerFunctionMailServices { get; private set; }
+            ITimerServiceFactory<T> timerServiceFactory = (ITimerServiceFactory<T>)Activator.CreateInstance(serviceFactoryType);
 
-		private const string CommonTimerServices = "CommonTimerServices";
+            T commonTimerFunctionMailService = timerServiceFactory.GetService();
 
-		private const string StandaloneTimerServices = "StandaloneTimerServices";
+            // Local interval has highest precedence
+            if (commonTimerFunctionMailService.Interval == 0)
+            {
+                commonTimerFunctionMailService.Interval = interval;
+            }
 
-		private const string Interval = "interval";
+            return commonTimerFunctionMailService;
+        }
 
-		private const string TimeUnit = "timeUnit";
+        private int GetNormalizedInterval(XElement element)
+        {
+            int interval = int.Parse(element.Attribute(Interval).Value);
 
-		private const string ServiceFactoryFullTypeName = "serviceFactoryFullTypeName";
-	}
+            string strTimeUnit = element.Attribute(TimeUnit) == null ? MailService.TimeUnit.Second.ToString() : element.Attribute(TimeUnit).Value;
+            TimeUnit timeUnit = (TimeUnit)Enum.Parse(typeof(TimeUnit), strTimeUnit);
+
+            return IntervalConverter.ToMiliSeconds(interval, timeUnit);
+        }
+    }
 }

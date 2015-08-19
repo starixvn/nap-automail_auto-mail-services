@@ -1,20 +1,18 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="BalanceNegativeSel_BySiteCriteria.cs" company="Microsoft">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Criteria
+﻿namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Criteria
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class Sel_BySiteCriteria : CriteriaBase
     {
         public string Site { get; set; }
 
-        public bool IsTest { get { return AppSettings.IsTesting; } }
+        public bool IsTest 
+        { 
+            get 
+            { 
+                return AppSettings.IsTesting; 
+            } 
+        }
 
         [SpParam(Ignored = true)]
         public string SpName

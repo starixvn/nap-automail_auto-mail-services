@@ -6,7 +6,7 @@
 
 namespace Fanex.NAPReport.RngCasino.Business.Entities
 {
-	/// <summary>
+    /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class Currency

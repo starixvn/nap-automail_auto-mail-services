@@ -1,11 +1,13 @@
-﻿using System;
-using System.IO;
-using Fanex.Data.Configuration;
-using Fanex.DW.DailyBettypeWith3rdProducts.Business.Jobs;
-using Fanex.MailDelivery.Client.Handlers;
-
-namespace Fanex.DW.DailyBettypeWith3rdProducts.Testing
+﻿namespace Fanex.DW.DailyBettypeWith3rdProducts.Testing
 {
+    using System;
+    using System.IO;
+    using Fanex.Data.Configuration;
+    using Fanex.DW.DailyBettypeWith3rdProducts.Business;
+    using Fanex.DW.DailyBettypeWith3rdProducts.Business.Service;
+    using Fanex.MailDelivery.Client.Handlers;
+    using Fanex.Service.Core.Configuration;
+
     internal class Program
     {
         private static void Main(string[] args)
@@ -14,9 +16,12 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Testing
             DbSettingProviderManager.Current.Start();
             MailClientHandler.Start();
 
+            ConfigurationParser configurationParser = new ConfigurationParser(@"SiteConfig\BettypeWith3rdProducts\Settings\Bettype_With_3rd_Products.Settings.xml");
+            configurationParser.Parse<AppSettings>();
+
             Console.WriteLine("Running DailyBettypeWith3rdProductsService");
 
-            var job = new DailyBettypeWith3rdProductJob();
+            var job = new MailingService();
 
             string subject = "Bettype With 3rd Products";
             job.ExportBettypeWith3rdProducts(true, subject);

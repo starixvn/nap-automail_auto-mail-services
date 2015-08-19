@@ -1,12 +1,12 @@
-﻿using System;
-using System.IO;
-using Fanex.Data.Configuration;
-using Fanex.MailDelivery.Client.Handlers;
-using Fanex.NAPReport.SMALoss.Business.Services;
-using Fanex.NAPReport.SMALoss.Business;
-
-namespace Fanex.NAPReport.SMALoss.Testing
+﻿namespace Fanex.NAPReport.SMALoss.Testing
 {
+    using System;
+    using System.IO;
+    using Fanex.Data.Configuration;
+    using Fanex.MailDelivery.Client.Handlers;
+    using Fanex.NAPReport.SMALoss.Business;
+    using Fanex.NAPReport.SMALoss.Business.Services;
+
     internal class Program
     {
         private static void Main(string[] args)

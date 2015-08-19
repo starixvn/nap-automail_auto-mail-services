@@ -6,10 +6,8 @@
 
 namespace Fanex.NAPReport.TurnoverWatcher.Business
 {
-    using System;
-    using System.Configuration;
-    using Fanex.Service.Core.Utilities;
     using Fanex.Service.Core.Configuration;
+    using Fanex.Service.Core.Utilities;
 
     /// <summary>
     /// TODO: Update summary.

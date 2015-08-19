@@ -1,10 +1,10 @@
 ﻿namespace Fanex.NAPReport.SMALoss.Business.Services.ExcelExport
 {
     using System.Drawing;
-    using NPOI.SS.UserModel;
-    using Fanex.Service.Core.Service.Interface.Npoi;
-    using NPOI.XSSF.UserModel;
     using Fanex.Service.Core.Service.Implement.Npoi;
+    using Fanex.Service.Core.Service.Interface.Npoi;
+    using NPOI.SS.UserModel;
+    using NPOI.XSSF.UserModel;
 
     public class ExportHeaderCommand : ExportCommandBase
     {
@@ -12,7 +12,7 @@
         private INpoiNewFormatFontService _fontService;
         private INpoiNewFormatCustomCellStyleService _customCellStyleService;
         private XSSFFont _regularFont;
-        XSSFCellStyle _headerStyle;
+        private XSSFCellStyle _headerStyle;
 
         public ExportHeaderCommand(ExcelDocument excelDocument, string title)
             : base(excelDocument)

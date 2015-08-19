@@ -200,7 +200,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
                     _cell.CellValue = string.Empty;                    
                     NpoiNewFormatExcelExtension.RenderCell(_workSheet, _cell, _headerStyle);
                  
-                    for (int bettypeIndex = 0; bettypeIndex < numberBettype; bettypeIndex ++)
+                    for (int bettypeIndex = 0; bettypeIndex < numberBettype; bettypeIndex++)
                     {
                         int startBetTypeGroupColumn = startColumn + (bettypeIndex * 3) + 1;
                         int endBetTypeGroupColumn = startColumn + (bettypeIndex * 3) + 3;

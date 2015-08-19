@@ -1,16 +1,10 @@
-﻿using System;
-using System.IO;
-using Fanex.Data.Configuration;
-using Fanex.NAPReport.HorseRacingReport.Business;
-using Fanex.NAPReport.HorseRacingReport.Business.Criteria;
-using Fanex.NAPReport.HorseRacingReport.Business.Service;
-using Fanex.Service.Core.Constants;
-using Fanex.Service.Core.Extensions;
-using Fanex.Service.Core.Model;
-using RazorEngine;
-
-namespace Fanex.NAPReport.HorseRacingReport.Testing
+﻿namespace Fanex.NAPReport.HorseRacingReport.Testing
 {
+    using System;
+    using System.IO;
+    using Fanex.Data.Configuration;
+    using Fanex.NAPReport.HorseRacingReport.Business.Service;
+
     internal class Program
     {
         private static void Main(string[] args)

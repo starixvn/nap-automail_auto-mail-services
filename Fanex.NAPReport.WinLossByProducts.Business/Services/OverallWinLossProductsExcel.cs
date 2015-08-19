@@ -25,7 +25,6 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
     /// </summary>
     public class OverallWinLossProductsExcel
     {
-        private IOverallWinLossProducts _productsWinLoss;
         private List<Product> _products;
 
         private Color _colorHeader;
@@ -141,7 +140,6 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
 
         private void InitialSetting()
         {
-            _productsWinLoss = new OverallWinLossProducts();
             _products = new List<Product>();
 
             _cell = new Cell();
@@ -277,7 +275,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
         private void ExportReportHeader(OverallWinLossProductsCriteria criteria)
         {
             XSSFCellStyle headerStyle = _customCellStyleService.CreateCenterTextStyle(_colorHeader, _fontService.WhiteBoldFont);
-            string reportTile = string.Format(Resources.WinLossByProducts_ReportTitle, criteria.rptdate.ToShortFormatedDate());
+            string reportTile = string.Format(Resources.WinLossByProducts_ReportTitle, criteria.RptDate.ToShortFormatedDate());
             _cell.EndColumn = _cell.CurrentColumn + 5;
             _cell.EndRow = _cell.CurrentRow + 1;
             _cell.CellValue = reportTile;
@@ -317,7 +315,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
         {
             string reportName = string.Format(
                 Labels.Overall_Win_Loss_Products,
-                criteria.rptdate.ToShortFormatedDateWithSlash().Replace('/', '_'));
+                criteria.RptDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
             var reportNameWithExtension = string.Format("{0}.{1}", reportName, "xlsx");
             return reportNameWithExtension;
         }
@@ -376,7 +374,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
         private void ExportNote()
         {
             _cell.CellValue = Labels.Notes;
-            _cell.EndRow = _cell.CurrentRow + 1;            
+            _cell.EndRow = _cell.CurrentRow + 2;            
             NpoiNewFormatExcelExtension.RenderMergeCell(_workSheet, _cell, _noteRightStyle);
 
             _cell.IncreaseColumnIndex();
@@ -390,6 +388,13 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
             _cell.CurrentColumn = 1;
             _cell.EndColumn = _cell.CurrentColumn + 4;
             _cell.CellValue = Labels.Note2;
+            NpoiNewFormatExcelExtension.RenderMergeCell(_workSheet, _cell, _noteLeftStyle);
+
+            _cell.IncreaseRowIndex();
+            _cell.ResetColumnIndex();
+            _cell.CurrentColumn = 1;
+            _cell.EndColumn = _cell.CurrentColumn + 4;
+            _cell.CellValue = Labels.Note3;
             NpoiNewFormatExcelExtension.RenderMergeCell(_workSheet, _cell, _noteLeftStyle);
         }
 
@@ -519,6 +524,17 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
             {
                 if (prodName.ToLower().Equals(productName.ToLower())
                     && (rowWinLossName.ToLower().Equals(Labels.Total_Turnover_WL.ToLower()) || rowWinLossName.ToLower().Equals(Labels.Margin.ToLower())))
+                {
+                    result = true;
+                    break;
+                }
+            }
+
+            products = ProductsConstants.ProductsHaveNoNumberOfBetAndMargin;
+            foreach (var prodName in products)
+            {
+                if (prodName.ToLower().Equals(productName.ToLower())
+                    && rowWinLossName.ToLower().Equals(Labels.Number_Of_bets_WL.ToLower()))
                 {
                     result = true;
                     break;

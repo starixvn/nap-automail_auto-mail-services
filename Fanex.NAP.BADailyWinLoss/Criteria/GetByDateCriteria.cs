@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     public class GetByDateCriteria : CriteriaBase
     {

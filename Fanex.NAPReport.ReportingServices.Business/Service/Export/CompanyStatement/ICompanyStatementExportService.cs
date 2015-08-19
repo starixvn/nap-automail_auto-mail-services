@@ -14,8 +14,8 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyState
     /// </summary>
     public interface ICompanyStatementExportService
     {
-        void ExportReport(CompanyStatement companyStatement, DateTime winlossDate);
-
         string FileName { get; set; }
+
+        void ExportReport(CompanyStatement companyStatement, DateTime winlossDate);        
     }
 }

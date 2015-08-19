@@ -1,12 +1,12 @@
-﻿using System;
-using Fanex.MailDelivery.Client.Enumerations;
-using Fanex.MailDelivery.Client.Handlers;
-using Fanex.NAPReport.GameWinLimitControl.Business.Services;
-using Fanex.Service.Core.Extensions;
-using Fanex.Service.Core.MailService;
-
-namespace Fanex.NAPReport.GameWinLimitControl.Business.ServiceFactory
+﻿namespace Fanex.NAPReport.GameWinLimitControl.Business.ServiceFactory
 {
+    using System;
+    using Fanex.MailDelivery.Client.Enumerations;
+    using Fanex.MailDelivery.Client.Handlers;
+    using Fanex.NAPReport.GameWinLimitControl.Business.Services;
+    using Fanex.Service.Core.Extensions;
+    using Fanex.Service.Core.MailService;
+
     public class MailingServiceFactory : TimerFunctionMailServiceBase, IStandaloneTimerFunctionMailService
     {
         public override bool IsActive()

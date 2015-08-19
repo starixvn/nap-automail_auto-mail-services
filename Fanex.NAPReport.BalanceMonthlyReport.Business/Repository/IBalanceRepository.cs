@@ -6,14 +6,10 @@
 
 namespace Fanex.NAPReport.BalanceMonthlyReport.Business.Repository
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.NAPReport.BalanceMonthlyReport.Business.Model;
     using System.Data;
     using Fanex.Data.Repository;
-    using Fanex.Data;
+    using Fanex.NAPReport.BalanceMonthlyReport.Business.Model;
 
     /// <summary>
     /// TODO: Update summary.

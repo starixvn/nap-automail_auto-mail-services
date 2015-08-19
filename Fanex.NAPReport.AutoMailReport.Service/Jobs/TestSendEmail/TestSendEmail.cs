@@ -6,15 +6,11 @@
 
 namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.TestSendEmail
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.Service.Core.MailService;
+    using Fanex.MailDelivery.Client.Enumerations;
     using Fanex.MailDelivery.Client.Messages;
     using Fanex.MailDelivery.Client.Models;
+    using Fanex.Service.Core.MailService;
     using Quartz;
-    using Fanex.MailDelivery.Client.Enumerations;
 
     /// <summary>
     /// TODO: Update summary.

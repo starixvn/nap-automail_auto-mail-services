@@ -2,8 +2,7 @@
 <Settings>
   <add key="FromDate" value="2015-03-01" />
   <add key="ToDate" value="2015-03-16" />
-  <add key="IsTest" value="false" />
-  <add key="MailTitle" value="Starix IT" />
+  <add key="IsTest" value="false" />  
   <add key="ExportDataDirectory" value="\\10.40.40.52\NAP_Reports\CreditMovementExcelFile" />
   <add key="EmailTemplate" value="SiteConfig\CreditMovement\Templates\CreditMovementEmail.cshtml" />
   <add key="Amount" value="300000" />

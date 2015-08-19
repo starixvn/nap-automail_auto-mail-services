@@ -23,7 +23,6 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
     /// </summary>
     public class OverallWinLossSportbook3rdPartyExcel
     {
-        private IOverallWinLossProducts _productsWinLoss;
         private List<Product> _products;
 
         private Color _colorHeader;
@@ -123,7 +122,6 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
 
         private void InitialSetting()
         {
-            _productsWinLoss = new OverallWinLossProducts();
             _products = new List<Product>();
 
             _cell = new Cell();
@@ -235,7 +233,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
         private void ExportReportHeader(OverallWinLossProductsCriteria criteria)
         {
             XSSFCellStyle headerStyle = _customCellStyleService.CreateCenterTextStyle(_colorHeader, _fontService.WhiteBoldFont);
-            string reportTile = string.Format(Resources.WinLossByProducts_ReportTitle3rd, criteria.rptdate.ToShortFormatedDate());
+            string reportTile = string.Format(Resources.WinLossByProducts_ReportTitle3rd, criteria.RptDate.ToShortFormatedDate());
             _cell.EndColumn = _cell.CurrentColumn + 5;
             _cell.EndRow = _cell.CurrentRow + 1;
             _cell.CellValue = reportTile;
@@ -273,7 +271,6 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
 
         private void ExportContent(List<Product> sportbook3rdParty)
         {
-            bool isIncreaseRowIndex = false;
             foreach (var product in sportbook3rdParty)
             {
                 _cell.EndRow = _cell.CurrentRow + product.Rows.Count - 1;
@@ -310,12 +307,6 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
 
                     _cell.IncreaseRowIndex();
                     _cell.ResetColumnIndex();
-                }
-
-                if (!isIncreaseRowIndex)
-                {
-                    isIncreaseRowIndex = true;
-                    _cell.IncreaseRowIndex();
                 }
             }
 

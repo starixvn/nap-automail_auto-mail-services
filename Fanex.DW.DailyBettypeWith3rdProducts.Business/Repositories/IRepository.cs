@@ -6,7 +6,6 @@
 
 namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Repositories
 {
-    using System.Data;
     using System;
 
     /// <summary>

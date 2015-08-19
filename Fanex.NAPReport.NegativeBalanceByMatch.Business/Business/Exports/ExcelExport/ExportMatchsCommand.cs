@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities;
-using NPOI.SS.UserModel;
-using NPOI.XSSF.UserModel;
-
-namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport
+﻿namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport
 {
+    using System.Collections.Generic;
+    using Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities;
+    using NPOI.SS.UserModel;
+    using NPOI.XSSF.UserModel;
+
     public class ExportMatchsCommand : ExportCompositeCommand<ExportMatchCommand>
     {
         private readonly ExcelDocument _excelDocument;
@@ -45,12 +45,9 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.Excel
         {
             XSSFCellStyle style = ExcelDocument.GetCellStyle(FontBoldWeight.Bold, horizontalAlignment: HorizontalAlignment.Left);
 
-            ExcelDocument.RenderMergeCell(ExcelDocument.CurrentRow, ExcelDocument.CurrentRow,
-                ExcelDocument.CurrentColumn, ExcelDocument.CurrentColumn + ExcelDocument.ExportSettings.MaxNumOfColumns - 1);
+            ExcelDocument.RenderMergeCell(ExcelDocument.CurrentRow, ExcelDocument.CurrentRow, ExcelDocument.CurrentColumn, ExcelDocument.CurrentColumn + ExcelDocument.ExportSettings.MaxNumOfColumns - 1);
 
-            ExcelDocument.RenderCurrentCell(
-                string.Format("{0}-Match {1}: {2} vs {3}", index + 1, index + 1, matchInfo.HomeName, matchInfo.AwayName),
-                style);
+            ExcelDocument.RenderCurrentCell(string.Format("{0}-Match {1}: {2} vs {3}", index + 1, index + 1, matchInfo.HomeName, matchInfo.AwayName), style);
         }
     }
 }

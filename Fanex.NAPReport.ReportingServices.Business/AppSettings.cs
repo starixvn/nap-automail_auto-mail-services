@@ -6,10 +6,9 @@
 
 namespace Fanex.NAPReport.ReportingServices.Business
 {
-    using System.Collections.Generic;
+    using System;
     using Fanex.Service.Core.Configuration;
     using Fanex.Service.Core.Utilities;
-using System;
 
     /// <summary>
     /// Application setting.
@@ -44,14 +43,9 @@ using System;
         {
             get;
             set;
-        }
+        }        
 
-        public static string DataDirectory(string path)
-        {
-            return ExportDataDirectoryWithYearMonth(path);
-        }
-
-        public static string ExcelPassword
+        public static new string ExcelPassword
         {
             get;
             set;
@@ -67,6 +61,11 @@ using System;
         {
             get;
             set;
+        }
+
+        public static string DataDirectory(string path)
+        {
+            return ExportDataDirectoryWithYearMonth(path);
         }
     }
 }

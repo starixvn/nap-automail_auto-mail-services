@@ -1,34 +1,34 @@
-﻿using Fanex.Common.Extensions;
-using Fanex.Service.Core.MailService.ServiceFactory;
-
-namespace Fanex.Service.Core.MailService
+﻿namespace Fanex.Service.Core.MailService
 {
-	public class TimerServiceFacade
-	{
-		private CommonTimerService _commonTimerService;
-		private StandaloneTimerService _standaloneTimerService;
+    using Fanex.Common.Extensions;
+    using Fanex.Service.Core.MailService.ServiceFactory;
 
-		public TimerServiceFacade(string fileNamePath)
-		{
-			TimerServiceFactoryLoader timerServiceFactoryLoader = new TimerServiceFactoryLoader(fileNamePath);
+    public class TimerServiceFacade
+    {
+        private CommonTimerService _commonTimerService;
+        private StandaloneTimerService _standaloneTimerService;
 
-			_commonTimerService = new CommonTimerService(timerServiceFactoryLoader.CommonInterval);
-			_standaloneTimerService = new StandaloneTimerService();
+        public TimerServiceFacade(string fileNamePath)
+        {
+            TimerServiceFactoryLoader timerServiceFactoryLoader = new TimerServiceFactoryLoader(fileNamePath);
 
-			timerServiceFactoryLoader.CommonTimerFunctionMailServices.ForEach(n => _commonTimerService.Register(n));
-			timerServiceFactoryLoader.StandaloneTimerFunctionMailServices.ForEach(n => _standaloneTimerService.Register(n));
-		}
+            _commonTimerService = new CommonTimerService(timerServiceFactoryLoader.CommonInterval);
+            _standaloneTimerService = new StandaloneTimerService();
 
-		public void StartServices()
-		{
-			_commonTimerService.Start();
-			_standaloneTimerService.Start();
-		}
+            timerServiceFactoryLoader.CommonTimerFunctionMailServices.ForEach(n => _commonTimerService.Register(n));
+            timerServiceFactoryLoader.StandaloneTimerFunctionMailServices.ForEach(n => _standaloneTimerService.Register(n));
+        }
 
-		public void StopServices()
-		{
-			_commonTimerService.Dispose();
-			_standaloneTimerService.Dispose();
-		}
-	}
+        public void StartServices()
+        {
+            _commonTimerService.Start();
+            _standaloneTimerService.Start();
+        }
+
+        public void StopServices()
+        {
+            _commonTimerService.Dispose();
+            _standaloneTimerService.Dispose();
+        }
+    }
 }

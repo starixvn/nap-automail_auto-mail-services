@@ -10,7 +10,7 @@
 
     public class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
             DbSettingProviderManager.Current.Start();

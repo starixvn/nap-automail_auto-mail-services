@@ -15,6 +15,6 @@ namespace Fanex.NAPReport.TurnoverWatcher.Business.Constants
     /// </summary>
     public class EmailTemplateConstants
     {
-        public const string TURNOVER_WATCHER_EMAIL_TEMPLATE = @"\SiteConfig\TurnoverWatcher\Templates\TurnoverWatcherEmailTemplate.cshtml";
+        public const string _TURNOVER_WATCHER_EMAIL_TEMPLATE = @"\SiteConfig\TurnoverWatcher\Templates\TurnoverWatcherEmailTemplate.cshtml";
     }
 }

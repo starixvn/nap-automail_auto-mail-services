@@ -8,25 +8,22 @@ namespace Fanex.CreditMovement.Business
 {
     using System;
     using System.Collections.Generic;
-    using System.Configuration;
     using Fanex.CreditMovement.Business.Repositories;
-    using Fanex.Service.Core.Utilities;
     using Fanex.Service.Core.Configuration;
+    using Fanex.Service.Core.Utilities;
 
     /// <summary>
     /// Application setting.
     /// </summary>
     public class AppSettings : AppSettingBase, ISettings
     {
-        private List<string> _listSite;
-
-        public static string ExportDataDirectory
+        public static new string ExportDataDirectory
         {
             get;
             set;
         }
 
-        public static string ExportDataDirectoryWithYearMonth
+        public static new string ExportDataDirectoryWithYearMonth
         {
             get { return ExportDataDirectoryWithYearMonth(ExportDataDirectory); }
         }
@@ -37,7 +34,7 @@ namespace Fanex.CreditMovement.Business
             set;
         }
 
-        public static string ExcelPassword
+        public static new string ExcelPassword
         {
             get;
             set;

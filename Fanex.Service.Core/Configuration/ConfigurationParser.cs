@@ -1,52 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Dynamic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
-
-namespace Fanex.Service.Core.Configuration
+﻿namespace Fanex.Service.Core.Configuration
 {
-	public class ConfigurationParser
-	{
-		private readonly string _fileNamePath;
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Xml.Linq;
 
-		public ConfigurationParser(string fileNamePath)
-		{
-			_fileNamePath = fileNamePath;
-		}
+    public class ConfigurationParser
+    {
+        private readonly string _fileNamePath;
 
-		public IDictionary<string, string> Parse()
-		{
-			IDictionary<string, string> keyToValue = new Dictionary<string, string>();
+        public ConfigurationParser(string fileNamePath)
+        {
+            _fileNamePath = fileNamePath;
+        }
 
-			XElement settings = XElement.Load(_fileNamePath);
-			foreach (XElement setting in settings.Elements())
-			{
-				keyToValue.Add(setting.Attribute("key").Value, setting.Attribute("value").Value);
-			}
+        public IDictionary<string, string> Parse()
+        {
+            IDictionary<string, string> keyToValue = new Dictionary<string, string>();
 
-			return keyToValue;
-		}
+            XElement settings = XElement.Load(_fileNamePath);
+            foreach (XElement setting in settings.Elements())
+            {
+                keyToValue.Add(setting.Attribute("key").Value, setting.Attribute("value").Value);
+            }
 
-		public T Parse<T>() where T : ISettings
-		{
-			IDictionary<string, string> keyToValue = Parse();
+            return keyToValue;
+        }
 
-			T settings = Activator.CreateInstance<T>();
+        public T Parse<T>() where T : ISettings
+        {
+            IDictionary<string, string> keyToValue = Parse();
 
-			foreach (var prop in typeof(T).GetProperties())
-			{
-				if (!prop.CanRead || !prop.CanWrite)
-					continue;
+            T settings = Activator.CreateInstance<T>();
 
-				object value = TypeDescriptor.GetConverter(prop.PropertyType).ConvertFromInvariantString(keyToValue[prop.Name]);
+            foreach (var prop in typeof(T).GetProperties())
+            {
+                if (!prop.CanRead || !prop.CanWrite)
+                {
+                    continue;
+                }
 
-				prop.SetValue(settings, value, null);
-			}
+                object value = TypeDescriptor.GetConverter(prop.PropertyType).ConvertFromInvariantString(keyToValue[prop.Name]);
 
-			return settings;
-		}
-	}
+                prop.SetValue(settings, value, null);
+            }
+
+            return settings;
+        }
+    }
 }

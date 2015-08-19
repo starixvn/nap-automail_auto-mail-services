@@ -261,6 +261,7 @@
                         this._cell = new Cell(columnIndex, rowIndex, columnIndex++, rowIndex, marginSubTotal);
                         NpoiNewFormatExcelExtension.RenderCell(this._sheet, this._cell, percentStyle);
                     }
+
                     rowIndex++;
                 }
             }
@@ -395,7 +396,6 @@
 
             this._cell = new Cell(columnIndex, rowIndex, columnIndex++, rowIndex, list.Sum(item => item.AmtDueToBARM));
             NpoiNewFormatExcelExtension.RenderCell(this._sheet, _cell, cellStyleOfNumber);
-
             
             if (turnOverRM == 0)
             {
@@ -407,8 +407,7 @@
                 var margin = CalculateMargin(winlossRM, turnOverRM);
                 this._cell = new Cell(columnIndex, rowIndex, columnIndex++, rowIndex, margin);
                 NpoiNewFormatExcelExtension.RenderCell(this._sheet, _cell, cellStyleOfPercent);
-            }
-            
+            }            
         }
 
         private double CalculateMargin(double winloss, double turnover)

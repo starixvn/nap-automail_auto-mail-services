@@ -8,13 +8,11 @@ namespace Fanex.CreditMovement.Business.Service
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
+    using Fanex.CreditMovement.Business.Criteria;
+    using Fanex.Service.Core.Configuration;
+    using Fanex.Service.Core.Extensions;
     using Fanex.Service.Core.MailService;
     using Fanex.Service.Core.Model;
-    using Fanex.Service.Core.Configuration;
-    using Fanex.CreditMovement.Business.Criteria;
-    using Fanex.Service.Core.Extensions;
 
     /// <summary>
     /// TODO: Update summary.
@@ -52,7 +50,7 @@ namespace Fanex.CreditMovement.Business.Service
 
                 _excel.ExportExcel(criteria);
                 
-                if(string.IsNullOrEmpty(_excel.FileName))
+                if (string.IsNullOrEmpty(_excel.FileName))
                 {
                     mailResult.JobStatus = MailDelivery.Client.Enumerations.JobStatus.SuccessWithoutSendmail;
                 }

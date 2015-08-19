@@ -1,7 +1,7 @@
-﻿using NPOI.XSSF.UserModel;
-
-namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport
+﻿namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Exports.ExcelExport
 {
+    using NPOI.XSSF.UserModel;
+
     public class ExportAutoSizeColumnCommand : ExportCommandBase
     {
         public ExportAutoSizeColumnCommand(ExcelDocument excelDocument)

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Fanex.Service.Core.MailService
+﻿namespace Fanex.Service.Core.MailService
 {
-	public interface ITimerFunctionMailService
-	{
-		void NotifyMail();
+    public interface ITimerFunctionMailService
+    {
+        int Interval { get; set; }
 
-		int Interval { get; set; }
-	}
+        void NotifyMail();
+    }
 }

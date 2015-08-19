@@ -41,13 +41,13 @@
 
         private List<Exchange> _currencyList;
 
-        XSSFCellStyle evenCenterTextStyle;
-        XSSFCellStyle evenDecimalNumberStyle;
-        XSSFCellStyle evenLeftTextStyle;
+        private XSSFCellStyle evenCenterTextStyle;
+        private XSSFCellStyle evenDecimalNumberStyle;
+        private XSSFCellStyle evenLeftTextStyle;
 
-        XSSFCellStyle oddCenterTextStyle;
-        XSSFCellStyle oddDecimalNumberStyle;
-        XSSFCellStyle oddLeftTextStyle;
+        private XSSFCellStyle oddCenterTextStyle;
+        private XSSFCellStyle oddDecimalNumberStyle;
+        private XSSFCellStyle oddLeftTextStyle;
 
         #region Constructors
         public BalanceService(BalanceReportBaseCriteria criteria)
@@ -66,7 +66,6 @@
             InitColumnWidth();
             InitCellStyle();
             _currencyList = _repository.GetCurrencyList();
-
         }
 
         public string DirectoryOfFileName

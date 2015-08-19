@@ -1,16 +1,13 @@
-﻿using System;
-using System.IO;
-
-namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Helper.Implement
+﻿namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Helper.Implement
 {
+    using System;
+    using System.IO;
+
     public class FileExtension
     {
-        public static void WriteFile(string sContent)
+        public static void WriteFile(string content)
         {
-
             string logPath = AppDomain.CurrentDomain.BaseDirectory;
-
-            //get the folder that's in
 
             var outPath = string.Format(@"{0}\Logs\Error", logPath);
 
@@ -24,7 +21,7 @@ namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Helper.Implement
             var fs = new FileStream(outPath, FileMode.Append, FileAccess.Write);
             var sw = new StreamWriter(fs);
 
-            sw.WriteLine(DateTime.Now + ": " + sContent);
+            sw.WriteLine(DateTime.Now + ": " + content);
 
             sw.Close();
             fs.Close();

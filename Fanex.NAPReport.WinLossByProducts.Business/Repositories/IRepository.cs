@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Fanex.NAPReport.WinLossByProducts.Business.Model;
-using Fanex.Data.Repository;
-
-namespace Fanex.NAPReport.WinLossByProducts.Business.Repositories
+﻿namespace Fanex.NAPReport.WinLossByProducts.Business.Repositories
 {
+    using System;
+    using System.Collections.Generic;
+    using Fanex.Data.Repository;
+    using Fanex.NAPReport.WinLossByProducts.Business.Model;
+
     public interface IRepository
     {
         List<Product> SimulateWinLossByProducts(Random rd);

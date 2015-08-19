@@ -17,7 +17,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Criteria
     /// </summary>
     public class OverallWinLossProducts3rdCriteria : CriteriaBase
     {
-        public DateTime rptdate
+        public DateTime RptDate
         {
             get;
             set;

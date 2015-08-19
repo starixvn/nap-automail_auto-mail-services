@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using Fanex.Common;
-using Fanex.Data;
-using Fanex.Data.Repository;
-using Fanex.NAPReport.WinLossByProducts.Business.Criteria;
-using Fanex.NAPReport.WinLossByProducts.Business.Model;
-using Fanex.NAPReport.WinLossByProducts.Business.Resources;
-
-namespace Fanex.NAPReport.WinLossByProducts.Business.Repositories
+﻿namespace Fanex.NAPReport.WinLossByProducts.Business.Repositories
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Linq;
+    using Fanex.Common;
+    using Fanex.Data;
+    using Fanex.Data.Repository;
+    using Fanex.NAPReport.WinLossByProducts.Business.Criteria;
+    using Fanex.NAPReport.WinLossByProducts.Business.Model;
+    using Fanex.NAPReport.WinLossByProducts.Business.Resources;
+
     public class Repository : IRepository
     {
         public List<Product> SimulateWinLossByProducts(Random rd)
@@ -171,12 +171,6 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Repositories
             {
                 Product product = new Product();
                 product.ProductName = name;
-
-                if (product.ProductName == "Outright")
-                {
-                    string s = "";
-                }
-
 
                 var rows = dataTable.AsEnumerable().Where(s => Converter.To<string>(s["ProductName"]) == name).ToList();
                 foreach (var row in rows)

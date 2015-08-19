@@ -1,25 +1,24 @@
-﻿using System;
-using Fanex.MailDelivery.Client.Jobs;
-using Fanex.MailDelivery.Client.Messages;
-using Fanex.MailDelivery.Client.Models;
-using Quartz;
-
-namespace Fanex.Service.Core.MailService
+﻿namespace Fanex.Service.Core.MailService
 {
-	public abstract class ScheduleMailBase : JobBase
-	{
-		protected override JobResultMessage Run(Schedule schedule, IJobExecutionContext jobContext)
-		{			
-			var jobResult = SendMailToVipGroup(schedule, jobContext);
+    using Fanex.MailDelivery.Client.Jobs;
+    using Fanex.MailDelivery.Client.Messages;
+    using Fanex.MailDelivery.Client.Models;
+    using Quartz;
+
+    public abstract class ScheduleMailBase : JobBase
+    {
+        protected override JobResultMessage Run(Schedule schedule, IJobExecutionContext jobContext)
+        {
+            var jobResult = SendMailToVipGroup(schedule, jobContext);
             SendMailToNormalGroup();
 
             return jobResult;
-		}
+        }
 
-		public abstract JobResultMessage SendMailToVipGroup(Schedule schedule, IJobExecutionContext jobContext);
+        public abstract JobResultMessage SendMailToVipGroup(Schedule schedule, IJobExecutionContext jobContext);
 
-		public virtual void SendMailToNormalGroup()
-		{
-		}
-	}
+        public virtual void SendMailToNormalGroup()
+        {
+        }
+    }
 }

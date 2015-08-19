@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Helper.Implement
+﻿namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Helper.Implement
 {
+    using System;
+
     public static class NumberExtensions
     {
         /// <summary>

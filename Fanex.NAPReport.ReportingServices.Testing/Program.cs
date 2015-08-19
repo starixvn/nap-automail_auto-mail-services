@@ -3,9 +3,9 @@
     using System;
     using System.IO;
     using Fanex.Data.Configuration;
+    using Fanex.NAPReport.ReportingServices.Business;
     using Fanex.NAPReport.ReportingServices.Business.Service;
     using Fanex.Service.Core.Configuration;
-    using Fanex.NAPReport.ReportingServices.Business;
 
     public class Program
     {
@@ -35,7 +35,6 @@
 
             serviceProcess.RunService(currentDate);            
             Console.WriteLine("Done at " + DateTime.Now.ToString());
-            //Console.ReadLine();
         }
     }
 }

@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using Fanex.NAP.Framework.Data;
-
-namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Helper.Interface
+﻿namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Helper.Interface
 {
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
+    using System.Collections.Generic;
+    using Fanex.Data.Repository;
+
     public interface IServiceBase
     {
         IEnumerable<T> GetReportData<T>(ICriteria criteria);

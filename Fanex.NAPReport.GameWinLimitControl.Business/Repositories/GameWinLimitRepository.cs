@@ -7,9 +7,9 @@
 namespace Fanex.NAPReport.GameWinLimitControl.Business.Repositories
 {
     using System.Data;
-    using Fanex.Data.Repository;
-    using Fanex.Data;
     using Fanex.Common;
+    using Fanex.Data;
+    using Fanex.Data.Repository;
     using Fanex.Service.Core.Model;
 
     /// <summary>

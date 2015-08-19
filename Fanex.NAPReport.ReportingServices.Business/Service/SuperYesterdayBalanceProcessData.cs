@@ -26,6 +26,12 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service
             serviceProcess.RegisterObserver(this);
         }
 
+        public string FileName
+        {
+            get;
+            set;
+        }
+
         public void ProcessData(DateTime winlossDate)
         {
             _superBalanceService = new SuperYesterdayBalanceService();
@@ -33,12 +39,6 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service
             var balanceReport = _superBalanceService.GetSuperYesterdayBalance(new GetSuperYesterdayBalanceCriteria());
             _exportService.ExportReport(balanceReport, winlossDate);
             FileName = _exportService.FileName;
-        }
-
-        public string FileName
-        {
-            get;
-            set;
-        }
+        }        
     }
 }

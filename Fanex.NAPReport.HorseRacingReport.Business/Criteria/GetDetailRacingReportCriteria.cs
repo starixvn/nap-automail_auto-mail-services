@@ -7,7 +7,7 @@
 namespace Fanex.NAPReport.HorseRacingReport.Business.Criteria
 {
     using System;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
     using Fanex.Service.Core.Service;
 
     /// <summary>

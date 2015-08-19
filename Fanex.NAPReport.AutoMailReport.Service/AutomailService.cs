@@ -1,20 +1,20 @@
-﻿using System;
-using System.IO;
-using System.ServiceProcess;
-using Fanex.Data.Configuration;
-using Fanex.MailDelivery.Client.Handlers;
-using Fanex.Service.Core.MailService;
-using Fanex.Service.Core.Utilities;
-using Fanex.Service.Core.Extensions;
-
-namespace Fanex.NAPReport.AutoMailReport.Service
+﻿namespace Fanex.NAPReport.AutoMailReport.Service
 {
-	public partial class AutoMailService : ServiceBase
-	{
-		private TimerServiceFacade _timerServiceFacade;
+    using System;
+    using System.IO;
+    using System.ServiceProcess;
+    using Fanex.Data.Configuration;
+    using Fanex.MailDelivery.Client.Handlers;
+    using Fanex.Service.Core.Extensions;
+    using Fanex.Service.Core.MailService;
+    using Fanex.Service.Core.Utilities;
 
-		public AutoMailService()
-		{
+    public partial class AutoMailService : ServiceBase
+    {
+        private TimerServiceFacade _timerServiceFacade;
+
+        public AutoMailService()
+        {
             try
             {
                 InitializeComponent(AppSettingBase.ServiceName);
@@ -28,10 +28,10 @@ namespace Fanex.NAPReport.AutoMailReport.Service
             {
                 LogExtensions.ExceptionHandler(ex);
             }
-		}
+        }
 
-		protected override void OnStart(string[] args)
-		{
+        protected override void OnStart(string[] args)
+        {
             try
             {
                 _timerServiceFacade.StartServices();
@@ -40,21 +40,20 @@ namespace Fanex.NAPReport.AutoMailReport.Service
             {
                 LogExtensions.ExceptionHandler(ex);
             }
-		}
+        }
 
-		protected override void OnStop()
-		{
-			_timerServiceFacade.StopServices();
+        protected override void OnStop()
+        {
+            _timerServiceFacade.StopServices();
             MailClientHandler.Stop();
+        }
 
-		}
-
-		/// <summary>
-		/// Console Test
-		/// </summary>
-		public void StartAndStop()
-		{
-			OnStart(null);
-		}
-	}
+        /// <summary>
+        /// Console Test
+        /// </summary>
+        public void StartAndStop()
+        {
+            OnStart(null);
+        }
+    }
 }

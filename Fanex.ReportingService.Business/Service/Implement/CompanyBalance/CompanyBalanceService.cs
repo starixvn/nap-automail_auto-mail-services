@@ -31,10 +31,7 @@ namespace Fanex.ReportingService.Business.Service.Implement.CompanyBalance
         private const short EvenRowColorIndex = 29;
         private const short GrandTotalColorIndex = 40;
         private IDataFormat dataForMat = null;
-        /// <summary>
-        /// Exports the company balance report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
+        
         public void ExportCompanyBalanceReport(GetCompanyBalanceCriteria criteria)
         {
             FileStream fileStream = null;

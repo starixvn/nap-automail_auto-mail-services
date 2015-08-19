@@ -33,18 +33,18 @@
         private XSSFSheet _workSheet;
         private XSSFFont _regularFont;
 
-        XSSFCellStyle overLimitTextStyle;
-        XSSFCellStyle overLimitCenterBoldTextStyle;
-        XSSFCellStyle overLimitDecimalNumberStyle;
-        XSSFCellStyle overLimitTextLeftStyle;
+        private XSSFCellStyle overLimitTextStyle;
+        private XSSFCellStyle overLimitCenterBoldTextStyle;
+        private XSSFCellStyle overLimitDecimalNumberStyle;
+        private XSSFCellStyle overLimitTextLeftStyle;
 
-        XSSFCellStyle normalTextStyle;
-        XSSFCellStyle normalCenterBoldTextStyle;
-        XSSFCellStyle normalDecimalNumberStyle;
-        XSSFCellStyle normalTextLeftStyle;
+        private XSSFCellStyle normalTextStyle;
+        private XSSFCellStyle normalCenterBoldTextStyle;
+        private XSSFCellStyle normalDecimalNumberStyle;
+        private XSSFCellStyle normalTextLeftStyle;
 
-        XSSFCellStyle normalLeftBoldTextStyle;
-        XSSFCellStyle headerStyle;        
+        private XSSFCellStyle normalLeftBoldTextStyle;
+        private XSSFCellStyle headerStyle;        
 
         private Cell _cell;
 
@@ -130,12 +130,12 @@
 
         private void InitCellStyle()
         {
-             overLimitTextStyle = _customCellStyleService.CreateCenterTextStyle(_overLimitColor, _fontService.RegularFont); ;
+             overLimitTextStyle = _customCellStyleService.CreateCenterTextStyle(_overLimitColor, _fontService.RegularFont);
              overLimitCenterBoldTextStyle = _customCellStyleService.CreateCenterTextStyle(_overLimitColor, _fontService.BlackBoldFont);
              overLimitDecimalNumberStyle = _customCellStyleService.CreatePositiveDecimalNumberStyle(_overLimitColor, _fontService.RegularFont);
              overLimitTextLeftStyle = _customCellStyleService.CreateLeftTextStyle(_overLimitColor, _fontService.RegularFont);
 
-             normalTextStyle = _customCellStyleService.CreateCenterTextStyle(_normalColor, _fontService.RegularFont); ;
+             normalTextStyle = _customCellStyleService.CreateCenterTextStyle(_normalColor, _fontService.RegularFont);
              normalCenterBoldTextStyle = _customCellStyleService.CreateCenterTextStyle(_normalColor, _fontService.BlackBoldFont);
              normalDecimalNumberStyle = _customCellStyleService.CreatePositiveDecimalNumberStyle(_normalColor, _fontService.RegularFont);
              normalTextLeftStyle = _customCellStyleService.CreateLeftTextStyle(_normalColor, _fontService.RegularFont);
@@ -285,6 +285,7 @@
                     CreateRowDetail(detail);
                     _cell.IncreaseRowIndex();
                 }
+
                 if (AppSettings.IsTest)
                 {
                     return;

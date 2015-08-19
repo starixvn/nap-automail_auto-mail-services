@@ -14,8 +14,8 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.SuperYesterd
     /// </summary>
     public interface ISuperYesterdayBalanceExportService
     {
-        void ExportReport(SuperYesterdayBalance balance, DateTime currentTime);
-
         string FileName { get; set; }
+
+        void ExportReport(SuperYesterdayBalance balance, DateTime currentTime);        
     }
 }

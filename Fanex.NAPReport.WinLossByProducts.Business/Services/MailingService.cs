@@ -65,7 +65,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
             string reportPath = _exportDataService.DirectoryOfFileName;
 
             var root = AppDomain.CurrentDomain.BaseDirectory;
-            string emailTemplatePath = root + EmailTemplateConstants.WIN_LOSS_BY_PRODUCTS_TEMPLATE;
+            string emailTemplatePath = root + EmailTemplateConstants._WIN_LOSS_BY_PRODUCTS_TEMPLATE;
             string template = File.ReadAllText(emailTemplatePath);
 
             WinLossProductsDTO data = new WinLossProductsDTO();
@@ -99,7 +99,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
         private void SendFunctionMailCustomContentNotification()
         {
             var root = AppDomain.CurrentDomain.BaseDirectory;
-            string emailTemplatePath = root + EmailTemplateConstants.NOTIFICATION_EMAIL_TEMPLATE;
+            string emailTemplatePath = root + EmailTemplateConstants._NOTIFICATION_EMAIL_TEMPLATE;
             string template = File.ReadAllText(emailTemplatePath);
 
             _mailInfo.FileName = "Win Loss By Products";

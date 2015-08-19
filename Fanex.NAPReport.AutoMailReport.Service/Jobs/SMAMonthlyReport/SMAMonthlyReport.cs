@@ -11,9 +11,7 @@ namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.SMAMonthlyReport
     using Fanex.NAPReport.SMAReport.Business.Service;
     using Fanex.Service.Core.MailService;
     using Quartz;
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
+
     public class SMAMonthlyReport : ScheduleMailBase
     {
         private MailingService service;

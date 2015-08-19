@@ -26,20 +26,19 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service
             serviceProcess.RegisterObserver(this);
         }
 
-        public void ProcessData(DateTime winlossDate)
-        {
-            _companyStatementService = new CompanyStatementService();
-            _exportService = new CompanyStatementExportService();
-            var companyStatementReport = _companyStatementService.GetCompanyBalanceReport(new GetCompanyStatementCriteria() { FromDate = winlossDate});
-            _exportService.ExportReport(companyStatementReport, winlossDate);
-            FileName = _exportService.FileName;
-        }
-
-
         public string FileName
         {
             get;
             set;
         }
+
+        public void ProcessData(DateTime winlossDate)
+        {
+            _companyStatementService = new CompanyStatementService();
+            _exportService = new CompanyStatementExportService();
+            var companyStatementReport = _companyStatementService.GetCompanyBalanceReport(new GetCompanyStatementCriteria() { FromDate = winlossDate });
+            _exportService.ExportReport(companyStatementReport, winlossDate);
+            FileName = _exportService.FileName;
+        }        
     }
 }

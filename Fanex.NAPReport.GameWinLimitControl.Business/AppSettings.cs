@@ -6,12 +6,8 @@
 
 namespace Fanex.NAPReport.GameWinLimitControl.Business
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.Service.Core.Utilities;
     using Fanex.Service.Core.Configuration;
+    using Fanex.Service.Core.Utilities;
 
     /// <summary>
     /// TODO: Update summary.

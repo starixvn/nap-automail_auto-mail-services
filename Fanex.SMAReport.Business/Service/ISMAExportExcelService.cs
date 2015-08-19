@@ -6,8 +6,6 @@
 
 namespace Fanex.NAPReport.SMAReport.Business.Service
 {
-    using Fanex.NAPReport.SMAReport.Business.Model;
-    using Fanex.MailDelivery.Client.Models;
     using System.Collections.Generic;
 
     /// <summary>
@@ -15,10 +13,10 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
     /// </summary>
     public interface ISMAExportExcelService
     {
-        void ExportReport();
-
         List<string> DirectoryOfFileNames { get; set; }
 
         List<string> FileNames { get; set; }
+
+        void ExportReport();
     }
 }

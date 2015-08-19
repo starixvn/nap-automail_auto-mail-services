@@ -26,14 +26,14 @@
         private INpoiNewFormatBodyCellStyleService _bodyCellStyleService;
         private INpoiNewFormatCustomCellStyleService _customCellStyleService;
         private INpoiAlignmentService _alignmentService;
-        private XSSFFont _regularFont;        
+        private XSSFFont _regularFont;
 
-        XSSFCellStyle leagueStyle;
-        XSSFCellStyle eventStyle;
-        XSSFCellStyle percentStyle;
-        XSSFCellStyle percentRedColorStyle;
-        XSSFCellStyle decimalNumberStyle;
-        XSSFCellStyle textStyle;
+        private XSSFCellStyle leagueStyle;
+        private XSSFCellStyle eventStyle;
+        private XSSFCellStyle percentStyle;
+        private XSSFCellStyle percentRedColorStyle;
+        private XSSFCellStyle decimalNumberStyle;
+        private XSSFCellStyle textStyle;
 
         public ExportExcelService()
         {
@@ -175,7 +175,7 @@
                 }
                 else if (sportbook.CustomerInfo.PercentageUsed >= 50)
                 {
-                    _cell.CellValue = sportbook.CustomerInfo.PercentageUsed/100;
+                    _cell.CellValue = sportbook.CustomerInfo.PercentageUsed / 100;
                 }
                 else
                 {

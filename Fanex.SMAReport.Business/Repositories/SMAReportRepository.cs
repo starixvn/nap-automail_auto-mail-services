@@ -11,15 +11,12 @@ namespace Fanex.NAPReport.SMAReport.Business.Repositories
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using Fanex.AccountingReports.SqLiteDatabase;
     using Fanex.Common;
     using Fanex.Data;
+    using Fanex.NAPReport.SMAReport.Business.Model;
     using Fanex.Service.Core.Constants;
     using Fanex.Service.Core.Enums;
-    using Fanex.Service.Core.Extensions;
     using Fanex.Service.Core.Service;
-    using Fanex.NAPReport.SMAReport.Business.Constants;
-    using Fanex.NAPReport.SMAReport.Business.Model;
 
     /// <summary>
     /// TODO: Update summary.

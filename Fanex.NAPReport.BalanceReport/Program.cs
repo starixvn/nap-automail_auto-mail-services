@@ -1,13 +1,13 @@
-﻿using System;
-using Fanex.Data.Configuration;
-using Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Balance;
-using Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Mailing;
-
-namespace Fanex.NAPReport.BalanceMonthlyReport.Business
+﻿namespace Fanex.NAPReport.BalanceMonthlyReport.Business
 {
-    class Program
+    using System;
+    using Fanex.Data.Configuration;
+    using Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Balance;
+    using Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Mailing;
+
+    public class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             try
             {
@@ -17,11 +17,10 @@ namespace Fanex.NAPReport.BalanceMonthlyReport.Business
                 var mail = mailingService.SendMailCreditTermToVIPGroup();
                 mail = mailingService.SendMailSuperBalanceToVIPGroup();
                 mail = mailingService.SendMailDirectBalanceToVIPGroup();
-                
             }
             catch (Exception ex)
             {
-               
+                Console.WriteLine(ex.Message);
             }
         }
     }

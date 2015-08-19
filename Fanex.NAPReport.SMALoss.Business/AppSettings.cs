@@ -7,7 +7,7 @@
     {
         public static string DataDirectory { get; set; }
 
-        public static string ExportDataDirectoryWithYearMonth
+        public static new string ExportDataDirectoryWithYearMonth
         {
             get { return ExportDataDirectoryWithYearMonth(DataDirectory); }
         }

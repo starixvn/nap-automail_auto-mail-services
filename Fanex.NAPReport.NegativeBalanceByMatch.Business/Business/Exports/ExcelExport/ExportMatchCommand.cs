@@ -6,10 +6,7 @@
         private ExportMatchSettleLogsCommand _exportMatchSettleLogsCommand;
         private ExportCustomerBalanceInfosCommand _exportCustomerBalanceInfoCommand;
 
-        public ExportMatchCommand(ExcelDocument excelDocument,
-            ExportMatchInfoCommand exportMatchInfoCommand,
-            ExportMatchSettleLogsCommand exportMatchSettleLogsCommand,
-            ExportCustomerBalanceInfosCommand exportCustomerBalanceInfoCommand)
+        public ExportMatchCommand(ExcelDocument excelDocument, ExportMatchInfoCommand exportMatchInfoCommand, ExportMatchSettleLogsCommand exportMatchSettleLogsCommand, ExportCustomerBalanceInfosCommand exportCustomerBalanceInfoCommand)
             : base(excelDocument)
         {
             _exportMatchInfoCommand = exportMatchInfoCommand;

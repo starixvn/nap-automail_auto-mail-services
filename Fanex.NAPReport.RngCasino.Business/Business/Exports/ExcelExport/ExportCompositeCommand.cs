@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using Fanex.Common.Extensions;
-
-namespace Fanex.NAPReport.RngCasino.Business.Business.Exports.ExcelExport
+﻿namespace Fanex.NAPReport.RngCasino.Business.Business.Exports.ExcelExport
 {
+    using System.Collections.Generic;
+    using Fanex.Common.Extensions;
+
     public class ExportCompositeCommand<T> : ExportCommandBase where T : IExportCommand
     {
-        protected IList<T> _commands;
+        private IList<T> _commands;
 
         public ExportCompositeCommand(ExcelDocument excelDocument)
             : base(excelDocument)

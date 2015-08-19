@@ -1,19 +1,14 @@
-﻿using System;
-using System.IO;
-using System.ServiceProcess;
-using System.Timers;
-using Fanex.Data.Configuration;
-using Fanex.MailDelivery.Client.Handlers;
-using Fanex.Service.Core.Extensions;
-
-namespace Fanex.DW.AutoMailReport.Service
+﻿namespace Fanex.DW.AutoMailReport.Service
 {
+    using System;
+    using System.IO;
+    using System.ServiceProcess;
+    using Fanex.Data.Configuration;
+    using Fanex.MailDelivery.Client.Handlers;
+    using Fanex.Service.Core.Extensions;
+
     public partial class AutoMailService : ServiceBase
     {
-        /// <summary>
-        /// The timer.
-        /// </summary>
-
         public AutoMailService()
         {
             InitializeComponent(AppSettings.ServiceName);
@@ -40,7 +35,5 @@ namespace Fanex.DW.AutoMailReport.Service
             MailClientHandler.Stop();
             GC.Collect();
         }
-
-     
     }
 }

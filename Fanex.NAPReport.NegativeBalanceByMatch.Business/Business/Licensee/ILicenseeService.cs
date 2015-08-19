@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities;
-
-namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Licensee
+﻿namespace Fanex.NAPReport.NegativeBalanceByMatch.Business.Business.Licensee
 {
-	public interface ILicenseeService
-	{
-		IList<string> GetLicensees();
+    using System.Collections.Generic;
+    using Fanex.NAPReport.NegativeBalanceByMatch.Business.Entities;
 
-		IList<LicenseeFunction> GetLicenseeFunctions();
-	}
+    public interface ILicenseeService
+    {
+        IList<string> GetLicensees();
+
+        IList<LicenseeFunction> GetLicenseeFunctions();
+    }
 }

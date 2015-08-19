@@ -44,6 +44,18 @@
             _mailInfo = new MailInfo();
         }
 
+        private string DirectoryOfFileName
+        {
+            get;
+            set;
+        }
+
+        private string FileName
+        {
+            get;
+            set;
+        }
+
         private string GetTemplate
         {
             get
@@ -109,19 +121,7 @@
             }
 
             return result;
-        }
-
-        private string DirectoryOfFileName
-        {
-            get;
-            set;
-        }
-
-        private string FileName
-        {
-            get;
-            set;
-        }
+        }        
       
         public MailResult SendMailToVIPGroup()
         {

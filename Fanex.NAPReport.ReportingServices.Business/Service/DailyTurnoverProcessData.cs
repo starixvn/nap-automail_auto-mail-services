@@ -25,6 +25,12 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service
             serviceProcess.RegisterObserver(this);
         }
 
+        public string FileName
+        {
+            get;
+            set;
+        }
+
         public void ProcessData(DateTime winlossDate)
         {
             _dailyTurnoverService = new DailyTurnoverService();
@@ -32,12 +38,6 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service
             var dailyTurnoverReport = _dailyTurnoverService.GetDailyTurnover(winlossDate);
             _exportService.ExportReport(dailyTurnoverReport, winlossDate);
             FileName = _exportService.FileName;
-        }
-
-        public string FileName
-        {
-            get;
-            set;
-        }
+        }        
     }
 }

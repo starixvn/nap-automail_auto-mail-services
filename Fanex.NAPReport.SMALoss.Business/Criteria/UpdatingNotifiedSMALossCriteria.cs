@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
     using Fanex.NAPReport.SMALoss.Business.Entities;
 
     public class UpdatingNotifiedSMALossCriteria : CriteriaBase

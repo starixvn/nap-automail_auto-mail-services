@@ -1,16 +1,7 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="GetCurrencyListCriteria.cs" company="Nexcel">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-using Fanex.NAP.Framework.Data;
-
-namespace Fanex.NAPReport.RngCasino.Business.Criteria
+﻿namespace Fanex.NAPReport.RngCasino.Business.Criteria
 {
-	/// <summary>
-    /// TODO: Update summary.
-    /// </summary>
+    using Fanex.Data.Repository;
+
     public class GetCurrencyListCriteria : CriteriaBase
     {
         public override bool IsValid()

@@ -6,8 +6,6 @@
 
 namespace Fanex.NAPReport.SMAReport.Business.Repositories
 {
-    using System.Collections.Generic;
-    using Fanex.Service.Core.Enums;
     using Fanex.NAPReport.SMAReport.Business.Model;
 
     /// <summary>

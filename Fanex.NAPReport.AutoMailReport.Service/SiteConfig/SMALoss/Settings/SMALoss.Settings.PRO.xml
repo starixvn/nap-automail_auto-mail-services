@@ -1,5 +1,5 @@
-﻿<appSettings>  
-  <add key="DataDirectory" value="\\10.18.200.202\_Fanex.ExcelFiles\SMALossReport" />
+﻿<appSettings>
+  <add key="DataDirectory" value="\\10.40.40.52\NAP_Reports\SMALossReport" />
   <add key="ExcelPasswordProtected" value="" />
-  <add key="FunctionId" value="82" />
+  <add key="FunctionId" value="65" />
 </appSettings>

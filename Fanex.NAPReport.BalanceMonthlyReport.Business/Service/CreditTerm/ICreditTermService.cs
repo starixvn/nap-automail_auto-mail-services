@@ -1,7 +1,7 @@
-﻿using Fanex.NAPReport.BalanceMonthlyReport.Business.Model;
-
-namespace Fanex.NAPReport.BalanceMonthlyReport.Business.Service.CreditTerm
+﻿namespace Fanex.NAPReport.BalanceMonthlyReport.Business.Service.CreditTerm
 {
+    using Fanex.NAPReport.BalanceMonthlyReport.Business.Model;
+
     public interface ICreditTermService
     {
         string DirectoryOfFileName { get; set; }

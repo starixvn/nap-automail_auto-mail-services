@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Fanex.Service.Core.MailService
+﻿namespace Fanex.Service.Core.MailService
 {
-	public interface ITimerService<in T> : IDisposable where T : ITimerFunctionMailService
-	{
-		void Register(T functionMailService);
+    using System;
 
-		void Start();
-	}
+    public interface ITimerService<in T> : IDisposable where T : ITimerFunctionMailService
+    {
+        void Register(T functionMailService);
+
+        void Start();
+    }
 }

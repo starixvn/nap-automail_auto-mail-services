@@ -1,47 +1,44 @@
-﻿using System.Timers;
-
-namespace Fanex.Service.Core.MailService
+﻿namespace Fanex.Service.Core.MailService
 {
-	/// <summary>
-	/// Common Timer Service Base. 
-	/// </summary>
-	public class CommonTimerService : ITimerService<ICommonTimerFunctionMailService>
-	{
-		private readonly int _commonInterval;
-		private Timer _commonTimer;
+    using System.Timers;
 
-		public CommonTimerService(int commonInterval)
-		{
-			_commonInterval = commonInterval;
-		}
+    public class CommonTimerService : ITimerService<ICommonTimerFunctionMailService>
+    {
+        private readonly int _commonInterval;
+        private Timer _commonTimer;
 
-		public void Start()
-		{
-			if (_commonTimer != null)
-			{
-				_commonTimer.Start();
-			}
-		}
+        public CommonTimerService(int commonInterval)
+        {
+            _commonInterval = commonInterval;
+        }
 
-		public void Dispose()
-		{
-			if (_commonTimer != null)
-			{
-				_commonTimer.Dispose();
-			}
-		}
+        public void Start()
+        {
+            if (_commonTimer != null)
+            {
+                _commonTimer.Start();
+            }
+        }
 
-		public void Register(ICommonTimerFunctionMailService standaloneTimerTimerFunctionMailService)
-		{
-			if (_commonTimer == null)
-			{
-				_commonTimer = new Timer { Interval = _commonInterval };
-			}
+        public void Dispose()
+        {
+            if (_commonTimer != null)
+            {
+                _commonTimer.Dispose();
+            }
+        }
 
-			_commonTimer.Elapsed += (sender, e) =>
-			{
-				standaloneTimerTimerFunctionMailService.NotifyMail();
-			};
-		}
-	}
+        public void Register(ICommonTimerFunctionMailService standaloneTimerTimerFunctionMailService)
+        {
+            if (_commonTimer == null)
+            {
+                _commonTimer = new Timer { Interval = _commonInterval };
+            }
+
+            _commonTimer.Elapsed += (sender, e) =>
+            {
+                standaloneTimerTimerFunctionMailService.NotifyMail();
+            };
+        }
+    }
 }

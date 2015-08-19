@@ -171,7 +171,6 @@
     <Compile Include="Jobs\CreditMovement\CreditMovement.cs" />
     <Compile Include="Jobs\GameWinLimitControl\GameWinLimitControl.cs" />
     <Compile Include="Jobs\HorseTransaction3rd\HorseTransaction3rd.cs" />
-    <Compile Include="Jobs\NAPReport\CreditMovement.cs" />
     <Compile Include="Jobs\BalanceMonthlyReport\CreditTerm.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -608,10 +607,6 @@
     <ProjectReference Include="..\Fanex.CreditMovement.Business\Fanex.NAPReport.CreditMovement.Business.csproj">
       <Project>{11920088-769E-4635-9222-19CF072BC6E1}</Project>
       <Name>Fanex.NAPReport.CreditMovement.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fanex.MonthlyWinlossByLeague.Business\Fanex.MonthlyWinlossByLeague.Business.csproj">
-      <Project>{B9C0CA6B-C407-4E48-B672-4CA10B8BA6FE}</Project>
-      <Name>Fanex.MonthlyWinlossByLeague.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.NAP.BADailyWinLoss\Fanex.NAPReport.BADailyWinLoss.Business.csproj">
       <Project>{D8FF5D62-BFFD-4710-98AA-B0E338033252}</Project>

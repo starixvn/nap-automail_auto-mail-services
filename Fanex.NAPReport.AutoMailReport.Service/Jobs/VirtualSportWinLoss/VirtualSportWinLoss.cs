@@ -1,11 +1,11 @@
-﻿using Fanex.MailDelivery.Client.Messages;
-using Fanex.MailDelivery.Client.Models;
-using Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement;
-using Fanex.Service.Core.MailService;
-using Quartz;
-
-namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.VirtualSportWinLoss
+﻿namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.VirtualSportWinLoss
 {
+    using Fanex.MailDelivery.Client.Messages;
+    using Fanex.MailDelivery.Client.Models;
+    using Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement;
+    using Fanex.Service.Core.MailService;
+    using Quartz;
+
     public class VirtualSportWinLoss : ScheduleMailBase
     {
         private IMailingServiceBase service;

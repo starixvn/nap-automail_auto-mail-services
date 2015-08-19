@@ -1,7 +1,7 @@
-﻿using NPOI.XSSF.UserModel;
-
-namespace Fanex.NAPReport.RngCasino.Business.Business.Exports.ExcelExport
+﻿namespace Fanex.NAPReport.RngCasino.Business.Business.Exports.ExcelExport
 {
+    using NPOI.XSSF.UserModel;
+
     public class ExportAutoSizeColumnCommand : ExportCommandBase
     {
         public ExportAutoSizeColumnCommand(ExcelDocument excelDocument)

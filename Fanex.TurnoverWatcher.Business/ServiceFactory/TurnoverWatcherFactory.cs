@@ -6,12 +6,8 @@
 
 namespace Fanex.NAPReport.TurnoverWatcher.Business.ServiceFactory
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.Service.Core.MailService.ServiceFactory;
     using Fanex.Service.Core.MailService;
+    using Fanex.Service.Core.MailService.ServiceFactory;
 
     /// <summary>
     /// TODO: Update summary.

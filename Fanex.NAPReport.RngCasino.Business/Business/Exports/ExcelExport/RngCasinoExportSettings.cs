@@ -2,12 +2,35 @@
 {
     public class RngCasinoExportSettings
     {
-        public int StartRowIndex = 1;
+        public RngCasinoExportSettings()
+        {
+            StartRowIndex = 1;
+            StartColIndex = 1;
+            ColumnPadding = 500;
+            MaxNumOfColumns = 5;
+        }
 
-        public int StartColIndex = 1;
+        public int StartRowIndex 
+        { 
+            get; set; 
+        }
 
-        public int ColumnPadding = 500;
+        public int StartColIndex
+        {
+            get;
+            set;
+        }
 
-	    public int MaxNumOfColumns = 5;
+        public int ColumnPadding
+        {
+            get;
+            set;
+        }
+
+        public int MaxNumOfColumns
+        {
+            get;
+            set;
+        }
     }
 }

@@ -6,10 +6,8 @@
 
 namespace Fanex.NAPReport.SMAReport.Business
 {
-    using System;
-    using System.Configuration;
-    using Fanex.Service.Core.Utilities;
     using Fanex.Service.Core.Configuration;
+    using Fanex.Service.Core.Utilities;
 
     /// <summary>
     /// Application setting.
@@ -22,7 +20,7 @@ namespace Fanex.NAPReport.SMAReport.Business
             set;
         }
 
-        public static new string DataDirectoryWithYear
+        public static string DataDirectoryWithYear
         {
             get { return ExportDataDirectoryWithYear(DataDirectory); }
         }

@@ -189,4 +189,13 @@
   <data name="Sportsbook_Non_Live" xml:space="preserve">
     <value>Sportsbook Non-Live</value>
   </data>
+  <data name="AG_Casino" xml:space="preserve">
+    <value>AG Casino</value>
+  </data>
+  <data name="Macau" xml:space="preserve">
+    <value>Macau</value>
+  </data>
+  <data name="Note3" xml:space="preserve">
+    <value>- %Margin of a period of multiple dates is the average value of all dates in the period.</value>
+  </data>
 </root>

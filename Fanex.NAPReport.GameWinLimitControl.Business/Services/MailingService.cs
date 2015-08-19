@@ -15,16 +15,16 @@ namespace Fanex.NAPReport.GameWinLimitControl.Business.Services
     using Fanex.NAPReport.GameWinLimitControl.Business.Model;
     using Fanex.Service.Core.Configuration;
     using Fanex.Service.Core.Constants;
+    using Fanex.Service.Core.Extensions;
     using Fanex.Service.Core.Model;
     using RazorEngine;
-    using Fanex.Service.Core.Extensions;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class MailingService : IMailingService
     {
-        private const string GAME_WIN_LIMIT_EMAIL_TEMPLATE = @"SiteConfig\GameWinLimitControl\Templates\GameWinLimitControlEmailTemplate.cshtml";
+        private const string GameWinLimitEmailTemplate = @"SiteConfig\GameWinLimitControl\Templates\GameWinLimitControlEmailTemplate.cshtml";
         private IGameWinLimitService _gameWinLimitService;
         private IGameWinLimitExcelService _excelService;
 
@@ -79,12 +79,12 @@ namespace Fanex.NAPReport.GameWinLimitControl.Business.Services
         private Mail CreateMail(List<GameWinLimit> members)
         {
             var root = AppDomain.CurrentDomain.BaseDirectory;
-            string emailTemplatePath = root + GAME_WIN_LIMIT_EMAIL_TEMPLATE;
+            string emailTemplatePath = root + GameWinLimitEmailTemplate;
             string template = File.ReadAllText(emailTemplatePath);
             var bodyContent = Razor.Parse(template, members);
             DateTime dt = DateTime.Now;
-            string fromDate = dt.AddSeconds(-AppSettings.IntervalInSecond).ToString(DateTimeFormatConstants.YEAR_MONTH_DATE_MINUTE2);
-            string toDate = dt.ToString(DateTimeFormatConstants.YEAR_MONTH_DATE_MINUTE2);
+            string fromDate = dt.AddSeconds(-AppSettings.IntervalInSecond).ToString(DateTimeFormatConstants.YearMonthDateMinute2);
+            string toDate = dt.ToString(DateTimeFormatConstants.YearMonthDateMinute2);
 
             Mail mail = new Mail()
             {

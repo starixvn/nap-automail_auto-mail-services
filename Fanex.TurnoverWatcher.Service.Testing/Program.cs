@@ -22,7 +22,6 @@
                 service.SendMailToVIPGroup();
 
                 MailClientHandler.Stop();               
-
             }
             catch (Exception ex)
             {
@@ -30,6 +29,5 @@
                 Console.ReadLine();
             }
         }
-
     }
 }

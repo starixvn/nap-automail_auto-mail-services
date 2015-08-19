@@ -20,11 +20,14 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Constants
         { 
             "RNG Casino", 
             "Racing",
-            "Bingo",
-            "AG Casino",
-            "Vegas Game",
+            "Bingo",            
             "Bettrade",
         };
 
+        public static readonly List<string> ProductsHaveNoNumberOfBetAndMargin = new List<string> 
+        { 
+            "AG Casino",
+            "Macau",            
+        };
     }
 }

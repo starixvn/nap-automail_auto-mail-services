@@ -1,13 +1,13 @@
-﻿using System;
-using System.IO;
-using Fanex.Data.Configuration;
-using Fanex.NAPReport.BADailyWinLoss.Business.Service;
-
-namespace Fanex.NAPReport.BADailyWinLoss.Testing
+﻿namespace Fanex.NAPReport.BADailyWinLoss.Testing
 {
-    class Program
+    using System;
+    using System.IO;
+    using Fanex.Data.Configuration;
+    using Fanex.NAPReport.BADailyWinLoss.Business.Service;
+
+    public class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
             DbSettingProviderManager.Current.Start();

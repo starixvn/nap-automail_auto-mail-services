@@ -9,7 +9,7 @@
     using Fanex.Service.Core.MailService.ServiceFactory;
 
     public class NegativeBalanceByMatchServiceFactory : ITimerServiceFactory<IStandaloneTimerFunctionMailService>
-	{
+    {
         public IStandaloneTimerFunctionMailService GetService()
         {
             string baseDir = AppDomain.CurrentDomain.BaseDirectory;

@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Fanex.Common.Helper;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
     using Fanex.Service.Core.Extensions;
 
     public class ServiceBase

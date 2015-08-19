@@ -83,7 +83,7 @@
         private string GetTemplate()
         {
             var appLocation = AppDomain.CurrentDomain.BaseDirectory;
-            string template = File.ReadAllText(appLocation + EmailTemplateConstants.TURNOVER_WATCHER_EMAIL_TEMPLATE);
+            string template = File.ReadAllText(appLocation + EmailTemplateConstants._TURNOVER_WATCHER_EMAIL_TEMPLATE);
             return template;
         }
     }

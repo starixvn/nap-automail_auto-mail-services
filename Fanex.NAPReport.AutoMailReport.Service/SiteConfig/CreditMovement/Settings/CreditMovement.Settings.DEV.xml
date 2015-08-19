@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Settings>
   <add key="FromDate" value="2015-03-01" />
-  <add key="ToDate" value="2015-03-16" />
-  <add key="MailTitle" value="Starix IT" />
+  <add key="ToDate" value="2015-03-16" />  
   <add key="ExportDataDirectory" value="\\10.18.200.202\_Fanex.ExcelFiles\CreditMovementExcelFile" />
   <add key="EmailTemplate" value="SiteConfig\CreditMovement\Templates\CreditMovementEmail.cshtml" />
   <add key="Amount" value="300" />

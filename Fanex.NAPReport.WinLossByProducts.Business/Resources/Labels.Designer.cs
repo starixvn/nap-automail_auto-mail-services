@@ -61,6 +61,15 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AG Casino.
+        /// </summary>
+        public static string AG_Casino {
+            get {
+                return ResourceManager.GetString("AG_Casino", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All Products.
         /// </summary>
         public static string All_Products {
@@ -84,6 +93,15 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Resources {
         public static string Last_Month {
             get {
                 return ResourceManager.GetString("Last_Month", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Macau.
+        /// </summary>
+        public static string Macau {
+            get {
+                return ResourceManager.GetString("Macau", resourceCulture);
             }
         }
         
@@ -138,6 +156,15 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Resources {
         public static string Note2 {
             get {
                 return ResourceManager.GetString("Note2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to - %Margin of a period of multiple dates is the average value of all dates in the period..
+        /// </summary>
+        public static string Note3 {
+            get {
+                return ResourceManager.GetString("Note3", resourceCulture);
             }
         }
         

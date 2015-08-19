@@ -48,7 +48,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
         public void ExportExcel(OverallWinLossProductsCriteria criteria)
         {
             OverallWinLossProducts3rdCriteria criteria3rd = new OverallWinLossProducts3rdCriteria();
-            criteria3rd.rptdate = criteria.rptdate;
+            criteria3rd.RptDate = criteria.RptDate;
 
             List<Product> products = _repository.GetOverallWinLossByProducts(criteria);            
             List<Product> sportbook3rdParty = _repository.GetOverallWinLossBySportbook3rdParty(criteria3rd);
@@ -66,7 +66,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
 
         private string CreateReportNameWithExtension(OverallWinLossProductsCriteria criteria)
         {
-            string reportName = string.Format(Labels.Overall_Win_Loss_Products, criteria.rptdate.ToString("yyyy_MM_dd"));
+            string reportName = string.Format(Labels.Overall_Win_Loss_Products, criteria.RptDate.ToString("yyyy_MM_dd"));
 
             return reportName;
         }

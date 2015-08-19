@@ -100,6 +100,7 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.NewFormat.Bod
                 return _parenthesesBlackNegativeDecimalNumberStyle;
             }
         }
+
         public XSSFCellStyle ParenthesesUnsignedNegativeDecimalNumberStyle
         {
             get

@@ -70,9 +70,13 @@ namespace Fanex.NAPReport.ReportingServices.Business.Model.MatchWinLoss2a
             {
                 decimal result = 0;
                 if (IsExcludeVirtualLineTotal)
+                {
                     result = 0;
+                }
                 else
+                {
                     result = this.LineTotalReal - this.LineTotalVirtual;
+                }
 
                 return result;
             }

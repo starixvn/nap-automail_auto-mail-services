@@ -18,7 +18,7 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
     /// </summary>
     public class MailingService : IMailingServiceBase
     {
-        private const string SMA_REPORT_TEMPLATE = @"SiteConfig\SMAReport\Templates\SMAReportTemplate.cshtml";
+        private const string _SMA_REPORT_TEMPLATE = @"SiteConfig\SMAReport\Templates\SMAReportTemplate.cshtml";
         private ISMAExportExcelService _excelService;
         private MailInfo _mailInfo;
         private IMailStationService mailStation;
@@ -40,7 +40,7 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
             _excelService.ExportReport();
             var data = _excelService.FileNames;
             var root = AppDomain.CurrentDomain.BaseDirectory;
-            string emailTemplatePath = root + SMA_REPORT_TEMPLATE;
+            string emailTemplatePath = root + _SMA_REPORT_TEMPLATE;
             string template = File.ReadAllText(emailTemplatePath);
             var bodyContent = Razor.Parse(template, data);
 

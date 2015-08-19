@@ -6,9 +6,9 @@
 
 namespace Fanex.NAPReport.WinLossByProducts.Business
 {
+    using System;
     using Fanex.Service.Core.Configuration;
     using Fanex.Service.Core.Utilities;
-using System;
 
     /// <summary>
     /// Application setting.

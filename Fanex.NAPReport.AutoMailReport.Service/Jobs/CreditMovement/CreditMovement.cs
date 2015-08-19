@@ -6,13 +6,11 @@
 
 namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.CreditMovement
 {
-    using System;
+    using Fanex.CreditMovement.Business.Service;
     using Fanex.MailDelivery.Client.Messages;
     using Fanex.MailDelivery.Client.Models;
     using Fanex.Service.Core.MailService;
     using Quartz;
-    using Fanex.CreditMovement.Business.Service;
-    using Fanex.MailDelivery.Client.Enumerations;
 
     /// <summary>
     /// TODO: Update summary.
@@ -29,13 +27,6 @@ namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.CreditMovement
         public override JobResultMessage SendMailToVipGroup(Schedule schedule, IJobExecutionContext jobContext)
         {
             var mail = _service.SendMailToVIPGroup();
-
-            //Mail mail = new Mail()
-            //{
-            //    Subject = schedule.Name,
-            //    Title = "Title - Testing",
-            //    Body = "Body - Testing"
-            //};
 
             return new JobResultMessage()
             {

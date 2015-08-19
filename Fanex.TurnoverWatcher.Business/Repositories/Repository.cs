@@ -100,6 +100,5 @@ namespace Fanex.NAPReport.TurnoverWatcher.Business.Repositories
 
             return result;
         }
-
     }
 }

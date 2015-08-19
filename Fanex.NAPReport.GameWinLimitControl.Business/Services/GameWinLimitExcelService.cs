@@ -9,6 +9,7 @@ namespace Fanex.NAPReport.GameWinLimitControl.Business.Services
     using System;
     using System.Collections.Generic;
     using System.Drawing;
+    using System.Linq;
     using Fanex.Data.Repository;
     using Fanex.NAPReport.GameWinLimitControl.Business.Model;
     using Fanex.Service.Core.Constants;
@@ -18,7 +19,6 @@ namespace Fanex.NAPReport.GameWinLimitControl.Business.Services
     using Fanex.Service.Core.Service.Interface.Npoi;
     using Fanex.Service.Core.Utilities;
     using NPOI.XSSF.UserModel;
-    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
@@ -73,7 +73,7 @@ namespace Fanex.NAPReport.GameWinLimitControl.Business.Services
             CreateSheet();
             InitColumnWidth();
             ExportReport(games);
-            FileName = "Blocked_Account_List_" + DateTime.Now.ToString(DateTimeFormatConstants.YEAR_MONTH_DATE_MINUTE) + ".xlsx";
+            FileName = "Blocked_Account_List_" + DateTime.Now.ToString(DateTimeFormatConstants.YearMonthDateMinute) + ".xlsx";
             DirectoryOfFileName = _reportPath = AppSettings.ExportDataDirectoryWithYearMonthDay + @"\" + FileName;
             SaveFile.SaveExcelFile(AppSettings.ExportDataDirectoryWithYearMonthDay, FileName, this._workbook, AppSettings.ExcelPasswordProtected);
         }

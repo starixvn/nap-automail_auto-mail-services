@@ -1,10 +1,7 @@
 ﻿namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Criteria
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
-    /// <summary>
-    /// Get All Sport Type Criteria.
-    /// </summary>
     public class GetAllSportType : CriteriaBase
     {
         public override string GetSettingKey()

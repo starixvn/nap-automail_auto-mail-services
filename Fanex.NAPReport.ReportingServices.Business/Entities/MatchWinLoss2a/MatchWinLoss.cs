@@ -37,8 +37,6 @@ namespace Fanex.NAPReport.ReportingServices.Business.Entities.MatchWinLoss2a
 
         public decimal IBCTurnover { get; set; }
 
-       // public decimal Turnover { get; set; }
-
         public string LeagueName { get; set; }
 
         public bool IsNeutral { get; set; }

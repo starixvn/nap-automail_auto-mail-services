@@ -1,17 +1,8 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="CustomerWinLossCriteria.cs" company="Nexcel">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-using System;
-using Fanex.NAP.Framework.Data;
-
-namespace Fanex.NAPReport.RngCasino.Business.Criteria
+﻿namespace Fanex.NAPReport.RngCasino.Business.Criteria
 {
-	/// <summary>
-    /// TODO: Update summary.
-    /// </summary>
+    using System;
+    using Fanex.Data.Repository;
+
     public class CustomerWinLossCriteria : CriteriaBase
     {
         [SpParam(SqlParamName = "fromdate")]

@@ -173,11 +173,9 @@
     </Compile>
     <Compile Include="Services\ExportExcelService.cs" />
     <Compile Include="Services\IExportExcelService.cs" />
-    <Compile Include="Services\IOverallWinLossProducts.cs" />
     <Compile Include="Services\IWinLossByProductsExportDataService.cs" />
     <Compile Include="Services\IWinLossByProductsService.cs" />
     <Compile Include="Services\MailingService.cs" />
-    <Compile Include="Services\OverallWinLossProducts.cs" />
     <Compile Include="Services\OverallWinLossProductsExcel.cs" />
     <Compile Include="Services\OverallWinLossProductsMailingService.cs" />
     <Compile Include="Services\OverallWinLossSportbook3rdPartyExcel.cs" />

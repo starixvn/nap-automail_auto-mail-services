@@ -17,7 +17,6 @@ namespace Fanex.CreditMovement.Business.Criteria
     /// </summary>
     public class GetCreditMovementCriteria : CriteriaBase
     {
-
         public GetCreditMovementCriteria()
         {
             if (!AppSettings.IsTest)

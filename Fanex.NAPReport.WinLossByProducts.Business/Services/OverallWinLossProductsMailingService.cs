@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using Fanex.NAPReport.WinLossByProducts.Business.Criteria;
-using Fanex.Service.Core.Configuration;
-using Fanex.Service.Core.MailService;
-using Fanex.Service.Core.Model;
-using Fanex.MailDelivery.Client.Models;
-using Fanex.MailDelivery.Client.Enumerations;
-using System.IO;
-using Fanex.NAPReport.WinLossByProducts.Business.Repositories;
-
-namespace Fanex.NAPReport.WinLossByProducts.Business.Services
+﻿namespace Fanex.NAPReport.WinLossByProducts.Business.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using Fanex.MailDelivery.Client.Enumerations;
+    using Fanex.MailDelivery.Client.Models;
+    using Fanex.NAPReport.WinLossByProducts.Business.Criteria;
+    using Fanex.NAPReport.WinLossByProducts.Business.Repositories;
+    using Fanex.Service.Core.Configuration;
+    using Fanex.Service.Core.MailService;
+    using Fanex.Service.Core.Model;
+
     public class OverallWinLossProductsMailingService : IMailingServiceBase
     {
         private IMailStationService _mailStation;
@@ -33,11 +33,11 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
             MailResult mailResult = new MailResult();
 
             OverallWinLossProductsCriteria criteria = new OverallWinLossProductsCriteria();
-            criteria.rptdate = AppSettings.IsTesting ? AppSettings.WinLossDate : DateTime.Today.AddDays(-1);
+            criteria.RptDate = AppSettings.IsTesting ? AppSettings.WinLossDate : DateTime.Today.AddDays(-1);
 
             var lastDate = new Repository().GetLastDateDataAvaiable();
 
-            bool isNotifyEmail = criteria.rptdate != lastDate && AppSettings.IsCheckEnoughData;
+            bool isNotifyEmail = criteria.RptDate != lastDate && AppSettings.IsCheckEnoughData;
             if (isNotifyEmail)
             {
                 mailResult.JobStatus = JobStatus.DataIsNotReady;

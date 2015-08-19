@@ -7,13 +7,10 @@
 namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Repositories
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Data;
+    using Fanex.Common;
     using Fanex.Data;
     using Fanex.DW.DailyBettypeWith3rdProducts.Business.Criteria;
-    using Fanex.Common;
 
     /// <summary>
     /// TODO: Update summary.

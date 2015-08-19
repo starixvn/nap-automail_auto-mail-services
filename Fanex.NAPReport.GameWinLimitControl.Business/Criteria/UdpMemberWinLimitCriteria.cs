@@ -1,10 +1,14 @@
-﻿using Fanex.Data.Repository;
-
-namespace Fanex.NAPReport.GameWinLimitControl.Business.Criteria
+﻿namespace Fanex.NAPReport.GameWinLimitControl.Business.Criteria
 {
+    using Fanex.Data.Repository;
+
     public class UdpMemberWinLimitCriteria : CriteriaBase
     {
-        public string MemNotify { get; set; }
+        public string MemNotify { get; set; }        
+
+        public int ErrCode { get; set; }
+
+        public string ErrMsg { get; set; }
 
         public override string GetSettingKey()
         {
@@ -15,9 +19,5 @@ namespace Fanex.NAPReport.GameWinLimitControl.Business.Criteria
         {
             return true;
         }
-
-        public int ErrCode { get; set; }
-
-        public string ErrMsg { get; set; }
     }
 }

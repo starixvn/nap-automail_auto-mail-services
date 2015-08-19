@@ -1,17 +1,8 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="IServiceBase.cs" company="Nexcel">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-using System.Collections.Generic;
-using Fanex.NAP.Framework.Data;
-
-namespace Fanex.NAPReport.RngCasino.Business.Helper.Interface
+﻿namespace Fanex.NAPReport.RngCasino.Business.Helper.Interface
 {
-	/// <summary>
-    /// TODO: Update summary.
-    /// </summary>
+    using System.Collections.Generic;
+    using Fanex.Data.Repository;
+
     public interface IServiceBase
     {
         IEnumerable<T> GetReportData<T>(ICriteria criteria);
