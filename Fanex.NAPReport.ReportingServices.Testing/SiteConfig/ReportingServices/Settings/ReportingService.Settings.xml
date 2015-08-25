@@ -6,6 +6,6 @@
   <add key="ExportDataDirectoryMatchWinLoss2a" value="\\10.18.200.202\_Fanex.ExcelFiles\ReportingService_MatchWinLoss2a" />
   <add key="ExportDataDirectorySuperYesterdayBalance" value="\\10.18.200.202\_Fanex.ExcelFiles\ReportingService_SuperYesterdayBalance" />
   <add key="ExcelPassword" value="" />
-  <add key="IsTest" value="true" />
+  <add key="IsTest" value="false" />
   <add key="WinLossDate" value="2015-08-20" />
 </Settings>
