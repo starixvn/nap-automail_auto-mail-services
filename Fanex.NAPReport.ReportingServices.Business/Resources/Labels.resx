@@ -282,4 +282,7 @@
   <data name="Type" xml:space="preserve">
     <value>Type</value>
   </data>
+  <data name="Bettrade" xml:space="preserve">
+    <value>Bettrade</value>
+  </data>
 </root>
