@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Settings>
+  <add key="FunctionId" value="28" />
+  <add key="DataDirectory" value="\\10.18.200.202\_Fanex.ExcelFiles\TurnoverWatcher" />
+  <add key="ExcelPasswordProtected" value="" />
+  <add key="IsTest" value="false" />
+</Settings>

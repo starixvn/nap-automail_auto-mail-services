@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.TurnoverWatcher.Business.Model
+namespace Fanex.NAPReport.TurnoverWatcher.Business.Model
 {
     using System;
     using System.Collections.Generic;
@@ -37,8 +37,8 @@ namespace Fanex.TurnoverWatcher.Business.Model
                     return 0;
                 }
 
-                var percentage = (CompanyTurnover / MaxTurnover) * 100;
-                return (int)Math.Round(percentage, 0, MidpointRounding.AwayFromZero);
+                decimal percentage = (CompanyTurnover / MaxTurnover) * 100;
+                return (int)Math.Round(percentage, 0, MidpointRounding.AwayFromZero);                
             }
         }
     }

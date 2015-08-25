@@ -1,0 +1,16 @@
+﻿<Functions>
+  <Function Name="SMA - Report">
+    <Setting Key="SMA_Report_GetData" SpName="Acc_Rpt_SMAAutomail" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+  </Function>
+
+  <Function Name="WinLoss - Virtual Sport">
+    <Setting Key="Acc_Rpt_WLAutomail_VS_Detail_old" SpName="Acc_Rpt_WLAutomail_VS_Detail_old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
+    <Setting Key="Acc_Rpt_WLAutomail_VS_Summary_old" SpName="Acc_Rpt_WLAutomail_VS_Summary_old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
+  </Function>
+
+  <Function Name="Overall Win Loss By Products Report">
+    <Setting Key="Acc_Rpt_Automail_WinlossbyProduct" SpName="Acc_Rpt_Automail_WinlossbyProduct" DbName="DBDWH.bodb_dwrs.bodbAdminNet" Timeout="0"/>
+    <Setting Key="Acc_Rpt_Automail_Winloss_3rd" SpName="Acc_Rpt_Automail_Winloss_3rd" DbName="DBDWH.bodb_dwrs.bodbAdminNet" Timeout="0"/>
+  </Function>
+  
+</Functions>

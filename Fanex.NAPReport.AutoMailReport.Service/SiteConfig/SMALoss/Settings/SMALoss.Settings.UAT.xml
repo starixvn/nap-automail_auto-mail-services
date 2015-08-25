@@ -1,0 +1,5 @@
+﻿<appSettings>  
+  <add key="DataDirectory" value="\\10.40.40.52\NAP_Reports\UAT\SMALossReport" />
+  <add key="ExcelPasswordProtected" value="" />
+  <add key="FunctionId" value="65" />
+</appSettings>

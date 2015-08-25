@@ -3,7 +3,7 @@
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
-namespace Fanex.TurnoverWatcher.Business.Constants
+namespace Fanex.NAPReport.TurnoverWatcher.Business.Constants
 {
     using System;
     using System.Collections.Generic;
@@ -15,5 +15,6 @@ namespace Fanex.TurnoverWatcher.Business.Constants
     /// </summary>
     public class EmailTemplateConstants
     {
+        public const string _TURNOVER_WATCHER_EMAIL_TEMPLATE = @"\SiteConfig\TurnoverWatcher\Templates\TurnoverWatcherEmailTemplate.cshtml";
     }
 }

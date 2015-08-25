@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.SMAReport.Business.Model
+namespace Fanex.NAPReport.SMAReport.Business.Model
 {
     using System;
     using System.Collections.Generic;

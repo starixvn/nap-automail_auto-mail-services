@@ -19,6 +19,16 @@ namespace Fanex.Service.Core.Extensions
         }
 
         /// <summary>
+        /// Formats the integer.
+        /// </summary>
+        /// <param name="value">The value that needs to be formatted.</param>
+        /// <returns>The formatted value.</returns>
+        public static string FormatInteger(this int value)
+        {
+            return string.Format("{0:0,0}", value);
+        }
+
+        /// <summary>
         /// Formats the specified value.
         /// </summary>
         /// <param name="value">The value.</param>
@@ -105,6 +115,11 @@ namespace Fanex.Service.Core.Extensions
             {
                 throw new NullReferenceException();
             }
+        }
+
+        public static string DecimalNumberFormat(decimal value)
+        {
+            return value.ToString("#,##0.00");
         }
     }
 }

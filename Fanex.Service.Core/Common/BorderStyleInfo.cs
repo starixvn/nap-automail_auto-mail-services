@@ -50,6 +50,9 @@ namespace Fanex.Service.Core.Common
         }
     }
 
+    /// <summary>
+    /// Border information.
+    /// </summary>
     public struct BorderInfo
     {
         public short LeftBorderStyle;

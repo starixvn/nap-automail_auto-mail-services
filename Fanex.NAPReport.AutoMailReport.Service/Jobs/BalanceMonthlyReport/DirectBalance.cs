@@ -1,0 +1,45 @@
+﻿// -----------------------------------------------------------------------
+// <copyright file="DirectBalance.cs" company="Microsoft">
+// TODO: Update copyright text.
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.BalanceMonthlyReport
+{
+    using Fanex.MailDelivery.Client.Enumerations;
+    using Fanex.MailDelivery.Client.Messages;
+    using Fanex.MailDelivery.Client.Models;
+    using Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Mailing;
+    using Fanex.Service.Core.MailService;
+    using Quartz;
+
+    /// <summary>
+    /// TODO: Update summary.
+    /// </summary>
+    public class DirectBalance : ScheduleMailBase
+    {
+        private IMailingService service;
+
+        public DirectBalance()
+        {
+            service = new MailingService();
+        }
+
+        public override JobResultMessage SendMailToVipGroup(Schedule schedule, IJobExecutionContext jobContext)
+        {
+            var mail = service.SendMailDirectBalanceToVIPGroup();
+
+            return new JobResultMessage()
+            {
+                JobStatus = JobStatus.Success,
+                Mail = mail,
+                Schedule = schedule,
+            };
+        }
+
+        public override void SendMailToNormalGroup()
+        {
+            service.SendMailToDirectBalanceNormalGroup();
+        }
+    }
+}

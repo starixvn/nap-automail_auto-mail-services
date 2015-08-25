@@ -1,0 +1,80 @@
+﻿@using Fanex.Service.Core.Extensions
+@using Fanex.Service.Core.Model;
+@using Fanex.NAPReport.WinLossByProducts.Business.Model;
+@{
+    string linkNapReport = Model.MailInfo.NapReportURL;
+    var _model = Model.WinLossByProducts;
+}
+<div>
+    <div>
+        Dear All,<br /><br />
+        This is to provide the Daily Win Loss report of all products on @_model.Date
+    </div>
+    <br/>
+   <table cellspacing="0" rules="all" border="1" id="display" style="border-color:#c5c5c5; border-style:Solid;border-collapse:collapse;font-size:10pt; font-family:Tahoma, Arial, Verdana, Sans-Serif;">
+        <thead>
+            <tr style="height: 25px;background-color:#3C5EA5; color: #FFFFFF; font-weight: bold;">
+                <th style="width:150px;">Product</th>
+                <th style="width:120px;">Win/Loss</th>
+                <th style="width:180px;">Month to Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in _model.Sportbook)
+            {
+                <tr style="height: 25px;">
+                    <td style="text-align:left;">@item.ProductName</td>
+                    <td style="text-align:right;">@NumberExtensions.DecimalNumberFormat(@item.WinLoss)</td>
+                    <td style="text-align:right;">@NumberExtensions.DecimalNumberFormat(@item.MonthToDateWinLoss)</td>
+                </tr>
+            }
+            @if (_model.SportbookTotal != null)
+            {
+                <tr style="height: 25px; background-color:#D8E4BC; text-align:right; font-weight:bold;">
+                    <td>@_model.SportbookTotal.ProductName</td>
+                    <td>@NumberExtensions.DecimalNumberFormat(@_model.SportbookTotal.WinLoss)</td>
+                    <td>@NumberExtensions.DecimalNumberFormat(@_model.SportbookTotal.MonthToDateWinLoss)</td>
+                </tr>
+            }
+            @foreach (var item in _model.ThirdPartySport)
+            {
+                if (@item.GroupName.ToLower() == "partners")
+                {
+                    <tr style="height: 25px;font-style:italic;color:#C0C0C0;">
+                        <td style="text-align:left;">@item.ProductName</td>
+                        <td style="text-align:right;">@NumberExtensions.DecimalNumberFormat(@item.WinLoss)</td>
+                        <td style="text-align:right;">@NumberExtensions.DecimalNumberFormat(@item.MonthToDateWinLoss)</td>
+                    </tr>
+                }
+                else
+                {
+                    <tr style="height: 25px;">
+                        <td style="text-align:left; ">@item.ProductName</td>
+                        <td style="text-align:right; ">@NumberExtensions.DecimalNumberFormat(@item.WinLoss)</td>
+                        <td style="text-align:right; ">@NumberExtensions.DecimalNumberFormat(@item.MonthToDateWinLoss)</td>
+                    </tr>
+                }
+            }
+            @if (_model.Total != null)
+            {
+                <tr style="height: 25px;background-color:#C3D79B; text-align:right; font-weight:bold;">
+                    <td>@_model.Total.ProductName</td>
+                    <td>@NumberExtensions.DecimalNumberFormat(@_model.Total.WinLoss)</td>
+                    <td>@NumberExtensions.DecimalNumberFormat(@_model.Total.MonthToDateWinLoss)</td>
+                </tr>
+            }
+        </tbody>
+   </table>
+   <br />
+    <div>
+        <div style="font-style:italic">Note: The amount due to 3rd parties for Virtual Sports and Keno products will be manually settled by Oneworks which are not shown here.</div><br />
+        This is an auto-generated email, please do not reply.<br /><br />
+
+        @*<b>* Note:</b> You also can access to <a href="@linkNapReport" target="_blank">Nap-Accounting Report</a> to download report. <br /><br />
+ 
+        Please contact Starix IT if you can not access or download report.<br /><br />*@
+
+        Thanks & Regards,<br /><br />
+        Automail System.
+    </div>
+</div>

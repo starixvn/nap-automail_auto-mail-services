@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="BetTypeConstants.cs" company="">
+// <copyright file="BetTypeConstants.cs" company="Nexcel Solutions Vietnam">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------

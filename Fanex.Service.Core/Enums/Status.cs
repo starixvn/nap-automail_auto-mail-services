@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="Status.cs" company="Microsoft">
+// <copyright file="Status.cs" company="Nexcel Solutions Vietnam">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -34,6 +34,11 @@ namespace Fanex.Service.Core.Enums
         /// <summary>
         /// The can not found.
         /// </summary>
-        CannotFound
+        CannotFound,
+
+        /// <summary>
+        /// Data does not enough.
+        /// </summary>
+        NotEnoughDataToSendEmail
     }
 }

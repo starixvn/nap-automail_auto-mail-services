@@ -7,9 +7,6 @@
 namespace Fanex.Service.Core.Utilities
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Configuration;
 
     /// <summary>
@@ -62,38 +59,102 @@ namespace Fanex.Service.Core.Utilities
             }
         }
 
-        protected static string GetSettingValueByKey(string key)
-        {
-            var val = ConfigurationManager.AppSettings[key];
-            return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings[key]);
-        }
-
         public static string ExcelPassword
         {
-            get 
+            get
             {
                 return GetSettingValueByKey("ExcelPassword");
             }
         }
 
-        protected static string ExportDataDirectory(string key)
-        {
-            string path = AppSettingBase.GetSettingValueByKey(key); 
-            string month = DateTime.Today.Month < 10
-                ? "0" + DateTime.Today.Month
-                : DateTime.Today.Month + string.Empty;
-
-            path += @"\" + DateTime.Today.Year + @"\" + month;
-
-            return path;
-        }
-
         public static string ServiceName
         {
-            get 
+            get
             {
                 return GetSettingValueByKey("ServiceName");
             }
+        }
+
+        public static int Interval
+        {
+            get
+            {
+                var val = ConfigurationManager.AppSettings["Interval.Minute"];
+                int interval = val == null ? 1000 * 3600 : Convert.ToInt32(val) * 60 * 1000;
+                return interval;
+            }
+        }
+
+        public static bool OnProcessing { get; set; }
+
+        public static string NapReportURL
+        {
+            get
+            {
+                return GetSettingValueByKey("NapReportURL");
+            }
+        }
+
+        public static string Title
+        {
+            get
+            {
+                return GetSettingValueByKey("Title");
+            }
+        }
+
+        public static string Subject
+        {
+            get
+            {
+                return GetSettingValueByKey("Subject");
+            }
+        }
+
+        public static int NotificationEmailFunctionId
+        {
+            get
+            {
+                var val = ConfigurationManager.AppSettings["NotificationEmailFunctionId"];
+                return val == null ? 0 : Convert.ToInt32(ConfigurationManager.AppSettings["NotificationEmailFunctionId"]);
+            }
+        }
+
+        protected static string ExportDataDirectory(string key)
+        {
+            string path = AppSettingBase.GetSettingValueByKey(key);
+
+            return ExportDataDirectoryWithYearMonth(path);
+        }
+
+        protected static string ExportDataDirectoryWithYearMonthDay(string exportDataDirectory)
+        {
+            string month = DateTime.Today.ToString("MM");
+            string day = DateTime.Today.ToString("dd");
+            exportDataDirectory += @"\" + DateTime.Today.Year + @"\" + month + @"\" + day;
+
+            return exportDataDirectory;
+        }
+
+        protected static string ExportDataDirectoryWithYearMonth(string exportDataDirectory)
+        {
+            string month = DateTime.Today.ToString("MM");
+            exportDataDirectory += @"\" + DateTime.Today.Year + @"\" + month;
+
+            return exportDataDirectory;
+        }
+
+        protected static string ExportDataDirectoryWithYear(string exportDataDirectory)
+        {
+            exportDataDirectory += @"\" + DateTime.Today.Year;
+
+            return exportDataDirectory;
+        }
+
+        protected static string GetSettingValueByKey(string key)
+        {
+            var val = ConfigurationManager.AppSettings[key];
+            return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings[key]);
         }
     }
 }

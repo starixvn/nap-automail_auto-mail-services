@@ -4,173 +4,31 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.SMAReport.Business.Repositories
+namespace Fanex.NAPReport.SMAReport.Business.Repositories
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using Fanex.AccountingReports.SqLiteDatabase;
     using Fanex.Common;
     using Fanex.Data;
+    using Fanex.NAPReport.SMAReport.Business.Model;
     using Fanex.Service.Core.Constants;
     using Fanex.Service.Core.Enums;
-    using Fanex.Service.Core.Extensions;
     using Fanex.Service.Core.Service;
-    using Fanex.SMAReport.Business.Constants;
-    using Fanex.SMAReport.Business.Model;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class SMAReportRepository : ISMAReportRepository
     {
-        private SqLite _db = null;
         private Dictionary<int, int> _bettype = new Dictionary<int, int>();
         private Dictionary<string, int> _enabledVirtualRateUser;
 
         public SMAReportRepository()
         {
-            _db = new SqLite(AppSettings.ConnectionString);
             InitBettype();
-        }
-
-        /// <summary>
-        /// Updates the task status.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <param name="status">The status.</param>
-        public void UpdateTaskStatus(int id, Status status)
-        {
-            try
-            {
-                Dictionary<string, string> data = new Dictionary<string, string>();
-                data.Add("Status", ((int)status).ToString());
-                data.Add("UpdatedDate", DateTime.Now.ToString());
-
-                string where = " Id = " + id;
-                _db.Update("Log", data, where);
-            }
-            catch (Exception ex)
-            {
-                LogExtensions.ExceptionHandler(ex);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Gets the current task.
-        /// </summary>
-        /// <returns>SMA report task.</returns>
-        public SMAReportModel GetCurrentTask()
-        {
-            SMAReportModel model = null;
-            try
-            {
-                string sql = "select * from log where Status = " + (int)Status.Running + " LIMIT 1";
-                DataTable dataTable = _db.GetDataTable(sql);
-
-                if (dataTable.Rows.Count == 0)
-                {
-                    return model;
-                }
-
-                DataRow row = dataTable.Rows[0];
-                model = this.MapTaskData(row);
-            }
-            catch (Exception ex)
-            {
-                LogExtensions.ExceptionHandler(ex);
-                throw;
-            }
-
-            return model;
-        }
-
-        /// <summary>
-        /// Gets the task ready run.
-        /// </summary>
-        /// <returns>SMA report task.</returns>
-        public SMAReportModel GetTaskReadyRun()
-        {
-            SMAReportModel model = null;
-            try
-            {
-                string sql = "select * from log order by Id desc LIMIT 1";
-                DataTable dataTable = _db.GetDataTable(sql);
-
-                if (dataTable.Rows.Count == 0)
-                {
-                    return model;
-                }
-
-                DataRow row = dataTable.Rows[0];
-                model = this.MapTaskData(row);
-            }
-            catch (Exception ex)
-            {
-                LogExtensions.ExceptionHandler(ex);
-                throw;
-            }
-
-            return model;
-        }
-
-        /// <summary>
-        /// Gets the task by identifier.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns>SMA report task.</returns>
-        public SMAReportModel GetTaskById(int id)
-        {
-            SMAReportModel model = null;
-            try
-            {
-                string sql = "select * from log where Id = " + id;
-                DataTable dataTable = _db.GetDataTable(sql);
-
-                if (dataTable.Rows.Count == 0)
-                {
-                    return model;
-                }
-
-                DataRow row = dataTable.Rows[0];
-                model = this.MapTaskData(row);
-            }
-            catch (Exception ex)
-            {
-                LogExtensions.ExceptionHandler(ex);
-                throw;
-            }
-
-            return model;
-        }
-
-        /// <summary>
-        /// Inserts the task.
-        /// </summary>
-        /// <param name="task">The SMA task.</param>
-        /// <returns>Identifier of the task.</returns>
-        public int InsertTask(SMAReportModel task)
-        {
-            int id = 0;
-            try
-            {
-                Dictionary<string, string> data = new Dictionary<string, string>();
-                data.Add("Status", ((int)Status.Running).ToString());
-                data.Add("CreatedDate", DateTime.Now.ToString());
-                data.Add("Type", task.TaskType.ToString());
-
-                id = Converter.ToInt(_db.Insert("Log", data));
-            }
-            catch (Exception ex)
-            {
-                LogExtensions.ExceptionHandler(ex);
-                throw;
-            }
-
-            return id;
         }
 
         /// <summary>

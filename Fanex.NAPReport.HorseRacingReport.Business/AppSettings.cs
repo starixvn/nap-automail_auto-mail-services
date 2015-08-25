@@ -7,44 +7,53 @@
 namespace Fanex.NAPReport.HorseRacingReport.Business
 {
     using System;
-    using System.Configuration;
+    using Fanex.Service.Core.Configuration;
     using Fanex.Service.Core.Utilities;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class AppSettings: AppSettingBase
+    public class AppSettings : AppSettingBase, ISettings
     {
-        public static string ExportDataDirectory
+        public static string DataDirectory
         {
-            get 
-            {
-                return ExportDataDirectory("Fanex.HorseRacingReport.ExportDataDirectory");
-            }
+            get;
+            set;
         }
 
-        public static string Subject
+        public static string DataDirectoryWithYearMonth
         {
-            get
-            {
-                return GetSettingValueByKey("HorseRacingReport.Subject");
-            }
+            get { return ExportDataDirectoryWithYearMonth(DataDirectory); }
         }
 
-        public static string Title
+        public static string ExcelPasswordProtected
         {
-            get
-            {
-                return GetSettingValueByKey("HorseRacingReport.Title");
-            }
+            get;
+            set;
         }
 
-        public static string [] BaseCurrencies
+        public static DateTime FromDate
         {
-            get
-            {
-                return GetSettingValueByKey("OandaExchangeRate.BaseCurrencies").Split(',');
-            }
+            get;
+            set;
+        }
+
+        public static DateTime ToDate
+        {
+            get;
+            set;
+        }
+
+        public static bool IsTest
+        {
+            get;
+            set;
+        }
+
+        public static int FunctionId
+        {
+            get;
+            set;
         }
     }
 }

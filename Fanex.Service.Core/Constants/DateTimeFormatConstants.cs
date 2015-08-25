@@ -23,5 +23,7 @@ namespace Fanex.Service.Core.Constants
         public const string MonthDayWithNoHyphen = "dd MMM";
         public const string FullMonthName = "MMMM";
         public const string YearMonthDateWithSlash = "yyyy/MM/dd";
+        public const string YearMonthDateMinute = "yyyy-MM-dd hh-mm tt";
+        public const string YearMonthDateMinute2 = "yyyy-MM-dd hh:mm tt";
     }
 }

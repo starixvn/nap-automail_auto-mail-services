@@ -1,0 +1,29 @@
+﻿@using System.Collections.Generic;
+@using Fanex.Service.Core.Extensions;
+@using Fanex.Service.Core.Model;
+@{
+    string fileName = Model.FileName;
+    string linkNapReport = Model.NapReportURL;
+    bool isSingle = Model.FileNamesPath.Count == 1;
+    string verb = isSingle ? "has" : "have";
+}
+<div>
+    Deal Admins, <br/><br/>
+
+    The @fileName @verb been sent to you. <br/><br/>
+
+    Please kindly find the attachment for more details.<br/><br/>
+
+     * <b>Note:</b>You also can access to <a href="@linkNapReport" target="_blank">Nap-Accounting Report</a> to download report. <br/><br/>
+
+    Thanks & Best Regards, <br/><br/>
+
+    Starix IT<br/><br/>
+
+    ---------------------------------------------------------------------- <br/>
+    <i>This email is confidential. <br/>
+    If you are not the addressee you may not copy, forward, disclose or use any part of it. <br/>
+    If you have received this message in error, please delete it from your system. <br/>
+    This is an auto-generated email, please do not reply.<br/>
+    </i>
+</div>

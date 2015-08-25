@@ -1,0 +1,26 @@
+﻿namespace Fanex.NAPReport.SMALoss.Business.Entities
+{
+    using System.Collections.Generic;
+
+    /// <summary>
+    /// SMA loss group view model.
+    /// </summary>
+    public class FormattedSMALossGroup
+    {
+        public FormattedSMALossGroup(SMALoss rawData, string levelRange)
+        {
+            if (rawData != null)
+            {
+                this.LossLevel = rawData.LevelID;
+                this.LossLevelRange = levelRange;
+                this.SMALossItems = new List<FormattedSMALossItem>();
+            }
+        }
+
+        public byte LossLevel { get; set; }
+
+        public string LossLevelRange { get; set; }
+
+        public List<FormattedSMALossItem> SMALossItems { get; set; }
+    }
+}

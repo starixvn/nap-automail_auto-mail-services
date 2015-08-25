@@ -26,6 +26,9 @@ namespace Fanex.Service.Core.Common
         }
     }
 
+    /// <summary>
+    /// Background style information.
+    /// </summary>
     public struct BackgroundStyleInfo
     {
         public Color FillForegroundColor;

@@ -196,7 +196,7 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Daily Racing Report {0} - {1}.zip.
+        ///   Looks up a localized string similar to Daily_Racing_Report_From_{0}_To_ {1}.zip.
         /// </summary>
         public static string Racing_Report_Directory {
             get {

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Settings>
+  <add key="FromDate" value="2015-01-01" />
+  <add key="ToDate" value="2015-06-16" />
+  <add key="ExportDataDirectory" value="\\10.18.200.202\_Fanex.ExcelFiles\CreditMovementExcelFile" />
+  <add key="EmailTemplate" value="SiteConfig\CreditMovement\Templates\CreditMovementEmail.cshtml" />
+  <add key="Amount" value="300" />
+  <add key="ExcelPassword" value="we168" />
+  <add key="IsTest" value="true" />
+  <add key="FunctionId" value="0" />
+</Settings>

@@ -22,7 +22,7 @@ namespace Fanex.ReportingService.Business.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ReportingServiceResources {
+    public class ReportingServiceResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Fanex.ReportingService.Business.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Fanex.ReportingService.Business.Resources.ReportingServiceResources", typeof(ReportingServiceResources).Assembly);
@@ -51,7 +51,7 @@ namespace Fanex.ReportingService.Business.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Company_Balance_Date_{0}.
         /// </summary>
-        internal static string CompanyBalance_ReportName {
+        public static string CompanyBalance_ReportName {
             get {
                 return ResourceManager.GetString("CompanyBalance_ReportName", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Company Balance Date: {0}.
         /// </summary>
-        internal static string CompanyBalance_ReportTitle {
+        public static string CompanyBalance_ReportTitle {
             get {
                 return ResourceManager.GetString("CompanyBalance_ReportTitle", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Company Balance.
         /// </summary>
-        internal static string CompanyBalance_SheetName {
+        public static string CompanyBalance_SheetName {
             get {
                 return ResourceManager.GetString("CompanyBalance_SheetName", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Company_Statement_Date_{0}.
         /// </summary>
-        internal static string CompanyStatement_ReportName {
+        public static string CompanyStatement_ReportName {
             get {
                 return ResourceManager.GetString("CompanyStatement_ReportName", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Company Statement - Date: {0}.
         /// </summary>
-        internal static string CompanyStatement_ReportTitle {
+        public static string CompanyStatement_ReportTitle {
             get {
                 return ResourceManager.GetString("CompanyStatement_ReportTitle", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Company Statement.
         /// </summary>
-        internal static string CompanyStatement_SheetName {
+        public static string CompanyStatement_SheetName {
             get {
                 return ResourceManager.GetString("CompanyStatement_SheetName", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Daily_Turnover_Date_{0}.
         /// </summary>
-        internal static string DailyTurnover_ReportName {
+        public static string DailyTurnover_ReportName {
             get {
                 return ResourceManager.GetString("DailyTurnover_ReportName", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Daily Turnover - Date: {0}.
         /// </summary>
-        internal static string DailyTurnover_ReportTitle {
+        public static string DailyTurnover_ReportTitle {
             get {
                 return ResourceManager.GetString("DailyTurnover_ReportTitle", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Daily Turnover.
         /// </summary>
-        internal static string DailyTurnover_SheetName {
+        public static string DailyTurnover_SheetName {
             get {
                 return ResourceManager.GetString("DailyTurnover_SheetName", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to {0} PRODUCT {1}{2} BETTYPE WIN/LOSS REPORT FOR {3}.
         /// </summary>
-        internal static string MatchWinLoss2a_DetailReportByBetType_Title {
+        public static string MatchWinLoss2a_DetailReportByBetType_Title {
             get {
                 return ResourceManager.GetString("MatchWinLoss2a_DetailReportByBetType_Title", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Margin%.
         /// </summary>
-        internal static string MatchWinLoss2a_Margin {
+        public static string MatchWinLoss2a_Margin {
             get {
                 return ResourceManager.GetString("MatchWinLoss2a_Margin", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Match_Win_Loss_Report_On_{0}.
         /// </summary>
-        internal static string MatchWinLoss2a_ReportName {
+        public static string MatchWinLoss2a_ReportName {
             get {
                 return ResourceManager.GetString("MatchWinLoss2a_ReportName", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Match Win Loss 2a.
         /// </summary>
-        internal static string MatchWinLoss2a_SheetName {
+        public static string MatchWinLoss2a_SheetName {
             get {
                 return ResourceManager.GetString("MatchWinLoss2a_SheetName", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Match_Win_Loss_Report_On_{0}.
         /// </summary>
-        internal static string MatchWinLoss2a_SummaryReportByBetType_ReportName {
+        public static string MatchWinLoss2a_SummaryReportByBetType_ReportName {
             get {
                 return ResourceManager.GetString("MatchWinLoss2a_SummaryReportByBetType_ReportName", resourceCulture);
             }
@@ -189,7 +189,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Match Win Loss 2a.
         /// </summary>
-        internal static string MatchWinLoss2a_SummaryReportByBetType_ReportTitle {
+        public static string MatchWinLoss2a_SummaryReportByBetType_ReportTitle {
             get {
                 return ResourceManager.GetString("MatchWinLoss2a_SummaryReportByBetType_ReportTitle", resourceCulture);
             }
@@ -198,7 +198,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to FI 3rd-Party.
         /// </summary>
-        internal static string MatchWinLoss2a_ThirdPartyBetTypeName {
+        public static string MatchWinLoss2a_ThirdPartyBetTypeName {
             get {
                 return ResourceManager.GetString("MatchWinLoss2a_ThirdPartyBetTypeName", resourceCulture);
             }
@@ -207,7 +207,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to MatchWinLoss2aAllReports_{0}.
         /// </summary>
-        internal static string MatchWinLoss2aAll_ReportName {
+        public static string MatchWinLoss2aAll_ReportName {
             get {
                 return ResourceManager.GetString("MatchWinLoss2aAll_ReportName", resourceCulture);
             }
@@ -216,7 +216,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Match Win Loss 2a All Reports - {0}.
         /// </summary>
-        internal static string MatchWinLoss2aAll_ReportTitle {
+        public static string MatchWinLoss2aAll_ReportTitle {
             get {
                 return ResourceManager.GetString("MatchWinLoss2aAll_ReportTitle", resourceCulture);
             }
@@ -225,7 +225,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to MatchWinLoss2aByBetType_{0}.
         /// </summary>
-        internal static string MatchWinLoss2aByBetType_ReportName {
+        public static string MatchWinLoss2aByBetType_ReportName {
             get {
                 return ResourceManager.GetString("MatchWinLoss2aByBetType_ReportName", resourceCulture);
             }
@@ -234,7 +234,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Match Win Loss 2a By Bet Type - {0}.
         /// </summary>
-        internal static string MatchWinLoss2aByBetType_ReportTitle {
+        public static string MatchWinLoss2aByBetType_ReportTitle {
             get {
                 return ResourceManager.GetString("MatchWinLoss2aByBetType_ReportTitle", resourceCulture);
             }
@@ -243,7 +243,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to MatchWinLoss2aSummaryBySportType_{0}.
         /// </summary>
-        internal static string MatchWinLoss2aBySportType_ReportName {
+        public static string MatchWinLoss2aBySportType_ReportName {
             get {
                 return ResourceManager.GetString("MatchWinLoss2aBySportType_ReportName", resourceCulture);
             }
@@ -252,7 +252,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Match Win Loss 2a Summary By Sport Type - {0}.
         /// </summary>
-        internal static string MatchWinLoss2aBySportType_ReportTitle {
+        public static string MatchWinLoss2aBySportType_ReportTitle {
             get {
                 return ResourceManager.GetString("MatchWinLoss2aBySportType_ReportTitle", resourceCulture);
             }
@@ -261,7 +261,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to MatchWinLoss2aDetailByBetType_{0}.
         /// </summary>
-        internal static string MatchWinLoss2aDetailByBetType_ReportName {
+        public static string MatchWinLoss2aDetailByBetType_ReportName {
             get {
                 return ResourceManager.GetString("MatchWinLoss2aDetailByBetType_ReportName", resourceCulture);
             }
@@ -270,7 +270,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to MatchWinLoss2aDetailBySportType_{0}.
         /// </summary>
-        internal static string MatchWinLoss2aDetailBySportType_ReportName {
+        public static string MatchWinLoss2aDetailBySportType_ReportName {
             get {
                 return ResourceManager.GetString("MatchWinLoss2aDetailBySportType_ReportName", resourceCulture);
             }
@@ -279,7 +279,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Super_Yesterday_Balance_{0}.
         /// </summary>
-        internal static string SuperYesterdayBalance_ReportName {
+        public static string SuperYesterdayBalance_ReportName {
             get {
                 return ResourceManager.GetString("SuperYesterdayBalance_ReportName", resourceCulture);
             }
@@ -288,7 +288,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Super Yesterday Balance.
         /// </summary>
-        internal static string SuperYesterdayBalance_ReportTitle {
+        public static string SuperYesterdayBalance_ReportTitle {
             get {
                 return ResourceManager.GetString("SuperYesterdayBalance_ReportTitle", resourceCulture);
             }
@@ -297,7 +297,7 @@ namespace Fanex.ReportingService.Business.Resources {
         /// <summary>
         ///   Looks up a localized string similar to SuperYesterdayBalance.
         /// </summary>
-        internal static string SuperYesterdayBalance_SheetName {
+        public static string SuperYesterdayBalance_SheetName {
             get {
                 return ResourceManager.GetString("SuperYesterdayBalance_SheetName", resourceCulture);
             }

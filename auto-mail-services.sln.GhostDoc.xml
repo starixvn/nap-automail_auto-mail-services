@@ -5,7 +5,6 @@
     <IgnoreExtensions>
     </IgnoreExtensions>
     <IgnoreFiles>
-      <IgnoreFile>.\Fanex.OandaExChangeRate.Business\Services\MailingExChangeRate.cs</IgnoreFile>
     </IgnoreFiles>
   </SpellChecker>
 <HelpConfigurations selected="HelpFile">

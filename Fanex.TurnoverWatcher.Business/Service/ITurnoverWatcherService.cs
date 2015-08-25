@@ -1,21 +1,12 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ITurnoverWatcherService.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.TurnoverWatcher.Business.Service
+﻿namespace Fanex.NAPReport.TurnoverWatcher.Business.Service
 {
-    using Fanex.Service.Core.Enums;
-    using Fanex.TurnoverWatcher.Business.Model;
+    using System.Collections.Generic;
+    using Fanex.NAPReport.TurnoverWatcher.Business.Model;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public interface ITurnoverWatcherService
     {
-        int InsertTask(TurnoverWatcherTask task);
+        List<TurnoverInfo> GetSMATurnover();
 
-        void ProcessTurnoverWatcher();
+        Result RemoveNotifiedCustomer(List<TurnoverInfo> notifiedCustomer, int sendMailLevel);
     }
 }

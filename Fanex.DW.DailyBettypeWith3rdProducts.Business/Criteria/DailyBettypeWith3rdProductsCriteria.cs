@@ -1,10 +1,7 @@
 ﻿namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Criteria
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Daily BETTYPE With 3rd Products Criteria.
@@ -13,7 +10,7 @@
     {
         public DailyBettypeWith3rdProductsCriteria()
         {
-            var now = DateTime.Now;
+            var now = DateTime.Today;
             int year = now.Year;
             int month = now.Month;
 
@@ -29,7 +26,7 @@
                     month = month - 1;
                 }
 
-                this.DateStart = new DateTime(year, month , 1);                
+                this.DateStart = new DateTime(year, month, 1);                
             }
             else
             {

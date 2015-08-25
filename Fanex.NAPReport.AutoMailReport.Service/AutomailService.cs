@@ -1,47 +1,59 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="AutomailService.cs" company="Nexcel Solutions Vietnam.">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.NAPReport.AutoMailReport.Service
+﻿namespace Fanex.NAPReport.AutoMailReport.Service
 {
     using System;
     using System.IO;
     using System.ServiceProcess;
     using Fanex.Data.Configuration;
     using Fanex.MailDelivery.Client.Handlers;
-    using Fanex.NAPReport.HorseRacingReport.Business;
+    using Fanex.Service.Core.Extensions;
+    using Fanex.Service.Core.MailService;
+    using Fanex.Service.Core.Utilities;
 
-    /// <summary>
-    /// Auto mail service.
-    /// </summary>
     public partial class AutoMailService : ServiceBase
     {
-        /// <summary>
-        /// The timer.
-        /// </summary>
+        private TimerServiceFacade _timerServiceFacade;
 
         public AutoMailService()
         {
-            InitializeComponent(AppSettings.ServiceName);
+            try
+            {
+                InitializeComponent(AppSettingBase.ServiceName);
+                Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
+                DbSettingProviderManager.Current.Start();
+                MailClientHandler.Start();
+
+                _timerServiceFacade = new TimerServiceFacade(AppDomain.CurrentDomain.BaseDirectory + @"TimerServiceSetting\TimerServiceSetting.xml");
+            }
+            catch (Exception ex)
+            {
+                LogExtensions.ExceptionHandler(ex);
+            }
         }
 
         protected override void OnStart(string[] args)
         {
-            Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
-
-            DbSettingProviderManager.Current.Start();
-
-            MailClientHandler.Start();
+            try
+            {
+                _timerServiceFacade.StartServices();
+            }
+            catch (Exception ex)
+            {
+                LogExtensions.ExceptionHandler(ex);
+            }
         }
 
         protected override void OnStop()
         {
+            _timerServiceFacade.StopServices();
             MailClientHandler.Stop();
-            GC.Collect();
         }
 
-
+        /// <summary>
+        /// Console Test
+        /// </summary>
+        public void StartAndStop()
+        {
+            OnStart(null);
+        }
     }
 }

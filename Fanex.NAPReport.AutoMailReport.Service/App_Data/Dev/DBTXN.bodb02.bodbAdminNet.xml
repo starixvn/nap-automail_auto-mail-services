@@ -1,0 +1,5 @@
+﻿<Functions>
+  <Function Name="Game Win Limit Control">
+    <Setting Key="NAP_WinLimit_Notification_MemSel" SpName="NAP_WinLimit_Notification_MemSel" DbName="DBTXN.bodb02.bodbAdminNet" Timeout="0" />
+  </Function>
+</Functions>

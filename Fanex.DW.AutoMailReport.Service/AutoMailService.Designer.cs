@@ -1,6 +1,6 @@
 ﻿namespace Fanex.DW.AutoMailReport.Service
 {
-    partial class AutoMailService
+    public partial class AutoMailService
     {
         /// <summary> 
         /// Required designer variable.

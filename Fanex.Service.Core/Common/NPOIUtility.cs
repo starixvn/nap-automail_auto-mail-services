@@ -7,7 +7,11 @@
 namespace Fanex.Service.Core.Common
 {
     using System;
+    using System.Drawing;
+    using NPOI.HSSF.Util;
     using NPOI.SS.UserModel;
+    using NPOI.XSSF.UserModel;
+    using NPOI.XSSF.UserModel.Extensions;
 
     /// <summary>
     /// TODO: Update summary.
@@ -67,6 +71,38 @@ namespace Fanex.Service.Core.Common
             {
                 cell.SetCellValue((System.DateTime)cellValue);
             }
+        }
+
+        public static ICellStyle AssignOldFormatCellStyleData(ICellStyle cellStyle, short backgroundColorIndex)
+        {
+            cellStyle.BorderLeft = BorderStyle.Thin;
+            cellStyle.BorderTop = BorderStyle.Thin;
+            cellStyle.BorderRight = BorderStyle.Thin;
+            cellStyle.BorderBottom = BorderStyle.Thin;
+            cellStyle.LeftBorderColor = HSSFColor.Grey80Percent.Index;
+            cellStyle.TopBorderColor = HSSFColor.Grey80Percent.Index;
+            cellStyle.RightBorderColor = HSSFColor.Grey80Percent.Index;
+            cellStyle.BottomBorderColor = HSSFColor.Grey80Percent.Index;
+            cellStyle.FillForegroundColor = backgroundColorIndex;
+            cellStyle.FillPattern = FillPattern.SolidForeground;
+            cellStyle.VerticalAlignment = VerticalAlignment.Center;
+            return cellStyle;
+        }
+
+        public static XSSFCellStyle AssignNewFormatCellStyleData(XSSFCellStyle cellStyle, Color backgroundColor)
+        {
+            cellStyle.BorderLeft = BorderStyle.Thin;
+            cellStyle.BorderTop = BorderStyle.Thin;
+            cellStyle.BorderRight = BorderStyle.Thin;
+            cellStyle.BorderBottom = BorderStyle.Thin;
+            cellStyle.SetBorderColor(BorderSide.BOTTOM, new XSSFColor(Color.Gray));
+            cellStyle.SetBorderColor(BorderSide.LEFT, new XSSFColor(Color.Gray));
+            cellStyle.SetBorderColor(BorderSide.RIGHT, new XSSFColor(Color.Gray));
+            cellStyle.SetBorderColor(BorderSide.TOP, new XSSFColor(Color.Gray));
+            cellStyle.SetFillForegroundColor(new XSSFColor(backgroundColor));
+            cellStyle.FillPattern = FillPattern.SolidForeground;
+            cellStyle.VerticalAlignment = VerticalAlignment.Center;
+            return cellStyle;
         }
     }
 }

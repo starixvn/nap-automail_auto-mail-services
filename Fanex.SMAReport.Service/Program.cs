@@ -6,24 +6,17 @@
 
 namespace Fanex.SMAReport.Service
 {
-    using System.ServiceProcess;
+    using Fanex.Data.Configuration;
+    using Fanex.NAPReport.SMAReport.Business.Service;
+    using Fanex.Service.Core.MailService;    
 
-    /// <summary>
-    /// Main program.
-    /// </summary>
     public static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         private static void Main()
         {
-            ServiceBase[] servicesToRun;
-            servicesToRun = new ServiceBase[]
-            {
-                new AutoMailService()
-            };
-            ServiceBase.Run(servicesToRun);
+            DbSettingProviderManager.Current.Start();
+            IMailingServiceBase service = new MailingService();
+            var mail = service.SendMailToVIPGroup();
         }
     }
 }

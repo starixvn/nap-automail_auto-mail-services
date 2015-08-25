@@ -8,8 +8,8 @@ namespace Fanex.Service.Core.Extensions
 {
     using System;
     using Fanex.Logging;
-    using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Service.Impl;
+    using Fanex.NAP.Core.Service.Interface;
 
     /// <summary>
     /// TODO: Update summary.
@@ -24,17 +24,35 @@ namespace Fanex.Service.Core.Extensions
                                     "<br>\r\nINNEREXCEPTION: " + ex.InnerException +
                                     "<br>\r\nSOURCE: " + ex.Source +
                                     "<br>\r\nTARGETSITE: " + ex.TargetSite +
-                                    "<br>\r\nSTACKTRACE: " + ex.StackTrace;
-
-                IMaintainanceService maintenance = new MaintainanceService();
+                                    "<br>\r\nSTACKTRACE: " + ex.StackTrace;                
+                IMaintenanceService maintenance = new MaintenanceService();                
                 var downTime = maintenance.GetDowntimeInfo();
                 if (!downTime.IsDowntime)
                 {
                     Logger.Log.Error(message);
                 }
             }
-            catch
+            catch (Exception exception)
             {
+                Logger.Log.Error(exception.ToString());
+            }
+        }
+
+        public static void LogInfo(string msg)
+        {
+            try
+            {
+                string message = msg;
+                IMaintenanceService maintenance = new MaintenanceService();
+                var downTime = maintenance.GetDowntimeInfo();
+                if (!downTime.IsDowntime)
+                {
+                    Logger.Log.Info(message);
+                }
+            }
+            catch (Exception exception)
+            {
+                Logger.Log.Error(exception.ToString());
             }
         }
     }

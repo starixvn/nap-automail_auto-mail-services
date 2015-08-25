@@ -21,10 +21,16 @@ namespace Fanex.ReportingService.Business.Criteria.DailyTurnOver
 
         public bool IsActual { get; set; }
 
+        [SpParam(SqlParamName = "errcode")]
         public bool ErrorCode { get; set; }
 
+        [SpParam(SqlParamName = "errmsg")]
         public string ErrorMessage { get; set; }
 
+        /// <summary>
+        /// Gets the setting key.
+        /// </summary>
+        /// <returns></returns>
         public override string GetSettingKey()
         {
             return "Special_DailyTurnover_GetReport";

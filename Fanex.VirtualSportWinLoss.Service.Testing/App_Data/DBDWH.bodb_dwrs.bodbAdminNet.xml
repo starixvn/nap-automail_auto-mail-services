@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Functions>
+  <Function Name="WinLoss - Virtual Sport">
+    <Setting Key="Acc_Rpt_WLAutomail_VS_Detail_old" SpName="Acc_Rpt_WLAutomail_VS_Detail_old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
+    <Setting Key="Acc_Rpt_WLAutomail_VS_Summary_old" SpName="Acc_Rpt_WLAutomail_VS_Summary_old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
+  </Function>
+</Functions>
