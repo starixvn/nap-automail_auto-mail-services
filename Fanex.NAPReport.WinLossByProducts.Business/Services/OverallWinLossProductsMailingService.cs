@@ -40,7 +40,7 @@
             bool isNotifyEmail = criteria.RptDate != lastDate && AppSettings.IsCheckEnoughData;
             if (isNotifyEmail)
             {
-                mailResult.JobStatus = JobStatus.DataIsNotReady;
+                mailResult.JobStatus = JobStatus.SuccessWithoutSendmail;
                 SendFunctionMailCustomContentNotification();
             }
             else

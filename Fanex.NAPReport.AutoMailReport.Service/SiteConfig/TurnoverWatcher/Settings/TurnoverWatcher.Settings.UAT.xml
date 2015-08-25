@@ -3,5 +3,5 @@
   <add key="FunctionId" value="44" />
   <add key="DataDirectory" value="\\10.40.40.52\NAP_Reports\UAT\TurnoverWatcher" />
   <add key="ExcelPasswordProtected" value="" />
-  <add key="IsTest" value="true" />
+  <add key="IsTest" value="false" />
 </Settings>

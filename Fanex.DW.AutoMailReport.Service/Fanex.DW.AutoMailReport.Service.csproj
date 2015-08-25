@@ -160,15 +160,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
-    <Content Include="SiteConfig\BettypeWith3rdProducts\Settings\Bettype_With_3rd_Products.Settings.Local.xml">
+    <Content Include="SiteConfig\BettypeWith3rdProducts\Settings\Bettype_With_3rd.Settings.Local.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SiteConfig\BettypeWith3rdProducts\Settings\Bettype_With_3rd_Products.Settings.UAT.xml">
+    <Content Include="SiteConfig\BettypeWith3rdProducts\Settings\Bettype_With_3rd.Settings.UAT.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SiteConfig\BettypeWith3rdProducts\Settings\Bettype_With_3rd_Products.Settings.PRO.xml">
+    <Content Include="SiteConfig\BettypeWith3rdProducts\Settings\Bettype_With_3rd.Settings.PRO.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -178,7 +178,7 @@
     <Content Include="SiteConfig\Common\Templates\NotificationEmail.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SiteConfig\BettypeWith3rdProducts\Settings\Bettype_With_3rd_Products.Settings.DEV.xml">
+    <Content Include="SiteConfig\BettypeWith3rdProducts\Settings\Bettype_With_3rd.Settings.DEV.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

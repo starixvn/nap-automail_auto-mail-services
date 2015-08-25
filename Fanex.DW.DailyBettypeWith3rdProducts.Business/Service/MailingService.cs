@@ -27,7 +27,7 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Service
 
         public MailingService()
         {
-            ConfigurationParser configurationParser = new ConfigurationParser(@"SiteConfig\BettypeWith3rdProducts\Settings\Bettype_With_3rd_Products.Settings.xml");
+            ConfigurationParser configurationParser = new ConfigurationParser(@"SiteConfig\BettypeWith3rdProducts\Settings\Bettype_With_3rd.Settings.xml");
             configurationParser.Parse<AppSettings>();
 
             _mailStation = new MailStationService();
@@ -45,7 +45,7 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Service
             bool isNotifyEmail = criteria.DateEnd != lastDate && AppSettings.IsCheckEnoughData;
             if (isNotifyEmail)
             {
-                mailResult.JobStatus = JobStatus.DataIsNotReady;
+                mailResult.JobStatus = JobStatus.SuccessWithoutSendmail;
                 SendFunctionMailCustomContentNotification(subject);
             }
             else
