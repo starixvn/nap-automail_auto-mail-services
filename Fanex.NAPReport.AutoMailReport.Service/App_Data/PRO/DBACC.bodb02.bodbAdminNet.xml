@@ -29,8 +29,8 @@
   </Function>
 
   <Function Name="Reporting Service- Main Report - Match Win Loss (2a)">
-    <Setting Key="Main_MatchWinLoss2a_GetMainReport" SpName="Acc_Rpt_MatchWinLoss2_New" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
-    <Setting Key="Main_MatchWinLoss2a_GetMainReport_14" SpName="Acc_Rpt_MatchWinLoss2_New14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Main_MatchWinLoss2a_GetMainReport" SpName="Acc_Rpt_MatchWinLoss2_New_xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Main_MatchWinLoss2a_GetMainReport_14" SpName="Acc_Rpt_MatchWinLoss2_New14_xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_MatchWinLoss2a_GetThirdPartyCasinoReport" SpName="Acc_Rpt_WinlostCA_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_MatchWinLoss2a_GetThirdPartyCasinoReport_14" SpName="Acc_Rpt_WinlostCA_Details14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_MatchWinloss2a_GetWinLossByBettype" SpName="Acc_Rpt_WinlossByBettype" DbName="DBACC.bodb02.bodbAdminNet"  TimeOut="0"/>
@@ -47,5 +47,9 @@
   </Function>
   <Function Name="Reporting Service- Balance - Company Balance">
     <Setting Key="Balance_CompanyBalance_GetReport" SpName="Acc_Rpt_Balance_Company" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
+  </Function>
+
+  <Function Name="RNG Casino - Get WinLoss">
+    <Setting Key="RNGCasinoCustomerWinLoss" SpName="Acc_Rpt_RNGCasinoAutomail" DbName="DBACC.bodb02.bodbAdminNet" Timeout="0" />
   </Function>
 </Functions>
