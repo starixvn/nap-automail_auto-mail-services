@@ -129,7 +129,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
             var headerStyle = this.CreateHeaderStyle();
             _cell.CellValue = string.Format(
                     ReportingServicesResource.MatchWinLoss2aAll_ReportTitle,
-                    currentTime.AddDays(-1).ToShortFormatedDate());
+                    currentTime.ToShortFormatedDate());
             _cell.EndColumn = _cell.CurrentColumn + 13;
             _cell.EndRow = _cell.CurrentRow + 1;
             NpoiNewFormatExcelExtension.RenderMergeCell(_workSheet, _cell, headerStyle);
@@ -217,7 +217,14 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
             {
                 if (bettypeWinLoss.IsExcludeVirtualLineTotal)
                 {
-                    this.ExportExcludeVirtualLineTotalBettypeRow(bettypeWinLoss);
+                    if (string.Equals(bettypeWinLoss.BettypeName, Labels.Bettrade))
+                    {
+                        this.ExportBettradeBettypeRow(bettypeWinLoss);
+                    }
+                    else
+                    {
+                        this.ExportExcludeVirtualLineTotalBettypeRow(bettypeWinLoss);
+                    }
                 }
                 else
                 {
@@ -298,6 +305,37 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
             this.RenderCell(bettypeRow.Turnover, _bodyCellStyleService.DecimalNumberStyle);
             _cell.IncreaseColumnIndex();
             this.RenderCell(bettypeRow.Margin == 0 ? (object)Labels.NotAvailable : bettypeRow.Margin, _bodyCellStyleService.ParenthesesUnsignedNegativeDecimalNumberStyle);
+        }
+
+        private void ExportBettradeBettypeRow(SummaryBettypesWinLoss bettypeRow)
+        {
+            this.RenderCell(bettypeRow.BettypeName, _bodyCellStyleService.CenterTextStyle);
+            _cell.IncreaseColumnIndex();
+            this.RenderCell(Labels.NotAvailable, _bodyCellStyleService.RightTextStyle);
+            _cell.IncreaseColumnIndex();
+            this.RenderCell(Labels.NotAvailable, _bodyCellStyleService.RightTextStyle);
+            _cell.IncreaseColumnIndex();
+            this.RenderCell(Labels.NotAvailable, _bodyCellStyleService.RightTextStyle);
+            _cell.IncreaseColumnIndex();
+            this.RenderCell(Labels.NotAvailable, _bodyCellStyleService.RightTextStyle);
+            _cell.IncreaseColumnIndex();
+            this.RenderCell(Labels.NotAvailable, _bodyCellStyleService.RightTextStyle);
+            _cell.IncreaseColumnIndex();
+            this.RenderCell(Labels.NotAvailable, _bodyCellStyleService.RightTextStyle);
+            _cell.IncreaseColumnIndex();
+            this.RenderCell(Labels.NotAvailable, _bodyCellStyleService.RightTextStyle);
+            _cell.IncreaseColumnIndex();
+            this.RenderCell(Labels.NotAvailable, _bodyCellStyleService.RightTextStyle);
+            _cell.IncreaseColumnIndex();
+            this.RenderCell(bettypeRow.LineTotalReal, _bodyCellStyleService.ParenthesesUnsignedNegativeDecimalNumberStyle);
+            _cell.IncreaseColumnIndex();
+            this.RenderCell(bettypeRow.LineTotalVirtual, _bodyCellStyleService.ParenthesesUnsignedNegativeDecimalNumberStyle);
+            _cell.IncreaseColumnIndex();
+            this.RenderCell(bettypeRow.Variance, _bodyCellStyleService.DecimalNumberStyle);
+            _cell.IncreaseColumnIndex();
+            this.RenderCell(bettypeRow.Turnover, _bodyCellStyleService.DecimalNumberStyle);
+            _cell.IncreaseColumnIndex();
+            this.RenderCell(Labels.NotAvailable, _bodyCellStyleService.RightTextStyle);
         }
 
         private void ExportBettypeRow(SummaryBettypesWinLoss bettypeRow)
@@ -516,7 +554,15 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
         {
             foreach (var product in thirdPartyProducts.SummaryWinLossBySports)
             {
-                this.ExportThirdPartyProductRow(product);
+                if (string.Equals(product.SportName, Labels.Bettrade))
+                {
+                    this.ExportBettradeProductRow(product);
+                }
+                else
+                {
+                    this.ExportThirdPartyProductRow(product);
+                }
+
                 _cell.ResetColumnIndex();
                 _cell.IncreaseRowIndex();
             }
@@ -601,6 +647,34 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
             {
                 this.RenderCell(product.Margin, _bodyCellStyleService.ParenthesesUnsignedNegativeDecimalNumberStyle);
             }
+        }
+
+        private void ExportBettradeProductRow(SummarySportsWinLoss product)
+        {
+            this.RenderCell(product.SportName, _bodyCellStyleService.CenterTextStyle);
+            _cell.IncreaseColumnIndex();
+            this.RenderCell(product.WinLossDate, _bodyCellStyleService.RightTextStyle);
+            _cell.IncreaseColumnIndex();
+            _cell.EndColumn = _cell.CurrentColumn + 2;
+            this.RenderMergeCell(string.Empty, _bodyCellStyleService.RightTextStyle);
+            _cell.IncreaseColumnIndex();
+            this.RenderCell(product.WinLoss, _bodyCellStyleService.ParenthesesUnsignedNegativeDecimalNumberStyle);
+            _cell.IncreaseColumnIndex();
+            this.RenderCell(product.Position, _bodyCellStyleService.ParenthesesUnsignedNegativeDecimalNumberStyle);
+            _cell.IncreaseColumnIndex();
+            this.RenderCell(product.Commission, _bodyCellStyleService.DecimalNumberStyle);
+            _cell.IncreaseColumnIndex();
+            this.RenderCell(product.VirtualCommission, _bodyCellStyleService.DecimalNumberStyle);
+            _cell.IncreaseColumnIndex();
+            this.RenderCell(product.LineTotal, _boldParenthesesUnsignedNegativeDecimalStyle);
+            _cell.IncreaseColumnIndex();
+            this.RenderCell(product.VirtualLineTotal, _boldParenthesesUnsignedNegativeDecimalStyle);
+            _cell.IncreaseColumnIndex();
+            this.RenderCell(product.Variance, _bodyCellStyleService.ParenthesesUnsignedNegativeDecimalNumberStyle);
+            _cell.IncreaseColumnIndex();
+            this.RenderCell(product.IBCTurnover, _bodyCellStyleService.DecimalNumberStyle);
+            _cell.IncreaseColumnIndex();
+            this.RenderCell(Labels.NotAvailable, _bodyCellStyleService.RightTextStyle);
         }
 
         private XSSFCellStyle CreateHeaderStyle()

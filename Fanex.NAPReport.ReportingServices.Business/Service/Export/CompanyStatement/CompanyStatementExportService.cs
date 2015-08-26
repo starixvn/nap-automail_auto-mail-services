@@ -89,7 +89,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyState
             var headerStyle = this.CreateHeaderStyle();
             _cell.CellValue = string.Format(
                     ReportingServicesResource.CompanyStatement_ReportTitle,
-                    currentTime.AddDays(-1).ToShortFormatedDate());
+                    currentTime.ToShortFormatedDate());
             _cell.EndColumn = _cell.CurrentColumn + 3;
             NpoiNewFormatExcelExtension.RenderMergeCell(_workSheet, _cell, headerStyle);
             _cell.ResetColumnIndex();

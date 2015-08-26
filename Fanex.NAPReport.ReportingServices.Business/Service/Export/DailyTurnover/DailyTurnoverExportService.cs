@@ -100,7 +100,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.DailyTurnove
             var headerStyle = this.CreateHeaderStyle();
             _cell.CellValue = string.Format(
                     ReportingServicesResource.DailyTurnover_ReportTitle,
-                    currentTime.AddDays(-1).ToShortFormatedDate());
+                    currentTime.ToShortFormatedDate());
             _cell.EndColumn = _cell.CurrentColumn + 6;
             _cell.EndRow = _cell.CurrentRow + 1;
             NpoiNewFormatExcelExtension.RenderMergeCell(_workSheet, _cell, headerStyle);

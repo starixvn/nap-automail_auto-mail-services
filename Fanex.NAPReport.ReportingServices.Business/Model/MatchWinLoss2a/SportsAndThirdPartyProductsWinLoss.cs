@@ -33,11 +33,26 @@ namespace Fanex.NAPReport.ReportingServices.Business.Model.MatchWinLoss2a
             {
                 return new SummarySportsWinLoss 
                 {
-                    Commission = this.SportsWinLoss.GrandTotal.Commission + this.ThirdPartyProductsWinLoss.GrandTotal.Commission,
-                    VirtualCommission = this.SportsWinLoss.GrandTotal.VirtualCommission + this.ThirdPartyProductsWinLoss.GrandTotal.VirtualCommission,
-                    LineTotal = this.SportsWinLoss.GrandTotal.LineTotal + this.ThirdPartyProductsWinLoss.GrandTotal.LineTotal,
-                    VirtualLineTotal = this.SportsWinLoss.GrandTotal.VirtualLineTotal + this.ThirdPartyProductsWinLoss.GrandTotal.VirtualLineTotal,                  
-                    IBCTurnover = this.SportsWinLoss.GrandTotal.Turnover + this.ThirdPartyProductsWinLoss.GrandTotal.IBCTurnover
+                    Commission = this.SportsWinLoss.GrandTotal.Commission +
+                        this.SportsWinLoss.EightRMTotal.Commission +
+                        this.SportsWinLoss.BARMTotal.Commission +
+                        this.ThirdPartyProductsWinLoss.GrandTotal.Commission,
+                    VirtualCommission = this.SportsWinLoss.GrandTotal.VirtualCommission +
+                        this.SportsWinLoss.EightRMTotal.VirtualCommission +
+                        this.SportsWinLoss.BARMTotal.VirtualCommission +
+                        this.ThirdPartyProductsWinLoss.GrandTotal.VirtualCommission,
+                    LineTotal = this.SportsWinLoss.GrandTotal.LineTotal +
+                        this.SportsWinLoss.EightRMTotal.LineTotal +
+                        this.SportsWinLoss.BARMTotal.LineTotal +
+                        this.ThirdPartyProductsWinLoss.GrandTotal.LineTotal,
+                    VirtualLineTotal = this.SportsWinLoss.GrandTotal.VirtualLineTotal +
+                        this.SportsWinLoss.EightRMTotal.VirtualLineTotal +
+                        this.SportsWinLoss.BARMTotal.VirtualLineTotal +
+                        this.ThirdPartyProductsWinLoss.GrandTotal.VirtualLineTotal,
+                    IBCTurnover = this.SportsWinLoss.GrandTotal.Turnover +
+                        this.SportsWinLoss.EightRMTotal.Turnover +
+                        this.SportsWinLoss.BARMTotal.Turnover +
+                        this.ThirdPartyProductsWinLoss.GrandTotal.IBCTurnover
                 };
             }
         }

@@ -72,7 +72,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.SuperYesterd
                 this.ExportReportContent(balance.ReportRows);
                 this.ExportGrandTotal(balance.BaseBalanceTotal);
                 string parentDirectory = AppSettings.DataDirectory(AppSettings.ExportDataDirectorySuperYesterdayBalance);
-                string reportName = string.Format(ReportingServicesResource.SuperYesterdayBalance_ReportName, currentTime.AddDays(-1).ToString("yyyy_MM_dd"));
+                string reportName = string.Format(ReportingServicesResource.SuperYesterdayBalance_ReportName, currentTime.ToString("yyyy_MM_dd"));
                 FileName = Path.Combine(parentDirectory, reportName);
                 SaveFile.SaveExcelFile(parentDirectory, reportName, _workbook, AppSettings.ExcelPassword);
             }
