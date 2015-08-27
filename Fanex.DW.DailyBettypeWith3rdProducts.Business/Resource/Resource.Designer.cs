@@ -61,6 +61,15 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ALL.
+        /// </summary>
+        internal static string ALL {
+            get {
+                return ResourceManager.GetString("ALL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bettype_With_3rd_Products_Monthly_Winloss_Real_For_{0}.xlsx.
         /// </summary>
         internal static string DailyFileNameReal {
@@ -75,6 +84,15 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Resource {
         internal static string DailyFileNameVirtual {
             get {
                 return ResourceManager.GetString("DailyFileNameVirtual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SUMMARY.
+        /// </summary>
+        internal static string SUMMARY {
+            get {
+                return ResourceManager.GetString("SUMMARY", resourceCulture);
             }
         }
         

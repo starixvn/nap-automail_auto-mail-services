@@ -3,10 +3,10 @@
   <add key="ExportDataDirectoryDaily" value="\\10.18.200.202\_Fanex.ExcelFiles\BettypeWith3rdProducts" />
   <add key="ExportDataDirectoryWeekly" value="\\10.18.200.202\_Fanex.ExcelFiles\BettypeWith3rdProductsForShareholders" />
   <add key="IsManually" value="false" />
-  <add key="IsSingleSport" value="true" />
+  <add key="IsSingleSport" value="false" />
   <add key="IsCheckEnoughData" value="false" />
-  <add key="DateStart" value="2015-04-01" />
-  <add key="DateEnd" value="2015-04-30" />
+  <add key="DateStart" value="2015-08-01" />
+  <add key="DateEnd" value="2015-08-31" />
   <add key="FunctionIdDaily" value="106" />
   <add key="FunctionIdWeekly" value="107" />
   <add key="SubjectDaily" value="Automail Report - Bettype With 3rd Products - {0}" />

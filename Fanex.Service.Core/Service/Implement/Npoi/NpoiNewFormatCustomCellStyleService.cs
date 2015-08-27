@@ -134,5 +134,10 @@ namespace Fanex.Service.Core.Service.Implement.Npoi
         {
             return this._percentageStyle.CreateParenthesesNegativePercentageStyle(backgroundColor, font);
         }
+
+        public XSSFCellStyle CreateParenthesesNegativeIntegerNumberStyle(Color backgroundColor, XSSFFont font)
+        {
+            return this._numberStyle.CreateParenthesesNegativeDecimalNumberStyle(backgroundColor, font);
+        }
     }
 }

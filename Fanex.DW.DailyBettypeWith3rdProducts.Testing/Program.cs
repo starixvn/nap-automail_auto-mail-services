@@ -26,10 +26,12 @@
             string subject = "Bettype With 3rd Products";
             job.ExportBettypeWith3rdProducts(true, subject);
 
+            string s1 = "Bettype With 3rd Products @#@ Testing at Local";
+            var arr = s1.Split(new[] { "@#@" }, StringSplitOptions.RemoveEmptyEntries);
+
             MailClientHandler.Stop();
 
-            Console.WriteLine("Done at " + DateTime.Now.ToString());
-            Console.ReadLine();
+            Console.WriteLine("Done at " + DateTime.Now.ToString());            
         }
     }
 }
