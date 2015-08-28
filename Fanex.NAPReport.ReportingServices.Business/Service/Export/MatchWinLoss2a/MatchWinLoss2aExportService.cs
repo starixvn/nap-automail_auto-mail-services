@@ -265,7 +265,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
             _cell.IncreaseColumnIndex();
             this.RenderCell(grandTotal.Turnover, _grandTotalDecimalStyle);
             _cell.IncreaseColumnIndex();
-            this.RenderCell(grandTotal.Margin, _grandTotalUnsignedNegativeDecimalStyle);
+            this.RenderCell(grandTotal.Turnover == 0 ? (object)Labels.NotAvailable : grandTotal.Margin, _grandTotalUnsignedNegativeDecimalStyle);
             _cell.ResetColumnIndex();
             _cell.CurrentRow += 2;
             _cell.EndRow += 2;
@@ -304,7 +304,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
             _cell.IncreaseColumnIndex();
             this.RenderCell(bettypeRow.Turnover, _bodyCellStyleService.DecimalNumberStyle);
             _cell.IncreaseColumnIndex();
-            this.RenderCell(bettypeRow.Margin == 0 ? (object)Labels.NotAvailable : bettypeRow.Margin, _bodyCellStyleService.ParenthesesUnsignedNegativeDecimalNumberStyle);
+            this.RenderCell(bettypeRow.Turnover == 0 ? (object)Labels.NotAvailable : bettypeRow.Margin, _bodyCellStyleService.ParenthesesUnsignedNegativeDecimalNumberStyle);
         }
 
         private void ExportBettradeBettypeRow(SummaryBettypesWinLoss bettypeRow)
@@ -371,7 +371,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
             _cell.IncreaseColumnIndex();
             this.RenderCell(bettypeRow.Turnover, _bodyCellStyleService.DecimalNumberStyle);
             _cell.IncreaseColumnIndex();
-            this.RenderCell(bettypeRow.Margin == 0 ? (object)Labels.NotAvailable : bettypeRow.Margin, _bodyCellStyleService.ParenthesesUnsignedNegativeDecimalNumberStyle);
+            this.RenderCell(bettypeRow.Turnover == 0 ? (object)Labels.NotAvailable : bettypeRow.Margin, _bodyCellStyleService.ParenthesesUnsignedNegativeDecimalNumberStyle);
         }
 
         private void ExportSportsAndThirdPartyProductsHeader()
@@ -446,7 +446,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
             _cell.IncreaseColumnIndex();
             this.RenderCell(grandTotal.Turnover, _grandTotalDecimalStyle);
             _cell.IncreaseColumnIndex();
-            this.RenderCell(grandTotal.Margin, _grandTotalUnsignedNegativeDecimalStyle);
+            this.RenderCell(grandTotal.Turnover == 0 ? (object)Labels.NotAvailable : grandTotal.Margin, _grandTotalUnsignedNegativeDecimalStyle);
             _cell.ResetColumnIndex();
             _cell.IncreaseRowIndex();
         }
@@ -464,7 +464,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
             _cell.IncreaseColumnIndex();
             this.RenderCell(totalRMRow.Turnover, _sportTotalUnsignedNegativeDecimalStyle);
             _cell.IncreaseColumnIndex();
-            this.RenderCell(totalRMRow.Margin, _sportTotalUnsignedNegativeDecimalStyle);
+            this.RenderCell(totalRMRow.Turnover == 0 ? (object)Labels.NotAvailable : totalRMRow.Margin, _sportTotalUnsignedNegativeDecimalStyle);
             _cell.ResetColumnIndex();
             _cell.IncreaseRowIndex();
         }
@@ -500,7 +500,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
             _cell.IncreaseColumnIndex();
             this.RenderCell(match.Turnover, _bodyCellStyleService.DecimalNumberStyle);
             _cell.IncreaseColumnIndex();
-            this.RenderCell(match.Margin, _bodyCellStyleService.ParenthesesUnsignedNegativeDecimalNumberStyle);
+            this.RenderCell(match.Turnover == 0 ? (object)Labels.NotAvailable : match.Margin, _bodyCellStyleService.ParenthesesUnsignedNegativeDecimalNumberStyle);
         }
 
         private void ExportBettypeTotalRow(BettypeWinLoss bettype)
@@ -524,7 +524,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
             _cell.IncreaseColumnIndex();
             this.RenderCell(bettype.BettypesWinLossTotal.Turnover, _bettypeTotalDecimalStyle);
             _cell.IncreaseColumnIndex();
-            this.RenderCell(bettype.BettypesWinLossTotal.Margin, _bettypeTotalUnsignedNegativeDecimalStyle);
+            this.RenderCell(bettype.BettypesWinLossTotal.Turnover == 0 ? (object)Labels.NotAvailable : bettype.BettypesWinLossTotal.Margin, _bettypeTotalUnsignedNegativeDecimalStyle);
         }
 
         private void ExportSportTotalRow(WinLossBySport sport)
@@ -547,7 +547,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
             _cell.IncreaseColumnIndex();
             this.RenderCell(sport.SportWinLossTotal.Turnover, _sportTotalDecimalStyle);
             _cell.IncreaseColumnIndex();
-            this.RenderCell(sport.SportWinLossTotal.Margin, _sportTotalUnsignedNegativeDecimalStyle);
+            this.RenderCell(sport.SportWinLossTotal.Turnover == 0 ? (object)Labels.NotAvailable : sport.SportWinLossTotal.Margin, _sportTotalUnsignedNegativeDecimalStyle);
         }
 
         private void ExportThirdPartyProductsWinLoss(SummarySportsWinLoss thirdPartyProducts)
@@ -585,7 +585,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
             _cell.IncreaseColumnIndex();
             this.RenderCell(grandTotal.IBCTurnover, _grandTotalDecimalStyle);
             _cell.IncreaseColumnIndex();
-            this.RenderCell(grandTotal.Margin, _grandTotalUnsignedNegativeDecimalStyle);
+            this.RenderCell(grandTotal.IBCTurnover == 0 ? (object)Labels.NotAvailable : grandTotal.Margin, _grandTotalUnsignedNegativeDecimalStyle);
         }
 
         private void ExportThirdPartyProductRow(SummarySportsWinLoss product)
@@ -639,14 +639,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
             this.RenderCell(product.IBCTurnover, _bodyCellStyleService.DecimalNumberStyle);
 
             _cell.IncreaseColumnIndex();
-            if (product.IsExcludeVirtualLineTotal)
-            {
-                this.RenderCell(Labels.NotAvailable, _bodyCellStyleService.RightTextStyle);
-            }
-            else
-            {
-                this.RenderCell(product.Margin, _bodyCellStyleService.ParenthesesUnsignedNegativeDecimalNumberStyle);
-            }
+            this.RenderCell(product.IBCTurnover == 0 ? (object)Labels.NotAvailable : product.Margin, _bodyCellStyleService.ParenthesesUnsignedNegativeDecimalNumberStyle);
         }
 
         private void ExportBettradeProductRow(SummarySportsWinLoss product)
