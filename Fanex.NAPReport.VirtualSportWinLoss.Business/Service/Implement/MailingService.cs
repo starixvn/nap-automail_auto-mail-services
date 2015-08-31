@@ -1,5 +1,6 @@
 ﻿namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
 {
+    using System;
     using System.Collections.Generic;
     using Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Interface;
     using Fanex.Service.Core.Configuration;
@@ -32,6 +33,7 @@
 
             _mailInfo.FileName = _service.FileName;
             _mailInfo.FileNamesPath = fileNamesPath;
+            _mailInfo.Subject = string.Format(AppSettings.Subject, DateTime.Today.ToString("yyyy/MM/dd"));
 
             var mail = mailStation.CreateMailWithAttachedFile(_mailInfo);
             mailResult.Mail = mail;

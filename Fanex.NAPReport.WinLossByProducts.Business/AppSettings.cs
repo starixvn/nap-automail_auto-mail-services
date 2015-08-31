@@ -55,5 +55,17 @@ namespace Fanex.NAPReport.WinLossByProducts.Business
             get;
             set;
         }
+
+        public static string SubjectOverall
+        {
+            get;
+            set;
+        }
+
+        public static string SubjectProductWL
+        {
+            get;
+            set;
+        }
     }
 }

@@ -6,4 +6,6 @@
   <add key="IsCheckEnoughData" value="true" />
   <add key="IsTesting" value="true" />
   <add key="WinLossDate" value="2015-08-06" />
+  <add key="SubjectOverall" value="Automail Report - Overall Products Win Loss - {0}" />
+  <add key="SubjectProductWL" value="Automail Report - Products Win Loss - {0}" />
 </Settings>

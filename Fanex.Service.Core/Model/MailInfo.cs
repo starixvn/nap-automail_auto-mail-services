@@ -22,12 +22,15 @@ namespace Fanex.Service.Core.Model
             FileName = string.Empty;
             NapReportURL = AppSettingBase.NapReportURL;
             FileNamesPath = new List<string>();
+            Subject = AppSettingBase.Subject;
         }
 
         public string FileName { get; set; }
 
         public string NapReportURL { get; set; }
 
-        public List<string> FileNamesPath { get; set; }        
+        public List<string> FileNamesPath { get; set; }
+
+        public string Subject { get; set; }
     }
 }
