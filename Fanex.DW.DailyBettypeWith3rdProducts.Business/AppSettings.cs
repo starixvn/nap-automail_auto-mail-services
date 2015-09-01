@@ -96,5 +96,17 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business
             get;
             set;
         }  
+        
+        public static string ExcelPasswordProtected
+        {
+            get;
+            set;
+        }
+
+        public static bool IsSingleFile
+        {
+            get;
+            set;
+        }
     }
 }

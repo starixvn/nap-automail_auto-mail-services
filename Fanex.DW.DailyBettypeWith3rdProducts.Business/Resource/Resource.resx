@@ -120,6 +120,9 @@
   <data name="ALL" xml:space="preserve">
     <value>ALL</value>
   </data>
+  <data name="DailyFileName" xml:space="preserve">
+    <value>Bettype_With_3rd_Products_Monthly_Winloss_For_{0}.xlsx</value>
+  </data>
   <data name="DailyFileNameReal" xml:space="preserve">
     <value>Bettype_With_3rd_Products_Monthly_Winloss_Real_For_{0}.xlsx</value>
   </data>
@@ -128,6 +131,9 @@
   </data>
   <data name="SUMMARY" xml:space="preserve">
     <value>SUMMARY</value>
+  </data>
+  <data name="WeeklyFileName" xml:space="preserve">
+    <value>Bettype_With_3rd_Products_For_Shareholders_Winloss_For_{0}.xlsx</value>
   </data>
   <data name="WeeklyFileNameReal" xml:space="preserve">
     <value>Bettype_With_3rd_Products_For_Shareholders_Winloss_Real_For_{0}.xlsx</value>

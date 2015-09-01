@@ -15,7 +15,6 @@
     using Fanex.Service.Core.Model.NpoiNewFormat;
     using Fanex.Service.Core.Service.Implement.Npoi;
     using Fanex.Service.Core.Service.Interface.Npoi;
-    using Fanex.Service.Core.Utilities;
     using NPOI.SS.UserModel;
     using NPOI.SS.Util;
     using NPOI.XSSF.UserModel;
@@ -26,7 +25,10 @@
         private GetAllSportType _allSporttypeCriteria;
         private List<SportType> _sportType;
         private DataTable _dataTable;
-        private XSSFSheet _sheet;
+
+        private XSSFSheet _workSheet;
+        private XSSFWorkbook _workbook;
+
         private int _startCol = 1;
         private int _colSplit = 1;
         private int _rowSplit = 5;
@@ -52,6 +54,7 @@
 
         private XSSFCellStyle _backgroundGreenColorStyle;
         private XSSFCellStyle _backgroundPinkColorStyle;
+        private XSSFCellStyle _backgroundPinkBrightColorStyle;
         private XSSFCellStyle _backgroundOrangeColorStyle;
         private XSSFCellStyle _backgroundOrangeBrightColorStyle;
         private XSSFCellStyle _backgroundBlueColorStyle;
@@ -67,38 +70,26 @@
 
         private Color _greenColor;
         private Color _pinkColor;
+        private Color _pinkBrightColor;
         private Color _greyColor;        
         private Color _orangeColor;
         private Color _orangeBrightColor;
         private Color _blueColor;
         private Color _blueBrightColor;
 
-        public BettypeWith3rdProductsExcelService()
+        public BettypeWith3rdProductsExcelService(XSSFWorkbook workbook)
         {
+            _workbook = workbook;            
+
             this._criteria = new DailyBettypeWith3rdProductsCriteria();
             this._allSporttypeCriteria = new GetAllSportType();
             this._sportType = new List<SportType>();
             this._totalRow = new List<double>();                       
         }
 
-        public string FileName { get; set; }
-
-        private XSSFWorkbook Workbook { get; set; }
-
-        public string GetFileName
-        {
-            get;
-            set;
-        }
-
-        private void InitialSettings()
-        {
-            _borderInformation = new BorderInformation(0, 0, 0, 0, Color.White, Color.White, Color.White, Color.White);
-        }
-
         private void InitialFont()
         {
-            _fontService = new NpoiNewFormatFontService(Workbook);
+            _fontService = new NpoiNewFormatFontService(_workbook);
             _regularFont = _fontService.RegularFont;
             _regularBoldFont = _fontService.RegularFont;
             _regularBoldFont.IsBold = true;
@@ -108,6 +99,7 @@
         {
             _greenColor = Color.FromArgb(0, 255, 0);
             _pinkColor = Color.FromArgb(255, 0, 102);
+            _pinkBrightColor = Color.FromArgb(218, 150, 148);
             _greyColor = Color.FromArgb(217, 217, 217);
             _blueBrightColor = Color.FromArgb(204, 255, 255);
             _blueColor = Color.FromArgb(51, 204, 204);
@@ -119,6 +111,7 @@
         {
             _backgroundGreenColorStyle = _customCellStyleService.CreateCenterTextStyle(_greenColor, _regularFont);
             _backgroundPinkColorStyle = _customCellStyleService.CreateCenterTextStyle(_pinkColor, _regularFont);
+            _backgroundPinkBrightColorStyle = _customCellStyleService.CreateCenterTextStyle(_pinkBrightColor, _regularFont);
             _backgroundOrangeColorStyle = _customCellStyleService.CreateCenterTextStyle(_orangeColor, _regularFont);
             _backgroundOrangeBrightColorStyle = _customCellStyleService.CreateParenthesesNegativeIntegerNumberStyle(_orangeBrightColor, _regularFont);
             _backgroundBlueColorStyle = _customCellStyleService.CreateCenterTextStyle(_blueColor, _regularFont);
@@ -126,44 +119,22 @@
             _textRightStyle = _customCellStyleService.CreateRightTextStyle(Color.White, _regularFont);
             _textLeftStyle = _customCellStyleService.CreateLeftTextStyle(Color.White, _regularFont);
             _textTotalCenterStyle = _customCellStyleService.CreateCenterTextStyle(_greyColor, _regularFont);
-            _textTitleLeftStyle = _customCellStyleService.CreateCellStyle(_borderInformation, new BackgroundInformation(), new AlignmentInformation(), _regularBoldFont);
+
+            var bgInfor = new BackgroundInformation();
+            var alignInfo = new AlignmentInformation();
+            alignInfo.HorizontalAlignment = (int)HorizontalAlignment.Left;
+            alignInfo.VerticalAlignment = (int)VerticalAlignment.Center;
+            _textTitleLeftStyle = _customCellStyleService.CreateCellStyle(_borderInformation, bgInfor, alignInfo, _regularBoldFont);
 
             _numberStyle = _customCellStyleService.CreateParenthesesNegativeIntegerNumberStyle(Color.White, _regularFont);
             _numberTotalStyle = _customCellStyleService.CreateParenthesesNegativeIntegerNumberStyle(_greyColor, _regularFont);
             _numberTotalWLStyle = _customCellStyleService.CreateParenthesesNegativeIntegerNumberStyle(_blueBrightColor, _regularFont);
         }
 
-        public void GenerateReport(bool isVirtual, bool isDaily, string exportDataDirectory)
+        public void GenerateReport(bool isVirtual, bool isDaily)
         {
-            this.Init();
             this._isVirtual = isVirtual;
             this._isDaily = isDaily;
-            this.GenerateFileName();
-            this.GetAllSporttype();
-            this.GenerateReportHeadline();
-            this.GenerateAllSection();
-            this.GenerateSummarySection();
-            foreach (var sporttype in this._sportType)
-            {
-                this.GenerateSporttypeSection(sporttype);
-            }
-
-            this.GetFileName = exportDataDirectory + @"\" + this.FileName;
-            SaveFile.SaveExcelFile(exportDataDirectory, this.FileName, this.Workbook, AppSettings.ExcelPassword);
-        }
-
-        private void Init()
-        {
-            this.Workbook = new XSSFWorkbook();
-            this._sheet = Workbook.CreateSheet("Sheet1") as XSSFSheet;
-            this._cellStyle = new ExcelCellStyleRepository(this.Workbook);
-            _customCellStyleService = new NpoiNewFormatCustomCellStyleService(this.Workbook);
-
-            InitialSettings();
-            InitialFont();
-            InitialColor();
-            InitialStyle();
-
             this._startCol = 1;
             this._colSplit = 2;
             this._rowSplit = 5;
@@ -171,31 +142,26 @@
             this._columnCount = 0;
             this._sportType = new List<SportType>();
             this._dataTable = new DataTable();
-        }
 
-        private void GenerateFileName()
-        {
-            if (this._isDaily)
+            _workSheet = _workbook.CreateSheet(isVirtual ? "Virtual" : "Real") as XSSFSheet;
+
+            this._cellStyle = new ExcelCellStyleRepository(this._workbook);
+            _customCellStyleService = new NpoiNewFormatCustomCellStyleService(this._workbook);
+
+            short borderStyle = (short)BorderStyle.Thin;
+            _borderInformation = new BorderInformation(borderStyle, borderStyle, borderStyle, borderStyle, Color.White, Color.White, Color.White, Color.White);
+
+            InitialFont();
+            InitialColor();
+            InitialStyle();
+
+            this.GetAllSporttype();
+            this.GenerateReportHeadline();
+            this.GenerateAllSection();
+            this.GenerateSummarySection();
+            foreach (var sporttype in this._sportType)
             {
-                if (this._isVirtual)
-                {
-                    this.FileName = string.Format(Resource.DailyFileNameVirtual, DateTime.Today.ToString("yyyy_MM_dd"));
-                }
-                else
-                {
-                    this.FileName = string.Format(Resource.DailyFileNameReal, DateTime.Today.ToString("yyyy_MM_dd"));
-                }
-            }
-            else
-            {
-                if (this._isVirtual)
-                {
-                    this.FileName = string.Format(Resource.WeeklyFileNameVirtual, DateTime.Today.ToString("yyyy_MM_dd"));
-                }
-                else
-                {
-                    this.FileName = string.Format(Resource.WeeklyFileNameReal, DateTime.Today.ToString("yyyy_MM_dd"));
-                }
+                this.GenerateSporttypeSection(sporttype);
             }
         }
 
@@ -232,9 +198,9 @@
 
         private void GenerateReportHeadline()
         {
-            this._sheet.CreateFreezePane(this._colSplit, this._rowSplit);
-            this._sheet.DisplayGridlines = false;
-            var row = this._sheet.CreateRow(this._currentRow++);
+            this._workSheet.CreateFreezePane(this._colSplit, this._rowSplit);
+            this._workSheet.DisplayGridlines = false;
+            var row = this._workSheet.CreateRow(this._currentRow++);
 
             var cell = row.CreateCell(this._startCol);
             cell.CellStyle = this._cellStyle.TitleStyle;
@@ -244,7 +210,7 @@
                 this._criteria.DateStart.ToString(this._dateFormat),
                 this._criteria.DateEnd.ToString(this._dateFormat)));
 
-            row = this._sheet.CreateRow(this._currentRow++);
+            row = this._workSheet.CreateRow(this._currentRow++);
             cell = row.CreateCell(this._startCol);
             cell.SetCellValue(string.Format(Label.GeneratedTitle, "it", DateTime.Now.ToString(this._dateTimeFormat)));
             cell.CellStyle = this._cellStyle.BoldStyle;
@@ -269,7 +235,7 @@
                     this._dataTable = new DataTable();
                 }
 
-                this.GenerateSection(Resource.ALL, false);
+                this.GenerateSection(Resource.ALL, false, 0);
             }
 
             this._currentRow++;
@@ -292,7 +258,7 @@
                     this._dataTable = new DataTable();
                 }
 
-                this.GenerateSection(Resource.SUMMARY, false);
+                this.GenerateSection(Resource.SUMMARY, false, 0);
             }
 
             this._currentRow++;
@@ -320,13 +286,13 @@
 
                 if (this._dataTable.Columns.Count != 0)
                 {
-                    this.GenerateSection(sporttype.SportName, true);
+                    this.GenerateSection(sporttype.SportName, true, sporttype.SportId);
                     this._currentRow++;
                 }
             }
         }
 
-        private void GenerateSection(string title, bool isSporttype)
+        private void GenerateSection(string title, bool isSporttype, int sportId)
         {
             GenerateTitle(title);
 
@@ -336,7 +302,7 @@
                 _beginColumn = 0;
                 _endColumn = _columnCount;
 
-                GenerateSubSection(title, isSporttype, 0);
+                GenerateSubSection(title, isSporttype, 0, sportId);
             }
             else
             {
@@ -370,37 +336,40 @@
                         GenerateTitle(title);
                     }
 
-                    GenerateSubSection(title, isSporttype, indexSportSection);
+                    if (_endColumn > _beginColumn)
+                    {
+                        GenerateSubSection(title, isSporttype, indexSportSection, sportId);
+                    }
                 }
             }
 
-            this._sheet.SetColumnWidth(this._startCol, 4000);
+            this._workSheet.SetColumnWidth(this._startCol, 4000);
             for (int i = 1; i < this._columnCount; i++)
             {
-                this._sheet.AutoSizeColumn(i + this._startCol, true);
+                this._workSheet.AutoSizeColumn(i + this._startCol, true);
             }
         }
 
-        private void GenerateSubSection(string title, bool isSporttype, int indexSportSection)
+        private void GenerateSubSection(string title, bool isSporttype, int indexSportSection, int sportId)
         {
-            this.GenerateSectionHeader(title, isSporttype, indexSportSection);
+            this.GenerateSectionHeader(title, isSporttype, indexSportSection, sportId);
             this.GenerateSectionBody(isSporttype, indexSportSection);
             this.GenerateSectionFooter(isSporttype, indexSportSection);
         }
 
         private void GenerateTitle(string title)
         {
-            var row = this._sheet.CreateRow(this._currentRow++);
+            var row = this._workSheet.CreateRow(this._currentRow++);
             var cell = row.CreateCell(1);
             cell.CellStyle = _textTitleLeftStyle;
             cell.SetCellValue(title);
         }
 
-        private void GenerateSectionHeader(string title, bool isSporttype, int indexSportSection)
+        private void GenerateSectionHeader(string title, bool isSporttype, int indexSportSection, int sportId)
         {
             this._totalRow = new List<double>();
-            var headerRow = this._sheet.CreateRow(_currentRow++);
-            IRow headerRow1 = isSporttype ? this._sheet.CreateRow(_currentRow++) : null;
+            var headerRow = this._workSheet.CreateRow(_currentRow++);
+            IRow headerRow1 = isSporttype ? this._workSheet.CreateRow(_currentRow++) : null;
             int columnIndex = 0;
             int numBettype = 0;
 
@@ -418,13 +387,13 @@
                 colName = colName.Contains("Column") ? string.Empty : colName;
 
                 var cell = headerRow.CreateCell(this._startCol + columnIndex);
-                SetHeaderBackGroundColor(title, cell);
+                SetHeaderBackGroundColor(title, cell, sportId);
                 cell.SetCellValue(colName);
 
                 if (isSporttype)
                 {
                     var cell1 = headerRow1.CreateCell(this._startCol + columnIndex);
-                    SetHeaderBackGroundColor(title, cell1);
+                    SetHeaderBackGroundColor(title, cell1, sportId);
                     cell1.SetCellValue(colName);
 
                     var arrColNames = colName.Split(new[] { "@#@" }, StringSplitOptions.RemoveEmptyEntries);
@@ -465,7 +434,7 @@
         {
             for (var rowIndex = firstRow; rowIndex <= lastRow; rowIndex++)
             {
-                XSSFRow currentRow = _sheet.GetRow(rowIndex) as XSSFRow ?? _sheet.CreateRow(rowIndex) as XSSFRow;
+                XSSFRow currentRow = _workSheet.GetRow(rowIndex) as XSSFRow ?? _workSheet.CreateRow(rowIndex) as XSSFRow;
 
                 for (var cellIndex = firstColumn; cellIndex <= lastColumn; cellIndex++)
                 {
@@ -485,39 +454,44 @@
                 }
             }
 
-            _sheet.AddMergedRegion(new CellRangeAddress(firstRow, lastRow, firstColumn, lastColumn));            
+            _workSheet.AddMergedRegion(new CellRangeAddress(firstRow, lastRow, firstColumn, lastColumn));            
         }
 
-        private void SetHeaderBackGroundColor(string title, ICell cell)
+        private void SetHeaderBackGroundColor(string title, ICell cell, int sportId)
         {
             if (title.Equals(Resource.ALL))
             {
-                cell.CellStyle = _backgroundGreenColorStyle;
                 _backgroundStyle = _backgroundGreenColorStyle;
             }
             else if (title.Equals(Resource.SUMMARY))
             {
-                cell.CellStyle = _backgroundPinkColorStyle;
                 _backgroundStyle = _backgroundPinkColorStyle;
             }
             else if (title.ToLower().Equals("soccer"))
             {
-                cell.CellStyle = _backgroundOrangeColorStyle;
                 _backgroundStyle = _backgroundOrangeColorStyle;
             }
             else
             {
-                cell.CellStyle = _backgroundBlueColorStyle;
-                _backgroundStyle = _backgroundBlueColorStyle;
+                if (sportId >= 2 && sportId <= 99)
+                {
+                    _backgroundStyle = _backgroundBlueColorStyle;
+                }
+                else
+                {
+                    _backgroundStyle = _backgroundPinkBrightColorStyle;
+                }
             }
+
+            cell.CellStyle = _backgroundStyle;
         }
 
         private void GenerateSectionBody(bool isSporttype, int indexSportSection)
         {
             string date = string.Empty;
             foreach (DataRow dataRow in _dataTable.Rows)
-            {
-                var row = this._sheet.CreateRow(this._currentRow++);
+            {            
+                var row = this._workSheet.CreateRow(this._currentRow++);
                 int columnIndex = 0;
                 int numBettype = 0;
 
@@ -589,7 +563,7 @@
 
         private void GenerateSectionFooter(bool isSporttype, int indexSportSection)
         {
-            var footerRow = this._sheet.CreateRow(this._currentRow++);            
+            var footerRow = this._workSheet.CreateRow(this._currentRow++);            
             int columnIndex = 0;
 
             if (isSporttype && indexSportSection > 0 && _endColumn > _beginColumn)
