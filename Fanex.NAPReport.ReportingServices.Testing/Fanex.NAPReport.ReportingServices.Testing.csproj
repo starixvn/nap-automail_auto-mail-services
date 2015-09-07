@@ -80,6 +80,7 @@
     </None>
     <None Include="SiteConfig\ReportingServices\Configurations\CustomBettype\CustomBettypeSection.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="SiteConfig\ReportingServices\Configurations\ExcludeVirtualLineTotal\ExcludeVirtualLineTotal.config">
       <SubType>Designer</SubType>
