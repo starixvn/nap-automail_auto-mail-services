@@ -21,5 +21,7 @@
         {
             get { return ExportDataDirectoryWithYearMonthDay(ExportDataDirectory); }
         }
+
+        public static new string Subject { get; set; }
     }
 }

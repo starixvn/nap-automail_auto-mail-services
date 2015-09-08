@@ -8,4 +8,5 @@
   <add key="ExcelPassword" value="we168" />
   <add key="IsTest" value="true" />
   <add key="FunctionId" value="0" />
+  <add key="Subject" value="Automail Report - Credit Movement - {0}" />
 </Settings>

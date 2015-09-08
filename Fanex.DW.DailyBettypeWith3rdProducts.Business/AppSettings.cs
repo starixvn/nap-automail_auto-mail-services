@@ -83,6 +83,18 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business
         {
             get;
             set;
+        }
+
+        public static string SubjectDaily
+        {
+            get;
+            set;
+        }
+
+        public static string SubjectWeekly
+        {
+            get;
+            set;
         }  
     }
 }

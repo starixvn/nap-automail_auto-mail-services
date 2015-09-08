@@ -41,6 +41,12 @@ namespace Fanex.NAPReport.SMAReport.Business
         {
             get;
             set;
-        }       
+        }
+
+        public static new string Subject
+        {
+            get;
+            set;
+        }
     }
 }

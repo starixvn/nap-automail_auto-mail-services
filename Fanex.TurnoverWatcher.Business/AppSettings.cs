@@ -38,5 +38,7 @@ namespace Fanex.NAPReport.TurnoverWatcher.Business
             get;
             set;
         }
+
+        public static new string Subject { get; set; }
     }
 }

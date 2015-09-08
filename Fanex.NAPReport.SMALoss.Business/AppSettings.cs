@@ -23,5 +23,11 @@
             get;
             set;
         }
+
+        public static new string Subject
+        {
+            get;
+            set;
+        }
     }
 }

@@ -16,7 +16,7 @@
             DbSettingProviderManager.Current.Start();
             MailClientHandler.Start();
 
-            ConfigurationParser configurationParser = new ConfigurationParser(@"SiteConfig\BettypeWith3rdProducts\Settings\Bettype_With_3rd_Products.Settings.xml");
+            ConfigurationParser configurationParser = new ConfigurationParser(@"SiteConfig\BettypeWith3rdProducts\Settings\Bettype_With_3rd.Settings.xml");
             configurationParser.Parse<AppSettings>();
 
             Console.WriteLine("Running DailyBettypeWith3rdProductsService");

@@ -1,6 +1,7 @@
 ﻿namespace Fanex.NAPReport.SMALoss.Business.Entities
 {
     using System.Collections.Generic;
+    using Fanex.Service.Core.Utilities;
 
     /// <summary>
     /// SMA loss group view model.
@@ -22,5 +23,13 @@
         public string LossLevelRange { get; set; }
 
         public List<FormattedSMALossItem> SMALossItems { get; set; }
+
+        public string UrlDownloadFile
+        { 
+            get 
+            { 
+                return AppSettingBase.NapReportURL; 
+            }
+        }
     }
 }

@@ -50,6 +50,8 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
                 WinLossDate = DateTime.Now.AddDays(-1)
             };
 
+            _mailInfo.Subject = string.Format(AppSettings.Subject, DateTime.Now.ToString("yyyy/MM/dd"));
+
             var report = _service.GetWinLossByProductsData(criteria);
             isEnoughData = report.IsEnoughData;
 
@@ -76,11 +78,8 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
             var fileNamesPath = new List<string>();
             fileNamesPath.Add(_exportDataService.DirectoryOfFileName);
 
-            _mailInfo = new MailInfo()
-            {
-                FileName = _exportDataService.FileName,
-                FileNamesPath = fileNamesPath
-            };
+            _mailInfo.FileName = _exportDataService.FileName;
+            _mailInfo.FileNamesPath = fileNamesPath;
 
             var mail = mailStation.CreateMailCustomContentWithAttachedFile(_mailInfo, bodyContent);
             mailResult.Mail = mail;

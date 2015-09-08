@@ -4,4 +4,5 @@
   <add key="ExcelPasswordProtected" value="we168" />
   <add key="FunctionId" value="0" />
   <add key="DownloadUrl" value="http://qa-accrpt.starific.net/uat8/UserLogin/Common/DownloadReport"/>
+  <add key="Subject" value="Automail Report - SMA Report Month by Month {0} To {1}" />
 </Settings>

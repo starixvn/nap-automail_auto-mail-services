@@ -6,6 +6,7 @@
 
 namespace Fanex.NAPReport.SMAReport.Business.Service
 {
+    using System;
     using System.Collections.Generic;
 
     /// <summary>
@@ -13,6 +14,10 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
     /// </summary>
     public interface ISMAExportExcelService
     {
+        DateTime ReportFrom { get; }
+
+        DateTime ReportTo { get; }
+
         List<string> DirectoryOfFileNames { get; set; }
 
         List<string> FileNames { get; set; }

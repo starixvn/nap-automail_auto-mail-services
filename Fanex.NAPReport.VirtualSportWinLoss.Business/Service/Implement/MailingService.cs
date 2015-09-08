@@ -33,7 +33,7 @@
 
             _mailInfo.FileName = _service.FileName;
             _mailInfo.FileNamesPath = fileNamesPath;
-            _mailInfo.Subject = string.Format(AppSettings.Subject, DateTime.Today.ToString("yyyy/MM/dd"));
+            _mailInfo.Subject = string.Format(AppSettings.Subject, DateTime.Now.ToString("yyyy/MM/dd"));
 
             var mail = mailStation.CreateMailWithAttachedFile(_mailInfo);
             mailResult.Mail = mail;

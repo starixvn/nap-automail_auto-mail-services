@@ -46,7 +46,7 @@ namespace Fanex.NAPReport.BADailyWinLoss.Business.Service
             { 
                 FileName = service.FileName,
                 FileNamesPath = fileNamesPath,
-                Subject = string.Format(AppSettings.Subject, winLossDate.ToString("yyyy/MM/dd"))
+                Subject = string.Format(AppSettings.Subject, DateTime.Now.ToString("yyyy/MM/dd"))
             };
 
             var mail = mailStation.CreateMailWithAttachedFile(_mailInfo);
