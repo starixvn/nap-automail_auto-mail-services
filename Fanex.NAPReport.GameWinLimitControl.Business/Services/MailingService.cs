@@ -66,7 +66,7 @@ namespace Fanex.NAPReport.GameWinLimitControl.Business.Services
             {
                 return new MailResult()
                 {
-                    JobStatus = JobStatus.Failed,
+                    JobStatus = JobStatus.JobFailed,
                 };
             }
 
