@@ -175,15 +175,10 @@
     </Content>
     <Content Include="SiteConfig\Common\Templates\AttachedFileEmail.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\BettypeWith3rdProducts\Settings\Bettype_With_3rd.Settings.xml">
-    </Content>
+    </Content>    
     <Content Include="SiteConfig\Common\Templates\NotificationEmail.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\BettypeWith3rdProducts\Templates\NotificationEmailTemplate.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </Content>    
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\DBDWH.bodb_dwrs.dwrs.xml">

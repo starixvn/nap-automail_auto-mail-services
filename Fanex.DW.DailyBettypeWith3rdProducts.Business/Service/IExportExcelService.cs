@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Service
+﻿namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Service
 {
+    using System.Collections.Generic;
+
     public interface IExportExcelService
     {
         List<string> DirectoryOfFileNames { get; set; }

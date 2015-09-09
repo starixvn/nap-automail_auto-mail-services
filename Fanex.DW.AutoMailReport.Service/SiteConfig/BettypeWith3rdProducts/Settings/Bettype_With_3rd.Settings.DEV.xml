@@ -2,7 +2,7 @@
 <Settings>
   <add key="ExportDataDirectoryDaily" value="\\10.18.200.202\_Fanex.ExcelFiles\BettypeWith3rdProducts" />
   <add key="ExportDataDirectoryWeekly" value="\\10.18.200.202\_Fanex.ExcelFiles\BettypeWith3rdProductsForShareholders" />
-  <add key="ExcelPasswordProtected" value="" />
+  <add key="ExcelPasswordProtected" value="we168" />
   <add key="IsSingleFile" value="true" />
   <add key="IsManually" value="false" />
   <add key="IsSingleSport" value="true" />

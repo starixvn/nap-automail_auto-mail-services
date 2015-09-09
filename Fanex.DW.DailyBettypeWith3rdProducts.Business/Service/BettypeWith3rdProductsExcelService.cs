@@ -120,11 +120,11 @@
             _textLeftStyle = _customCellStyleService.CreateLeftTextStyle(Color.White, _regularFont);
             _textTotalCenterStyle = _customCellStyleService.CreateCenterTextStyle(_greyColor, _regularFont);
 
-            var bgInfor = new BackgroundInformation();
+            var backgroundInformation = new BackgroundInformation();
             var alignInfo = new AlignmentInformation();
             alignInfo.HorizontalAlignment = (int)HorizontalAlignment.Left;
             alignInfo.VerticalAlignment = (int)VerticalAlignment.Center;
-            _textTitleLeftStyle = _customCellStyleService.CreateCellStyle(_borderInformation, bgInfor, alignInfo, _regularBoldFont);
+            _textTitleLeftStyle = _customCellStyleService.CreateCellStyle(_borderInformation, backgroundInformation, alignInfo, _regularBoldFont);
 
             _numberStyle = _customCellStyleService.CreateParenthesesNegativeIntegerNumberStyle(Color.White, _regularFont);
             _numberTotalStyle = _customCellStyleService.CreateParenthesesNegativeIntegerNumberStyle(_greyColor, _regularFont);

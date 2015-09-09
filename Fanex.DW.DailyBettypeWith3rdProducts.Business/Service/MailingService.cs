@@ -57,7 +57,7 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Service
             bool isNotifyEmail = criteria.DateEnd != lastDate && AppSettings.IsCheckEnoughData;
             if (isNotifyEmail)
             {
-                mailResult.JobStatus = JobStatus.SuccessWithoutSendmail;
+                mailResult.JobStatus = JobStatus.DataIsNotReady;
                 SendFunctionMailCustomContentNotification(subject);
             }
             else
@@ -82,13 +82,10 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Service
                 _excel.ExportExcelSeparateRealAndVirtual(false, isDaily);                
                 _excel.ExportExcelSeparateRealAndVirtual(true, isDaily);                
             }
-
             
-            _mailInfo = new Fanex.Service.Core.Model.MailInfo()
-            {
-                FileName = string.Join(", ", _excel.FileNames),
-                FileNamesPath = _excel.DirectoryOfFileNames
-            };
+            _mailInfo.FileName = string.Join(", ", _excel.FileNames);
+            _mailInfo.FileNamesPath = _excel.DirectoryOfFileNames;
+            
 
             var mail = _mailStation.CreateMailWithAttachedFile(_mailInfo);
 

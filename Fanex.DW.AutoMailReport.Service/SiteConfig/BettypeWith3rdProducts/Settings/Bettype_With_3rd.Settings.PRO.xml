@@ -2,7 +2,7 @@
 <Settings>
   <add key="ExportDataDirectoryDaily" value="\\10.40.40.52\NAP_Reports\BettypeWith3rdProducts" />
   <add key="ExportDataDirectoryWeekly" value="\\10.40.40.52\NAP_Reports\BettypeWith3rdProductsForShareholders" />
-  <add key="ExcelPasswordProtected" value="" />
+  <add key="ExcelPasswordProtected" value="we168" />
   <add key="IsSingleFile" value="true" />
   <add key="IsManually" value="false" />
   <add key="IsSingleSport" value="false" />
