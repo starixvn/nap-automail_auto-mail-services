@@ -2,7 +2,7 @@
 	<CommonTimerServices interval="10" timeUnit="Second">		
 	</CommonTimerServices>
 	
-	<StandaloneTimerServices>		    
+	<StandaloneTimerServices>
     
 	</StandaloneTimerServices>
   
