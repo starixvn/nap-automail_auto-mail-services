@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Settings>
-  <add key="DataDirectory" value="\\10.40.40.52\NAP_Reports\WinLossByProducts" />
+  <add key="DataDirectory" value="\\10.40.40.52\NAP_Reports\ProductsWinLoss" />
   <add key="ExcelPasswordProtected" value="" />
   <add key="FunctionId" value="0" />
   <add key="IsCheckEnoughData" value="true" />

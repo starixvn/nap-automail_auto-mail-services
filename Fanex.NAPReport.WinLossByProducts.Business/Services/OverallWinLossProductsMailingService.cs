@@ -38,7 +38,7 @@
             var lastDate = new Repository().GetLastDateDataAvaiable();
 
             bool isNotifyEmail = criteria.RptDate != lastDate && AppSettings.IsCheckEnoughData;
-            _mailInfo.Subject = string.Format(AppSettings.Subject, DateTime.Now.ToString("yyyy/MM/dd"));
+            _mailInfo.Subject = string.Format(AppSettings.SubjectOverall, DateTime.Now.ToString("yyyy/MM/dd"));
 
             if (isNotifyEmail)
             {

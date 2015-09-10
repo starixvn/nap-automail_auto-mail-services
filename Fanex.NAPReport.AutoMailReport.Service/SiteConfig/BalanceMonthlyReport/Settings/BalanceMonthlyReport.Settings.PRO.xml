@@ -10,10 +10,10 @@
   <add key="ExcelPasswordProtectedSuperBalance" value="" />
   <add key="ExcelPasswordProtectedDirectBalance" value="" />
   
-  <add key="FunctionIdCreditTerm" value="0" />
-  <add key="FunctionIdSuperBalance" value="0" />
-  <add key="FunctionIdDirectBalance" value="0" />
+  <add key="FunctionIdCreditTerm" value="30" />
+  <add key="FunctionIdSuperBalance" value="32" />
+  <add key="FunctionIdDirectBalance" value="34" />
   <add key="CreditTermSubject" value="Automail Report - Credit Term - {0}" />
   <add key="SuperBalanceSubject" value="Automail Report - Super Balance - {0}" />
-  <add key="CreditDirectBalance" value="Automail Report - DirectBalance - {0}" />
+  <add key="DirectBalanceSubject" value="Automail Report - Direct Balance - {0}" />
 </Settings>

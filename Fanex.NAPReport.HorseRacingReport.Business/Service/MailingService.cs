@@ -44,8 +44,8 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
             {
                 Subject = string.Format(
                 AppSettings.Subject,
-                timeRangeCriteria.FromDate.ToString("dd MM"),
-                timeRangeCriteria.ToDate.ToString("dd MM,yyyy")),
+                timeRangeCriteria.FromDate.ToString("dd MMM"),
+                timeRangeCriteria.ToDate.ToString("dd MMM,yyyy")),
                 FileName = service.FileName,
                 FileNamesPath = fileNamesPath,
             };

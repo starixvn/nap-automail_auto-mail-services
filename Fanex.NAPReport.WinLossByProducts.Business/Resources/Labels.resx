@@ -148,7 +148,7 @@
     <value>Year to Date</value>
   </data>
   <data name="Overall_Win_Loss_Products" xml:space="preserve">
-    <value>Overall_Win_Loss_By_Products_For_{0}.xlsx</value>
+    <value>Overall_Products_Win_Loss_Report_For_{0}.xlsx</value>
   </data>
   <data name="All_Products" xml:space="preserve">
     <value>All Products</value>

@@ -167,8 +167,10 @@
     <Content Include="SiteConfig\Common\Templates\NotificationEmail.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SiteConfig\DailyBettypeWith3rdProducts\Settings\Bettype_With_3rd.Settings.xml" />
-    <Content Include="SiteConfig\DailyBettypeWith3rdProducts\Templates\NotificationEmailTemplate.cshtml">
+    <Content Include="SiteConfig\BettypeWith3rdProducts\Settings\Bettype_With_3rd.Settings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\BettypeWith3rdProducts\Templates\NotificationEmailTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -50,7 +50,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
                 WinLossDate = DateTime.Now.AddDays(-1)
             };
 
-            _mailInfo.Subject = string.Format(AppSettings.Subject, DateTime.Now.ToString("yyyy/MM/dd"));
+            _mailInfo.Subject = string.Format(AppSettings.SubjectProductWL, DateTime.Now.ToString("yyyy/MM/dd"));
 
             var report = _service.GetWinLossByProductsData(criteria);
             isEnoughData = report.IsEnoughData;

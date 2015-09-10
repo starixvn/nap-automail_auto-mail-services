@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Settings>
-  <add key="ExportDataDirectoryDaily" value="\\10.40.40.52\NAP_Reports\UAT\DailyBettypeWith3rdProducts" />
-  <add key="ExportDataDirectoryWeekly" value="\\10.40.40.52\NAP_Reports\UAT\WeeklyBettypeWith3rdProducts" />
+  <add key="ExportDataDirectoryDaily" value="\\10.40.40.52\NAP_Reports\UAT\BettypeWith3rdProducts" />
+  <add key="ExportDataDirectoryWeekly" value="\\10.40.40.52\NAP_Reports\UAT\BettypeWith3rdProductsForShareholders" />
   <add key="IsManually" value="false" />
   <add key="IsSingleSport" value="false" />
   <add key="IsCheckEnoughData" value="true" />

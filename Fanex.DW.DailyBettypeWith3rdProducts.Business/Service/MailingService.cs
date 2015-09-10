@@ -47,8 +47,8 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Service
                     DateTime.Now.ToString("yyyy/MM/dd")) :
                 string.Format(
                     AppSettings.SubjectWeekly,
-                    criteria.DateStart.ToString("dd MM"),
-                    criteria.DateEnd.ToString("dd MM,yyyy"));
+                    criteria.DateStart.ToString("dd MMM"),
+                    criteria.DateEnd.ToString("dd MMM,yyyy"));
 
             var lastDate = _repository.GetLastDateDataAvaiable();
 
@@ -84,12 +84,9 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Service
             _excel.GenerateReport(true, isDaily, info.ExportDataDirectory);
             fileNamesPath.Add(_excel.GetFileName);
             fileNames.Add(Path.GetFileName(_excel.GetFileName));
-
-            _mailInfo = new Fanex.Service.Core.Model.MailInfo()
-            {
-                FileName = string.Join(", ", fileNames),
-                FileNamesPath = fileNamesPath
-            };
+            
+            _mailInfo.FileName = string.Join(", ", fileNames);
+            _mailInfo.FileNamesPath = fileNamesPath;
 
             var mail = _mailStation.CreateMailWithAttachedFile(_mailInfo);
 

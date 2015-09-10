@@ -61,7 +61,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Win_Loss_By_Products_For_{0}.xlsx.
+        ///   Looks up a localized string similar to Products_Win_Loss_Report_For_{0}.xlsx.
         /// </summary>
         public static string WinLossByProducts_ReportName {
             get {

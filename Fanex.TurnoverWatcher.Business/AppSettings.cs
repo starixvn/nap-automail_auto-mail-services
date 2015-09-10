@@ -40,5 +40,11 @@ namespace Fanex.NAPReport.TurnoverWatcher.Business
         }
 
         public static new string Subject { get; set; }
+
+        public static int FunctionIdNormalGroup
+        {
+            get;
+            set;
+        }
     }
 }

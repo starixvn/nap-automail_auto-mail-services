@@ -15,5 +15,5 @@
   <add key="FunctionIdDirectBalance" value="86" />
   <add key="CreditTermSubject" value="Automail Report - Credit Term - {0}" />
   <add key="SuperBalanceSubject" value="Automail Report - Super Balance - {0}" />
-  <add key="CreditDirectBalance" value="Automail Report - DirectBalance - {0}" />
+  <add key="DirectBalanceSubject" value="Automail Report - Direct Balance - {0}" />
 </Settings>

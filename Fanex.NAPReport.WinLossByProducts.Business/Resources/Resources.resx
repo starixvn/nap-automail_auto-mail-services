@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="WinLossByProducts_ReportName" xml:space="preserve">
-    <value>Win_Loss_By_Products_For_{0}.xlsx</value>
+    <value>Products_Win_Loss_Report_For_{0}.xlsx</value>
   </data>
   <data name="WinLossByProducts_ReportTitle" xml:space="preserve">
     <value>Products Win Loss Report - {0}</value>

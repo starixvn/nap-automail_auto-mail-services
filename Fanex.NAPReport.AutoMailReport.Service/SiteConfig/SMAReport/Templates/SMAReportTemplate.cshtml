@@ -24,11 +24,13 @@
         string reportDownloadUrl = string.Format("{0}?time={1}&reportName={2}", reportPath, encryptText, encryptReportName);
         <a href="@reportDownloadUrl">@fileName</a><br /><br />
     }
-    <div>Note: <span style="font-style: italic;">The links will be expired on @currentTime.AddMonths(1).ToShortFormatedDate(). Please contact Starix IT if you can not download them!</span></div><br /><br />
+    <div>Note: <span style="font-style: italic;">The links will be expired on @currentTime.AddMonths(1).ToShortFormatedDate().</span></div><br /><br />
     
-    @*You also can access to <a href="@linkNapReport" target="_blank">Nap-Accounting Report</a> to download report. <br /><br />
+    You also can access to <a href="@linkNapReport" target="_blank">Nap-Accounting Report</a> to download report. <br /><br />
+
+    Your report is placed at Nap Accounting Report/Misc/Auto-Generated Reports.<br /><br />
  
-    Please contact Starix IT if you can not access or download report.<br /><br />*@
+    Please contact Starix IT if you can not access or download report.<br /><br />
     <div>
         Thanks & Regards,<br />
         <br />
