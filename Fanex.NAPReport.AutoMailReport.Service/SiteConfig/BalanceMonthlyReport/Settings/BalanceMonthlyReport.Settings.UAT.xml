@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Settings>
-  <add key="IsTest" value="false" />  
-  <add key="DataDirectoryCreditTerm" value="\\10.40.40.52\NAP_Reports\UAT\BalanceMonthlyCreditTerm" />
-  <add key="DataDirectorySuperBalance" value="\\10.40.40.52\NAP_Reports\UAT\BalanceMonthlySuperBalance" />
-  <add key="DataDirectoryDirectBalance" value="\\10.40.40.52\NAP_Reports\UAT\BalanceMonthlyDirectBalance" />
+  <add key="IsTest" value="false" />
+  <add key="DataDirectoryCreditTerm" value="\\10.40.40.52\NAP_Reports\UAT\BalanceMonthlyReport_CreditTerm" />
+  <add key="DataDirectorySuperBalance" value="\\10.40.40.52\NAP_Reports\UAT\BalanceMonthlyReport_SuperBalance" />
+  <add key="DataDirectoryDirectBalance" value="\\10.40.40.52\NAP_Reports\UAT\BalanceMonthlyReport_DirectBalance" 
   
   <add key="ExcelPasswordProtectedCreditTerm" value="" />
   <add key="ExcelPasswordProtectedSuperBalance" value="" />
