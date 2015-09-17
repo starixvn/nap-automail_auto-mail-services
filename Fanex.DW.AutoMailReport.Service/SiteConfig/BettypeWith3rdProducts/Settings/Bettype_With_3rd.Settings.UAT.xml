@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Settings>
-  <add key="ExportDataDirectoryDaily" value="\\10.40.40.52\NAP_Reports\UAT\DailyBettypeWith3rdProducts" />
-  <add key="ExportDataDirectoryWeekly" value="\\10.40.40.52\NAP_Reports\UAT\WeeklyBettypeWith3rdProducts" />
+  <add key="ExportDataDirectoryDaily" value="\\10.40.40.52\NAP_Reports\UAT\BettypeWith3rdProducts" />
+  <add key="ExportDataDirectoryWeekly" value="\\10.40.40.52\NAP_Reports\UAT\BettypeWith3rdProductsForShareholders" />
   <add key="IsManually" value="false" />
   <add key="IsSingleSport" value="false" />
   <add key="IsCheckEnoughData" value="true" />
@@ -9,4 +9,6 @@
   <add key="DateEnd" value="2015-04-30" />
   <add key="FunctionIdDaily" value="60" />
   <add key="FunctionIdWeekly" value="61" />
+  <add key="SubjectDaily" value="Automail Report - Bettype With 3rd Products - {0}" />
+  <add key="SubjectWeekly" value="Automail Report - Bettype With 3rd Products For Shareholders From {0} To {1}" />
 </Settings>

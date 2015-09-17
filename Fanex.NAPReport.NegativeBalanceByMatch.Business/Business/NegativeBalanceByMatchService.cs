@@ -69,7 +69,7 @@
                         string body = GetMailVipGroupBody(licenseeName, matches);
 
                         INegativeBalanceByMatchExcelService excel = new NegativeBalanceByMatchExcelService();
-                        string fileNamePath = Path.Combine(AppSettings.ExportDataDirectoryWithYearMonthDay, "Negative_Balance_By_Match_Report_" + licenseeName + "_For_" + curDateTime.ToString("yyyy_MM_dd_hh_mm_tt") + ".xlsx");
+                        string fileNamePath = Path.Combine(AppSettings.ExportDataDirectoryWithYearMonthDay, licenseeName + "_List_Of_Members_With_Negative_Balance_By_Match_Report_For_" + curDateTime.ToString("yyyy_MM_dd_hh_mm_tt") + ".xlsx");
                         excel.GenerateReportForLicensee(licenseeName, matches, exportSettings, fileNamePath);
 
                         var fileNamesPath = new List<string>();
@@ -77,6 +77,7 @@
 
                         _mailInfo = new MailInfo()
                         {
+                            Subject = string.Format(AppSettings.Subject, licenseeName, DateTime.Now.ToString("yyyy/MM/dd")),
                             FileName = Path.GetFileName(fileNamePath),
                             FileNamesPath = fileNamesPath
                         };

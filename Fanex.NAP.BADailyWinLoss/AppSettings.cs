@@ -49,5 +49,11 @@ namespace Fanex.NAPReport.BADailyWinLoss.Business
             get;
             set;
         }
+
+        public static new string Subject
+        {
+            get;
+            set;
+        }
     }
 }

@@ -66,12 +66,12 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service
 
             _mailInfo = new MailInfo()
             {
+                Subject = string.Format(AppSettings.Subject, DateTime.Now.ToString("yyyy/MM/dd")),
                 FileName = string.Join(", ", fileNames),
                 FileNamesPath = fileNamesPath
             };
 
             var mail = _mailStation.CreateMailWithNotification(_mailInfo);
-            mail.Subject = "Automail Report - Reporting Service on " + currentDate.ToShortDateString();
             mailResult.Mail = mail;
 
             return mailResult;
@@ -79,6 +79,10 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service
 
         public void SendMailToNormalGroup()
         {
+            if (AppSettings.FunctionId > 0)
+            {
+                _mailStation.SendFunctionMailWithNotification(AppSettings.FunctionId, _mailInfo);
+            }
         }
     }
 }

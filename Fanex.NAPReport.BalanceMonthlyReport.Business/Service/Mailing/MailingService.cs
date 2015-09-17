@@ -42,6 +42,7 @@ namespace Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Mailing
 
             _mailInfo = new MailInfo()
             {
+                Subject = string.Format(AppSettings.CreditTermSubject, DateTime.Now.ToString("MM/yyyy")),
                 FileName = service.FileName,
                 FileNamesPath = fileNamesPath,
             };
@@ -97,6 +98,7 @@ namespace Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Mailing
 
             _mailInfo = new MailInfo()
             {
+                Subject = string.Format(AppSettings.SuperBalanceSubject, DateTime.Now.ToString("MM/yyyy")),
                 FileName = service.FileName,
                 FileNamesPath = fileNamesPath,
             };
@@ -164,6 +166,7 @@ namespace Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Mailing
 
             _mailInfo = new MailInfo()
             {
+                Subject = string.Format(AppSettings.DirectBalanceSubject, DateTime.Now.ToString("MM/yyyy")),
                 FileName = string.Join(", ", fileNames),
                 FileNamesPath = fileNamesPath,
             };

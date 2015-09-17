@@ -182,8 +182,8 @@
                 subject,
                 AppSettings.BaseCurrency,
                 NumberExtension.WinLossFormat(AppSettings.WinLoss, 0),
-                fromDate.ToString(DateTimeFormatConstants.YearMonthDateMinute2),
-                toDate.ToString(DateTimeFormatConstants.YearMonthDateMinute2));
+                fromDate.ToString(DateTimeFormatConstants.YearMonthDateHourMinute),
+                toDate.ToString(DateTimeFormatConstants.YearMonthDateHourMinute));
 
             return subject;
         }
@@ -195,8 +195,8 @@
                 subject,
                 AppSettings.BaseCurrency,
                 NumberExtension.WinLossFormat(AppSettings.WinLoss, 0),
-                fromDate.ToString(DateTimeFormatConstants.YearMonthDateMinute2),
-                toDate.ToString(DateTimeFormatConstants.YearMonthDateMinute2));
+                fromDate.ToString(DateTimeFormatConstants.YearMonthDateHourMinute),
+                toDate.ToString(DateTimeFormatConstants.YearMonthDateHourMinute));
 
             return subject;
         }

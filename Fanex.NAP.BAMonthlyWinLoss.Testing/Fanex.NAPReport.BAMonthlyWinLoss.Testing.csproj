@@ -144,7 +144,9 @@
     <Content Include="SiteConfig\Common\Templates\NotificationEmail.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Dev\DBEXT.bodb02.bodbAdminNet.xml">

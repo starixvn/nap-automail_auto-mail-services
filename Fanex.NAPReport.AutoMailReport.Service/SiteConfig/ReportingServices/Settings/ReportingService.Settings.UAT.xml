@@ -8,4 +8,6 @@
   <add key="ExcelPassword" value="" />
   <add key="IsTest" value="false" />
   <add key="WinLossDate" value="2015-06-18" />
+  <add key="FunctionId" value="0" />
+  <add key="Subject" value="Automail Report - Reporting Services - {0}" />
 </Settings>

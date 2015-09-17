@@ -57,6 +57,7 @@
 
                         _mailInfo = new MailInfo()
                         {
+                            Subject = string.Format(AppSettings.Subject, DateTime.Now.ToString("yyyy/MM/dd")),
                             FileName = _excel.FileName,
                             FileNamesPath = fileNamesPath
                         };
@@ -69,6 +70,8 @@
                         {
                             _service.RemoveNotifiedCustomer(notifiedCustomerMatchTurnovers, fromPercentage);
                         }
+
+                        SendMailToNormalGroup();
                     }
                 }
             }
@@ -78,6 +81,10 @@
 
         public void SendMailToNormalGroup()
         {
+            if (AppSettings.FunctionIdNormalGroup > 0)
+            {
+                _mailStation.SendFunctionMailWithNotification(AppSettings.FunctionIdNormalGroup, _mailInfo);
+            }
         }
 
         private string GetTemplate()

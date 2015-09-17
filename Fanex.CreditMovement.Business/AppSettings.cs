@@ -78,5 +78,11 @@ namespace Fanex.CreditMovement.Business
             get;
             set;
         }
+
+        public static new string Subject
+        {
+            get;
+            set;
+        }
     }
 }

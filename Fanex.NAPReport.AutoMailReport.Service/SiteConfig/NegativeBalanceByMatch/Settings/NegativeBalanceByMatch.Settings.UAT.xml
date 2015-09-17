@@ -5,4 +5,5 @@
   <Setting key="ExcelPasswordProtected" value="" />
   <Setting key="LicenseesDualLanguage" value="haifa,bodog" />
   <Setting key="ExportDataDirectory" value="\\10.40.40.52\NAP_Reports\UAT\NegativeBalanceByMatch" />
+  <Setting key="Subject" value="Automail Report - {0} List of Members with Negative Balance By Match - {1}" />
 </Settings>

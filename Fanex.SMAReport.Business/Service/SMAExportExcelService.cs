@@ -94,6 +94,22 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
         {
             get;
             set;
+        }        
+
+        public DateTime ReportFrom
+        {
+            get
+            {
+                return new DateTime(_lastMonth.Year, 1, 1);
+            }
+        }
+
+        public DateTime ReportTo
+        {
+            get
+            {
+                return _lastMonth;
+            }
         }
 
         private void Init()

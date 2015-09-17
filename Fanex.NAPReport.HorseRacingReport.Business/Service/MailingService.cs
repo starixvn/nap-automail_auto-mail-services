@@ -42,8 +42,12 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
 
             _mailInfo = new MailInfo() 
             {
+                Subject = string.Format(
+                AppSettings.Subject,
+                timeRangeCriteria.FromDate.ToString("dd MMM"),
+                timeRangeCriteria.ToDate.ToString("dd MMM,yyyy")),
                 FileName = service.FileName,
-                FileNamesPath = fileNamesPath,                
+                FileNamesPath = fileNamesPath,
             };
 
             var mail = mailStation.CreateMailWithAttachedFile(_mailInfo);

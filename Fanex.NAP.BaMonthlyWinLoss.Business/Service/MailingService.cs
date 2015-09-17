@@ -44,6 +44,7 @@ namespace Fanex.NAPReport.BAMonthlyWinLoss.Business.Service
 
             _mailInfo = new MailInfo()
             {
+                Subject = string.Format(AppSettings.Subject, DateTime.Now.ToString("MM/yyyy")),
                 FileName = service.FileName,
                 FileNamesPath = fileNamesPath
             };

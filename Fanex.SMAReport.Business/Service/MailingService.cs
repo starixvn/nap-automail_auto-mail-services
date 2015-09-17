@@ -46,6 +46,7 @@ namespace Fanex.NAPReport.SMAReport.Business.Service
 
             _mailInfo = new MailInfo()
             {
+                Subject = string.Format(AppSettings.Subject, _excelService.ReportFrom.ToString("MMM yyyy"), _excelService.ReportTo.ToString("MMM yyyy")),
                 FileName = string.Join(", ", _excelService.FileNames),
                 FileNamesPath = _excelService.DirectoryOfFileNames
             };

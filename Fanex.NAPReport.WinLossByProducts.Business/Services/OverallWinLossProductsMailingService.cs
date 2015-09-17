@@ -38,6 +38,8 @@
             var lastDate = new Repository().GetLastDateDataAvaiable();
 
             bool isNotifyEmail = criteria.RptDate != lastDate && AppSettings.IsCheckEnoughData;
+            _mailInfo.Subject = string.Format(AppSettings.SubjectOverall, DateTime.Now.ToString("yyyy/MM/dd"));
+
             if (isNotifyEmail)
             {
                 mailResult.JobStatus = JobStatus.SuccessWithoutSendmail;
@@ -59,11 +61,8 @@
             var fileNamesPath = new List<string>();
             fileNamesPath.Add(_excel.DirectoryOfFileName);
 
-            _mailInfo = new MailInfo()
-            {
-                FileName = _excel.FileName,
-                FileNamesPath = fileNamesPath
-            };
+            _mailInfo.FileName = _excel.FileName;
+            _mailInfo.FileNamesPath = fileNamesPath;
 
             var mail = _mailStation.CreateMailWithAttachedFile(_mailInfo);
 

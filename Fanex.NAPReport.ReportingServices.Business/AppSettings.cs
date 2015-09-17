@@ -61,6 +61,18 @@ namespace Fanex.NAPReport.ReportingServices.Business
         {
             get;
             set;
+        }        
+
+        public static int FunctionId
+        {
+            get;
+            set;
+        }
+
+        public static new string Subject
+        {
+            get;
+            set;
         }
 
         public static string DataDirectory(string path)

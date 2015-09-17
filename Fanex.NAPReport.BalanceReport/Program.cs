@@ -1,8 +1,8 @@
 ﻿namespace Fanex.NAPReport.BalanceMonthlyReport.Business
 {
     using System;
+    using System.IO;
     using Fanex.Data.Configuration;
-    using Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Balance;
     using Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Mailing;
 
     public class Program
@@ -11,6 +11,7 @@
         {
             try
             {
+                Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
                 DbSettingProviderManager.Current.Start();
 
                 IMailingService mailingService = new MailingService();

@@ -40,6 +40,16 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Service
             MailResult mailResult = new MailResult();
 
             DailyBettypeWith3rdProductsCriteria criteria = new DailyBettypeWith3rdProductsCriteria();
+
+            _mailInfo.Subject = isDaily ? 
+                string.Format(
+                    AppSettings.SubjectDaily,
+                    DateTime.Now.ToString("yyyy/MM/dd")) :
+                string.Format(
+                    AppSettings.SubjectWeekly,
+                    criteria.DateStart.ToString("dd MMM"),
+                    criteria.DateEnd.ToString("dd MMM,yyyy"));
+
             var lastDate = _repository.GetLastDateDataAvaiable();
 
             bool isNotifyEmail = criteria.DateEnd != lastDate && AppSettings.IsCheckEnoughData;
@@ -50,36 +60,33 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Service
             }
             else
             {
-                var mail = SendEmail(isDaily);
+                var mail = SendEmail(isDaily, criteria);
                 mailResult.Mail = mail;
 
                 SendMailToNormalGroup(isDaily);
             }
-           
+
             return mailResult;
         }
 
-        public Mail SendEmail(bool isDaily)
+        public Mail SendEmail(bool isDaily, DailyBettypeWith3rdProductsCriteria criteria)
         {
             var fileNamesPath = new List<string>();
             var fileNames = new List<string>();
 
             Fanex.DW.DailyBettypeWith3rdProducts.Business.Model.MailInfo info = new Fanex.DW.DailyBettypeWith3rdProducts.Business.Model.MailInfo(isDaily);
             BettypeWith3rdProductsExcelService _excel = new BettypeWith3rdProductsExcelService();
-            
-            _excel.GenerateReport(false, isDaily, info.ExportDataDirectory);            
+
+            _excel.GenerateReport(false, isDaily, info.ExportDataDirectory);
             fileNamesPath.Add(_excel.GetFileName);
             fileNames.Add(Path.GetFileName(_excel.GetFileName));
 
             _excel.GenerateReport(true, isDaily, info.ExportDataDirectory);
             fileNamesPath.Add(_excel.GetFileName);
             fileNames.Add(Path.GetFileName(_excel.GetFileName));
-
-            _mailInfo = new Fanex.Service.Core.Model.MailInfo()
-            {
-                FileName = string.Join(", ", fileNames),
-                FileNamesPath = fileNamesPath
-            };
+            
+            _mailInfo.FileName = string.Join(", ", fileNames);
+            _mailInfo.FileNamesPath = fileNamesPath;
 
             var mail = _mailStation.CreateMailWithAttachedFile(_mailInfo);
 

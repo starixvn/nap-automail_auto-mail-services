@@ -5,4 +5,5 @@
   <add key="DataDirectory" value="\\10.40.40.52\NAP_Reports\UAT\BAMonthlyWinLoss" />
   <add key="ExcelPasswordProtected" value="" />
   <add key="FunctionId" value="28" />
+  <add key="Subject" value="Automail Report - BA Monthly Win Loss - {0}" />
 </Settings>

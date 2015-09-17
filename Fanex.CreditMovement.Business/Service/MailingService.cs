@@ -60,6 +60,7 @@ namespace Fanex.CreditMovement.Business.Service
 
                 _mailInfo = new MailInfo()
                 {
+                    Subject = string.Format(AppSettings.Subject, DateTime.Now.ToString("yyyy/MM/dd")),
                     FileName = _excel.FileName,
                     FileNamesPath = fileNamesPath
                 };

@@ -88,5 +88,23 @@ namespace Fanex.NAPReport.BalanceMonthlyReport.Business
             get;
             set;
         }
+
+        public static string CreditTermSubject
+        {
+            get;
+            set;
+        }
+
+        public static string SuperBalanceSubject
+        {
+            get;
+            set;
+        }
+
+        public static string DirectBalanceSubject
+        {
+            get;
+            set;
+        }
     }
 }

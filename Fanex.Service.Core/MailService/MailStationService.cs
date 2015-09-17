@@ -29,8 +29,8 @@ namespace Fanex.Service.Core.MailService
             var emailContent = Razor.Parse(template, mailInfo); 
 
             Mail mail = new Mail() 
-            { 
-                Subject = string.Format(AppSettingBase.Subject, mailInfo.FileName),
+            {
+                Subject = mailInfo.Subject,
                 Title = AppSettingBase.Title,
                 Body = emailContent,
                 Attachments = new List<MailAttachment>()
@@ -53,7 +53,7 @@ namespace Fanex.Service.Core.MailService
 
             Mail mail = new Mail()
             {
-                Subject = string.Format(AppSettingBase.Subject, mailInfo.FileName),
+                Subject = mailInfo.Subject,
                 Title = AppSettingBase.Title,
                 Body = emailContent
             };
@@ -81,7 +81,7 @@ namespace Fanex.Service.Core.MailService
         {
             Mail mail = new Mail()
             {
-                Subject = string.Format(AppSettingBase.Subject, mailInfo.FileName),
+                Subject = mailInfo.Subject,
                 Title = AppSettingBase.Title,
                 Body = bodyContent, 
                 Attachments = new List<MailAttachment>()
@@ -99,7 +99,7 @@ namespace Fanex.Service.Core.MailService
         {
             Mail mail = new Mail()
             {
-                Subject = string.Format(AppSettingBase.Subject, mailInfo.FileName),
+                Subject = mailInfo.Subject,
                 Title = AppSettingBase.Title,
                 Body = bodyContent,
                 Attachments = new List<MailAttachment>()
@@ -112,7 +112,7 @@ namespace Fanex.Service.Core.MailService
         {
             Mail mail = new Mail()
             {
-                Subject = string.Format(AppSettingBase.Subject, mailInfo.FileName),
+                Subject = mailInfo.Subject,
                 Title = AppSettingBase.Title,
                 Body = bodyContent,
                 Attachments = new List<MailAttachment>(),
