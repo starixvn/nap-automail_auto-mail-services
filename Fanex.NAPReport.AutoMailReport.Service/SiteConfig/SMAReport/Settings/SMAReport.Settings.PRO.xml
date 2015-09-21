@@ -2,7 +2,7 @@
 <Settings>
   <add key="DataDirectory" value="\\10.40.40.52\NAP_Reports\SMAMonthlyAutomailReport" />
   <add key="ExcelPasswordProtected" value="we168" />
-  <add key="FunctionId" value="0" />
+  <add key="FunctionId" value="79" />
   <add key="DownloadUrl" value="http://63.216.198.114/AccReport/UserLogin/Common/DownloadReport"/>
   <add key="Subject" value="Automail Report - SMA Report Month by Month {0} To {1}" />
 </Settings>

@@ -3,15 +3,15 @@
   <add key="IsTest" value="false" />
   <add key="DataDirectoryCreditTerm" value="\\10.40.40.52\NAP_Reports\UAT\BalanceMonthlyReport_CreditTerm" />
   <add key="DataDirectorySuperBalance" value="\\10.40.40.52\NAP_Reports\UAT\BalanceMonthlyReport_SuperBalance" />
-  <add key="DataDirectoryDirectBalance" value="\\10.40.40.52\NAP_Reports\UAT\BalanceMonthlyReport_DirectBalance" 
+  <add key="DataDirectoryDirectBalance" value="\\10.40.40.52\NAP_Reports\UAT\BalanceMonthlyReport_DirectBalance" />
   
   <add key="ExcelPasswordProtectedCreditTerm" value="" />
   <add key="ExcelPasswordProtectedSuperBalance" value="" />
   <add key="ExcelPasswordProtectedDirectBalance" value="" />
 
-  <add key="FunctionIdCreditTerm" value="30" />
-  <add key="FunctionIdSuperBalance" value="32" />
-  <add key="FunctionIdDirectBalance" value="34" />
+  <add key="FunctionIdCreditTerm" value="0" />
+  <add key="FunctionIdSuperBalance" value="0" />
+  <add key="FunctionIdDirectBalance" value="0" />
   <add key="CreditTermSubject" value="Automail Report - Credit Term - {0}" />
   <add key="SuperBalanceSubject" value="Automail Report - Super Balance - {0}" />
   <add key="DirectBalanceSubject" value="Automail Report - Direct Balance - {0}" />

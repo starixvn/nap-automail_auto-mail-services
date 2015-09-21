@@ -4,6 +4,6 @@
   <add key="TestedDate" value="05/03/2015" />  
   <add key="DataDirectory" value="\\10.40.40.52\NAP_Reports\UAT\BADailyWinLoss" />
   <add key="ExcelPasswordProtected" value="" />
-  <add key="FunctionId" value="75" />
+  <add key="FunctionId" value="0" />
   <add key="Subject" value="Automail Report - BA Daily Win Loss - {0}" />
 </Settings>
