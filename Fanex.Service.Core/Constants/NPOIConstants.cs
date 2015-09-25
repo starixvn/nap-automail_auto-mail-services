@@ -23,6 +23,7 @@ namespace Fanex.Service.Core.Constants
         public const string NegativeNumberFormat = "[>0]#,##0;[<0][Red]-#,##0;#,##0";
         public const string NegativeDecimalNumberFormat = "[>0]#,##0.00;[<0][Red]-#,##0.00;#,##0.00";
         public const string PositiveDecimalNumberFormat = "[>0][Red]#,##0.00;[<0]-#,##0.00;#,##0.00";
+        public const string ParenthesesNegativeIntegerNumberFormat = "[>0]#,##0;[<0][Red](#,##0);#,##0";
         public const string ParenthesesNegativeDecimalNumberFormat = "[>0]#,##0.00;[<0][Red](-#,##0.00);#,##0.00";
         public const string ParenthesesPositiveDecimalNumberFormat = "[>0][Red](#,##0.00);[<0]-#,##0.00;#,##0.00";
         public const string NormalDecimalNumberFormat = "#,##0.00;-#,##0.00";

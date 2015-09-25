@@ -500,6 +500,7 @@
     </Content>
     <Content Include="App_Data\PRO\DBACC.bodb02.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\PRO\DBAGE.bodb02.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

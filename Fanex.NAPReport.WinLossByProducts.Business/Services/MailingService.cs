@@ -57,7 +57,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
 
             if (!isEnoughData)
             {
-                mailResult.JobStatus = JobStatus.SuccessWithoutSendmail;
+                mailResult.JobStatus = JobStatus.DataIsNotReady;
                 SendFunctionMailCustomContentNotification();
 
                 return mailResult;

@@ -24,6 +24,7 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Service
         private IMailStationService _mailStation;
         private Fanex.Service.Core.Model.MailInfo _mailInfo;
         private IRepository _repository;
+        private IExportExcelService _excel;
 
         public MailingService()
         {
@@ -33,6 +34,7 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Service
             _mailStation = new MailStationService();
             _mailInfo = new Fanex.Service.Core.Model.MailInfo();
             _repository = new Repository();
+            _excel = new ExportExcelService();
         }
 
         public MailResult ExportBettypeWith3rdProducts(bool isDaily, string subject)
@@ -55,7 +57,7 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Service
             bool isNotifyEmail = criteria.DateEnd != lastDate && AppSettings.IsCheckEnoughData;
             if (isNotifyEmail)
             {
-                mailResult.JobStatus = JobStatus.SuccessWithoutSendmail;
+                mailResult.JobStatus = JobStatus.DataIsNotReady;
                 SendFunctionMailCustomContentNotification(subject);
             }
             else
@@ -71,23 +73,19 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Service
 
         public Mail SendEmail(bool isDaily, DailyBettypeWith3rdProductsCriteria criteria)
         {
-            var fileNamesPath = new List<string>();
-            var fileNames = new List<string>();
-
-            Fanex.DW.DailyBettypeWith3rdProducts.Business.Model.MailInfo info = new Fanex.DW.DailyBettypeWith3rdProducts.Business.Model.MailInfo(isDaily);
-            BettypeWith3rdProductsExcelService _excel = new BettypeWith3rdProductsExcelService();
-
-            _excel.GenerateReport(false, isDaily, info.ExportDataDirectory);
-            fileNamesPath.Add(_excel.GetFileName);
-            fileNames.Add(Path.GetFileName(_excel.GetFileName));
-
-            _excel.GenerateReport(true, isDaily, info.ExportDataDirectory);
-            fileNamesPath.Add(_excel.GetFileName);
-            fileNames.Add(Path.GetFileName(_excel.GetFileName));
+            if (AppSettings.IsSingleFile)
+            {
+                _excel.ExportExcelCombineRealAndVirtual(isDaily);                
+            }
+            else
+            {
+                _excel.ExportExcelSeparateRealAndVirtual(false, isDaily);                
+                _excel.ExportExcelSeparateRealAndVirtual(true, isDaily);                
+            }
             
-            _mailInfo.FileName = string.Join(", ", fileNames);
-            _mailInfo.FileNamesPath = fileNamesPath;
-
+            _mailInfo.FileName = string.Join(", ", _excel.FileNames);
+            _mailInfo.FileNamesPath = _excel.DirectoryOfFileNames;
+            
             var mail = _mailStation.CreateMailWithAttachedFile(_mailInfo);
 
             return mail;

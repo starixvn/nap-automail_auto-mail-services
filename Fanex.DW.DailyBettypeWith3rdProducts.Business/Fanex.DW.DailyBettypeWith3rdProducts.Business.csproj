@@ -146,6 +146,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\System.Web.Razor.dll</HintPath>
     </Reference>
@@ -163,9 +164,10 @@
     <Compile Include="Criteria\DailyBettypeWith3rdProductsCriteria.cs" />
     <Compile Include="Criteria\GetAllSportType.cs" />
     <Compile Include="Criteria\GetDWStatusByCubeCriteria.cs" />
+    <Compile Include="Service\ExportExcelService.cs" />
+    <Compile Include="Service\IExportExcelService.cs" />
     <Compile Include="Service\MailingService.cs" />
     <Compile Include="Service\IMailingService.cs" />
-    <Compile Include="Model\MailInfo.cs" />
     <Compile Include="Model\Sporttype.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IRepository.cs" />
@@ -176,7 +178,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
-    <Compile Include="Service\AutoMailBaseService.cs" />
     <Compile Include="Service\BettypeWith3rdProductsExcelService.cs" />
   </ItemGroup>
   <ItemGroup>

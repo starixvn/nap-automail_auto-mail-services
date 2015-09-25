@@ -56,5 +56,15 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.NewFormat.Cus
             centerNumberStyle.SetFont(font);
             return centerNumberStyle;
         }
+
+        public XSSFCellStyle CreateParenthesesNegativeDecimalNumberStyle(Color backgroundColor, XSSFFont font)
+        {
+            XSSFCellStyle parenthesesNegativeIntegerNumberStyle = this._workbook.CreateCellStyle() as XSSFCellStyle;
+            NPOIUtility.AssignNewFormatCellStyleData(parenthesesNegativeIntegerNumberStyle, backgroundColor);
+            parenthesesNegativeIntegerNumberStyle.Alignment = HorizontalAlignment.Right;
+            parenthesesNegativeIntegerNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.ParenthesesNegativeIntegerNumberFormat);
+            parenthesesNegativeIntegerNumberStyle.SetFont(font);
+            return parenthesesNegativeIntegerNumberStyle;
+        }
     }
 }

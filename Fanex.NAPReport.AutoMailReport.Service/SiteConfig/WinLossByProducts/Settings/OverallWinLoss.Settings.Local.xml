@@ -4,7 +4,7 @@
   <add key="ExcelPasswordProtected" value="" />
   <add key="FunctionId" value="89" />
   <add key="IsCheckEnoughData" value="false" />
-  <add key="IsTesting" value="true" />
+  <add key="IsTesting" value="false" />
   <add key="WinLossDate" value="2015-08-30" />
   <add key="SubjectOverall" value="Automail Report - Overall Products Win Loss - {0}" />
   <add key="SubjectProductWL" value="Automail Report - Products Win Loss - {0}" />

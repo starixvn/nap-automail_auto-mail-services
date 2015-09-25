@@ -19,5 +19,7 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Interface.NewFormat.Cus
         XSSFCellStyle CreateRightNumberStyle(Color backgroundColor, XSSFFont font);
 
         XSSFCellStyle CreateCenterNumberStyle(Color backgroundColor, XSSFFont font);
+
+        XSSFCellStyle CreateParenthesesNegativeDecimalNumberStyle(Color backgroundColor, XSSFFont font);
     }
 }

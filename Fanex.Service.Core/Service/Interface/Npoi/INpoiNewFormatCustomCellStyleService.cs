@@ -49,5 +49,7 @@ namespace Fanex.Service.Core.Service.Interface.Npoi
         XSSFCellStyle CreateParenthesesNegativePercentageStyle(Color backgroundColor, XSSFFont font);
 
         XSSFCellStyle CreateCellStyle(BorderInformation border, BackgroundInformation background, AlignmentInformation alignment, XSSFFont font);
+
+        XSSFCellStyle CreateParenthesesNegativeIntegerNumberStyle(Color backgroundColor, XSSFFont font);
     }
 }

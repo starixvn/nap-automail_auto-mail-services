@@ -4,6 +4,12 @@
 
     public class GetAllSportType : CriteriaBase
     {
+        public bool Include3rd 
+        { 
+            get; 
+            set; 
+        }
+
         public override string GetSettingKey()
         {
             return "GetAllSportType";
