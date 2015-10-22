@@ -34,6 +34,7 @@
         {
             try
             {
+                LogExtensions.LogServiceChangeStatusTime(true);
                 _timerServiceFacade.StartServices();
             }
             catch (Exception ex)
@@ -44,6 +45,7 @@
 
         protected override void OnStop()
         {
+            LogExtensions.LogServiceChangeStatusTime(false);
             _timerServiceFacade.StopServices();
             MailClientHandler.Stop();
         }

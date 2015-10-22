@@ -1,5 +1,6 @@
 ﻿<Functions>
-  <Function Name="Game Win Limit Control">
-    <Setting Key="NAP_WinLimit_Notification_MemSel" SpName="NAP_WinLimit_Notification_MemSel" DbName="DBTXN.bodb02.bodbAdminNet" Timeout="0" />
+  <Function Name="Negative Balance Report">
+    <Setting Key="Acc_BalanceNegativeUpd_StatusID" SpName="Acc_BalanceNegativeUpd_StatusID" DbName="DBTXN.bodb02.bodbAdminNet" Timeout="0"/>
+    <Setting Key="Acc_BalanceNegativeSel_BySite" SpName="Acc_BalanceNegativeSel_BySite" DbName="DBTXN.bodb02.bodbAdminNet" Timeout="0"/>
   </Function>
 </Functions>

@@ -10,6 +10,7 @@ namespace Fanex.Service.Core.Extensions
     using Fanex.Logging;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
+    using Fanex.Service.Core.Utilities;
 
     /// <summary>
     /// TODO: Update summary.
@@ -54,6 +55,20 @@ namespace Fanex.Service.Core.Extensions
             {
                 Logger.Log.Error(exception.ToString());
             }
+        }
+
+        public static void LogServiceChangeStatusTime(bool isStart, string category = "")
+        {
+            string message = "Service {0} {1} at {2}.";
+            string status = isStart ? "start" : "stop";
+            message = string.Format(message, AppSettingBase.ServiceName, status, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"));
+
+            if (string.IsNullOrEmpty(category))
+            {
+                category = AppSettingBase.WindowsServiceCategory;
+            }
+
+            Logger.Log.Info(message, category);
         }
     }
 }
