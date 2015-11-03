@@ -120,6 +120,11 @@ namespace Fanex.Service.Core.Utilities
             }
         }
 
+        public static string WindowsServiceCategory
+        {
+            get { return GetSettingValueByKey("WindowsService.Category"); }
+        }
+
         protected static string ExportDataDirectory(string key)
         {
             string path = AppSettingBase.GetSettingValueByKey(key);

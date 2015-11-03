@@ -41,16 +41,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Logging, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.MailStation.1.0.7.3-beta1\lib\net40\Common.Logging.dll</HintPath>
+      <HintPath>..\packages\Fanex.MailStation.1.0.7.3\lib\net40\Common.Logging.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Common.Logging.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.MailStation.1.0.7.3-beta1\lib\net40\Common.Logging.Core.dll</HintPath>
+      <HintPath>..\packages\Fanex.MailStation.1.0.7.3\lib\net40\Common.Logging.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Couchbase, Version=1.0.0.0, Culture=neutral, PublicKeyToken=81137140da4e57ef, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.Caching.1.0.404.95\lib\net40\Couchbase.dll</HintPath>
     </Reference>
     <Reference Include="EasyNetQ, Version=0.50.1.392, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.MailStation.1.0.7.3-beta1\lib\net40\EasyNetQ.dll</HintPath>
+      <HintPath>..\packages\Fanex.MailStation.1.0.7.3\lib\net40\EasyNetQ.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net40\EntityFramework.dll</HintPath>
@@ -78,7 +81,8 @@
       <HintPath>..\packages\Fanex.Logging.1.0.0.0\lib\net40\Fanex.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.MailDelivery.Client, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.MailStation.1.0.7.3-beta1\lib\net40\Fanex.MailDelivery.Client.dll</HintPath>
+      <HintPath>..\packages\Fanex.MailStation.1.0.7.3\lib\net40\Fanex.MailDelivery.Client.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.NAP.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -129,10 +133,12 @@
       <HintPath>..\packages\MvcPager.1.5.0.28157\lib\net40\MvcPager.dll</HintPath>
     </Reference>
     <Reference Include="Quartz, Version=2.3.3.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.MailStation.1.0.7.3-beta1\lib\net40\Quartz.dll</HintPath>
+      <HintPath>..\packages\Fanex.MailStation.1.0.7.3\lib\net40\Quartz.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="RabbitMQ.Client, Version=3.5.4.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.MailStation.1.0.7.3-beta1\lib\net40\RabbitMQ.Client.dll</HintPath>
+      <HintPath>..\packages\Fanex.MailStation.1.0.7.3\lib\net40\RabbitMQ.Client.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="RazorEngine, Version=3.3.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -184,7 +190,6 @@
     <Compile Include="Jobs\BA\DailyWinLoss.cs" />
     <Compile Include="Jobs\BA\MonthlyWinLoss.cs" />
     <Compile Include="Jobs\CreditMovement\CreditMovement.cs" />
-    <Compile Include="Jobs\GameWinLimitControl\GameWinLimitControl.cs" />
     <Compile Include="Jobs\HorseTransaction3rd\HorseTransaction3rd.cs" />
     <Compile Include="Jobs\BalanceMonthlyReport\CreditTerm.cs">
       <SubType>Code</SubType>
@@ -307,22 +312,6 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SiteConfig\GameWinLimitControl\Settings\GameWinLimitControl.Settings.PRO.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\GameWinLimitControl\Settings\GameWinLimitControl.Settings.UAT.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\GameWinLimitControl\Settings\GameWinLimitControl.Settings.DEV.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\GameWinLimitControl\Settings\GameWinLimitControl.Settings.Local.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="SiteConfig\HorseRacingReport\Settings\HorseRacingReport.Settings.PRO.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -337,30 +326,6 @@
     </Content>
     <Content Include="SiteConfig\HorseRacingReport\Settings\HorseRacingReport.Settings.DEV.xml">
       <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\NegativeBalanceByMatch\Settings\NegativeBalanceByMatch.Settings.UAT.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\NegativeBalanceByMatch\Settings\NegativeBalanceByMatch.Settings.PRO.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\NegativeBalanceByMatch\Settings\NegativeBalanceByMatch.Settings.DEV.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\NegativeBalanceByMatch\Settings\LicenseeFunctionMap.PRO.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\NegativeBalanceByMatch\Settings\LicenseeFunctionMap.UAT.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\NegativeBalanceByMatch\Settings\LicenseeFunctionMap.Local.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\NegativeBalanceByMatch\Settings\LicenseeFunctionMap.DEV.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\NegativeBalanceByMatch\Settings\NegativeBalanceByMatch.Settings.Local.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SiteConfig\ReportingServices\Settings\ReportingService.Settings.PRO.xml">
@@ -463,15 +428,21 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TimerServiceSetting\TimerServiceSetting.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TimerServiceSetting\TimerServiceSetting.PRO.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
     <Content Include="TimerServiceSetting\TimerServiceSetting.UAT.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="TimerServiceSetting\TimerServiceSetting.DEV.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="TimerServiceSetting\TimerServiceSetting.Local.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -571,9 +542,6 @@
     <Content Include="SiteConfig\CreditMovement\Templates\CreditMovementEmail.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SiteConfig\GameWinLimitControl\Templates\GameWinLimitControlEmailTemplate.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="SiteConfig\RNGCasinoWinLoss\SQLite\AutoMail-RNGCasinoWinLoss.s3db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -581,12 +549,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SiteConfig\SMAReport\Templates\SMAReportTemplate.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\NegativeBalanceByMatch\Templates\EmailTemplateDualLanguage.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\NegativeBalanceByMatch\Templates\EmailTemplateSingleLanguage.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SiteConfig\RNGCasinoWinLoss\Templates\RNGCasinoWinLossEmptyDataEmailTemplate.cshtml">
@@ -641,10 +603,6 @@
       <Project>{4DF39ADE-3E49-4D1E-9211-E48353B65135}</Project>
       <Name>Fanex.NAPReport.BalanceMonthlyReport.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Fanex.NAPReport.GameWinLimitControl.Business\Fanex.NAPReport.GameWinLimitControl.Business.csproj">
-      <Project>{A96430C3-502E-457A-ACAD-2EABA37EE197}</Project>
-      <Name>Fanex.NAPReport.GameWinLimitControl.Business</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Fanex.NAPReport.HorseRacingReport.Business\Fanex.NAPReport.HorseRacingReport.Business.csproj">
       <Project>{AFE10301-BCFD-4D11-885C-A43A46B5B2BF}</Project>
       <Name>Fanex.NAPReport.HorseRacingReport.Business</Name>
@@ -652,10 +610,6 @@
     <ProjectReference Include="..\Fanex.NAPReport.HorseTransaction3rdServices\Fanex.NAPReport.HorseTransaction3rd.Business.csproj">
       <Project>{446FBE1E-58F9-41A8-B442-8012B884BF7F}</Project>
       <Name>Fanex.NAPReport.HorseTransaction3rd.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fanex.NAPReport.NegativeBalanceByMatch.Business\Fanex.NAPReport.NegativeBalanceByMatch.Business.csproj">
-      <Project>{8C5FF65C-DC35-417B-9464-35C0CAF05FDD}</Project>
-      <Name>Fanex.NAPReport.NegativeBalanceByMatch.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.NAPReport.ReportingServices.Business\Fanex.NAPReport.ReportingServices.Business.csproj">
       <Project>{3221F978-C15B-427F-991C-3E00E2780D22}</Project>
