@@ -26,11 +26,7 @@
   <Function Name="WinLoss - Virtual Sport">
     <Setting Key="Acc_Rpt_WLAutomail_VS_Detail" SpName="Acc_Rpt_WLAutomail_VS_Detail" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Acc_Rpt_WLAutomail_VS_Summary" SpName="Acc_Rpt_WLAutomail_VS_Summary" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-  </Function>
-
-  <Function Name="RNG Casino - Get WinLoss">
-    <Setting Key="RNGCasinoCustomerWinLoss" SpName="Acc_Rpt_RNGCasinoAutomail" DbName="DBACC.bodb02.bodbAdminNet" Timeout="0" />
-  </Function>
+  </Function>  
 
   <Function Name="Reporting Service- Main Report - Match Win Loss (2a)">
     <Setting Key="Main_MatchWinLoss2a_GetMainReport" SpName="Acc_Rpt_MatchWinLoss2_New" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>

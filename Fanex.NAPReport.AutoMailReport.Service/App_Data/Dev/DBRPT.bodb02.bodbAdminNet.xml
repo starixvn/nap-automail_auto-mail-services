@@ -1,5 +1,0 @@
-﻿<Functions>
-  <Function Name="RNG Casino - Get WinLoss">
-    <Setting Key="RNGCasinoCustomerWinLoss" SpName="Acc_Rpt_RNGCasinoAutomail" DbName="DBRPT.bodb02.bodbAdminNet"></Setting>
-  </Function>
-</Functions>

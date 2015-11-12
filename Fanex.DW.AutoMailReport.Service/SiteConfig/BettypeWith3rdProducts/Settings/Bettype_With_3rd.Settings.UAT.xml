@@ -4,11 +4,11 @@
   <add key="ExportDataDirectoryWeekly" value="\\10.40.40.52\NAP_Reports\UAT\BettypeWith3rdProductsForShareholders" />
   <add key="ExcelPasswordProtected" value="we168" />
   <add key="IsSingleFile" value="true" />
-  <add key="IsManually" value="false" />
+  <add key="IsManually" value="true" />
   <add key="IsSingleSport" value="false" />
   <add key="IsCheckEnoughData" value="false" />
-  <add key="DateStart" value="2015-04-01" />
-  <add key="DateEnd" value="2015-04-30" />
+  <add key="DateStart" value="2015-12-01" />
+  <add key="DateEnd" value="2015-12-31" />
   <add key="FunctionIdDaily" value="0" />
   <add key="FunctionIdWeekly" value="0" />
   <add key="SubjectDaily" value="Automail Report - Bettype With 3rd Products - {0}" />

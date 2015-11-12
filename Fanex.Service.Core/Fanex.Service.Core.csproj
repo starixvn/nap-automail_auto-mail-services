@@ -145,6 +145,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
@@ -272,6 +273,7 @@
     <Compile Include="Service\Interface\Npoi\INpoiOldFormatBodyCellStyleService.cs" />
     <Compile Include="Utilities\AppSettingBase.cs" />
     <Compile Include="Utilities\Impersonate.cs" />
+    <Compile Include="Utilities\MemoryManagement.cs" />
     <Compile Include="Utilities\NetworkConnection.cs" />
     <Compile Include="Utilities\SaveFile.cs" />
   </ItemGroup>

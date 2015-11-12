@@ -18,7 +18,7 @@
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -28,7 +28,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -197,7 +197,6 @@
     <Compile Include="Jobs\NAPReport\HorseRacingReport.cs" />
     <Compile Include="Jobs\ReportingServices\ReportingServices.cs" />
     <Compile Include="Jobs\SMALossReport\SMALossReport.cs" />
-    <Compile Include="Jobs\SMAMonthlyReport\SMAMonthlyReport.cs" />
     <Compile Include="Jobs\TestSendEmail\TestSendEmail.cs" />
     <Compile Include="Jobs\VirtualSportWinLoss\VirtualSportWinLoss.cs" />
     <Compile Include="Jobs\WinLossByProducts\OverallWinLossProducts.cs" />
@@ -253,6 +252,7 @@
     </Content>
     <Content Include="App_Data\UAT\DBDWH.bodb_dwrs.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\UAT\DBDWH.bodb_dwrs.dwrs.xml">
       <SubType>Designer</SubType>
@@ -340,22 +340,6 @@
     <Content Include="SiteConfig\ReportingServices\Settings\ReportingService.Settings.DEV.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SiteConfig\RNGCasinoWinLoss\Settings\RngCasino.Settings.UAT.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\RNGCasinoWinLoss\Settings\RngCasino.Settings.PRO.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\RNGCasinoWinLoss\Settings\RngCasino.Settings.Local.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\RNGCasinoWinLoss\Settings\RngCasino.Settings.DEV.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="SiteConfig\SMALoss\Settings\SMALoss.Settings.PRO.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -366,18 +350,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SiteConfig\SMALoss\Settings\SMALoss.Settings.UAT.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\SMAReport\Settings\SMAReport.Settings.PRO.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\SMAReport\Settings\SMAReport.Settings.UAT.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\SMAReport\Settings\SMAReport.Settings.Local.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\SMAReport\Settings\SMAReport.Settings.DEV.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SiteConfig\TurnoverWatcher\Settings\TurnoverWatcher.Settings.PRO.xml">
@@ -509,9 +481,7 @@
     </Content>
     <Content Include="Fanex.NAPReport.AutoMailReport.Service.UAT.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App_Data\Dev\DBRPT.bodb02.bodbAdminNet.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="deployment.ignore">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -538,18 +508,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SiteConfig\CreditMovement\Templates\CreditMovementEmail.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\RNGCasinoWinLoss\SQLite\AutoMail-RNGCasinoWinLoss.s3db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\RNGCasinoWinLoss\Templates\RNGCasinoWinLossEmailTemplate.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\SMAReport\Templates\SMAReportTemplate.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SiteConfig\RNGCasinoWinLoss\Templates\RNGCasinoWinLossEmptyDataEmailTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SiteConfig\Common\Templates\NotificationEmail.cshtml">
@@ -613,10 +571,6 @@
       <Project>{3221F978-C15B-427F-991C-3E00E2780D22}</Project>
       <Name>Fanex.NAPReport.ReportingServices.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Fanex.NAPReport.RngCasino.Business\Fanex.NAPReport.RngCasino.Business.csproj">
-      <Project>{506C2FB3-261A-4EDD-B7BB-16F9567DE39D}</Project>
-      <Name>Fanex.NAPReport.RngCasino.Business</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Fanex.NAPReport.SMALoss.Business\Fanex.NAPReport.SMALoss.Business.csproj">
       <Project>{DA6DE65A-5D27-4B28-A928-422B664502C2}</Project>
       <Name>Fanex.NAPReport.SMALoss.Business</Name>
@@ -632,10 +586,6 @@
     <ProjectReference Include="..\Fanex.Service.Core\Fanex.Service.Core.csproj">
       <Project>{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}</Project>
       <Name>Fanex.Service.Core %28Fanex.Service.Core\Fanex.Service.Core%29</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fanex.SMAReport.Business\Fanex.NAPReport.SMAReport.Business.csproj">
-      <Project>{56CC0914-78E8-4BF8-8664-5DB8807C1488}</Project>
-      <Name>Fanex.NAPReport.SMAReport.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.TurnoverWatcher.Business\Fanex.NAPReport.TurnoverWatcher.Business.csproj">
       <Project>{EEEE6EC6-55BC-4C6E-AC8B-2D5B8C8B7179}</Project>
