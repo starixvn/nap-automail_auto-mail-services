@@ -129,6 +129,14 @@
 
             string content = string.Empty;
             var lossItems = GetReachedSMALoss();
+
+            int changedLevelUp = 0;
+            int changedLevelDown = 0;
+            int changedLevelHorizontal = 0;
+
+            lossItems.ToList().ForEach(s => changedLevelUp += s.SMALossItems.Where(a => a.ChangedLevel > 0).Count());
+            lossItems.ToList().ForEach(s => changedLevelDown += s.SMALossItems.Where(a => a.ChangedLevel < 0).Count());
+            lossItems.ToList().ForEach(s => changedLevelHorizontal += s.SMALossItems.Where(a => a.ChangedLevel == 0).Count());
             
             if (lossItems != null && lossItems.Any())
             {
@@ -158,9 +166,21 @@
                 var downwardArrow = new MailLinkedResource(appLocation + DownwardArrowUrl, FileExtension.IMG_PNG, "lruworradrawnwod");
                 var horizontalLineArrow = new MailLinkedResource(appLocation + HorizontalLineUrl, FileExtension.IMG_PNG, "lruworradrawenillatnoziroh");
                 mail.AlternativeViews = new List<MailLinkedResource>();
-                mail.AlternativeViews.Add(upwardArrow);
-                mail.AlternativeViews.Add(downwardArrow);
-                mail.AlternativeViews.Add(horizontalLineArrow);
+
+                if (changedLevelUp > 0)
+                {
+                    mail.AlternativeViews.Add(upwardArrow);
+                }
+
+                if (changedLevelDown > 0)
+                {
+                    mail.AlternativeViews.Add(downwardArrow);
+                }
+
+                if (changedLevelHorizontal > 0)
+                {
+                    mail.AlternativeViews.Add(horizontalLineArrow);
+                }
                 
                 mailResult.Mail = mail;
             }
