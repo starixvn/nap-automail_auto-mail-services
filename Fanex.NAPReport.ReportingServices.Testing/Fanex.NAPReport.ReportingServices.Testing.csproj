@@ -137,6 +137,7 @@
     </Content>
     <Content Include="SiteConfig\ReportingServices\Settings\ReportingService.Settings.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
