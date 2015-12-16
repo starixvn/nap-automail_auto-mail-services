@@ -12,7 +12,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Constants
     public class RowType
     {
         public const int ThirdParty = 150;
-        public const int EightRM = 400;
-        public const int BARM = 401;
+        public const int EightRM = -400;
+        public const int BARM = -401;
     }
 }
