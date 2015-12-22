@@ -120,8 +120,14 @@
   <data name="CompanyBalance_ReportName" xml:space="preserve">
     <value>Company_Balance_For_{0}.xlsx</value>
   </data>
+  <data name="CompanyYesterdayBalance_ReportName" xml:space="preserve">
+    <value>Company_Yesterday_Balance_For_{0}.xlsx</value>
+  </data>
   <data name="CompanyBalance_ReportTitle" xml:space="preserve">
     <value>Company Balance Date: {0}</value>
+  </data>
+  <data name="CompanyYesterdayBalance_ReportTitle" xml:space="preserve">
+    <value>Company Yesterday Balance Date: {0}</value>
   </data>
   <data name="CompanyBalance_SheetName" xml:space="preserve">
     <value>Company Balance</value>

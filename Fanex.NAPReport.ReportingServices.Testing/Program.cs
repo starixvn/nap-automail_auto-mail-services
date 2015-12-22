@@ -21,7 +21,8 @@
             Console.WriteLine("Start running reporting services!");
 
             var serviceProcess = new ServiceProcess();
-            var combanyBalance = new CompanyBalanceProcessData(serviceProcess);
+            var combanyBalance = new CompanyBalanceProcessData(serviceProcess, false);
+            var combanyYesterdayBalance = new CompanyBalanceProcessData(serviceProcess, true);
             var companyStatement = new CompanyStatementProcessData(serviceProcess);
             var dailyTurnover = new DailyTurnoverProcessData(serviceProcess);
             var superYesterdayBalance = new SuperYesterdayBalanceProcessData(serviceProcess);

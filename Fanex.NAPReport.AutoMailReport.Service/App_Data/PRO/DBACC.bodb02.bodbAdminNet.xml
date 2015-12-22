@@ -46,7 +46,7 @@
     <Setting Key="Statement_Get_Company_Statement" SpName="Acc_AllStatementCompany" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
   <Function Name="Reporting Service- Balance - Company Balance">
-    <Setting Key="Balance_CompanyBalance_GetReport" SpName="Acc_Rpt_Balance_Company" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
+    <Setting Key="Balance_CompanyBalance_GetReport" SpName="Acc_Rpt_Balance_Company_xtest" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
 
   <Function Name="RNG Casino - Get WinLoss">

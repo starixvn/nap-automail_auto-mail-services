@@ -115,6 +115,24 @@ namespace Fanex.NAPReport.ReportingServices.Business.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Company_Yesterday_Balance_For_{0}.xlsx.
+        /// </summary>
+        internal static string CompanyYesterdayBalance_ReportName {
+            get {
+                return ResourceManager.GetString("CompanyYesterdayBalance_ReportName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company Yesterday Balance Date: {0}.
+        /// </summary>
+        internal static string CompanyYesterdayBalance_ReportTitle {
+            get {
+                return ResourceManager.GetString("CompanyYesterdayBalance_ReportTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Daily_Turnover_For_{0}.xlsx.
         /// </summary>
         internal static string DailyTurnover_ReportName {

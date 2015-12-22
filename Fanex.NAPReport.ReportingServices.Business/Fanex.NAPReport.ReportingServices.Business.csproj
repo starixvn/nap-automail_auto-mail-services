@@ -236,6 +236,7 @@
     <EmbeddedResource Include="Resources\ReportingServicesResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ReportingServicesResource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

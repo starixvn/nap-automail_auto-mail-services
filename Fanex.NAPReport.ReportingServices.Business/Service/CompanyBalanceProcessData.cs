@@ -19,10 +19,12 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service
         private ISubject _serviceProcess;
         private ICompanyBalanceService _companyBalanceService;
         private ICompanyBalanceExportService _exportService;
+        private bool _isYesterdayBalance;
 
-        public CompanyBalanceProcessData(ISubject serviceProcess)
+        public CompanyBalanceProcessData(ISubject serviceProcess, bool isYesterdayBalance)
         {
             this._serviceProcess = serviceProcess;
+            _isYesterdayBalance = isYesterdayBalance;
             serviceProcess.RegisterObserver(this);
         }
 
@@ -35,8 +37,8 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service
         public void ProcessData(DateTime winlossDate)
         {
             _companyBalanceService = new CompanyBalanceService();
-            _exportService = new CompanyBalanceExportService();
-            var balanceReport = _companyBalanceService.GetCompanyBalanceReport(new GetCompanyBalanceCriteria() { ReportDate = winlossDate });
+            _exportService = new CompanyBalanceExportService(_isYesterdayBalance);
+            var balanceReport = _companyBalanceService.GetCompanyBalanceReport(new GetCompanyBalanceCriteria() { ReportDate = winlossDate, IsYesterdayBalance = _isYesterdayBalance });
             _exportService.ExportReport(balanceReport, winlossDate);
             FileName = _exportService.FileName;
         }        

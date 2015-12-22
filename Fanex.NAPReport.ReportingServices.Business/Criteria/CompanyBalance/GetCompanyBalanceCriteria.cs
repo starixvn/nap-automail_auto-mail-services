@@ -17,6 +17,8 @@ namespace Fanex.NAPReport.ReportingServices.Business.Criteria.CompanyBalance
         [SpParam(Ignored = true)]
         public DateTime ReportDate { get; set; }
 
+        public bool IsYesterdayBalance { get; set; }
+
         public override string GetSettingKey()
         {
             return "Balance_CompanyBalance_GetReport";

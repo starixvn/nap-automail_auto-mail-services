@@ -21,6 +21,12 @@ namespace Fanex.NAPReport.ReportingServices.Business
             set;
         }
 
+        public static string ExportDataDirectoryCompanyYesterdayBalance
+        {
+            get;
+            set;
+        }
+
         public static string ExportDataDirectoryCompanyStatement
         {
             get;

@@ -37,7 +37,8 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service
 
             var serviceProcess = new ServiceProcess();
 
-            var companyBalance = new CompanyBalanceProcessData(serviceProcess);
+            var companyBalance = new CompanyBalanceProcessData(serviceProcess, false);
+            var companyYesterdayBalance = new CompanyBalanceProcessData(serviceProcess, true);
             var companyStatement = new CompanyStatementProcessData(serviceProcess);
             var dailyTurnover = new DailyTurnoverProcessData(serviceProcess);
             var superYesterdayBalance = new SuperYesterdayBalanceProcessData(serviceProcess);
@@ -54,6 +55,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service
             var fileNames = new List<string>();
 
             fileNamesPath.Add(companyBalance.FileName);
+            fileNamesPath.Add(companyYesterdayBalance.FileName);
             fileNamesPath.Add(companyStatement.FileName);
             fileNamesPath.Add(dailyTurnover.FileName);
             fileNamesPath.Add(superYesterdayBalance.FileName);

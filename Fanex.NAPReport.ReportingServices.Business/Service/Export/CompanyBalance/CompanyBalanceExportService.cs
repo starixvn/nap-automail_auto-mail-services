@@ -40,8 +40,9 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyBalan
         private XSSFFont _regularFont;
         private INpoiAlignmentService _alignmentService;
         private XSSFDataFormat _dataFormat;
+        private bool _isYesterdayBalance;
 
-        public CompanyBalanceExportService()
+        public CompanyBalanceExportService(bool isYesterdayBalance)
         {
             _cell = new Cell();
             _workbook = new XSSFWorkbook();
@@ -51,7 +52,8 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyBalan
             _alignmentService = new NpoiNewFormatAlignmentService();
             _dataFormat = _workbook.CreateDataFormat() as XSSFDataFormat;
             _bodyCellStyleService = new NpoiNewFormatBodyCellStyleService(_workbook, _regularFont);
-            _customCellStyleService = new NpoiNewFormatCustomCellStyleService(_workbook);            
+            _customCellStyleService = new NpoiNewFormatCustomCellStyleService(_workbook);
+            _isYesterdayBalance = isYesterdayBalance;
         }
 
         public string FileName
@@ -70,8 +72,20 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyBalan
                 this.ExportReportHeader();
                 this.ExportReportContent(balance);
                 this.ExportGrandTotal(balance.GrandTotal);
-                string parentDirectory = AppSettings.DataDirectory(AppSettings.ExportDataDirectoryCompanyBalance);
-                string reportName = string.Format(ReportingServicesResource.CompanyBalance_ReportName, winlossDate.ToString("yyyy_MM_dd"));
+
+                string parentDirectory = string.Empty;
+                string reportName = string.Empty;
+                if (_isYesterdayBalance)
+                {
+                    parentDirectory = AppSettings.DataDirectory(AppSettings.ExportDataDirectoryCompanyYesterdayBalance);
+                    reportName = string.Format(ReportingServicesResource.CompanyYesterdayBalance_ReportName, winlossDate.ToString("yyyy_MM_dd"));
+                }
+                else
+                {
+                    parentDirectory = AppSettings.DataDirectory(AppSettings.ExportDataDirectoryCompanyBalance);
+                    reportName = string.Format(ReportingServicesResource.CompanyBalance_ReportName, winlossDate.ToString("yyyy_MM_dd"));
+                }
+
                 FileName = Path.Combine(parentDirectory, reportName);
                 SaveFile.SaveExcelFile(parentDirectory, reportName, _workbook, AppSettings.ExcelPassword);
             }
@@ -107,9 +121,8 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyBalan
         private void ExportReportTitle(DateTime currentTime)
         {
             var headerStyle = this.CreateHeaderStyle();
-            _cell.CellValue = string.Format(
-                    ReportingServicesResource.CompanyBalance_ReportTitle,
-                    currentTime.ToShortFormatedDate());
+            string title = _isYesterdayBalance ? ReportingServicesResource.CompanyYesterdayBalance_ReportTitle : ReportingServicesResource.CompanyBalance_ReportTitle;
+            _cell.CellValue = string.Format(title, currentTime.ToShortFormatedDate());
             _cell.EndColumn = _cell.CurrentColumn + 4;
             NpoiNewFormatExcelExtension.RenderMergeCell(_workSheet, _cell, headerStyle);
             _cell.ResetColumnIndex();
