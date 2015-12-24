@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Settings>
   <add key="ExportDataDirectoryCompanyBalance" value="\\10.40.40.52\NAP_Reports\ReportingService_CompanyBalance" />
+  <add key="ExportDataDirectoryCompanyYesterdayBalance" value="\\10.40.40.52\NAP_Reports\ReportingService_CompanyYesterdayBalance" />
   <add key="ExportDataDirectoryCompanyStatement" value="\\10.40.40.52\NAP_Reports\ReportingService_CompanyStatement" />
   <add key="ExportDataDirectoryDailyTurnover" value="\\10.40.40.52\NAP_Reports\ReportingService_DailyTurnover" />
   <add key="ExportDataDirectoryMatchWinLoss2a" value="\\10.40.40.52\NAP_Reports\ReportingService_MatchWinLoss2a" />

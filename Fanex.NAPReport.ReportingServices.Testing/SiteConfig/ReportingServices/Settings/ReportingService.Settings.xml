@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Settings>
   <add key="ExportDataDirectoryCompanyBalance" value="\\10.18.200.202\_Fanex.ExcelFiles\ReportingService_CompanyBalance" />
+  <add key="ExportDataDirectoryCompanyYesterdayBalance" value="\\10.18.200.202\_Fanex.ExcelFiles\ReportingService_CompanyYesterdayBalance" />
   <add key="ExportDataDirectoryCompanyStatement" value="\\10.18.200.202\_Fanex.ExcelFiles\ReportingService_CompanyStatement" />
   <add key="ExportDataDirectoryDailyTurnover" value="\\10.18.200.202\_Fanex.ExcelFiles\ReportingService_DailyTurnover" />
   <add key="ExportDataDirectoryMatchWinLoss2a" value="\\10.18.200.202\_Fanex.ExcelFiles\ReportingService_MatchWinLoss2a" />
