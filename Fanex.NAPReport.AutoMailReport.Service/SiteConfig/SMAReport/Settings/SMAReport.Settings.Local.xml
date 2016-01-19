@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<Settings>
-  <add key="DataDirectory" value="\\10.18.200.202\_Fanex.ExcelFiles\SMAMonthlyAutomailReport" />
-  <add key="ExcelPasswordProtected" value="we168" />
-  <add key="FunctionId" value="94" />
-  <add key="DownloadUrl" value="http://10.18.200.202:8032/NAP-Reports/UserLogin/Common/DownloadReport"/>
-  <add key="Subject" value="Automail Report - SMA Report Month by Month {0} To {1}" />
-</Settings>

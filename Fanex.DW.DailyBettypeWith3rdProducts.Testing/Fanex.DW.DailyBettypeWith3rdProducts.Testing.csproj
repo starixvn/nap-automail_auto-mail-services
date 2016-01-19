@@ -164,6 +164,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Jobs\DW\DailyBettypeWith3rdProducts.cs" />
+    <Compile Include="Jobs\DW\WeeklyBettypeWith3rdProducts.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
