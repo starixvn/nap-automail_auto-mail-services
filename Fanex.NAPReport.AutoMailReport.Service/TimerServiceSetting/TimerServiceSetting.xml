@@ -1,0 +1,10 @@
+<TimerServices >
+	<CommonTimerServices interval="10" timeUnit="Second">		
+	</CommonTimerServices>
+	
+	<StandaloneTimerServices>		
+    <StandaloneTimerService interval="300" timeUnit="Second" serviceFactoryFullTypeName="Fanex.NAPReport.TurnoverWatcher.Business.ServiceFactory.TurnoverWatcherFactory, Fanex.NAPReport.TurnoverWatcher.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"/>
+  </StandaloneTimerServices>
+  
+</TimerServices>
+
