@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Settings>
+  <add key="DataDirectory" value="\\10.18.200.202\_Fanex.ExcelFiles\ProductsWinLoss" />
+  <add key="ExcelPasswordProtected" value="" />
+  <add key="FunctionId" value="89" />
+  <add key="IsCheckEnoughData" value="false" />
+  <add key="IsTesting" value="false" />
+  <add key="WinLossDate" value="2015-08-30" />
+  <add key="SubjectOverall" value="Automail Report - Overall Products Win Loss - {0}" />
+  <add key="SubjectProductWL" value="Automail Report - Products Win Loss - {0}" />
+</Settings>
