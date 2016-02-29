@@ -1,6 +1,7 @@
 ﻿namespace Fanex.NAPReport.SMALoss.Business.Services.ExcelExport
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
     using Fanex.Common;
     using Fanex.NAPReport.SMALoss.Business.Entities;
@@ -62,6 +63,9 @@
             }
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         private void RenderContent()
         {
             var counter = 0;

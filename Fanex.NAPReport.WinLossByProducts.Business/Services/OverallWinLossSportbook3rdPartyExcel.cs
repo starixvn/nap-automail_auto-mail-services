@@ -7,6 +7,7 @@
 namespace Fanex.NAPReport.WinLossByProducts.Business.Services
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
     using Fanex.NAPReport.WinLossByProducts.Business.Criteria;
     using Fanex.NAPReport.WinLossByProducts.Business.Model;
@@ -140,6 +141,9 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
             _alignmentService = new NpoiNewFormatAlignmentService();            
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private void InitialCellStyle()
         {
             _boldCenterRedColorYellowBGStyle = _customCellStyleService.CreateCenterTextStyle(_colorYellowBG, _redBoldFont);
@@ -327,6 +331,9 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
             }
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         private void SetOthersStyle(string productName, WinLoss winLoss)
         {
             if (IsProductAndTotal(productName))

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
     using System.Linq;
     using Fanex.NAPReport.BADailyWinLoss.Business.Model;
@@ -174,9 +175,14 @@
             return _listBALicWL;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         private void BuildTitle()
         {
-            var borderInformation = new BorderInformation((short)BorderStyle.None, (short)BorderStyle.None, (short)BorderStyle.None, (short)BorderStyle.None, Color.White, Color.White, Color.White, Color.White);
+            Color white = Color.White;
+            short borderStyle = (short)BorderStyle.None;
+            var borderInformation = new BorderInformation(borderStyle, borderStyle, borderStyle, borderStyle, white, white, white, white);
             var backgroundInformation = new BackgroundInformation((int)FillPattern.SolidForeground, Color.White);            
             var cellStyle = this._customCellStyleService.CreateCellStyle(borderInformation, backgroundInformation, _alignmentService.CenterAlignment,  _fontService.CreateBoldFont(_headerFont));
             this._cell = new Cell(0, this._currentRow, 8, this._currentRow + 1, Resource.Title);
@@ -191,6 +197,9 @@
             NpoiNewFormatExcelExtension.RenderMergeCell(this._sheet, this._cell, cellStyle);
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         private void BuildTableHeader(int rowIndex)
         {
             var columnNameList = new List<string> { Resource.Licensee, Resource.Currency, Resource.Turnover, Resource.TotalTrans, Resource.CustomerWL, Resource.LicenseeComm, Resource.AmountDueBA, Resource.Margin };
@@ -203,6 +212,9 @@
             }
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private int BuildTableBobyForLicensee(int rowIndex, string licenseeName, List<BALicWinLossDaily> list)
         {
             var cellStyleOfDateTime = this._customCellStyleService.CreateCenterTextStyle(Color.White, _fontService.RegularFont);
@@ -273,6 +285,9 @@
             return rowIndex;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         private void BuildSubTotal(int rowIndex, string licenseeName, double turnOverRM_Total, double betCount_Total, double winlostRM_Total, double commRM_Total, double amtDueToBARM_Total)
         {
             var cellStyleOfLicenseeName = _customCellStyleService.CreateCenterTextStyle(Color.White, null);

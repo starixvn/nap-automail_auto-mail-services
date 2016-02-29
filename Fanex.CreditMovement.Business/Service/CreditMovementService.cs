@@ -8,6 +8,7 @@ namespace Fanex.CreditMovement.Business.Service
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
     using Fanex.CreditMovement.Business.Criteria;
     using Fanex.CreditMovement.Business.Model;
@@ -95,6 +96,9 @@ namespace Fanex.CreditMovement.Business.Service
             _workSheet.SetColumnWidth(6, 200 * NPOIConstants.FontWidth);
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReportHeader(GetCreditMovementCriteria criteria)
         {
             Color headerBackgroundColor = Color.FromArgb(60, 94, 165);

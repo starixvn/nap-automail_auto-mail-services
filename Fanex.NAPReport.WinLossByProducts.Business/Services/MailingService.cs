@@ -102,7 +102,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
             string template = File.ReadAllText(emailTemplatePath);
 
             _mailInfo.FileName = "Win Loss By Products";
-            mailStation.SendFunctionMailCustomContentNotification(AppSettings.NotificationEmailFunctionId, _mailInfo, template);
+            mailStation.SendFunctionMailCustomContentNotification(Service.Core.Utilities.AppSettingBase.NotificationEmailFunctionId, _mailInfo, template);
         }
     }
 }

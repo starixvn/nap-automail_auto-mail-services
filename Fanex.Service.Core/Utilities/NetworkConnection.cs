@@ -18,7 +18,7 @@ namespace Fanex.Service.Core.Utilities
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public enum ResourceScope : int
+    public enum ResourceScope 
     {
         /// <summary>
         /// The connected.
@@ -46,7 +46,7 @@ namespace Fanex.Service.Core.Utilities
         Context
     }
 
-    public enum ResourceType : int
+    public enum ResourceType 
     {
         /// <summary>
         /// Resource type Any.
@@ -69,7 +69,7 @@ namespace Fanex.Service.Core.Utilities
         Reserved = 8,
     }
 
-    public enum ResourceDisplaytype : int
+    public enum ResourceDisplaytype 
     {
         /// <summary>
         /// The generic.

@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
     using Fanex.Common;
     using Fanex.Data;
@@ -18,7 +19,7 @@
     using NPOI.SS.UserModel;
     using NPOI.SS.Util;
     using NPOI.XSSF.UserModel;
-    
+
     public class BettypeWith3rdProductsExcelService
     {
         private DailyBettypeWith3rdProductsCriteria _criteria;
@@ -292,6 +293,9 @@
             }
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private void GenerateSection(string title, bool isSporttype, int sportId)
         {
             GenerateTitle(title);
@@ -365,6 +369,9 @@
             cell.SetCellValue(title);
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private void GenerateSectionHeader(string title, bool isSporttype, int indexSportSection, int sportId)
         {
             this._totalRow = new List<double>();
@@ -486,6 +493,9 @@
             cell.CellStyle = _backgroundStyle;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private void GenerateSectionBody(bool isSporttype, int indexSportSection)
         {
             string date = string.Empty;

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
     using System.Linq;
     using Fanex.NAPReport.BAMonthlyWinLoss.Business.Criteria;
@@ -24,9 +25,23 @@
     {
         private const int ColumnWidth = 18;
         private const int StartColumn = 1;
-        private AlignmentInformation _alignmentCenter = new AlignmentInformation() { HorizontalAlignment = (int)HorizontalAlignment.Center, VerticalAlignment = (int)VerticalAlignment.Center };
-        private AlignmentInformation _alignmentLeft = new AlignmentInformation() { HorizontalAlignment = (int)HorizontalAlignment.Left, VerticalAlignment = (int)VerticalAlignment.Center };
-        private AlignmentInformation _alignmentRight = new AlignmentInformation() { HorizontalAlignment = (int)HorizontalAlignment.Right, VerticalAlignment = (int)VerticalAlignment.Center };
+        private AlignmentInformation _alignmentCenter = new AlignmentInformation()
+        {
+            HorizontalAlignment = (int)HorizontalAlignment.Center,
+            VerticalAlignment = (int)VerticalAlignment.Center
+        };
+
+        private AlignmentInformation _alignmentLeft = new AlignmentInformation()
+        {
+            HorizontalAlignment = (int)HorizontalAlignment.Left,
+            VerticalAlignment = (int)VerticalAlignment.Center
+        };
+
+        private AlignmentInformation _alignmentRight = new AlignmentInformation()
+        {
+            HorizontalAlignment = (int)HorizontalAlignment.Right,
+            VerticalAlignment = (int)VerticalAlignment.Center
+        };
 
         private XSSFWorkbook _workbook;
         private XSSFSheet _sheet;
@@ -120,6 +135,9 @@
             NpoiNewFormatExcelExtension.RenderMergeCell(this._sheet, this._cell, cellStyle);
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         private void BuildLicenseeName(string licenseeName)
         {
             var backgroundInformation = new BackgroundInformation((int)FillPattern.SolidForeground, Color.FromArgb(255, 102, 0));
@@ -148,6 +166,9 @@
             this._currentRow++;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private void BuildTableBody(List<BALicWinlossDaily> winLossList)
         {
             var backgroundInformation = new BackgroundInformation((int)FillPattern.SolidForeground, Color.White);
@@ -202,6 +223,9 @@
             }
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         private void BuildSubTotal(DateTime date, double turnOverRM_Total, double betCount_Total, double winlostRM_Total, double commRM_Total, double amtDueToBARM_Total)
         {
             var backgroundInformation = new BackgroundInformation((int)FillPattern.SolidForeground, Color.FromArgb(255, 255, 153));

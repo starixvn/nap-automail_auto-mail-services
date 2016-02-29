@@ -1,12 +1,16 @@
 ﻿namespace Fanex.NAPReport.HorseTransaction3rd.Business.Libs
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Windows.Forms;
     using System.Xml;
 
     public class LogService
     {
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         public static void Write(string functionName, string error, string userName = "")
         {
             var path = string.Format("{0}/Logs", Application.StartupPath);

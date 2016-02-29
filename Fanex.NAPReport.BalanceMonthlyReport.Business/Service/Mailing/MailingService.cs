@@ -8,6 +8,7 @@ namespace Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Mailing
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using Fanex.MailDelivery.Client.Models;
     using Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Balance;
     using Fanex.NAPReport.BalanceMonthlyReport.Business.Service.CreditTerm;
@@ -108,6 +109,9 @@ namespace Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Mailing
             return mail;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         public Mail SendMailDirectBalanceToVIPGroup()
         {
             var masterCriteria = new DirectBalanceReportMasterCriteria

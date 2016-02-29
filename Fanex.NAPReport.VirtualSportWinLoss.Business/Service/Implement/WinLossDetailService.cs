@@ -10,6 +10,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Threading.Tasks;
     using Fanex.NAPReport.VirtualSportWinLoss.Business.Criteria;
@@ -41,6 +42,9 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
             _sportIDsExistOrNot.Add(186, "Virtual Tennis");
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         public List<WinLossDetailBySportType> GetWinLossDetail()
         {
             var winlossBySportList = new List<WinLossDetailBySportType>();
@@ -268,6 +272,9 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
             return winlossByDateList;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private List<WinLossDetailByBettype> GetWinLossDetailByBettypeList()
         {
             var winlossListFromIBC = new List<WinLossDetailByBettype>();

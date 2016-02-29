@@ -1,5 +1,6 @@
 ﻿namespace Fanex.NAPReport.SMALoss.Business.Services.ExcelExport
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
     using Fanex.Service.Core.Service.Implement.Npoi;
     using Fanex.Service.Core.Service.Interface.Npoi;
@@ -29,6 +30,9 @@
             this.RenderHeader();
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         private void RenderHeader()
         {
             var styleTitle = ExcelDocument.GetCellStyle(FontBoldWeight.Bold, fontColor: Color.Red, horizontalAlignment: HorizontalAlignment.Left);

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
     using System.IO;
     using Fanex.NAPReport.TurnoverWatcher.Business.Model;
@@ -132,6 +133,9 @@
             _cell.IncreaseRowIndex();
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportSportBookContent(List<TurnoverInfo> report)
         {
             foreach (var sportbook in report)

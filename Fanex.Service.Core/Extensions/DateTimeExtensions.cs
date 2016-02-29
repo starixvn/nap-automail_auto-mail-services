@@ -172,11 +172,6 @@ namespace Fanex.Service.Core.Extensions
 
         public static DateTime GetEndOfDate(this DateTime date)
         {
-            if (date == null)
-            {
-                date = DateTime.Today;
-            }
-
             date = date.AddDays(1).AddSeconds(-1);
             return date;
         }

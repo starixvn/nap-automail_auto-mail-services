@@ -98,7 +98,7 @@ namespace Fanex.DW.DailyBettypeWith3rdProducts.Business.Service
             string template = File.ReadAllText(emailTemplatePath);
 
             _mailInfo.FileName = subject;
-            _mailStation.SendFunctionMailCustomContentNotification(AppSettings.NotificationEmailFunctionId, _mailInfo, template);
+            _mailStation.SendFunctionMailCustomContentNotification(Fanex.Service.Core.Utilities.AppSettingBase.NotificationEmailFunctionId, _mailInfo, template);
         }
 
         private void SendMailToNormalGroup(bool isDaily)
