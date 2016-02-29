@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Linq;
     using Fanex.MailDelivery.Client.Enumerations;
@@ -121,8 +122,11 @@
             }
 
             return result;
-        }        
-      
+        }
+
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         public MailResult SendMailToVIPGroup()
         {
             MailResult mailResult = new MailResult();

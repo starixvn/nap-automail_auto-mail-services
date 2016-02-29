@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Fanex.Common;
     using Fanex.Data;
@@ -100,7 +101,7 @@
                     multiple = 100000;
                 }
 
-                pre = index % 2 == 0 ? 1 : 1;
+                pre = index % 2 == 0 ? 1 : 0;
                 WinLoss winLoss = new WinLoss();
                 winLoss.Name = name;
                 winLoss.Today = pre * Convert.ToDecimal(rd.NextDouble() * multiple);
@@ -164,6 +165,9 @@
             return products;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private void MappingData(List<Product> products, DataTable dataTable)
         {
             var productsName = dataTable.AsEnumerable().Select(s => Converter.To<string>(s["ProductName"])).Distinct().ToList();

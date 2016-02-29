@@ -7,6 +7,7 @@
 namespace Fanex.NAPReport.ReportingServices.Business.Service
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using Fanex.NAPReport.ReportingServices.Business.Criteria.CompanyBalance;
     using Fanex.NAPReport.ReportingServices.Business.Service.Business.CompanyBalance;
     using Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyBalance;
@@ -34,6 +35,9 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service
             set;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         public void ProcessData(DateTime winlossDate)
         {
             _companyBalanceService = new CompanyBalanceService();

@@ -1,6 +1,7 @@
 ﻿namespace Fanex.NAPReport.HorseTransaction3rd.Business.Libs
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Net;
     using System.Net.Sockets;
@@ -143,6 +144,9 @@
             return size;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         public void Login()
         {
             clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -229,6 +233,9 @@
             Download(remFileName, locFileName, false);
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         public void Download(string remFileName, string locFileName, bool resume)
         {
             if (!logined)
@@ -321,6 +328,9 @@
             Upload(fileName, false);
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         public void Upload(string fileName, bool resume)
         {
             if (!logined)
@@ -563,6 +573,9 @@
             ReadReply();
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private Socket CreateDataSocket()
         {
             SendCommand("PASV");

@@ -10,6 +10,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
     using System.Linq;
     using Fanex.NAPReport.VirtualSportWinLoss.Business.Model;
@@ -20,7 +21,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
     using Fanex.Service.Core.Service.Implement.Npoi;
     using Fanex.Service.Core.Service.Interface.Npoi;
     using NPOI.XSSF.UserModel;
-    
+
     public class ExportExcelWinLossDetailService 
     {
         private Color _titleColor;
@@ -176,6 +177,9 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
             }
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private void RenderHeaderBySport(VirtualSportExcelSheet sheet)
         {
             int startColumn = 0;            

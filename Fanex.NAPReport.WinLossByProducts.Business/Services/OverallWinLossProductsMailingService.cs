@@ -76,7 +76,7 @@
             string template = File.ReadAllText(emailTemplatePath);
 
             _mailInfo.FileName = "Overall Products Win Loss";
-            _mailStation.SendFunctionMailCustomContentNotification(AppSettings.NotificationEmailFunctionId, _mailInfo, template);
+            _mailStation.SendFunctionMailCustomContentNotification(Service.Core.Utilities.AppSettingBase.NotificationEmailFunctionId, _mailInfo, template);
         }
 
         public void SendMailToNormalGroup()

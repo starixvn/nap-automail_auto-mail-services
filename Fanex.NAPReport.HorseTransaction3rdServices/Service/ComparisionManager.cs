@@ -1,6 +1,7 @@
 ﻿namespace Fanex.NAPReport.HorseTransaction3rd.Business.Service
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Text;
     using DNAide.Utils;
@@ -10,7 +11,13 @@
     {
         private HorseRacing3rdService _service = new HorseRacing3rdService();
         private IExchangeService _exchangeService = new ExchangeService();
-        
+
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         public string GetComparision(DateTime winlostdate, int racingId)
         {            
             var winLossCriteria = new GetRacingWinLossCriteria() { ReportType = Convert.ToInt32(racingId), WinLostDate = winlostdate };
@@ -41,7 +48,7 @@
             string color_TO = string.Empty, color_dividend = string.Empty;                        
             
             var html = new StringBuilder();
-            html.Append("<table cellspacing='1px' cellpadding='1px' width='460px' style='background-color: #999999; font-family:Tahoma,Arial,helvetica,sans-serif;font-size:8pt'>");
+            html.Append("<table style='background-color: #999999; font-family:Tahoma,Arial,helvetica,sans-serif;font-size:8pt'>");
             html.Append("<thead>");
             html.Append("<tr style='height:20' bgcolor='#d0e8fb'>");
             html.Append("<th rowspan='2' width='60' align='center' valign='center'><b>Currency</b></th>");
