@@ -17,7 +17,10 @@
           
             Console.WriteLine("Running Win Loss By Products Report");
             MailClientHandler.Start();
-            IExportExcelService excel = new ExportExcelService();
+
+            MailingService service = new MailingService();
+            var mail = service.SendMailToVIPGroup();
+
             MailClientHandler.Stop();
             Console.WriteLine("Done at " + DateTime.Now.ToString());            
         }      

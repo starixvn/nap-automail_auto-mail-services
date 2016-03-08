@@ -124,7 +124,7 @@
     <value>Last Month</value>
   </data>
   <data name="MonthtoDate" xml:space="preserve">
-    <value>Month to Date</value>
+    <value>Month To Date (After Extra PT)</value>
   </data>
   <data name="Month_To_Date" xml:space="preserve">
     <value>Month to Date</value>
@@ -142,7 +142,7 @@
     <value>Total</value>
   </data>
   <data name="Win_Loss" xml:space="preserve">
-    <value>Win/Loss</value>
+    <value>​Win/Loss (After Extra PT)</value>
   </data>
   <data name="Year_To_Date" xml:space="preserve">
     <value>Year to Date</value>
