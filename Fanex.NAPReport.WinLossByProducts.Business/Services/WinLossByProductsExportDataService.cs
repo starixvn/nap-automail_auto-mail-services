@@ -234,8 +234,8 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
         private void InitColumnWidth()
         {
             _workSheet.SetColumnWidth(0, 200 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(1, 220 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(2, 220 * NPOIConstants.FontWidth);
+            _workSheet.SetColumnWidth(1, 300 * NPOIConstants.FontWidth);
+            _workSheet.SetColumnWidth(2, 350 * NPOIConstants.FontWidth);
         }
 
         private XSSFFont CreateRacingDueToPartnerFont()

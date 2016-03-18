@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Functions>
-  <Function Name="NAP-DW">
-    <Setting Key="NAP_UpdateUserReport_SP" SpName="dbo.NAP_UpdateUserReport_SP" DbName="DBDWHFN.FN.fin" TimeOut="0" />
-  </Function>
-</Functions>

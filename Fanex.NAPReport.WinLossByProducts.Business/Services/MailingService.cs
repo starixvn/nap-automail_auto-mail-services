@@ -55,6 +55,11 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
             var report = _service.GetWinLossByProductsData(criteria);
             isEnoughData = report.IsEnoughData;
 
+            if (!AppSettings.IsCheckEnoughData)
+            {
+                isEnoughData = true;
+            }
+
             if (!isEnoughData)
             {
                 mailResult.JobStatus = JobStatus.DataIsNotReady;

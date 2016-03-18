@@ -32,3 +32,4 @@ _ReSharper*/
 *.orig
 *.Cache
 Fanex.Service.Core/MailService/MailService.cd
+.vs/config/applicationhost.config
