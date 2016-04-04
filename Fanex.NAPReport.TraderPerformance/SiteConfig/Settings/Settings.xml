@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Settings>
+  <add key="ExportDirectory" value="D:\ExcelFiles\TraderPerformance" />
+  <add key="ExcelPassword" value="" />
+  <add key="IsTest" value="false" />
+  <add key="FromDate" value="2016-03-27" />
+  <add key="ToDate" value="2016-04-05" />
+  <add key="FunctionId" value="0" />
+  <add key="Subject" value="Automail Report - TraderPerformance - {0}" />
+</Settings>
