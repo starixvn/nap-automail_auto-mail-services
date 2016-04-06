@@ -12,7 +12,6 @@ namespace Fanex.NAPReport.TraderPerformance.Business.Services
 
         public TraderPerformanceService() : this(null, null)
         {
-
         }
 
         public TraderPerformanceService(ITraderPerformanceRepository repository, ICalculationService calculationService)

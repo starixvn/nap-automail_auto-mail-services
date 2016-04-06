@@ -12,7 +12,6 @@ namespace Fanex.NAPReport.TraderPerformance.Business.Repositories
        public List<RawTrader> GetRawData(GetTraderPerformanceCriteria criteria)
         {
             var result = new List<RawTrader>();
-
             string settingKey = criteria.GetSettingKey();
             using (var objectDb = new ObjectDb(settingKey))
             {
@@ -26,8 +25,7 @@ namespace Fanex.NAPReport.TraderPerformance.Business.Repositories
 
                 while (reader.Read())
                 {
-                    if (Converter.ToInt(reader["custid"]) == 0 &&
-                        Converter.ToDecimal(reader["overall_st"]) == 0)
+                    if (Converter.ToInt(reader["custid"]) == 0 && Converter.ToDecimal(reader["overall_st"]) == 0)
                     {
                         continue;
                     }
@@ -37,7 +35,6 @@ namespace Fanex.NAPReport.TraderPerformance.Business.Repositories
                     var commission = GetTraderBetType(reader, "comm", "com");
                     var margin = GetTraderBetType(reader, "margin", "margin");
                     var liveBetCount = GetTraderBetType(reader, "bet", "livebet");
-
                     RawTrader traderItem = new RawTrader
                     {
                         Id = Converter.ToInt(reader["custid"]),
@@ -68,7 +65,6 @@ namespace Fanex.NAPReport.TraderPerformance.Business.Repositories
         {
             var result = new List<RawTraderDetail>();
             var settingKey = criteria.GetSettingKey();
-
             using (var objectDb = new ObjectDb(settingKey))
             {
                 var reportDetailParams = criteria.GetSpParams();

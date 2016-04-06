@@ -166,7 +166,6 @@ namespace Fanex.NAPReport.TraderPerformance.Business.Services
             cell.CurrentRow = cell.CurrentRow + 1;
             cell.EndRow = cell.CurrentRow;
             cell.ResetColumnIndex();
-
         }
 
         private void ExportTraderSheetContent(List<RawTrader> traders)
@@ -189,7 +188,7 @@ namespace Fanex.NAPReport.TraderPerformance.Business.Services
             RenderAndInCreaseCellIndex(trader.Minor3, bodyCellStyleService.RightNumberStyle);
             RenderAndInCreaseCellIndex(trader.Others, bodyCellStyleService.RightNumberStyle);
             ExportBetTypeContent(trader.WinLoss, winLossGroupParenthesesNegativeDecimalStyle);
-            ExportBetTypeContent(trader.Turnover,turnOverGroupParenthesesNegativeDecimalStyle);
+            ExportBetTypeContent(trader.Turnover, turnOverGroupParenthesesNegativeDecimalStyle);
             ExportBetTypeContent(trader.LiveBetCount, liveBetCountGroupNumberStyle);
             ExportBetTypeContent(trader.Margin, marginGroupParenthesesNegativePercentStyle);
             ExportBetTypeContent(trader.Commission, commissionGroupParenthesesNegativeDecimalStyle);
@@ -472,7 +471,9 @@ namespace Fanex.NAPReport.TraderPerformance.Business.Services
             turnOverGroupParenthesesNegativeDecimalStyle = customCellStyleService.CreateParenthesesNegativeDecimalNumberStyle(turnoverGroupColor, fontService.RegularFont);
             liveBetCountGroupNumberStyle = customCellStyleService.CreateRightNumberStyle(liveBetCountGroupColor, fontService.RegularFont);
             marginGroupParenthesesNegativePercentStyle = customCellStyleService.CreateParenthesesNegativePercentageStyle(marginGroupColor, fontService.RegularFont);
-            commissionGroupParenthesesNegativeDecimalStyle = customCellStyleService.CreateParenthesesNegativeDecimalNumberStyle(commissionGroupColor, fontService.RegularFont);
+            commissionGroupParenthesesNegativeDecimalStyle = customCellStyleService.CreateParenthesesNegativeDecimalNumberStyle(
+                commissionGroupColor,
+                fontService.RegularFont);
         }
 
         private void CreateGrandTotalStyle()

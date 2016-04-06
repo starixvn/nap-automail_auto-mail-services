@@ -9,10 +9,8 @@ namespace Fanex.NAPReport.TraderPerformance.Business.Services
     {
         private IRemotingRefService remotingRefService;
 
-
         public CalculationService() : this(null)
         {
-
         }
 
         public CalculationService(IRemotingRefService remotingRefService)
@@ -103,7 +101,7 @@ namespace Fanex.NAPReport.TraderPerformance.Business.Services
 
         private TraderBetType SumByBetType(IEnumerable<TraderBetType> traderBetType)
         {
-            if(!traderBetType.Any())
+            if (!traderBetType.Any())
             {
                 return new TraderBetType();
             }
