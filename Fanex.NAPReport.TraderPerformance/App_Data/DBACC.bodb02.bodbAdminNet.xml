@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Functions>
+  <Function Name="Trader Performance">
+    <Setting Key="Trader_Performance_GetMainReport" SpName="Acc_Rpt_TraderPerformanceSum" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Trader_Performance_GetMainReport_14" SpName="Acc_Rpt_TraderPerformanceSum_14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Trader_Performance_GetMainReport_WH" SpName="Acc_Rpt_TraderPerformanceSumBK" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Trader_Performance_GetDetailReport" SpName="Acc_Rpt_TraderPerformanceDetail" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Trader_Performance_GetDetailReport_14" SpName="Acc_Rpt_TraderPerformanceDetail_14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Trader_Performance_GetDetailReport_WH" SpName="Acc_Rpt_TraderPerformanceDetailBK" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
+  </Function>
+</Functions>
