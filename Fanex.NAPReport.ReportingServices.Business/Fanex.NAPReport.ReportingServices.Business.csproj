@@ -123,6 +123,7 @@
     <Compile Include="Configurations\RM\RMCollection.cs" />
     <Compile Include="Configurations\RM\RMElement.cs" />
     <Compile Include="Configurations\RM\RMSection.cs" />
+    <Compile Include="Constants\BetType.cs" />
     <Compile Include="Constants\RowType.cs" />
     <Compile Include="Criteria\CompanyBalance\GetCompanyBalanceCriteria.cs" />
     <Compile Include="Criteria\CompanyStatement\GetCompanyStatementCriteria.cs" />

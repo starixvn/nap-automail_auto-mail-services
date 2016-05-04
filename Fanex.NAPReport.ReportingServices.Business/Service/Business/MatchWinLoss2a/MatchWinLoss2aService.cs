@@ -155,6 +155,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Business.MatchWinLo
             _cachedBettypeNames = CachedBettypeName(bettypeIds);
             foreach (var bettype in summaryBettypeWinLoss)
             {
+                SummaryBettypesWinLoss bettypeWinLoss;
                 int bettypeId = bettype.BettypeId;
                 if ((bettypeId == RowType.EightRM && !_configuration.EightRMConfig.IsActive) ||
                     (bettypeId == RowType.BARM && !this._configuration.BARMConfig.IsActive))
@@ -162,7 +163,15 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Business.MatchWinLo
                     continue;
                 }
 
-                var bettypeWinLoss = BindingSummaryBettypeWinLoss(bettype);
+                if (IsBettrade(bettypeId))
+                {
+                    bettypeWinLoss = BindingBettradeBettypeWinLoss(bettype);
+                }
+                else
+                {
+                    bettypeWinLoss = BindingSummaryBettypeWinLoss(bettype);
+                }
+
                 bettypeWinLoss.IsExcludeVirtualLineTotal = _excludeVirtualLineTotal.IsExcludeVirtualLineTotal(bettypeId);
                 summaryBettypesWinLossReport.AddToGrandTotal(bettypeWinLoss);
                 summaryBettypesWinLossReport.ReportRows.Add(bettypeWinLoss);
@@ -187,8 +196,33 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Business.MatchWinLo
                 VirtualLineTotal_Others_Live = bettypeWinLoss.VirtualLineTotal_Others_Live,
                 LineTotal_Others_Non_Live = bettypeWinLoss.LineTotal_Others_Non_Live,
                 VirtualLineTotal_Others_Non_Live = bettypeWinLoss.VirtualLineTotal_Others_Non_Live,
+                LineTotalReal = bettypeWinLoss.LineTotal_Soccer_Live + bettypeWinLoss.LineTotal_Soccer_Non_Live + bettypeWinLoss.LineTotal_Others_Live + bettypeWinLoss.LineTotal_Others_Non_Live,
+                LineTotalVirtual = bettypeWinLoss.VirtualLineTotal_Soccer_Live + bettypeWinLoss.VirtualLineTotal_Soccer_Non_Live + bettypeWinLoss.VirtualLineTotal_Others_Live + bettypeWinLoss.VirtualLineTotal_Others_Non_Live,
                 Hedge = bettypeWinLoss.Hedge,
                 Turnover = bettypeWinLoss.Turnover
+            };
+        }
+
+        private SummaryBettypesWinLoss BindingBettradeBettypeWinLoss(MatchWinLoss2aEntities.SummaryBettypeWinLoss bettypeWinLoss)
+        {
+            int bettypeId = bettypeWinLoss.BettypeId;
+            return new SummaryBettypesWinLoss
+            {
+                BettypeName = _cachedBettypeNames[bettypeId],
+                Name_Suffix = _bettypeName.GetBettypeNameSuffix(bettypeId),
+                BettypeId = bettypeId,
+                LineTotal_Soccer_Live = 0,
+                VirtualLineTotal_Soccer_Live = 0,
+                LineTotal_Soccer_Non_Live = 0,
+                VirtualLineTotal_Soccer_Non_Live = 0,
+                LineTotal_Others_Live = 0,
+                VirtualLineTotal_Others_Live = 0,
+                LineTotal_Others_Non_Live = 0,
+                VirtualLineTotal_Others_Non_Live = 0,
+                LineTotalReal = bettypeWinLoss.LineTotal_Soccer_Live + bettypeWinLoss.LineTotal_Soccer_Non_Live + bettypeWinLoss.LineTotal_Others_Live + bettypeWinLoss.LineTotal_Others_Non_Live,
+                LineTotalVirtual = bettypeWinLoss.VirtualLineTotal_Soccer_Live + bettypeWinLoss.VirtualLineTotal_Soccer_Non_Live + bettypeWinLoss.VirtualLineTotal_Others_Live + bettypeWinLoss.VirtualLineTotal_Others_Non_Live,
+                Hedge = bettypeWinLoss.Hedge,
+                Turnover = 0
             };
         }
 
@@ -323,6 +357,11 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Business.MatchWinLo
             }
 
             return thirdPartyProductsWinLoss;
+        }
+
+        private bool IsBettrade(int bettype)
+        {
+            return bettype >= BetType.MinBettrade && bettype <= BetType.MaxBettrade;
         }
     }
 }

@@ -40,29 +40,9 @@ namespace Fanex.NAPReport.ReportingServices.Business.Model.MatchWinLoss2a
 
         public decimal VirtualLineTotal_Others_Non_Live { get; set; }
 
-        public decimal LineTotalReal
-        {
-            get
-            {
-                var lineTotalReal = this.LineTotal_Soccer_Live +
-                    this.LineTotal_Soccer_Non_Live +
-                    this.LineTotal_Others_Live +
-                    this.LineTotal_Others_Non_Live;
-                return lineTotalReal;
-            }
-        }
+        public decimal LineTotalReal { get; set; }
 
-        public decimal LineTotalVirtual
-        {
-            get
-            {
-                var virtualLineTotalReal = this.VirtualLineTotal_Soccer_Live +
-                    this.VirtualLineTotal_Soccer_Non_Live +
-                    this.VirtualLineTotal_Others_Live +
-                    this.VirtualLineTotal_Others_Non_Live;
-                return virtualLineTotalReal;
-            }
-        }
+        public decimal LineTotalVirtual { get; set; }
 
         public decimal Variance
         {
@@ -117,6 +97,8 @@ namespace Fanex.NAPReport.ReportingServices.Business.Model.MatchWinLoss2a
             this.GrandTotal.VirtualLineTotal_Others_Live += isExcludeVirtualLineTotal ? 0 : winLoss.VirtualLineTotal_Others_Live;
             this.GrandTotal.LineTotal_Others_Non_Live += winLoss.LineTotal_Others_Non_Live;
             this.GrandTotal.VirtualLineTotal_Others_Non_Live += isExcludeVirtualLineTotal ? 0 : winLoss.VirtualLineTotal_Others_Non_Live;
+            this.GrandTotal.LineTotalReal += winLoss.LineTotalReal;
+            this.GrandTotal.LineTotalVirtual += isExcludeVirtualLineTotal ? 0 : winLoss.LineTotalVirtual;
             this.GrandTotal.Turnover += winLoss.Turnover;
         }
     }
