@@ -219,20 +219,20 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
         {
             foreach (var bettypeWinLoss in summaryBettypesWinLoss.ReportRows)
             {
-                if (bettypeWinLoss.IsExcludeVirtualLineTotal)
+                if (string.Equals(bettypeWinLoss.BettypeName, Labels.Bettrade))
                 {
-                    if (string.Equals(bettypeWinLoss.BettypeName, Labels.Bettrade))
-                    {
-                        this.ExportBettradeBettypeRow(bettypeWinLoss);
-                    }
-                    else
-                    {
-                        this.ExportExcludeVirtualLineTotalBettypeRow(bettypeWinLoss);
-                    }
+                    this.ExportBettradeBettypeRow(bettypeWinLoss);
                 }
                 else
                 {
-                    this.ExportBettypeRow(bettypeWinLoss);
+                    if (bettypeWinLoss.IsExcludeVirtualLineTotal)
+                    {
+                        this.ExportExcludeVirtualLineTotalBettypeRow(bettypeWinLoss);
+                    }
+                    else
+                    {
+                        this.ExportBettypeRow(bettypeWinLoss);
+                    }
                 }
 
                 _cell.ResetColumnIndex();
