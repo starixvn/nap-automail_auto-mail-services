@@ -144,7 +144,7 @@
             return size;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void Login()
@@ -233,7 +233,7 @@
             Download(remFileName, locFileName, false);
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void Download(string remFileName, string locFileName, bool resume)
@@ -328,7 +328,7 @@
             Upload(fileName, false);
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void Upload(string fileName, bool resume)
@@ -573,7 +573,7 @@
             ReadReply();
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private Socket CreateDataSocket()

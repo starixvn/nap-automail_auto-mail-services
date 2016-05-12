@@ -135,7 +135,7 @@
             NpoiNewFormatExcelExtension.RenderMergeCell(this._sheet, this._cell, cellStyle);
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
         private void BuildLicenseeName(string licenseeName)
@@ -166,7 +166,7 @@
             this._currentRow++;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void BuildTableBody(List<BALicWinlossDaily> winLossList)
@@ -223,7 +223,7 @@
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
         private void BuildSubTotal(DateTime date, double turnOverRM_Total, double betCount_Total, double winlostRM_Total, double commRM_Total, double amtDueToBARM_Total)

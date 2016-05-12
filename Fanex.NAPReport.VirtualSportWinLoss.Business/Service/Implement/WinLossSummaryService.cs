@@ -81,7 +81,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
             return model;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private List<WinLossSummaryBySportType> GetWinLossSummaryBySportTypeTotalList()

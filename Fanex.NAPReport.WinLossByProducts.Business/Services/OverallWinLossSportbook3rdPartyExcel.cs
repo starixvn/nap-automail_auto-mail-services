@@ -141,7 +141,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
             _alignmentService = new NpoiNewFormatAlignmentService();            
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void InitialCellStyle()
@@ -331,7 +331,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
         private void SetOthersStyle(string productName, WinLoss winLoss)

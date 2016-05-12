@@ -42,7 +42,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
             _sportIDsExistOrNot.Add(186, "Virtual Tennis");
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public List<WinLossDetailBySportType> GetWinLossDetail()
@@ -272,7 +272,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
             return winlossByDateList;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private List<WinLossDetailByBettype> GetWinLossDetailByBettypeList()

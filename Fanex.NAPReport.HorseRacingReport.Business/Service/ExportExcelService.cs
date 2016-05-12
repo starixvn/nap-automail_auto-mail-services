@@ -117,7 +117,7 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The main racing report data.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         public RacingWinLoss GetMainReport(GetMainRacingReportCriteria criteria)
@@ -205,7 +205,7 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The detail racing report data.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         public RacingWinLoss GetDetailReport(GetDetailRacingReportCriteria criteria)
@@ -454,7 +454,7 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
         /// <param name="worksheet">The worksheet.</param>
         /// <param name="firstColumnName">First name of the column.</param>
         /// <param name="secondColumnName">Name of the second column.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReportHeader(XSSFSheet worksheet, string firstColumnName, string secondColumnName)
@@ -647,7 +647,7 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
         /// </summary>
         /// <param name="worksheet">The worksheet.</param>
         /// <param name="grandTotal">The grand total.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private void ExportMainReportGrandTotal(XSSFSheet worksheet, RacingWinLoss grandTotal)
@@ -679,7 +679,7 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
         /// </summary>
         /// <param name="worksheet">The worksheet.</param>
         /// <param name="report">The report.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private void ExportDetailReportContent(XSSFSheet worksheet, RacingWinLoss report)
@@ -804,7 +804,7 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
         /// <param name="worksheet">The worksheet.</param>
         /// <param name="row">The row of sheet.</param>
         /// <param name="rowType">Type of the row.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private void ExportRacingWinLossReportRow(
@@ -1089,7 +1089,7 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
         /// <summary>
         /// Initializes the cell style information.
         /// </summary>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private void InitCellStyleInfo()
@@ -1262,7 +1262,7 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
         /// <param name="reportName">Name of the report.</param>
         /// <param name="sheetName">Name of the sheet.</param>
         /// <param name="reportTitle">The report title.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private void GetExportMainReportInfo(
@@ -1306,7 +1306,7 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
         /// <param name="reportName">Name of the report.</param>
         /// <param name="sheetName">Name of the sheet.</param>
         /// <param name="reportTitle">The report title.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private void GetExportDetailReportInfo(

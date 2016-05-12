@@ -96,7 +96,7 @@ namespace Fanex.CreditMovement.Business.Service
             _workSheet.SetColumnWidth(6, 200 * NPOIConstants.FontWidth);
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReportHeader(GetCreditMovementCriteria criteria)

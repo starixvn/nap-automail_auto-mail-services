@@ -75,7 +75,7 @@ namespace Fanex.NAPReport.TraderPerformance.Business.Services
             ExportTraderDetailSheet(traderDetailModel, reportDate.ToString("MMM dd yyyy"));
 
             string parentDirectory = AppSettings.DataDirectory(AppSettings.ExportDirectory);
-            string reportName = $"TraderPerformance_on_{ reportDate.ToString("yyyy_MM_dd")}.xlsx";
+            string reportName = "TraderPerformance_on_" + reportDate.ToString("yyyy_MM_dd") + ".xlsx";
             SaveFile.SaveExcelFile(parentDirectory, reportName, workBook, AppSettings.ExcelPassword);
         }
 

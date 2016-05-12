@@ -35,7 +35,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service
             set;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
         public void ProcessData(DateTime winlossDate)

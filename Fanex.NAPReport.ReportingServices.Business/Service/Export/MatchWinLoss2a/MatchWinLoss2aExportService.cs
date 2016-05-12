@@ -157,7 +157,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
             this.ExportGrandTotal(sportsAndThirdPartyProductsWinLoss.GrandTotal);
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportSummaryBettypesHeader()
@@ -275,7 +275,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
             _cell.EndRow += 2;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportExcludeVirtualLineTotalBettypeRow(SummaryBettypesWinLoss bettypeRow)
@@ -345,7 +345,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
             this.RenderCell(Labels.NotAvailable, _bodyCellStyleService.RightTextStyle);
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportBettypeRow(SummaryBettypesWinLoss bettypeRow)
@@ -513,7 +513,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
             this.RenderCell(match.Turnover == 0 ? (object)Labels.NotAvailable : match.Margin, _bodyCellStyleService.ParenthesesUnsignedNegativeDecimalNumberStyle);
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportBettypeTotalRow(BettypeWinLoss bettype)
@@ -601,7 +601,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.MatchWinLoss
             this.RenderCell(grandTotal.IBCTurnover == 0 ? (object)Labels.NotAvailable : grandTotal.Margin, _grandTotalUnsignedNegativeDecimalStyle);
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportThirdPartyProductRow(SummarySportsWinLoss product)

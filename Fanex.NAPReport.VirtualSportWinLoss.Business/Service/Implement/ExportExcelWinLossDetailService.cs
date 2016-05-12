@@ -177,7 +177,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void RenderHeaderBySport(VirtualSportExcelSheet sheet)

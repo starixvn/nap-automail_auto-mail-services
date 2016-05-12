@@ -12,7 +12,7 @@
 
   <Function Name="BA">
     <Setting Key="Acc_Rpt_BALicWinlossMonthly" SpName="Acc_Rpt_BALicWinlossMonthly" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="36000"/>
-    <Setting Key="Acc_Rpt_BALicWinlossDaily" SpName="Acc_Rpt_BALicWinlossDaily_xtest2" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="36000"/>
+    <Setting Key="Acc_Rpt_BALicWinlossDaily" SpName="Acc_Rpt_BALicWinlossDaily" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="36000"/>
     <Setting Key="Acc_Rpt_BALicWinloss" SpName="Acc_Rpt_BALicWinloss" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="36000"/>
   </Function>
 

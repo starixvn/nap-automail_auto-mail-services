@@ -175,7 +175,7 @@
             return _listBALicWL;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
         private void BuildTitle()
@@ -197,7 +197,7 @@
             NpoiNewFormatExcelExtension.RenderMergeCell(this._sheet, this._cell, cellStyle);
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
         private void BuildTableHeader(int rowIndex)
@@ -212,7 +212,7 @@
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private int BuildTableBobyForLicensee(int rowIndex, string licenseeName, List<BALicWinLossDaily> list)
@@ -285,7 +285,7 @@
             return rowIndex;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
         private void BuildSubTotal(int rowIndex, string licenseeName, double turnOverRM_Total, double betCount_Total, double winlostRM_Total, double commRM_Total, double amtDueToBARM_Total)

@@ -42,7 +42,7 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
         /// Processes the horse racing report service.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         public void GetData(TimeRangeCriteria criteria)
@@ -148,7 +148,7 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>List detail report criteria.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private List<GetDetailRacingReportCriteria> GetListDetailReportCriteria(TimeRangeCriteria criteria)

@@ -109,7 +109,7 @@ namespace Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Mailing
             return mail;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public Mail SendMailDirectBalanceToVIPGroup()
