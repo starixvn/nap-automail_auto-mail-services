@@ -196,8 +196,14 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Business.MatchWinLo
                 VirtualLineTotal_Others_Live = bettypeWinLoss.VirtualLineTotal_Others_Live,
                 LineTotal_Others_Non_Live = bettypeWinLoss.LineTotal_Others_Non_Live,
                 VirtualLineTotal_Others_Non_Live = bettypeWinLoss.VirtualLineTotal_Others_Non_Live,
-                LineTotalReal = bettypeWinLoss.LineTotal_Soccer_Live + bettypeWinLoss.LineTotal_Soccer_Non_Live + bettypeWinLoss.LineTotal_Others_Live + bettypeWinLoss.LineTotal_Others_Non_Live,
-                LineTotalVirtual = bettypeWinLoss.VirtualLineTotal_Soccer_Live + bettypeWinLoss.VirtualLineTotal_Soccer_Non_Live + bettypeWinLoss.VirtualLineTotal_Others_Live + bettypeWinLoss.VirtualLineTotal_Others_Non_Live,
+                LineTotalReal = bettypeWinLoss.LineTotal_Soccer_Live +
+                                bettypeWinLoss.LineTotal_Soccer_Non_Live + 
+                                bettypeWinLoss.LineTotal_Others_Live +
+                                bettypeWinLoss.LineTotal_Others_Non_Live,
+                LineTotalVirtual = bettypeWinLoss.VirtualLineTotal_Soccer_Live +
+                                bettypeWinLoss.VirtualLineTotal_Soccer_Non_Live +
+                                bettypeWinLoss.VirtualLineTotal_Others_Live + 
+                                bettypeWinLoss.VirtualLineTotal_Others_Non_Live,
                 Hedge = bettypeWinLoss.Hedge,
                 Turnover = bettypeWinLoss.Turnover
             };
@@ -219,8 +225,14 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Business.MatchWinLo
                 VirtualLineTotal_Others_Live = 0,
                 LineTotal_Others_Non_Live = 0,
                 VirtualLineTotal_Others_Non_Live = 0,
-                LineTotalReal = bettypeWinLoss.LineTotal_Soccer_Live + bettypeWinLoss.LineTotal_Soccer_Non_Live + bettypeWinLoss.LineTotal_Others_Live + bettypeWinLoss.LineTotal_Others_Non_Live,
-                LineTotalVirtual = bettypeWinLoss.VirtualLineTotal_Soccer_Live + bettypeWinLoss.VirtualLineTotal_Soccer_Non_Live + bettypeWinLoss.VirtualLineTotal_Others_Live + bettypeWinLoss.VirtualLineTotal_Others_Non_Live,
+                LineTotalReal = bettypeWinLoss.LineTotal_Soccer_Live +
+                bettypeWinLoss.LineTotal_Soccer_Non_Live +
+                bettypeWinLoss.LineTotal_Others_Live +
+                bettypeWinLoss.LineTotal_Others_Non_Live,
+                LineTotalVirtual = bettypeWinLoss.VirtualLineTotal_Soccer_Live +
+                bettypeWinLoss.VirtualLineTotal_Soccer_Non_Live +
+                bettypeWinLoss.VirtualLineTotal_Others_Live +
+                bettypeWinLoss.VirtualLineTotal_Others_Non_Live,
                 Hedge = bettypeWinLoss.Hedge,
                 Turnover = 0
             };
