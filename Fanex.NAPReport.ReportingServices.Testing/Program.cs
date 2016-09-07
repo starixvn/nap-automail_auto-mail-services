@@ -1,11 +1,11 @@
 ﻿namespace Fanex.NAPReport.ReportingServices.Testing
 {
-    using System;
-    using System.IO;
     using Fanex.Data.Configuration;
     using Fanex.NAPReport.ReportingServices.Business;
     using Fanex.NAPReport.ReportingServices.Business.Service;
     using Fanex.Service.Core.Configuration;
+    using System;
+    using System.IO;
 
     public class Program
     {
@@ -26,7 +26,6 @@
             var companyStatement = new CompanyStatementProcessData(serviceProcess);
             var dailyTurnover = new DailyTurnoverProcessData(serviceProcess);
             var superYesterdayBalance = new SuperYesterdayBalanceProcessData(serviceProcess);
-            var matchWinLoss2a = new MatchWinLoss2aProcessData(serviceProcess);
 
             var currentDate = DateTime.Today.AddDays(-1);
             if (AppSettings.IsTest)
@@ -34,7 +33,7 @@
                 currentDate = AppSettings.WinLossDate;
             }
 
-            serviceProcess.RunService(currentDate);            
+            serviceProcess.RunService(currentDate);
             Console.WriteLine("Done at " + DateTime.Now.ToString());
         }
     }
