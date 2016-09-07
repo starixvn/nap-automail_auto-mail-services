@@ -4,7 +4,6 @@
   <add key="ExportDataDirectoryCompanyYesterdayBalance" value="\\10.40.40.52\NAP_Reports\UAT\ReportingService_CompanyYesterdayBalance" />
   <add key="ExportDataDirectoryCompanyStatement" value="\\10.40.40.52\NAP_Reports\UAT\ReportingService_CompanyStatement" />
   <add key="ExportDataDirectoryDailyTurnover" value="\\10.40.40.52\NAP_Reports\UAT\ReportingService_DailyTurnover" />
-  <add key="ExportDataDirectoryMatchWinLoss2a" value="\\10.40.40.52\NAP_Reports\UAT\ReportingService_MatchWinLoss2a" />
   <add key="ExportDataDirectorySuperYesterdayBalance" value="\\10.40.40.52\NAP_Reports\UAT\ReportingService_SuperYesterdayBalance" />
   <add key="ExcelPassword" value="" />
   <add key="IsTest" value="false" />

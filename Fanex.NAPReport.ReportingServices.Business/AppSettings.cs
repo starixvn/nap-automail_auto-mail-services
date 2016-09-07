@@ -6,9 +6,9 @@
 
 namespace Fanex.NAPReport.ReportingServices.Business
 {
-    using System;
     using Fanex.Service.Core.Configuration;
     using Fanex.Service.Core.Utilities;
+    using System;
 
     /// <summary>
     /// Application setting.
@@ -39,17 +39,11 @@ namespace Fanex.NAPReport.ReportingServices.Business
             set;
         }
 
-        public static string ExportDataDirectoryMatchWinLoss2a
-        {
-            get;
-            set;
-        }
-
         public static string ExportDataDirectorySuperYesterdayBalance
         {
             get;
             set;
-        }        
+        }
 
         public static new string ExcelPassword
         {
@@ -67,7 +61,7 @@ namespace Fanex.NAPReport.ReportingServices.Business
         {
             get;
             set;
-        }        
+        }
 
         public static int FunctionId
         {
