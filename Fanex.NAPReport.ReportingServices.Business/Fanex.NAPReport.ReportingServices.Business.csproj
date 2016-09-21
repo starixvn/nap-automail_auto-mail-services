@@ -120,37 +120,17 @@
     <Compile Include="Configurations\ExcludeVirtualLineTotal\ExcludeVirtualLineTotalCollection.cs" />
     <Compile Include="Configurations\ExcludeVirtualLineTotal\ExcludeVirtualLineTotalElement.cs" />
     <Compile Include="Configurations\ExcludeVirtualLineTotal\ExcludeVirtualLineTotalSection.cs" />
-    <Compile Include="Configurations\RM\RMCollection.cs" />
-    <Compile Include="Configurations\RM\RMElement.cs" />
-    <Compile Include="Configurations\RM\RMSection.cs" />
     <Compile Include="Constants\BetType.cs" />
     <Compile Include="Constants\RowType.cs" />
     <Compile Include="Criteria\CompanyBalance\GetCompanyBalanceCriteria.cs" />
     <Compile Include="Criteria\CompanyStatement\GetCompanyStatementCriteria.cs" />
     <Compile Include="Criteria\DailyTurnover\GetDailyTurnoverCriteria.cs" />
-    <Compile Include="Criteria\MatchWinLoss2a\GetSportsWinLossCriteria.cs" />
-    <Compile Include="Criteria\MatchWinLoss2a\GetFullReportCriteria.cs" />
-    <Compile Include="Criteria\MatchWinLoss2a\GetSummaryBettypesWinLossCriteria.cs" />
     <Compile Include="Criteria\SuperYesterdayBalance\GetSuperYesterdayBalanceCriteria.cs" />
-    <Compile Include="Entities\MatchWinLoss2a\MatchAndSportWinLoss.cs" />
-    <Compile Include="Entities\MatchWinLoss2a\MatchWinLoss.cs" />
-    <Compile Include="Entities\MatchWinLoss2a\SportWinLoss.cs" />
-    <Compile Include="Entities\MatchWinLoss2a\SummaryBettypeAndMatchAndSportWinLoss.cs" />
-    <Compile Include="Entities\MatchWinLoss2a\SummaryBettypeWinLoss.cs" />
     <Compile Include="Enums\SuperBalance.cs" />
     <Compile Include="Model\CompanyBalance\CompanyBalance.cs" />
     <Compile Include="Model\CompanyStatement\CompanyStatement.cs" />
     <Compile Include="Model\DailyTurnover\DailyTurnover.cs" />
     <Compile Include="Model\DailyTurnover\TurnoverDetail.cs" />
-    <Compile Include="Model\MatchWinLoss2a\BettypeRangeBySport.cs" />
-    <Compile Include="Model\MatchWinLoss2a\SportsAndThirdPartyProductsWinLoss.cs" />
-    <Compile Include="Model\MatchWinLoss2a\SportsWinLoss.cs" />
-    <Compile Include="Model\MatchWinLoss2a\SummarySportsWinLoss.cs" />
-    <Compile Include="Model\MatchWinLoss2a\BettypeWinLoss.cs" />
-    <Compile Include="Model\MatchWinLoss2a\SummaryBettypesWinLoss.cs" />
-    <Compile Include="Model\MatchWinLoss2a\BettypesAndSportsAndThirdPartyProductsWinLoss.cs" />
-    <Compile Include="Model\MatchWinLoss2a\WinLossBySport.cs" />
-    <Compile Include="Model\MatchWinLoss2a\MatchWinLoss.cs" />
     <Compile Include="Model\SuperYesterdayBalance\SuperYesterdayBalance.cs" />
     <Compile Include="Model\SuperYesterdayBalance\SuperYesterdayBalanceDetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -160,8 +140,6 @@
     <Compile Include="Repositories\CompanyStatement\ICompanyStatementRepository.cs" />
     <Compile Include="Repositories\DailyTurnover\DailyTuroverRepository.cs" />
     <Compile Include="Repositories\DailyTurnover\IDailyTurnoverRepository.cs" />
-    <Compile Include="Repositories\MatchWinLoss2a\IMatchWinLoss2aRepository.cs" />
-    <Compile Include="Repositories\MatchWinLoss2a\MatchWinLoss2aRepository.cs" />
     <Compile Include="Repositories\SuperYesterdayBalance\ISuperYesterdayBalanceRepository.cs" />
     <Compile Include="Repositories\SuperYesterdayBalance\SuperYesterdayBalanceRepository.cs" />
     <Compile Include="Resources\Labels.Designer.cs">
@@ -180,14 +158,6 @@
     <Compile Include="Service\Business\CompanyStatement\ICompanyStatementService.cs" />
     <Compile Include="Service\Business\DailyTurnover\DailyTurnoverService.cs" />
     <Compile Include="Service\Business\DailyTurnover\IDailyTurnoverService.cs" />
-    <Compile Include="Service\Business\MatchWinLoss2a\IMatchWinLoss2aBettypeName.cs" />
-    <Compile Include="Service\Business\MatchWinLoss2a\IMatchWinLoss2aConfiguration.cs" />
-    <Compile Include="Service\Business\MatchWinLoss2a\IMatchWinLoss2aExcludeVirtualLineTotal.cs" />
-    <Compile Include="Service\Business\MatchWinLoss2a\IMatchWinLoss2aService.cs" />
-    <Compile Include="Service\Business\MatchWinLoss2a\MatchWinLoss2aBettypeName.cs" />
-    <Compile Include="Service\Business\MatchWinLoss2a\MatchWinLoss2aConfiguration.cs" />
-    <Compile Include="Service\Business\MatchWinLoss2a\MatchWinLoss2aExcludeVirtualLineTotal.cs" />
-    <Compile Include="Service\Business\MatchWinLoss2a\MatchWinLoss2aService.cs" />
     <Compile Include="Service\Business\SuperYesterdayBalance\ISuperYesterdayBalanceService.cs" />
     <Compile Include="Service\Business\SuperYesterdayBalance\SuperYesterdayBalanceService.cs" />
     <Compile Include="Service\CompanyBalanceProcessData.cs" />
@@ -199,16 +169,11 @@
     <Compile Include="Service\Export\CompanyStatement\ICompanyStatementExportService.cs" />
     <Compile Include="Service\Export\DailyTurnover\DailyTurnoverExportService.cs" />
     <Compile Include="Service\Export\DailyTurnover\IDailyTurnoverExportService.cs" />
-    <Compile Include="Service\Export\MatchWinLoss2a\IMatchWinLoss2aExportService.cs" />
-    <Compile Include="Service\Export\MatchWinLoss2a\MatchWinLoss2aExportService.cs">
-      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
-    </Compile>
     <Compile Include="Service\Export\SuperYesterdayBalance\ISuperYesterdayBalanceExportService.cs" />
     <Compile Include="Service\Export\SuperYesterdayBalance\SuperYesterdayBalanceExportService.cs" />
     <Compile Include="Service\IObserver.cs" />
     <Compile Include="Service\ISubject.cs" />
     <Compile Include="Service\MailingService.cs" />
-    <Compile Include="Service\MatchWinLoss2aProcessData.cs" />
     <Compile Include="Service\ServiceProcess.cs" />
     <Compile Include="Service\SuperYesterdayBalanceProcessData.cs" />
   </ItemGroup>
@@ -217,7 +182,6 @@
     <None Include="Configurations\ExcludeVirtualLineTotal\ExcludeVirtualLineTotal.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Configurations\RM\RMSection.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

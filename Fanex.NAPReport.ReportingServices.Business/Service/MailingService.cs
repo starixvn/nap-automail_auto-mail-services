@@ -6,12 +6,12 @@
 
 namespace Fanex.NAPReport.ReportingServices.Business.Service
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
     using Fanex.Service.Core.Configuration;
     using Fanex.Service.Core.MailService;
     using Fanex.Service.Core.Model;
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
 
     /// <summary>
     /// TODO: Update summary.
@@ -42,7 +42,6 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service
             var companyStatement = new CompanyStatementProcessData(serviceProcess);
             var dailyTurnover = new DailyTurnoverProcessData(serviceProcess);
             var superYesterdayBalance = new SuperYesterdayBalanceProcessData(serviceProcess);
-            var matchWinLoss2a = new MatchWinLoss2aProcessData(serviceProcess);
             var currentDate = DateTime.Today.AddDays(-1);
             if (AppSettings.IsTest)
             {
@@ -59,7 +58,6 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service
             fileNamesPath.Add(companyStatement.FileName);
             fileNamesPath.Add(dailyTurnover.FileName);
             fileNamesPath.Add(superYesterdayBalance.FileName);
-            fileNamesPath.Add(matchWinLoss2a.FileName);
 
             foreach (string fileNamePath in fileNamesPath)
             {
