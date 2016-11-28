@@ -1,10 +1,8 @@
 ﻿namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.BA
 {
-    using Fanex.MailDelivery.Client.Enumerations;
-    using Fanex.MailDelivery.Client.Messages;
-    using Fanex.MailDelivery.Client.Models;
     using Fanex.NAPReport.BAMonthlyWinLoss.Business.Service;
     using Fanex.Service.Core.MailService;
+    using MailDelivery.Core.Models;
     using Quartz;
 
     /// <summary>
@@ -19,11 +17,11 @@
             service = new MailingService();
         }
 
-        public override JobResultMessage SendMailToVipGroup(Schedule schedule, IJobExecutionContext jobContext)
+        public override JobMessage SendMailToVipGroup(Schedule schedule, IJobExecutionContext jobContext)
         {
             var mail = service.SendMailToVIPGroup();
 
-            return new JobResultMessage()
+            return new JobMessage()
             {
                 JobStatus = JobStatus.Success,
                 Mail = mail,

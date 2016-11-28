@@ -8,11 +8,11 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
 {
     using System;
     using System.Collections.Generic;
-    using Fanex.MailDelivery.Client.Models;
     using Fanex.NAPReport.HorseRacingReport.Business.Criteria;
     using Fanex.Service.Core.Configuration;
     using Fanex.Service.Core.MailService;
     using Fanex.Service.Core.Model;
+    using MailDelivery.Core.Models;
 
     /// <summary>
     /// TODO: Update summary.
@@ -40,7 +40,7 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
             var fileNamesPath = new List<string>();
             fileNamesPath.Add(service.ReportZipFolderPath);
 
-            _mailInfo = new MailInfo() 
+            _mailInfo = new MailInfo()
             {
                 Subject = string.Format(
                 AppSettings.Subject,

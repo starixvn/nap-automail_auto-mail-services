@@ -1,12 +1,8 @@
 ﻿namespace Fanex.NAPReport.BAMonthlyWinLoss.Testing
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
     using Fanex.Data.Configuration;
-    using Fanex.MailDelivery.Client.Models;
-    using Fanex.NAPReport.BAMonthlyWinLoss.Business;
-    using Fanex.NAPReport.BAMonthlyWinLoss.Business.Resources;
     using Fanex.NAPReport.BAMonthlyWinLoss.Business.Service;
 
     public class Program

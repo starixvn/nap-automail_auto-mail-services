@@ -5,8 +5,8 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
     using System.Linq;
+    using Fanex.BADailyWinLoss.Business.Resource;
     using Fanex.NAPReport.BADailyWinLoss.Business.Model;
-    using Fanex.NAPReport.BADailyWinLoss.Business.Resource;
     using Fanex.Service.Core.Constants;
     using Fanex.Service.Core.Extensions;
     using Fanex.Service.Core.Model;
@@ -17,7 +17,6 @@
     using NPOI.SS.UserModel;
     using NPOI.SS.Util;
     using NPOI.XSSF.UserModel;
-    using NPOI.XSSF.UserModel.Extensions;
 
     public class BAReportService
     {
@@ -70,7 +69,7 @@
             this._sheet = this._workbook.CreateSheet("Sheet1") as XSSFSheet;
             _headerFont = new FontInformation(NPOIConstants.FontName, 16, Color.Black);
             _customCellStyleService = new NpoiNewFormatCustomCellStyleService(_workbook);
-            
+
             _cell = new Cell();
             _fontService = new NpoiNewFormatFontService(_workbook);
             _sheet.DefaultColumnWidth = ColumnWidth;
@@ -183,8 +182,8 @@
             Color white = Color.White;
             short borderStyle = (short)BorderStyle.None;
             var borderInformation = new BorderInformation(borderStyle, borderStyle, borderStyle, borderStyle, white, white, white, white);
-            var backgroundInformation = new BackgroundInformation((int)FillPattern.SolidForeground, Color.White);            
-            var cellStyle = this._customCellStyleService.CreateCellStyle(borderInformation, backgroundInformation, _alignmentService.CenterAlignment,  _fontService.CreateBoldFont(_headerFont));
+            var backgroundInformation = new BackgroundInformation((int)FillPattern.SolidForeground, Color.White);
+            var cellStyle = this._customCellStyleService.CreateCellStyle(borderInformation, backgroundInformation, _alignmentService.CenterAlignment, _fontService.CreateBoldFont(_headerFont));
             this._cell = new Cell(0, this._currentRow, 8, this._currentRow + 1, Resource.Title);
             NpoiNewFormatExcelExtension.RenderMergeCell(this._sheet, this._cell, cellStyle);
             this._currentRow++;
@@ -411,7 +410,7 @@
 
             this._cell = new Cell(columnIndex, rowIndex, columnIndex++, rowIndex, list.Sum(item => item.AmtDueToBARM));
             NpoiNewFormatExcelExtension.RenderCell(this._sheet, _cell, cellStyleOfNumber);
-            
+
             if (turnOverRM == 0)
             {
                 this._cell = new Cell(columnIndex, rowIndex, columnIndex++, rowIndex, NotAvailableStr);
@@ -422,7 +421,7 @@
                 var margin = CalculateMargin(winlossRM, turnOverRM);
                 this._cell = new Cell(columnIndex, rowIndex, columnIndex++, rowIndex, margin);
                 NpoiNewFormatExcelExtension.RenderCell(this._sheet, _cell, cellStyleOfPercent);
-            }            
+            }
         }
 
         private double CalculateMargin(double winloss, double turnover)

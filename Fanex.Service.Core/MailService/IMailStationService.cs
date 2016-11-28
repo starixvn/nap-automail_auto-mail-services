@@ -6,8 +6,8 @@
 
 namespace Fanex.Service.Core.MailService
 {
-    using Fanex.MailDelivery.Client.Models;
     using Fanex.Service.Core.Model;
+    using MailDelivery.Core.Models;
 
     /// <summary>
     /// TODO: Update summary.

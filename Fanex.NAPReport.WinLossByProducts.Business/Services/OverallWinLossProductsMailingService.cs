@@ -3,13 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using Fanex.MailDelivery.Client.Enumerations;
-    using Fanex.MailDelivery.Client.Models;
     using Fanex.NAPReport.WinLossByProducts.Business.Criteria;
     using Fanex.NAPReport.WinLossByProducts.Business.Repositories;
     using Fanex.Service.Core.Configuration;
     using Fanex.Service.Core.MailService;
     using Fanex.Service.Core.Model;
+    using MailDelivery.Core.Models;
 
     public class OverallWinLossProductsMailingService : IMailingServiceBase
     {

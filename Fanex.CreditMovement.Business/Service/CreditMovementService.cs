@@ -13,8 +13,6 @@ namespace Fanex.CreditMovement.Business.Service
     using Fanex.CreditMovement.Business.Criteria;
     using Fanex.CreditMovement.Business.Model;
     using Fanex.CreditMovement.Business.Repositories;
-    using Fanex.MailDelivery.Client.Models;
-    using Fanex.Service.Core.Configuration;
     using Fanex.Service.Core.Constants;
     using Fanex.Service.Core.Extensions;
     using Fanex.Service.Core.Model;
@@ -45,13 +43,13 @@ namespace Fanex.CreditMovement.Business.Service
             _fontService = new NpoiNewFormatFontService(_workbook);
             _regularFont = _fontService.RegularFont;
             _bodyCellStyleService = new NpoiNewFormatBodyCellStyleService(_workbook, _regularFont);
-            _customCellStyleService = new NpoiNewFormatCustomCellStyleService(_workbook);            
+            _customCellStyleService = new NpoiNewFormatCustomCellStyleService(_workbook);
         }
 
         public string DirectoryOfFileName { get; set; }
 
         public string FileName { get; set; }
-        
+
         public void ExportExcel(GetCreditMovementCriteria criteria)
         {
             var report = _repository.GetReportData(criteria);
@@ -60,7 +58,7 @@ namespace Fanex.CreditMovement.Business.Service
                 ExportReport(report, criteria);
             }
         }
-        
+
         private void ExportReport(List<CreditMovement> report, GetCreditMovementCriteria criteria)
         {
             string sheetName = "Credit Movement";
@@ -79,7 +77,7 @@ namespace Fanex.CreditMovement.Business.Service
 
             GC.Collect();
         }
-        
+
         private void InitColumnWidth()
         {
             int numberColumn = 6;
@@ -148,7 +146,7 @@ namespace Fanex.CreditMovement.Business.Service
             NpoiNewFormatExcelExtension.RenderCell(_workSheet, _cell, headerStyle);
             _cell.IncreaseRowIndex();
         }
-       
+
         private void ExportReportContent(List<CreditMovement> report)
         {
             for (int i = 0; i < report.Count; i++)

@@ -8,10 +8,10 @@ namespace Fanex.NAPReport.BAMonthlyWinLoss.Business.Service
 {
     using System;
     using System.Collections.Generic;
-    using Fanex.MailDelivery.Client.Models;
     using Fanex.Service.Core.Configuration;
     using Fanex.Service.Core.MailService;
     using Fanex.Service.Core.Model;
+    using MailDelivery.Core.Models;
 
     /// <summary>
     /// TODO: Update summary.

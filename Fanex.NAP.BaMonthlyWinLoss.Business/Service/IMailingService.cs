@@ -6,11 +6,7 @@
 
 namespace Fanex.NAPReport.BAMonthlyWinLoss.Business.Service
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.MailDelivery.Client.Models;
+    using MailDelivery.Core.Models;
 
     /// <summary>
     /// TODO: Update summary.

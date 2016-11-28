@@ -4,10 +4,10 @@
     using System.IO;
     using System.ServiceProcess;
     using Fanex.Data.Configuration;
-    using Fanex.MailDelivery.Client.Handlers;
     using Fanex.Service.Core.Extensions;
     using Fanex.Service.Core.MailService;
     using Fanex.Service.Core.Utilities;
+    using MailDelivery.Client;
 
     public partial class AutoMailService : ServiceBase
     {

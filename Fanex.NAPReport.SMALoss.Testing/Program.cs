@@ -3,9 +3,9 @@
     using System;
     using System.IO;
     using Fanex.Data.Configuration;
-    using Fanex.MailDelivery.Client.Handlers;
     using Fanex.NAPReport.SMALoss.Business;
     using Fanex.NAPReport.SMALoss.Business.Services;
+    using MailDelivery.Client;
 
     internal class Program
     {
@@ -19,7 +19,7 @@
             var mail = lossProcess.SendMailToVIPGroup();
 
             mail.Mail.MailingListId = AppSettings.FunctionId;
-            MailClientHandler.SendMail(mail.Mail);
+            MailClientHandler.SendFunctionMail(mail.Mail);
             MailClientHandler.Stop();
         }
     }

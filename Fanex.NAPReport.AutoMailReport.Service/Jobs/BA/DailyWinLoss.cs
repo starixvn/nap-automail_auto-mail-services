@@ -1,39 +1,37 @@
-﻿﻿namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.BA
- {
-     using Fanex.MailDelivery.Client.Enumerations;
-     using Fanex.MailDelivery.Client.Messages;
-     using Fanex.MailDelivery.Client.Models;
-     using Fanex.NAPReport.BADailyWinLoss.Business.Service;
-     using Fanex.Service.Core.MailService;
-     using Quartz;
+﻿namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.BA
+{
+    using Fanex.NAPReport.BADailyWinLoss.Business.Service;
+    using Fanex.Service.Core.MailService;
+    using MailDelivery.Core.Models;
+    using Quartz;
 
-     /// <summary>
-     /// TODO: Update summary.
-     /// </summary>
-     public class DailyWinLoss : ScheduleMailBase
-     {
-         private IMailingService service;
+    /// <summary>
+    /// TODO: Update summary.
+    /// </summary>
+    public class DailyWinLoss : ScheduleMailBase
+    {
+        private IMailingService service;
 
-         public DailyWinLoss()
-         {
-             service = new MailingService();
-         }
+        public DailyWinLoss()
+        {
+            service = new MailingService();
+        }
 
-         public override JobResultMessage SendMailToVipGroup(Schedule schedule, IJobExecutionContext jobContext)
-         {
-             var mail = service.SendMailToVIPGroup();
+        public override JobMessage SendMailToVipGroup(Schedule schedule, IJobExecutionContext jobContext)
+        {
+            var mail = service.SendMailToVIPGroup();
 
-             return new JobResultMessage()
-             {
-                 JobStatus = JobStatus.Success,
-                 Mail = mail,
-                 Schedule = schedule,
-             };
-         }
+            return new JobMessage()
+            {
+                JobStatus = JobStatus.Success,
+                Mail = mail,
+                Schedule = schedule,
+            };
+        }
 
-         public override void SendMailToNormalGroup()
-         {
-             service.SendMailToNormalGroup();
-         }
-     }
- }
+        public override void SendMailToNormalGroup()
+        {
+            service.SendMailToNormalGroup();
+        }
+    }
+}

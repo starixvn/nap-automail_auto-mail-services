@@ -9,11 +9,11 @@ namespace Fanex.Service.Core.MailService
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using Fanex.MailDelivery.Client.Handlers;
-    using Fanex.MailDelivery.Client.Models;
     using Fanex.Service.Core.Constants;
     using Fanex.Service.Core.Model;
     using Fanex.Service.Core.Utilities;
+    using MailDelivery.Client;
+    using MailDelivery.Core.Models;
     using RazorEngine;
 
     /// <summary>
@@ -26,9 +26,9 @@ namespace Fanex.Service.Core.MailService
             var root = AppDomain.CurrentDomain.BaseDirectory;
             string filePath = root + MailTemplateConstants.AttachedFileEmail;
             string template = File.ReadAllText(filePath);
-            var emailContent = Razor.Parse(template, mailInfo); 
+            var emailContent = Razor.Parse(template, mailInfo);
 
-            Mail mail = new Mail() 
+            Mail mail = new Mail()
             {
                 Subject = mailInfo.Subject,
                 Title = AppSettingBase.Title,
@@ -37,9 +37,9 @@ namespace Fanex.Service.Core.MailService
             };
 
             foreach (string fileNamePath in mailInfo.FileNamesPath)
-            {                
-                mail.Attachments.Add(new MailAttachment(fileNamePath, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
-            }            
+            {
+                mail.Attachments.Add(new MailAttachment(fileNamePath, FileExtension.MS_EXCEL));
+            }
 
             return mail;
         }
@@ -66,7 +66,7 @@ namespace Fanex.Service.Core.MailService
             var mail = CreateMailWithAttachedFile(mailInfo);
             mail.MailingListId = functionId;
 
-            MailClientHandler.SendMail(mail);
+            SendEmail(mail);
         }
 
         public void SendFunctionMailWithNotification(int functionId, MailInfo mailInfo)
@@ -74,7 +74,7 @@ namespace Fanex.Service.Core.MailService
             var mail = CreateMailWithNotification(mailInfo);
             mail.MailingListId = functionId;
 
-            MailClientHandler.SendMail(mail);
+            SendEmail(mail);
         }
 
         public Mail CreateMailCustomContentWithAttachedFile(MailInfo mailInfo, string bodyContent)
@@ -83,13 +83,13 @@ namespace Fanex.Service.Core.MailService
             {
                 Subject = mailInfo.Subject,
                 Title = AppSettingBase.Title,
-                Body = bodyContent, 
+                Body = bodyContent,
                 Attachments = new List<MailAttachment>()
             };
 
             foreach (string fileNamePath in mailInfo.FileNamesPath)
             {
-                mail.Attachments.Add(new MailAttachment(fileNamePath, MailDelivery.Client.Enumerations.FileExtension.MS_EXCEL));
+                mail.Attachments.Add(new MailAttachment(fileNamePath, FileExtension.MS_EXCEL));
             }
 
             return mail;
@@ -119,7 +119,14 @@ namespace Fanex.Service.Core.MailService
                 MailingListId = functionId
             };
 
-            MailClientHandler.SendMail(mail);
+            SendEmail(mail);
+        }
+
+        private void SendEmail(Mail mail)
+        {
+            MailClientHandler.Start();
+            MailClientHandler.SendFunctionMail(mail);
+            MailClientHandler.Stop();
         }
     }
 }

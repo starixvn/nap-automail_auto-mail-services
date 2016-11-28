@@ -9,12 +9,12 @@ namespace Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Mailing
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using Fanex.MailDelivery.Client.Models;
     using Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Balance;
     using Fanex.NAPReport.BalanceMonthlyReport.Business.Service.CreditTerm;
     using Fanex.Service.Core.Configuration;
     using Fanex.Service.Core.MailService;
     using Fanex.Service.Core.Model;
+    using MailDelivery.Core.Models;
 
     /// <summary>
     /// TODO: Update summary.
@@ -35,7 +35,7 @@ namespace Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Mailing
 
         public Mail SendMailCreditTermToVIPGroup()
         {
-            ICreditTermService service = new CreditTermService();            
+            ICreditTermService service = new CreditTermService();
             service.ExportExcelCreditTerm();
 
             var fileNamesPath = new List<string>();
@@ -154,11 +154,11 @@ namespace Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Mailing
             var fileNames = new List<string>();
 
             IBalanceService service = new BalanceService(masterCriteria);
-            service.ExportExcelBalance();            
+            service.ExportExcelBalance();
             fileNamesPath.Add(service.DirectoryOfFileName);
             fileNames.Add(service.FileName);
 
-            service = new BalanceService(agentCriteria); 
+            service = new BalanceService(agentCriteria);
             service.ExportExcelBalance();
             fileNamesPath.Add(service.DirectoryOfFileName);
             fileNames.Add(service.FileName);

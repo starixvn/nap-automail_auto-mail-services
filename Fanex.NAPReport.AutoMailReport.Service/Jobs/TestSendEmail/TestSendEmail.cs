@@ -6,10 +6,8 @@
 
 namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.TestSendEmail
 {
-    using Fanex.MailDelivery.Client.Enumerations;
-    using Fanex.MailDelivery.Client.Messages;
-    using Fanex.MailDelivery.Client.Models;
     using Fanex.Service.Core.MailService;
+    using MailDelivery.Core.Models;
     using Quartz;
 
     /// <summary>
@@ -17,16 +15,16 @@ namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.TestSendEmail
     /// </summary>
     public class TestSendEmail : ScheduleMailBase
     {
-        public override JobResultMessage SendMailToVipGroup(Schedule schedule, IJobExecutionContext jobContext)
+        public override JobMessage SendMailToVipGroup(Schedule schedule, IJobExecutionContext jobContext)
         {
-            Mail mail = new Mail() 
+            Mail mail = new Mail()
             {
                 Subject = schedule.Name,
                 Title = "Title - Testing",
                 Body = "Body - Testing"
             };
 
-            return new JobResultMessage()
+            return new JobMessage()
             {
                 JobStatus = JobStatus.Success,
                 Mail = mail,

@@ -5,14 +5,13 @@
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Linq;
-    using Fanex.MailDelivery.Client.Enumerations;
-    using Fanex.MailDelivery.Client.Models;
     using Fanex.NAPReport.SMALoss.Business.Criteria;
     using Fanex.NAPReport.SMALoss.Business.Entities;
     using Fanex.NAPReport.SMALoss.Business.Services.ExcelExport;
     using Fanex.Service.Core.Configuration;
     using Fanex.Service.Core.MailService;
     using Fanex.Service.Core.Model;
+    using MailDelivery.Core.Models;
     using RazorEngine;
 
     public class MailingService : IMailingServiceBase
@@ -101,7 +100,7 @@
 
             return result;
         }
-      
+
         private List<FormattedSMALossLevelItem> GetSMALossLevels()
         {
             IEnumerable<SMALossLevel> rawData = this._lossService.GetSMALossLevels(new LimitLossActionConfigCriteria());
@@ -141,7 +140,7 @@
             lossItems.ToList().ForEach(s => changedLevelUp += s.SMALossItems.Where(a => a.ChangedLevel > 0).Count());
             lossItems.ToList().ForEach(s => changedLevelDown += s.SMALossItems.Where(a => a.ChangedLevel < 0).Count());
             lossItems.ToList().ForEach(s => changedLevelHorizontal += s.SMALossItems.Where(a => a.ChangedLevel == 0).Count());
-            
+
             if (lossItems != null && lossItems.Any())
             {
                 content = Razor.Parse(GetTemplate, lossItems);
@@ -162,7 +161,7 @@
                     FileName = FileName,
                     FileNamesPath = fileNamesPath
                 };
-                
+
                 var mail = mailStation.CreateMailCustomContentWithAttachedFile(_mailInfo, content);
 
                 var appLocation = AppDomain.CurrentDomain.BaseDirectory;
@@ -185,7 +184,7 @@
                 {
                     mail.AlternativeViews.Add(horizontalLineArrow);
                 }
-                
+
                 mailResult.Mail = mail;
             }
             else

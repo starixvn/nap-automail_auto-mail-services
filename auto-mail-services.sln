@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fanex.Service.Core", "Fanex.Service.Core", "{4913BD11-42BB-4F4E-97C4-24475392CC54}"
 EndProject
@@ -39,11 +39,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.TurnoverWat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.TurnoverWatcher.Business", "Fanex.TurnoverWatcher.Business\Fanex.NAPReport.TurnoverWatcher.Business.csproj", "{EEEE6EC6-55BC-4C6E-AC8B-2D5B8C8B7179}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.BADailyWinLoss.Testing", "Fanex.NAP.BADailyWinLoss.Testing\Fanex.NAPReport.BADailyWinLoss.Testing.csproj", "{F63933BB-A6C9-4D53-A8D2-976883539902}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.BAMonthlyWinLoss.Testing", "Fanex.NAP.BAMonthlyWinLoss.Testing\Fanex.NAPReport.BAMonthlyWinLoss.Testing.csproj", "{2E68F6ED-72FE-4059-9ED5-F7600BDD93B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.BADailyWinLoss.Business", "Fanex.NAP.BADailyWinLoss\Fanex.NAPReport.BADailyWinLoss.Business.csproj", "{D8FF5D62-BFFD-4710-98AA-B0E338033252}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.BADailyWinLoss.Business", "Fanex.NAP.BADailyWinLoss\Fanex.BADailyWinLoss.Business.csproj", "{D8FF5D62-BFFD-4710-98AA-B0E338033252}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.BAMonthlyWinLoss.Business", "Fanex.NAP.BaMonthlyWinLoss.Business\Fanex.NAPReport.BAMonthlyWinLoss.Business.csproj", "{AF1F498A-2733-40CE-8B6B-84A02827E0A5}"
 EndProject
@@ -65,9 +63,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.ReportingSe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.ReportingServices.Testing", "Fanex.NAPReport.ReportingServices.Testing\Fanex.NAPReport.ReportingServices.Testing.csproj", "{6EDA5B09-6322-4CED-AE31-72D6F37AE602}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.TraderPerformance.Testing", "Fanex.NAPReport.TraderPerformance\Fanex.NAPReport.TraderPerformance.Testing.csproj", "{940F285B-73B1-47DA-BF76-3E23ACD0DA66}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fanex.BADailyWinLoss", "Fanex.BADailyWinLoss", "{6DA56D23-347A-4FFB-A0FF-EE8C69CF0AAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.TraderPerformance.Business", "Fanex.NAPReport.TraderPerformance.Business\Fanex.NAPReport.TraderPerformance.Business.csproj", "{E4FFF516-2214-41C4-8F56-503307D59BF9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.BADailyWinLoss.Executing", "Fanex.BADailyWinLoss.Executing\Fanex.BADailyWinLoss.Executing.csproj", "{9B8A9DA0-2F7A-4B1A-BDB6-DB4A30E85500}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -189,16 +187,6 @@ Global
 		{EEEE6EC6-55BC-4C6E-AC8B-2D5B8C8B7179}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{EEEE6EC6-55BC-4C6E-AC8B-2D5B8C8B7179}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{EEEE6EC6-55BC-4C6E-AC8B-2D5B8C8B7179}.Release|x86.ActiveCfg = Release|Any CPU
-		{F63933BB-A6C9-4D53-A8D2-976883539902}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F63933BB-A6C9-4D53-A8D2-976883539902}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F63933BB-A6C9-4D53-A8D2-976883539902}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{F63933BB-A6C9-4D53-A8D2-976883539902}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{F63933BB-A6C9-4D53-A8D2-976883539902}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{F63933BB-A6C9-4D53-A8D2-976883539902}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F63933BB-A6C9-4D53-A8D2-976883539902}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F63933BB-A6C9-4D53-A8D2-976883539902}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{F63933BB-A6C9-4D53-A8D2-976883539902}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{F63933BB-A6C9-4D53-A8D2-976883539902}.Release|x86.ActiveCfg = Release|Any CPU
 		{2E68F6ED-72FE-4059-9ED5-F7600BDD93B9}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{2E68F6ED-72FE-4059-9ED5-F7600BDD93B9}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{2E68F6ED-72FE-4059-9ED5-F7600BDD93B9}.Debug|Mixed Platforms.Build.0 = Debug|x86
@@ -316,30 +304,18 @@ Global
 		{6EDA5B09-6322-4CED-AE31-72D6F37AE602}.Release|Mixed Platforms.Build.0 = Release|x86
 		{6EDA5B09-6322-4CED-AE31-72D6F37AE602}.Release|x86.ActiveCfg = Release|x86
 		{6EDA5B09-6322-4CED-AE31-72D6F37AE602}.Release|x86.Build.0 = Release|x86
-		{940F285B-73B1-47DA-BF76-3E23ACD0DA66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{940F285B-73B1-47DA-BF76-3E23ACD0DA66}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{940F285B-73B1-47DA-BF76-3E23ACD0DA66}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{940F285B-73B1-47DA-BF76-3E23ACD0DA66}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{940F285B-73B1-47DA-BF76-3E23ACD0DA66}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{940F285B-73B1-47DA-BF76-3E23ACD0DA66}.Debug|x86.Build.0 = Debug|Any CPU
-		{940F285B-73B1-47DA-BF76-3E23ACD0DA66}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{940F285B-73B1-47DA-BF76-3E23ACD0DA66}.Release|Any CPU.Build.0 = Release|Any CPU
-		{940F285B-73B1-47DA-BF76-3E23ACD0DA66}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{940F285B-73B1-47DA-BF76-3E23ACD0DA66}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{940F285B-73B1-47DA-BF76-3E23ACD0DA66}.Release|x86.ActiveCfg = Release|Any CPU
-		{940F285B-73B1-47DA-BF76-3E23ACD0DA66}.Release|x86.Build.0 = Release|Any CPU
-		{E4FFF516-2214-41C4-8F56-503307D59BF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E4FFF516-2214-41C4-8F56-503307D59BF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E4FFF516-2214-41C4-8F56-503307D59BF9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{E4FFF516-2214-41C4-8F56-503307D59BF9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{E4FFF516-2214-41C4-8F56-503307D59BF9}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{E4FFF516-2214-41C4-8F56-503307D59BF9}.Debug|x86.Build.0 = Debug|Any CPU
-		{E4FFF516-2214-41C4-8F56-503307D59BF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E4FFF516-2214-41C4-8F56-503307D59BF9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E4FFF516-2214-41C4-8F56-503307D59BF9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{E4FFF516-2214-41C4-8F56-503307D59BF9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{E4FFF516-2214-41C4-8F56-503307D59BF9}.Release|x86.ActiveCfg = Release|Any CPU
-		{E4FFF516-2214-41C4-8F56-503307D59BF9}.Release|x86.Build.0 = Release|Any CPU
+		{9B8A9DA0-2F7A-4B1A-BDB6-DB4A30E85500}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B8A9DA0-2F7A-4B1A-BDB6-DB4A30E85500}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B8A9DA0-2F7A-4B1A-BDB6-DB4A30E85500}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9B8A9DA0-2F7A-4B1A-BDB6-DB4A30E85500}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9B8A9DA0-2F7A-4B1A-BDB6-DB4A30E85500}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9B8A9DA0-2F7A-4B1A-BDB6-DB4A30E85500}.Debug|x86.Build.0 = Debug|Any CPU
+		{9B8A9DA0-2F7A-4B1A-BDB6-DB4A30E85500}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B8A9DA0-2F7A-4B1A-BDB6-DB4A30E85500}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B8A9DA0-2F7A-4B1A-BDB6-DB4A30E85500}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9B8A9DA0-2F7A-4B1A-BDB6-DB4A30E85500}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9B8A9DA0-2F7A-4B1A-BDB6-DB4A30E85500}.Release|x86.ActiveCfg = Release|Any CPU
+		{9B8A9DA0-2F7A-4B1A-BDB6-DB4A30E85500}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -356,9 +332,8 @@ Global
 		{FA306BD2-0F8F-4453-AC72-92905D715DDE} = {84385BB5-6DA3-4429-B535-7ECB1089FCC0}
 		{19757FF5-3D1C-41A2-97E0-83ED31FDCC2E} = {DD647794-42ED-4DBB-82FF-75040CE2D8D0}
 		{EEEE6EC6-55BC-4C6E-AC8B-2D5B8C8B7179} = {84385BB5-6DA3-4429-B535-7ECB1089FCC0}
-		{F63933BB-A6C9-4D53-A8D2-976883539902} = {DD647794-42ED-4DBB-82FF-75040CE2D8D0}
 		{2E68F6ED-72FE-4059-9ED5-F7600BDD93B9} = {DD647794-42ED-4DBB-82FF-75040CE2D8D0}
-		{D8FF5D62-BFFD-4710-98AA-B0E338033252} = {84385BB5-6DA3-4429-B535-7ECB1089FCC0}
+		{D8FF5D62-BFFD-4710-98AA-B0E338033252} = {6DA56D23-347A-4FFB-A0FF-EE8C69CF0AAB}
 		{AF1F498A-2733-40CE-8B6B-84A02827E0A5} = {84385BB5-6DA3-4429-B535-7ECB1089FCC0}
 		{28127410-CF82-4859-967C-1F1A06780538} = {DD647794-42ED-4DBB-82FF-75040CE2D8D0}
 		{446FBE1E-58F9-41A8-B442-8012B884BF7F} = {84385BB5-6DA3-4429-B535-7ECB1089FCC0}
@@ -369,8 +344,7 @@ Global
 		{4DF39ADE-3E49-4D1E-9211-E48353B65135} = {84385BB5-6DA3-4429-B535-7ECB1089FCC0}
 		{3221F978-C15B-427F-991C-3E00E2780D22} = {84385BB5-6DA3-4429-B535-7ECB1089FCC0}
 		{6EDA5B09-6322-4CED-AE31-72D6F37AE602} = {DD647794-42ED-4DBB-82FF-75040CE2D8D0}
-		{940F285B-73B1-47DA-BF76-3E23ACD0DA66} = {DD647794-42ED-4DBB-82FF-75040CE2D8D0}
-		{E4FFF516-2214-41C4-8F56-503307D59BF9} = {84385BB5-6DA3-4429-B535-7ECB1089FCC0}
+		{9B8A9DA0-2F7A-4B1A-BDB6-DB4A30E85500} = {6DA56D23-347A-4FFB-A0FF-EE8C69CF0AAB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35;packages\Unity.Interception.2.1.505.2\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Data.5.0.505.0\lib\NET35

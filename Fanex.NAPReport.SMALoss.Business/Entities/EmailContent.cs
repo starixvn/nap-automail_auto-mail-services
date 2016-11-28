@@ -1,7 +1,6 @@
 ﻿namespace Fanex.NAPReport.SMALoss.Business.Entities
 {
     using Fanex.MailDelivery.Client.Configurations;
-    using Fanex.MailDelivery.Client.Models;
 
     /// <summary>
     /// Email content.

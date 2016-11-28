@@ -9,19 +9,19 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using Fanex.MailDelivery.Client.Enumerations;
     using Fanex.NAPReport.WinLossByProducts.Business.Constants;
     using Fanex.NAPReport.WinLossByProducts.Business.Criteria;
     using Fanex.NAPReport.WinLossByProducts.Business.Model;
     using Fanex.Service.Core.Configuration;
     using Fanex.Service.Core.MailService;
     using Fanex.Service.Core.Model;
+    using MailDelivery.Core.Models;
     using RazorEngine;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class MailingService : IMailingServiceBase 
+    public class MailingService : IMailingServiceBase
     {
         private IMailStationService mailStation;
         private MailInfo _mailInfo;

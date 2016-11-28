@@ -3,8 +3,8 @@
     using System;
     using System.IO;
     using Fanex.Data.Configuration;
-    using Fanex.MailDelivery.Client.Handlers;
     using Fanex.NAPReport.TurnoverWatcher.Business.Service;
+    using MailDelivery.Client;
 
     public class Program
     {
@@ -21,7 +21,7 @@
                 var service = new MailingService();
                 service.SendMailToVIPGroup();
 
-                MailClientHandler.Stop();               
+                MailClientHandler.Stop();
             }
             catch (Exception ex)
             {

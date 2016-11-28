@@ -6,20 +6,10 @@
 
 namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.NAPReport
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using Fanex.MailDelivery.Client.Enumerations;
-    using Fanex.MailDelivery.Client.Messages;
-    using Fanex.MailDelivery.Client.Models;
-    using Fanex.NAPReport.HorseRacingReport.Business;
-    using Fanex.NAPReport.HorseRacingReport.Business.Criteria;
     using Fanex.NAPReport.HorseRacingReport.Business.Service;
-    using Fanex.Service.Core.Constants;
-    using Fanex.Service.Core.Extensions;
     using Fanex.Service.Core.MailService;
+    using MailDelivery.Core.Models;
     using Quartz;
-    using RazorEngine;
 
     /// <summary>
     /// TODO: Update summary.
@@ -33,11 +23,11 @@ namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.NAPReport
             service = new MailingService();
         }
 
-        public override JobResultMessage SendMailToVipGroup(Schedule schedule, IJobExecutionContext jobContext)
+        public override JobMessage SendMailToVipGroup(Schedule schedule, IJobExecutionContext jobContext)
         {
             var mail = service.SendMailToVIPGroup();
 
-            return new JobResultMessage()
+            return new JobMessage()
             {
                 JobStatus = JobStatus.Success,
                 Mail = mail,

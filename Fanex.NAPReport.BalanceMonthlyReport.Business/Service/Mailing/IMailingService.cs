@@ -6,14 +6,14 @@
 
 namespace Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Mailing
 {
-    using Fanex.MailDelivery.Client.Models;
+    using MailDelivery.Core.Models;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public interface IMailingService
     {
-        Mail SendMailCreditTermToVIPGroup();        
+        Mail SendMailCreditTermToVIPGroup();
 
         Mail SendMailSuperBalanceToVIPGroup();
 

@@ -4,11 +4,11 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using Fanex.MailDelivery.Client.Handlers;
     using Fanex.NAPReport.TurnoverWatcher.Business.Constants;
     using Fanex.Service.Core.Configuration;
     using Fanex.Service.Core.MailService;
     using Fanex.Service.Core.Model;
+    using MailDelivery.Client;
     using RazorEngine;
 
     public class MailingService : IMailingServiceBase
@@ -21,7 +21,7 @@
         public MailingService()
         {
             ConfigurationParser configurationParser = new ConfigurationParser(@"SiteConfig\TurnoverWatcher\Settings\TurnoverWatcher.Settings.xml");
-            configurationParser.Parse<AppSettings>();            
+            configurationParser.Parse<AppSettings>();
             _mailStation = new MailStationService();
             _mailInfo = new MailInfo();
             _service = new TurnoverWatcherService();
@@ -65,7 +65,7 @@
                         var mail = _mailStation.CreateMailCustomContentWithAttachedFile(_mailInfo, bodyContent);
                         mail.MailingListId = AppSettings.FunctionId;
                         mailResult.Mail = mail;
-                        MailClientHandler.SendMail(mail);
+                        MailClientHandler.SendFunctionMail(mail);
                         if (!AppSettings.IsTest)
                         {
                             _service.RemoveNotifiedCustomer(notifiedCustomerMatchTurnovers, fromPercentage);
