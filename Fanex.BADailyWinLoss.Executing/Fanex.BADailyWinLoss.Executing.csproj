@@ -162,7 +162,7 @@
     <None Include="Fanex.BADailyWinLoss.Executing.Local.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Fanex.BADailyWinLoss.ExecutingPRO.exe.config">
+    <None Include="Fanex.BADailyWinLoss.Executing.PRO.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Fanex.BADailyWinLoss.Executing.UAT.exe.config">
@@ -193,7 +193,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fanex.NAP.BADailyWinLoss\Fanex.BADailyWinLoss.Business.csproj">
+    <ProjectReference Include="..\Fanex.BADailyWinLoss.Business\Fanex.BADailyWinLoss.Business.csproj">
       <Project>{d8ff5d62-bffd-4710-98aa-b0e338033252}</Project>
       <Name>Fanex.BADailyWinLoss.Business</Name>
     </ProjectReference>

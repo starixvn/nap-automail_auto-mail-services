@@ -1,6 +1,6 @@
 ﻿namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.BA
 {
-    using Fanex.NAPReport.BAMonthlyWinLoss.Business.Service;
+    using BAMonthlyWinLoss.Business.Service;
     using Fanex.Service.Core.MailService;
     using MailDelivery.Core.Models;
     using Quartz;
