@@ -678,9 +678,9 @@
       <Project>{6004DBB8-7209-4690-A158-62D12B49EAE4}</Project>
       <Name>Fanex.NAPReport.VirtualSportWinLoss.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Fanex.NAPReport.WinLossByProducts.Business\Fanex.NAPReport.WinLossByProducts.Business.csproj">
-      <Project>{FA306BD2-0F8F-4453-AC72-92905D715DDE}</Project>
-      <Name>Fanex.NAPReport.WinLossByProducts.Business</Name>
+    <ProjectReference Include="..\Fanex.ProductsWinLoss.Business\Fanex.ProductsWinLoss.Business.csproj">
+      <Project>{fa306bd2-0f8f-4453-ac72-92905d715dde}</Project>
+      <Name>Fanex.ProductsWinLoss.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.Service.Core\Fanex.Service.Core.csproj">
       <Project>{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}</Project>

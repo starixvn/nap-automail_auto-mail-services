@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<Functions>
-  <Function Name="Overall Win Loss By Products Report">
-    <Setting Key="Acc_Rpt_Automail_WinlossbyProduct" SpName="Acc_Rpt_Automail_WinlossbyProduct" DbName="DBDWH.bodb_dwrs.bodbAdminNet" Timeout="0"/>
-    <Setting Key="Acc_Rpt_Automail_Winloss_3rd" SpName="Acc_Rpt_Automail_Winloss_3rd" DbName="DBDWH.bodb_dwrs.bodbAdminNet" Timeout="0"/>
-  </Function>
-</Functions>
