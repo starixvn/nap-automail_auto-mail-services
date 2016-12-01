@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<Functions>
-  <Function Name="Core - Report Service">
-    <Setting Key="NAP_ExchangeCurrencySel" SpName="NAP_ExchangeCurrencySel" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
-  </Function>
-</Functions>
