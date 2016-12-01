@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<Functions>
-  <Function Name="Misc - Credit movement">
+﻿<Functions>	
+  <Function Name="CreditMovement">
     <Setting Key="CreditMovement_GetReport" SpName="Acc_Rpt_CreditMovement" DbName="DBLOG.bodb_CustomerLog.bodbAdminNet" TimeOut="0" />
   </Function>
 </Functions>

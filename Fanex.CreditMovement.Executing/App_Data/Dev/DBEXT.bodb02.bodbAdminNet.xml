@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Functions>
+  <Function Name="Exchange rate">
+    <Setting Key="Acc_ExchangeCodeSel" SpName="Acc_ExchangeCodeSel" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" />
+  </Function>
+</Functions>

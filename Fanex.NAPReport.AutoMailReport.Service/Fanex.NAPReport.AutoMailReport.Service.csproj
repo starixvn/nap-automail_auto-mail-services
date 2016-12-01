@@ -650,9 +650,9 @@
       <Project>{af1f498a-2733-40ce-8b6b-84a02827e0a5}</Project>
       <Name>Fanex.BAMonthlyWinLoss.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Fanex.CreditMovement.Business\Fanex.NAPReport.CreditMovement.Business.csproj">
+    <ProjectReference Include="..\Fanex.CreditMovement.Business\Fanex.CreditMovement.Business.csproj">
       <Project>{11920088-769E-4635-9222-19CF072BC6E1}</Project>
-      <Name>Fanex.NAPReport.CreditMovement.Business</Name>
+      <Name>Fanex.CreditMovement.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.NAPReport.BalanceMonthlyReport.Business\Fanex.NAPReport.BalanceMonthlyReport.Business.csproj">
       <Project>{4DF39ADE-3E49-4D1E-9211-E48353B65135}</Project>
