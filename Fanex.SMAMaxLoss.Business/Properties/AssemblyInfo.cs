@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Fanex.NAPReport.SMALoss.Testing")]
+[assembly: AssemblyTitle("Fanex.SMAMaxLoss.Business")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Fanex.NAPReport.SMALoss.Testing")]
+[assembly: AssemblyProduct("Fanex.SMAMaxLoss.Business")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("522b2823-2e6f-4fcc-9516-dc4e8720a31c")]
+[assembly: Guid("05e43f35-53bf-446d-93ea-3db6e1edcc4e")]
 
 // Version information for an assembly consists of the following four values:
 //

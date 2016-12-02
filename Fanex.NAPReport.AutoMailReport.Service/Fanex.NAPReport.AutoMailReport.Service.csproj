@@ -666,10 +666,6 @@
       <Project>{446FBE1E-58F9-41A8-B442-8012B884BF7F}</Project>
       <Name>Fanex.NAPReport.HorseTransaction3rd.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Fanex.NAPReport.SMALoss.Business\Fanex.NAPReport.SMALoss.Business.csproj">
-      <Project>{DA6DE65A-5D27-4B28-A928-422B664502C2}</Project>
-      <Name>Fanex.NAPReport.SMALoss.Business</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Fanex.ProductsWinLoss.Business\Fanex.ProductsWinLoss.Business.csproj">
       <Project>{fa306bd2-0f8f-4453-ac72-92905d715dde}</Project>
       <Name>Fanex.ProductsWinLoss.Business</Name>
@@ -681,6 +677,10 @@
     <ProjectReference Include="..\Fanex.Service.Core\Fanex.Service.Core.csproj">
       <Project>{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}</Project>
       <Name>Fanex.Service.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.SMAMaxLoss.Business\Fanex.SMAMaxLoss.Business.csproj">
+      <Project>{da6de65a-5d27-4b28-a928-422b664502c2}</Project>
+      <Name>Fanex.SMAMaxLoss.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.TurnoverWatcher.Business\Fanex.NAPReport.TurnoverWatcher.Business.csproj">
       <Project>{EEEE6EC6-55BC-4C6E-AC8B-2D5B8C8B7179}</Project>
