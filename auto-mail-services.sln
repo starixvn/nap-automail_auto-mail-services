@@ -83,6 +83,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.BalanceMonthlyReportC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.BalanceMonthlyReport.Business", "Fanex.BalanceMonthlyReport.Business\Fanex.BalanceMonthlyReport.Business.csproj", "{4DF39ADE-3E49-4D1E-9211-E48353B65135}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.BalanceMonthlyReportSuperBalance.Executing", "Fanex.BalanceMonthlyReportSuperBalance.Executing\Fanex.BalanceMonthlyReportSuperBalance.Executing.csproj", "{CD9A65A8-D520-485F-8D1D-8DF9BADE183E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -365,6 +367,18 @@ Global
 		{4DF39ADE-3E49-4D1E-9211-E48353B65135}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{4DF39ADE-3E49-4D1E-9211-E48353B65135}.Release|x86.ActiveCfg = Release|Any CPU
 		{4DF39ADE-3E49-4D1E-9211-E48353B65135}.Release|x86.Build.0 = Release|Any CPU
+		{CD9A65A8-D520-485F-8D1D-8DF9BADE183E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD9A65A8-D520-485F-8D1D-8DF9BADE183E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD9A65A8-D520-485F-8D1D-8DF9BADE183E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CD9A65A8-D520-485F-8D1D-8DF9BADE183E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CD9A65A8-D520-485F-8D1D-8DF9BADE183E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CD9A65A8-D520-485F-8D1D-8DF9BADE183E}.Debug|x86.Build.0 = Debug|Any CPU
+		{CD9A65A8-D520-485F-8D1D-8DF9BADE183E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD9A65A8-D520-485F-8D1D-8DF9BADE183E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD9A65A8-D520-485F-8D1D-8DF9BADE183E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CD9A65A8-D520-485F-8D1D-8DF9BADE183E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{CD9A65A8-D520-485F-8D1D-8DF9BADE183E}.Release|x86.ActiveCfg = Release|Any CPU
+		{CD9A65A8-D520-485F-8D1D-8DF9BADE183E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -394,6 +408,7 @@ Global
 		{AFE10301-BCFD-4D11-885C-A43A46B5B2BF} = {0024BAF5-72C4-471A-A5E7-4F84EFECBFC9}
 		{8C8FB539-DAAD-46D4-A7B8-F5601D7F42BF} = {3CD6E96D-D7A3-4110-9052-7219C819F7DF}
 		{4DF39ADE-3E49-4D1E-9211-E48353B65135} = {3CD6E96D-D7A3-4110-9052-7219C819F7DF}
+		{CD9A65A8-D520-485F-8D1D-8DF9BADE183E} = {3CD6E96D-D7A3-4110-9052-7219C819F7DF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35;packages\Unity.Interception.2.1.505.2\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Data.5.0.505.0\lib\NET35
