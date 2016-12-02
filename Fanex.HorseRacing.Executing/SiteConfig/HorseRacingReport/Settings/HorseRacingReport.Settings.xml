@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Settings>
+  <add key="IsTest" value="false" />
+  <add key="FromDate" value="2015-03-01" />
+  <add key="ToDate" value="2015-03-16" />    
+  <add key="DataDirectory" value="\\10.18.200.202\_Fanex.ExcelFiles\HorseRacingReport" />  
+  <add key="ExcelPasswordProtected" value="we168" />
+  <add key="FunctionId" value="77" />
+  <add key="Subject" value="Automail Report - Horse Racing Report From {0} To {1}" />
+</Settings>
