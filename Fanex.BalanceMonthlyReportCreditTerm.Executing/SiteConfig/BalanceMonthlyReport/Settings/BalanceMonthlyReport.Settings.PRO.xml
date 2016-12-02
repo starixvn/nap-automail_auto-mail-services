@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Settings>
+  <add key="IsTest" value="false" />
+
+  <add key="DataDirectoryCreditTerm" value="\\10.40.40.52\NAP_Reports\BalanceMonthlyReport_CreditTerm" />
+  <add key="DataDirectorySuperBalance" value="\\10.40.40.52\NAP_Reports\BalanceMonthlyReport_SuperBalance" />
+  <add key="DataDirectoryDirectBalance" value="\\10.40.40.52\NAP_Reports\BalanceMonthlyReport_DirectBalance" />
+  
+  <add key="ExcelPasswordProtectedCreditTerm" value="" />
+  <add key="ExcelPasswordProtectedSuperBalance" value="" />
+  <add key="ExcelPasswordProtectedDirectBalance" value="" />
+  
+  <add key="FunctionIdCreditTerm" value="174" />
+  <add key="FunctionIdSuperBalance" value="0" />
+  <add key="FunctionIdDirectBalance" value="0" />
+  <add key="CreditTermSubject" value="Automail Report - Credit Term - {0}" />
+  <add key="SuperBalanceSubject" value="Automail Report - Super Balance - {0}" />
+  <add key="DirectBalanceSubject" value="Automail Report - Direct Balance - {0}" />
+</Settings>

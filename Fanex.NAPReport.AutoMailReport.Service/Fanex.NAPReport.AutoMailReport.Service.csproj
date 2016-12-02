@@ -646,6 +646,10 @@
       <Project>{d8ff5d62-bffd-4710-98aa-b0e338033252}</Project>
       <Name>Fanex.BADailyWinLoss.Business</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Fanex.BalanceMonthlyReport.Business\Fanex.BalanceMonthlyReport.Business.csproj">
+      <Project>{4df39ade-3e49-4d1e-9211-e48353b65135}</Project>
+      <Name>Fanex.BalanceMonthlyReport.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fanex.BAMonthlyWinLoss.Business\Fanex.BAMonthlyWinLoss.Business.csproj">
       <Project>{af1f498a-2733-40ce-8b6b-84a02827e0a5}</Project>
       <Name>Fanex.BAMonthlyWinLoss.Business</Name>
@@ -657,10 +661,6 @@
     <ProjectReference Include="..\Fanex.HorseRacing.Business\Fanex.HorseRacing.Business.csproj">
       <Project>{afe10301-bcfd-4d11-885c-a43a46b5b2bf}</Project>
       <Name>Fanex.HorseRacing.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fanex.NAPReport.BalanceMonthlyReport.Business\Fanex.NAPReport.BalanceMonthlyReport.Business.csproj">
-      <Project>{4DF39ADE-3E49-4D1E-9211-E48353B65135}</Project>
-      <Name>Fanex.NAPReport.BalanceMonthlyReport.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.NAPReport.HorseTransaction3rdServices\Fanex.NAPReport.HorseTransaction3rd.Business.csproj">
       <Project>{446FBE1E-58F9-41A8-B442-8012B884BF7F}</Project>
