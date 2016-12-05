@@ -17,28 +17,28 @@ namespace Fanex.TurnoverWatcher.Service
         private Timer timer;
         private bool isOnProcessing = false;
 
-        public TurnoverWatcherNotificationService(IUMControlAdapter umcontrolAdapter)
+        public TurnoverWatcherNotificationService()
         {
-            //this.umcontrolAdapter = umcontrolAdapter;            
-            //Register();
+            this.umcontrolAdapter = umcontrolAdapter ?? new ONEbook.UM.Services.Impl.UMControlAdapter();
+            Register();
         }
 
         public bool Start()
         {
-            //Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
-            //DbSettingProviderManager.Current.Start();
-            //timer.Start();
-            //MailClientHandler.Start();
+            Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
+            DbSettingProviderManager.Current.Start();
+            timer.Start();
+            MailClientHandler.Start();
 
             return true;
         }
 
         public bool Stop()
         {
-            //timer.Stop();
-            //MailClientHandler.Stop();
+            timer.Stop();
+            MailClientHandler.Stop();
 
-            //timer.Dispose();
+            timer.Dispose();
 
             return true;
         }

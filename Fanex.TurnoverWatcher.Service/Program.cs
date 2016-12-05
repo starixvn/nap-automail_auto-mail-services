@@ -1,6 +1,4 @@
-﻿using SimpleInjector;
-using Topshelf;
-using Topshelf.SimpleInjector;
+﻿using Topshelf;
 
 namespace Fanex.TurnoverWatcher.Service
 {
@@ -8,17 +6,11 @@ namespace Fanex.TurnoverWatcher.Service
     {
         public static void Main(string[] args)
         {
-            var container = new Container();
-            TurnoverWatcherInjector.Register(container);
-            container.Verify();
-
             HostFactory.Run(x =>
             {
-                x.UseSimpleInjector(container);
-
                 x.Service<TurnoverWatcherNotificationService>(s =>
                 {
-                    s.ConstructUsingSimpleInjector();
+                    s.ConstructUsing(name => new TurnoverWatcherNotificationService());
                     s.WhenStarted(tc => tc.Start());
                     s.WhenStopped(tc => tc.Stop());
                 });
