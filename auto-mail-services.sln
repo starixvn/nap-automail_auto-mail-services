@@ -21,9 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{13DD1A
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.TurnoverWatcher.Service.Testing", "Fanex.TurnoverWatcher.Service.Testing\Fanex.NAPReport.TurnoverWatcher.Service.Testing.csproj", "{19757FF5-3D1C-41A2-97E0-83ED31FDCC2E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.TurnoverWatcher.Business", "Fanex.TurnoverWatcher.Business\Fanex.NAPReport.TurnoverWatcher.Business.csproj", "{EEEE6EC6-55BC-4C6E-AC8B-2D5B8C8B7179}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.TurnoverWatcher.Business", "Fanex.TurnoverWatcher.Business\Fanex.TurnoverWatcher.Business.csproj", "{EEEE6EC6-55BC-4C6E-AC8B-2D5B8C8B7179}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAPReport.HorseTransaction3rd.Testing", "Fanex.NAPReport.HorseTransaction3rd.Testing\Fanex.NAPReport.HorseTransaction3rd.Testing.csproj", "{28127410-CF82-4859-967C-1F1A06780538}"
 EndProject
@@ -87,6 +85,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.BalanceMonthlyReportS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.BalanceMonthlyReportDirectBalance.Executing", "Fanex.BalanceMonthlyReportDirectBalance.Executing\Fanex.BalanceMonthlyReportDirectBalance.Executing.csproj", "{42AE2410-76FB-4F0B-A3FB-78E3529C4CBB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fanex.TurnoverWatcher", "Fanex.TurnoverWatcher", "{9B44E547-15D8-4849-B6CF-BC081DD0CDB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.TurnoverWatcher.Service", "Fanex.TurnoverWatcher.Service\Fanex.TurnoverWatcher.Service.csproj", "{FAC81088-2D9E-43AB-846B-9FA52906AD05}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,16 +119,6 @@ Global
 		{A26D737A-8655-40AD-AA5D-13DC22FCFF7C}.Release|Mixed Platforms.Build.0 = Release|x86
 		{A26D737A-8655-40AD-AA5D-13DC22FCFF7C}.Release|x86.ActiveCfg = Release|x86
 		{A26D737A-8655-40AD-AA5D-13DC22FCFF7C}.Release|x86.Build.0 = Release|x86
-		{19757FF5-3D1C-41A2-97E0-83ED31FDCC2E}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{19757FF5-3D1C-41A2-97E0-83ED31FDCC2E}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{19757FF5-3D1C-41A2-97E0-83ED31FDCC2E}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{19757FF5-3D1C-41A2-97E0-83ED31FDCC2E}.Debug|x86.ActiveCfg = Debug|x86
-		{19757FF5-3D1C-41A2-97E0-83ED31FDCC2E}.Debug|x86.Build.0 = Debug|x86
-		{19757FF5-3D1C-41A2-97E0-83ED31FDCC2E}.Release|Any CPU.ActiveCfg = Release|x86
-		{19757FF5-3D1C-41A2-97E0-83ED31FDCC2E}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{19757FF5-3D1C-41A2-97E0-83ED31FDCC2E}.Release|Mixed Platforms.Build.0 = Release|x86
-		{19757FF5-3D1C-41A2-97E0-83ED31FDCC2E}.Release|x86.ActiveCfg = Release|x86
-		{19757FF5-3D1C-41A2-97E0-83ED31FDCC2E}.Release|x86.Build.0 = Release|x86
 		{EEEE6EC6-55BC-4C6E-AC8B-2D5B8C8B7179}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EEEE6EC6-55BC-4C6E-AC8B-2D5B8C8B7179}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEEE6EC6-55BC-4C6E-AC8B-2D5B8C8B7179}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -393,6 +385,18 @@ Global
 		{42AE2410-76FB-4F0B-A3FB-78E3529C4CBB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{42AE2410-76FB-4F0B-A3FB-78E3529C4CBB}.Release|x86.ActiveCfg = Release|Any CPU
 		{42AE2410-76FB-4F0B-A3FB-78E3529C4CBB}.Release|x86.Build.0 = Release|Any CPU
+		{FAC81088-2D9E-43AB-846B-9FA52906AD05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAC81088-2D9E-43AB-846B-9FA52906AD05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAC81088-2D9E-43AB-846B-9FA52906AD05}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FAC81088-2D9E-43AB-846B-9FA52906AD05}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FAC81088-2D9E-43AB-846B-9FA52906AD05}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FAC81088-2D9E-43AB-846B-9FA52906AD05}.Debug|x86.Build.0 = Debug|Any CPU
+		{FAC81088-2D9E-43AB-846B-9FA52906AD05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAC81088-2D9E-43AB-846B-9FA52906AD05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAC81088-2D9E-43AB-846B-9FA52906AD05}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FAC81088-2D9E-43AB-846B-9FA52906AD05}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FAC81088-2D9E-43AB-846B-9FA52906AD05}.Release|x86.ActiveCfg = Release|Any CPU
+		{FAC81088-2D9E-43AB-846B-9FA52906AD05}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -400,8 +404,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B} = {4913BD11-42BB-4F4E-97C4-24475392CC54}
 		{A26D737A-8655-40AD-AA5D-13DC22FCFF7C} = {84385BB5-6DA3-4429-B535-7ECB1089FCC0}
-		{19757FF5-3D1C-41A2-97E0-83ED31FDCC2E} = {DD647794-42ED-4DBB-82FF-75040CE2D8D0}
-		{EEEE6EC6-55BC-4C6E-AC8B-2D5B8C8B7179} = {84385BB5-6DA3-4429-B535-7ECB1089FCC0}
+		{EEEE6EC6-55BC-4C6E-AC8B-2D5B8C8B7179} = {9B44E547-15D8-4849-B6CF-BC081DD0CDB5}
 		{28127410-CF82-4859-967C-1F1A06780538} = {DD647794-42ED-4DBB-82FF-75040CE2D8D0}
 		{446FBE1E-58F9-41A8-B442-8012B884BF7F} = {84385BB5-6DA3-4429-B535-7ECB1089FCC0}
 		{11920088-769E-4635-9222-19CF072BC6E1} = {3CFFDD94-8A84-4E41-AFEA-A741A546C877}
@@ -424,6 +427,7 @@ Global
 		{4DF39ADE-3E49-4D1E-9211-E48353B65135} = {3CD6E96D-D7A3-4110-9052-7219C819F7DF}
 		{CD9A65A8-D520-485F-8D1D-8DF9BADE183E} = {3CD6E96D-D7A3-4110-9052-7219C819F7DF}
 		{42AE2410-76FB-4F0B-A3FB-78E3529C4CBB} = {3CD6E96D-D7A3-4110-9052-7219C819F7DF}
+		{FAC81088-2D9E-43AB-846B-9FA52906AD05} = {9B44E547-15D8-4849-B6CF-BC081DD0CDB5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35;packages\Unity.Interception.2.1.505.2\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Data.5.0.505.0\lib\NET35

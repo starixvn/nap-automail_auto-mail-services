@@ -2,7 +2,7 @@
 <Settings>
   <add key="FunctionId" value="28" />
   <add key="FunctionIdNormalGroup" value="28" />
-  <add key="DataDirectory" value="\\10.18.200.202\_Fanex.ExcelFiles\TurnoverWatcher" />
+  <add key="DataDirectory" value="\\10.18.200.202\_Fanex.ExcelFiles\TurnoverWatcherReport" />
   <add key="ExcelPasswordProtected" value="" />
   <add key="IsTest" value="true" />
   <add key="Subject" value="Automail Report - Turnover Watcher - {0}" />

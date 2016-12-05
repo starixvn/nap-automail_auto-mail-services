@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Settings>
+  <add key="FunctionId" value="44" />
+  <add key="FunctionIdNormalGroup" value="74" />
+  <add key="DataDirectory" value="\\10.40.40.52\NAP_Reports\TurnoverWatcherReport" />
+  <add key="ExcelPasswordProtected" value="" />
+  <add key="IsTest" value="false" />
+  <add key="Subject" value="Automail Report - Turnover Watcher - {0}" />
+</Settings>
