@@ -1,0 +1,6 @@
+﻿<appSettings>  
+  <add key="DataDirectory" value="\\10.18.200.202\_Fanex.ExcelFiles\ListofSMAReachingAllowableMaxLoss" />
+  <add key="ExcelPasswordProtected" value="" />
+  <add key="FunctionId" value="0" />
+  <add key="Subject" value="Automail Report - List of SMA Reaching Allowable Max Loss - {0} 10:00:00 PM (GMT-4)" />
+</appSettings>

@@ -1,9 +1,8 @@
 ﻿namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.WinLossByProducts
 {
-    using Fanex.MailDelivery.Client.Messages;
-    using Fanex.MailDelivery.Client.Models;
     using Fanex.NAPReport.WinLossByProducts.Business.Services;
     using Fanex.Service.Core.MailService;
+    using MailDelivery.Core.Models;
     using Quartz;
 
     public class OverallWinLossProducts : ScheduleMailBase
@@ -15,11 +14,11 @@
             _serivce = new OverallWinLossProductsMailingService();
         }
 
-        public override JobResultMessage SendMailToVipGroup(Schedule schedule, IJobExecutionContext jobContext)
+        public override JobMessage SendMailToVipGroup(Schedule schedule, IJobExecutionContext jobContext)
         {
             var mail = _serivce.SendMailToVIPGroup();
 
-            return new JobResultMessage()
+            return new JobMessage()
             {
                 JobStatus = mail.JobStatus,
                 Mail = mail.Mail,

@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<Settings>
-  <add key="IsTest" value="false" />
-  <add key="TestedDate" value="05/03/2015" />  
-  <add key="DataDirectory" value="\\10.18.200.202\_Fanex.ExcelFiles\BADailyWinLoss" />  
-  <add key="ExcelPasswordProtected" value="we168" />
-  <add key="FunctionId" value="77" />
-  <add key="Subject" value="Automail Report - BA Daily Win Loss - {0}" />
-</Settings>

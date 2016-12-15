@@ -6,7 +6,6 @@
     using System.Drawing;
     using System.IO;
     using Fanex.NAPReport.TurnoverWatcher.Business.Model;
-    using Fanex.NAPReport.TurnoverWatcher.Business.Resources;
     using Fanex.Service.Core.Constants;
     using Fanex.Service.Core.Extensions;
     using Fanex.Service.Core.Model;
@@ -14,6 +13,7 @@
     using Fanex.Service.Core.Service.Implement.Npoi;
     using Fanex.Service.Core.Service.Interface.Npoi;
     using Fanex.Service.Core.Utilities;
+    using Fanex.TurnoverWatcher.Business.Resources;
     using NPOI.XSSF.UserModel;
 
     public class ExportExcelService : IExportExcelService
@@ -52,7 +52,7 @@
             percentStyle = _customCellStyleService.CreatePercentageStyle(Color.White, _fontService.RegularFont);
             percentRedColorStyle = _customCellStyleService.CreatePercentageStyle(Color.Red, _fontService.WhiteBoldFont);
             decimalNumberStyle = _customCellStyleService.CreateDecimalNumberStyle(Color.White, _fontService.RegularFont);
-            textStyle = _bodyCellStyleService.CenterTextStyle;            
+            textStyle = _bodyCellStyleService.CenterTextStyle;
         }
 
         public string DirectoryOfFileName
@@ -169,7 +169,7 @@
                 _cell.IncreaseColumnIndex();
                 _cell.CellValue = sportbook.CustomerInfo.MaxTurnover;
                 NpoiNewFormatExcelExtension.RenderCell(_workSheet, _cell, decimalNumberStyle);
-                
+
                 _cell.IncreaseColumnIndex();
                 var _percentStyle = percentStyle;
                 if (sportbook.CustomerInfo.PercentageUsed >= 100)
@@ -247,6 +247,6 @@
         private void CreateReportPath(string exportDataDirectory, string reportNameWithExtension)
         {
             DirectoryOfFileName = Path.Combine(exportDataDirectory, reportNameWithExtension);
-        }        
+        }
     }
 }

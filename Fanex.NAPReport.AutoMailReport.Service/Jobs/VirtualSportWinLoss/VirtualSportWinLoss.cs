@@ -1,9 +1,8 @@
 ﻿namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.VirtualSportWinLoss
 {
-    using Fanex.MailDelivery.Client.Messages;
-    using Fanex.MailDelivery.Client.Models;
     using Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement;
     using Fanex.Service.Core.MailService;
+    using MailDelivery.Core.Models;
     using Quartz;
 
     public class VirtualSportWinLoss : ScheduleMailBase
@@ -15,11 +14,11 @@
             service = new MailingService();
         }
 
-        public override JobResultMessage SendMailToVipGroup(Schedule schedule, IJobExecutionContext jobContext)
+        public override JobMessage SendMailToVipGroup(Schedule schedule, IJobExecutionContext jobContext)
         {
             var mail = service.SendMailToVIPGroup();
 
-            return new JobResultMessage()
+            return new JobMessage()
             {
                 JobStatus = mail.JobStatus,
                 Mail = mail.Mail,

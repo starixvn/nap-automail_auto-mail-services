@@ -1,0 +1,5 @@
+<Functions>
+  <Function Name="Core - Report Service">
+    <Setting Key="Acc_ExchangeCurrencySel" SpName="Acc_ExchangeCurrencySel" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0" />
+  </Function>  
+</Functions>

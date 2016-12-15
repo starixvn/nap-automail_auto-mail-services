@@ -4,11 +4,10 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using Fanex.MailDelivery.Core.Models;
+
 namespace Fanex.Service.Core.Model
 {
-    using Fanex.MailDelivery.Client.Enumerations;
-    using Fanex.MailDelivery.Client.Models;
-
     /// <summary>
     /// TODO: Update summary.
     /// </summary>

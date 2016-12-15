@@ -4,9 +4,9 @@
     using System.IO;
     using System.Linq;
     using Fanex.Data.Configuration;
-    using Fanex.MailDelivery.Client.Models;
     using Fanex.NAPReport.HorseTransaction3rd.Business.Resource;
     using Fanex.NAPReport.HorseTransaction3rd.Business.Service;
+    using MailDelivery.Core.Models;
 
     public class Program
     {

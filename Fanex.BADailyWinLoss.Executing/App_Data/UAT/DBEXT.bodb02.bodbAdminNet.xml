@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Functions>
+  <Function Name="BA">
+    <Setting Key="Acc_Rpt_BALicWinlossDaily" SpName="Acc_Rpt_BALicWinlossDaily" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_BALicWinloss" SpName="Acc_Rpt_BALicWinloss" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" />
+  </Function>
+</Functions>

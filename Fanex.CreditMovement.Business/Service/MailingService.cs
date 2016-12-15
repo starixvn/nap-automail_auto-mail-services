@@ -13,6 +13,7 @@ namespace Fanex.CreditMovement.Business.Service
     using Fanex.Service.Core.Extensions;
     using Fanex.Service.Core.MailService;
     using Fanex.Service.Core.Model;
+    using MailDelivery.Core.Models;
 
     /// <summary>
     /// TODO: Update summary.
@@ -49,10 +50,10 @@ namespace Fanex.CreditMovement.Business.Service
                 };
 
                 _excel.ExportExcel(criteria);
-                
+
                 if (string.IsNullOrEmpty(_excel.FileName))
                 {
-                    mailResult.JobStatus = MailDelivery.Client.Enumerations.JobStatus.SuccessWithoutSendmail;
+                    mailResult.JobStatus = JobStatus.SuccessWithoutSendmail;
                 }
 
                 var fileNamesPath = new List<string>();

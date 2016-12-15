@@ -1,17 +1,15 @@
 ﻿namespace Fanex.NAPReport.AutoMailReport.Service.Jobs.HorseTransaction3rd
 {
     using System.Linq;
-    using Fanex.MailDelivery.Client.Enumerations;
     using Fanex.MailDelivery.Client.Jobs;
-    using Fanex.MailDelivery.Client.Messages;
-    using Fanex.MailDelivery.Client.Models;
     using Fanex.NAPReport.HorseTransaction3rd.Business.Resource;
     using Fanex.NAPReport.HorseTransaction3rd.Business.Service;
+    using MailDelivery.Core.Models;
     using Quartz;
 
     public class HorseTransaction3rd : JobBase
     {
-        protected override JobResultMessage Run(Schedule schedule, IJobExecutionContext jobContext)
+        protected override JobMessage Run(Schedule schedule, IJobExecutionContext jobContext)
         {
             var ftp = new GetFilesTransactionManager();
             ftp.GetFilesTransaction();
@@ -24,7 +22,7 @@
                 Body = content
             };
 
-            return new JobResultMessage()
+            return new JobMessage()
             {
                 JobStatus = JobStatus.Success,
                 Mail = mail,

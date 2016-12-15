@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Settings>
+  <add key="ExportDataDirectoryCompanyBalance" value="\\10.40.40.52\NAP_Reports\ReportingService_CompanyBalance" />
+  <add key="ExportDataDirectoryCompanyYesterdayBalance" value="\\10.40.40.52\NAP_Reports\ReportingService_CompanyYesterdayBalance" />
+  <add key="ExportDataDirectoryCompanyStatement" value="\\10.40.40.52\NAP_Reports\ReportingService_CompanyStatement" />
+  <add key="ExportDataDirectoryDailyTurnover" value="\\10.40.40.52\NAP_Reports\ReportingService_DailyTurnover" />
+  <add key="ExportDataDirectorySuperYesterdayBalance" value="\\10.40.40.52\NAP_Reports\ReportingService_SuperYesterdayBalance" />
+  <add key="ExcelPassword" value="" />
+  <add key="IsTest" value="false" />
+  <add key="WinLossDate" value="2015-06-18" />
+  <add key="FunctionId" value="0" />
+  <add key="Subject" value="Automail Report - Reporting Services - {0}" />
+</Settings>

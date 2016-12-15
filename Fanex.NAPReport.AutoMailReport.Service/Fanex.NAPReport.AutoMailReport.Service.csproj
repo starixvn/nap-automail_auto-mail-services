@@ -16,6 +16,8 @@
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -41,18 +43,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Logging, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.MailStation.1.0.7.3\lib\net40\Common.Logging.dll</HintPath>
+      <HintPath>..\packages\Common.Logging.3.0.0\lib\net40\Common.Logging.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Common.Logging.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.MailStation.1.0.7.3\lib\net40\Common.Logging.Core.dll</HintPath>
+      <HintPath>..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Couchbase, Version=1.0.0.0, Culture=neutral, PublicKeyToken=81137140da4e57ef, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.Caching.1.0.404.95\lib\net40\Couchbase.dll</HintPath>
     </Reference>
-    <Reference Include="EasyNetQ, Version=0.50.1.392, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.MailStation.1.0.7.3\lib\net40\EasyNetQ.dll</HintPath>
+    <Reference Include="EasyNetQ, Version=0.53.6.418, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EasyNetQ.0.53.6.418\lib\net40\EasyNetQ.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -85,7 +87,11 @@
       <HintPath>..\packages\Fanex.Logging.1.0.0.0\lib\net40\Fanex.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.MailDelivery.Client, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.MailStation.1.0.7.3\lib\net40\Fanex.MailDelivery.Client.dll</HintPath>
+      <HintPath>..\packages\Fanex.MailStation.1.1.0.1-beta1\lib\net40\Fanex.MailDelivery.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Fanex.MailDelivery.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.MailStation.1.1.0.1-beta1\lib\net40\Fanex.MailDelivery.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.NAP.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -98,6 +104,10 @@
     </Reference>
     <Reference Include="IBCFile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.File.1.0.0\lib\net40\IBCFile.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.1.3.1\lib\net40\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Caching, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\EnterpriseLibrary.Caching.5.0.414.0\lib\net40\Microsoft.Practices.EnterpriseLibrary.Caching.dll</HintPath>
@@ -129,6 +139,18 @@
     <Reference Include="Microsoft.Practices.Unity.Interception">
       <HintPath>..\packages\EnterpriseLibrary.Unity.5.0.414.0\lib\net40\Microsoft.Practices.Unity.Interception.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop, Version=1.0.168.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -136,12 +158,28 @@
     <Reference Include="MvcPager">
       <HintPath>..\packages\MvcPager.1.5.0.28157\lib\net40\MvcPager.dll</HintPath>
     </Reference>
-    <Reference Include="Quartz, Version=2.3.3.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.MailStation.1.0.7.3\lib\net40\Quartz.dll</HintPath>
+    <Reference Include="NPOI, Version=2.1.3.1, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.1.3.1\lib\net40\NPOI.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="RabbitMQ.Client, Version=3.5.4.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.MailStation.1.0.7.3\lib\net40\RabbitMQ.Client.dll</HintPath>
+    <Reference Include="NPOI.OOXML, Version=2.1.3.1, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.1.3.1\lib\net40\NPOI.OOXML.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.1.3.1, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.1.3.1\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.1.3.1, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.1.3.1\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Quartz, Version=2.3.3.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Quartz.2.3.3\lib\net40\Quartz.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=3.5.7.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\packages\RabbitMQ.Client.3.5.7\lib\net40\RabbitMQ.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="RazorEngine, Version=3.3.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
@@ -166,6 +204,19 @@
     <Reference Include="System.Data.SQLite.Linq, Version=1.0.98.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\System.Data.SQLite.Linq.1.0.98.1\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.IO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Threading.Tasks.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -531,6 +582,9 @@
     <Content Include="deployment.ignore">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="job_scheduling_data_2_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <Content Include="SiteConfig\SMALoss\Templates\Images\DownardArrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -588,53 +642,53 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fanex.CreditMovement.Business\Fanex.NAPReport.CreditMovement.Business.csproj">
+    <ProjectReference Include="..\Fanex.BADailyWinLoss.Business\Fanex.BADailyWinLoss.Business.csproj">
+      <Project>{d8ff5d62-bffd-4710-98aa-b0e338033252}</Project>
+      <Name>Fanex.BADailyWinLoss.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.BalanceMonthlyReport.Business\Fanex.BalanceMonthlyReport.Business.csproj">
+      <Project>{4df39ade-3e49-4d1e-9211-e48353b65135}</Project>
+      <Name>Fanex.BalanceMonthlyReport.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.BAMonthlyWinLoss.Business\Fanex.BAMonthlyWinLoss.Business.csproj">
+      <Project>{af1f498a-2733-40ce-8b6b-84a02827e0a5}</Project>
+      <Name>Fanex.BAMonthlyWinLoss.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.CreditMovement.Business\Fanex.CreditMovement.Business.csproj">
       <Project>{11920088-769E-4635-9222-19CF072BC6E1}</Project>
-      <Name>Fanex.NAPReport.CreditMovement.Business</Name>
+      <Name>Fanex.CreditMovement.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Fanex.NAP.BADailyWinLoss\Fanex.NAPReport.BADailyWinLoss.Business.csproj">
-      <Project>{D8FF5D62-BFFD-4710-98AA-B0E338033252}</Project>
-      <Name>Fanex.NAPReport.BADailyWinLoss.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fanex.NAP.BaMonthlyWinLoss.Business\Fanex.NAPReport.BAMonthlyWinLoss.Business.csproj">
-      <Project>{AF1F498A-2733-40CE-8B6B-84A02827E0A5}</Project>
-      <Name>Fanex.NAPReport.BAMonthlyWinLoss.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fanex.NAPReport.BalanceMonthlyReport.Business\Fanex.NAPReport.BalanceMonthlyReport.Business.csproj">
-      <Project>{4DF39ADE-3E49-4D1E-9211-E48353B65135}</Project>
-      <Name>Fanex.NAPReport.BalanceMonthlyReport.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fanex.NAPReport.HorseRacingReport.Business\Fanex.NAPReport.HorseRacingReport.Business.csproj">
-      <Project>{AFE10301-BCFD-4D11-885C-A43A46B5B2BF}</Project>
-      <Name>Fanex.NAPReport.HorseRacingReport.Business</Name>
+    <ProjectReference Include="..\Fanex.HorseRacing.Business\Fanex.HorseRacing.Business.csproj">
+      <Project>{afe10301-bcfd-4d11-885c-a43a46b5b2bf}</Project>
+      <Name>Fanex.HorseRacing.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.NAPReport.HorseTransaction3rdServices\Fanex.NAPReport.HorseTransaction3rd.Business.csproj">
       <Project>{446FBE1E-58F9-41A8-B442-8012B884BF7F}</Project>
       <Name>Fanex.NAPReport.HorseTransaction3rd.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Fanex.NAPReport.ReportingServices.Business\Fanex.NAPReport.ReportingServices.Business.csproj">
-      <Project>{3221F978-C15B-427F-991C-3E00E2780D22}</Project>
-      <Name>Fanex.NAPReport.ReportingServices.Business</Name>
+    <ProjectReference Include="..\Fanex.ProductsWinLoss.Business\Fanex.ProductsWinLoss.Business.csproj">
+      <Project>{fa306bd2-0f8f-4453-ac72-92905d715dde}</Project>
+      <Name>Fanex.ProductsWinLoss.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Fanex.NAPReport.SMALoss.Business\Fanex.NAPReport.SMALoss.Business.csproj">
-      <Project>{DA6DE65A-5D27-4B28-A928-422B664502C2}</Project>
-      <Name>Fanex.NAPReport.SMALoss.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fanex.NAPReport.VirtualSportWinLoss.Business\Fanex.NAPReport.VirtualSportWinLoss.Business.csproj">
-      <Project>{6004DBB8-7209-4690-A158-62D12B49EAE4}</Project>
-      <Name>Fanex.NAPReport.VirtualSportWinLoss.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fanex.NAPReport.WinLossByProducts.Business\Fanex.NAPReport.WinLossByProducts.Business.csproj">
-      <Project>{FA306BD2-0F8F-4453-AC72-92905D715DDE}</Project>
-      <Name>Fanex.NAPReport.WinLossByProducts.Business</Name>
+    <ProjectReference Include="..\Fanex.ReportingServices.Business\Fanex.ReportingServices.Business.csproj">
+      <Project>{3221f978-c15b-427f-991c-3e00e2780d22}</Project>
+      <Name>Fanex.ReportingServices.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fanex.Service.Core\Fanex.Service.Core.csproj">
       <Project>{35EF12A3-4FE1-4FDB-ACAB-49ABF9818D2B}</Project>
-      <Name>Fanex.Service.Core %28Fanex.Service.Core\Fanex.Service.Core%29</Name>
+      <Name>Fanex.Service.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Fanex.TurnoverWatcher.Business\Fanex.NAPReport.TurnoverWatcher.Business.csproj">
+    <ProjectReference Include="..\Fanex.SMAMaxLoss.Business\Fanex.SMAMaxLoss.Business.csproj">
+      <Project>{da6de65a-5d27-4b28-a928-422b664502c2}</Project>
+      <Name>Fanex.SMAMaxLoss.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.TurnoverWatcher.Business\Fanex.TurnoverWatcher.Business.csproj">
       <Project>{EEEE6EC6-55BC-4C6E-AC8B-2D5B8C8B7179}</Project>
-      <Name>Fanex.NAPReport.TurnoverWatcher.Business</Name>
+      <Name>Fanex.TurnoverWatcher.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.VirtualSportWinLoss.Business\Fanex.VirtualSportWinLoss.Business.csproj">
+      <Project>{6004dbb8-7209-4690-a158-62d12b49eae4}</Project>
+      <Name>Fanex.VirtualSportWinLoss.Business</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -655,8 +709,10 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
     <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.98.1\build\net40\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.98.1\build\net40\System.Data.SQLite.Core.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
   </Target>
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.98.1\build\net40\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.98.1\build\net40\System.Data.SQLite.Core.targets')" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
