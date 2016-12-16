@@ -16,7 +16,7 @@ namespace Fanex.SMAMaxLoss.Executing
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
             DbSettingProviderManager.Current.Start();
 
-            ConfigurationParser configurationParser = new ConfigurationParser(@"SiteConfig\HorseRacingReport\Settings\HorseRacingReport.Settings.xml");
+            ConfigurationParser configurationParser = new ConfigurationParser(@"SiteConfig\SMALoss\Settings\SMALoss.Settings.xml");
             configurationParser.Parse<AppSettings>();
 
             var service = new MailingService();
