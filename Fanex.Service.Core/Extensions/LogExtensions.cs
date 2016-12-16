@@ -8,9 +8,9 @@ namespace Fanex.Service.Core.Extensions
 {
     using System;
     using Fanex.Logging;
-    using Fanex.NAP.Core.Service.Impl;
-    using Fanex.NAP.Core.Service.Interface;
     using Fanex.Service.Core.Utilities;
+    using ONEbook.UM.Services;
+    using ONEbook.UM.Services.Impl;
 
     /// <summary>
     /// TODO: Update summary.
@@ -25,10 +25,10 @@ namespace Fanex.Service.Core.Extensions
                                     "<br>\r\nINNEREXCEPTION: " + ex.InnerException +
                                     "<br>\r\nSOURCE: " + ex.Source +
                                     "<br>\r\nTARGETSITE: " + ex.TargetSite +
-                                    "<br>\r\nSTACKTRACE: " + ex.StackTrace;                
-                IMaintenanceService maintenance = new MaintenanceService();                
-                var downTime = maintenance.GetDowntimeInfo();
-                if (!downTime.IsDowntime)
+                                    "<br>\r\nSTACKTRACE: " + ex.StackTrace;
+                IUMControlAdapter maintenance = new UMControlAdapter();
+                var downTime = maintenance.GetUnderMaintenanceTime().IsUnderMaintenanceTime;
+                if (!downTime)
                 {
                     Logger.Log.Error(message);
                 }
@@ -44,9 +44,9 @@ namespace Fanex.Service.Core.Extensions
             try
             {
                 string message = msg;
-                IMaintenanceService maintenance = new MaintenanceService();
-                var downTime = maintenance.GetDowntimeInfo();
-                if (!downTime.IsDowntime)
+                IUMControlAdapter maintenance = new UMControlAdapter();
+                var downTime = maintenance.GetUnderMaintenanceTime().IsUnderMaintenanceTime;
+                if (!downTime)
                 {
                     Logger.Log.Info(message);
                 }
