@@ -33,3 +33,10 @@ _ReSharper*/
 *.Cache
 Fanex.Service.Core/MailService/MailService.cd
 .vs/config/applicationhost.config
+*.violations.xml
+*.StyleCop.xml
+cireport/*
+MSBUILD.SUMMARY.email
+MsBuild.xml
+SUMMARY.DISPLAY.xml
+dry.atomiqProj
