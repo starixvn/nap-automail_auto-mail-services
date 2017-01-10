@@ -33,11 +33,7 @@ namespace Fanex.NAPReport.BAMonthlyWinLoss.Business.Service
         public Mail SendMailToVIPGroup()
         {
             var service = new BAReportService();
-            var isTesting = AppSettings.IsTest;
-            var testedDate = AppSettings.TestedDate;
-            var winLossDate = isTesting ? testedDate : DateTime.Now.AddDays(-1);
-
-            service.GenerateReport(winLossDate);
+            service.GenerateReport();
 
             var fileNamesPath = new List<string>();
             fileNamesPath.Add(service.DirectoryOfFileName);

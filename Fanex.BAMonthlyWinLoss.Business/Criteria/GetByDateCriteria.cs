@@ -5,10 +5,24 @@
 
     public class GetByDateCriteria : CriteriaBase
     {
-        public GetByDateCriteria(DateTime date)
+        public GetByDateCriteria()
         {
-            FromDate = date.Month.ToString() + "/1/" + date.Year.ToString();
-            ToDate = date.ToShortDateString();
+            if (AppSettings.IsTest)
+            {
+                FromDate = AppSettings.FromDate.ToShortDateString();
+                ToDate = AppSettings.ToDate.ToShortDateString();
+            }
+            else
+            {
+                var date = DateTime.Today;
+                if (date.Month == 1)
+                {
+                    date = date.AddMonths(-1);
+                }
+
+                FromDate = date.ToString("MM/01/yyyy");
+                ToDate = $"{date.Month}/{DateTime.DaysInMonth(date.Year, date.Month)}/{date.Year}";
+            }
         }
 
         public string FromDate { get; set; }

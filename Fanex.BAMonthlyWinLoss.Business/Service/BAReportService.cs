@@ -58,12 +58,12 @@
 
         public string DirectoryOfFileName { get; set; }
 
-        public void GenerateReport(DateTime winLossDate)
+        public void GenerateReport()
         {
             var service = new BetAggregatorService();
-            var criteria = new GetByDateCriteria(winLossDate);
+            var criteria = new GetByDateCriteria();
             var winLossList = service.GetBALicWinlossMonthly(criteria);
-
+            var winLossDate = Convert.ToDateTime(criteria.FromDate);
             this.FileName = string.Format(Label.FileName, winLossDate.ToString("MMM_yyyy"));
             this.DirectoryOfFileName = AppSettings.DataDirectoryWithYearMonth + @"\" + this.FileName;
 
@@ -76,7 +76,7 @@
 
                 InitSheet(licenseeName);
 
-                BuildTitle();
+                BuildTitle(winLossDate);
 
                 BuildLicenseeName(licenseeName);
 
@@ -92,7 +92,7 @@
                 string licenseeName = "There is no data";
                 InitSheet(licenseeName);
 
-                BuildTitle();
+                BuildTitle(winLossDate);
 
                 BuildLicenseeName(licenseeName);
             }
@@ -121,7 +121,7 @@
                 Color.FromArgb(124, 152, 164));
         }
 
-        private void BuildTitle()
+        private void BuildTitle(DateTime winLossDate)
         {
             var headerFont = new FontInformation(NPOIConstants.FontName, 14, Color.Black);
             var cellStyle = this._customCellStyleService.CreateCenterTextStyle(Color.White, _fontService.CreateBoldFont(headerFont));
@@ -132,7 +132,7 @@
             this._cell = new Cell(StartColumn, _currentRow, 7, _currentRow++, Label.Title);
             NpoiNewFormatExcelExtension.RenderMergeCell(this._sheet, this._cell, cellStyle);
 
-            this._cell = new Cell(StartColumn, _currentRow, 7, _currentRow++, DateTime.Now.ToString("MMM yyyy"));
+            this._cell = new Cell(StartColumn, _currentRow, 7, _currentRow++, winLossDate.ToString("MMM yyyy"));
             NpoiNewFormatExcelExtension.RenderMergeCell(this._sheet, this._cell, cellStyle);
         }
 
