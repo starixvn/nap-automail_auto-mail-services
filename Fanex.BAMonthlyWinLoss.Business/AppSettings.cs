@@ -38,7 +38,13 @@ namespace Fanex.NAPReport.BAMonthlyWinLoss.Business
             set;
         }
 
-        public static DateTime TestedDate
+        public static DateTime FromDate
+        {
+            get;
+            set;
+        }
+
+        public static DateTime ToDate
         {
             get;
             set;

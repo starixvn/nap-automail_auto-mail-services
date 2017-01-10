@@ -32,7 +32,7 @@ namespace Fanex.NAPReport.TurnoverWatcher.Business.Model
         {
             get
             {
-                if (0 == MaxTurnover)
+                if (MaxTurnover == 0)
                 {
                     return 0;
                 }
