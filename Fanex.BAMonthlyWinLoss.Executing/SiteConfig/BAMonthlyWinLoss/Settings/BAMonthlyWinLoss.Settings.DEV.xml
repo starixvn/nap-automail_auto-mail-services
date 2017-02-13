@@ -3,7 +3,7 @@
   <add key="IsTest" value="true" />
   <add key="FromDate" value="2017-01-01" />
   <add key="ToDate" value="2017-01-31" />
-  <add key="DataDirectory" value="\\10.18.200.202\_Fanex.ExcelFiles\BAMonthlyWinLoss" />  
+  <add key="DataDirectory" value="\\10.70.70.242\www\Olympus\Fanex.Excel\BAMonthlyWinLoss" />  
   <add key="ExcelPasswordProtected" value="we168" />
   <add key="FunctionId" value="79" />
   <add key="Subject" value="Automail Report - BA Monthly Win Loss - {0}" />
