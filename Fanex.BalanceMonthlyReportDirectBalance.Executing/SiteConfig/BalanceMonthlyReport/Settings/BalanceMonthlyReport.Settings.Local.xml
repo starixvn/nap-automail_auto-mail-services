@@ -2,9 +2,9 @@
 <Settings>
   <add key="IsTest" value="false" />
 
-  <add key="DataDirectoryCreditTerm" value="\\10.18.200.202\_Fanex.ExcelFiles\BalanceMonthlyReport_CreditTerm" />
-  <add key="DataDirectorySuperBalance" value="\\10.18.200.202\_Fanex.ExcelFiles\BalanceMonthlyReport_SuperBalance" />
-  <add key="DataDirectoryDirectBalance" value="\\10.18.200.202\_Fanex.ExcelFiles\BalanceMonthlyReport_DirectBalance" />
+  <add key="DataDirectoryCreditTerm" value="\\10.70.70.242\www\Olympus\Fanex.Excel\BalanceMonthlyReport_CreditTerm" />
+  <add key="DataDirectorySuperBalance" value="\\10.70.70.242\www\Olympus\Fanex.Excel\BalanceMonthlyReport_SuperBalance" />
+  <add key="DataDirectoryDirectBalance" value="\\10.70.70.242\www\Olympus\Fanex.Excel\BalanceMonthlyReport_DirectBalance" />
   
   <add key="ExcelPasswordProtectedCreditTerm" value="we168" />
   <add key="ExcelPasswordProtectedSuperBalance" value="we168" />
