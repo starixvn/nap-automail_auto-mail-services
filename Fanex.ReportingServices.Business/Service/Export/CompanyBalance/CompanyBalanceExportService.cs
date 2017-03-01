@@ -75,6 +75,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyBalan
 
                 string parentDirectory = string.Empty;
                 string reportName = string.Empty;
+                string dataDirectory = AppSettings.ExportDataDirectoryCompanyStatement;
                 if (_isYesterdayBalance)
                 {
                     parentDirectory = AppSettings.DataDirectory(AppSettings.ExportDataDirectoryCompanyYesterdayBalance);
@@ -87,7 +88,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyBalan
                 }
 
                 FileName = Path.Combine(parentDirectory, reportName);
-                SaveFile.SaveExcelFile(parentDirectory, reportName, _workbook, AppSettings.ExcelPassword);
+                SaveFile.SaveExcelFile(dataDirectory, parentDirectory, reportName, _workbook, AppSettings.ExcelPassword);
             }
             catch (Exception ex)
             {

@@ -74,7 +74,7 @@
             ExportReport(report);
             FileName = CreateReportNameWithExtension();
             CreateReportPath(AppSettings.ExportDataDirectoryWithYearMonthDay, FileName);
-            SaveFile.SaveExcelFile(AppSettings.ExportDataDirectoryWithYearMonthDay, FileName, this._workbook, AppSettings.ExcelPasswordProtected);
+            SaveFile.SaveExcelFile(AppSettings.DataDirectory, AppSettings.ExportDataDirectoryWithYearMonthDay, FileName, this._workbook, AppSettings.ExcelPasswordProtected);
         }
 
         private void ExportReport(List<TurnoverInfo> report)

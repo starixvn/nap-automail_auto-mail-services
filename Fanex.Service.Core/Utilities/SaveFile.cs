@@ -17,11 +17,11 @@ namespace Fanex.Service.Core.Utilities
     /// </summary>
     public class SaveFile
     {
-        public static void SaveExcelFile(string exportDataDirectory, string fileName, IWorkbook workbook, string excelPassword = "")
+        public static void SaveExcelFile(string rootDataDirectory, string exportDataDirectory, string fileName, IWorkbook workbook, string excelPassword = "")
         {
             if (AppSettingBase.IsAuthenticate)
             {
-                SaveFileWithAuthenticate(exportDataDirectory, fileName, workbook, excelPassword);
+                SaveFileWithAuthenticate(rootDataDirectory, exportDataDirectory, fileName, workbook, excelPassword);
             }
             else
             {
@@ -49,9 +49,8 @@ namespace Fanex.Service.Core.Utilities
             stream1.Dispose();            
         }
 
-        private static void SaveFileWithAuthenticate(string exportDataDirectory, string fileName, IWorkbook workbook, string excelPassword)
+        private static void SaveFileWithAuthenticate(string rootDataDirectory, string exportDataDirectory, string fileName, IWorkbook workbook, string excelPassword)
         {
-            string ip = AppSettingBase.IP;
             string password = AppSettingBase.Password;
             string username = AppSettingBase.UserName;
 
@@ -62,7 +61,7 @@ namespace Fanex.Service.Core.Utilities
 
             NetworkCredential networkCredential = new NetworkCredential(username, password);
 
-            using (new NetworkConnection(@"\\" + ip, networkCredential))
+            using (new NetworkConnection(rootDataDirectory, networkCredential))
             {
                 if (!Directory.Exists(exportDataDirectory))
                 {

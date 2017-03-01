@@ -48,7 +48,7 @@
 
         public void Save(string saveFileNamePath)
         {
-            SaveFile.SaveExcelFile(Path.GetDirectoryName(saveFileNamePath), Path.GetFileName(saveFileNamePath), Workbook, AppSettings.ExcelPasswordProtected);
+            SaveFile.SaveExcelFile(AppSettings.DataDirectory, Path.GetDirectoryName(saveFileNamePath), Path.GetFileName(saveFileNamePath), Workbook, AppSettings.ExcelPasswordProtected);
         }
 
         public void RenderCurrentCell(object cellValue, XSSFCellStyle cellStyle = null)

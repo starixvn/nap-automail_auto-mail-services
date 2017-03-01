@@ -72,7 +72,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
             ExportReport(report);
             FileName = CreateReportNameWithExtension(criteria);
             _reportPath = AppSettings.DataDirectoryWithYearMonth + @"\" + FileName;
-            SaveFile.SaveExcelFile(AppSettings.DataDirectoryWithYearMonth, FileName, this._workbook, AppSettings.ExcelPasswordProtected);
+            SaveFile.SaveExcelFile(AppSettings.DataDirectory, AppSettings.DataDirectoryWithYearMonth, FileName, this._workbook, AppSettings.ExcelPasswordProtected);
         }
 
         private void ExportReport(WinLossByProducts report)

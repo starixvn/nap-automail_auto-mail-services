@@ -86,7 +86,7 @@
             ExportReportContent();
             FileName = CreateReportNameWithExtension();
             DirectoryOfFileName = Path.Combine(_criteria.DataDirectoryWithYear, FileName);
-            SaveFile.SaveExcelFile(_criteria.DataDirectoryWithYear, FileName, this._workbook, _criteria.ExcelPasswordProtected);
+            SaveFile.SaveExcelFile(AppSettings.DataDirectorySuperBalance, _criteria.DataDirectoryWithYear, FileName, this._workbook, _criteria.ExcelPasswordProtected);
         }
 
         private void CreateColor()

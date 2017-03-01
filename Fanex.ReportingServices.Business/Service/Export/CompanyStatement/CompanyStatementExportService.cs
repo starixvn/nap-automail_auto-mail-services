@@ -62,7 +62,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyState
                 string parentDirectory = AppSettings.DataDirectory(AppSettings.ExportDataDirectoryCompanyStatement);
                 string reportName = string.Format(ReportingServicesResource.CompanyStatement_ReportName, winlossDate.ToString("yyyy_MM_dd"));
                 FileName = Path.Combine(parentDirectory, reportName);
-                SaveFile.SaveExcelFile(parentDirectory, reportName, _workbook, AppSettings.ExcelPassword);
+                SaveFile.SaveExcelFile(AppSettings.ExportDataDirectoryCompanyStatement, parentDirectory, reportName, _workbook, AppSettings.ExcelPassword);
             }
             catch (Exception ex)
             {

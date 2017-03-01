@@ -43,7 +43,7 @@
         {
             FileName = string.Format(WinLossVirtualSportResoure.VirtualSportWinLoss_ReportName, DateTime.Today.ToString("yyyy_MM_dd"));
             DirectoryOfFileName = Path.Combine(AppSettings.DataDirectoryWithYearMonth, FileName);
-            SaveFile.SaveExcelFile(AppSettings.DataDirectoryWithYearMonth, FileName, _workbook, AppSettings.ExcelPasswordProtected);
+            SaveFile.SaveExcelFile(AppSettings.DataDirectory, AppSettings.DataDirectoryWithYearMonth, FileName, _workbook, AppSettings.ExcelPasswordProtected);
         }
     }
 }

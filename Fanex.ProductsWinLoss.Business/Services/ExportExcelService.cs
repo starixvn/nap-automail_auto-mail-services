@@ -60,7 +60,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
 
             FileName = CreateReportNameWithExtension(criteria);
             DirectoryOfFileName = Path.Combine(AppSettings.DataDirectoryWithYearMonth, FileName);
-            SaveFile.SaveExcelFile(AppSettings.DataDirectoryWithYearMonth, FileName, _workbook, AppSettings.ExcelPasswordProtected);
+            SaveFile.SaveExcelFile(AppSettings.DataDirectory, AppSettings.DataDirectoryWithYearMonth, FileName, _workbook, AppSettings.ExcelPasswordProtected);
         }
 
         private string CreateReportNameWithExtension(OverallWinLossProductsCriteria criteria)
