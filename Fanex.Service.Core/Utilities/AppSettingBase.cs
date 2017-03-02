@@ -14,15 +14,6 @@ namespace Fanex.Service.Core.Utilities
     /// </summary>
     public class AppSettingBase
     {
-        public static string IP
-        {
-            get
-            {
-                var val = ConfigurationManager.AppSettings["ServerFile.IP"];
-                return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["ServerFile.IP"]);
-            }
-        }
-
         public static string UserName
         {
             get

@@ -199,16 +199,16 @@ namespace Fanex.Service.Core.Utilities
                 RemoteName = networkName
             };
 
-            WNetCancelConnection2(_networkName, 0, true);
+            var cancelResult = WNetCancelConnection2(_networkName, 0, true);
             var result = WNetAddConnection2(
                 netResource,
                 credentials.Password,
                 credentials.UserName,
-                0);
+                4);
 
             if (result != 0)
             {
-                throw new Win32Exception(result, "Error connecting to remote share");
+                throw new Win32Exception(result, $"Error connecting to remote share with WNetAddConnection2: {result}. WNetCancelConnection2: {cancelResult}, networkName: {networkName}");
             }
         }
 

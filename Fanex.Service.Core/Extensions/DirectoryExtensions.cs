@@ -18,11 +18,11 @@ namespace Fanex.Service.Core.Extensions
     {
         private static readonly int _MaxNumberOfDirectories = 3;
 
-        public static void CheckAndCreateDirectory(string path)
+        public static void CheckAndCreateDirectory(string rootPath, string path)
         {
             if (AppSettingBase.IsAuthenticate)
             {
-                CheckAndCreateDirectoryWithAuthenticate(path);
+                CheckAndCreateDirectoryWithAuthenticate(rootPath, path);
             }
             else
             {
@@ -38,9 +38,8 @@ namespace Fanex.Service.Core.Extensions
             }
         }
 
-        private static void CheckAndCreateDirectoryWithAuthenticate(string path)
+        private static void CheckAndCreateDirectoryWithAuthenticate(string rootPath, string path)
         {
-            string ip = AppSettingBase.IP;
             string password = AppSettingBase.Password;
             string username = AppSettingBase.UserName;
 
@@ -51,7 +50,7 @@ namespace Fanex.Service.Core.Extensions
 
             NetworkCredential networkCredential = new NetworkCredential(username, password);
 
-            using (new NetworkConnection(@"\\" + ip, networkCredential))
+            using (new NetworkConnection(rootPath, networkCredential))
             {
                 if (!Directory.Exists(path))
                 {
@@ -64,11 +63,11 @@ namespace Fanex.Service.Core.Extensions
         /// Deletes the directory.
         /// </summary>
         /// <param name="path">The path of directory.</param>
-        public static void DeleteDirectory(string path)
+        public static void DeleteDirectory(string rootPath, string path)
         {
             if (AppSettingBase.IsAuthenticate)
             {
-                DeleteDirectoryWithAuthenticate(path);
+                DeleteDirectoryWithAuthenticate(rootPath, path);
             }
             else
             {
@@ -91,9 +90,8 @@ namespace Fanex.Service.Core.Extensions
             }
         }
 
-        private static void DeleteDirectoryWithAuthenticate(string path)
+        private static void DeleteDirectoryWithAuthenticate(string rootPath, string path)
         {
-            string ip = AppSettingBase.IP;
             string password = AppSettingBase.Password;
             string username = AppSettingBase.UserName;
 
@@ -104,7 +102,7 @@ namespace Fanex.Service.Core.Extensions
 
             NetworkCredential networkCredential = new NetworkCredential(username, password);
 
-            using (new NetworkConnection(@"\\" + ip, networkCredential))
+            using (new NetworkConnection(rootPath, networkCredential))
             {
                 var directories = Directory.GetDirectories(path);
                 var directoryLength = directories.Length;

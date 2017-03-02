@@ -73,7 +73,7 @@ namespace Fanex.CreditMovement.Business.Service
             string parentDirectory = AppSettings.ExportDataDirectoryWithYearMonth;
             DirectoryOfFileName = parentDirectory + @"\" + FileName;
 
-            SaveFile.SaveExcelFile(parentDirectory, FileName, _workbook, AppSettings.ExcelPassword);
+            SaveFile.SaveExcelFile(AppSettings.ExportDataDirectory, parentDirectory, FileName, _workbook, AppSettings.ExcelPassword);
 
             GC.Collect();
         }

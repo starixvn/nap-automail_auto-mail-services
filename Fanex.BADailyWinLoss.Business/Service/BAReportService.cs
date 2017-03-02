@@ -60,7 +60,7 @@
 
             BuildMonthYearToDate(Resource.YearToDate, yearToDateList);
 
-            SaveFile.SaveExcelFile(AppSettings.DataDirectoryWithYearMonth, this.FileName, this._workbook, AppSettings.ExcelPasswordProtected);
+            SaveFile.SaveExcelFile(AppSettings.DataDirectory, AppSettings.DataDirectoryWithYearMonth, this.FileName, this._workbook, AppSettings.ExcelPasswordProtected);
         }
 
         private void InitWorkBook()
