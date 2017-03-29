@@ -13,13 +13,7 @@
     {
         private XSSFSheet _wooksheet;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ExcelDocument" /> class.
-        /// </summary>
-        /// <param name="wookbook">Wookbook value.</param>
-        /// <param name="exportSettings">Export Settings.</param>
-        /// <param name="sheetName">Sheet name.</param>
-        public ExcelDocument(XSSFWorkbook wookbook, ExportSettings exportSettings, string sheetName)
+        public ExcelDocument(ExportSettings exportSettings, string sheetName)
         {
             Workbook = new XSSFWorkbook();
             ExportSettings = exportSettings;
@@ -48,7 +42,12 @@
 
         public void Save(string saveFileNamePath)
         {
-            SaveFile.SaveExcelFile(AppSettings.DataDirectory, Path.GetDirectoryName(saveFileNamePath), Path.GetFileName(saveFileNamePath), Workbook, AppSettings.ExcelPasswordProtected);
+            SaveFile.SaveExcelFile(
+                AppSettings.DataDirectory, 
+                Path.GetDirectoryName(saveFileNamePath), 
+                Path.GetFileName(saveFileNamePath), 
+                Workbook, 
+                AppSettings.ExcelPasswordProtected);
         }
 
         public void RenderCurrentCell(object cellValue, XSSFCellStyle cellStyle = null)

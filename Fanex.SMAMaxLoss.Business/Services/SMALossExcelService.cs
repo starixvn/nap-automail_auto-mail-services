@@ -23,7 +23,7 @@
             var fontService = new NpoiNewFormatFontService(workbook);
             var cellStyleService = new NpoiNewFormatCustomCellStyleService(workbook);
 
-            var excelDocument = new ExcelDocument(new XSSFWorkbook(), exportSettings, sheetName);
+            var excelDocument = new ExcelDocument(exportSettings, sheetName);
 
             var exportCommand = new ExportCompositeCommand<IExportCommand>(excelDocument);
 

@@ -92,7 +92,12 @@
             ExportExcelFile();
             FileName = CreateReportNameWithExtension();
             DirectoryOfFileName = Path.Combine(AppSettings.DataDirectoryWithYearCreditTerm, FileName);
-            SaveFile.SaveExcelFile(AppSettings.DataDirectoryCreditTerm, AppSettings.DataDirectoryWithYearCreditTerm, FileName, this._workbook, AppSettings.ExcelPasswordProtectedCreditTerm); 
+            SaveFile.SaveExcelFile(
+                AppSettings.DataDirectoryCreditTerm, 
+                AppSettings.DataDirectoryWithYearCreditTerm, 
+                FileName, 
+                this._workbook, 
+                AppSettings.ExcelPasswordProtectedCreditTerm); 
         }
 
         private void CreateColor()
@@ -162,27 +167,27 @@
             _cell.IncreaseRowIndex();
             _cell.ResetColumnIndex();
 
-            HeaderCellText(headerStyle, "Role");
-            HeaderCellText(headerStyle, "UserName");
-            HeaderCellText(headerStyle, "Curr");
-            HeaderCellText(headerStyle, "Pre-Agreed Amount");
-            HeaderCellText(headerStyle, "Balance");
-            HeaderCellText(headerStyle, "Base (RM)");
-            HeaderCellText(headerStyle, "Remark");
-            HeaderCellText(headerStyle, "Phone");
-            HeaderCellText(headerStyle, "Checker");
-            HeaderCellText(headerStyle, "Remark Timestamp");
+            HeaderCellText("Role");
+            HeaderCellText("UserName");
+            HeaderCellText("Curr");
+            HeaderCellText("Pre-Agreed Amount");
+            HeaderCellText("Balance");
+            HeaderCellText("Base (RM)");
+            HeaderCellText("Remark");
+            HeaderCellText("Phone");
+            HeaderCellText("Checker");
+            HeaderCellText("Remark Timestamp");
         }
 
         private void ExportReportTitle()
         {
-            var headerStyle = _customCellStyleService.CreateCenterTextStyle(Color.White, _fontService.BlackBoldFont);
+            var titleStyle = _customCellStyleService.CreateCenterTextStyle(Color.White, _fontService.BlackBoldFont);
             _cell.EndColumn = _cell.CurrentColumn + 9;
             _cell.CellValue = "CREDIT TERM (PRE AGREE REPORT)"; 
-            NpoiNewFormatExcelExtension.RenderMergeCell(_workSheet, _cell, headerStyle);
+            NpoiNewFormatExcelExtension.RenderMergeCell(_workSheet, _cell, titleStyle);
         }
 
-        private void HeaderCellText(XSSFCellStyle headerStyle, string textTitle)
+        private void HeaderCellText(string textTitle)
         {
             _cell.CellValue = textTitle;
             NpoiNewFormatExcelExtension.RenderCell(_workSheet, _cell, headerStyle);
@@ -197,15 +202,15 @@
         {
             _cell.ResetColumnIndex();
             _cell.IncreaseColumnIndex();
-            HeaderCellText(headerStyle, "Role");
-            HeaderCellText(headerStyle, "UserName");
-            HeaderCellText(headerStyle, "Curr");
-            HeaderCellText(headerStyle, "Balance");
-            HeaderCellText(headerStyle, GetCurrencyName(currency));
-            HeaderCellText(headerStyle, "RM");
-            HeaderCellText(headerStyle, "Remark");
-            HeaderCellText(headerStyle, string.Empty);
-            HeaderCellText(headerStyle, "Remark Timestamp");
+            HeaderCellText("Role");
+            HeaderCellText("UserName");
+            HeaderCellText("Curr");
+            HeaderCellText("Balance");
+            HeaderCellText(GetCurrencyName(currency));
+            HeaderCellText("RM");
+            HeaderCellText("Remark");
+            HeaderCellText(string.Empty);
+            HeaderCellText("Remark Timestamp");
         }
 
         /// <summary>
