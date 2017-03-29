@@ -92,7 +92,12 @@
             ExportExcelFile();
             FileName = CreateReportNameWithExtension();
             DirectoryOfFileName = Path.Combine(AppSettings.DataDirectoryWithYearCreditTerm, FileName);
-            SaveFile.SaveExcelFile(AppSettings.DataDirectoryCreditTerm, AppSettings.DataDirectoryWithYearCreditTerm, FileName, this._workbook, AppSettings.ExcelPasswordProtectedCreditTerm); 
+            SaveFile.SaveExcelFile(
+                AppSettings.DataDirectoryCreditTerm, 
+                AppSettings.DataDirectoryWithYearCreditTerm, 
+                FileName, 
+                this._workbook, 
+                AppSettings.ExcelPasswordProtectedCreditTerm); 
         }
 
         private void CreateColor()
