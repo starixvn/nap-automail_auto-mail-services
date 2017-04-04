@@ -2,7 +2,7 @@
 <Settings>
   <add key="IsTest" value="false" />
   <add key="TestedDate" value="1/30/2015" />  
-  <add key="DataDirectory" value="\\10.18.200.202\_Fanex.ExcelFiles\BAMonthlyWinLoss" />  
+  <add key="DataDirectory" value="\\10.70.70.242\www\Olympus\Fanex.Excel\BAMonthlyWinLoss" />  
   <add key="ExcelPasswordProtected" value="we168" />
   <add key="FunctionId" value="79" />
   <add key="Subject" value="Automail Report - BA Monthly Win Loss - {0}" />
