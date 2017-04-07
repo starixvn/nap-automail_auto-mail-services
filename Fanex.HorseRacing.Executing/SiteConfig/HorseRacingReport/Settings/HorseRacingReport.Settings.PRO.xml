@@ -3,7 +3,7 @@
   <add key="IsTest" value="false" />
   <add key="FromDate" value="2015-03-01" />
   <add key="ToDate" value="2015-03-16" />    
-  <add key="DataDirectory" value="\\10.40.40.52\NAP_Reports\HorseRacingReport" />  
+  <add key="DataDirectory" value="\\10.40.40.127\Data.Web\Fanex.Excel\HorseRacingReport" />  
   <add key="ExcelPasswordProtected" value="we168" />
   <add key="FunctionId" value="170" />
   <add key="Subject" value="Automail Report - Horse Racing Report From {0} To {1}" />
