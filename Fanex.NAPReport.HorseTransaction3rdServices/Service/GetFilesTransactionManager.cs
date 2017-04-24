@@ -48,7 +48,7 @@
                     fileName = racing.FileName;
                     var ftpHost = racing.FtpHost;
                     var ftpAcc = racing.FtpAcc;
-                    var ftpPass = Encryption.CfsDeCrypt(racing.FtpPass);
+                    var ftpPass = racing.FtpPass;
                     var ftpDomain = racing.FtpDomain;
                     _mask = racing.FtpFolder;
 
