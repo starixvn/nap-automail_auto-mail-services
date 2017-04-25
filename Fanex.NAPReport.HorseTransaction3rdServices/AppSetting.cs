@@ -5,29 +5,19 @@
 
     public class AppSetting
     {
-        public static bool IsLocal
+        public static bool IsManual
         {
-            get { return ConfigurationManager.AppSettings["Fanex.NAPReport.HorseTransaction3rd.IsLocal"] == "1"; }
+            get { return Convert.ToBoolean(ConfigurationManager.AppSettings["Fanex.NAPReport.HorseTransaction3rd.IsManual"]); }
         }
 
-        public static bool FtpLocal
+        public static DateTime FromDate
         {
-            get { return ConfigurationManager.AppSettings["Fanex.NAPReport.HorseTransaction3rd.ftplocal"] == "1"; }
+            get { return Convert.ToDateTime(ConfigurationManager.AppSettings["Fanex.NAPReport.HorseTransaction3rd.FromDate"]); }
         }
 
-        public static int RangeDate
+        public static DateTime ToDate
         {
-            get { return Convert.ToInt32(ConfigurationManager.AppSettings["Fanex.NAPReport.HorseTransaction3rd.RangeDate"], 10); }
-        }
-
-        public static bool TestFlag
-        {
-            get { return Convert.ToBoolean(ConfigurationManager.AppSettings["Fanex.NAPReport.HorseTransaction3rd.TestFlag"]); }
-        }
-
-        public static DateTime TestDate
-        {
-            get { return Convert.ToDateTime(ConfigurationManager.AppSettings["Fanex.NAPReport.HorseTransaction3rd.TestDate"]); }
+            get { return Convert.ToDateTime(ConfigurationManager.AppSettings["Fanex.NAPReport.HorseTransaction3rd.ToDate"]); }
         }
 
         public static string TemplateOfSuccessEmailDirectory

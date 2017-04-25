@@ -2,13 +2,14 @@
 {
     using System;
     using System.Collections;
-    using Fanex.NAP.Framework.Data;
+    using Data;
+    using Data.Repository;
 
     public class GetRacingTo3rdCriteria : CriteriaBase
     {
         [SpParam(Ignored = true)]
         public DateTime WinLostDate { get; set; }
-        
+
         [SpParam(Ignored = true)]
         public int ReportType { get; set; }
 
@@ -25,6 +26,11 @@
             parameterList.Add("reporttype", this.ReportType);
 
             return parameterList;
+        }
+
+        public override bool IsValid()
+        {
+            return true;
         }
     }
 }

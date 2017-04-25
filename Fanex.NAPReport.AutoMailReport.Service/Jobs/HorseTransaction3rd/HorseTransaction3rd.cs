@@ -13,7 +13,7 @@
         {
             var ftp = new GetFilesTransactionManager();
             ftp.GetFilesTransaction();
-            var content = string.Join("<br/>", ftp.MailList.Select(i => i.Value));
+            var content = string.Join("<br/>", ftp.MailList);
 
             var mail = new Mail()
             {

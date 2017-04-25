@@ -1,34 +1,20 @@
-﻿namespace Fanex.NAPReport.HorseTransaction3rd.Testing
-{
-    using System;
-    using System.IO;
-    using System.Linq;
-    using Fanex.Data.Configuration;
-    using Fanex.NAPReport.HorseTransaction3rd.Business.Resource;
-    using Fanex.NAPReport.HorseTransaction3rd.Business.Service;
-    using MailDelivery.Core.Models;
+﻿using System;
+using Fanex.NAPReport.HorseTransaction3rd.Business.Service;
+using Newtonsoft.Json;
 
+namespace Fanex.HorseTransaction3rd.Executing
+{
     public class Program
     {
         private static void Main(string[] args)
         {
-            Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
-            DbSettingProviderManager.Current.Start();
+            FanexDataRegisterService.ConfigureFanexData();
+            var service = new TransactionServiceImp();
+            var jobResult = service.Execute();
 
-            Console.WriteLine("Running Horse Transaction 3rd");
-
-            var ftp = new GetFilesTransactionManager();
-            ftp.GetFilesTransaction();
-
-            var content = string.Join("<br/>", ftp.MailList.Select(i => i.Value));
-
-            var mail = new Mail()
-            {
-                Subject = Resource.SubjectOfMail,
-                Title = Resource.SubjectOfMail,
-                Body = content
-            };
-            Console.WriteLine("Done at " + DateTime.Now.ToString());
+            var json = JsonConvert.SerializeObject(jobResult);
+            Console.Write(json);
+            Environment.Exit(0);
         }
     }
 }

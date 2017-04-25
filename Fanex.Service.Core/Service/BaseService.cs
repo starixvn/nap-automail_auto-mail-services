@@ -22,7 +22,7 @@ namespace Fanex.Service.Core.Service
     public static class BaseService
     {
         public const string BetTrans14SPSuffix = "_14";
-        public const string WarehouseSPSuffix = "_WH";
+        public const string WarehouseSPSuffix = "_14";
 
         public static Dictionary<int, string> ExchangeCurrencies
         {
