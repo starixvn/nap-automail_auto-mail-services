@@ -19,11 +19,10 @@
             FtpWebRequest requestFileDownload = null;
             FtpWebResponse responseFileDownload = null;
 
+            var ftpFullPath = string.Format("ftp://{0}{1}{2}", FtpHost, FtpFolder, fileName);
+
             try
             {
-                var ftpFullPath = string.Format("ftp://{0}{1}{2}", FtpHost, FtpFolder, fileName);                
-                LogService.Write("FTPExtension.DownLoadFile", string.Format("get file: ({0})", ftpFullPath));
-
                 requestFileDownload = (FtpWebRequest)WebRequest.Create(ftpFullPath);
                 requestFileDownload.Credentials = new NetworkCredential(FtpAcc, FtpPass);
                 requestFileDownload.Method = WebRequestMethods.Ftp.DownloadFile;
@@ -42,16 +41,13 @@
                 }
 
                 writeStream.Close();
-            }
-            catch (Exception exceptionObj)
-            {
-                LogService.Write("FTPExtension.DownLoadFile", string.Format("Error: ({0}) {1}", fileName, exceptionObj.Message));                
-            }
-            finally
-            {                
                 requestFileDownload = null;
                 responseFileDownload = null;
             }
+            catch (Exception ex)
+            {
+                throw new Exception($"The file name {fileName} - {ex.Message}");
+            }           
         }
     }
 }

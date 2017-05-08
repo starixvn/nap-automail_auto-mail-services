@@ -1,7 +1,7 @@
-﻿namespace Fanex.NAPReport.HorseTransaction3rd.Business.Criteria
-{
-    using Fanex.NAP.Framework.Data;
+﻿using Fanex.Data.Repository;
 
+namespace Fanex.NAPReport.HorseTransaction3rd.Business.Criteria
+{
     /// <summary>
     /// Exchange Criteria.
     /// </summary>

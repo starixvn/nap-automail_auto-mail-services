@@ -2,20 +2,20 @@
 {
     using System;
     using System.Collections;
-    using Fanex.NAP.Framework.Data;
-    using Fanex.Service.Core.Service;
+    using Data;
+    using Data.Repository;
 
     public class GetRacingWinLossCriteria : CriteriaBase
     {
         [SpParam(Ignored = true)]
         public DateTime WinLostDate { get; set; }
-        
+
         [SpParam(Ignored = true)]
         public int ReportType { get; set; }
 
         public override string GetSettingKey()
         {
-            return "Acc_Rpt_WinlostRacing_Tote" + BaseService.GetStoreMappingSuffix(this.WinLostDate);
+            return "Acc_Rpt_WinlostRacing_Tote";
         }
 
         public override Hashtable GetSpParams()
@@ -26,6 +26,11 @@
             parameterList.Add("reporttype", this.ReportType);
 
             return parameterList;
+        }
+
+        public override bool IsValid()
+        {
+            return true;
         }
     }
 }
