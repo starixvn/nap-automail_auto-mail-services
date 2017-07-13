@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Functions>  
+<Functions SiteName="Auto Mail - Reporting Service">  
   <Function Name="Reporting Service- Special - Daily Turnover">
     <Setting Key="Special_DailyTurnover_GetReport" SpName="Acc_Rpt_DailyTurnover" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
