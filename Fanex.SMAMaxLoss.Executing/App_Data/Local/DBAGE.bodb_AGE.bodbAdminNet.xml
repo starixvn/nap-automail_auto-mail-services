@@ -1,5 +1,5 @@
-<Functions SiteName="Auto Mail - SMA Max Loss">
-  <Function Name="SMA Loss Automail">
+<Functions SiteId="25" SiteName="Auto Mail">
+  <Function Name="SMA Max Loss">
     <Setting Key="NAP_LimitLoss_MonitorList" SpName="NAP_LimitLoss_MonitorList" DbName="DBAGE.bodb_AGE.bodbAdminNet" TimeOut="0" />
     <Setting Key="NAP_LimitLoss_ActionConfigSel" SpName="NAP_LimitLoss_ActionConfigSel" DbName="DBAGE.bodb_AGE.bodbAdminNet" TimeOut="0"></Setting>
   </Function>

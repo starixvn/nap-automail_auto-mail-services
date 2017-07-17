@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Functions SiteName="Auto Mail - Products Win Loss">
+<Functions SiteId="25" SiteName="Auto Mail">
   <Function Name="Products Win Loss">
-    <Setting Key="Win_Loss_By_Products_Report" SpName="Acc_Rpt_AllProductWLAutomail_xpre" DbName="DBACC.bodb02.bodbAdminNet" Timeout="0" />
+    <Setting Key="Win_Loss_By_Products_Report" SpName="Acc_Rpt_AllProductWLAutomail_xtest" DbName="DBACC.bodb02.bodbAdminNet" Timeout="0" />
   </Function>
 </Functions>

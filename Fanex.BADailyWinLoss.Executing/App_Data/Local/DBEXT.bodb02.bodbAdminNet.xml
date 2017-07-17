@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Functions SiteName="Auto Mail - BA Daily WinLoss">
-  <Function Name="BA">
+<Functions SiteId="25" SiteName="Auto Mail">
+  <Function Name="BA Daily WinLoss">
     <Setting Key="Acc_Rpt_BALicWinlossDaily" SpName="Acc_Rpt_BALicWinlossDaily" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Acc_Rpt_BALicWinloss" SpName="Acc_Rpt_BALicWinloss" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
