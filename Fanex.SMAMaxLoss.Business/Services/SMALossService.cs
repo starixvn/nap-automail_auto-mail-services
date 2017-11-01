@@ -1,12 +1,8 @@
 ﻿namespace Fanex.NAPReport.SMALoss.Business.Services
 {
-    using System;
     using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
     using Fanex.NAPReport.SMALoss.Business.Criteria;
     using Fanex.NAPReport.SMALoss.Business.Entities;
-    using Fanex.Service.Core.Service;
 
     public class SMALossService : ServiceBase, ISMALossService
     {

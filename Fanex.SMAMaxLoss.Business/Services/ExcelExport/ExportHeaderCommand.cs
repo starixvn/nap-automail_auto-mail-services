@@ -45,7 +45,7 @@
             ExcelDocument.RenderCurrentCell("#", _headerStyle);
 
             ExcelDocument.IncreaseColumnIndex();
-            ExcelDocument.RenderCurrentCell("SMA Name", _headerStyle);
+            ExcelDocument.RenderCurrentCell("Username", _headerStyle);
 
             ExcelDocument.IncreaseColumnIndex();
             ExcelDocument.RenderCurrentCell("Level", _headerStyle);
