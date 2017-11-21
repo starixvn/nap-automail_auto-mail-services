@@ -37,7 +37,7 @@
             ConfigurationParser configurationParser = new ConfigurationParser(@"SiteConfig\SMALoss\Settings\SMALoss.Settings.xml");
             configurationParser.Parse<AppSettings>();
 
-            _lossService = lossService ?? new SMALossService();
+            _lossService = lossService ?? new SmaLossService();
             _lossExcelService = lossExcelService ?? new SMALossExcelService();
 
             mailStation = new MailStationService();
