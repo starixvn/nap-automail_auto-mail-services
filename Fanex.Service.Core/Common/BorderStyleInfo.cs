@@ -13,22 +13,6 @@ namespace Fanex.Service.Core.Common
     /// </summary>
     public struct BorderStyleInfo
     {
-        public short LeftBorderStyle;
-
-        public short TopBorderStyle;
-
-        public short RightBorderStyle;
-
-        public short BottomBorderStyle;
-
-        public short LeftBoderColor;
-
-        public short TopBoderColor;
-
-        public short RightBoderColor;
-
-        public short BottomBoderColor;
-
         public BorderStyleInfo(
             short leftBorderStyle,
             short topBorderStyle,
@@ -48,6 +32,22 @@ namespace Fanex.Service.Core.Common
             this.RightBoderColor = rightBoderColor;
             this.BottomBoderColor = bottomBoderColor;
         }
+
+        public short LeftBorderStyle { get; set; }
+
+        public short TopBorderStyle { get; set; }
+
+        public short RightBorderStyle { get; set; }
+
+        public short BottomBorderStyle { get; set; }
+
+        public short LeftBoderColor { get; set; }
+
+        public short TopBoderColor { get; set; }
+
+        public short RightBoderColor { get; set; }
+
+        public short BottomBoderColor { get; set; }
     }
 
     /// <summary>
@@ -55,22 +55,6 @@ namespace Fanex.Service.Core.Common
     /// </summary>
     public struct BorderInfo
     {
-        public short LeftBorderStyle;
-
-        public short TopBorderStyle;
-
-        public short RightBorderStyle;
-
-        public short BottomBorderStyle;
-
-        public Color LeftBoderColor;
-
-        public Color TopBoderColor;
-
-        public Color RightBoderColor;
-
-        public Color BottomBoderColor;
-
         public BorderInfo(
             short leftBorderStyle,
             short topBorderStyle,
@@ -90,5 +74,21 @@ namespace Fanex.Service.Core.Common
             this.RightBoderColor = rightBoderColor;
             this.BottomBoderColor = bottomBoderColor;
         }
+
+        public short LeftBorderStyle { get; set; }
+
+        public short TopBorderStyle { get; set; }
+
+        public short RightBorderStyle { get; set; }
+
+        public short BottomBorderStyle { get; set; }
+
+        public Color LeftBoderColor { get; set; }
+
+        public Color TopBoderColor { get; set; }
+
+        public Color RightBoderColor { get; set; }
+
+        public Color BottomBoderColor { get; set; }
     }
 }

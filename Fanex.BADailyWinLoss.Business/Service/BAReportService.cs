@@ -26,7 +26,7 @@
         private XSSFSheet _sheet;
         private int _currentRow = 0;
         private FontInformation _headerFont;
-        private Color _borderColor = Color.FromArgb(124, 152, 164);
+        private readonly Color _borderColor = Color.FromArgb(124, 152, 164);
         private INpoiNewFormatCustomCellStyleService _customCellStyleService;
         private INpoiNewFormatBodyCellStyleService _bodyCellStyleService;
         private Cell _cell;
@@ -67,7 +67,7 @@
         {
             this._workbook = new XSSFWorkbook();
             this._sheet = this._workbook.CreateSheet("Sheet1") as XSSFSheet;
-            _headerFont = new FontInformation(NPOIConstants.FontName, 16, Color.Black);
+            _headerFont = new FontInformation(NpoiConstants.FontName, 16, Color.Black);
             _customCellStyleService = new NpoiNewFormatCustomCellStyleService(_workbook);
 
             _cell = new Cell();

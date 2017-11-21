@@ -164,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Model\CreditTerm.cs" />
     <Compile Include="Service\CreditTerm\ICreditTermService.cs" />
     <Compile Include="Service\Balance\IBalanceService.cs" />

@@ -41,9 +41,9 @@ namespace Fanex.Service.Core.Extensions
             ICellStyle cellStyle)
         {
             IRow currentRow = worksheet.GetRow(cell.CurrentRow) ?? worksheet.CreateRow(cell.CurrentRow);
-            currentRow.Height = NPOIConstants.RowHeight;
+            currentRow.Height = NpoiConstants.RowHeight;
             ICell currentCell = currentRow.GetCell(cell.CurrentColumn) ?? currentRow.CreateCell(cell.CurrentColumn);
-            NPOIUtility.SetCellValue(currentCell, cell.CellValue);
+            NpoiUtility.SetCellValue(currentCell, cell.CellValue);
             currentCell.CellStyle = cellStyle;
         }
 
@@ -55,14 +55,14 @@ namespace Fanex.Service.Core.Extensions
             for (var rowIndex = cell.CurrentRow; rowIndex <= cell.EndRow; rowIndex++)
             {
                 IRow currentRow = worksheet.GetRow(rowIndex) ?? worksheet.CreateRow(rowIndex);
-                currentRow.Height = NPOIConstants.RowHeight;
+                currentRow.Height = NpoiConstants.RowHeight;
 
                 for (var cellIndex = cell.CurrentColumn; cellIndex <= cell.EndColumn; cellIndex++)
                 {
                     ICell currentCell = currentRow.GetCell(cellIndex) ?? currentRow.CreateCell(cellIndex);
                     if (rowIndex == cell.CurrentRow && rowIndex == cell.CurrentColumn)
                     {
-                        NPOIUtility.SetCellValue(currentCell, cell.CellValue);
+                        NpoiUtility.SetCellValue(currentCell, cell.CellValue);
                     }
 
                     if (rowIndex == cell.CurrentRow ||

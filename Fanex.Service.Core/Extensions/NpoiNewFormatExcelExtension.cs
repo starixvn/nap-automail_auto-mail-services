@@ -41,9 +41,9 @@ namespace Fanex.Service.Core.Extensions
             XSSFCellStyle cellStyle)
         {
             XSSFRow currentRow = worksheet.GetRow(cell.CurrentRow) as XSSFRow ?? worksheet.CreateRow(cell.CurrentRow) as XSSFRow;
-            currentRow.Height = NPOIConstants.RowHeight;
+            currentRow.Height = NpoiConstants.RowHeight;
             XSSFCell currentCell = currentRow.GetCell(cell.CurrentColumn) as XSSFCell ?? currentRow.CreateCell(cell.CurrentColumn) as XSSFCell;
-            NPOIUtility.SetCellValue(currentCell, cell.CellValue);
+            NpoiUtility.SetCellValue(currentCell, cell.CellValue);
             currentCell.CellStyle = cellStyle;
         }
 
@@ -55,14 +55,14 @@ namespace Fanex.Service.Core.Extensions
             for (var rowIndex = cell.CurrentRow; rowIndex <= cell.EndRow; rowIndex++)
             {
                 XSSFRow currentRow = worksheet.GetRow(rowIndex) as XSSFRow ?? worksheet.CreateRow(rowIndex) as XSSFRow;
-                currentRow.Height = NPOIConstants.RowHeight;
+                currentRow.Height = NpoiConstants.RowHeight;
 
                 for (var cellIndex = cell.CurrentColumn; cellIndex <= cell.EndColumn; cellIndex++)
                 {
                     XSSFCell currentCell = currentRow.GetCell(cellIndex) as XSSFCell ?? currentRow.CreateCell(cellIndex) as XSSFCell;
                     if (rowIndex == cell.CurrentRow && cellIndex == cell.CurrentColumn)
                     {
-                        NPOIUtility.SetCellValue(currentCell, cell.CellValue);
+                        NpoiUtility.SetCellValue(currentCell, cell.CellValue);
                     }
 
                     if (rowIndex == cell.CurrentRow ||

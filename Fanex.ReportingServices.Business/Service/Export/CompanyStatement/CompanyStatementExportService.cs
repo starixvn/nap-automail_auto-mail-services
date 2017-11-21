@@ -24,14 +24,15 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyState
     /// </summary>
     public class CompanyStatementExportService : ICompanyStatementExportService
     {
-        private Color _headerColor;
-        private XSSFWorkbook _workbook;
+        private readonly Color _headerColor;
+        private readonly XSSFWorkbook _workbook;        
+        private readonly Cell _cell;
+        private readonly INpoiNewFormatFontService _fontService;
+        private readonly INpoiNewFormatBodyCellStyleService _bodyCellStyleService;
+        private readonly INpoiNewFormatCustomCellStyleService _customCellStyleService;
+        private readonly XSSFFont _regularFont;
+
         private XSSFSheet _workSheet;
-        private Cell _cell;
-        private INpoiNewFormatFontService _fontService;
-        private INpoiNewFormatBodyCellStyleService _bodyCellStyleService;
-        private INpoiNewFormatCustomCellStyleService _customCellStyleService;
-        private XSSFFont _regularFont;
 
         public CompanyStatementExportService()
         {
@@ -80,7 +81,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyState
         {
             for (int i = 0; i < 4; i++)
             {
-                _workSheet.SetColumnWidth(i, 170 * NPOIConstants.FontWidth);
+                _workSheet.SetColumnWidth(i, 170 * NpoiConstants.FontWidth);
             }
         }
 

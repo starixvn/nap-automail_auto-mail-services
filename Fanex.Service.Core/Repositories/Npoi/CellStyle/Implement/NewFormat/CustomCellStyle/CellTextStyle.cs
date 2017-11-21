@@ -17,7 +17,7 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.NewFormat.Cus
     /// </summary>
     public class CellTextStyle : ICellTextStyle
     {
-        private XSSFWorkbook _workbook;
+        private readonly XSSFWorkbook _workbook;
 
         public CellTextStyle(XSSFWorkbook workbook)
         {
@@ -27,7 +27,7 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.NewFormat.Cus
         public XSSFCellStyle CreateLeftTextStyle(Color backgroundColor, XSSFFont font)
         {
             XSSFCellStyle leftTextStyle = this._workbook.CreateCellStyle() as XSSFCellStyle;
-            NPOIUtility.AssignNewFormatCellStyleData(leftTextStyle, backgroundColor);
+            NpoiUtility.AssignNewFormatCellStyleData(leftTextStyle, backgroundColor);
             leftTextStyle.Alignment = HorizontalAlignment.Left;
             leftTextStyle.SetFont(font);
             return leftTextStyle;
@@ -36,7 +36,7 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.NewFormat.Cus
         public XSSFCellStyle CreateRightTextStyle(Color backgroundColor, XSSFFont font)
         {
             XSSFCellStyle rightTextStyle = this._workbook.CreateCellStyle() as XSSFCellStyle;
-            NPOIUtility.AssignNewFormatCellStyleData(rightTextStyle, backgroundColor);
+            NpoiUtility.AssignNewFormatCellStyleData(rightTextStyle, backgroundColor);
             rightTextStyle.Alignment = HorizontalAlignment.Right;
             rightTextStyle.SetFont(font);
             return rightTextStyle;
@@ -45,7 +45,7 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.NewFormat.Cus
         public XSSFCellStyle CreateCenterTextStyle(Color backgroundColor, XSSFFont font)
         {
             XSSFCellStyle centerTextStyle = this._workbook.CreateCellStyle() as XSSFCellStyle;
-            NPOIUtility.AssignNewFormatCellStyleData(centerTextStyle, backgroundColor);
+            NpoiUtility.AssignNewFormatCellStyleData(centerTextStyle, backgroundColor);
             centerTextStyle.Alignment = HorizontalAlignment.Center;
             centerTextStyle.SetFont(font);
             return centerTextStyle;

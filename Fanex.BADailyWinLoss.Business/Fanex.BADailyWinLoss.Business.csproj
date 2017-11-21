@@ -179,6 +179,7 @@
     <Compile Include="Criteria\GetYearToDateCriteria.cs" />
     <Compile Include="Criteria\GetMonthToDateCriteria.cs" />
     <Compile Include="Criteria\GetByDateCriteria.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Model\BALicWinLossDaily.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BetAggregatorRepository.cs" />
@@ -189,7 +190,9 @@
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
     <Compile Include="Service\BetAggregatorService.cs" />
-    <Compile Include="Service\BAReportService.cs" />
+    <Compile Include="Service\BAReportService.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Service\IBetAggregatorService.cs" />
     <Compile Include="Service\IMailingService.cs" />
     <Compile Include="Service\MailingService.cs" />

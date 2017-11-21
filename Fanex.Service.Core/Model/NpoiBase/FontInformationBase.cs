@@ -13,14 +13,14 @@ namespace Fanex.Service.Core.Model.NpoiBase
     /// </summary>
     public class FontInformationBase
     {
-        private string _fontName;
+        private readonly string _fontName;
 
-        private short _fontSize;
+        private readonly short _fontSize;
 
         public FontInformationBase()
         {
-            this._fontName = NPOIConstants.FontName;
-            this._fontSize = NPOIConstants.FontSize;
+            this._fontName = NpoiConstants.FontName;
+            this._fontSize = NpoiConstants.FontSize;
         }
 
         public FontInformationBase(string fontName, short fontSize)

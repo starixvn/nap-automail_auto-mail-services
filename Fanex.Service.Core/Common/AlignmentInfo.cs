@@ -11,10 +11,6 @@ namespace Fanex.Service.Core.Common
     /// </summary>
     public struct AlignmentInfo
     {
-        public int HorizontalAlign;
-
-        public int VerticalAlign;
-
         public AlignmentInfo(
             int horizontalAlign,
             int verticalAlign)
@@ -22,5 +18,9 @@ namespace Fanex.Service.Core.Common
             this.HorizontalAlign = horizontalAlign;
             this.VerticalAlign = verticalAlign;
         }
+
+        public int HorizontalAlign { get; set; }
+
+        public int VerticalAlign { get; set; }
     }
 }

@@ -27,20 +27,21 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
     public class WinLossByProductsExportDataService : IWinLossByProductsExportDataService
     {
         private const string PartnersGroupName = "partners";
+        private readonly XSSFWorkbook _workbook;
+        private readonly Cell _cell;
+        private readonly INpoiNewFormatFontService _fontService;
+        private readonly INpoiNewFormatBodyCellStyleService _bodyCellStyleService;
+        private readonly INpoiNewFormatCustomCellStyleService _customCellStyleService;
+        private readonly INpoiAlignmentService _alignmentService;
+        private readonly XSSFFont _regularFont;
+
         private Color _headerColor;
         private Color _subTotalColor;
         private Color _grandTotalColor;
         private Color _grandTotalBorderColor;
-        private Color _racingDueToPartnersColor;
+        private Color _racingDueToPartnersColor;        
 
-        private XSSFWorkbook _workbook;
         private XSSFSheet _workSheet;
-        private Cell _cell;
-        private INpoiNewFormatFontService _fontService;
-        private INpoiNewFormatBodyCellStyleService _bodyCellStyleService;
-        private INpoiNewFormatCustomCellStyleService _customCellStyleService;
-        private INpoiAlignmentService _alignmentService;
-        private XSSFFont _regularFont;
         private string _reportPath;
 
         public WinLossByProductsExportDataService()
@@ -187,7 +188,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
                 backgroundInformation,
                 _alignmentService.RightAlignment,
                 _fontService.BlackBoldFont);
-            grandTotalDecimalNumberStyle.DataFormat = dataFormat.GetFormat(NPOIConstants.NormalDecimalNumberFormat);
+            grandTotalDecimalNumberStyle.DataFormat = dataFormat.GetFormat(NpoiConstants.NormalDecimalNumberFormat);
             _cell.CellValue = report.Total.ProductName;
             NpoiNewFormatExcelExtension.RenderCell(_workSheet, _cell, grandTotalTextStyle);
             _cell.IncreaseColumnIndex();
@@ -232,14 +233,14 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
 
         private void InitColumnWidth()
         {
-            _workSheet.SetColumnWidth(0, 200 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(1, 300 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(2, 350 * NPOIConstants.FontWidth);
+            _workSheet.SetColumnWidth(0, 200 * NpoiConstants.FontWidth);
+            _workSheet.SetColumnWidth(1, 300 * NpoiConstants.FontWidth);
+            _workSheet.SetColumnWidth(2, 350 * NpoiConstants.FontWidth);
         }
 
         private XSSFFont CreateRacingDueToPartnerFont()
         {
-            var racingDueToPartnerFontInformation = new FontInformation(NPOIConstants.FontName, NPOIConstants.FontSize, _racingDueToPartnersColor);
+            var racingDueToPartnerFontInformation = new FontInformation(NpoiConstants.FontName, NpoiConstants.FontSize, _racingDueToPartnersColor);
             var font = _fontService.CreateFont(racingDueToPartnerFontInformation);
             return font;
         }

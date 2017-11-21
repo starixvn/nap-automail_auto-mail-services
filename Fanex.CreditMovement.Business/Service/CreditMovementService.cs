@@ -27,13 +27,14 @@ namespace Fanex.CreditMovement.Business.Service
     public class CreditMovementService : ICreditMovementService
     {
         private readonly ICreditMovementRepository _repository = null;
-        private XSSFWorkbook _workbook;
+        private readonly XSSFWorkbook _workbook;        
+        private readonly Cell _cell;
+        private readonly INpoiNewFormatFontService _fontService;
+        private readonly INpoiNewFormatBodyCellStyleService _bodyCellStyleService;
+        private readonly INpoiNewFormatCustomCellStyleService _customCellStyleService;
+        private readonly XSSFFont _regularFont;
+
         private XSSFSheet _workSheet;
-        private Cell _cell;
-        private INpoiNewFormatFontService _fontService;
-        private INpoiNewFormatBodyCellStyleService _bodyCellStyleService;
-        private INpoiNewFormatCustomCellStyleService _customCellStyleService;
-        private XSSFFont _regularFont;
 
         public CreditMovementService()
         {
@@ -62,7 +63,7 @@ namespace Fanex.CreditMovement.Business.Service
         private void ExportReport(List<CreditMovement> report, GetCreditMovementCriteria criteria)
         {
             string sheetName = "Credit Movement";
-            string reportTitle = string.Empty;
+            
             _workSheet = _workbook.GetSheet(sheetName) as XSSFSheet ?? _workbook.CreateSheet(sheetName) as XSSFSheet;
             this.InitColumnWidth();
             ExportReportHeader(criteria);
@@ -73,9 +74,7 @@ namespace Fanex.CreditMovement.Business.Service
             string parentDirectory = AppSettings.ExportDataDirectoryWithYearMonth;
             DirectoryOfFileName = parentDirectory + @"\" + FileName;
 
-            SaveFile.SaveExcelFile(AppSettings.ExportDataDirectory, parentDirectory, FileName, _workbook, AppSettings.ExcelPassword);
-
-            GC.Collect();
+            SaveFile.SaveExcelFile(AppSettings.ExportDataDirectory, parentDirectory, FileName, _workbook, AppSettings.ExcelPassword);            
         }
 
         private void InitColumnWidth()
@@ -83,15 +82,15 @@ namespace Fanex.CreditMovement.Business.Service
             int numberColumn = 6;
             for (int i = 0; i < numberColumn; i++)
             {
-                _workSheet.SetColumnWidth(i, 130 * NPOIConstants.FontWidth);
+                _workSheet.SetColumnWidth(i, 130 * NpoiConstants.FontWidth);
             }
 
-            _workSheet.SetColumnWidth(0, 60 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(1, 150 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(3, 150 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(4, 320 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(5, 200 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(6, 200 * NPOIConstants.FontWidth);
+            _workSheet.SetColumnWidth(0, 60 * NpoiConstants.FontWidth);
+            _workSheet.SetColumnWidth(1, 150 * NpoiConstants.FontWidth);
+            _workSheet.SetColumnWidth(3, 150 * NpoiConstants.FontWidth);
+            _workSheet.SetColumnWidth(4, 320 * NpoiConstants.FontWidth);
+            _workSheet.SetColumnWidth(5, 200 * NpoiConstants.FontWidth);
+            _workSheet.SetColumnWidth(6, 200 * NpoiConstants.FontWidth);
         }
 
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",

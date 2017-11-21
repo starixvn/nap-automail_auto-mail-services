@@ -22,25 +22,25 @@
     /// </summary>
     public class BalanceService : IBalanceService
     {
-        private IBalanceRepository _repository;
+        private readonly IBalanceRepository _repository;
+        private readonly XSSFWorkbook _workbook;
+        private readonly Cell _cell;
+        private readonly INpoiNewFormatFontService _fontService;
+        private readonly INpoiNewFormatBodyCellStyleService _bodyCellStyleService;
+        private readonly INpoiNewFormatCustomCellStyleService _customCellStyleService;
+        private readonly INpoiAlignmentService _alignmentService;
+        private readonly XSSFFont _regularFont;
+        private readonly BalanceReportBaseCriteria _criteria;
+        private readonly List<Exchange> _currencyList;
+
         private Color _headerColor;
         private Color _evenColor;
         private Color _oddColor;
         private Color _totalColor;
         private Color _borderColor;
 
-        private XSSFWorkbook _workbook;
         private XSSFSheet _workSheet;
-        private Cell _cell;
-        private INpoiNewFormatFontService _fontService;
-        private INpoiNewFormatBodyCellStyleService _bodyCellStyleService;
-        private INpoiNewFormatCustomCellStyleService _customCellStyleService;
-        private INpoiAlignmentService _alignmentService;
-        private XSSFFont _regularFont;
-        private BalanceReportBaseCriteria _criteria;
-
-        private List<Exchange> _currencyList;
-
+        
         private XSSFCellStyle evenCenterTextStyle;
         private XSSFCellStyle evenDecimalNumberStyle;
         private XSSFCellStyle evenLeftTextStyle;
@@ -107,11 +107,11 @@
 
         private void InitColumnWidth()
         {
-            _workSheet.SetColumnWidth(0, 100 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(1, 250 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(2, 100 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(3, 150 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(4, 150 * NPOIConstants.FontWidth);
+            _workSheet.SetColumnWidth(0, 100 * NpoiConstants.FontWidth);
+            _workSheet.SetColumnWidth(1, 250 * NpoiConstants.FontWidth);
+            _workSheet.SetColumnWidth(2, 100 * NpoiConstants.FontWidth);
+            _workSheet.SetColumnWidth(3, 150 * NpoiConstants.FontWidth);
+            _workSheet.SetColumnWidth(4, 150 * NpoiConstants.FontWidth);
         }
 
         private void InitCellStyle()

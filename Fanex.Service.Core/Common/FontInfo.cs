@@ -13,12 +13,6 @@ namespace Fanex.Service.Core.Common
     /// </summary>
     public struct FontInfo
     {
-        public string FontName;
-
-        public short FontSize;
-
-        public short FontColor;
-
         public FontInfo(
             string fontName,
             short fontSize,
@@ -28,6 +22,12 @@ namespace Fanex.Service.Core.Common
             this.FontSize = fontSize;
             this.FontColor = fontColor;
         }
+
+        public string FontName { get; set; }
+
+        public short FontSize { get; set; }
+
+        public short FontColor { get; set; }
     }
 
     /// <summary>
@@ -35,12 +35,6 @@ namespace Fanex.Service.Core.Common
     /// </summary>
     public struct FontAndColorInfo
     {
-        public string FontName;
-
-        public short FontSize;
-
-        public Color FontColor;
-
         public FontAndColorInfo(
             string fontName,
             short fontSize,
@@ -50,5 +44,11 @@ namespace Fanex.Service.Core.Common
             this.FontSize = fontSize;
             this.FontColor = fontColor;
         }
+
+        public string FontName { get; set; }
+
+        public short FontSize { get; set; }
+
+        public Color FontColor { get; set; }
     }
 }

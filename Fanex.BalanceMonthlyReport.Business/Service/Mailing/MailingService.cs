@@ -21,7 +21,7 @@ namespace Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Mailing
     /// </summary>
     public class MailingService : IMailingService
     {
-        private IMailStationService mailStation;
+        private readonly IMailStationService mailStation;
         private MailInfo _mailInfo;
 
         public MailingService()

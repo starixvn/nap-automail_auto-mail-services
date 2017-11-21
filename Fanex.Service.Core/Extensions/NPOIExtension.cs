@@ -15,7 +15,7 @@ namespace Fanex.Service.Core.Extensions
     /// <summary>
     /// Excel extension.
     /// </summary>
-    public static class NPOIExtension
+    public static class NpoiExtension
     {
         /// <summary>
         /// Creates the cell style.
@@ -95,14 +95,14 @@ namespace Fanex.Service.Core.Extensions
             for (var i = cellInfo.CurrentRow; i <= cellInfo.EndRow; i++)
             {
                 row = worksheet.GetRow(i) ?? worksheet.CreateRow(i);
-                row.Height = NPOIConstants.RowHeight;
+                row.Height = NpoiConstants.RowHeight;
 
                 for (var j = cellInfo.CurrentColumn; j <= cellInfo.EndColumn; j++)
                 {
                     ICell cell = row.GetCell(j) ?? row.CreateCell(j);
                     if (i == cellInfo.CurrentRow && j == cellInfo.CurrentColumn)
                     {
-                        NPOIUtility.SetCellValue(cell, cellInfo.CellValue);
+                        NpoiUtility.SetCellValue(cell, cellInfo.CellValue);
                     }
 
                     if (i == cellInfo.CurrentRow ||

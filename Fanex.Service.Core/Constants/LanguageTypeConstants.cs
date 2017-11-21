@@ -9,7 +9,7 @@ namespace Fanex.Service.Core.Constants
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class LanguageTypeConstants
+    public static class LanguageTypeConstants
     {
         public const string EnUS = "en-US";
         public const string ZhTW = "zh-TW";

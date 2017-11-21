@@ -9,7 +9,7 @@ namespace Fanex.Service.Core.Constants
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public static class NPOIConstants
+    public static class NpoiConstants
     {
         public const int FontWidth = 30;
         public const int FontHeight = 20;

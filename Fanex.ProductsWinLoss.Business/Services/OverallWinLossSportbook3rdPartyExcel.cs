@@ -22,16 +22,17 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class OverallWinLossSportbook3rdPartyExcel
+    public class OverallWinLossSportbook3RdPartyExcel
     {
+        private readonly XSSFWorkbook _workbook;
+
         private List<Product> _products;
 
         private Color _colorHeader;
         private Color _colorYellowBG;
         private Color _colorBlueBG;
         private Color _colorOrangeBG;
-
-        private XSSFWorkbook _workbook;
+        
         private XSSFSheet _workSheet;
         private Cell _cell;
 
@@ -112,7 +113,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
         private XSSFCellStyle _notAvailableTextRightStyle;
         private XSSFCellStyle _notAvailableTextRightBoldColorBlueBGStyle;
 
-        public OverallWinLossSportbook3rdPartyExcel(XSSFWorkbook workbook)
+        public OverallWinLossSportbook3RdPartyExcel(XSSFWorkbook workbook)
         {
             _workbook = workbook;
 
@@ -230,7 +231,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
         {
             for (int i = 0; i < 6; i++)
             {
-                _workSheet.SetColumnWidth(i, 200 * NPOIConstants.FontWidth);
+                _workSheet.SetColumnWidth(i, 200 * NpoiConstants.FontWidth);
             }
         }
 

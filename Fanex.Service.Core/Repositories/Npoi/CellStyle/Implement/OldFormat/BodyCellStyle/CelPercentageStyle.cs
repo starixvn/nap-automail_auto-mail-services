@@ -18,14 +18,15 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.OldFormat.Bod
     /// </summary>
     public class CelPercentageStyle : ICelPercentageStyle
     {
-        private HSSFWorkbook _workbook;
+        private readonly HSSFWorkbook _workbook;
+        private readonly IDataFormat _dataFormat;
+        private readonly IFont _font;
+
         private ICellStyle _percentageStyle;
         private ICellStyle _positivePercentageStyle;
         private ICellStyle _negativePercentageStyle;
         private ICellStyle _parenthesesPositivePercentageStyle;
-        private ICellStyle _parenthesesNegativePercentageStyle;
-        private IDataFormat _dataFormat;
-        private IFont _font;
+        private ICellStyle _parenthesesNegativePercentageStyle;        
 
         public CelPercentageStyle(HSSFWorkbook workbook, IFont font)
         {
@@ -82,45 +83,45 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.OldFormat.Bod
         private void CreatePercentageStyle()
         {
             this._percentageStyle = this._workbook.CreateCellStyle();
-            NPOIUtility.AssignOldFormatCellStyleData(this._percentageStyle, HSSFColor.White.Index);
+            NpoiUtility.AssignOldFormatCellStyleData(this._percentageStyle, HSSFColor.White.Index);
             this._percentageStyle.Alignment = HorizontalAlignment.Right;
-            this._percentageStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NormalPercentFormat);
+            this._percentageStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.NormalPercentFormat);
             this._percentageStyle.SetFont(_font);
         }
 
         private void CreatePositivePercentageStyle()
         {
             this._positivePercentageStyle = this._workbook.CreateCellStyle();
-            NPOIUtility.AssignOldFormatCellStyleData(this._positivePercentageStyle, HSSFColor.White.Index);
+            NpoiUtility.AssignOldFormatCellStyleData(this._positivePercentageStyle, HSSFColor.White.Index);
             this._positivePercentageStyle.Alignment = HorizontalAlignment.Right;
-            this._positivePercentageStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.PositivePercentFormat);
+            this._positivePercentageStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.PositivePercentFormat);
             this._positivePercentageStyle.SetFont(_font);
         }
 
         private void CreateNegativePercentageStyle()
         {
             this._negativePercentageStyle = this._workbook.CreateCellStyle();
-            NPOIUtility.AssignOldFormatCellStyleData(this._negativePercentageStyle, HSSFColor.White.Index);
+            NpoiUtility.AssignOldFormatCellStyleData(this._negativePercentageStyle, HSSFColor.White.Index);
             this._negativePercentageStyle.Alignment = HorizontalAlignment.Right;
-            this._negativePercentageStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NegativePercentFormat);
+            this._negativePercentageStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.NegativePercentFormat);
             this._negativePercentageStyle.SetFont(_font);
         }
 
         private void CreateParenthesesPositivePercentageStyle()
         {
             this._parenthesesPositivePercentageStyle = this._workbook.CreateCellStyle();
-            NPOIUtility.AssignOldFormatCellStyleData(this._parenthesesPositivePercentageStyle, HSSFColor.White.Index);
+            NpoiUtility.AssignOldFormatCellStyleData(this._parenthesesPositivePercentageStyle, HSSFColor.White.Index);
             this._parenthesesPositivePercentageStyle.Alignment = HorizontalAlignment.Right;
-            this._parenthesesPositivePercentageStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.ParenthesesPositivePercentFormat);
+            this._parenthesesPositivePercentageStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.ParenthesesPositivePercentFormat);
             this._parenthesesPositivePercentageStyle.SetFont(_font);
         }
 
         private void CreateParenthesesNegativePercentageStyle()
         {
             this._parenthesesNegativePercentageStyle = this._workbook.CreateCellStyle();
-            NPOIUtility.AssignOldFormatCellStyleData(this._parenthesesNegativePercentageStyle, HSSFColor.White.Index);
+            NpoiUtility.AssignOldFormatCellStyleData(this._parenthesesNegativePercentageStyle, HSSFColor.White.Index);
             this._parenthesesNegativePercentageStyle.Alignment = HorizontalAlignment.Right;
-            this._parenthesesNegativePercentageStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.ParenthesesNegativePercentFormat);
+            this._parenthesesNegativePercentageStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.ParenthesesNegativePercentFormat);
             this._parenthesesNegativePercentageStyle.SetFont(_font);
         }
     }

@@ -19,11 +19,11 @@ namespace Fanex.Service.Core.Service.Implement.Npoi
     /// </summary>
     public class NpoiOldFormatCustomCellStyleService : INpoiOldFormatCustomCellStyleService
     {
-        private ICellTextStyle _textStyle;
-        private ICellNumberStyle _numberStyle;
-        private ICellDecimalNumberStyle _decimalNumberStyle;
-        private ICelPercentageStyle _percentageStyle;
-        private HSSFWorkbook _workbook;
+        private readonly ICellTextStyle _textStyle;
+        private readonly ICellNumberStyle _numberStyle;
+        private readonly ICellDecimalNumberStyle _decimalNumberStyle;
+        private readonly ICelPercentageStyle _percentageStyle;
+        private readonly HSSFWorkbook _workbook;
 
         public NpoiOldFormatCustomCellStyleService(HSSFWorkbook workbook)
         {

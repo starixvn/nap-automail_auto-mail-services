@@ -21,17 +21,23 @@
     /// </summary>
     public class CreditTermService : ICreditTermService
     {
-        private IBalanceRepository _repository;
+        private readonly IBalanceRepository _repository;
+        private readonly XSSFWorkbook _workbook;
+        private readonly XSSFFont _regularFont;
+        private readonly Cell _cell;
+        private readonly INpoiNewFormatFontService _fontService;
+        private readonly INpoiNewFormatBodyCellStyleService _bodyCellStyleService;
+        private readonly INpoiNewFormatCustomCellStyleService _customCellStyleService;
+        private readonly INpoiAlignmentService _alignmentService;
+        private readonly List<Exchange> _currencyList;
 
         private Color _headerColor;
         private Color _overLimitColor;
         private Color _normalColor;
         private Color _contentColor;
         private Color _borderColor;
-
-        private XSSFWorkbook _workbook;
-        private XSSFSheet _workSheet;
-        private XSSFFont _regularFont;
+        
+        private XSSFSheet _workSheet;        
 
         private XSSFCellStyle overLimitTextStyle;
         private XSSFCellStyle overLimitCenterBoldTextStyle;
@@ -45,15 +51,6 @@
 
         private XSSFCellStyle normalLeftBoldTextStyle;
         private XSSFCellStyle headerStyle;        
-
-        private Cell _cell;
-
-        private INpoiNewFormatFontService _fontService;
-        private INpoiNewFormatBodyCellStyleService _bodyCellStyleService;
-        private INpoiNewFormatCustomCellStyleService _customCellStyleService;
-        private INpoiAlignmentService _alignmentService;
-
-        private List<Exchange> _currencyList;
 
         #region Constructors
         public CreditTermService() 
@@ -121,16 +118,16 @@
         /// </summary>
         private void InitColumnWidth()
         {
-            _workSheet.SetColumnWidth(0, 60 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(1, 100 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(2, 100 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(3, 150 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(4, 150 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(5, 150 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(6, 150 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(7, 400 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(8, 100 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(9, 150 * NPOIConstants.FontWidth);
+            _workSheet.SetColumnWidth(0, 60 * NpoiConstants.FontWidth);
+            _workSheet.SetColumnWidth(1, 100 * NpoiConstants.FontWidth);
+            _workSheet.SetColumnWidth(2, 100 * NpoiConstants.FontWidth);
+            _workSheet.SetColumnWidth(3, 150 * NpoiConstants.FontWidth);
+            _workSheet.SetColumnWidth(4, 150 * NpoiConstants.FontWidth);
+            _workSheet.SetColumnWidth(5, 150 * NpoiConstants.FontWidth);
+            _workSheet.SetColumnWidth(6, 150 * NpoiConstants.FontWidth);
+            _workSheet.SetColumnWidth(7, 400 * NpoiConstants.FontWidth);
+            _workSheet.SetColumnWidth(8, 100 * NpoiConstants.FontWidth);
+            _workSheet.SetColumnWidth(9, 150 * NpoiConstants.FontWidth);
         }
 
         private void InitCellStyle()
@@ -219,8 +216,7 @@
         /// <param name="item">The row item.</param>
         private void CreateRowData(CreditTermMain item)
         {
-            _cell.ResetColumnIndex();
-            var color = item.OverLimit ? _overLimitColor : _normalColor;
+            _cell.ResetColumnIndex();            
             var textStyle = item.OverLimit ? overLimitTextStyle : normalTextStyle;
             var centerBoldTextStyle = item.OverLimit ? overLimitCenterBoldTextStyle : normalCenterBoldTextStyle;
             var decimalNumberStyle = item.OverLimit ? overLimitDecimalNumberStyle : normalDecimalNumberStyle;

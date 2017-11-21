@@ -212,7 +212,7 @@
     <Compile Include="Common\BorderStyleInfo.cs" />
     <Compile Include="Common\CellInfo.cs" />
     <Compile Include="Common\FontInfo.cs" />
-    <Compile Include="Common\NPOIUtility.cs" />
+    <Compile Include="Common\NpoiUtility.cs" />
     <Compile Include="Configuration\ConfigurationParser.cs" />
     <Compile Include="Configuration\ISettings.cs" />
     <Compile Include="Constants\BetTypeConstants.cs" />
@@ -220,7 +220,7 @@
     <Compile Include="Constants\DateTimeFormatConstants.cs" />
     <Compile Include="Constants\LanguageTypeConstants.cs" />
     <Compile Include="Constants\MailTemplateConstants.cs" />
-    <Compile Include="Constants\NPOIConstants.cs" />
+    <Compile Include="Constants\NpoiConstants.cs" />
     <Compile Include="Criteria\BalanceUpCriteria.cs" />
     <Compile Include="Criteria\GetExchangeCurrenciesCriteria.cs" />
     <Compile Include="Enums\Status.cs" />
@@ -228,8 +228,8 @@
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\DirectoryExtensions.cs" />
     <Compile Include="Extensions\LogExtensions.cs" />
-    <Compile Include="Extensions\NPOIExtension.cs" />
-    <Compile Include="Extensions\NPOIHighVersion.cs" />
+    <Compile Include="Extensions\NpoiExtension.cs" />
+    <Compile Include="Extensions\NpoiHighVersion.cs" />
     <Compile Include="Extensions\NpoiNewFormatExcelExtension.cs" />
     <Compile Include="Extensions\NpoiOldFormatExcelExtension.cs" />
     <Compile Include="Extensions\NumberExtensions.cs" />

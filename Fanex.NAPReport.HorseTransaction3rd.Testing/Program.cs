@@ -4,9 +4,9 @@ using Newtonsoft.Json;
 
 namespace Fanex.HorseTransaction3rd.Executing
 {
-    public class Program
+    public static class Program
     {
-        private static void Main(string[] args)
+        private static void Main()
         {
             FanexDataRegisterService.ConfigureFanexData();
             var service = new TransactionServiceImp();

@@ -9,9 +9,9 @@ using Newtonsoft.Json;
 
 namespace Fanex.VirtualSportWinLoss.Executing
 {
-    public class Program
+    public static class Program
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
             DbSettingProviderManager.Current.Start();

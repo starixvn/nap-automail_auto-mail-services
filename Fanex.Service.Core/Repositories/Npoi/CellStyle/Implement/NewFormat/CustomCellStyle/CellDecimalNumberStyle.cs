@@ -18,8 +18,8 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.NewFormat.Cus
     /// </summary>
     public class CellDecimalNumberStyle : ICellDecimalNumberStyle
     {
-        private XSSFWorkbook _workbook;
-        private XSSFDataFormat _dataFormat;
+        private readonly XSSFWorkbook _workbook;
+        private readonly XSSFDataFormat _dataFormat;
 
         public CellDecimalNumberStyle(XSSFWorkbook workbook)
         {
@@ -30,9 +30,9 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.NewFormat.Cus
         public XSSFCellStyle CreateDecimalNumberStyle(Color backgroundColor, XSSFFont font)
         {
             XSSFCellStyle decimalNumberStyle = this._workbook.CreateCellStyle() as XSSFCellStyle;
-            NPOIUtility.AssignNewFormatCellStyleData(decimalNumberStyle, backgroundColor);
+            NpoiUtility.AssignNewFormatCellStyleData(decimalNumberStyle, backgroundColor);
             decimalNumberStyle.Alignment = HorizontalAlignment.Right;
-            decimalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NormalDecimalNumberFormat);
+            decimalNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.NormalDecimalNumberFormat);
             decimalNumberStyle.SetFont(font);
             return decimalNumberStyle;
         }
@@ -40,9 +40,9 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.NewFormat.Cus
         public XSSFCellStyle CreatePositiveDecimalNumberStyle(Color backgroundColor, XSSFFont font)
         {
             XSSFCellStyle positiveDecimalNumberStyle = this._workbook.CreateCellStyle() as XSSFCellStyle;
-            NPOIUtility.AssignNewFormatCellStyleData(positiveDecimalNumberStyle, backgroundColor);
+            NpoiUtility.AssignNewFormatCellStyleData(positiveDecimalNumberStyle, backgroundColor);
             positiveDecimalNumberStyle.Alignment = HorizontalAlignment.Right;
-            positiveDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.PositiveDecimalNumberFormat);
+            positiveDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.PositiveDecimalNumberFormat);
             positiveDecimalNumberStyle.SetFont(font);
             return positiveDecimalNumberStyle;
         }
@@ -50,9 +50,9 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.NewFormat.Cus
         public XSSFCellStyle CreateNegativeDecimalNumberStyle(Color backgroundColor, XSSFFont font)
         {
             XSSFCellStyle negativeDecimalNumberStyle = this._workbook.CreateCellStyle() as XSSFCellStyle;
-            NPOIUtility.AssignNewFormatCellStyleData(negativeDecimalNumberStyle, backgroundColor);
+            NpoiUtility.AssignNewFormatCellStyleData(negativeDecimalNumberStyle, backgroundColor);
             negativeDecimalNumberStyle.Alignment = HorizontalAlignment.Right;
-            negativeDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NegativeDecimalNumberFormat);
+            negativeDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.NegativeDecimalNumberFormat);
             negativeDecimalNumberStyle.SetFont(font);
             return negativeDecimalNumberStyle;
         }
@@ -60,9 +60,9 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.NewFormat.Cus
         public XSSFCellStyle CreateParenthesesPositiveDecimalNumberStyle(Color backgroundColor, XSSFFont font)
         {
             XSSFCellStyle parenthesesPositiveDecimalNumberStyle = this._workbook.CreateCellStyle() as XSSFCellStyle;
-            NPOIUtility.AssignNewFormatCellStyleData(parenthesesPositiveDecimalNumberStyle, backgroundColor);
+            NpoiUtility.AssignNewFormatCellStyleData(parenthesesPositiveDecimalNumberStyle, backgroundColor);
             parenthesesPositiveDecimalNumberStyle.Alignment = HorizontalAlignment.Right;
-            parenthesesPositiveDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.ParenthesesPositiveDecimalNumberFormat);
+            parenthesesPositiveDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.ParenthesesPositiveDecimalNumberFormat);
             parenthesesPositiveDecimalNumberStyle.SetFont(font);
             return parenthesesPositiveDecimalNumberStyle;
         }
@@ -70,9 +70,9 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.NewFormat.Cus
         public XSSFCellStyle CreateParenthesesNegativeDecimalNumberStyle(Color backgroundColor, XSSFFont font)
         {
             XSSFCellStyle parenthesesNegativeDecimalNumberStyle = this._workbook.CreateCellStyle() as XSSFCellStyle;
-            NPOIUtility.AssignNewFormatCellStyleData(parenthesesNegativeDecimalNumberStyle, backgroundColor);
+            NpoiUtility.AssignNewFormatCellStyleData(parenthesesNegativeDecimalNumberStyle, backgroundColor);
             parenthesesNegativeDecimalNumberStyle.Alignment = HorizontalAlignment.Right;
-            parenthesesNegativeDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.ParenthesesNegativeDecimalNumberFormat);
+            parenthesesNegativeDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.ParenthesesNegativeDecimalNumberFormat);
             parenthesesNegativeDecimalNumberStyle.SetFont(font);
             return parenthesesNegativeDecimalNumberStyle;
         }

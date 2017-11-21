@@ -17,11 +17,12 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.OldFormat.Bod
     /// </summary>
     public class CellTextStyle : ICellTextStyle
     {
-        private HSSFWorkbook _workbook;
+        private readonly HSSFWorkbook _workbook;
+        private readonly IFont _font;
+
         private ICellStyle _leftTextStyle;
         private ICellStyle _rightTextStyle;
         private ICellStyle _centerTextStyle;
-        private IFont _font;
 
         public CellTextStyle(HSSFWorkbook workbook, IFont font)
         {
@@ -59,7 +60,7 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.OldFormat.Bod
         private void CreateLeftTextStyle()
         {
             this._leftTextStyle = this._workbook.CreateCellStyle();
-            NPOIUtility.AssignOldFormatCellStyleData(this._leftTextStyle, HSSFColor.White.Index);
+            NpoiUtility.AssignOldFormatCellStyleData(this._leftTextStyle, HSSFColor.White.Index);
             this._leftTextStyle.Alignment = HorizontalAlignment.Left;
             this._leftTextStyle.SetFont(_font);
         }
@@ -67,7 +68,7 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.OldFormat.Bod
         private void CreateRightTextStyle()
         {
             this._rightTextStyle = this._workbook.CreateCellStyle();
-            NPOIUtility.AssignOldFormatCellStyleData(this._rightTextStyle, HSSFColor.White.Index);
+            NpoiUtility.AssignOldFormatCellStyleData(this._rightTextStyle, HSSFColor.White.Index);
             this._rightTextStyle.Alignment = HorizontalAlignment.Right;
             this._rightTextStyle.SetFont(_font);
         }
@@ -75,7 +76,7 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.OldFormat.Bod
         private void CreateCenterTextStyle()
         {
             this._centerTextStyle = this._workbook.CreateCellStyle();
-            NPOIUtility.AssignOldFormatCellStyleData(this._centerTextStyle, HSSFColor.White.Index);
+            NpoiUtility.AssignOldFormatCellStyleData(this._centerTextStyle, HSSFColor.White.Index);
             this._centerTextStyle.Alignment = HorizontalAlignment.Center;
             this._centerTextStyle.SetFont(_font);
         }

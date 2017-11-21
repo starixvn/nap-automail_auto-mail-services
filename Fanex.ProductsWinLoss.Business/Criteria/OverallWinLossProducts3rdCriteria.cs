@@ -7,15 +7,12 @@
 namespace Fanex.NAPReport.WinLossByProducts.Business.Criteria
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class OverallWinLossProducts3rdCriteria : CriteriaBase
+    public class OverallWinLossProducts3RDCriteria : CriteriaBase
     {
         public DateTime RptDate
         {
