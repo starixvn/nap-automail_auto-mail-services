@@ -18,7 +18,7 @@ namespace Fanex.Service.Core.Service.Implement.Npoi
     /// </summary>
     public class NpoiNewFormatFontService : INpoiNewFormatFontService
     {
-        private XSSFWorkbook _workbook;
+        private readonly XSSFWorkbook _workbook;
 
         public NpoiNewFormatFontService(XSSFWorkbook workbook)
         {
@@ -45,7 +45,7 @@ namespace Fanex.Service.Core.Service.Implement.Npoi
         {
             get
             {
-                FontInformation fontInformation = new FontInformation(NPOIConstants.FontName, NPOIConstants.FontSize, Color.White);
+                FontInformation fontInformation = new FontInformation(NpoiConstants.FontName, NpoiConstants.FontSize, Color.White);
                 return CreateBoldFont(fontInformation);
             }
         }

@@ -32,7 +32,8 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
     public class ExportExcelService : IExportExcelService
     {
         private const string RMCurrency = "RM2";
-        private Dictionary<int, string> _currencies;
+        private readonly Dictionary<int, string> _currencies;
+        private readonly string _reportDataDirectory;
 
         private XSSFWorkbook _workbook;
         private BorderInfo _borderInfo;
@@ -83,9 +84,7 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
 
         private AlignmentInfo _leftAlignmentInfo;
         private AlignmentInfo _centerAlignmentInfo;
-        private AlignmentInfo _rightAlignmentInfo;
-
-        private string _reportDataDirectory;
+        private AlignmentInfo _rightAlignmentInfo;        
 
         public ExportExcelService()
             : this(null)
@@ -131,9 +130,9 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
 
             using (ObjectDb objectDb = new ObjectDb(criteria.GetSettingKey()))
             {
-                RacingWinLoss racingByGroup = null;
-                RacingWinLoss winLossTotalPoolByPartner = null;
-                RacingWinLoss winLossTotalBaseByPartner = null;
+                RacingWinLoss racingByGroup = new RacingWinLoss();
+                RacingWinLoss winLossTotalPoolByPartner = new RacingWinLoss();
+                RacingWinLoss winLossTotalBaseByPartner = new RacingWinLoss();
                 var reportParams = criteria.GetSpParams();
                 IDataReader reader = objectDb.ExecuteReader(reportParams);
                 while (reader.Read())
@@ -209,7 +208,7 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
         Justification = "Reviewed. Suppression is OK here.")]
         public RacingWinLoss GetDetailReport(GetDetailRacingReportCriteria criteria)
         {
-            Dictionary<int, int> totalDictionary = new Dictionary<int, int>();
+            var totalDictionary = new Dictionary<int, int>();
             string previousCurrency = string.Empty;
             int previousMeeting = 0;
             int totalIndex = 0;
@@ -230,15 +229,14 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
                 {
                     CurrencyName = Labels.Base_RM
                 };
-                RacingWinLoss racingWinLossByCurrencyGroup = null;
-                RacingWinLoss racingWinLossByMeetingGroup = null;
-                RacingWinLoss racingWinLossBaseCurrencyTotal = null;
-                RacingWinLoss racingWinLossByCurrencyTotal = null;
+                RacingWinLoss racingWinLossByCurrencyGroup = new RacingWinLoss();
+                RacingWinLoss racingWinLossByMeetingGroup = new RacingWinLoss();
+                RacingWinLoss racingWinLossBaseCurrencyTotal = new RacingWinLoss();
+                RacingWinLoss racingWinLossByCurrencyTotal = new RacingWinLoss();
                 IDataReader reader = objectDb.ExecuteReader(criteria.GetSpParams());
                 while (reader.Read())
                 {
-                    int meetingId = Converter.ToInt(reader["MeetingID"]);
-                    int currencyId = Converter.ToInt(reader["currency"]);
+                    int meetingId = Converter.ToInt(reader["MeetingID"]);                    
                     string currencyName = Converter.ToString2(reader["currencyName"]);
                     string leagueName = CacheRef.GetLeagueName(meetingId);
                     if (!CheckIsSameCurrency(reader, previousCurrency))
@@ -298,7 +296,9 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
 
                     if (totalDictionary.ContainsKey(meetingId))
                     {
+#pragma warning disable S4158 // Empty collections should not be accessed or iterated
                         totalIndex = totalDictionary[meetingId];
+#pragma warning restore S4158 // Empty collections should not be accessed or iterated
                     }
                     else
                     {
@@ -356,7 +356,7 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
             _cellInfo = new CellInfo(0, 0, 0, 0, string.Empty);
             this.ExportReportTitle(worksheet, reportTitle);
             this.ExportReportHeader(worksheet, Labels.Pool_Currency, Labels.Currency);
-            NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+            NpoiUtility.IncreaseRowIndex(ref _cellInfo);
 
             if (report.ReportRows.Count > 0)
             {
@@ -371,8 +371,6 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
             worksheet.CreateFreezePane(2, 4, 2, 4);
             reportName = string.Format("{0}.{1}", reportName, "xlsx");
             SaveFile.SaveExcelFile(AppSettings.DataDirectory, _reportDataDirectory, reportName, _workbook, AppSettings.ExcelPasswordProtected);
-
-            GC.Collect();
         }
 
         /// <summary>
@@ -397,7 +395,7 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
             _cellInfo = new CellInfo(0, 0, 0, 0, string.Empty);
             this.ExportReportTitle(worksheet, reportTitle);
             this.ExportReportHeader(worksheet, Labels.Meeting_Currency, Labels.Race);
-            NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+            NpoiUtility.IncreaseRowIndex(ref _cellInfo);
 
             if (report.ReportRows.Count > 0)
             {
@@ -413,18 +411,16 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
 
             reportName = string.Format("{0}.{1}", reportName, "xlsx");
             SaveFile.SaveExcelFile(AppSettings.DataDirectory, _reportDataDirectory, reportName, _workbook, AppSettings.ExcelPasswordProtected);
-
-            GC.Collect();
         }
 
         private void InitColumnWidth(XSSFSheet worksheet)
         {
             for (int i = 0; i < 25; i++)
             {
-                worksheet.SetColumnWidth(i, 130 * NPOIConstants.FontWidth);
+                worksheet.SetColumnWidth(i, 130 * NpoiConstants.FontWidth);
             }
 
-            worksheet.SetColumnWidth(0, 300 * NPOIConstants.FontWidth);
+            worksheet.SetColumnWidth(0, 300 * NpoiConstants.FontWidth);
         }
 
         private void ExportReportTitle(XSSFSheet worksheet, string reportTitle)
@@ -432,8 +428,8 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
             XSSFRow row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
             _cellInfo.CellValue = reportTitle;
             _cellInfo.EndColumn = _cellInfo.EndColumn + 24;
-            NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.ResetColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.ResetColumnIndex(ref _cellInfo);
             _cellInfo.CurrentRow = 2;
             _cellInfo.EndRow = 2;
         }
@@ -443,8 +439,8 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
             XSSFRow row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
             _cellInfo.CellValue = "There is no data.";
             _cellInfo.EndColumn = _cellInfo.EndColumn + 24;
-            NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _leftTextStyle);
-            NPOIUtility.ResetColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _leftTextStyle);
+            NpoiUtility.ResetColumnIndex(ref _cellInfo);
         }
 
         /// <summary>
@@ -462,127 +458,127 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
 
             _cellInfo.CellValue = firstColumnName;
             _cellInfo.EndRow = _cellInfo.CurrentRow + 1;
-            NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = secondColumnName;
-            NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.EndRow = _cellInfo.CurrentRow;
             _cellInfo.EndColumn = _cellInfo.CurrentColumn + 5;
             _cellInfo.CellValue = Labels.Agency;
-            NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
 
             _cellInfo.CurrentColumn = _cellInfo.EndColumn + 1;
             _cellInfo.EndColumn = _cellInfo.CurrentColumn + 8;
             _cellInfo.CellValue = Labels.IBC;
-            NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
 
             _cellInfo.CurrentColumn = _cellInfo.EndColumn + 1;
             _cellInfo.EndColumn = _cellInfo.CurrentColumn + 7;
             _cellInfo.CellValue = Labels.Partner;
-            NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.ResetColumnIndex(ref _cellInfo);
-            NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+            NpoiHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.ResetColumnIndex(ref _cellInfo);
+            NpoiUtility.IncreaseRowIndex(ref _cellInfo);
 
             _cellInfo.CurrentColumn = 2;
             _cellInfo.EndColumn = 2;
 
             //// Agency header group
             _cellInfo.CellValue = Labels.Win_TO;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = Labels.Place_TO;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = Labels.Win_Place_TO;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = Labels.Total_TO;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = Labels.Comm_Income;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = Labels.PT_Win_Loss;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             //// IBC header group
             _cellInfo.CellValue = Labels.Win_TO;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = Labels.Place_TO;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = Labels.Win_Place_TO;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = Labels.Total_TO;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = Labels.Comm_Income;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = Labels.Tote_Fee;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = Labels.Comm_Expense;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = Labels.PT_Win_Loss;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = Labels.Net_Income;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             //// Partner header group.
             _cellInfo.CellValue = Labels.Win_TO;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = Labels.Place_TO;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = Labels.Win_Place_TO;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = Labels.Total_TO;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = Labels.Dividend_Won;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = Labels.Comm_Expense;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = Labels.Tote_Fee;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = Labels.Amount_Due;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
-            NPOIUtility.ResetColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _headerTextStyle);
+            NpoiUtility.ResetColumnIndex(ref _cellInfo);
         }
 
         /// <summary>
@@ -601,43 +597,43 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
 
                 _cellInfo.CellValue = racingWinLossByPartner.PartnerName;
                 _cellInfo.EndRow = _cellInfo.CurrentRow + groupLength - 1;
-                NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _centerTextStyle);
-                NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+                NpoiHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _centerTextStyle);
+                NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
                 _cellInfo.EndRow = _cellInfo.CurrentRow;
 
                 foreach (var racingWinLossByCurrency in racingWinLossByPartner.ReportRows)
                 {
                     row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
                     _cellInfo.CellValue = racingWinLossByCurrency.CurrencyName;
-                    NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _centerTextStyle);
+                    NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _centerTextStyle);
                     ExportRacingWinLossReportRow(racingWinLossByCurrency, worksheet, row, RowType.NormalRow);
                     _cellInfo.CurrentColumn = 1;
                     _cellInfo.EndColumn = 1;
-                    NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+                    NpoiUtility.IncreaseRowIndex(ref _cellInfo);
                 }
 
-                NPOIUtility.ResetColumnIndex(ref _cellInfo);
+                NpoiUtility.ResetColumnIndex(ref _cellInfo);
                 groupLength = racingWinLossByPartner.Total.ReportRows.Count;
                 row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
                 _cellInfo.CellValue = racingWinLossByPartner.Total.PartnerName;
                 _cellInfo.EndRow = _cellInfo.CurrentRow + groupLength - 1;
-                NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _subTotalByCurrencyCenterTextStyle);
-                NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+                NpoiHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _subTotalByCurrencyCenterTextStyle);
+                NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
                 _cellInfo.EndRow = _cellInfo.CurrentRow;
 
                 foreach (var racingWinLossByPartnerTotal in racingWinLossByPartner.Total.ReportRows)
                 {
                     row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
                     _cellInfo.CellValue = racingWinLossByPartnerTotal.CurrencyName;
-                    NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _subTotalByCurrencyCenterTextStyle);
+                    NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _subTotalByCurrencyCenterTextStyle);
                     ExportRacingWinLossReportRow(racingWinLossByPartnerTotal, worksheet, row, RowType.SubTotalByCurrency);
                     _cellInfo.CurrentColumn = 1;
                     _cellInfo.EndColumn = 1;
-                    NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+                    NpoiUtility.IncreaseRowIndex(ref _cellInfo);
                 }
 
-                NPOIUtility.ResetColumnIndex(ref _cellInfo);
-                NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+                NpoiUtility.ResetColumnIndex(ref _cellInfo);
+                NpoiUtility.IncreaseRowIndex(ref _cellInfo);
             }
         }
 
@@ -657,19 +653,19 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
 
             _cellInfo.EndRow = _cellInfo.CurrentRow + groupLength - 1;
             _cellInfo.CellValue = grandTotal.PartnerName;
-            NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _grandTotalCenterTextStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _grandTotalCenterTextStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
             _cellInfo.EndRow = _cellInfo.CurrentRow;
 
             foreach (var grandTotalByCurrency in grandTotal.ReportRows)
             {
                 row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
                 _cellInfo.CellValue = grandTotalByCurrency.CurrencyName;
-                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _grandTotalCenterTextStyle);
+                NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _grandTotalCenterTextStyle);
                 ExportRacingWinLossReportRow(grandTotalByCurrency, worksheet, row, RowType.GrandTotal);
                 _cellInfo.CurrentColumn = 1;
                 _cellInfo.EndColumn = 1;
-                NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+                NpoiUtility.IncreaseRowIndex(ref _cellInfo);
             }
         }
 
@@ -694,53 +690,53 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
                     row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
                     _cellInfo.EndRow = _cellInfo.CurrentRow + groupLength - 1;
                     _cellInfo.CellValue = racingWinLossByLeague.PartnerName;
-                    NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _centerTextStyle);
-                    NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+                    NpoiHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _centerTextStyle);
+                    NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
                     _cellInfo.EndRow = _cellInfo.CurrentRow;
 
                     foreach (RacingWinLoss racingWinLossInfo in racingWinLossByLeague.ReportRows)
                     {
                         row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
                         _cellInfo.CellValue = racingWinLossInfo.Race;
-                        NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _intNumberStyle);
+                        NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _intNumberStyle);
                         ExportRacingWinLossReportRow(racingWinLossInfo, worksheet, row, RowType.NormalRow);
                         _cellInfo.CurrentColumn = 1;
                         _cellInfo.EndColumn = 1;
-                        NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+                        NpoiUtility.IncreaseRowIndex(ref _cellInfo);
                     }
 
-                    NPOIUtility.ResetColumnIndex(ref _cellInfo);
+                    NpoiUtility.ResetColumnIndex(ref _cellInfo);
                     _cellInfo.CellValue = racingWinLossByLeague.Total.PartnerName;
                     _cellInfo.EndColumn = _cellInfo.CurrentColumn + 1;
-                    NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _subTotalCenterTextStyle);
-                    NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+                    NpoiHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _subTotalCenterTextStyle);
+                    NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
                     ExportRacingWinLossReportRow(racingWinLossByLeague.Total, worksheet, row, RowType.SubTotal);
-                    NPOIUtility.ResetColumnIndex(ref _cellInfo);
-                    NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+                    NpoiUtility.ResetColumnIndex(ref _cellInfo);
+                    NpoiUtility.IncreaseRowIndex(ref _cellInfo);
                 }
 
                 groupLength = racingWinLossByCurrency.Total.ReportRows.Count;
                 _cellInfo.EndRow = _cellInfo.CurrentRow + groupLength - 1;
                 _cellInfo.CellValue = racingWinLossByCurrency.Total.PartnerName;
                 row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
-                NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _subTotalByCurrencyCenterTextStyle);
-                NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+                NpoiHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _subTotalByCurrencyCenterTextStyle);
+                NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
                 _cellInfo.EndRow = _cellInfo.CurrentRow;
 
                 foreach (RacingWinLoss racingWinLossByCurrencyTotal in racingWinLossByCurrency.Total.ReportRows)
                 {
                     row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
                     _cellInfo.CellValue = racingWinLossByCurrencyTotal.CurrencyName;
-                    NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _subTotalByCurrencyCenterTextStyle);
-                    NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+                    NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _subTotalByCurrencyCenterTextStyle);
+                    NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
                     ExportRacingWinLossReportRow(racingWinLossByCurrencyTotal, worksheet, row, RowType.SubTotalByCurrency);
                     _cellInfo.CurrentColumn = 1;
                     _cellInfo.EndColumn = 1;
-                    NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+                    NpoiUtility.IncreaseRowIndex(ref _cellInfo);
                 }
 
-                NPOIUtility.ResetColumnIndex(ref _cellInfo);
-                NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+                NpoiUtility.ResetColumnIndex(ref _cellInfo);
+                NpoiUtility.IncreaseRowIndex(ref _cellInfo);
             }
         }
 
@@ -760,15 +756,15 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
                 row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
                 grandTotalInfo = grandTotal.ReportRows[i];
                 _cellInfo.CellValue = grandTotalInfo.PartnerName;
-                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _subTotalByPoolCurrencyCenterTextStyle);
-                NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+                NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _subTotalByPoolCurrencyCenterTextStyle);
+                NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
                 _cellInfo.CellValue = grandTotalInfo.CurrencyName;
-                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _subTotalByPoolCurrencyCenterTextStyle);
-                NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+                NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _subTotalByPoolCurrencyCenterTextStyle);
+                NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
                 ExportRacingWinLossReportRow(grandTotalInfo, worksheet, row, RowType.SubTotalByPoolCurrency);
-                NPOIUtility.ResetColumnIndex(ref _cellInfo);
-                NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+                NpoiUtility.ResetColumnIndex(ref _cellInfo);
+                NpoiUtility.IncreaseRowIndex(ref _cellInfo);
             }
 
             grandTotalInfo = grandTotal.ReportRows[grandTotalLength - 1];
@@ -776,24 +772,24 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
             _cellInfo.EndRow = _cellInfo.CurrentRow + groupLength - 1;
             _cellInfo.CellValue = grandTotalInfo.PartnerName;
             row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
-            NPOIHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _grandTotalCenterTextStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderMergeCell(ref worksheet, ref row, ref _cellInfo, _grandTotalCenterTextStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
             _cellInfo.EndRow = _cellInfo.CurrentRow;
 
             foreach (var grandTotalByCurrency in grandTotalInfo.ReportRows)
             {
                 row = worksheet.GetRow(_cellInfo.CurrentRow) as XSSFRow ?? worksheet.CreateRow(_cellInfo.CurrentRow) as XSSFRow;
                 _cellInfo.CellValue = grandTotalByCurrency.CurrencyName;
-                NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _grandTotalCenterTextStyle);
-                NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+                NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, _grandTotalCenterTextStyle);
+                NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
                 ExportRacingWinLossReportRow(grandTotalByCurrency, worksheet, row, RowType.GrandTotal);
                 _cellInfo.CurrentColumn = 1;
                 _cellInfo.EndColumn = 1;
-                NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+                NpoiUtility.IncreaseRowIndex(ref _cellInfo);
             }
 
-            NPOIUtility.ResetColumnIndex(ref _cellInfo);
-            NPOIUtility.IncreaseRowIndex(ref _cellInfo);
+            NpoiUtility.ResetColumnIndex(ref _cellInfo);
+            NpoiUtility.IncreaseRowIndex(ref _cellInfo);
         }
 
         /// <summary>
@@ -818,98 +814,98 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
 
             //// Agency group data.
             _cellInfo.CellValue = rowData.WinTOAgency;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = rowData.PlaceTOAgency;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = rowData.WinPlaceTOAgency;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = rowData.TotalTOAgency;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = rowData.CommIncomeAgency;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = rowData.PTWinLossAgency;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             //// IBC group data.
             _cellInfo.CellValue = rowData.WinTurnoverIBC;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = rowData.PlaceTurnoverIBC;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = rowData.WinPlaceTurnoverIBC;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = rowData.TotalTurnoverIBC;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = rowData.CommIncomeIBC;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = rowData.ToteFeeIBC;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = rowData.CommExpenseIBC;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = rowData.PTWinLossIBC;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = rowData.NetIncomeIBC;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             //// Partner group data.
             _cellInfo.CellValue = rowData.WinTOPartner;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = rowData.PlaceTOPartner;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = rowData.WinPlaceTOPartner;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = rowData.TotalTOPartner;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = rowData.DividendWonPartner;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = rowData.CommExpensePartner;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = rowData.ToteFeePartner;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
-            NPOIUtility.IncreaseColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
+            NpoiUtility.IncreaseColumnIndex(ref _cellInfo);
 
             _cellInfo.CellValue = rowData.AmountDuePartner;
-            NPOIHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
-            NPOIUtility.ResetColumnIndex(ref _cellInfo);
+            NpoiHighVersion.RenderCell(ref worksheet, ref row, ref _cellInfo, decimalNumberStyle);
+            NpoiUtility.ResetColumnIndex(ref _cellInfo);
         }
 
         /// <summary>
@@ -1026,16 +1022,16 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
         private void InitFontInfo()
         {
             _fontInfo = new FontAndColorInfo(
-                    NPOIConstants.FontName,
-                    NPOIConstants.FontSize,
+                    NpoiConstants.FontName,
+                    NpoiConstants.FontSize,
                     Color.Black);
             _blueFontInfo = new FontAndColorInfo(
-                    NPOIConstants.FontName,
-                    NPOIConstants.FontSize,
+                    NpoiConstants.FontName,
+                    NpoiConstants.FontSize,
                     Color.Blue);
             _headerFontInfo = new FontAndColorInfo(
-                   NPOIConstants.FontName,
-                   NPOIConstants.FontSize,
+                   NpoiConstants.FontName,
+                   NpoiConstants.FontSize,
                    Color.White);
         }
 
@@ -1093,92 +1089,92 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
         Justification = "Reviewed. Suppression is OK here.")]
         private void InitCellStyleInfo()
         {
-            _centerTextStyle = NPOIHighVersion.CreateCellStyle(
+            _centerTextStyle = NpoiHighVersion.CreateCellStyle(
                 _workbook,
                 _borderInfo,
                 _normalRowBackgroundInfo,
                 _centerAlignmentInfo,
                 _font);
-            _leftTextStyle = NPOIHighVersion.CreateCellStyle(
+            _leftTextStyle = NpoiHighVersion.CreateCellStyle(
                 _workbook,
                 _borderInfo,
                 _normalRowBackgroundInfo,
                 _leftAlignmentInfo,
                 _font);
 
-            _intNumberStyle = NPOIHighVersion.CreateCellStyle(
+            _intNumberStyle = NpoiHighVersion.CreateCellStyle(
                 _workbook,
                 _borderInfo,
                 _normalRowBackgroundInfo,
                 _centerAlignmentInfo,
                 _blueFont);
-            _intNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NumberFormat);
+            _intNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.NumberFormat);
 
-            _decimalNumberStyle = NPOIHighVersion.CreateCellStyle(
+            _decimalNumberStyle = NpoiHighVersion.CreateCellStyle(
                 _workbook,
                 _borderInfo,
                 _normalRowBackgroundInfo,
                 _rightAlignmentInfo,
                 _font);
-            _decimalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NormalDecimalNumberFormat);
+            _decimalNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.NormalDecimalNumberFormat);
 
-            _subTotalCenterTextStyle = NPOIHighVersion.CreateCellStyle(
+            _subTotalCenterTextStyle = NpoiHighVersion.CreateCellStyle(
                 _workbook,
                 _borderInfo,
                 _subTotalBackgroundInfo,
                 _centerAlignmentInfo,
                 _boldFont);
-            _subTotalDecimalNumberStyle = NPOIHighVersion.CreateCellStyle(
+            _subTotalDecimalNumberStyle = NpoiHighVersion.CreateCellStyle(
                 _workbook,
                 _borderInfo,
                 _subTotalBackgroundInfo,
                 _rightAlignmentInfo,
                 _boldFont);
-            _subTotalDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NormalDecimalNumberFormat);
+            _subTotalDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.NormalDecimalNumberFormat);
 
-            _subTotalByCurrencyCenterTextStyle = NPOIHighVersion.CreateCellStyle(
+            _subTotalByCurrencyCenterTextStyle = NpoiHighVersion.CreateCellStyle(
                 _workbook,
                 _borderInfo,
                 _subTotalByCurrencyBackgroundInfo,
                 _centerAlignmentInfo,
                 _boldFont);
-            _subTotalByCurrencyDecimalNumberStyle = NPOIHighVersion.CreateCellStyle(
+            _subTotalByCurrencyDecimalNumberStyle = NpoiHighVersion.CreateCellStyle(
                 _workbook,
                 _borderInfo,
                 _subTotalByCurrencyBackgroundInfo,
                 _rightAlignmentInfo,
                 _boldFont);
-            _subTotalByCurrencyDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NormalDecimalNumberFormat);
+            _subTotalByCurrencyDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.NormalDecimalNumberFormat);
 
-            _subTotalByPoolCurrencyCenterTextStyle = NPOIHighVersion.CreateCellStyle(
+            _subTotalByPoolCurrencyCenterTextStyle = NpoiHighVersion.CreateCellStyle(
                _workbook,
                _borderInfo,
                _subTotalByPoolCurrencyBackgroundInfo,
                _centerAlignmentInfo,
                _boldFont);
-            _subTotalByPoolCurrencyDecimalNumberStyle = NPOIHighVersion.CreateCellStyle(
+            _subTotalByPoolCurrencyDecimalNumberStyle = NpoiHighVersion.CreateCellStyle(
                 _workbook,
                 _borderInfo,
                 _subTotalByPoolCurrencyBackgroundInfo,
                 _rightAlignmentInfo,
                 _boldFont);
-            _subTotalByPoolCurrencyDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NormalDecimalNumberFormat);
+            _subTotalByPoolCurrencyDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.NormalDecimalNumberFormat);
 
-            _grandTotalCenterTextStyle = NPOIHighVersion.CreateCellStyle(
+            _grandTotalCenterTextStyle = NpoiHighVersion.CreateCellStyle(
                 _workbook,
                 _borderInfo,
                 _grandTotalBackgroundInfo,
                 _centerAlignmentInfo,
                 _boldFont);
-            _grandTotalDecimalNumberStyle = NPOIHighVersion.CreateCellStyle(
+            _grandTotalDecimalNumberStyle = NpoiHighVersion.CreateCellStyle(
                 _workbook,
                 _borderInfo,
                 _grandTotalBackgroundInfo,
                 _rightAlignmentInfo,
                 _boldFont);
-            _grandTotalDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NormalDecimalNumberFormat);
+            _grandTotalDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.NormalDecimalNumberFormat);
 
-            _headerTextStyle = NPOIHighVersion.CreateCellStyle(
+            _headerTextStyle = NpoiHighVersion.CreateCellStyle(
                 _workbook,
                 _borderInfo,
                 _headerBackgroundInfo,
@@ -1191,10 +1187,10 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
         /// </summary>
         private void InitFont()
         {
-            _font = NPOIHighVersion.CreateFont(_workbook, _fontInfo, false);
-            _blueFont = NPOIHighVersion.CreateFont(_workbook, _blueFontInfo, false);
-            _boldFont = NPOIHighVersion.CreateFont(_workbook, _fontInfo, true);
-            _headerFont = NPOIHighVersion.CreateFont(_workbook, _headerFontInfo, true);
+            _font = NpoiHighVersion.CreateFont(_workbook, _fontInfo, false);
+            _blueFont = NpoiHighVersion.CreateFont(_workbook, _blueFontInfo, false);
+            _boldFont = NpoiHighVersion.CreateFont(_workbook, _fontInfo, true);
+            _headerFont = NpoiHighVersion.CreateFont(_workbook, _headerFontInfo, true);
         }
 
         /// <summary>

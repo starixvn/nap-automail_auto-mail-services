@@ -75,7 +75,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
             string emailTemplatePath = root + EmailTemplateConstants._WIN_LOSS_BY_PRODUCTS_TEMPLATE;
             string template = File.ReadAllText(emailTemplatePath);
 
-            WinLossProductsDTO data = new WinLossProductsDTO();
+            WinLossProductsDto data = new WinLossProductsDto();
             data.WinLossByProducts = report;
 
             var bodyContent = Razor.Parse(template, data);

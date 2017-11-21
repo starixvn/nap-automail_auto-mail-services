@@ -16,7 +16,7 @@ namespace Fanex.Service.Core.Common
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public static class NPOIUtility
+    public static class NpoiUtility
     {
         public static void IncreaseRowIndex(ref CellInfo cellInfo)
         {
@@ -43,7 +43,7 @@ namespace Fanex.Service.Core.Common
         /// <param name="cellValue">The cell value.</param>
         public static void SetCellValue(ICell cell, object cellValue)
         {
-            if (cellValue is string)
+            if (cellValue != null && cellValue is string)
             {
                 cell.SetCellValue((string)cellValue);
             }

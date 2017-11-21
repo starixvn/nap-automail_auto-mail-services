@@ -22,7 +22,7 @@
         private const string TemplateUrl = @"/SiteConfig/SMALoss/Templates/EmailTemplate.cshtml";
         private readonly ISMALossService _lossService = null;
         private readonly ISMALossExcelService _lossExcelService = null;
-        private IMailStationService mailStation;
+        private readonly IMailStationService mailStation;
         private MailInfo _mailInfo;
 
         public MailingService()
@@ -137,9 +137,9 @@
             int changedLevelDown = 0;
             int changedLevelHorizontal = 0;
 
-            lossItems.ToList().ForEach(s => changedLevelUp += s.SMALossItems.Where(a => a.ChangedLevel > 0).Count());
-            lossItems.ToList().ForEach(s => changedLevelDown += s.SMALossItems.Where(a => a.ChangedLevel < 0).Count());
-            lossItems.ToList().ForEach(s => changedLevelHorizontal += s.SMALossItems.Where(a => a.ChangedLevel == 0).Count());
+            lossItems.ToList().ForEach(s => changedLevelUp += s.SMALossItems.Count(a => a.ChangedLevel > 0));
+            lossItems.ToList().ForEach(s => changedLevelDown += s.SMALossItems.Count(a => a.ChangedLevel < 0));
+            lossItems.ToList().ForEach(s => changedLevelHorizontal += s.SMALossItems.Count(a => a.ChangedLevel == 0));
 
             if (lossItems != null && lossItems.Any())
             {

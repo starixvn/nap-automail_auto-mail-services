@@ -25,16 +25,16 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.DailyTurnove
     /// </summary>
     public class DailyTurnoverExportService : IDailyTurnoverExportService
     {
+        private readonly XSSFWorkbook _workbook;
+        private readonly Cell _cell;
+        private readonly INpoiNewFormatFontService _fontService;
+        private readonly INpoiNewFormatBodyCellStyleService _bodyCellStyleService;
+        private readonly INpoiNewFormatCustomCellStyleService _customCellStyleService;
+        private readonly XSSFFont _regularFont;
+
         private Color _headerColor;
         private Color _currencyTypeColor;
-
-        private XSSFWorkbook _workbook;
         private XSSFSheet _workSheet;
-        private Cell _cell;
-        private INpoiNewFormatFontService _fontService;
-        private INpoiNewFormatBodyCellStyleService _bodyCellStyleService;
-        private INpoiNewFormatCustomCellStyleService _customCellStyleService;
-        private XSSFFont _regularFont;
 
         public DailyTurnoverExportService()
         {
@@ -89,10 +89,10 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.DailyTurnove
         {
             for (var i = 0; i < 7; i++)
             {
-                _workSheet.SetColumnWidth(i, 170 * NPOIConstants.FontWidth);
+                _workSheet.SetColumnWidth(i, 170 * NpoiConstants.FontWidth);
             }
 
-            _workSheet.SetColumnWidth(6, 300 * NPOIConstants.FontWidth);
+            _workSheet.SetColumnWidth(6, 300 * NpoiConstants.FontWidth);
         }
 
         private void ExportReportTitle(DateTime currentTime)

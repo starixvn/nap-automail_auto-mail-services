@@ -9,7 +9,7 @@ namespace Fanex.Service.Core.Constants
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class CombinationTypeConstants
+    public static class CombinationTypeConstants
     {
         public const string _2XCombinations = "2XCombinations";
         public const string _3XCombinations = "3XCombinations";

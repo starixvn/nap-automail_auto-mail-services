@@ -26,21 +26,21 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyBalan
     /// </summary>
     public class CompanyBalanceExportService : ICompanyBalanceExportService
     {
+        private readonly XSSFWorkbook _workbook;
+        private readonly Cell _cell;
+        private readonly INpoiNewFormatFontService _fontService;
+        private readonly INpoiNewFormatBodyCellStyleService _bodyCellStyleService;
+        private readonly INpoiNewFormatCustomCellStyleService _customCellStyleService;
+        private readonly XSSFFont _regularFont;
+        private readonly INpoiAlignmentService _alignmentService;
+        private readonly XSSFDataFormat _dataFormat;
+        private readonly bool _isYesterdayBalance;
+
         private Color _headerColor;
         private Color _evenRowColor;
         private Color _grandTotalColor;
         private Color _grandTotalBorderColor;
-
-        private XSSFWorkbook _workbook;
         private XSSFSheet _workSheet;
-        private Cell _cell;
-        private INpoiNewFormatFontService _fontService;
-        private INpoiNewFormatBodyCellStyleService _bodyCellStyleService;
-        private INpoiNewFormatCustomCellStyleService _customCellStyleService;
-        private XSSFFont _regularFont;
-        private INpoiAlignmentService _alignmentService;
-        private XSSFDataFormat _dataFormat;
-        private bool _isYesterdayBalance;
 
         public CompanyBalanceExportService(bool isYesterdayBalance)
         {
@@ -112,11 +112,11 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyBalan
 
         private void InitColumnWidth()
         {
-            _workSheet.SetColumnWidth(0, 80 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(1, 200 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(2, 200 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(3, 150 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(4, 150 * NPOIConstants.FontWidth);
+            _workSheet.SetColumnWidth(0, 80 * NpoiConstants.FontWidth);
+            _workSheet.SetColumnWidth(1, 200 * NpoiConstants.FontWidth);
+            _workSheet.SetColumnWidth(2, 200 * NpoiConstants.FontWidth);
+            _workSheet.SetColumnWidth(3, 150 * NpoiConstants.FontWidth);
+            _workSheet.SetColumnWidth(4, 150 * NpoiConstants.FontWidth);
         }
 
         private void ExportReportTitle(DateTime currentTime)
@@ -241,7 +241,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyBalan
                 backgroundInformation,
                 _alignmentService.RightAlignment,
                 _fontService.BlackBoldFont);
-            grandTotalDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NormalDecimalNumberFormat);
+            grandTotalDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.NormalDecimalNumberFormat);
             return grandTotalDecimalNumberStyle;
         }
 

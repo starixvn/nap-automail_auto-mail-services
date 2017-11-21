@@ -8,7 +8,6 @@ namespace Fanex.Service.Core.Extensions
 {
     using Fanex.Service.Core.Common;
     using Fanex.Service.Core.Constants;
-    using NPOI.HSSF.UserModel;
     using NPOI.SS.UserModel;
     using NPOI.SS.Util;
     using NPOI.XSSF.UserModel;
@@ -17,7 +16,7 @@ namespace Fanex.Service.Core.Extensions
     /// <summary>
     /// Excel extension.
     /// </summary>
-    public static class NPOIHighVersion
+    public static class NpoiHighVersion
     {
         /// <summary>
         /// Creates the cell style.
@@ -98,14 +97,14 @@ namespace Fanex.Service.Core.Extensions
             for (var i = cellInfo.CurrentRow; i <= cellInfo.EndRow; i++)
             {
                 row = worksheet.GetRow(i) as XSSFRow ?? worksheet.CreateRow(i) as XSSFRow;
-                row.Height = NPOIConstants.RowHeight;
+                row.Height = NpoiConstants.RowHeight;
 
                 for (var j = cellInfo.CurrentColumn; j <= cellInfo.EndColumn; j++)
                 {
                     XSSFCell cell = row.GetCell(j) as XSSFCell ?? row.CreateCell(j) as XSSFCell;
                     if (i == cellInfo.CurrentRow && j == cellInfo.CurrentColumn)
                     {
-                        NPOIUtility.SetCellValue(cell, cellInfo.CellValue);
+                        NpoiUtility.SetCellValue(cell, cellInfo.CellValue);
                     }
 
                     if (i == cellInfo.CurrentRow ||

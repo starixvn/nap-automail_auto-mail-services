@@ -18,12 +18,13 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.OldFormat.Bod
     /// </summary>
     public class CellNumberStyle : ICellNumberStyle
     {
-        private HSSFWorkbook _workbook;
+        private readonly HSSFWorkbook _workbook;
+        private readonly IDataFormat _dataFormat;
+        private readonly IFont _font;
+
         private ICellStyle _leftNumberStyle;
         private ICellStyle _rightNumberStyle;
-        private ICellStyle _centerNumberStyle;
-        private IDataFormat _dataFormat;
-        private IFont _font;
+        private ICellStyle _centerNumberStyle;        
 
         public CellNumberStyle(HSSFWorkbook workbook, IFont font)
         {
@@ -62,27 +63,27 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.OldFormat.Bod
         private void CreateLeftNumberStyle()
         {
             this._leftNumberStyle = this._workbook.CreateCellStyle();
-            NPOIUtility.AssignOldFormatCellStyleData(this._leftNumberStyle, HSSFColor.White.Index);
+            NpoiUtility.AssignOldFormatCellStyleData(this._leftNumberStyle, HSSFColor.White.Index);
             this._leftNumberStyle.Alignment = HorizontalAlignment.Left;
-            this._leftNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NumberFormat);
+            this._leftNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.NumberFormat);
             this._leftNumberStyle.SetFont(_font);
         }
 
         private void CreateRightNumberStyle()
         {
             this._rightNumberStyle = this._workbook.CreateCellStyle();
-            NPOIUtility.AssignOldFormatCellStyleData(this._rightNumberStyle, HSSFColor.White.Index);
+            NpoiUtility.AssignOldFormatCellStyleData(this._rightNumberStyle, HSSFColor.White.Index);
             this._rightNumberStyle.Alignment = HorizontalAlignment.Right;
-            this._rightNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NumberFormat);
+            this._rightNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.NumberFormat);
             this._rightNumberStyle.SetFont(_font);
         }
 
         private void CreateCenterNumberStyle()
         {
             this._centerNumberStyle = this._workbook.CreateCellStyle();
-            NPOIUtility.AssignOldFormatCellStyleData(this._centerNumberStyle, HSSFColor.White.Index);
+            NpoiUtility.AssignOldFormatCellStyleData(this._centerNumberStyle, HSSFColor.White.Index);
             this._centerNumberStyle.Alignment = HorizontalAlignment.Center;
-            this._centerNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NumberFormat);
+            this._centerNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.NumberFormat);
             this._centerNumberStyle.SetFont(_font);
         }
     }

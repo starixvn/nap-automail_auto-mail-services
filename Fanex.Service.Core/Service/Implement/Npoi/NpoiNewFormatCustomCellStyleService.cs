@@ -21,11 +21,11 @@ namespace Fanex.Service.Core.Service.Implement.Npoi
     /// </summary>
     public class NpoiNewFormatCustomCellStyleService : INpoiNewFormatCustomCellStyleService
     {
-        private ICellDecimalNumberStyle _decimalNumberStyle;
-        private ICellTextStyle _textStyle;
-        private ICellNumberStyle _numberStyle;
-        private ICelPercentageStyle _percentageStyle;
-        private XSSFWorkbook _workbook;
+        private readonly ICellDecimalNumberStyle _decimalNumberStyle;
+        private readonly ICellTextStyle _textStyle;
+        private readonly ICellNumberStyle _numberStyle;
+        private readonly ICelPercentageStyle _percentageStyle;
+        private readonly XSSFWorkbook _workbook;
 
         public NpoiNewFormatCustomCellStyleService(XSSFWorkbook workbook)
         {

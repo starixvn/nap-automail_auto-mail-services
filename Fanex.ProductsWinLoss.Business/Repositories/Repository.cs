@@ -89,7 +89,7 @@
 
             int index = 0;
             int pre = 1;
-            int multiple = 100000;
+            int multiple = 0;
             foreach (var name in names)
             {
                 if (name == Labels.Margin)

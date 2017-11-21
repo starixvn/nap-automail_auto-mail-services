@@ -26,19 +26,19 @@
         private const int ColumnWidth = 18;
         private const int StartColumn = 1;
 
-        private AlignmentInformation _alignmentCenter = new AlignmentInformation()
+        private readonly AlignmentInformation _alignmentCenter = new AlignmentInformation()
         {
             HorizontalAlignment = (int)HorizontalAlignment.Center,
             VerticalAlignment = (int)VerticalAlignment.Center
         };
 
-        private AlignmentInformation _alignmentLeft = new AlignmentInformation()
+        private readonly AlignmentInformation _alignmentLeft = new AlignmentInformation()
         {
             HorizontalAlignment = (int)HorizontalAlignment.Left,
             VerticalAlignment = (int)VerticalAlignment.Center
         };
 
-        private AlignmentInformation _alignmentRight = new AlignmentInformation()
+        private readonly AlignmentInformation _alignmentRight = new AlignmentInformation()
         {
             HorizontalAlignment = (int)HorizontalAlignment.Right,
             VerticalAlignment = (int)VerticalAlignment.Center
@@ -123,7 +123,7 @@
 
         private void BuildTitle(DateTime winLossDate)
         {
-            var headerFont = new FontInformation(NPOIConstants.FontName, 14, Color.Black);
+            var headerFont = new FontInformation(NpoiConstants.FontName, 14, Color.Black);
             var cellStyle = this._customCellStyleService.CreateCenterTextStyle(Color.White, _fontService.CreateBoldFont(headerFont));
             cellStyle.SetBorderColor(BorderSide.TOP, new XSSFColor(Color.White));
             cellStyle.SetBorderColor(BorderSide.RIGHT, new XSSFColor(Color.White));
@@ -143,7 +143,7 @@
         {
             var backgroundInformation = new BackgroundInformation((int)FillPattern.SolidForeground, Color.FromArgb(255, 102, 0));
             _cell = new Cell(StartColumn, this._currentRow, StartColumn + 1, this._currentRow, licenseeName);
-            var licenseeFont = new FontInformation(NPOIConstants.FontName, 14, Color.White);
+            var licenseeFont = new FontInformation(NpoiConstants.FontName, 14, Color.White);
 
             var cellStyle = this._customCellStyleService.CreateCellStyle(_borderInformation, backgroundInformation, _alignmentCenter, _fontService.CreateBoldFont(licenseeFont));
             NpoiNewFormatExcelExtension.RenderMergeCell(this._sheet, this._cell, cellStyle);
@@ -176,7 +176,7 @@
             var cellStyleOfDateTime = this._customCellStyleService.CreateCellStyle(_borderInformation, backgroundInformation, _alignmentCenter, _font);
 
             var cellStyleOfNumber = _customCellStyleService.CreateCellStyle(_borderInformation, backgroundInformation, _alignmentRight, _font);
-            cellStyleOfNumber.DataFormat = _dataFormat.GetFormat(NPOIConstants.NormalDecimalNumberFormat);
+            cellStyleOfNumber.DataFormat = _dataFormat.GetFormat(NpoiConstants.NormalDecimalNumberFormat);
 
             var cellStyleOfCurrency = _customCellStyleService.CreateCellStyle(_borderInformation, backgroundInformation, _alignmentLeft, _font);
 
@@ -235,7 +235,7 @@
             var cellStyleOfDateTime = this._customCellStyleService.CreateCellStyle(_borderInformation, backgroundDateTime, _alignmentCenter, _font);
 
             var cellStyleOfSubTotalNumber = _customCellStyleService.CreateCellStyle(_borderInformation, backgroundInformation, _alignmentRight, _fontService.BlackBoldFont);
-            cellStyleOfSubTotalNumber.DataFormat = _dataFormat.GetFormat(NPOIConstants.NormalDecimalNumberFormat);
+            cellStyleOfSubTotalNumber.DataFormat = _dataFormat.GetFormat(NpoiConstants.NormalDecimalNumberFormat);
 
             var columnIndex = StartColumn;
 
@@ -268,7 +268,7 @@
             var backgroundInformation = new BackgroundInformation((int)FillPattern.SolidForeground, Color.FromArgb(0, 128, 128));
             var cellStyleOfTotal = _customCellStyleService.CreateCellStyle(_borderInformation, backgroundInformation, _alignmentCenter, _fontService.WhiteBoldFont);
             var cellStyleOfNumber = _customCellStyleService.CreateCellStyle(_borderInformation, backgroundInformation, _alignmentRight, _fontService.WhiteBoldFont);
-            cellStyleOfNumber.DataFormat = _dataFormat.GetFormat(NPOIConstants.NormalDecimalNumberFormat);
+            cellStyleOfNumber.DataFormat = _dataFormat.GetFormat(NpoiConstants.NormalDecimalNumberFormat);
 
             var columnIndex = StartColumn;
             _cell = new Cell(columnIndex, this._currentRow, columnIndex + 1, this._currentRow, Label.Total);

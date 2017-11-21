@@ -20,11 +20,11 @@ namespace Fanex.Service.Core.Service.Implement.Npoi
     /// </summary>
     public class NpoiOldFormatBodyCellStyleService : INpoiOldFormatBodyCellStyleService
     {
-        private ICellTextStyle _textStyle;
-        private ICellNumberStyle _numberStyle;
-        private ICellDecimalNumberStyle _decimalNumberStyle;
-        private ICelPercentageStyle _percentageStyle;
-        private IFont _font;
+        private readonly ICellTextStyle _textStyle;
+        private readonly ICellNumberStyle _numberStyle;
+        private readonly ICellDecimalNumberStyle _decimalNumberStyle;
+        private readonly ICelPercentageStyle _percentageStyle;
+        private readonly IFont _font;
 
         public NpoiOldFormatBodyCellStyleService(HSSFWorkbook workbook, IFont font)
         {

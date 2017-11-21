@@ -27,20 +27,20 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.SuperYesterd
     /// </summary>
     public class SuperYesterdayBalanceExportService : ISuperYesterdayBalanceExportService
     {
+        private readonly XSSFWorkbook _workbook;
+        private readonly Cell _cell;
+        private readonly INpoiNewFormatFontService _fontService;
+        private readonly INpoiNewFormatBodyCellStyleService _bodyCellStyleService;
+        private readonly INpoiNewFormatCustomCellStyleService _customCellStyleService;
+        private readonly XSSFFont _regularFont;
+        private readonly INpoiAlignmentService _alignmentService;
+        private readonly XSSFDataFormat _dataFormat;
+
         private Color _headerColor;
         private Color _evenRowColor;
         private Color _grandTotalColor;
         private Color _grandTotalBorderColor;
-
-        private XSSFWorkbook _workbook;
         private XSSFSheet _workSheet;
-        private Cell _cell;
-        private INpoiNewFormatFontService _fontService;
-        private INpoiNewFormatBodyCellStyleService _bodyCellStyleService;
-        private INpoiNewFormatCustomCellStyleService _customCellStyleService;
-        private XSSFFont _regularFont;
-        private INpoiAlignmentService _alignmentService;
-        private XSSFDataFormat _dataFormat;
 
         public SuperYesterdayBalanceExportService()
         {
@@ -92,12 +92,12 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.SuperYesterd
         {
             for (var i = 0; i < 5; i++)
             {
-                _workSheet.SetColumnWidth(i, 170 * NPOIConstants.FontWidth);
+                _workSheet.SetColumnWidth(i, 170 * NpoiConstants.FontWidth);
             }
 
-            _workSheet.SetColumnWidth(0, 60 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(1, 120 * NPOIConstants.FontWidth);
-            _workSheet.SetColumnWidth(2, 100 * NPOIConstants.FontWidth);
+            _workSheet.SetColumnWidth(0, 60 * NpoiConstants.FontWidth);
+            _workSheet.SetColumnWidth(1, 120 * NpoiConstants.FontWidth);
+            _workSheet.SetColumnWidth(2, 100 * NpoiConstants.FontWidth);
         }
 
         private void ExportReportTitle()
@@ -231,7 +231,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.SuperYesterd
                 backgroundInformation,
                 _alignmentService.RightAlignment,
                 _fontService.BlackBoldFont);
-            grandTotalDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NormalDecimalNumberFormat);
+            grandTotalDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.NormalDecimalNumberFormat);
             return grandTotalDecimalNumberStyle;
         }
 

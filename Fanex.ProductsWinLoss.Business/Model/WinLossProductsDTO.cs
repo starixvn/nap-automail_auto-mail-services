@@ -11,9 +11,9 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Model
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class WinLossProductsDTO
+    public class WinLossProductsDto
     {
-        public WinLossProductsDTO()
+        public WinLossProductsDto()
         {
             WinLossByProducts = new WinLossByProducts();
             MailInfo = new MailInfo();

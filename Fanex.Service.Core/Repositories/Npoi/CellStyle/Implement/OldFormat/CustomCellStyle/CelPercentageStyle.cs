@@ -17,8 +17,8 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.OldFormat.Cus
     /// </summary>
     public class CelPercentageStyle : ICelPercentageStyle
     {
-        private HSSFWorkbook _workbook;
-        private IDataFormat _dataFormat;
+        private readonly HSSFWorkbook _workbook;
+        private readonly IDataFormat _dataFormat;
 
         public CelPercentageStyle(HSSFWorkbook workbook)
         {
@@ -29,9 +29,9 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.OldFormat.Cus
         public ICellStyle CreatePercentageStyle(short backgroundColorIndex, IFont font)
         {
             ICellStyle percentageStyle = this._workbook.CreateCellStyle();
-            NPOIUtility.AssignOldFormatCellStyleData(percentageStyle, backgroundColorIndex);
+            NpoiUtility.AssignOldFormatCellStyleData(percentageStyle, backgroundColorIndex);
             percentageStyle.Alignment = HorizontalAlignment.Right;
-            percentageStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NormalPercentFormat);
+            percentageStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.NormalPercentFormat);
             percentageStyle.SetFont(font);
             return percentageStyle;
         }
@@ -39,9 +39,9 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.OldFormat.Cus
         public ICellStyle CreatePositivePercentageStyle(short backgroundColorIndex, IFont font)
         {
             ICellStyle positivePercentageStyle = this._workbook.CreateCellStyle();
-            NPOIUtility.AssignOldFormatCellStyleData(positivePercentageStyle, backgroundColorIndex);
+            NpoiUtility.AssignOldFormatCellStyleData(positivePercentageStyle, backgroundColorIndex);
             positivePercentageStyle.Alignment = HorizontalAlignment.Right;
-            positivePercentageStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.PositivePercentFormat);
+            positivePercentageStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.PositivePercentFormat);
             positivePercentageStyle.SetFont(font);
             return positivePercentageStyle;
         }
@@ -49,9 +49,9 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.OldFormat.Cus
         public ICellStyle CreateNegativePercentageStyle(short backgroundColorIndex, IFont font)
         {
             ICellStyle negativePercentageStyle = this._workbook.CreateCellStyle();
-            NPOIUtility.AssignOldFormatCellStyleData(negativePercentageStyle, backgroundColorIndex);
+            NpoiUtility.AssignOldFormatCellStyleData(negativePercentageStyle, backgroundColorIndex);
             negativePercentageStyle.Alignment = HorizontalAlignment.Right;
-            negativePercentageStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NegativePercentFormat);
+            negativePercentageStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.NegativePercentFormat);
             negativePercentageStyle.SetFont(font);
             return negativePercentageStyle;
         }
@@ -59,9 +59,9 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.OldFormat.Cus
         public ICellStyle CreateParenthesesPositivePercentageStyle(short backgroundColorIndex, IFont font)
         {
             ICellStyle parenthesesPositivePercentageStyle = this._workbook.CreateCellStyle();
-            NPOIUtility.AssignOldFormatCellStyleData(parenthesesPositivePercentageStyle, backgroundColorIndex);
+            NpoiUtility.AssignOldFormatCellStyleData(parenthesesPositivePercentageStyle, backgroundColorIndex);
             parenthesesPositivePercentageStyle.Alignment = HorizontalAlignment.Right;
-            parenthesesPositivePercentageStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.ParenthesesPositivePercentFormat);
+            parenthesesPositivePercentageStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.ParenthesesPositivePercentFormat);
             parenthesesPositivePercentageStyle.SetFont(font);
             return parenthesesPositivePercentageStyle;
         }
@@ -69,9 +69,9 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.OldFormat.Cus
         public ICellStyle CreateParenthesesNegativePercentageStyle(short backgroundColorIndex, IFont font)
         {
             ICellStyle parenthesesNegativePercentageStyle = this._workbook.CreateCellStyle();
-            NPOIUtility.AssignOldFormatCellStyleData(parenthesesNegativePercentageStyle, backgroundColorIndex);
+            NpoiUtility.AssignOldFormatCellStyleData(parenthesesNegativePercentageStyle, backgroundColorIndex);
             parenthesesNegativePercentageStyle.Alignment = HorizontalAlignment.Right;
-            parenthesesNegativePercentageStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.ParenthesesNegativePercentFormat);
+            parenthesesNegativePercentageStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.ParenthesesNegativePercentFormat);
             parenthesesNegativePercentageStyle.SetFont(font);
             return parenthesesNegativePercentageStyle;
         }

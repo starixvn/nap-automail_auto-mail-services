@@ -25,20 +25,21 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
     /// </summary>
     public class ExportExcelWinLossSummaryService
     {
+        private readonly Cell _cell;
+        private readonly INpoiNewFormatFontService _fontService;
+        private readonly INpoiNewFormatBodyCellStyleService _bodyCellStyleService;
+        private readonly INpoiNewFormatCustomCellStyleService _customCellStyleService;
+        private readonly XSSFFont _regularFont;
+        private readonly XSSFWorkbook _workbook;
+
         private Color _titleColor;
         private Color _headerColor;
         private Color _evenColor;
         private Color _greyColor;
         private Color _subColor;
         private Color _grandColor;
-
-        private XSSFWorkbook _workbook;
+        
         private XSSFSheet _workSheet;
-        private Cell _cell;
-        private INpoiNewFormatFontService _fontService;
-        private INpoiNewFormatBodyCellStyleService _bodyCellStyleService;
-        private INpoiNewFormatCustomCellStyleService _customCellStyleService;
-        private XSSFFont _regularFont;
 
         private XSSFCellStyle _textCenterNormalStyle;
         private XSSFCellStyle _textLeftTitleStyle;
@@ -194,8 +195,6 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
               periodTimeTitle
             };
 
-            string title = string.Join(Environment.NewLine, lines);
-
             for (int i = 0; i < lines.Length; i++)
             {
                 _cell.EndColumn = _cell.CurrentColumn + 6;
@@ -210,10 +209,10 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
         {
             for (int i = 0; i < 7; i++)
             {
-                _workSheet.SetColumnWidth(i, 170 * NPOIConstants.FontWidth);
+                _workSheet.SetColumnWidth(i, 170 * NpoiConstants.FontWidth);
             }
 
-            _workSheet.SetColumnWidth(0, 220 * NPOIConstants.FontWidth);
+            _workSheet.SetColumnWidth(0, 220 * NpoiConstants.FontWidth);
         }
 
         private void RenderHeader()

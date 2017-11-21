@@ -18,8 +18,8 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.NewFormat.Cus
     /// </summary>
     public class CellNumberStyle : ICellNumberStyle
     {
-        private XSSFWorkbook _workbook;
-        private XSSFDataFormat _dataFormat;
+        private readonly XSSFWorkbook _workbook;
+        private readonly XSSFDataFormat _dataFormat;
 
         public CellNumberStyle(XSSFWorkbook workbook)
         {
@@ -30,9 +30,9 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.NewFormat.Cus
         public XSSFCellStyle CreateLeftNumberStyle(Color backgroundColor, XSSFFont font)
         {
             XSSFCellStyle leftNumberStyle = this._workbook.CreateCellStyle() as XSSFCellStyle;
-            NPOIUtility.AssignNewFormatCellStyleData(leftNumberStyle, backgroundColor);
+            NpoiUtility.AssignNewFormatCellStyleData(leftNumberStyle, backgroundColor);
             leftNumberStyle.Alignment = HorizontalAlignment.Left;
-            leftNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NumberFormat);
+            leftNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.NumberFormat);
             leftNumberStyle.SetFont(font);
             return leftNumberStyle;
         }
@@ -40,9 +40,9 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.NewFormat.Cus
         public XSSFCellStyle CreateRightNumberStyle(Color backgroundColor, XSSFFont font)
         {
             XSSFCellStyle rightNumberStyle = this._workbook.CreateCellStyle() as XSSFCellStyle;
-            NPOIUtility.AssignNewFormatCellStyleData(rightNumberStyle, backgroundColor);
+            NpoiUtility.AssignNewFormatCellStyleData(rightNumberStyle, backgroundColor);
             rightNumberStyle.Alignment = HorizontalAlignment.Right;
-            rightNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NumberFormat);
+            rightNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.NumberFormat);
             rightNumberStyle.SetFont(font);
             return rightNumberStyle;
         }
@@ -50,9 +50,9 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.NewFormat.Cus
         public XSSFCellStyle CreateCenterNumberStyle(Color backgroundColor, XSSFFont font)
         {
             XSSFCellStyle centerNumberStyle = this._workbook.CreateCellStyle() as XSSFCellStyle;
-            NPOIUtility.AssignNewFormatCellStyleData(centerNumberStyle, backgroundColor);
+            NpoiUtility.AssignNewFormatCellStyleData(centerNumberStyle, backgroundColor);
             centerNumberStyle.Alignment = HorizontalAlignment.Center;
-            centerNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NumberFormat);
+            centerNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.NumberFormat);
             centerNumberStyle.SetFont(font);
             return centerNumberStyle;
         }
@@ -60,9 +60,9 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.NewFormat.Cus
         public XSSFCellStyle CreateParenthesesNegativeDecimalNumberStyle(Color backgroundColor, XSSFFont font)
         {
             XSSFCellStyle parenthesesNegativeIntegerNumberStyle = this._workbook.CreateCellStyle() as XSSFCellStyle;
-            NPOIUtility.AssignNewFormatCellStyleData(parenthesesNegativeIntegerNumberStyle, backgroundColor);
+            NpoiUtility.AssignNewFormatCellStyleData(parenthesesNegativeIntegerNumberStyle, backgroundColor);
             parenthesesNegativeIntegerNumberStyle.Alignment = HorizontalAlignment.Right;
-            parenthesesNegativeIntegerNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.ParenthesesNegativeIntegerNumberFormat);
+            parenthesesNegativeIntegerNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.ParenthesesNegativeIntegerNumberFormat);
             parenthesesNegativeIntegerNumberStyle.SetFont(font);
             return parenthesesNegativeIntegerNumberStyle;
         }

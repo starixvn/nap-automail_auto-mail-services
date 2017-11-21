@@ -29,7 +29,7 @@ namespace Fanex.NAPReport.BalanceMonthlyReport.Business.Repository
         public List<Exchange> GetCurrencyList()
         {
             ExchangeCriteria criteria = new ExchangeCriteria();
-            List<Exchange> currencies = new List<Exchange>();
+            List<Exchange> currencies;
 
             using (IObjectDb db = GetDrawData(criteria))
             {

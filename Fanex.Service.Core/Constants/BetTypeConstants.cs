@@ -14,7 +14,7 @@ namespace Fanex.Service.Core.Constants
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class BetTypeConstants
+    public static class BetTypeConstants
     {
         public const int Handicap = 1;
         public const int OverUnder2 = 3;

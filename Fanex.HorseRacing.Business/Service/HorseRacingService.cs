@@ -89,11 +89,6 @@ namespace Fanex.NAPReport.HorseRacingReport.Business.Service
             }
         }
 
-        /// <summary>
-        /// Gets the time range criteria.
-        /// </summary>
-        /// <param name="currentTime">The current time.</param>
-        /// <returns>Time range of report.</returns>
         public TimeRangeCriteria GetTimeRangeCriteria()
         {
             DateTime currentTime = DateTime.Today;

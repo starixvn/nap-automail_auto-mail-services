@@ -13,10 +13,6 @@ namespace Fanex.Service.Core.Common
     /// </summary>
     public struct BackgroundInfo
     {
-        public short FillForegroundColor;
-
-        public int FillPattern;
-
         public BackgroundInfo(
             short fillForegroundColor,
             int fillPattern)
@@ -24,6 +20,10 @@ namespace Fanex.Service.Core.Common
             this.FillForegroundColor = fillForegroundColor;
             this.FillPattern = fillPattern;
         }
+
+        public short FillForegroundColor { get; set; }
+
+        public int FillPattern { get; set; }
     }
 
     /// <summary>
@@ -31,16 +31,16 @@ namespace Fanex.Service.Core.Common
     /// </summary>
     public struct BackgroundStyleInfo
     {
-        public Color FillForegroundColor;
-
-        public int FillPattern;
-
         public BackgroundStyleInfo(
             Color fillForegroundColor,
             int fillPattern)
         {
             this.FillForegroundColor = fillForegroundColor;
-            this.FillPattern = fillPattern;
+            this.FillPattern = fillPattern;            
         }
+
+        public Color FillForegroundColor { get; set; }
+
+        public int FillPattern { get; set; }
     }
 }

@@ -14,8 +14,9 @@
             {
                 this.CustID = rawData.CustID;
                 this.Username = rawData.Username;
+                this.GroupHeadlineId = rawData.GroupHeadlineId;
                 this.Level = GetCustomerLevel(rawData.RoleID);
-                this.Currency = rawData.Currency;
+                this.Currency = rawData.Currency;                
                 this.YesterdayBalance = Converter.ToDecimal(rawData.YesterdayBalance).CurrencyFormat();
                 this.TotalBalance = Converter.ToDecimal(rawData.TotalBalance).CurrencyFormat();
                 this.MaxLoss = Converter.ToDecimal(rawData.MaxLoss).CurrencyFormat();
@@ -31,6 +32,8 @@
         public string Level { get; set; }
 
         public string Currency { get; set; }
+
+        public int GroupHeadlineId { get; set; }
 
         public string YesterdayBalance { get; set; }
 
@@ -72,6 +75,8 @@
                         break;
                 }
             }
+
+            level = GroupHeadlineId != 0 ? "Headline" : level;
 
             return level;
         }

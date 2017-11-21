@@ -17,8 +17,8 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.OldFormat.Cus
     /// </summary>
     public class CellNumberStyle : ICellNumberStyle
     {
-        private HSSFWorkbook _workbook;
-        private IDataFormat _dataFormat;
+        private readonly HSSFWorkbook _workbook;
+        private readonly IDataFormat _dataFormat;
 
         public CellNumberStyle(HSSFWorkbook workbook)
         {
@@ -29,9 +29,9 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.OldFormat.Cus
         public ICellStyle CreateLeftNumberStyle(short backgroundColorIndex, IFont font)
         {
             ICellStyle leftNumberStyle = this._workbook.CreateCellStyle();
-            NPOIUtility.AssignOldFormatCellStyleData(leftNumberStyle, backgroundColorIndex);
+            NpoiUtility.AssignOldFormatCellStyleData(leftNumberStyle, backgroundColorIndex);
             leftNumberStyle.Alignment = HorizontalAlignment.Left;
-            leftNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NumberFormat);
+            leftNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.NumberFormat);
             leftNumberStyle.SetFont(font);
             return leftNumberStyle;
         }
@@ -39,9 +39,9 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.OldFormat.Cus
         public ICellStyle CreateRightNumberStyle(short backgroundColorIndex, IFont font)
         {
             ICellStyle rightNumberStyle = this._workbook.CreateCellStyle();
-            NPOIUtility.AssignOldFormatCellStyleData(rightNumberStyle, backgroundColorIndex);
+            NpoiUtility.AssignOldFormatCellStyleData(rightNumberStyle, backgroundColorIndex);
             rightNumberStyle.Alignment = HorizontalAlignment.Right;
-            rightNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NumberFormat);
+            rightNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.NumberFormat);
             rightNumberStyle.SetFont(font);
             return rightNumberStyle;
         }
@@ -49,9 +49,9 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.OldFormat.Cus
         public ICellStyle CreateCenterNumberStyle(short backgroundColorIndex, IFont font)
         {
             ICellStyle centerNumberStyle = this._workbook.CreateCellStyle();
-            NPOIUtility.AssignOldFormatCellStyleData(centerNumberStyle, backgroundColorIndex);
+            NpoiUtility.AssignOldFormatCellStyleData(centerNumberStyle, backgroundColorIndex);
             centerNumberStyle.Alignment = HorizontalAlignment.Center;
-            centerNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NumberFormat);
+            centerNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.NumberFormat);
             centerNumberStyle.SetFont(font);
             return centerNumberStyle;
         }

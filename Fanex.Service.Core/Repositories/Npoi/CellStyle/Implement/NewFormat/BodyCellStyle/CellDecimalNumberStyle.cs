@@ -18,7 +18,10 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.NewFormat.Bod
     /// </summary>
     public class CellDecimalNumberStyle : ICellDecimalNumberStyle
     {
-        private XSSFWorkbook _workbook;
+        private readonly XSSFWorkbook _workbook;
+        private readonly XSSFDataFormat _dataFormat;
+        private readonly XSSFFont _font;
+
         private XSSFCellStyle _decimalNumberStyle;
         private XSSFCellStyle _positiveDecimalNumberStyle;
         private XSSFCellStyle _negativeDecimalNumberStyle;
@@ -27,8 +30,6 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.NewFormat.Bod
         private XSSFCellStyle _parenthesesBlackPositiveDecimalNumberStyle;
         private XSSFCellStyle _parenthesesBlackNegativeDecimalNumberStyle;
         private XSSFCellStyle _parenthesesUnsignedNegativeDecimalNumberStyle;
-        private XSSFDataFormat _dataFormat;
-        private XSSFFont _font;
 
         public CellDecimalNumberStyle(XSSFWorkbook workbook, XSSFFont font)
         {
@@ -112,72 +113,72 @@ namespace Fanex.Service.Core.Repositories.Npoi.CellStyle.Implement.NewFormat.Bod
         private void CreateDecimalNumberStyle()
         {
             this._decimalNumberStyle = this._workbook.CreateCellStyle() as XSSFCellStyle;
-            NPOIUtility.AssignNewFormatCellStyleData(this._decimalNumberStyle, Color.White);
+            NpoiUtility.AssignNewFormatCellStyleData(this._decimalNumberStyle, Color.White);
             this._decimalNumberStyle.Alignment = HorizontalAlignment.Right;
-            this._decimalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NormalDecimalNumberFormat);
+            this._decimalNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.NormalDecimalNumberFormat);
             this._decimalNumberStyle.SetFont(_font);
         }
 
         private void CreatePositiveDecimalNumberStyle()
         {
             this._positiveDecimalNumberStyle = this._workbook.CreateCellStyle() as XSSFCellStyle;
-            NPOIUtility.AssignNewFormatCellStyleData(this._positiveDecimalNumberStyle, Color.White);
+            NpoiUtility.AssignNewFormatCellStyleData(this._positiveDecimalNumberStyle, Color.White);
             this._positiveDecimalNumberStyle.Alignment = HorizontalAlignment.Right;
-            this._positiveDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.PositiveDecimalNumberFormat);
+            this._positiveDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.PositiveDecimalNumberFormat);
             this._positiveDecimalNumberStyle.SetFont(_font);
         }
 
         private void CreateNegativeDecimalNumberStyle()
         {
             this._negativeDecimalNumberStyle = this._workbook.CreateCellStyle() as XSSFCellStyle;
-            NPOIUtility.AssignNewFormatCellStyleData(this._negativeDecimalNumberStyle, Color.White);
+            NpoiUtility.AssignNewFormatCellStyleData(this._negativeDecimalNumberStyle, Color.White);
             this._negativeDecimalNumberStyle.Alignment = HorizontalAlignment.Right;
-            this._negativeDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.NegativeDecimalNumberFormat);
+            this._negativeDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.NegativeDecimalNumberFormat);
             this._negativeDecimalNumberStyle.SetFont(_font);
         }
 
         private void CreateParenthesesPositiveDecimalNumberStyle()
         {
             this._parenthesesPositiveDecimalNumberStyle = this._workbook.CreateCellStyle() as XSSFCellStyle;
-            NPOIUtility.AssignNewFormatCellStyleData(this._parenthesesPositiveDecimalNumberStyle, Color.White);
+            NpoiUtility.AssignNewFormatCellStyleData(this._parenthesesPositiveDecimalNumberStyle, Color.White);
             this._parenthesesPositiveDecimalNumberStyle.Alignment = HorizontalAlignment.Right;
-            this._parenthesesPositiveDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.ParenthesesPositiveDecimalNumberFormat);
+            this._parenthesesPositiveDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.ParenthesesPositiveDecimalNumberFormat);
             this._parenthesesPositiveDecimalNumberStyle.SetFont(_font);
         }
 
         private void CreateParenthesesNegativeDecimalNumberStyle()
         {
             this._parenthesesNegativeDecimalNumberStyle = this._workbook.CreateCellStyle() as XSSFCellStyle;
-            NPOIUtility.AssignNewFormatCellStyleData(this._parenthesesNegativeDecimalNumberStyle, Color.White);
+            NpoiUtility.AssignNewFormatCellStyleData(this._parenthesesNegativeDecimalNumberStyle, Color.White);
             this._parenthesesNegativeDecimalNumberStyle.Alignment = HorizontalAlignment.Right;
-            this._parenthesesNegativeDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.ParenthesesNegativeDecimalNumberFormat);
+            this._parenthesesNegativeDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.ParenthesesNegativeDecimalNumberFormat);
             this._parenthesesNegativeDecimalNumberStyle.SetFont(_font);
         }
 
         private void CreateParenthesesBlackPositiveDecimalNumberStyle()
         {
             this._parenthesesBlackPositiveDecimalNumberStyle = this._workbook.CreateCellStyle() as XSSFCellStyle;
-            NPOIUtility.AssignNewFormatCellStyleData(this._parenthesesBlackPositiveDecimalNumberStyle, Color.White);
+            NpoiUtility.AssignNewFormatCellStyleData(this._parenthesesBlackPositiveDecimalNumberStyle, Color.White);
             this._parenthesesBlackPositiveDecimalNumberStyle.Alignment = HorizontalAlignment.Right;
-            this._parenthesesBlackPositiveDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.ParenthesesBlackPositiveDecimalNumberFormat);
+            this._parenthesesBlackPositiveDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.ParenthesesBlackPositiveDecimalNumberFormat);
             this._parenthesesBlackPositiveDecimalNumberStyle.SetFont(_font);
         }
 
         private void CreateParenthesesBlackNegativeDecimalNumberStyle()
         {
             this._parenthesesBlackNegativeDecimalNumberStyle = this._workbook.CreateCellStyle() as XSSFCellStyle;
-            NPOIUtility.AssignNewFormatCellStyleData(this._parenthesesBlackNegativeDecimalNumberStyle, Color.White);
+            NpoiUtility.AssignNewFormatCellStyleData(this._parenthesesBlackNegativeDecimalNumberStyle, Color.White);
             this._parenthesesBlackNegativeDecimalNumberStyle.Alignment = HorizontalAlignment.Right;
-            this._parenthesesBlackNegativeDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.ParenthesesBlackNegativeDecimalNumberFormat);
+            this._parenthesesBlackNegativeDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.ParenthesesBlackNegativeDecimalNumberFormat);
             this._parenthesesBlackNegativeDecimalNumberStyle.SetFont(_font);
         }
 
         private void CreateParenthesesUnsignedNegativeDecimalNumberStyle()
         {
             this._parenthesesUnsignedNegativeDecimalNumberStyle = this._workbook.CreateCellStyle() as XSSFCellStyle;
-            NPOIUtility.AssignNewFormatCellStyleData(this._parenthesesUnsignedNegativeDecimalNumberStyle, Color.White);
+            NpoiUtility.AssignNewFormatCellStyleData(this._parenthesesUnsignedNegativeDecimalNumberStyle, Color.White);
             this._parenthesesUnsignedNegativeDecimalNumberStyle.Alignment = HorizontalAlignment.Right;
-            this._parenthesesUnsignedNegativeDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NPOIConstants.ParenthesesUnsignedNegativeDecimalNumberFormat);
+            this._parenthesesUnsignedNegativeDecimalNumberStyle.DataFormat = _dataFormat.GetFormat(NpoiConstants.ParenthesesUnsignedNegativeDecimalNumberFormat);
             this._parenthesesUnsignedNegativeDecimalNumberStyle.SetFont(_font);
         }
     }
