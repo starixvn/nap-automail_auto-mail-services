@@ -137,6 +137,7 @@
     <Content Include="SiteConfig\SMALoss\Templates\Images\HorizontalLine.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="SiteConfig\SMALoss\Templates\Images\List of SMA Reaching Allowable Max Loss.JPG" />
     <Content Include="SiteConfig\SMALoss\Templates\Images\UpwardArrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
