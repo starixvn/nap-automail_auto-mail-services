@@ -28,7 +28,7 @@ namespace Fanex.Service.Core.MailService
             string template = File.ReadAllText(filePath);
             var emailContent = Razor.Parse(template, mailInfo);
 
-            Mail mail = new Mail()
+            Mail mail = new Mail
             {
                 Subject = mailInfo.Subject,
                 Title = AppSettingBase.Title,
@@ -51,7 +51,7 @@ namespace Fanex.Service.Core.MailService
             string template = File.ReadAllText(filePath);
             var emailContent = Razor.Parse(template, mailInfo);
 
-            Mail mail = new Mail()
+            Mail mail = new Mail
             {
                 Subject = mailInfo.Subject,
                 Title = AppSettingBase.Title,
@@ -79,7 +79,7 @@ namespace Fanex.Service.Core.MailService
 
         public Mail CreateMailCustomContentWithAttachedFile(MailInfo mailInfo, string bodyContent)
         {
-            Mail mail = new Mail()
+            Mail mail = new Mail
             {
                 Subject = mailInfo.Subject,
                 Title = AppSettingBase.Title,
@@ -97,7 +97,7 @@ namespace Fanex.Service.Core.MailService
 
         public Mail CreateMailCustomContent(MailInfo mailInfo, string bodyContent)
         {
-            Mail mail = new Mail()
+            Mail mail = new Mail
             {
                 Subject = mailInfo.Subject,
                 Title = AppSettingBase.Title,
@@ -110,7 +110,7 @@ namespace Fanex.Service.Core.MailService
 
         public void SendFunctionMailCustomContentNotification(int functionId, MailInfo mailInfo, string bodyContent)
         {
-            Mail mail = new Mail()
+            Mail mail = new Mail
             {
                 Subject = mailInfo.Subject,
                 Title = AppSettingBase.Title,
@@ -122,7 +122,7 @@ namespace Fanex.Service.Core.MailService
             SendEmail(mail);
         }
 
-        private void SendEmail(Mail mail)
+        private static void SendEmail(Mail mail)
         {
             MailClientHandler.Start();
             MailClientHandler.SendFunctionMail(mail);

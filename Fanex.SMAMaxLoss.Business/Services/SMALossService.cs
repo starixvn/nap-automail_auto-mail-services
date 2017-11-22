@@ -4,7 +4,7 @@
     using Fanex.NAPReport.SMALoss.Business.Criteria;
     using Fanex.NAPReport.SMALoss.Business.Entities;
 
-    public class SMALossService : ServiceBase, ISMALossService
+    public class SmaLossService : ServiceBase, ISMALossService
     {
         /// <summary>
         /// Gets the SMA list that reached the max loss limit.
