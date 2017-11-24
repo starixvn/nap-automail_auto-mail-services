@@ -21,7 +21,11 @@ namespace Fanex.SMAMaxLoss.Executing
 
             var service = new MailingService();
             var mail = service.SendMailToVIPGroup();
-            service.SendMailToNormalGroup();
+            if (mail.JobStatus == JobStatus.Success)
+            {
+                service.SendMailToNormalGroup();
+            }
+
             JobMessage jobResult = new JobMessage
             {
                 Mail = mail.Mail,

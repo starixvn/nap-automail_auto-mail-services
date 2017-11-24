@@ -69,7 +69,14 @@
         {
             var rawData = _lossService.GetNotifiedSMALoss(new MonitorListCriteria());
             var levels = this.GetSMALossLevels();
-            List<FormattedSMALossGroup> result = null;
+            List<FormattedSMALossGroup> result = new List<FormattedSMALossGroup>();
+
+            if (rawData == null || levels == null)
+            {
+                Fanex.Logging.LogService.Info("rawData or levels is null");
+            }
+
+            Fanex.Logging.LogService.Info($"rawData: {rawData.Count()}, levels:{levels.Count}");
 
             if (rawData != null && rawData.Any())
             {
@@ -97,7 +104,7 @@
                     }
                 }
             }
-
+            
             return result;
         }
 
