@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using Fanex.Data.Configuration;
-using Fanex.MailDelivery.Core.Models;
 using Fanex.NAPReport.WinLossByProducts.Business;
 using Fanex.NAPReport.WinLossByProducts.Business.Services;
 using Fanex.Service.Core.Configuration;
@@ -20,15 +19,9 @@ namespace Fanex.ProductsWinLoss.Executing
             configurationParser.Parse<AppSettings>();
 
             var service = new MailingService();
-            var mail = service.SendMailToVIPGroup();
-            service.SendMailToNormalGroup();
-            JobMessage jobResult = new JobMessage
-            {
-                Mail = mail.Mail,
-                JobStatus = mail.JobStatus
-            };
+            var jobMessage = service.Execute();
 
-            var json = JsonConvert.SerializeObject(jobResult);
+            var json = JsonConvert.SerializeObject(jobMessage, Formatting.Indented);
             Console.Write(json);
             Environment.Exit(0);
         }

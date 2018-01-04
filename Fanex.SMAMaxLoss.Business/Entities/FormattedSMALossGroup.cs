@@ -20,9 +20,9 @@
 
         public byte LossLevel { get; set; }
 
-        public string LossLevelRange { get; set; }
+        public string LossLevelRange { get; set; } = string.Empty;
 
-        public List<FormattedSMALossItem> SMALossItems { get; set; }
+        public List<FormattedSMALossItem> SMALossItems { get; set; } = new List<FormattedSMALossItem>();
 
         public string UrlDownloadFile
         { 
