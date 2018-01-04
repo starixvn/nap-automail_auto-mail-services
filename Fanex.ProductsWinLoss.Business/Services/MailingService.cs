@@ -17,11 +17,12 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
     using Fanex.Service.Core.Model;
     using MailDelivery.Core.Models;
     using RazorEngine;
+    using Service.Core.Extensions;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class MailingService : IMailingServiceBase
+    public class MailingService 
     {
         private IMailStationService mailStation;
         private MailInfo _mailInfo;
@@ -41,33 +42,60 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
             _exportDataService = new WinLossByProductsExportDataService();
         }
 
-        public MailResult SendMailToVIPGroup()
+        public JobMessage Execute()
         {
-            MailResult mailResult = new MailResult();
-
-            GetWinLossByProductsCriteria criteria = new GetWinLossByProductsCriteria
+            JobMessage jobMessage = new JobMessage();
+            var message = string.Empty;
+            var mail = new Mail();
+            try
             {
-                WinLossDate = DateTime.Now.AddDays(-1)
-            };
+                GetWinLossByProductsCriteria criteria = new GetWinLossByProductsCriteria
+                {
+                    WinLossDate = DateTime.Now.AddDays(-1)
+                };
 
-            _mailInfo.Subject = string.Format(AppSettings.SubjectProductWL, DateTime.Now.ToString("yyyy/MM/dd"));
+                _mailInfo.Subject = string.Format(AppSettings.SubjectProductWL, DateTime.Now.ToString("yyyy/MM/dd"));
 
-            var report = _service.GetWinLossByProductsData(criteria);
-            isEnoughData = report.IsEnoughData;
+                var report = _service.GetWinLossByProductsData(criteria);
+                isEnoughData = report.IsEnoughData;
 
-            if (!AppSettings.IsCheckEnoughData)
+                if (!AppSettings.IsCheckEnoughData)
+                {
+                    isEnoughData = true;
+                }
+
+                if (!isEnoughData)
+                {
+                    message = "DataIsNotReady";                    
+                    SendFunctionMailCustomContentNotification();                    
+                }
+                else
+                {
+                    mail = SendNotification(criteria, report);
+                    SendMailToNormalGroup();
+                }
+            }
+            catch(Exception exception)
             {
-                isEnoughData = true;
+                message = exception.Message;
+                LogExtensions.ExceptionHandler(exception);
+            }
+            finally
+            {
+                jobMessage.JobStatus = isEnoughData ? JobStatus.Success : JobStatus.DataIsNotReady;
+                jobMessage.Mail = mail;
+                jobMessage.TaskLog = new TaskLog
+                {
+                    LogTime = DateTime.Now,
+                    Message = message
+                };
             }
 
-            if (!isEnoughData)
-            {
-                mailResult.JobStatus = JobStatus.DataIsNotReady;
-                SendFunctionMailCustomContentNotification();
+            return jobMessage;
+        }
 
-                return mailResult;
-            }
-
+        private Mail SendNotification(GetWinLossByProductsCriteria criteria, WinLossByProducts report)
+        {
             _exportDataService.ExportReportToExcel(report, criteria);
             string reportPath = _exportDataService.DirectoryOfFileName;
 
@@ -87,12 +115,11 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
             _mailInfo.FileNamesPath = fileNamesPath;
 
             var mail = mailStation.CreateMailCustomContentWithAttachedFile(_mailInfo, bodyContent);
-            mailResult.Mail = mail;
 
-            return mailResult;
+            return mail;
         }
 
-        public void SendMailToNormalGroup()
+        private void SendMailToNormalGroup()
         {
             if (isEnoughData && AppSettings.FunctionId > 0)
             {
