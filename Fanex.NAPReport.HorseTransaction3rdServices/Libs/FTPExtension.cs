@@ -20,7 +20,7 @@
             FtpWebResponse responseFileDownload = null;
 
             var ftpFullPath = string.Format("ftp://{0}{1}{2}", FtpHost, FtpFolder, fileName);
-
+            
             try
             {
                 requestFileDownload = (FtpWebRequest)WebRequest.Create(ftpFullPath);
@@ -40,12 +40,15 @@
                     bytesRead = responseStream.Read(buffer, 0, length);
                 }
 
+                
                 writeStream.Close();
                 requestFileDownload = null;
                 responseFileDownload = null;
+
+                Fanex.Logging.LogService.Info($"Getting the files via Ftp Server {Environment.NewLine} - localPath:{localPath} {Environment.NewLine} - fileName: {fileName} {Environment.NewLine} - bytesRead: {bytesRead}");
             }
             catch (Exception ex)
-            {
+            {                
                 throw new Exception($"The file name {fileName} - {ex.Message}");
             }           
         }

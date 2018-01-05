@@ -9,19 +9,19 @@ namespace Fanex.NAPReport.HorseTransaction3rd.Business.Service
 {
     public interface LogService
     {
-        void Log(Exception exception, string category = "");
+        void Log(Exception exception);
 
-        void Log(string message, string category = "");
+        void Log(string message);
     }
 
     public class LogServiceImp : LogService
     {
-        public void Log(string message, string category = "")
+        public void Log(string message)
         {
-            Logger.Log.Info(message, category);
+            Logger.Log.Info(message);
         }
 
-        public void Log(Exception exception, string category = "")
+        public void Log(Exception exception)
         {
             var sqlException = exception as SqlException;
             var stackTrace = new StackTrace(exception).GetFrames();
@@ -43,7 +43,7 @@ namespace Fanex.NAPReport.HorseTransaction3rd.Business.Service
                 logInfo.Add($"Server: {sqlException.Server}");
             }
 
-            Logger.Log.Error(string.Join(Environment.NewLine, logInfo), category);
+            Logger.Log.Error(string.Join(Environment.NewLine, logInfo));
         }
     }
 }
