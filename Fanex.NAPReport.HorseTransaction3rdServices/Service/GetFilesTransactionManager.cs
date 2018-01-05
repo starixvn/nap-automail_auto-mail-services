@@ -11,6 +11,7 @@
     using Fanex.NAPReport.HorseTransaction3rd.Business.Libs;
     using RazorEngine;
     using RazorEngine.Templating;
+    using System.Linq;
 
     public class GetFilesTransactionManager : IGetFilesTransactionManager
     {
@@ -36,10 +37,12 @@
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
-        public void GetFilesTransaction()
+        public bool GetFilesTransaction()
         {
             var saveFilePath = string.Empty;
             var fileName = string.Empty;
+            var result = false;
+            var logService = new LogServiceImp();
 
             foreach (RacingElement racing in RacingSection.Instance.RacingConfigs)
             {
@@ -85,7 +88,6 @@
                         {
                             var fullpath = saveFilePath + @"\" + filename;
                             var isExistedFile = IsExistedFile(fullpath, saveFilePath);
-
                             if (!isExistedFile)
                             {
                                 FTPExtension.DownLoadFile(saveFilePath, filename);
@@ -120,18 +122,18 @@
 
                     if (countNewFile > 0)
                     {
+                        result = true;
                         SendEmailNotificationSuccessful(names, saveFilePath, racing);
                     }
                     else
                     {
-                        var date = DateTime.Today.AddDays(-1);
-                        var criteria = new GetRacingWinLossCriteria() { ReportType = Convert.ToInt32(racing.Id), WinLostDate = date };
-                        var result = _service.WinlostHR_OpenTote(criteria);
-
+                        result = false;
                         SendEmailNotification("Can't download any files for " + racing.Name + " because maybe they don't update new file(" + GetMissFileName(fileName) + ") on this day, or they have already been downloaded.", saveFilePath, racing);
                     }
                 }
             }
+
+            return result;
         }
 
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
@@ -263,12 +265,7 @@
 
         protected virtual string GetMissFileName(string fileName)
         {
-            var str = string.Empty;
-            var yy = DateTime.Today.Year;
-            var mm = DateTime.Today.Month;
-            var dd = DateTime.Today.AddDays(-1).Day;
-            str = fileName + "-" + yy + "-" + ((mm < 10) ? "0" + mm : mm.ToString()) + "-" + dd + ".txt";
-            return str;
+            return $"{fileName}-{DateTime.Today.AddDays(-1):yyyy-MM-dd}.txt";
         }
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface IGetFilesTransactionManager
     {        
-        void GetFilesTransaction();        
+        bool GetFilesTransaction();        
     }
 }

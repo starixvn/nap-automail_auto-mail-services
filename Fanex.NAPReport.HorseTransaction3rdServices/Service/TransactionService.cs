@@ -19,8 +19,7 @@ namespace Fanex.NAPReport.HorseTransaction3rd.Business.Service
             var message = string.Empty;
             try
             {
-                ftp.GetFilesTransaction();
-                success = true;
+                success = ftp.GetFilesTransaction();
             }
             catch (Exception ex)
             {
@@ -31,6 +30,11 @@ namespace Fanex.NAPReport.HorseTransaction3rd.Business.Service
             finally
             {
                 var content = string.Join("<br/>", ftp.MailList);
+                if(!success)
+                {
+                    logService.Log(content);
+                }
+
                 var mail = new Mail()
                 {
                     Subject = "Getting the files via Ftp Server",
@@ -41,12 +45,12 @@ namespace Fanex.NAPReport.HorseTransaction3rd.Business.Service
                 jobMessage = new JobMessage
                 {
                     Mail = mail,
-                    JobStatus = success == true
+                    JobStatus = success 
                     ? JobStatus.Success
                     : JobStatus.DataIsNotReady,
                     TaskLog = new TaskLog
                     {
-                        Message = message
+                        Message = message + content,                        
                     }
                 };
             }
