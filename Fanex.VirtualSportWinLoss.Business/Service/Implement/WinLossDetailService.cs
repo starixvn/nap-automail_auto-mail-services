@@ -12,7 +12,6 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using System.Threading.Tasks;
     using Fanex.NAPReport.VirtualSportWinLoss.Business.Criteria;
     using Fanex.NAPReport.VirtualSportWinLoss.Business.Model.Detail;
     using Fanex.NAPReport.VirtualSportWinLoss.Business.Repositories;
@@ -22,7 +21,6 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
 
     public class WinLossDetailService : IWinLossDetailService
     {
-        private DateTime _moveBetsDay = DateTime.Today;
         private DateTime _firstDayOfMonth = new DateTime(DateTime.Today.AddDays(-1).Year, DateTime.Today.AddDays(-1).Month, 1);
         private DateTime _yesterday = DateTime.Today.AddDays(-1);
         private IRepository _repository;
@@ -32,7 +30,12 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
         public WinLossDetailService()
         {
             _repository = new Repository();
-            _moveBetsDay = _repository.BalanceUp.MoveBetsDay;
+            if (AppSettings.IsTest)
+            {
+                _firstDayOfMonth = AppSettings.DateStart;
+                _yesterday = AppSettings.DateEnd;
+            }
+
             _sportIDsExistOrNot.Add(180, "Virtual Soccer");
             _sportIDsExistOrNot.Add(181, "Virtual Horse Racing");
             _sportIDsExistOrNot.Add(182, "Virtual Greyhounds");
@@ -277,53 +280,11 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
             Justification = "Reviewed. Suppression is OK here.")]
         private List<WinLossDetailByBettype> GetWinLossDetailByBettypeList()
         {
-            var winlossListFromIBC = new List<WinLossDetailByBettype>();
-            var winlossListFromWH = new List<WinLossDetailByBettype>();
-            var tasks = new Task<List<WinLossDetailByBettype>>[2];
-
-            if (this._firstDayOfMonth > this._moveBetsDay && this._yesterday > this._moveBetsDay)
+            var winlossListMerge = _repository.GetWinLossDetailListByBettype(new WinLossDetailOldCriteria
             {
-                winlossListFromWH = _repository.GetWinLossDetailListByBettype(new WinLossDetailCriteria
-                {
-                    DateStart = this._firstDayOfMonth,
-                    DateEnd = this._yesterday
-                });
-            }
-            else if (this._yesterday == this._moveBetsDay)
-            {
-                winlossListFromWH = _repository.GetWinLossDetailListByBettype(new WinLossDetailOldCriteria
-                {
-                    DateStart = this._firstDayOfMonth,
-                    DateEnd = this._yesterday
-                });
-            }
-            else
-            {
-                tasks[0] = Task<List<WinLossDetailByBettype>>.Factory.StartNew(() =>
-                {
-                    return _repository.GetWinLossDetailListByBettype(new WinLossDetailOldCriteria
-                    {
-                        DateStart = this._firstDayOfMonth,
-                        DateEnd = this._moveBetsDay
-                    });
-                });
-
-                tasks[1] = Task<List<WinLossDetailByBettype>>.Factory.StartNew(() =>
-                {
-                    return _repository.GetWinLossDetailListByBettype(new WinLossDetailCriteria
-                    {
-                        DateStart = this._moveBetsDay.AddDays(1),
-                        DateEnd = this._yesterday
-                    });
-                });
-
-                Task.WaitAll(tasks);
-
-                winlossListFromWH = tasks[0].Result;
-                winlossListFromIBC = tasks[1].Result;
-            }
-
-            var winlossListMerge = winlossListFromIBC.Concat(winlossListFromWH).ToList();
+                DateStart = this._firstDayOfMonth,
+                DateEnd = this._yesterday
+            });
 
             var totalWinlossByDateList = winlossListMerge.GroupBy(x => new { x.BettypeID, x.SportID }).Select(y => new WinLossDetailByBettype
             {

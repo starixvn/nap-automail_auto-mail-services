@@ -22,7 +22,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class MailingService 
+    public class MailingService
     {
         private IMailStationService mailStation;
         private MailInfo _mailInfo;
@@ -66,8 +66,8 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
 
                 if (!isEnoughData)
                 {
-                    message = "DataIsNotReady";                    
-                    SendFunctionMailCustomContentNotification();                    
+                    message = "DataIsNotReady";
+                    SendFunctionMailCustomContentNotification();
                 }
                 else
                 {
@@ -75,7 +75,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
                     SendMailToNormalGroup();
                 }
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 message = exception.Message;
                 LogExtensions.ExceptionHandler(exception);

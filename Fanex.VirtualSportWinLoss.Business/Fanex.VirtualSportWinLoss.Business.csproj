@@ -15,7 +15,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>	
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,7 +24,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>	
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -32,11 +32,11 @@
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>	
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-    <PropertyGroup>
-	<!-- Exclude the project from analysis -->
-	<SonarQubeExclude>true</SonarQubeExclude>
+  <PropertyGroup>
+    <!-- Exclude the project from analysis -->
+    <SonarQubeExclude>true</SonarQubeExclude>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Logging, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
@@ -172,8 +172,6 @@
     <Compile Include="AppSettings.cs" />
     <Compile Include="Criteria\WinLossDetailOldCriteria.cs" />
     <Compile Include="Criteria\WinLossSummaryOldCriteria.cs" />
-    <Compile Include="Criteria\WinLossDetailCriteria.cs" />
-    <Compile Include="Criteria\WinLossSummaryCriteria.cs" />
     <Compile Include="Model\BalanceUp.cs" />
     <Compile Include="Model\Detail\WinLossDetailBySportType.cs" />
     <Compile Include="Model\Detail\WinLossDetailByBettype.cs" />
@@ -181,6 +179,7 @@
     <Compile Include="Model\Detail\WinlossDetailSheet.cs" />
     <Compile Include="Model\PeriodTimeReport.cs" />
     <Compile Include="Model\Summary\WinLossSummaryBySportTypeTotal.cs" />
+    <Compile Include="Model\Summary\WinLossSummaryByVendor.cs" />
     <Compile Include="Model\Summary\WinLossSummaryGrandTotal.cs" />
     <Compile Include="Model\Summary\WinLossSummaryBySportType.cs" />
     <Compile Include="Model\VirtualSportExcelSheet.cs" />

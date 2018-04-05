@@ -17,6 +17,10 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Model.Summary
     /// </summary>
     public class WinLossSummaryBySportType
     {
+        public int ProductId { get; set; }
+
+        public string ProductName { get; set; }
+
         public int SportID { get; set; }
 
         public string SportName { get; set; }

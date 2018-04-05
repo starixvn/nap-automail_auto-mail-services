@@ -18,11 +18,10 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Model.Summary
     {
         public WinLossSummaryGrandTotal()
         {
-            this.WinlostTotalList = new List<WinLossSummaryBySportTypeTotal>();
-            this.GrandTotal = new WinLossSummaryBySportType();
+            this.WinlostTotalList = new List<WinLossSummaryBySportTypeTotal>();         
         }
 
-        public WinLossSummaryBySportType GrandTotal { get; set; }
+        public WinLossSummaryBySportType GrandTotal { get; set; } = new WinLossSummaryBySportType();
 
         public List<WinLossSummaryBySportTypeTotal> WinlostTotalList { get; set; }
     }

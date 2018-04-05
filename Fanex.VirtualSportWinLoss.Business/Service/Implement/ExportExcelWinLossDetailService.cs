@@ -151,7 +151,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
             {
                 foreach (var sheet in virtualSportDetailSheet)
                 {
-                    CreateNewSheetBySport(sheet);
+                    CreateNewSheetBySport(sheet);                  
                 }
             }
         }
