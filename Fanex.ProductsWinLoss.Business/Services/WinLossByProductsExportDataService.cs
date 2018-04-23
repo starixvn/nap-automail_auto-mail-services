@@ -271,7 +271,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
 
         private bool IsRacingDueToPartnersSport(WinLossByProducts thirdPartySport)
         {
-            return thirdPartySport.GroupName == PartnersGroupName;
+            return thirdPartySport.GroupName == PartnersGroupName || thirdPartySport.ProductName == "Casino (Amount due to Jackpot Pool)";
         }
 
         private string CreateReportNameWithExtension(GetWinLossByProductsCriteria criteria)

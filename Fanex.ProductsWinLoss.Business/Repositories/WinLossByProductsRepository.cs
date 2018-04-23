@@ -86,6 +86,9 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Repositories
                 MonthToDateWinLoss = Converter.ToDecimal(reader["winlostmonthtodate"])
             };
 
+            winLossByProductsItem.GroupName = winLossByProductsItem.ProductName == "Casino (Amount due to Jackpot Pool)"
+                ? "partner" : winLossByProductsItem.GroupName;
+
             return winLossByProductsItem;
         }
     }
