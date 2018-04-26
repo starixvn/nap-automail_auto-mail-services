@@ -8,8 +8,6 @@
 
     public interface IRepository
     {
-        BalanceUp BalanceUp { get; }
-
         List<WinLossSummaryBySportType> GetWinLossSummaryListBySportType(CriteriaBase criteria);
 
         List<WinLossDetailByBettype> GetWinLossDetailListByBettype(CriteriaBase criteria);        

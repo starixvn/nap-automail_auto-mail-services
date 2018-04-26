@@ -10,13 +10,15 @@
 namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Interface
 {
     using System;
-    using Fanex.NAPReport.VirtualSportWinLoss.Business.Model.Summary;
+    using System.Collections.Generic;
+    using Fanex.VirtualSportWinLoss.Business.Model.Summary;
+    using Model.Summary;
 
     /// <summary>
     /// Win loss detail of virtual sport service's interface.
     /// </summary>
     public interface IWinLossSummaryService
     {
-        WinLossSummaryGrandTotal GetWinLossSummary();
+        Tuple<List<WinLossSummaryByVendor>, WinLossSummaryBySportType> GetWinLossSummary();
     }
 }

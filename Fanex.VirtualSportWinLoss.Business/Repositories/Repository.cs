@@ -5,26 +5,11 @@
     using Fanex.Common;
     using Fanex.Data;
     using Fanex.Data.Repository;
-    using Fanex.NAPReport.VirtualSportWinLoss.Business.Model;
     using Fanex.NAPReport.VirtualSportWinLoss.Business.Model.Detail;
     using Fanex.NAPReport.VirtualSportWinLoss.Business.Model.Summary;
 
     public class Repository : IRepository
     {
-        public BalanceUp BalanceUp
-        {
-            get
-            {
-                BalanceUp balanceUp = new BalanceUp();
-                using (ObjectDb objDb = new ObjectDb("Core_ReportService_GetBalanceUpDay"))
-                {
-                    balanceUp = objDb.QueryEntity<BalanceUp>();
-                }
-
-                return balanceUp;
-            }
-        }
-
         public List<WinLossSummaryBySportType> GetWinLossSummaryListBySportType(CriteriaBase criteria)
         {
             List<WinLossSummaryBySportType> winlossSummaryListbySportType = new List<WinLossSummaryBySportType>();
@@ -37,6 +22,8 @@
                 {
                     var winlossSummarybySportType = new WinLossSummaryBySportType
                     {
+                        ProductId = Converter.To<int>(row["ProductId"]),
+                        ProductName = Converter.To<string>(row["ProductName"]),
                         SportID = Converter.To<int>(row["SportID"]),
                         SportName = Converter.To<string>(row["SportName"]),
                         BettypeID = Converter.To<int>(row["BetTypeID"]),

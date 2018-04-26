@@ -38,9 +38,10 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
         private Color _greyColor;
         private Color _subColor;
         private Color _grandColor;
-        
+
         private XSSFSheet _workSheet;
 
+        private XSSFCellStyle _textCenterBoldStyle;
         private XSSFCellStyle _textCenterNormalStyle;
         private XSSFCellStyle _textLeftTitleStyle;
         private XSSFCellStyle _textLeftNormalStyle;
@@ -110,6 +111,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
         private void CreateStyle()
         {
             _textLeftTitleStyle = _customCellStyleService.CreateLeftTextStyle(_titleColor, _fontService.BlackBoldFont);
+            _textCenterBoldStyle = _customCellStyleService.CreateCenterTextStyle(Color.White, _fontService.BlackBoldFont);
             _textCenterNormalStyle = _bodyCellStyleService.CenterTextStyle;
             _textLeftNormalStyle = _bodyCellStyleService.LeftTextStyle;
             _numberNormalStyle = _bodyCellStyleService.RightNumberStyle;
@@ -154,11 +156,24 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
         {
             var service = new WinLossSummaryService();
             var model = service.GetWinLossSummary();
-
-            if (model.WinlostTotalList.Count > 0)
+            var vendors = model.Item1;
+            var hasData = false;
+            var grandTotal = model.Item2;
+            vendors.ForEach(vendor =>
             {
-                RenderBody(model.WinlostTotalList);
-                RenderFooter(model.GrandTotal);
+                if (vendor.Data.WinlostTotalList.Count > 0)
+                {
+                    hasData = true;
+
+                    RenderVendor(vendor);
+                    RenderBody(vendor.Data.WinlostTotalList);
+                    RenderFooter(vendor.Data.GrandTotal);
+                }
+            });
+
+            if (hasData)
+            {
+                RenderFooter(grandTotal);
             }
             else
             {
@@ -166,16 +181,19 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
                 DateTime startMonth = new DateTime(yesterday.Year, yesterday.Month, 1);
 
                 _cell.CellValue = string.Format(WinLossVirtualSportResoure.NoData, startMonth.ToShortFormatedDate(), yesterday.ToShortFormatedDate());
-                _cell.EndColumn = _cell.CurrentColumn + 6;
+                _cell.EndColumn = _cell.CurrentColumn + 7;
                 NpoiNewFormatExcelExtension.RenderMergeCell(_workSheet, _cell, _textCenterNormalStyle);
                 _cell.IncreaseColumnIndex();
             }
         }
 
-        private XSSFCellStyle CreateHeaderStyle()
+        private void RenderVendor(Fanex.VirtualSportWinLoss.Business.Model.Summary.WinLossSummaryByVendor vendor)
         {
-            XSSFCellStyle headerStyle = _customCellStyleService.CreateLeftTextStyle(_headerColor, _fontService.WhiteBoldFont);
-            return headerStyle;
+            _cell.CurrentColumn = 0;
+            _cell.EndColumn = 0;
+            _cell.EndRow = _cell.CurrentRow + vendor.RowCount - 1;
+            _cell.CellValue = vendor.ProductName;
+            NpoiNewFormatExcelExtension.RenderMergeCell(_workSheet, _cell, _textCenterBoldStyle);
         }
 
         private void RenderTitle()
@@ -197,7 +215,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
 
             for (int i = 0; i < lines.Length; i++)
             {
-                _cell.EndColumn = _cell.CurrentColumn + 6;
+                _cell.EndColumn = _cell.CurrentColumn + 7;
                 _cell.CellValue = lines[i];
                 NpoiNewFormatExcelExtension.RenderMergeCell(_workSheet, _cell, _textLeftTitleStyle);
                 _cell.ResetColumnIndex();
@@ -207,7 +225,7 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
 
         private void InitColumnWidth()
         {
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 8; i++)
             {
                 _workSheet.SetColumnWidth(i, 170 * NpoiConstants.FontWidth);
             }
@@ -218,6 +236,11 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
         private void RenderHeader()
         {
             var headerStyle = _customCellStyleService.CreateCenterTextStyle(_headerColor, _fontService.WhiteBoldFont);
+
+            _cell.EndRow = _cell.CurrentRow + 1;
+            _cell.CellValue = "Vendor";
+            NpoiNewFormatExcelExtension.RenderMergeCell(_workSheet, _cell, headerStyle);
+            _cell.IncreaseColumnIndex();
 
             _cell.EndRow = _cell.CurrentRow + 1;
             _cell.CellValue = WinLossVirtualSportResoure.Sport;
@@ -259,6 +282,8 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
 
         private void RenderTotalWinLossOfSporttype(WinLossSummaryBySportTypeTotal totalWinlossBySportObj)
         {
+            _cell.CurrentColumn = 1;
+            _cell.EndColumn = 1;
             var numberOfBettypes = totalWinlossBySportObj.WinlostList.Count;
             for (int j = 0; j < numberOfBettypes; j++)
             {
@@ -275,14 +300,16 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
                 _decimalStyle = row.BetCount == 0 ? _decimalGreyStyle : (j % 2 == 0 ? _decimalNormalStyle : _decimalEvenStyle);
                 _percentStyle = row.BetCount == 0 ? _percentGreyStyle : (j % 2 == 0 ? _percentNormalStyle : _percentEvenStyle);
 
-                _cell.CurrentColumn = 1;
-                _cell.EndColumn = 1;
+                _cell.CurrentColumn = 2;
+                _cell.EndColumn = 2;
                 _cell.EndRow = _cell.CurrentRow;
 
                 RenderRow(row);
             }
 
             _cell.ResetColumnIndex();
+            _cell.CurrentColumn = 1;
+            _cell.EndColumn = 1;
 
             var total = totalWinlossBySportObj.Total;
             _textLeftStyle = _textTotalLeftStyle;
@@ -342,9 +369,10 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
             _decimalStyle = _decimalGrandTotalStyle;
             _percentStyle = _percentGrandTotalStyle;
 
+            _cell.CurrentColumn = 0;
+            _cell.EndColumn = 2;
             _cell.CellValue = footerData.SportName;
-            NpoiNewFormatExcelExtension.RenderCell(_workSheet, _cell, _textLeftStyle);
-            _cell.IncreaseColumnIndex();
+            NpoiNewFormatExcelExtension.RenderMergeCell(_workSheet, _cell, _textLeftStyle);
 
             RenderRow(footerData);
 

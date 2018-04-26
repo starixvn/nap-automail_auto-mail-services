@@ -38,7 +38,7 @@
             }
             @foreach (var item in _model.ThirdPartySport)
             {
-                if (@item.GroupName.ToLower() == "partners")
+                if (@item.GroupName.ToLower() == "partners" || @item.ProductName == "Casino (Amount due to Jackpot Pool)")
                 {
                     <tr style="height: 25px;font-style:italic;color:#C0C0C0;">
                         <td style="text-align:left;">@item.ProductName</td>
