@@ -140,6 +140,9 @@
     <None Include="deployment.ignore">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Fanex.VirtualSportWinLoss.Executing.MNL.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Fanex.VirtualSportWinLoss.Executing.PRO.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -185,6 +188,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SiteConfig\VirtualSportWinLoss\Settings\VirtualSportWinLoss.Settings.Local.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\VirtualSportWinLoss\Settings\VirtualSportWinLoss.Settings.MNL.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

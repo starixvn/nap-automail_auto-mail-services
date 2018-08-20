@@ -139,6 +139,9 @@
     <None Include="Fanex.ReportingServices.Executing.Local.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Fanex.ReportingServices.Executing.MNL.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Fanex.ReportingServices.Executing.PRO.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -206,6 +209,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SiteConfig\ReportingServices\Settings\ReportingService.Settings.Local.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\ReportingServices\Settings\ReportingService.Settings.MNL.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SiteConfig\ReportingServices\Settings\ReportingService.Settings.PRO.xml">

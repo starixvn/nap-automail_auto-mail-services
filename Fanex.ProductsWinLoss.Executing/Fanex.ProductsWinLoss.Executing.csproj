@@ -140,6 +140,9 @@
     <None Include="deployment.ignore">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Fanex.ProductsWinLoss.Executing.MNL.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Fanex.ProductsWinLoss.Executing.Local.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -181,6 +184,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Data\UAT\DBEXT.bodb02.bodbAdminNet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteConfig\WinLossByProducts\Settings\OverallWinLoss.Settings.MNL.xml">
+      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SiteConfig\WinLossByProducts\Templates\NotificationEmailTemplate.cshtml">

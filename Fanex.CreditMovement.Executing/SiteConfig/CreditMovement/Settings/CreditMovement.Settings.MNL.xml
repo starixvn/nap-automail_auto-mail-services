@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Settings>
+  <add key="FromDate" value="2015-03-01" />
+  <add key="ToDate" value="2015-03-16" />
+  <add key="IsTest" value="false" />  
+  <add key="ExportDataDirectory" value="\\10.2.98.1\data-reports\olympus\Fanex.Excel\CreditMovementExcelFile" />
+  <add key="EmailTemplate" value="SiteConfig\CreditMovement\Templates\CreditMovementEmail.cshtml" />
+  <add key="Amount" value="300000" />
+  <add key="ExcelPassword" value="we168" />
+  <add key="FunctionId" value="160" />
+  <add key="Subject" value="Automail Report - Credit Movement - {0}" />
+</Settings>

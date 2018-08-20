@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Settings>
+  <add key="IsTest" value="false" />
+
+  <add key="DataDirectorySuperBalance" value="\\10.2.98.1\data-reports\olympus\Fanex.Excel\BalanceMonthlyReport_SuperBalance" />
+  
+  <add key="ExcelPasswordProtectedSuperBalance" value="" />
+  
+  <add key="FunctionIdCreditTerm" value="0" />
+  <add key="FunctionIdSuperBalance" value="180" />
+  <add key="FunctionIdDirectBalance" value="0" />
+  <add key="SuperBalanceSubject" value="Automail Report - Super Balance - {0}" />
+</Settings>
