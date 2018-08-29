@@ -2,7 +2,7 @@
 <Settings>
   <add key="FromDate" value="2015-03-01" />
   <add key="ToDate" value="2015-03-16" />  
-  <add key="ExportDataDirectory" value="\\10.70.70.242\www\Olympus\Fanex.Excel\CreditMovementExcelFile" />
+  <add key="ExportDataDirectory" value="\\10.18.200.120\www\Olympus\Fanex.Excel\CreditMovementExcelFile" />
   <add key="EmailTemplate" value="SiteConfig\CreditMovement\Templates\CreditMovementEmail.cshtml" />
   <add key="Amount" value="300" />
   <add key="ExcelPassword" value="we168" />

@@ -28,5 +28,17 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Constants
                 return new List<string> { "AG Casino", "Macau" };
             }
         }
+
+        public static List<string> IgnoreProductsWhenCalcTotal
+        {
+            get
+            {
+                return new List<string>
+                {
+                    "casino (amount due to jackpot pool)",
+                    "poker games (due to partners)"
+                };
+            }
+        }
     }
 }

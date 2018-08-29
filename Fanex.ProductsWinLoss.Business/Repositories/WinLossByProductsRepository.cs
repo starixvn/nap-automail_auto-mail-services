@@ -7,6 +7,7 @@
 namespace Fanex.NAPReport.WinLossByProducts.Business.Repositories
 {
     using System.Collections;
+    using System.Collections.Generic;
     using System.Data;
     using System.Linq;
     using Fanex.Common;
@@ -22,6 +23,8 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Repositories
     /// </summary>
     public class WinLossByProductsRepository : IWinLossByProductsRepository
     {
+        private List<string> ignoreProductWhenCalcTotal = new List<string> { "poker games (due to partners)" };
+
         public WinLossByProducts GetWinLossByProductsData(GetWinLossByProductsCriteria criteria)
         {
             WinLossByProducts winLossByProducts = CreateWinLossByProducts();
@@ -45,7 +48,9 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Repositories
                     }
                     else
                     {
-                        if (winLossByProductsItem.GroupName.ToLower() == "3rd")
+                        if (winLossByProductsItem.GroupName.ToLower() == "3rd"
+                            && !ignoreProductWhenCalcTotal.Contains(winLossByProductsItem.ProductName.ToLower())
+                            )
                         {
                             winLossByProducts.Total.CalculateTotal(winLossByProductsItem);
                         }
@@ -92,7 +97,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Repositories
             winLossByProductsItem.GroupName = winLossByProductsItem.ProductName == "Casino (Amount due to Jackpot Pool)"
                 ? "partner" : winLossByProductsItem.GroupName;
 
-            if(winLossByProductsItem.ProductName == "Exchange")
+            if (winLossByProductsItem.ProductName == "Exchange")
             {
                 var exchangeWinloss = GetExchangeWinLoss();
                 winLossByProductsItem.WinLoss = exchangeWinloss.WinLoss;
