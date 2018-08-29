@@ -40,7 +40,7 @@
             }
             @foreach (var item in _model.ThirdPartySport)
             {
-                if (@item.GroupName.ToLower() == "partners" || ignoreProducts.Contains(@item.ProductName.ToLower()))
+                if (ignoreProducts.Contains(@item.ProductName.ToLower()))
                 {
                     <tr style="height: 25px;font-style:italic;color:#C0C0C0;">
                         <td style="text-align:left;">@item.ProductName</td>

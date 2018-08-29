@@ -10,6 +10,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Repositories
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
+    using Constants;
     using Fanex.Common;
     using Fanex.Data;
     using Fanex.NAPReport.WinLossByProducts.Business.Criteria;
@@ -23,8 +24,6 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Repositories
     /// </summary>
     public class WinLossByProductsRepository : IWinLossByProductsRepository
     {
-        private List<string> ignoreProductWhenCalcTotal = new List<string> { "poker games (due to partners)" };
-
         public WinLossByProducts GetWinLossByProductsData(GetWinLossByProductsCriteria criteria)
         {
             WinLossByProducts winLossByProducts = CreateWinLossByProducts();
@@ -48,9 +47,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Repositories
                     }
                     else
                     {
-                        if (winLossByProductsItem.GroupName.ToLower() == "3rd"
-                            && !ignoreProductWhenCalcTotal.Contains(winLossByProductsItem.ProductName.ToLower())
-                            )
+                        if (!ProductsConstants.IgnoreProductsWhenCalcTotal.Contains(winLossByProductsItem.ProductName.ToLower()))
                         {
                             winLossByProducts.Total.CalculateTotal(winLossByProductsItem);
                         }
@@ -93,9 +90,6 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Repositories
                 WinLoss = Converter.ToDecimal(reader["winlostyesterday"]),
                 MonthToDateWinLoss = Converter.ToDecimal(reader["winlostmonthtodate"])
             };
-
-            winLossByProductsItem.GroupName = winLossByProductsItem.ProductName == "Casino (Amount due to Jackpot Pool)"
-                ? "partner" : winLossByProductsItem.GroupName;
 
             if (winLossByProductsItem.ProductName == "Exchange")
             {
