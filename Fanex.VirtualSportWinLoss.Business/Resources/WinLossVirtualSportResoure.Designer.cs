@@ -187,7 +187,7 @@ namespace Fanex.VirtualSportWinLoss.Business.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Turnover IBC.
+        ///   Looks up a localized string similar to Turnover House.
         /// </summary>
         internal static string TurnoverIBC {
             get {
@@ -214,7 +214,7 @@ namespace Fanex.VirtualSportWinLoss.Business.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Winloss IBC.
+        ///   Looks up a localized string similar to Winloss House.
         /// </summary>
         internal static string WinLossIBC {
             get {

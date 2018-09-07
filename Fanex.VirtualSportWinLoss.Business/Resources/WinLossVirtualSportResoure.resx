@@ -157,13 +157,13 @@
     <value>Turnover</value>
   </data>
   <data name="TurnoverIBC" xml:space="preserve">
-    <value>Turnover IBC</value>
+    <value>Turnover House</value>
   </data>
   <data name="Winloss" xml:space="preserve">
     <value>Win/Loss</value>
   </data>
   <data name="WinLossIBC" xml:space="preserve">
-    <value>Winloss IBC</value>
+    <value>Winloss House</value>
   </data>
   <data name="VirtualSportWinLoss_ReportName" xml:space="preserve">
     <value>Virtual_Sports_Daily_Win_Loss_Report_For_{0}.xlsx</value>

@@ -205,7 +205,7 @@ namespace Fanex.ReportingServices.Business.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to IBC Turnover.
+        ///   Looks up a localized string similar to House Turnover.
         /// </summary>
         public static string IBC_Turnover {
             get {
