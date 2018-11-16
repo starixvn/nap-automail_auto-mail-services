@@ -1,5 +1,0 @@
-﻿<Functions>
-	<Function Name="Live Casino - GET PT Setting">
-		<Setting Key="Acc_MailingListSel" SpName="Acc_MailingListSel" DbName="DBACC.bodb_ACC.bodbAdminNet" />
-	</Function>
-</Functions>

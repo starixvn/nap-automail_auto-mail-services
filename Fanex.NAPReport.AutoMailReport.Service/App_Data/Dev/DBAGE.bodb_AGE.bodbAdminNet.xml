@@ -1,6 +1,0 @@
-<Functions>
-  <Function Name="SMA Loss Automail">
-    <Setting Key="NAP_LimitLoss_MonitorList" SpName="NAP_LimitLoss_MonitorList" DbName="DBAGE.bodb_AGE.bodbAdminNet" />
-    <Setting Key="NAP_LimitLoss_ActionConfigSel" SpName="NAP_LimitLoss_ActionConfigSel" DbName="DBAGE.bodb_AGE.bodbAdminNet"></Setting>
-  </Function>
-</Functions>
