@@ -15,7 +15,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>	
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,7 +24,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>	
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -32,11 +32,11 @@
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>	
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-    <PropertyGroup>
-	<!-- Exclude the project from analysis -->
-	<SonarQubeExclude>true</SonarQubeExclude>
+  <PropertyGroup>
+    <!-- Exclude the project from analysis -->
+    <SonarQubeExclude>true</SonarQubeExclude>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Logging, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
@@ -201,10 +201,12 @@
     <Compile Include="Constants\EmailTemplateConstants.cs" />
     <Compile Include="Constants\ProductsConstants.cs" />
     <Compile Include="Criteria\GetDWStatusByCubeCriteria.cs" />
+    <Compile Include="Criteria\HouseNetIncomeEXDepositCriteria.cs" />
     <Compile Include="Criteria\OverallWinLossProducts3RDCriteria.cs" />
     <Compile Include="Criteria\GetWinLossByProductsCriteria.cs" />
     <Compile Include="Criteria\OverallWinLossProductsCriteria.cs" />
     <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\ProductWinLoss.cs" />
     <Compile Include="Model\WinLoss.cs" />
     <Compile Include="Model\WinLossByProducts.cs" />
     <Compile Include="Model\WinLossProductsDto.cs" />

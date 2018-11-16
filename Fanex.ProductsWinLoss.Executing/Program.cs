@@ -21,7 +21,7 @@ namespace Fanex.ProductsWinLoss.Executing
             var service = new MailingService();
             var jobMessage = service.Execute();
 
-            var json = JsonConvert.SerializeObject(jobMessage, Formatting.Indented);
+            var json = JsonConvert.SerializeObject(jobMessage, Formatting.Indented);            
             Console.Write(json);
             Environment.Exit(0);
         }

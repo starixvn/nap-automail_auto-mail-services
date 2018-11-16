@@ -7,11 +7,16 @@
 namespace Fanex.NAPReport.WinLossByProducts.Business.Repositories
 {
     using System.Collections;
+    using System.Collections.Generic;
     using System.Data;
+    using System.Linq;
+    using Constants;
     using Fanex.Common;
     using Fanex.Data;
     using Fanex.NAPReport.WinLossByProducts.Business.Criteria;
     using Fanex.NAPReport.WinLossByProducts.Business.Model;
+    using ProductsWinLoss.Business.Criteria;
+    using ProductsWinLoss.Business.Model;
     using ProductsWinLoss.Business.Resources;
 
     /// <summary>
@@ -42,7 +47,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Repositories
                     }
                     else
                     {
-                        if (winLossByProductsItem.GroupName.ToLower() == "3rd")
+                        if (!ProductsConstants.IgnoreProductsWhenCalcTotal.Contains(winLossByProductsItem.ProductName.ToLower()))
                         {
                             winLossByProducts.Total.CalculateTotal(winLossByProductsItem);
                         }
@@ -86,10 +91,39 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Repositories
                 MonthToDateWinLoss = Converter.ToDecimal(reader["winlostmonthtodate"])
             };
 
-            winLossByProductsItem.GroupName = winLossByProductsItem.ProductName == "Casino (Amount due to Jackpot Pool)"
-                ? "partner" : winLossByProductsItem.GroupName;
+            if (winLossByProductsItem.ProductName == "Exchange")
+            {
+                var exchangeWinloss = GetExchangeWinLoss();
+                winLossByProductsItem.WinLoss = exchangeWinloss.WinLoss;
+                winLossByProductsItem.MonthToDateWinLoss = exchangeWinloss.WinLossMtd;
+            }
 
             return winLossByProductsItem;
+        }
+
+        private ProductWinLoss GetExchangeWinLoss()
+        {
+            var criteria = new HouseNetIncomeEXDepositCriteria();
+            decimal winloss = 0, winlossMtd = 0;
+            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                db.AssignParamValues(criteria.GetSpParams());
+                var dataset = db.ExecuteDataSet();
+                var dataTable = dataset != null && dataset.Tables.Count > 0 ? dataset.Tables[0] : new DataTable();
+                winloss = dataTable.AsEnumerable().Sum(s => Converter.To<decimal>(s[dataTable.Columns.Count - 1]));
+
+                for (int i = 4; i < dataTable.Columns.Count; i++)
+                {
+                    winlossMtd += dataTable.AsEnumerable().Sum(s => Converter.To<decimal>(s[i]));
+                }
+            }
+
+            return new ProductWinLoss
+            {
+                Name = "Exchange",
+                WinLoss = (-1) * winloss,
+                WinLossMtd = (-1) * winlossMtd
+            };
         }
     }
 }

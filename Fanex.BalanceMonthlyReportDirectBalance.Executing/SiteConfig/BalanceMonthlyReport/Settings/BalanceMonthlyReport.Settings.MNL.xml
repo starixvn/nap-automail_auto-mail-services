@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Settings>
+  <add key="IsTest" value="false" />
+  
+  <add key="DataDirectoryDirectBalance" value="\\10.2.98.1\data-reports\olympus\Fanex.Excel\BalanceMonthlyReport_DirectBalance" />
+  <add key="ExcelPasswordProtectedDirectBalance" value="" />
+  <add key="FunctionIdDirectBalance" value="178" />  
+  <add key="DirectBalanceSubject" value="Automail Report - Direct Balance - {0}" />
+</Settings>

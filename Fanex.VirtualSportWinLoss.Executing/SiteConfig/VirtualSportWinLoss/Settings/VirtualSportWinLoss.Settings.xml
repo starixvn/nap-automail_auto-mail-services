@@ -1,5 +1,5 @@
 ﻿<appSettings>
-  <add key="DataDirectory" value="\\10.70.70.242\www\Olympus\Fanex.Excel\VirtualSportWinLoss" />
+  <add key="DataDirectory" value="\\10.18.200.120\www\Olympus\Fanex.Excel\VirtualSportWinLoss" />
   <add key="ExcelPasswordProtected" value="" />
   <add key="FunctionId" value="82" />
   <add key="IsTest" value="false" />

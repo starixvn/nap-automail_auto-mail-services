@@ -8,6 +8,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
 {
     using System;
     using System.Drawing;
+    using Constants;
     using Fanex.NAPReport.WinLossByProducts.Business.Criteria;
     using Fanex.NAPReport.WinLossByProducts.Business.Model;
     using Fanex.Service.Core.Constants;
@@ -39,7 +40,7 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
         private Color _subTotalColor;
         private Color _grandTotalColor;
         private Color _grandTotalBorderColor;
-        private Color _racingDueToPartnersColor;        
+        private Color _racingDueToPartnersColor;
 
         private XSSFSheet _workSheet;
         private string _reportPath;
@@ -271,7 +272,8 @@ namespace Fanex.NAPReport.WinLossByProducts.Business.Services
 
         private bool IsRacingDueToPartnersSport(WinLossByProducts thirdPartySport)
         {
-            return thirdPartySport.GroupName == PartnersGroupName || thirdPartySport.ProductName == "Casino (Amount due to Jackpot Pool)";
+            return thirdPartySport.GroupName == PartnersGroupName                
+                || ProductsConstants.IgnoreProductsWhenCalcTotal.Contains(thirdPartySport.ProductName.ToLower());
         }
 
         private string CreateReportNameWithExtension(GetWinLossByProductsCriteria criteria)

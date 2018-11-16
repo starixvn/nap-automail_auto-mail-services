@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Settings>
-  <add key="DataDirectory" value="\\10.70.70.242\www\Olympus\Fanex.Excel\ProductsWinLoss" />
+  <add key="DataDirectory" value="\\10.18.200.120\www\Olympus\Fanex.Excel\ProductsWinLoss" />
   <add key="ExcelPasswordProtected" value="" />
   <add key="FunctionId" value="89" /> 
   <add key="IsCheckEnoughData" value="false" />
