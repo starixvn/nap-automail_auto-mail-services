@@ -6,9 +6,9 @@
   <add key="DataDirectorySuperBalance" value="\\10.18.200.120\www\Olympus\Fanex.Excel\BalanceMonthlyReport_SuperBalance" />
   <add key="DataDirectoryDirectBalance" value="\\10.18.200.120\www\Olympus\Fanex.Excel\BalanceMonthlyReport_DirectBalance" />
   
-  <add key="ExcelPasswordProtectedCreditTerm" value="we168" />
-  <add key="ExcelPasswordProtectedSuperBalance" value="we168" />
-  <add key="ExcelPasswordProtectedDirectBalance" value="we168" />
+  <add key="ExcelPasswordProtectedCreditTerm" value="Star168" />
+  <add key="ExcelPasswordProtectedSuperBalance" value="Star168" />
+  <add key="ExcelPasswordProtectedDirectBalance" value="Star168" />
   
   <add key="FunctionIdCreditTerm" value="82" />
   <add key="FunctionIdSuperBalance" value="84" />

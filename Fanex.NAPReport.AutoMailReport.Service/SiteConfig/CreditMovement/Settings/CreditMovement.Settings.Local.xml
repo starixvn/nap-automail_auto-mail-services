@@ -5,7 +5,7 @@
   <add key="ExportDataDirectory" value="\\10.70.70.242\www\Olympus\Fanex.Excel\CreditMovementExcelFile" />
   <add key="EmailTemplate" value="SiteConfig\CreditMovement\Templates\CreditMovementEmail.cshtml" />
   <add key="Amount" value="300" />
-  <add key="ExcelPassword" value="we168" />
+  <add key="ExcelPassword" value="Star168" />
   <add key="IsTest" value="true" />
   <add key="FunctionId" value="0" />
   <add key="Subject" value="Automail Report - Credit Movement - {0}" />

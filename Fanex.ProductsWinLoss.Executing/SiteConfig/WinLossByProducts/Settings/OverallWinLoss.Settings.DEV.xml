@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Settings>
   <add key="DataDirectory" value="\\10.18.200.120\www\Olympus\Fanex.Excel\ProductsWinLoss" />
-  <add key="ExcelPasswordProtected" value="we168" />
+  <add key="ExcelPasswordProtected" value="Star168" />
   <add key="FunctionId" value="89" />
   <add key="IsCheckEnoughData" value="true" />
   <add key="IsTesting" value="true" />

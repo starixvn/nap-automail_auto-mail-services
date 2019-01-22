@@ -171,16 +171,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Dev\DBDWH.bodb_dwrs.bodbAdminNet.xml">
+    <Content Include="App_Data\Dev\DBWH.bodb_dwrs.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\Local\DBDWH.bodb_dwrs.bodbAdminNet.xml">
+    <Content Include="App_Data\Local\DBWH.bodb_dwrs.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\PRO\DBDWH.bodb_dwrs.bodbAdminNet.xml">
+    <Content Include="App_Data\PRO\DBWH.bodb_dwrs.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\UAT\DBDWH.bodb_dwrs.bodbAdminNet.xml">
+    <Content Include="App_Data\UAT\DBWH.bodb_dwrs.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SiteConfig\VirtualSportWinLoss\Settings\VirtualSportWinLoss.Settings.DEV.xml">

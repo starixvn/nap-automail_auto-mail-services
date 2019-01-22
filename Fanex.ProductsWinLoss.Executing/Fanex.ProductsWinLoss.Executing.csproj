@@ -157,7 +157,7 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\Local\DBDWH.bodb_dwrs.dwrs.xml">
+    <Content Include="App_Data\Local\DBWH.bodb_dwrs.dwrs.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -168,7 +168,7 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\PRO\DBDWH.bodb_dwrs.dwrs.xml">
+    <Content Include="App_Data\PRO\DBWH.bodb_dwrs.dwrs.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -179,7 +179,7 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\UAT\DBDWH.bodb_dwrs.dwrs.xml">
+    <Content Include="App_Data\UAT\DBWH.bodb_dwrs.dwrs.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -6,7 +6,7 @@
   <add key="ExportDataDirectory" value="\\10.40.40.52\NAP_Reports\CreditMovementExcelFile" />
   <add key="EmailTemplate" value="SiteConfig\CreditMovement\Templates\CreditMovementEmail.cshtml" />
   <add key="Amount" value="300000" />
-  <add key="ExcelPassword" value="we168" />
+  <add key="ExcelPassword" value="Star168" />
   <add key="FunctionId" value="160" />
   <add key="Subject" value="Automail Report - Credit Movement - {0}" />
 </Settings>
