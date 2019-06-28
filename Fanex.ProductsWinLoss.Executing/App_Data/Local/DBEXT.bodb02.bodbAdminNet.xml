@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<Functions>
-  <Function Name="NAP-DW">
-    <Setting Key="Acc_Rpt_HouseNetIncome_EX_Deposit" SpName="Acc_Rpt_HouseNetIncome_EX_Deposit_UAT2" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0"/>
-  </Function>
-</Functions> 
