@@ -170,16 +170,16 @@
             {
                 while (reader.Read())
                 {
-                    var baseBalanceAmount = reader.GetDouble(4);
-                    var balanceAmount = reader.GetDecimal(3);
+                    var baseBalanceAmount = Convert.ToDouble(reader["BaseBalance"]);
+                    var balanceAmount = Convert.ToDecimal(reader["Balance"]);
                     if (baseBalanceAmount != 0 || balanceAmount != 0)
                     {
                         total += baseBalanceAmount;
                         var balance = new BalanceModel
                         {
-                            CustID = reader.GetInt32(0),
-                            Username = reader.GetString(1),
-                            Currency = reader.GetInt32(2),
+                            CustID =  Convert.ToInt32(reader["CustId"]),
+                            Username = Convert.ToString(reader["Username"]),
+                            Currency = Convert.ToInt32(reader["Currency"]),
                             Balance = balanceAmount,
                             BaseBalance = baseBalanceAmount
                         };
