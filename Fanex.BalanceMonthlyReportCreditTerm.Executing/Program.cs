@@ -1,11 +1,12 @@
-﻿using System;
-using System.IO;
+﻿using Fanex.BalanceMonthlyReport.Business.Service;
 using Fanex.Data.Configuration;
 using Fanex.MailDelivery.Core.Models;
 using Fanex.NAPReport.BalanceMonthlyReport.Business;
 using Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Mailing;
 using Fanex.Service.Core.Configuration;
 using Newtonsoft.Json;
+using System;
+using System.IO;
 
 namespace Fanex.BalanceMonthlyReportCreditTerm.Executing
 {
@@ -19,14 +20,8 @@ namespace Fanex.BalanceMonthlyReportCreditTerm.Executing
             ConfigurationParser configurationParser = new ConfigurationParser(@"SiteConfig\BalanceMonthlyReport\Settings\BalanceMonthlyReport.Settings.xml");
             configurationParser.Parse<AppSettings>();
 
-            var service = new MailingService();
-            var mail = service.SendMailCreditTermToVIPGroup();
-            service.SendMailToCreditTermNormalGroup();
-            JobMessage jobResult = new JobMessage
-            {
-                Mail = mail,
-                JobStatus = JobStatus.Success
-            };
+            var service = new CreditTermNotificationImp();
+            var jobResult = service.Execute();
 
             var json = JsonConvert.SerializeObject(jobResult);
             Console.Write(json);
