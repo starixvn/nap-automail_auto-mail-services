@@ -3,7 +3,7 @@
   <add key="IsTest" value="false" />
   <add key="FromDate" value="2017-01-01" />
   <add key="ToDate" value="2017-01-31" />
-  <add key="DataDirectory" value="\\10.40.40.52\NAP_Reports\UAT\BAMonthlyWinLoss" />
+  <add key="DataDirectory" value="\\10.40.40.73\e$\1.Service\2.Nap-Reports-Auto-Mail-Services\Fanex.Excel\BAMonthlyWinLoss" />
   <add key="ExcelPasswordProtected" value="" />
   <add key="FunctionId" value="0" />
   <add key="Subject" value="Automail Report - BA Monthly Win Loss - {0}" />

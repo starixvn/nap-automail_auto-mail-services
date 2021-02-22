@@ -2,7 +2,7 @@
 <Settings>
   <add key="IsTest" value="false" />
   <add key="TestedDate" value="05/03/2015" />
-  <add key="DataDirectory" value="\\10.40.40.52\NAP_Reports\BADailyWinLoss" />
+  <add key="DataDirectory" value="\\10.40.40.22\Data.Web\Fanex.Excel\BADailyWinLoss" />
   <add key="ExcelPasswordProtected" value="" />
   <add key="FunctionId" value="151" />
   <add key="Subject" value="Automail Report - BA Daily Win Loss - {0}" />
