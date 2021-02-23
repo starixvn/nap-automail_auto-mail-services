@@ -1,5 +1,5 @@
 ﻿<appSettings>
-  <add key="DataDirectory" value="\\10.40.40.52\NAP_Reports\VirtualSportWinLoss" />
+  <add key="DataDirectory" value="\\10.40.40.22\Data.Web\Fanex.Excel\VirtualSportWinLoss" />
   <add key="ExcelPasswordProtected" value="" />
   <add key="FunctionId" value="165" />
   <add key="IsTest" value="false" />
