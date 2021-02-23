@@ -2,9 +2,9 @@
 <Settings>
   <add key="IsTest" value="false" />
 
-  <add key="DataDirectoryCreditTerm" value="\\10.40.40.52\NAP_Reports\BalanceMonthlyReport_CreditTerm" />
-  <add key="DataDirectorySuperBalance" value="\\10.40.40.52\NAP_Reports\BalanceMonthlyReport_SuperBalance" />
-  <add key="DataDirectoryDirectBalance" value="\\10.40.40.52\NAP_Reports\BalanceMonthlyReport_DirectBalance" />
+  <add key="DataDirectoryCreditTerm" value="\\10.40.40.22\Data.Web\Fanex.Excel\BalanceMonthlyReport_CreditTerm" />
+  <add key="DataDirectorySuperBalance" value="\\10.40.40.22\Data.Web\Fanex.Excel\BalanceMonthlyReport_SuperBalance" />
+  <add key="DataDirectoryDirectBalance" value="\\10.40.40.22\Data.Web\Fanex.Excel\BalanceMonthlyReport_DirectBalance" />
   
   <add key="ExcelPasswordProtectedCreditTerm" value="" />
   <add key="ExcelPasswordProtectedSuperBalance" value="" />

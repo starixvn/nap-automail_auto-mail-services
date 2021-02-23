@@ -28,7 +28,8 @@ namespace Fanex.CreditMovement.Executing
                 JobStatus = mail.JobStatus
             };
 
-            var json = JsonConvert.SerializeObject(jobResult);
+            var json = JsonConvert.SerializeObject(jobResult, Formatting.Indented);
+
             Console.Write(json);
             Environment.Exit(0);
         }
