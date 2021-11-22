@@ -64,36 +64,29 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyBalan
 
         public void ExportReport(CompanyBalance balance, DateTime winlossDate)
         {
-            try
-            {
-                this.CreateSheet();
-                this.InitColumnWidth();
-                this.ExportReportTitle(winlossDate);
-                this.ExportReportHeader();
-                this.ExportReportContent(balance);
-                this.ExportGrandTotal(balance.GrandTotal);
+            this.CreateSheet();
+            this.InitColumnWidth();
+            this.ExportReportTitle(winlossDate);
+            this.ExportReportHeader();
+            this.ExportReportContent(balance);
+            this.ExportGrandTotal(balance.GrandTotal);
 
-                string parentDirectory = string.Empty;
-                string reportName = string.Empty;
-                string rootDataDirectory = AppSettings.ExportDataDirectoryCompanyBalance;
-                if (_isYesterdayBalance)
-                {
-                    parentDirectory = AppSettings.DataDirectory(AppSettings.ExportDataDirectoryCompanyYesterdayBalance);
-                    reportName = string.Format(ReportingServicesResource.CompanyYesterdayBalance_ReportName, winlossDate.ToString("yyyy_MM_dd"));
-                }
-                else
-                {
-                    parentDirectory = AppSettings.DataDirectory(AppSettings.ExportDataDirectoryCompanyBalance);
-                    reportName = string.Format(ReportingServicesResource.CompanyBalance_ReportName, winlossDate.ToString("yyyy_MM_dd"));
-                }
-
-                FileName = Path.Combine(parentDirectory, reportName);
-                SaveFile.SaveExcelFile(rootDataDirectory, parentDirectory, reportName, _workbook, AppSettings.ExcelPassword);
-            }
-            catch (Exception ex)
+            string parentDirectory = string.Empty;
+            string reportName = string.Empty;
+            string rootDataDirectory = AppSettings.ExportDataDirectoryCompanyBalance;
+            if (_isYesterdayBalance)
             {
-                LogExtensions.ExceptionHandler(ex);
+                parentDirectory = AppSettings.DataDirectory(AppSettings.ExportDataDirectoryCompanyYesterdayBalance);
+                reportName = string.Format(ReportingServicesResource.CompanyYesterdayBalance_ReportName, winlossDate.ToString("yyyy_MM_dd"));
             }
+            else
+            {
+                parentDirectory = AppSettings.DataDirectory(AppSettings.ExportDataDirectoryCompanyBalance);
+                reportName = string.Format(ReportingServicesResource.CompanyBalance_ReportName, winlossDate.ToString("yyyy_MM_dd"));
+            }
+
+            FileName = Path.Combine(parentDirectory, reportName);
+            SaveFile.SaveExcelFile(rootDataDirectory, parentDirectory, reportName, _workbook, AppSettings.ExcelPassword);
         }
 
         private void CreateColor()

@@ -1,7 +1,6 @@
 ﻿using Fanex.BalanceMonthlyReport.Business.Model;
 using Fanex.MailDelivery.Core.Models;
 using Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Mailing;
-using Fanex.Service.Core.Extensions;
 using System;
 
 namespace Fanex.BalanceMonthlyReport.Business.Service
@@ -16,16 +15,17 @@ namespace Fanex.BalanceMonthlyReport.Business.Service
         public JobMessage Execute()
         {
             var result = new ExecuteResultModel();
+            var log = new LogImp();
             JobMessage jobMessage = new JobMessage();
             try
             {
                 result = SendNotification();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 result.Success = false;
-                result.Message = e.Message;
-                LogExtensions.ExceptionHandler(e);
+                result.Message = ex.Message;
+                log.Log(ex);
             }
             finally
             {

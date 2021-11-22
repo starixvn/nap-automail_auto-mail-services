@@ -1,8 +1,5 @@
 ﻿using Fanex.BalanceMonthlyReport.Business.Service;
-using Fanex.Data.Configuration;
-using Fanex.MailDelivery.Core.Models;
 using Fanex.NAPReport.BalanceMonthlyReport.Business;
-using Fanex.NAPReport.BalanceMonthlyReport.Business.Service.Mailing;
 using Fanex.Service.Core.Configuration;
 using Newtonsoft.Json;
 using System;
@@ -15,7 +12,7 @@ namespace Fanex.BalanceMonthlyReportCreditTerm.Executing
         public static void Main()
         {
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
-            DbSettingProviderManager.Current.Start();
+            RegisterService.RegisterServices();
 
             ConfigurationParser configurationParser = new ConfigurationParser(@"SiteConfig\BalanceMonthlyReport\Settings\BalanceMonthlyReport.Settings.xml");
             configurationParser.Parse<AppSettings>();

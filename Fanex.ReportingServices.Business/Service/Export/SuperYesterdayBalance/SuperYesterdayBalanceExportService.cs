@@ -63,23 +63,16 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.SuperYesterd
 
         public void ExportReport(SuperYesterdayBalance balance, DateTime currentTime)
         {
-            try
-            {
-                this.CreateSheet();
-                this.InitColumnWidth();
-                this.ExportReportTitle();
-                this.ExportReportHeader();
-                this.ExportReportContent(balance.ReportRows);
-                this.ExportGrandTotal(balance.BaseBalanceTotal);
-                string parentDirectory = AppSettings.DataDirectory(AppSettings.ExportDataDirectorySuperYesterdayBalance);
-                string reportName = string.Format(ReportingServicesResource.SuperYesterdayBalance_ReportName, currentTime.ToString("yyyy_MM_dd"));
-                FileName = Path.Combine(parentDirectory, reportName);
-                SaveFile.SaveExcelFile(AppSettings.ExportDataDirectorySuperYesterdayBalance, parentDirectory, reportName, _workbook, AppSettings.ExcelPassword);
-            }
-            catch (Exception ex)
-            {
-                LogExtensions.ExceptionHandler(ex);
-            }
+            this.CreateSheet();
+            this.InitColumnWidth();
+            this.ExportReportTitle();
+            this.ExportReportHeader();
+            this.ExportReportContent(balance.ReportRows);
+            this.ExportGrandTotal(balance.BaseBalanceTotal);
+            string parentDirectory = AppSettings.DataDirectory(AppSettings.ExportDataDirectorySuperYesterdayBalance);
+            string reportName = string.Format(ReportingServicesResource.SuperYesterdayBalance_ReportName, currentTime.ToString("yyyy_MM_dd"));
+            FileName = Path.Combine(parentDirectory, reportName);
+            SaveFile.SaveExcelFile(AppSettings.ExportDataDirectorySuperYesterdayBalance, parentDirectory, reportName, _workbook, AppSettings.ExcelPassword);
         }
 
         private void CreateSheet()

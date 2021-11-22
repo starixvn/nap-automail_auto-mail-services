@@ -41,58 +41,52 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
         {
             var vendors = new List<WinLossSummaryByVendor>();
             var grandTotal = new WinLossSummaryBySportType();
-            try
-            {
-                var winlossGroupByBettype = this.GetWinLossSummaryBySportTypeTotalList();
-                winlossGroupByBettype.GroupBy(s => new { s.ProductId, s.ProductName })
-                    .ToList()
-                    .ForEach(vendor =>
+
+            var winlossGroupByBettype = this.GetWinLossSummaryBySportTypeTotalList();
+            winlossGroupByBettype.GroupBy(s => new { s.ProductId, s.ProductName })
+                .ToList()
+                .ForEach(vendor =>
+                {
+                    WinLossSummaryGrandTotal model = new WinLossSummaryGrandTotal();
+                    var winlossTotalList = vendor.GroupBy(x => x.SportID).Select(y =>
                     {
-                        WinLossSummaryGrandTotal model = new WinLossSummaryGrandTotal();
-                        var winlossTotalList = vendor.GroupBy(x => x.SportID).Select(y =>
+                        var winlossTotal = new WinLossSummaryBySportTypeTotal
                         {
-                            var winlossTotal = new WinLossSummaryBySportTypeTotal
+                            Total = new WinLossSummaryBySportType
                             {
-                                Total = new WinLossSummaryBySportType
-                                {
-                                    SportID = y.Key,
-                                    SportName = y.Select(x => x.SportName).First() + " " + WinLossVirtualSportResoure.Total,
-                                    BettypeID = -1,
-                                    BettypeName = string.Empty,
-                                    BetCount = y.Sum(x => x.BetCount),
-                                    TurnOverIBC = Math.Round(y.Sum(x => x.TurnOverIBC), 2),
-                                    WinLostIBC = Math.Round(y.Sum(x => x.WinLostIBC), 2)
-                                },
-                                WinlostList = y.ToList()
-                            };
+                                SportID = y.Key,
+                                SportName = y.Select(x => x.SportName).First() + " " + WinLossVirtualSportResoure.Total,
+                                BettypeID = -1,
+                                BettypeName = string.Empty,
+                                BetCount = y.Sum(x => x.BetCount),
+                                TurnOverIBC = Math.Round(y.Sum(x => x.TurnOverIBC), 2),
+                                WinLostIBC = Math.Round(y.Sum(x => x.WinLostIBC), 2)
+                            },
+                            WinlostList = y.ToList()
+                        };
 
-                            grandTotal.SportName = WinLossVirtualSportResoure.GrandTotal;
-                            grandTotal.BetCount += winlossTotal.Total.BetCount;
-                            grandTotal.TurnOverIBC += winlossTotal.Total.TurnOverIBC;
-                            grandTotal.WinLostIBC += winlossTotal.Total.WinLostIBC;
+                        grandTotal.SportName = WinLossVirtualSportResoure.GrandTotal;
+                        grandTotal.BetCount += winlossTotal.Total.BetCount;
+                        grandTotal.TurnOverIBC += winlossTotal.Total.TurnOverIBC;
+                        grandTotal.WinLostIBC += winlossTotal.Total.WinLostIBC;
 
-                            model.GrandTotal.SportName = vendor.Key.ProductName + " Total";
-                            model.GrandTotal.BetCount += winlossTotal.Total.BetCount;
-                            model.GrandTotal.TurnOverIBC += winlossTotal.Total.TurnOverIBC;
-                            model.GrandTotal.WinLostIBC += winlossTotal.Total.WinLostIBC;
+                        model.GrandTotal.SportName = vendor.Key.ProductName + " Total";
+                        model.GrandTotal.BetCount += winlossTotal.Total.BetCount;
+                        model.GrandTotal.TurnOverIBC += winlossTotal.Total.TurnOverIBC;
+                        model.GrandTotal.WinLostIBC += winlossTotal.Total.WinLostIBC;
 
-                            return winlossTotal;
-                        }).ToList();
+                        return winlossTotal;
+                    }).ToList();
 
-                        model.WinlostTotalList = winlossTotalList;
-                        vendors.Add(new WinLossSummaryByVendor
-                        {
-                            ProductId = vendor.Key.ProductId,
-                            ProductName = vendor.Key.ProductName,
-                            Data = model,
-                            RowCount = vendor.Count() + model.WinlostTotalList.Count
-                        });
+                    model.WinlostTotalList = winlossTotalList;
+                    vendors.Add(new WinLossSummaryByVendor
+                    {
+                        ProductId = vendor.Key.ProductId,
+                        ProductName = vendor.Key.ProductName,
+                        Data = model,
+                        RowCount = vendor.Count() + model.WinlostTotalList.Count
                     });
-            }
-            catch (Exception ex)
-            {
-                LogExtensions.ExceptionHandler(ex);
-            }
+                });
 
             return new Tuple<List<WinLossSummaryByVendor>, WinLossSummaryBySportType>(vendors, grandTotal);
         }

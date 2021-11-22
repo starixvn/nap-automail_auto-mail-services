@@ -55,22 +55,15 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.DailyTurnove
 
         public void ExportReport(List<DailyTurnover> dailyTurnover, DateTime winlossDate)
         {
-            try
-            {
-                this.CreateSheet();
-                this.InitColumnWidth();
-                this.ExportReportTitle(winlossDate);
-                this.ExportReportHeader();
-                this.ExportReportContent(dailyTurnover);
-                string parentDirectory = AppSettings.DataDirectory(AppSettings.ExportDataDirectoryDailyTurnover);
-                string reportName = string.Format(ReportingServicesResource.DailyTurnover_ReportName, winlossDate.ToString("yyyy_MM_dd"));
-                FileName = Path.Combine(parentDirectory, reportName);
-                SaveFile.SaveExcelFile(AppSettings.ExportDataDirectoryDailyTurnover, parentDirectory, reportName, _workbook, AppSettings.ExcelPassword);
-            }
-            catch (Exception ex)
-            {
-                LogExtensions.ExceptionHandler(ex);
-            }
+            this.CreateSheet();
+            this.InitColumnWidth();
+            this.ExportReportTitle(winlossDate);
+            this.ExportReportHeader();
+            this.ExportReportContent(dailyTurnover);
+            string parentDirectory = AppSettings.DataDirectory(AppSettings.ExportDataDirectoryDailyTurnover);
+            string reportName = string.Format(ReportingServicesResource.DailyTurnover_ReportName, winlossDate.ToString("yyyy_MM_dd"));
+            FileName = Path.Combine(parentDirectory, reportName);
+            SaveFile.SaveExcelFile(AppSettings.ExportDataDirectoryDailyTurnover, parentDirectory, reportName, _workbook, AppSettings.ExcelPassword);
         }
 
         private void CreateColor()

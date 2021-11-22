@@ -34,30 +34,24 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Business.DailyTurno
         public List<DailyTurnover> GetDailyTurnover(DateTime winlossDate)
         {
             var report = new List<DailyTurnover>();
-            try
-            {
-                var virtualCurrency = _repository.GetDailyTurnoverByCurrency(
-                    new GetDailyTurnoverCriteria
-                    {
-                        FromDate = winlossDate,
-                        IsActual = false
-                    });
-                virtualCurrency.CurrencyType = Labels.Virtual_Currency;
-                report.Add(virtualCurrency);
 
-                var actualCurrency = _repository.GetDailyTurnoverByCurrency(
-                   new GetDailyTurnoverCriteria
-                   {
-                       FromDate = winlossDate,
-                       IsActual = true
-                   });
-                actualCurrency.CurrencyType = Labels.Actual_Currency;
-                report.Add(actualCurrency);
-            }
-            catch (Exception ex)
-            {
-                LogExtensions.ExceptionHandler(ex);
-            }
+            var virtualCurrency = _repository.GetDailyTurnoverByCurrency(
+                new GetDailyTurnoverCriteria
+                {
+                    FromDate = winlossDate,
+                    IsActual = false
+                });
+            virtualCurrency.CurrencyType = Labels.Virtual_Currency;
+            report.Add(virtualCurrency);
+
+            var actualCurrency = _repository.GetDailyTurnoverByCurrency(
+               new GetDailyTurnoverCriteria
+               {
+                   FromDate = winlossDate,
+                   IsActual = true
+               });
+            actualCurrency.CurrencyType = Labels.Actual_Currency;
+            report.Add(actualCurrency);
 
             return report;
         }

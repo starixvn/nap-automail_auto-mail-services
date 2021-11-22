@@ -36,18 +36,11 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Business.CompanyBal
                 GrandTotal = new CompanyBalance()
             };
 
-            try
+            var companyBalance = _repository.GetCompanyBalanceReport(criteria);
+            foreach (var companyBalanceItem in companyBalance.ReportRows)
             {
-                var companyBalance = _repository.GetCompanyBalanceReport(criteria);
-                foreach (var companyBalanceItem in companyBalance.ReportRows)
-                {
-                    balance.ReportRows.Add(companyBalanceItem);
-                    balance.AddToGrandTotal(companyBalanceItem);
-                }
-            }
-            catch (Exception ex)
-            {
-                LogExtensions.ExceptionHandler(ex);
+                balance.ReportRows.Add(companyBalanceItem);
+                balance.AddToGrandTotal(companyBalanceItem);
             }
 
             return balance;

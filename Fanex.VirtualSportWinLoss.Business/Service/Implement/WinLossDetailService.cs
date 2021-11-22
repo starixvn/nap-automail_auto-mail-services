@@ -51,84 +51,78 @@ namespace Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement
         public List<WinLossDetailBySportType> GetWinLossDetail()
         {
             var winlossBySportList = new List<WinLossDetailBySportType>();
-            try
-            {
-                var winlossGroupByDate = this.GetWinLossDetailByDateList();
 
-                winlossBySportList = winlossGroupByDate.GroupBy(x => x.SportID).Select(y =>
+            var winlossGroupByDate = this.GetWinLossDetailByDateList();
+
+            winlossBySportList = winlossGroupByDate.GroupBy(x => x.SportID).Select(y =>
+            {
+                var winlossBySport = new WinLossDetailBySportType
                 {
-                    var winlossBySport = new WinLossDetailBySportType
-                    {
-                        SportID = y.Key,
-                        IsExist = true,
-                        SportName = y.Select(x => x.SportName).FirstOrDefault(),
-                        WinLossByDateList = y.ToList()
-                    };
+                    SportID = y.Key,
+                    IsExist = true,
+                    SportName = y.Select(x => x.SportName).FirstOrDefault(),
+                    WinLossByDateList = y.ToList()
+                };
 
-                    _sportIDsExistOrNot.Remove(winlossBySport.SportID);
+                _sportIDsExistOrNot.Remove(winlossBySport.SportID);
 
-                    foreach (var winlossBydate in winlossBySport.WinLossByDateList)
+                foreach (var winlossBydate in winlossBySport.WinLossByDateList)
+                {
+                    winlossBySport.BettypeIDs = CreateBetIDsBySportType(winlossBydate.SportID);
+                }
+
+                AddRestDayNotExist(ref winlossBySport);
+
+                winlossBySport.WinLossByDateList = winlossBySport.WinLossByDateList.OrderBy(x => x.WinLossDate).ToList();
+
+                for (int i = 0; i < winlossBySport.WinLossByDateList.Count; i++)
+                {
+                    var idsTemp = winlossBySport.BettypeIDs.Take(winlossBySport.BettypeIDs.Count).ToList();
+                    var winlossByDateTmp = winlossBySport.WinLossByDateList[i];
+
+                    foreach (var id in winlossByDateTmp.BettypeIDs)
                     {
-                        winlossBySport.BettypeIDs = CreateBetIDsBySportType(winlossBydate.SportID);
+                        var index = idsTemp.FindIndex(j => j.Key == id.Key); // like Where/Single
+                        if (index >= 0)
+                        {   // ensure item found
+                            idsTemp.RemoveAt(index);
+                        }
                     }
 
-                    AddRestDayNotExist(ref winlossBySport);
-
-                    winlossBySport.WinLossByDateList = winlossBySport.WinLossByDateList.OrderBy(x => x.WinLossDate).ToList();
-
-                    for (int i = 0; i < winlossBySport.WinLossByDateList.Count; i++)
+                    foreach (var idtemp in idsTemp)
                     {
-                        var idsTemp = winlossBySport.BettypeIDs.Take(winlossBySport.BettypeIDs.Count).ToList();
-                        var winlossByDateTmp = winlossBySport.WinLossByDateList[i];
-
-                        foreach (var id in winlossByDateTmp.BettypeIDs)
+                        winlossByDateTmp.BettypeList.Add(new WinLossDetailByBettype
                         {
-                            var index = idsTemp.FindIndex(j => j.Key == id.Key); // like Where/Single
-                            if (index >= 0)
-                            {   // ensure item found
-                                idsTemp.RemoveAt(index);
-                            }
-                        }
-
-                        foreach (var idtemp in idsTemp)
-                        {
-                            winlossByDateTmp.BettypeList.Add(new WinLossDetailByBettype
-                            {
-                                BettypeID = idtemp.Key,
-                                BettypeName = idtemp.Value,
-                                TurnOver = 0,
-                                WinLoss = 0
-                            });
-                        }
-
-                        if (winlossBySport.BettypeIDs.Count > 1)
-                        {
-                            winlossByDateTmp.BettypeList.Add(new WinLossDetailByBettype
-                            {
-                                BettypeID = 111111,
-                                BettypeName = WinLossVirtualSportResoure.Total,
-                                BetCount = winlossByDateTmp.BettypeList.Sum(x => x.BetCount),
-                                TurnOver = Math.Round(winlossByDateTmp.BettypeList.Sum(x => x.TurnOver), 2),
-                                WinLoss = Math.Round(winlossByDateTmp.BettypeList.Sum(x => x.WinLoss), 2)
-                            });
-                        }
-                        else if (winlossBySport.BettypeIDs.Count == 1)
-                        {
-                            winlossBySport.WinLossByDateList[i].BettypeList[0].BettypeName += "(Total)";
-                        }
-
-                        winlossByDateTmp.BettypeList = winlossByDateTmp.BettypeList.OrderBy(x => x.BettypeID).Distinct().ToList();
+                            BettypeID = idtemp.Key,
+                            BettypeName = idtemp.Value,
+                            TurnOver = 0,
+                            WinLoss = 0
+                        });
                     }
 
-                    return winlossBySport;
-                }).Distinct().ToList();
+                    if (winlossBySport.BettypeIDs.Count > 1)
+                    {
+                        winlossByDateTmp.BettypeList.Add(new WinLossDetailByBettype
+                        {
+                            BettypeID = 111111,
+                            BettypeName = WinLossVirtualSportResoure.Total,
+                            BetCount = winlossByDateTmp.BettypeList.Sum(x => x.BetCount),
+                            TurnOver = Math.Round(winlossByDateTmp.BettypeList.Sum(x => x.TurnOver), 2),
+                            WinLoss = Math.Round(winlossByDateTmp.BettypeList.Sum(x => x.WinLoss), 2)
+                        });
+                    }
+                    else if (winlossBySport.BettypeIDs.Count == 1)
+                    {
+                        winlossBySport.WinLossByDateList[i].BettypeList[0].BettypeName += "(Total)";
+                    }
 
-                AddRestSportNotExist(ref winlossBySportList);
-            }
-            catch (Exception ex)
-            {
-                LogExtensions.ExceptionHandler(ex);
-            }
+                    winlossByDateTmp.BettypeList = winlossByDateTmp.BettypeList.OrderBy(x => x.BettypeID).Distinct().ToList();
+                }
+
+                return winlossBySport;
+            }).Distinct().ToList();
+
+            AddRestSportNotExist(ref winlossBySportList);
 
             return winlossBySportList;
         }

@@ -33,25 +33,18 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Business.CompanySta
         {
             CompanyStatement result = new CompanyStatement();
 
-            try
+            CompanyStatement companyStatement = _repository.GetCompanyStatement(criteria);
+            decimal accumulatedTotal = 0;
+            foreach (var companyStatementItem in companyStatement.ReportRows)
             {
-                CompanyStatement companyStatement = _repository.GetCompanyStatement(criteria);
-                decimal accumulatedTotal = 0;
-                foreach (var companyStatementItem in companyStatement.ReportRows)
+                accumulatedTotal += companyStatementItem.Total;
+                result.ReportRows.Add(new CompanyStatement
                 {
-                    accumulatedTotal += companyStatementItem.Total;
-                    result.ReportRows.Add(new CompanyStatement
-                        {
-                            Date = companyStatementItem.Date,
-                            Type = companyStatementItem.Type,
-                            Total = companyStatementItem.Total,
-                            AccumulatedTotal = accumulatedTotal
-                        });
-                }
-            }
-            catch (Exception ex)
-            {
-                LogExtensions.ExceptionHandler(ex);
+                    Date = companyStatementItem.Date,
+                    Type = companyStatementItem.Type,
+                    Total = companyStatementItem.Total,
+                    AccumulatedTotal = accumulatedTotal
+                });
             }
 
             return result;

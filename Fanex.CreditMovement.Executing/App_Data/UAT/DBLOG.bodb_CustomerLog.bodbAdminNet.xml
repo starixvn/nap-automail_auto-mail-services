@@ -1,5 +1,0 @@
-﻿<Functions>	
-  <Function Name="CreditMovement">
-    <Setting Key="CreditMovement_GetReport" SpName="Acc_Rpt_CreditMovement" DbName="DBLOG.bodb_CustomerLog.bodbAdminNet" TimeOut="0" />
-  </Function>
-</Functions>

@@ -1,6 +1,7 @@
 ﻿namespace Fanex.NAPReport.BalanceMonthlyReport.Business
 {
     using System;
+    using Fanex.Data;
     using Fanex.Data.Repository;
 
     public class BalanceReportBaseCriteria : CriteriaBase
@@ -41,5 +42,9 @@
             get;
             set;
         }
+
+        public override string GetSettingKey() => string.Empty;
+
+        public override bool IsValid() => true;
     }
 }
