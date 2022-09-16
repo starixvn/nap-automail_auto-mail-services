@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Settings>
   <add key="IsTest" value="false" />
-  <add key="DataDirectoryCreditTerm" value="\\10.40.40.73\e$\1.Service\2.Nap-Reports-Auto-Mail-Services\Fanex.Excel\BalanceMonthlyReport_CreditTerm" />
-  <add key="DataDirectorySuperBalance" value="\\10.40.40.73\e$\1.Service\2.Nap-Reports-Auto-Mail-Services\Fanex.Excel\BalanceMonthlyReport_SuperBalance" />
-  <add key="DataDirectoryDirectBalance" value="\\10.40.40.73\e$\1.Service\2.Nap-Reports-Auto-Mail-Services\Fanex.Excel\BalanceMonthlyReport_DirectBalance" />
+  <add key="DataDirectoryCreditTerm" value="\\10.2.190.81\e$\1.Service\2.Nap-Reports-Auto-Mail-Services\Fanex.Excel\BalanceMonthlyReport_CreditTerm" />
+  <add key="DataDirectorySuperBalance" value="\\10.2.190.81\e$\1.Service\2.Nap-Reports-Auto-Mail-Services\Fanex.Excel\BalanceMonthlyReport_SuperBalance" />
+  <add key="DataDirectoryDirectBalance" value="\\10.2.190.81\e$\1.Service\2.Nap-Reports-Auto-Mail-Services\Fanex.Excel\BalanceMonthlyReport_DirectBalance" />
   
   <add key="ExcelPasswordProtectedCreditTerm" value="" />
   <add key="ExcelPasswordProtectedSuperBalance" value="" />
