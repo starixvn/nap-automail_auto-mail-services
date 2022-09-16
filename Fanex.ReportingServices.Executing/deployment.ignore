@@ -8,3 +8,6 @@
 \\*.pro.xml
 \\*.sit.xml
 \\*.dev.xml
+\\*.local.json
+\\*.uat.json
+\\*.pro.json

@@ -1,0 +1,26 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "6004dbb8-7209-4690-a158-62d12b49eae4": {
+      "ProjectGuid": "6004dbb8-7209-4690-a158-62d12b49eae4",
+      "DisplayName": "Fanex.VirtualSportWinLoss.Business",
+      "ColorIndex": 0
+    },
+    "92af122f-1eb1-4fbb-bc61-b51474c7ce77": {
+      "ProjectGuid": "92af122f-1eb1-4fbb-bc61-b51474c7ce77",
+      "DisplayName": "Fanex.VirtualSportWinLoss.Executing",
+      "ColorIndex": 1
+    },
+    "3a743794-6498-4770-90af-8ad33adbb0eb": {
+      "ProjectGuid": "3a743794-6498-4770-90af-8ad33adbb0eb",
+      "DisplayName": "Fanex.CreditMovement.Executing",
+      "ColorIndex": 2
+    },
+    "4b42cae3-5dac-491e-9821-1d79bfa3debe": {
+      "ProjectGuid": "4b42cae3-5dac-491e-9821-1d79bfa3debe",
+      "DisplayName": "Fanex.BAMonthlyWinLoss.Executing",
+      "ColorIndex": 3
+    }
+  },
+  "NextColorIndex": 4
+}

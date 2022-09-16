@@ -32,26 +32,20 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Business.SuperYeste
         public SuperYesterdayBalance GetSuperYesterdayBalance(GetSuperYesterdayBalanceCriteria criteria)
         {
             SuperYesterdayBalance balance = new SuperYesterdayBalance();
-            try
-            {
-                var superYesterdayBalanceDetails = _superYesterdayBalanceRepository.GetSuperYesterdayBalanceDetail(criteria);
-                foreach (var superBalanceDetail in superYesterdayBalanceDetails)
-                {
-                    var balanceItemIsNearZero = superBalanceDetail.BalanceIsNearZero(superBalanceDetail);
-                    if (!balanceItemIsNearZero)
-                    {
-                        balance.BaseBalanceTotal.BaseBalance += superBalanceDetail.BaseBalance;
-                        superBalanceDetail.FormatBalance();
-                        balance.ReportRows.Add(superBalanceDetail);
-                    }
-                }
 
-                balance.BaseBalanceTotal.FormatBalance();
-            }
-            catch (Exception ex)
+            var superYesterdayBalanceDetails = _superYesterdayBalanceRepository.GetSuperYesterdayBalanceDetail(criteria);
+            foreach (var superBalanceDetail in superYesterdayBalanceDetails)
             {
-                LogExtensions.ExceptionHandler(ex);
+                var balanceItemIsNearZero = superBalanceDetail.BalanceIsNearZero(superBalanceDetail);
+                if (!balanceItemIsNearZero)
+                {
+                    balance.BaseBalanceTotal.BaseBalance += superBalanceDetail.BaseBalance;
+                    superBalanceDetail.FormatBalance();
+                    balance.ReportRows.Add(superBalanceDetail);
+                }
             }
+
+            balance.BaseBalanceTotal.FormatBalance();
 
             return balance;
         }

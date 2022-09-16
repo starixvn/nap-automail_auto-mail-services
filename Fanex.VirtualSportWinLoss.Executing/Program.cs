@@ -1,11 +1,8 @@
-﻿using System;
-using System.IO;
-using Fanex.Data.Configuration;
-using Fanex.MailDelivery.Core.Models;
-using Fanex.NAPReport.VirtualSportWinLoss.Business;
-using Fanex.NAPReport.VirtualSportWinLoss.Business.Service.Implement;
+﻿using Fanex.NAPReport.VirtualSportWinLoss.Business;
 using Fanex.Service.Core.Configuration;
+using Fanex.VirtualSportWinLoss.Business.Service;
 using Newtonsoft.Json;
+using System;
 
 namespace Fanex.VirtualSportWinLoss.Executing
 {
@@ -13,20 +10,13 @@ namespace Fanex.VirtualSportWinLoss.Executing
     {
         public static void Main()
         {
-            Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
-            DbSettingProviderManager.Current.Start();
+            RegisterService.RegisterServices();
 
             ConfigurationParser configurationParser = new ConfigurationParser(@"SiteConfig\VirtualSportWinLoss\Settings\VirtualSportWinLoss.Settings.xml");
             configurationParser.Parse<AppSettings>();
 
-            var service = new MailingService();
-            var mail = service.SendMailToVIPGroup();
-            service.SendMailToNormalGroup();
-            JobMessage jobResult = new JobMessage
-            {
-                Mail = mail.Mail,
-                JobStatus = mail.JobStatus
-            };
+            var service = new VirtualSportNotificationImp();
+            var jobResult = service.Execute();
 
             var json = JsonConvert.SerializeObject(jobResult);
             Console.Write(json);

@@ -39,40 +39,34 @@ namespace Fanex.CreditMovement.Business.Service
         public MailResult SendMailToVIPGroup()
         {
             MailResult mailResult = new MailResult();
-            try
+
+            GetCreditMovementCriteria criteria = new GetCreditMovementCriteria
             {
-                GetCreditMovementCriteria criteria = new GetCreditMovementCriteria
-                {
-                    FromDate = AppSettings.FromDate,
-                    ToDate = AppSettings.ToDate,
-                    SiteList = string.Join(",", AppSettings.ListSite),
-                    Amount = AppSettings.Amount
-                };
+                FromDate = AppSettings.FromDate,
+                ToDate = AppSettings.ToDate,
+                SiteList = string.Join(",", AppSettings.ListSite),
+                Amount = AppSettings.Amount
+            };
 
-                _excel.ExportExcel(criteria);
+            _excel.ExportExcel(criteria);
 
-                if (string.IsNullOrEmpty(_excel.FileName))
-                {
-                    mailResult.JobStatus = JobStatus.SuccessWithoutSendmail;
-                }
-
-                var fileNamesPath = new List<string>();
-                fileNamesPath.Add(_excel.DirectoryOfFileName);
-
-                _mailInfo = new MailInfo()
-                {
-                    Subject = string.Format(AppSettings.Subject, DateTime.Now.ToString("yyyy/MM/dd")),
-                    FileName = _excel.FileName,
-                    FileNamesPath = fileNamesPath
-                };
-
-                var mail = _mailStation.CreateMailWithAttachedFile(_mailInfo);
-                mailResult.Mail = mail;
-            }
-            catch (Exception ex)
+            if (string.IsNullOrEmpty(_excel.FileName))
             {
-                LogExtensions.ExceptionHandler(ex);
+                mailResult.JobStatus = JobStatus.SuccessWithoutSendmail;
             }
+
+            var fileNamesPath = new List<string>();
+            fileNamesPath.Add(_excel.DirectoryOfFileName);
+
+            _mailInfo = new MailInfo()
+            {
+                Subject = string.Format(AppSettings.Subject, DateTime.Now.ToString("yyyy/MM/dd")),
+                FileName = _excel.FileName,
+                FileNamesPath = fileNamesPath
+            };
+
+            var mail = _mailStation.CreateMailWithAttachedFile(_mailInfo);
+            mailResult.Mail = mail;
 
             return mailResult;
         }

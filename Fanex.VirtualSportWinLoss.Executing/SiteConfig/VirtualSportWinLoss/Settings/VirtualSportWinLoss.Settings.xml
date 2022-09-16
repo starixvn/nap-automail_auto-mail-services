@@ -2,8 +2,8 @@
   <add key="DataDirectory" value="\\10.18.200.120\www\Olympus\Fanex.Excel\VirtualSportWinLoss" />
   <add key="ExcelPasswordProtected" value="" />
   <add key="FunctionId" value="82" />
-  <add key="IsTest" value="false" />
-  <add key="DateStart" value="2018-03-01" />
-  <add key="DateEnd" value="2018-03-31" />
+  <add key="IsTest" value="true" />
+  <add key="DateStart" value="2021-01-01" />
+  <add key="DateEnd" value="2021-11-23" />
   <add key="Subject" value="Automail Report - Virtual Sports Win Loss - {0}" />
 </appSettings>

@@ -1,12 +1,13 @@
 \\*.local.exe.config
 \\*.uat.exe.config
 \\*.pro.exe.config
-\\*.live.exe.config
 \\*.sit.exe.config
 \\*.dev.exe.config
 \\*.local.xml
 \\*.uat.xml
 \\*.pro.xml
-\\*.live.xml
 \\*.sit.xml
 \\*.dev.xml
+\\*.local.json
+\\*.uat.json
+\\*.pro.json

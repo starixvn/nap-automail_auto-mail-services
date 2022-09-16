@@ -25,7 +25,7 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyState
     public class CompanyStatementExportService : ICompanyStatementExportService
     {
         private readonly Color _headerColor;
-        private readonly XSSFWorkbook _workbook;        
+        private readonly XSSFWorkbook _workbook;
         private readonly Cell _cell;
         private readonly INpoiNewFormatFontService _fontService;
         private readonly INpoiNewFormatBodyCellStyleService _bodyCellStyleService;
@@ -53,22 +53,15 @@ namespace Fanex.NAPReport.ReportingServices.Business.Service.Export.CompanyState
 
         public void ExportReport(CompanyStatement companyStatement, DateTime winlossDate)
         {
-            try
-            {
-                this.CreateSheet();
-                this.InitColumnWidth();
-                this.ExportReportTitle(winlossDate);
-                this.ExportReportHeader();
-                this.ExportReportContent(companyStatement);
-                string parentDirectory = AppSettings.DataDirectory(AppSettings.ExportDataDirectoryCompanyStatement);
-                string reportName = string.Format(ReportingServicesResource.CompanyStatement_ReportName, winlossDate.ToString("yyyy_MM_dd"));
-                FileName = Path.Combine(parentDirectory, reportName);
-                SaveFile.SaveExcelFile(AppSettings.ExportDataDirectoryCompanyStatement, parentDirectory, reportName, _workbook, AppSettings.ExcelPassword);
-            }
-            catch (Exception ex)
-            {
-                LogExtensions.ExceptionHandler(ex);
-            }
+            this.CreateSheet();
+            this.InitColumnWidth();
+            this.ExportReportTitle(winlossDate);
+            this.ExportReportHeader();
+            this.ExportReportContent(companyStatement);
+            string parentDirectory = AppSettings.DataDirectory(AppSettings.ExportDataDirectoryCompanyStatement);
+            string reportName = string.Format(ReportingServicesResource.CompanyStatement_ReportName, winlossDate.ToString("yyyy_MM_dd"));
+            FileName = Path.Combine(parentDirectory, reportName);
+            SaveFile.SaveExcelFile(AppSettings.ExportDataDirectoryCompanyStatement, parentDirectory, reportName, _workbook, AppSettings.ExcelPassword);
         }
 
         private void CreateSheet()
