@@ -6,14 +6,13 @@
 
 namespace Fanex.CreditMovement.Business.Service
 {
-    using System;
-    using System.Collections.Generic;
     using Fanex.CreditMovement.Business.Criteria;
     using Fanex.Service.Core.Configuration;
-    using Fanex.Service.Core.Extensions;
     using Fanex.Service.Core.MailService;
     using Fanex.Service.Core.Model;
     using MailDelivery.Core.Models;
+    using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// TODO: Update summary.
@@ -44,7 +43,7 @@ namespace Fanex.CreditMovement.Business.Service
             {
                 FromDate = AppSettings.FromDate,
                 ToDate = AppSettings.ToDate,
-                SiteList = string.Join(",", AppSettings.ListSite),
+                SiteList = "All",//string.Join(",", AppSettings.ListSite),
                 Amount = AppSettings.Amount
             };
 
