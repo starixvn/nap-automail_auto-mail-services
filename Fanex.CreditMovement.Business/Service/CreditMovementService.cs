@@ -4,12 +4,11 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using Newtonsoft.Json;
+using System.IO;
+
 namespace Fanex.CreditMovement.Business.Service
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Drawing;
     using Fanex.CreditMovement.Business.Criteria;
     using Fanex.CreditMovement.Business.Model;
     using Fanex.CreditMovement.Business.Repositories;
@@ -20,6 +19,9 @@ namespace Fanex.CreditMovement.Business.Service
     using Fanex.Service.Core.Service.Interface.Npoi;
     using Fanex.Service.Core.Utilities;
     using NPOI.XSSF.UserModel;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Drawing;
 
     /// <summary>
     /// TODO: Update summary.
@@ -27,7 +29,7 @@ namespace Fanex.CreditMovement.Business.Service
     public class CreditMovementService : ICreditMovementService
     {
         private readonly ICreditMovementRepository _repository = null;
-        private readonly XSSFWorkbook _workbook;        
+        private readonly XSSFWorkbook _workbook;
         private readonly Cell _cell;
         private readonly INpoiNewFormatFontService _fontService;
         private readonly INpoiNewFormatBodyCellStyleService _bodyCellStyleService;
@@ -54,6 +56,9 @@ namespace Fanex.CreditMovement.Business.Service
         public void ExportExcel(GetCreditMovementCriteria criteria)
         {
             var report = _repository.GetReportData(criteria);
+            var json = JsonConvert.SerializeObject(report, Formatting.Indented);
+            Directory.CreateDirectory(AppSettings.ExportDataDirectory);
+            File.WriteAllText($"{AppSettings.ExportDataDirectory}/CreditMovement.json", json);
             if (report.Count > 0)
             {
                 ExportReport(report, criteria);
@@ -63,7 +68,7 @@ namespace Fanex.CreditMovement.Business.Service
         private void ExportReport(List<CreditMovement> report, GetCreditMovementCriteria criteria)
         {
             string sheetName = "Credit Movement";
-            
+
             _workSheet = _workbook.GetSheet(sheetName) as XSSFSheet ?? _workbook.CreateSheet(sheetName) as XSSFSheet;
             this.InitColumnWidth();
             ExportReportHeader(criteria);
@@ -74,7 +79,7 @@ namespace Fanex.CreditMovement.Business.Service
             string parentDirectory = AppSettings.ExportDataDirectoryWithYearMonth;
             DirectoryOfFileName = parentDirectory + @"\" + FileName;
 
-            SaveFile.SaveExcelFile(AppSettings.ExportDataDirectory, parentDirectory, FileName, _workbook, AppSettings.ExcelPassword);            
+            SaveFile.SaveExcelFile(AppSettings.ExportDataDirectory, parentDirectory, FileName, _workbook, AppSettings.ExcelPassword);
         }
 
         private void InitColumnWidth()

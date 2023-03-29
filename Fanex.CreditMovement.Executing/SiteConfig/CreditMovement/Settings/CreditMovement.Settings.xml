@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Settings>
-  <add key="FromDate" value="2015-01-01" />
-  <add key="ToDate" value="2015-06-16" />
-  <add key="ExportDataDirectory" value="\\10.18.200.120\www\Olympus\Fanex.Excel\CreditMovementExcelFile" />
-  <add key="EmailTemplate" value="SiteConfig\CreditMovement\Templates\CreditMovementEmail.cshtml" />
-  <add key="Amount" value="300" />
-  <add key="ExcelPassword" value="Star168" />
-  <add key="IsTest" value="true" />
-  <add key="FunctionId" value="0" />
-  <add key="Subject" value="Automail Report - Credit Movement - {0}" />
+	<add key="FromDate" value="2020-01-01" />
+	<add key="ToDate" value="2023-03-27" />
+	<add key="ExportDataDirectory" value="\\10.18.200.120\www\Olympus\Fanex.Excel\CreditMovementExcelFile" />
+	<add key="EmailTemplate" value="SiteConfig\CreditMovement\Templates\CreditMovementEmail.cshtml" />
+	<add key="Amount" value="300" />
+	<add key="ExcelPassword" value="" />
+	<add key="IsTest" value="true" />
+	<add key="FunctionId" value="0" />
+	<add key="Subject" value="Automail Report - Credit Movement - {0}" />
 </Settings>
