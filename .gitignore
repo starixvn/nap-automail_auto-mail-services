@@ -40,3 +40,4 @@ MSBUILD.SUMMARY.email
 MsBuild.xml
 SUMMARY.DISPLAY.xml
 dry.atomiqProj
+**/.vs/**
